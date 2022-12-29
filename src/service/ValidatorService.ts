@@ -3,7 +3,6 @@ import MetadataKey from "../constants/MetadataKey";
 import InferredType from "../constants/InferredType";
 import ErrorMessage from "../constants/ErrorMessage";
 
-export type ClassType<T> = new () => T;
 export type ValidationEvaluationType = {
 	key: string;
 	message: string;
