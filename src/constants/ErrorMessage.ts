@@ -56,6 +56,13 @@ const ErrorMessage = {
 		} time'`,
 	Numeric: () => `Given string must only contain numbers`,
 	Alpha: () => `Given string must only contain alphabetical characters`,
+	Integer: () => `Value must be an integer`,
+	Positive: () => `Value must be a positive number`,
+	Negative: () => `Value must be a negative number`,
+	NonNegative: () => `Value must be more than or equal to 0`,
+	NonPositive: () => `Value must be less than or equal to 0`,
+	Truthy: () => `Value must be truthy`,
+	Falsy: () => `Value must be falsy`,
 };
 
 export default ErrorMessage;
