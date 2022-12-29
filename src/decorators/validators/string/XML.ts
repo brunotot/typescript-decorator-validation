@@ -1,10 +1,9 @@
-import ValidatorService, {
-	ValidationEvaluationType,
-} from "../../../service/ValidatorService";
+import ValidatorService from "../../../service/ValidatorService";
 import InferredType from "../../../constants/InferredType";
 import ErrorMessage from "../../../constants/ErrorMessage";
+import { ValidationResult } from "../../../handler/ValidationHandler";
 
-function isValidXML(value: string, message: string): ValidationEvaluationType {
+function isValidXML(value: string, message: string): ValidationResult {
 	let valid = true;
 	try {
 		const parser = new DOMParser();

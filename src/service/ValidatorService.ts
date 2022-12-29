@@ -2,19 +2,10 @@ import ReflectService from "./ReflectService";
 import MetadataKey from "../constants/MetadataKey";
 import InferredType from "../constants/InferredType";
 import ErrorMessage from "../constants/ErrorMessage";
-
-export type ValidationEvaluationType = {
-	key: string;
-	message: string;
-	valid: boolean;
-};
-export type EvaluateValidationType<T> = (value: T) => ValidationEvaluationType;
-export type EvaluateValidationTypes = {
-	[key: string]: EvaluateValidationType<any>[];
-};
+import { ValidationFn } from "../handler/ValidationHandler";
 
 export type FieldValidatorBuilderProps<T> = {
-	isValid: EvaluateValidationType<T>;
+	isValid: ValidationFn<T>;
 	expectedType?: InferredType | InferredType[];
 };
 
@@ -48,12 +39,8 @@ class ValidatorService {
 		}
 		const actualType = ReflectService.getClassFieldType(target, property);
 
-		/* TODO
-		const actualGetterType = ReflectService.getClassGetterType(
-			target,
-			property
-		);
-		*/
+		// TODO
+		// const actualGetterType = ReflectService.getClassGetterType(target, property);
 
 		if (actualType === InferredType.FUNCTION) {
 			return;
