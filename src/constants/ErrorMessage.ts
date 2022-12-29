@@ -43,6 +43,19 @@ const ErrorMessage = {
 	NotNull: () => `Value must be present`,
 	Size: (min: number, max: number) =>
 		`Array must contain between ${min} and ${max} elements`,
+	XML: () => `Given string is not a valid XML`,
+	JSON: () => `Given string is not a valid JSON`,
+	IPAddress: () => `Given string is not a valid IP address`,
+	Palindrome: () => `Given string is not a valid palindrome`,
+	CreditCardNumber: () => `Given string is not a valid credit card number`,
+	Date: (format: string) =>
+		`Given string does not comply the desired date format (${format})`,
+	Time: (locale: string, hour12: boolean) =>
+		`Given string does not comply '${locale} locale for ${
+			hour12 ? "12-hour" : "24:hour"
+		} time'`,
+	Numeric: () => `Given string must only contain numbers`,
+	Alpha: () => `Given string must only contain alphabetical characters`,
 };
 
 export default ErrorMessage;
