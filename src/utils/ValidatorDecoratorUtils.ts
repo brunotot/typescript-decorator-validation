@@ -95,6 +95,7 @@ const validators = {
 	number,
 	string,
 	custom,
+	compound,
 };
 
 export { validators };
