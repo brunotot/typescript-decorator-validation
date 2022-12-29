@@ -40,9 +40,10 @@ const ErrorMessage = {
 		`Value must contain exactly ${exact} characters`,
 	RangeLength: (min: number, max: number) =>
 		`Value must contain between ${min} and ${max} characters`,
-	NotNull: () => `Value must be present`,
-	Size: (min: number, max: number) =>
-		`Array must contain between ${min} and ${max} elements`,
+	Size: (min: number, max: number, exact?: number) =>
+		exact === undefined
+			? `Array must contain exactly ${exact} elements`
+			: `Array must contain between ${min} and ${max} elements`,
 	XML: () => `Given string is not a valid XML`,
 	JSON: () => `Given string is not a valid JSON`,
 	IPAddress: () => `Given string is not a valid IP address`,
@@ -63,6 +64,8 @@ const ErrorMessage = {
 	NonPositive: () => `Value must be less than or equal to 0`,
 	Truthy: () => `Value must be truthy`,
 	Falsy: () => `Value must be falsy`,
+	Unique: () => `Elements must be unique`,
+	Empty: () => `Array must be empty`,
 };
 
 export default ErrorMessage;

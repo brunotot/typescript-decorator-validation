@@ -2,12 +2,14 @@ import ValidatorService from "../../../service/ValidatorService";
 import ErrorMessage from "../../../constants/ErrorMessage";
 import InferredType from "../../../constants/InferredType";
 
-export default function AssertFalse(props?: string) {
+export default function AssertFalse(
+	message: string = ErrorMessage.AssertFalse()
+) {
 	return ValidatorService.buildFieldValidatorDecorator<boolean>({
 		expectedType: InferredType.BOOLEAN,
 		isValid: (value) => ({
 			key: "AssertFalse",
-			message: props ?? ErrorMessage.AssertFalse(),
+			message,
 			valid: !value,
 		}),
 	});
