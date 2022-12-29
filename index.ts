@@ -9,13 +9,11 @@ import {
 	EvaluateValidationTypes,
 } from "./src/service/ValidatorService";
 
-export {
-	InferredType,
-	ValidatorService,
-	validators,
-	Rule,
+export type {
 	ClassType,
 	ValidationEvaluationType,
 	DecoratorService,
 	EvaluateValidationTypes,
 };
+
+export { InferredType, ValidatorService, validators, Rule };
