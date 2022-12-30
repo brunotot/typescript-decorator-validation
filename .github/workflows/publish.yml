@@ -1,11 +1,5 @@
 name: 🚀 Publish to NPM
 
-inputs:
-  deploy:
-    description: "A parameter that controls version update for the package"
-    required: false
-    default: ""
-
 on:
   push:
     branches:
@@ -15,43 +9,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Execute git checkout
-        uses: actions/checkout@v3
-
-      - name: Execute node setup
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org
-
-      - name: Set NODE_AUTH_TOKEN environment variable
-        uses: .
+      - run: git config --global user.email "version@release.com"
+      - run: git config --global user.name "Version Release"
+      - run: npm install
+      - name: Commit code after npm install
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Autocommit version patch"
+      - name: 🚀 Publish to NPM
+        run: npm run deploy
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
-
-      - name: Set publish action name
-        id: publish_action
-        uses: .
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          deploy: ${{ github.event.head_commit.message }}
-
-      - name: Configure git user.email
-        uses: .
-        run: git config --global user.email "version@release.com"
-
-      - name: Configure git user.name
-        uses: .
-        run: git config --global user.name "Version Release"
-
-      - name: Publish to npm
-        uses: .
-        run: |
-          if [ "${{ steps.publish_action.outputs.deploy }}" != "" ]
-          then
-            npm install
-            git commit -am "Autocommit version patch"
-            npm version ${{ steps.publish_action.outputs.deploy }}
-            npm run deploy
-            git commit -am "New version upgrade"
-            git push
-          fi
+          commit_message: "New version upgrade"
+      - run: git push
