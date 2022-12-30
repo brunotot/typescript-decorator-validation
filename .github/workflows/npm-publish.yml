@@ -22,14 +22,16 @@ jobs:
         with:
           deploy: ${{ github.event.head_commit.message }}
       - name: If variable exists do
+        shell: bash
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+          deploy: ${{ inputs.deploy }}
         run: |
-          if [ "${{ steps.my_action.outputs.deploy }}" != "" ]
+          if [ "$deploy" != "" ]
           then
             npm install
             git commit -am "Autocommit version patch"
-            npm version ${{ steps.my_action.outputs.deploy }}
+            npm version $deploy
             npm run deploy
             git commit -am "New version upgrade"
             git push
