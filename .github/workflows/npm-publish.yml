@@ -5,12 +5,6 @@ on:
     branches:
       - main
 
-inputs:
-  deploy:
-    description: "The version to be deployed: major, minor or patch"
-    required: false
-    default: ""
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,16 +17,30 @@ jobs:
       - run: git config --global user.email "version@release.com"
       - run: git config --global user.name "Version Release"
       - name: If variable exists do
-        shell: bash
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
-          deploy: ${{ inputs.deploy }}
+          DEPLOY_PATCH: ${{ contains(github.event.head_commit.message, '[PATCH]') }}
+          DEPLOY_MINOR: ${{ contains(github.event.head_commit.message, '[MINOR]') }}
+          DEPLOY_MAJOR: ${{ contains(github.event.head_commit.message, '[MAJOR]') }}
         run: |
-          if [ "$deploy" != "" ]
-          then
+          if ${DEPLOY_PATCH} == true; then
             npm install
             git commit -am "Autocommit version patch"
-            npm version $deploy
+            npm version patch
+            npm run deploy
+            git commit -am "New version upgrade"
+            git push
+          elif ${DEPLOY_MINOR} == true; then
+            npm install
+            git commit -am "Autocommit version patch"
+            npm version patch
+            npm run minor
+            git commit -am "New version upgrade"
+            git push
+          elif ${DEPLOY_MAJOR} == true; then
+            npm install
+            git commit -am "Autocommit version patch"
+            npm version major
             npm run deploy
             git commit -am "New version upgrade"
             git push
