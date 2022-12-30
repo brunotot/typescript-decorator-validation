@@ -1,0 +1,53 @@
+name: 🚀 Publish to NPM
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute git checkout
+        uses: actions/checkout@v3
+
+      - name: Execute node setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org
+
+      - name: Set NODE_AUTH_TOKEN environment variable
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+
+      - name: Set publish action name
+        id: publish_action
+        uses: .
+        with:
+          deploy: ${{ github.event.head_commit.message }}
+
+      - name: Configure git user.email
+        run: git config --global user.email "version@release.com"
+
+      - name: Configure git user.name
+        run: git config --global user.name "Version Release"
+
+      - name: Publish to npm
+        run: |
+          if [ "${{ steps.publish_action.outputs.deploy }}" != "" ]
+          then
+            npm install
+            git commit -am "Autocommit version patch"
+            npm version ${{ steps.publish_action.outputs.deploy }}
+            npm run deploy
+            git commit -am "New version upgrade"
+            git push
+          fi
+
+inputs:
+  deploy:
+    description: "A parameter that controls version update for the package"
+    required: false
+    default: ""
