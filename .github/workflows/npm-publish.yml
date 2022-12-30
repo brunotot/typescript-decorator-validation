@@ -16,11 +16,6 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: git config --global user.email "version@release.com"
       - run: git config --global user.name "Version Release"
-      - name: My action
-        id: my_action
-        uses: .
-        with:
-          deploy: ${{ github.event.head_commit.message }}
       - name: If variable exists do
         shell: bash
         env:
