@@ -1,5 +1,11 @@
 name: 🚀 Publish to NPM
 
+inputs:
+  deploy:
+    description: "A parameter that controls version update for the package"
+    required: false
+    default: ""
+
 on:
   push:
     branches:
@@ -45,9 +51,3 @@ jobs:
             git commit -am "New version upgrade"
             git push
           fi
-
-inputs:
-  deploy:
-    description: "A parameter that controls version update for the package"
-    required: false
-    default: ""
