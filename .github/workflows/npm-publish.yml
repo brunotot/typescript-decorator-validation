@@ -45,3 +45,4 @@ jobs:
             git commit -am "New version upgrade"
             git push
           fi
+      - run: git push
