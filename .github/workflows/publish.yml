@@ -25,6 +25,7 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Set NODE_AUTH_TOKEN environment variable
+        uses: .
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
 
@@ -35,12 +36,15 @@ jobs:
           deploy: ${{ github.event.head_commit.message }}
 
       - name: Configure git user.email
+        uses: .
         run: git config --global user.email "version@release.com"
 
       - name: Configure git user.name
+        uses: .
         run: git config --global user.name "Version Release"
 
       - name: Publish to npm
+        uses: .
         run: |
           if [ "${{ steps.publish_action.outputs.deploy }}" != "" ]
           then
