@@ -5,8 +5,6 @@
 # Only exists if Bazel was run
 /bazel-out
 
-test
-
 # dependencies
 /node_modules
 
