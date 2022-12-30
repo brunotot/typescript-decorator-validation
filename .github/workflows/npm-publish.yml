@@ -27,6 +27,8 @@ jobs:
         with:
           deploy: ${{ github.event.head_commit.message }}
       - name: If variable exists do
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
         run: |
           if [ "${{ steps.my_action.outputs.deploy }}" != "" ]
           then
