@@ -5,6 +5,12 @@ on:
     branches:
       - main
 
+inputs:
+  deploy:
+    description: "The version to be deployed: major, minor or patch"
+    required: false
+    default: ""
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,9 +37,3 @@ jobs:
             git commit -am "New version upgrade"
             git push
           fi
-
-inputs:
-  deploy:
-    description: "The version to be deployed: major, minor or patch"
-    required: false
-    default: ""
