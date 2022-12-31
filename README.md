@@ -41,7 +41,12 @@ npm install react-decorate-form
 
 ## Contribution
 
-1. Setup the environment using
+1. Open bash terminal
+
+2. Change directory to your desired position
+
+3. Setup the environment by calling
 ```
 bash <(curl -s https://raw.githubusercontent.com/brunotot/typescript-decorator-validation/main/contribute/setup.sh)
 ```
+This will create all necessary directories and prepare development environment for a quick start to contributing to this library.
