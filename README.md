@@ -78,3 +78,14 @@ cd ../../
 if command -v code; then
     code .
 fi
+```
+
+4. Inside your editor open integrated terminal and navigate to the testing application
+```bash
+cd testing/react-test
+```
+
+5. Start the development server
+```bash
+npm run dev
+```
