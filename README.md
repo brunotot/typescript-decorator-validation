@@ -38,3 +38,10 @@ npm install react-decorate-form
   presets: ["@babel/preset-typescript"],
 }
 ```
+
+## Contribution
+
+1. Setup the environment using
+```
+bash <(curl -s https://raw.githubusercontent.com/brunotot/typescript-decorator-validation/main/contribute/setup.sh)
+```
