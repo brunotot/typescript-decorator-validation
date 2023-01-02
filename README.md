@@ -1,4 +1,4 @@
- <h1 align="center">:rocket: TypeScript Decorator Validation :rocket:</h1>
+<h1 align="center">:rocket: TypeScript Decorator Validation :rocket:</h1>
 
 <p align="center">:star: Class entity validations made easy with the help of 
  <a href="https://www.typescriptlang.org/docs/handbook/decorators.html">@Decorators</a>
