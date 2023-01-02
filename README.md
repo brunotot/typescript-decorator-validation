@@ -33,6 +33,7 @@
 - [Installation](#installation)
 - [Contribute](#contribute)
 - [Documentation](#documentation)
+- [Goals and TODOs](#goals-and-todos)
 
 ## Installation
 
@@ -91,3 +92,17 @@ git checkout -b "[issue-number]-[issue-description]"
 | `getErrors`       | `state`:&nbsp;Object   | [ErrorData](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L19)        | returns object error state from the calculated validation metadata for the given state object |
 | `validate`        | `state`:&nbsp;Object   | [StateValidationResult](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L23) | returns object state validation result from the calculated validation metadata for the given object state |
 | `buildInstance`   | `state`:&nbsp;Object   | [T](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L36)                | returns instantiated class `T` which is used to construct `ValidationHandler<T>` |
+
+## Goals and TODOs
+
+- [x] Implement strict type checking
+- [x] Implement predefined decorator validators
+- [ ] Write documentation  
+- [ ] Implement the logic so the library can be used easily in CI tests
+- [ ] Implement tests for predefined decorator validators
+- Write implementation libraries for popular front-end frameworks 
+	- [x] [React](https://github.com/brunotot/react-decorate-form)
+	- [ ] Angular
+	- [ ] Svelte
+	- [ ] Vue
+	- [ ] Solid
