@@ -23,7 +23,7 @@
   <img alt="Maintained" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" height="20"/>
  </a>
  
- <a href="https://costlydeveloper.github.io/ngx-awesome-popup/">
+ <a href="#">
   <img alt="Awesome badge" src="https://awesome.re/badge.svg" height="20"/>
  </a>
 </p>
