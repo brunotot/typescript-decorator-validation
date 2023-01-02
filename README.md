@@ -32,6 +32,7 @@
 
 - [Installation](#installation)
 - [Contribute](#contribute)
+- [Documentation](#documentation)
 
 ## Installation
 
@@ -77,3 +78,16 @@ git checkout -b "[issue-number]-[issue-description]"
 ```
 5. Commit and push changes
 6. Open pull request
+
+## Documentation
+
+### [ValidationHandler](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L28)
+
+| Method        | Parameters | Returns | Description |
+|---------------|------------|---------|-------------|
+|`constructor`  |`clazz`:&nbsp;[Class\<T>](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L5)|[ValidationHandler\<T>](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L28)|instantiates `ValidationHandler` class with the given decorated class to validate|
+| `validationData`  |                   | [ValidationData\<T>](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L15) | returns calculated validation data for given class through its metadata decorators           |
+| `hasErrors`       | `state`:&nbsp;Object   | `boolean`          | returns `true` if state object has errors            |
+| `getErrors`       | `state`:&nbsp;Object   | [ErrorData](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L19)        | returns object error state from the calculated validation metadata for the given state object |
+| `validate`        | `state`:&nbsp;Object   | [StateValidationResult](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L23) | returns object state validation result from the calculated validation metadata for the given object state |
+| `buildInstance`   | `state`:&nbsp;Object   | [T](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L36)                | returns instantiated class `T` which is used to construct `ValidationHandler<T>` |
