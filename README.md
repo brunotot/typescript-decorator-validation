@@ -36,12 +36,11 @@
 ## Installation
 
 1. Install library dependency
-
 ```
 npm install typescript-decorator-validation
 ```
-
-2. Allow experimental decorators configuration in your `tsconfig.json`. This removes IDE errors which could pop-up
+2. Allow experimental decorators configuration in your `tsconfig.json`. 
+   <br>This removes IDE errors which could pop-up
 ```ts
 {
   "compilerOptions": {
@@ -51,9 +50,8 @@ npm install typescript-decorator-validation
   }
 }
 ```
-
-3. Add babel configuration to your `tsconfig.json`. This allows for type-safety checking
-
+3. Add babel configuration to your `tsconfig.json`.
+   <br>This allows for type-safety checking
 ```ts
 {
   plugins: [
@@ -68,50 +66,14 @@ npm install typescript-decorator-validation
 ## Contribute
 
 1. Open bash terminal
-
 2. Change directory to your desired position
-
-3. Setup the environment by calling
-```
-bash <(curl -s https://raw.githubusercontent.com/brunotot/typescript-decorator-validation/main/contribute/setup.sh)
-```
-This will create all necessary directories and prepare development environment for a quick start to contributing to this library.
-You can see here what are the exact commands being executed when running the `setup.sh` script.
-
+3. Clone the repository main branch
 ```bash
-#!/bin/bash
-mkdir tdd
-cd tdd
-mkdir libs
-cd libs
-git clone https://github.com/brunotot/typescript-decorator-validation.git core
-cd core
-npm install
-cd ..
-mkdir impl
-cd impl
-git clone https://github.com/brunotot/react-decorate-form.git react
-cd react
-npm install
-cd ../../../
-mkdir testing
-cd testing
-git clone https://github.com/brunotot/react-decorate-form.git react-test
-cd react-test
-git checkout testing
-npm install
-cd ../../
-if command -v code; then
-    code .
-fi
+git clone https://github.com/brunotot/typescript-decorator-validation.git
 ```
-
-4. Inside your editor open integrated terminal and navigate to the testing application
+4. Checkout a new branch
 ```bash
-cd testing/react-test
+git checkout -b "[issue-number]-[issue-description]"
 ```
-
-5. Start the development server
-```bash
-npm run dev
-```
+5. Commit and push changes
+6. Open pull request
