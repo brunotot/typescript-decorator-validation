@@ -4,6 +4,7 @@
 	"description": "Typescript form validation using Decorators",
 	"main": "index.js",
 	"types": "types/index.d.ts",
+	"license": "MIT",
 	"scripts": {
 		"clean": "rm -rf dist",
 		"build": "npm run clean && tsc && cp package.json README.md ./dist",
@@ -21,7 +22,6 @@
 		"validation"
 	],
 	"author": "Bruno Tot",
-	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/brunotot/typescript-decorator-validation/issues"
 	},
