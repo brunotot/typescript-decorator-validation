@@ -34,6 +34,7 @@
 - [Contribute](#contribute)
 - [Documentation](#documentation)
 - [Goals and TODOs](#goals-and-todos)
+- [Examples](#examples)
 
 ## Installation
 
@@ -106,3 +107,48 @@ git checkout -b "[issue-number]-[issue-description]"
 	- [ ] Svelte
 	- [ ] Vue
 	- [ ] Solid
+	
+## Examples
+
+A basic TypeScript form can look something like
+```typescript
+import { validators } from 'react-decorate-form';
+
+export type UserFormFields = {
+  confirmPassword: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  url: string;
+  age: number;
+};
+
+export default class UserForm implements UserFormFields {
+  @validators.string.Size({ min: 5 })
+  @validators.string.NotEmpty()
+  firstName!: string;
+
+  @validators.string.NotEmpty()
+  lastName!: string;
+
+  @validators.string.NotEmpty()
+  @validators.string.Password()
+  password!: string;
+
+  confirmPassword!: string;
+
+  @validators.string.URL()
+  url!: string;
+
+  @validators.number.Range({ min: 18, max: 100 })
+  age!: number;
+
+  @validators.boolean.AssertTrue('Passwords must match')
+  get passwordsMatch(): boolean {
+    return this.password === this.confirmPassword;
+  }
+}
+```
+And with some styling we can display the form which can look something like:
+
+![example form](https://github.com/brunotot/typescript-decorator-validation/blob/main/assets/img/example-form-screenshot.png?raw=true)
