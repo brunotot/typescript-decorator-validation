@@ -42,8 +42,8 @@ const ErrorMessage = {
 		`Value must contain between ${min} and ${max} characters`,
 	Size: (min: number, max: number, exact?: number) =>
 		exact === undefined
-			? `Array must contain exactly ${exact} elements`
-			: `Array must contain between ${min} and ${max} elements`,
+			? `Length can be between ${min} and ${max} elements`
+			: `Length must be exactly ${exact} elements`,
 	XML: () => `Given string is not a valid XML`,
 	JSON: () => `Given string is not a valid JSON`,
 	IPAddress: () => `Given string is not a valid IP address`,
