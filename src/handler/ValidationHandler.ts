@@ -12,26 +12,22 @@ export type ValidationResult = {
 
 export type ValidationFn<T> = (value: T) => ValidationResult;
 
-export interface ValidationData<T> {
-	[key: string]: ValidationFn<T>[];
-}
+export type ValidationData<T> = Record<keyof T, ValidationFn<T>[]>;
 
-export type ErrorData = {
-	[key: string]: ValidationResult[];
-};
+export type ErrorData<T> = Partial<Record<keyof T, ValidationResult[]>>;
 
-export type StateValidationResult = {
+export type StateValidationResult<T> = {
 	valid: boolean;
-	errors: ErrorData;
+	errors: ErrorData<T>;
 };
 
 export default class ValidationHandler<T> {
 	private _clazz: Class<T>;
-	private _fieldNames: string[];
+	private _fieldNames: (keyof T)[];
 	private _validationData: ValidationData<T>;
 	private _oldState?: Object;
 	private _oldHasErrors?: boolean;
-	private _oldErrors?: ErrorData;
+	private _oldErrors?: ErrorData<T>;
 
 	constructor(clazz: Class<T>) {
 		this._clazz = clazz;
@@ -50,24 +46,25 @@ export default class ValidationHandler<T> {
 			: this._oldHasErrors;
 	}
 
-	getErrors(state: Object): ErrorData {
+	getErrors(state: Object): ErrorData<T> {
 		return this._oldErrors === undefined || !deepEquals(this._oldState, state)
 			? this.validate(state).errors
 			: this._oldErrors;
 	}
 
-	validate(state: Object): StateValidationResult {
+	validate(state: Object): StateValidationResult<T> {
 		let valid: boolean = true;
-		let errors: ErrorData = {};
+		let errors: ErrorData<T> = {};
 		const instance: any = this.buildInstance(state);
-		Object.entries(this._validationData).forEach(([key, validators]) => {
-			const fieldErrors = validators
+		const entries = Object.entries(this._validationData);
+		entries.forEach(([key, validators]) => {
+			const fieldErrors = (validators as ValidationFn<T>[])
 				.map((validator) => validator(instance[key]))
 				.filter((evaluation) => !evaluation.valid);
 			if (fieldErrors.length > 0) {
 				valid = false;
 			}
-			errors[key] = fieldErrors;
+			errors[key as keyof T] = fieldErrors;
 		});
 		this._oldState = state;
 		this._oldHasErrors = !valid;
@@ -92,20 +89,20 @@ export default class ValidationHandler<T> {
 		);
 	}
 
-	private buildFieldKeys(): string[] {
+	private buildFieldKeys(): (keyof T)[] {
 		return [
 			...ReflectService.getClassFieldNames(this._clazz),
 			...ReflectService.getClassGetterNames(this._clazz),
-		];
+		] as (keyof T)[];
 	}
 
 	private buildValidationData<T>(): ValidationData<T> {
 		return this._fieldNames.reduce(
 			(obj, property) => ({
 				...obj,
-				[property]: this.getValidationMetadata<T>(property),
+				[property]: this.getValidationMetadata<T>(property as string),
 			}),
 			{}
-		);
+		) as ValidationData<T>;
 	}
 }
