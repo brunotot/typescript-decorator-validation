@@ -33,6 +33,10 @@ function any(any: any): any {
   return any as any;
 }
 
+function array(any: any): any[] {
+  return any as any[];
+}
+
 export default class ValidationHandler<T> {
   private _clazz: Class<T>;
   private _fieldNames: (keyof T)[];
@@ -103,6 +107,17 @@ export default class ValidationHandler<T> {
           );
           continue;
         }
+      }
+
+      if (InferredType.ARRAY === type) {
+        errors[key as keyof ErrorData<T>] = any(
+          array(any(state)[key]).map((v: any) =>
+            (validators as ValidationFn<T>[])
+              .map((validator) => validator(v))
+              .filter((evaluation) => !evaluation.valid)
+          )
+        );
+        continue;
       }
 
       const fieldErrors = (validators as ValidationFn<T>[])

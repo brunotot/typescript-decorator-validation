@@ -2,6 +2,8 @@ import ValidatorService from "../../../service/ValidatorService";
 import ErrorMessage from "../../../model/const/ErrorMessage";
 import InferredType from "../../../model/enum/InferredType";
 
+// TODO: Separate CollectionSize and StringSize
+
 export type SizeMessageProps = {
   message?: string;
 };
