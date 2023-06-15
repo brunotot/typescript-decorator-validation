@@ -114,7 +114,12 @@ export default class ValidationHandler<T> {
           array(any(state)[key]).map((v: any) =>
             (validators as ValidationFn<T>[])
               .map((validator) => validator(v))
-              .filter((evaluation) => !evaluation.valid)
+              .filter((evaluation) => {
+                if (!evaluation.valid) {
+                  valid = false;
+                }
+                return !evaluation.valid;
+              })
           )
         );
         continue;
