@@ -1,6 +1,6 @@
 {
   "name": "typescript-decorator-validation",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Typescript form validation using Decorators",
   "main": "index.js",
   "types": "types/index.d.ts",
