@@ -1,6 +1,5 @@
 import {
   ValidationData,
-  ValidationFn,
   ValidationFnMetadata,
   ValidationGroupType,
 } from "../handler/ValidationHandler";

@@ -36,6 +36,10 @@ import ArrayNone from "../../decorators/validators/array/ArrayNone";
 import ArrayOne from "../../decorators/validators/array/ArrayOne";
 import ArraySome from "../../decorators/validators/array/ArraySome";
 import ValueMin from "../../decorators/validators/number/ValueMin";
+import ExactLength from "../../decorators/validators/string/ExactLength";
+import Length from "../../decorators/validators/string/Length";
+import MaxLength from "../../decorators/validators/string/MaxLength";
+import MinLength from "../../decorators/validators/string/MinLength";
 
 const any = {
   Truthy,
@@ -92,6 +96,10 @@ const string = {
   Numeric,
   XML,
   Time,
+  ExactLength,
+  Length,
+  MaxLength,
+  MinLength,
 };
 
 const custom = {
