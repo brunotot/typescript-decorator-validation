@@ -1,6 +1,8 @@
 import ValidatorService from "../../../service/ValidatorService";
 import InferredType from "../../../model/enum/InferredType";
-import ErrorMessage from "../../../model/const/ErrorMessage";
+import ErrorMessage from "../../../model/messages/ErrorMessage";
+import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
+import { extractGroupsFromValidatorProps } from "../../../model/utility/object.utility";
 
 type PasswordProps = {
   uppercase?: boolean;
@@ -49,14 +51,14 @@ function isPasswordChunkInvalid(
   return matchers === null || matchers.length === 0;
 }
 
-const PASSWORD_VALIDATOR_KEY = "Password";
-
 export default function Password(
-  props: PasswordProps = {
+  cfg: BasicValidatorProviderType<string, PasswordProps> = {
     ...DEFAULT_PROPS,
     message: undefined,
   }
 ) {
+  const props =
+    typeof cfg === "string" ? { ...DEFAULT_PROPS, message: cfg } : cfg;
   const uppercase = props.uppercase ?? DEFAULT_PROPS.uppercase;
   const lowercase = props.lowercase ?? DEFAULT_PROPS.lowercase;
   const numbers = props.numbers ?? DEFAULT_PROPS.numbers;
@@ -66,7 +68,7 @@ export default function Password(
 
   function buildConstraintViolation(message: string) {
     return {
-      key: PASSWORD_VALIDATOR_KEY,
+      key: "Password",
       message: !!definedMessage ? definedMessage : message,
       valid: false,
     };
@@ -74,7 +76,9 @@ export default function Password(
 
   return ValidatorService.buildFieldValidatorDecorator<string>({
     expectedType: InferredType.STRING,
-    isValid: (str) => {
+    groups: extractGroupsFromValidatorProps(props),
+    isValid: (string) => {
+      const str = string ?? "";
       if (str.length < length) {
         return buildConstraintViolation(
           ErrorMessage.PasswordLengthViolation(length)
@@ -98,7 +102,7 @@ export default function Password(
         );
 
       return {
-        key: PASSWORD_VALIDATOR_KEY,
+        key: "Password",
         valid: true,
         message: "",
       };

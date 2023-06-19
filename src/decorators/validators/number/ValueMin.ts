@@ -1,23 +1,30 @@
 import ValidatorService from "../../../service/ValidatorService";
 import InferredType from "../../../model/enum/InferredType";
-import ErrorMessage from "../../../model/messages/ErrorMessage";
+import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 import {
   extractGroupsFromValidatorProps,
   extractMessageFromValidatorProps,
 } from "../../../model/utility/object.utility";
-import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
+import ErrorMessage from "../../../model/messages/ErrorMessage";
 
-export default function Negative(props?: BasicValidatorProviderType) {
+type ValueMinType = {
+  value: number;
+};
+
+export default function ValueMin(
+  props: BasicValidatorProviderType<number, ValueMinType>
+) {
+  const min = typeof props === "number" ? props : props.value;
   return ValidatorService.buildFieldValidatorDecorator<number>({
     expectedType: InferredType.NUMBER,
     groups: extractGroupsFromValidatorProps(props),
-    isValid: (num) => ({
-      key: "Negative",
+    isValid: (value) => ({
+      key: "ValueMin",
       message: extractMessageFromValidatorProps(
         props,
-        ErrorMessage.Negative(num)
+        ErrorMessage.ValueMin(min, value)
       ),
-      valid: num !== undefined && num !== null && num < 0,
+      valid: value >= min,
     }),
   });
 }

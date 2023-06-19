@@ -1,11 +1,15 @@
 import ValidatorService from "../../../service/ValidatorService";
 import InferredType from "../../../model/enum/InferredType";
-import ErrorMessage from "../../../model/const/ErrorMessage";
+import ErrorMessage from "../../../model/messages/ErrorMessage";
+import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
+import {
+  extractGroupsFromValidatorProps,
+  extractMessageFromValidatorProps,
+} from "../../../model/utility/object.utility";
 
-export type DigitsProps = {
+export type DigitsType = {
   maxInteger?: number;
   maxFraction?: number;
-  message?: string;
 };
 
 function validateDigits(
@@ -27,14 +31,19 @@ function validateDigits(
   return integerPart.length <= maxInteger && fractionPart.length <= maxFraction;
 }
 
-export default function Digits(props: DigitsProps) {
+export default function Digits(
+  props: BasicValidatorProviderType<DigitsType, DigitsType>
+) {
   const { maxInteger = Infinity, maxFraction = Infinity } = props;
-  const message = props.message ?? ErrorMessage.Digits(maxInteger, maxFraction);
   return ValidatorService.buildFieldValidatorDecorator<number>({
     expectedType: InferredType.NUMBER,
+    groups: extractGroupsFromValidatorProps(props),
     isValid: (value) => ({
       key: "Digits",
-      message,
+      message: extractMessageFromValidatorProps(
+        props,
+        ErrorMessage.Digits(maxInteger, maxFraction)
+      ),
       valid: validateDigits(value, maxInteger, maxFraction),
     }),
   });

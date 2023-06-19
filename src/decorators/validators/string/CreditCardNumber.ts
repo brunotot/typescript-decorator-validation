@@ -1,6 +1,11 @@
 import ValidatorService from "../../../service/ValidatorService";
 import InferredType from "../../../model/enum/InferredType";
-import ErrorMessage from "../../../model/const/ErrorMessage";
+import ErrorMessage from "../../../model/messages/ErrorMessage";
+import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
+import {
+  extractGroupsFromValidatorProps,
+  extractMessageFromValidatorProps,
+} from "../../../model/utility/object.utility";
 
 function isValidCreditCardNumber(str: string): boolean {
   if (/[^0-9]/.test(str) || str.length < 16) {
@@ -21,12 +26,16 @@ function isValidCreditCardNumber(str: string): boolean {
   return sum % 10 === 0;
 }
 
-export default function CreditCardNumber(message?: string) {
+export default function CreditCardNumber(props?: BasicValidatorProviderType) {
   return ValidatorService.buildFieldValidatorDecorator<string>({
     expectedType: InferredType.STRING,
+    groups: extractGroupsFromValidatorProps(props),
     isValid: (value) => ({
       key: "CreditCardNumber",
-      message: message ?? ErrorMessage.CreditCardNumber(),
+      message: extractMessageFromValidatorProps(
+        props,
+        ErrorMessage.CreditCardNumber()
+      ),
       valid: isValidCreditCardNumber(value),
     }),
   });

@@ -3,14 +3,24 @@ import { Class } from "../model/type/class.type";
 import { ErrorData } from "../model/type/error-data.type";
 import { ValidationResult } from "../model/type/validation-result.type";
 import ReflectService from "../service/ReflectService";
-import { deepEquals } from "../model/utility/object.utility";
+import {
+  deepEquals,
+  isValidationGroupUnion,
+} from "../model/utility/object.utility";
 import { ValidationClass } from "../model/type/validation-class.type";
 import InferredType from "../model/enum/InferredType";
-import { OmitNever } from "../model/utility/type.utility";
+import { KeyOf, OmitNever } from "../model/utility/type.utility";
+import PropertyMetadata from "../service/PropertyMetadata";
+import ClassMetadata from "../service/ClassMetadata";
 
-export type ValidationFn<T> = (value: T) => ValidationResult;
+export type ValidationFn<T> = (value: T, context?: any) => ValidationResult;
 
-//export type ValidationData<T> = Record<keyof T, ValidationFn<T>[]>;
+export type ValidationFnMetadata<T> = {
+  groups: ValidationGroupType[];
+  validate: ValidationFn<T>;
+};
+
+export type ValidationGroupType = string | number;
 
 export type StateValidationResult<T> = {
   valid: boolean;
@@ -18,7 +28,7 @@ export type StateValidationResult<T> = {
 };
 
 export type ValidationData<T> = OmitNever<{
-  [K in keyof T]: T[K] extends object
+  [K in KeyOf<T>]: T[K] extends object
     ? T[K] extends Function
       ? never
       : T[K] extends any[]
@@ -39,20 +49,16 @@ function array(any: any): any[] {
 
 export default class ValidationHandler<T> {
   private _clazz: Class<T>;
-  private _fieldNames: (keyof T)[];
-  private _validationData: ValidationData<T>;
   private _oldState?: ValidationClass<T>;
   private _oldHasErrors?: boolean;
   private _oldErrors?: ErrorData<T>;
+  private _groups: ValidationGroupType[];
+  private _metadata: ClassMetadata<T>;
 
-  constructor(clazz: Class<T>) {
+  constructor(clazz: Class<T>, ...groups: ValidationGroupType[]) {
     this._clazz = clazz;
-    this._fieldNames = this.buildFieldKeys();
-    this._validationData = this.buildValidationData();
-  }
-
-  get validationData(): ValidationData<T> {
-    return this._validationData;
+    this._groups = Array.from(new Set(groups));
+    this._metadata = new ClassMetadata(clazz, ...groups);
   }
 
   hasErrors(state: ValidationClass<T>): boolean {
@@ -72,61 +78,105 @@ export default class ValidationHandler<T> {
     let valid: boolean = true;
     let errors: ErrorData<T> = {} as ErrorData<T>;
 
-    const instance: any = this.buildInstance(state);
-
-    const entries = Object.entries(this._validationData);
+    const instance: any = this._metadata.createInstance(state);
+    const entries = Object.entries(this._metadata.validators);
 
     for (const [key, validators] of entries) {
-      const type = ReflectService.getClassFieldType(instance, key);
-      const innerClass = this.getNestedType(key);
-
-      if (innerClass) {
-        if (InferredType.GENERIC_OBJECT === type) {
-          const innerValidationHandler = new ValidationHandler(innerClass);
+      const meta = new PropertyMetadata<T>(this._clazz, key as KeyOf<T>);
+      if (meta.clazz) {
+        if (meta.is(InferredType.GENERIC_OBJECT)) {
+          const innerValidationHandler = new ValidationHandler(
+            meta.clazz,
+            ...this._groups
+          );
           const validatorEval = innerValidationHandler.validate(
             any(state)[key]
           );
           if (!validatorEval.valid) {
             valid = false;
           }
-          errors[key as keyof ErrorData<T>] = any({
-            ...validatorEval,
-          });
+          errors[key as keyof ErrorData<T>] = any(validatorEval);
           continue;
-        } else if (InferredType.ARRAY === type) {
-          const innerValidationHandler = new ValidationHandler(innerClass);
-          const innerState: any[] = any(state)[key];
-          errors[key as keyof ErrorData<T>] = any(
-            innerState.map((innerValue: Object) => {
+        } else if (meta.is(InferredType.ARRAY)) {
+          const innerValidationHandler = new ValidationHandler(
+            meta.clazz,
+            ...this._groups
+          );
+          const stateValueArray: any[] = any(state)[key];
+
+          const parentValidators: any[] = (
+            (validators as any).node as ValidationFnMetadata<any>[]
+          )
+            .map((validator) => validator.validate(stateValueArray, any(state)))
+            .filter((evaluation) => {
+              if (!evaluation.valid) {
+                valid = false;
+              }
+              return !evaluation.valid;
+            });
+
+          const childrenValidators = stateValueArray.map(
+            (innerValue: Object) => {
               const validatorEval = innerValidationHandler.validate(innerValue);
               if (!validatorEval.valid) {
                 valid = false;
               }
               return validatorEval;
-            })
+            }
           );
+
+          errors[key as keyof ErrorData<T>] = any({
+            node: parentValidators,
+            children: childrenValidators,
+          });
+
           continue;
         }
       }
 
-      if (InferredType.ARRAY === type) {
-        errors[key as keyof ErrorData<T>] = any(
-          array(any(state)[key]).map((v: any) =>
-            (validators as ValidationFn<T>[])
-              .map((validator) => validator(v))
-              .filter((evaluation) => {
-                if (!evaluation.valid) {
-                  valid = false;
-                }
-                return !evaluation.valid;
-              })
-          )
+      if (meta.is(InferredType.ARRAY)) {
+        const arrayValidators = ReflectService.getMetadata<
+          ValidationFnMetadata<any>
+        >(MetadataKey.VALIDATOR_EACH_IN_ARRAY, this._clazz, key).filter((e) =>
+          isValidationGroupUnion(this._groups, e.groups)
         );
+
+        const stateValueArray = array(any(state)[key]);
+        const parentValidators = (validators as ValidationFnMetadata<any>[])
+          .map((validator) => {
+            return validator.validate(stateValueArray, any(state));
+          })
+          .filter((evaluation) => {
+            if (!evaluation.valid) {
+              valid = false;
+            }
+            return !evaluation.valid;
+          });
+
+        const childrenValidators = stateValueArray.map((v: any) =>
+          arrayValidators
+            .map((validator) => validator.validate(v, any(state)))
+            .filter((evaluation) => {
+              if (!evaluation.valid) {
+                valid = false;
+              }
+              return !evaluation.valid;
+            })
+        );
+
+        errors[key as keyof ErrorData<T>] = any({
+          node: parentValidators,
+          children: childrenValidators,
+        });
+
         continue;
       }
 
-      const fieldErrors = (validators as ValidationFn<T>[])
-        .map((validator) => validator(instance[key]))
+      const fieldErrors = (validators as ValidationFnMetadata<T>[])
+        .filter((validator) =>
+          isValidationGroupUnion(this._groups, validator.groups)
+        )
+        .map((validator) => validator.validate(instance[key], instance))
         .filter((evaluation) => !evaluation.valid);
 
       if (fieldErrors.length > 0) {
@@ -144,70 +194,5 @@ export default class ValidationHandler<T> {
       valid,
       errors,
     };
-  }
-
-  buildInstance(state: ValidationClass<T>): T {
-    const instance: any = new this._clazz();
-    const entries = Object.entries(state);
-    for (const [key, value] of entries) {
-      const type = ReflectService.getClassFieldType(instance, key);
-      const innerClass = this.getNestedType(key);
-
-      if (innerClass) {
-        if (InferredType.GENERIC_OBJECT === type) {
-          const innerValidationHandler = new ValidationHandler(innerClass);
-          instance[key] = innerValidationHandler.buildInstance(value as any);
-          continue;
-        }
-        if (InferredType.ARRAY === type) {
-          instance[key] = [];
-          const innerValidationHandler = new ValidationHandler(innerClass);
-          (value as any[]).forEach((v) => {
-            instance[key].push(innerValidationHandler.buildInstance(v));
-          });
-          continue;
-        }
-      }
-
-      instance[key] = value;
-    }
-    return instance as T;
-  }
-
-  private getValidationMetadata<T>(property: string): ValidationFn<T>[] {
-    return ReflectService.getMetadata(
-      MetadataKey.VALIDATOR_FIELD,
-      this._clazz,
-      property
-    );
-  }
-
-  private buildFieldKeys(): (keyof T)[] {
-    return [
-      ...ReflectService.getClassFieldNames(this._clazz),
-      ...ReflectService.getClassGetterNames(this._clazz),
-    ] as (keyof T)[];
-  }
-
-  private buildValidationData<T>(): ValidationData<T> {
-    return this._fieldNames.reduce((obj, property) => {
-      const innerClass = this.getNestedType(property as string);
-      return {
-        ...obj,
-        [property]: innerClass
-          ? new ValidationHandler(innerClass).buildValidationData()
-          : this.getValidationMetadata<T>(property as string),
-      };
-    }, {}) as ValidationData<T>;
-  }
-
-  private getNestedType(prop: string): Class<unknown> | null {
-    return (
-      ReflectService.getMetadata<Class<any>>(
-        MetadataKey.SEMANTICS_VALID,
-        this._clazz,
-        prop
-      )[0] || null
-    );
   }
 }

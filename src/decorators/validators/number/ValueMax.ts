@@ -1,23 +1,30 @@
 import ValidatorService from "../../../service/ValidatorService";
 import InferredType from "../../../model/enum/InferredType";
-import ErrorMessage from "../../../model/messages/ErrorMessage";
+import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 import {
   extractGroupsFromValidatorProps,
   extractMessageFromValidatorProps,
 } from "../../../model/utility/object.utility";
-import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
+import ErrorMessage from "../../../model/messages/ErrorMessage";
 
-export default function Negative(props?: BasicValidatorProviderType) {
+type ValueMaxType = {
+  value: number;
+};
+
+export default function ValueMax(
+  props: BasicValidatorProviderType<number, ValueMaxType>
+) {
+  const max = typeof props === "number" ? props : props.value;
   return ValidatorService.buildFieldValidatorDecorator<number>({
     expectedType: InferredType.NUMBER,
     groups: extractGroupsFromValidatorProps(props),
-    isValid: (num) => ({
-      key: "Negative",
+    isValid: (value) => ({
+      key: "ValueMax",
       message: extractMessageFromValidatorProps(
         props,
-        ErrorMessage.Negative(num)
+        ErrorMessage.ValueMax(max, value)
       ),
-      valid: num !== undefined && num !== null && num < 0,
+      valid: value <= max,
     }),
   });
 }

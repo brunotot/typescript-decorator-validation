@@ -1,9 +1,13 @@
 import ValidatorService from "../../../service/ValidatorService";
 import InferredType from "../../../model/enum/InferredType";
-import ErrorMessage from "../../../model/const/ErrorMessage";
-import { ValidationResult } from "../../../model/type/validation-result.type";
+import ErrorMessage from "../../../model/messages/ErrorMessage";
+import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
+import {
+  extractGroupsFromValidatorProps,
+  extractMessageFromValidatorProps,
+} from "../../../model/utility/object.utility";
 
-function isValidXML(value: string, message: string): ValidationResult {
+function isValidXML(value: string): boolean {
   let valid = true;
   try {
     const parser = new DOMParser();
@@ -12,16 +16,17 @@ function isValidXML(value: string, message: string): ValidationResult {
   } catch (ignored) {
     valid = false;
   }
-  return {
-    key: "XML",
-    message,
-    valid,
-  };
+  return valid;
 }
 
-export default function XML(message?: string) {
+export default function XML(props?: BasicValidatorProviderType) {
   return ValidatorService.buildFieldValidatorDecorator<string>({
     expectedType: InferredType.STRING,
-    isValid: (value) => isValidXML(value, message ?? ErrorMessage.XML()),
+    groups: extractGroupsFromValidatorProps(props),
+    isValid: (value) => ({
+      key: "XML",
+      message: extractMessageFromValidatorProps(props, ErrorMessage.XML()),
+      valid: isValidXML(value),
+    }),
   });
 }

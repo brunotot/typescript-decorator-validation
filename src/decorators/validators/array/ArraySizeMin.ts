@@ -7,17 +7,24 @@ import {
   extractMessageFromValidatorProps,
 } from "../../../model/utility/object.utility";
 
-export default function Decimal(props?: BasicValidatorProviderType<number>) {
-  return ValidatorService.buildFieldValidatorDecorator<number>({
-    expectedType: InferredType.NUMBER,
+type ArraySizeMinType = {
+  value: number;
+};
+
+export default function ArraySizeMin<T>(
+  props: BasicValidatorProviderType<number, ArraySizeMinType>
+) {
+  const min = typeof props === "number" ? props : props.value;
+  return ValidatorService.buildFieldValidatorDecorator<T[]>({
+    expectedType: InferredType.ARRAY,
     groups: extractGroupsFromValidatorProps(props),
-    isValid: (value) => ({
-      key: "Decimal",
+    isValid: (array) => ({
+      key: "ArraySizeMin",
       message: extractMessageFromValidatorProps(
         props,
-        ErrorMessage.Decimal(value)
+        ErrorMessage.ArraySizeMin(min, (array ?? []).length)
       ),
-      valid: value !== undefined && value !== null && !Number.isInteger(value),
+      valid: (array ?? []).length >= min,
     }),
   });
 }

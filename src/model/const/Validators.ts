@@ -1,12 +1,7 @@
-import Required from "../../decorators/validators/any/NotEmpty";
-import Size from "../../decorators/validators/compound/Size";
-import AssertFalse from "../../decorators/validators/boolean/AssertFalse";
-import AssertTrue from "../../decorators/validators/boolean/AssertTrue";
 import Rule from "../../decorators/validators/custom/Rule";
 import Digits from "../../decorators/validators/number/Digits";
-import Max from "../../decorators/validators/number/Max";
-import Min from "../../decorators/validators/number/Min";
-import Range from "../../decorators/validators/number/Range";
+import ValueMax from "../../decorators/validators/number/ValueMax";
+import ValueRange from "../../decorators/validators/number/ValueRange";
 import Email from "../../decorators/validators/string/Email";
 import Password from "../../decorators/validators/string/Password";
 import Pattern from "../../decorators/validators/string/Pattern";
@@ -25,39 +20,56 @@ import Date from "../../decorators/validators/string/Date";
 import IPAddress from "../../decorators/validators/string/IPAddress";
 import JSON from "../../decorators/validators/string/JSON";
 import Numeric from "../../decorators/validators/string/Numeric";
-import Palindrome from "../../decorators/validators/string/Palindrome";
 import XML from "../../decorators/validators/string/XML";
 import Time from "../../decorators/validators/string/Time";
-import NotEmpty from "../../decorators/validators/any/NotEmpty";
+import Required from "../../decorators/validators/any/Required";
+import ArrayContains from "../../decorators/validators/array/ArrayContains";
+import ArrayEmpty from "../../decorators/validators/array/ArrayEmpty";
+import ArrayEvery from "../../decorators/validators/array/ArrayEvery";
+import ArrayUnique from "../../decorators/validators/array/ArrayUnique";
+import ArraySizeExact from "../../decorators/validators/array/ArraySizeExact";
+import foreach from "../../decorators/validators/array/foreach";
+import ArraySizeMax from "../../decorators/validators/array/ArraySizeMax";
+import ArraySizeMin from "../../decorators/validators/array/ArraySizeMin";
+import ArraySizeRange from "../../decorators/validators/array/ArraySizeRange";
+import ArrayNone from "../../decorators/validators/array/ArrayNone";
+import ArrayOne from "../../decorators/validators/array/ArrayOne";
+import ArraySome from "../../decorators/validators/array/ArraySome";
+import ValueMin from "../../decorators/validators/number/ValueMin";
 
 const any = {
-  Required,
   Truthy,
   Falsy,
-  NotEmpty,
-};
-
-const compound = {
-  Size,
+  Required,
 };
 
 const array = {
   ...any,
-  Size: compound.Size,
+  ArrayContains,
+  ArrayEmpty,
+  ArrayEvery,
+  ArrayNone,
+  ArrayOne,
+  ArraySome,
+  ArrayUnique,
+  ArraySizeExact,
+  ArraySizeMax,
+  ArraySizeMin,
+  ArraySizeRange,
+  foreach,
 };
 
 const boolean = {
-  ...any,
-  AssertFalse,
-  AssertTrue,
+  Truthy,
+  Falsy,
 };
 
 const number = {
   ...any,
   Digits,
-  Max,
-  Min,
-  Range,
+  ValueMax,
+  ValueMin,
+  ValueRange,
   Decimal,
   Integer,
   Negative,
@@ -68,7 +80,6 @@ const number = {
 
 const string = {
   ...any,
-  Size: compound.Size,
   Email,
   Password,
   Pattern,
@@ -79,7 +90,6 @@ const string = {
   IPAddress,
   JSON,
   Numeric,
-  Palindrome,
   XML,
   Time,
 };
@@ -95,7 +105,6 @@ const validators = {
   number,
   string,
   custom,
-  compound,
 };
 
 export { validators };

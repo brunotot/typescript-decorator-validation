@@ -1,17 +1,17 @@
 import ValidatorService from "../../../service/ValidatorService";
-import ErrorMessage from "../../../model/const/ErrorMessage";
+import ErrorMessage from "../../../model/messages/ErrorMessage";
 import InferredType from "../../../model/enum/InferredType";
+import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 
 const DEFAULT_KEY = "Pattern";
 
+export type PatternType = {
+  regex: RegExp;
+  key?: string;
+};
+
 export default function Pattern(
-  props:
-    | RegExp
-    | {
-        regex: RegExp;
-        message?: string;
-        key?: string;
-      }
+  props: BasicValidatorProviderType<RegExp, PatternType>
 ) {
   const isPropsRegex = props instanceof RegExp;
   const key = isPropsRegex

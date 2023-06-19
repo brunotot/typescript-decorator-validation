@@ -1,0 +1,52 @@
+import { MessageFormatType } from "../ErrorMessage";
+
+const MessageFormatHr: MessageFormatType = {
+  ArrayEmpty: `Lista mora biti prazna.`,
+  ArrayContains: `Lista mora sadržavati sljedeći element: {0} `,
+  Decimal: `Broj mora biti decimalan ali je {0}`,
+  ArraySizeMin: `Lista mora sadržavati minimalno {0} elemenata ali sadržava {1}.`,
+  ArraySizeRange: `Lista mora sadržavati između {0} i {1} elemenata ali sadržava {2}.`,
+  ArraySizeMax: `Lista mora sadržavati maksimalno {0} elemenata ali sadržava {1}.`,
+  ArraySizeExact: `Lista mora sadržavati točno {0} elemenata ali sadržava {1}.`,
+  MinLength: `Unos mora sadržavati barem {0} znakova`,
+  MaxLength: `Unos ne smije sadržavati više od {0} znakova`,
+  NotEmpty: "Unos je obavezan",
+  Pattern: `Unos ne zadovoljava regularni izraz: "{0}"`,
+  Email: "Unos nije pravilni email",
+  PasswordUppercaseViolation: `Lozinka mora sadržavati barem 1 veliko slovo`,
+  PasswordLowercaseViolation: `Lozinka mora sadržavati barem 1 malo slovo`,
+  PasswordNumbersViolation: `Lozinka mora sadržavati barem 1 broj`,
+  PasswordSpecialsViolation: `Lozinka mora sadržavati barem 1 poseban znak`,
+  PasswordLengthViolation: `Lozinka mora imati minimalno {0} znakova`,
+  URL: `Unos nije validan URL`,
+  ValueMin: `Minimalna dozvoljena vrijednost je {0} ali je {1}`,
+  ValueMax: `Maksimalna dozvoljena vrijednost je {0} ali je {1}`,
+  ValueRange: `Vrijednost mora biti veća od ili jednaka {0} i manja od ili jednaka {1} ali je {2}`,
+  Digits: `Integer part of the number can have a maximum of {0} digits and fraction part a maximum of {1}`,
+  ExactLength: `Unos mora sadržavati točno {0} znakova`,
+  RangeLength: `Unos mora sadržavati između {0} i {1} znakova`,
+  XML: `Unos nije validni XML`,
+  JSON: `Unos nije validni JSON`,
+  IPAddress: `Unos nije validna IP adresa`,
+  CreditCardNumber: `Unos nije validni broj kreditne kartice`,
+  Date: `Unos ne zadovoljava format datuma ({0})`,
+  Time: `Unos ne zadovoljava {0} lokalitet za {1} vrijeme`,
+  Numeric: `Unos smije sadržavati samo brojeve`,
+  Alpha: `Unos smije sadržavati samo slova`,
+  Integer: `Vrijednost mora biti cijeli broj ali je {0}`,
+  Positive: `Vrijednost mora biti pozitivan broj ali je {0}`,
+  Negative: `Vrijednost mora biti negativan broj ali je {0}`,
+  NonNegative: `Vrijednost smije biti 0 ili veće ali je {0}`,
+  NonPositive: `Vrijednost smije biti 0 ili manja ali je {0}`,
+  Falsy: "Vrijednost mora biti negativna",
+  Truthy: "Vrijednost mora biti pozitivna",
+  ArrayUnique: `Elementi liste moraju biti jedinstveni`,
+  //
+  InvalidUsageOfDecoratorValid: `\n\n@valid dekorator očekuje parametar klase ali nije moguće zaključiti parametar preko refleksije jer tip klase nije prosljeđen.\nKoristite li @valid unutar @foreach i jeste li time zaboravili prosljediti tip liste kao parametar @valid dekoratoru?\n`,
+  InvalidDigitsParams: `maxInteger [{0}] i maxFraction [{1}] moraju biti cijeli brojevi`,
+  IncompatibleTypes:
+    `\n\nReturn type svojstva "{0}" klase "{1}" ne zadovoljava dozvoljene return type-ove dekoratora.` +
+    `\nOvaj dekorator očekuje bilo koji od [{2}] tipova ali je primio [{3}].\n`,
+};
+
+export default MessageFormatHr;

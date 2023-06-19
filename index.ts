@@ -9,6 +9,8 @@ import { ValidationClass } from "./src/model/type/validation-class.type";
 import ValidationHandler, {
   ValidationFn,
 } from "./src/handler/ValidationHandler";
+import { ValidationGroup } from "./src/handler/ValidationGroup";
+import { Locale, getLocale, setLocale } from "./src/model/messages/Locale";
 
 export type {
   Class,
@@ -18,4 +20,14 @@ export type {
   ValidationClass,
 };
 
-export { InferredType, ValidatorService, validators, Rule, ValidationHandler };
+export {
+  ValidationGroup,
+  InferredType,
+  ValidatorService,
+  validators,
+  Rule,
+  ValidationHandler,
+  Locale,
+  getLocale,
+  setLocale,
+};

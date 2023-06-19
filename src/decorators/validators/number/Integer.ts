@@ -1,13 +1,22 @@
 import ValidatorService from "../../../service/ValidatorService";
 import InferredType from "../../../model/enum/InferredType";
-import ErrorMessage from "../../../model/const/ErrorMessage";
+import ErrorMessage from "../../../model/messages/ErrorMessage";
+import {
+  extractGroupsFromValidatorProps,
+  extractMessageFromValidatorProps,
+} from "../../../model/utility/object.utility";
+import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 
-export default function Integer(message: string = ErrorMessage.Integer()) {
+export default function Integer(props?: BasicValidatorProviderType) {
   return ValidatorService.buildFieldValidatorDecorator<number>({
     expectedType: InferredType.NUMBER,
+    groups: extractGroupsFromValidatorProps(props),
     isValid: (num) => ({
       key: "Integer",
-      message,
+      message: extractMessageFromValidatorProps(
+        props,
+        ErrorMessage.Integer(num)
+      ),
       valid: num !== undefined && num !== null && Number.isInteger(num),
     }),
   });
