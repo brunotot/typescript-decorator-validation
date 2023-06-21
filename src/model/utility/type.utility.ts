@@ -68,20 +68,32 @@ type EndNode<CHILD, PARENT = CHILD> = {
   children: CHILD[];
 };
 
+export type UndefinedOrElse<
+  PREDICATE,
+  TRUE,
+  FALSE = PREDICATE
+> = PREDICATE extends undefined ? TRUE : FALSE;
+
+// prettier-ignore
 export type RecursiveComplexType<T, V = undefined> = OmitNever<{
-  [K in KeyOf<T>]: T[K] extends object
-    ? T[K] extends Function
-      ? never
-      : T[K] extends any[]
-      ? T[K][number] extends object
-        ? V extends undefined
-          ? RecursiveComplexType<T[K][number], V>[]
-          : EndNode<RecursiveComplexType<T[K][number], V>, V>
-        : V extends undefined
-        ? T[K]
-        : EndNode<V>
-      : RecursiveComplexType<T[K], V>
-    : V extends undefined
-    ? T[K]
-    : V;
+  [K in KeyOf<T>]: 
+    T[K] extends object
+      ? T[K] extends Function
+        ? never
+        : T[K] extends any[]
+          ? T[K][number] extends object
+            ? UndefinedOrElse<
+                V, 
+                RecursiveComplexType<T[K][number], V>[], 
+                EndNode<RecursiveComplexType<T[K][number], V>, V>
+              >
+            : UndefinedOrElse<
+                V, 
+                T[K], 
+                EndNode<V>
+              >
+          : T[K] extends Date
+            ? UndefinedOrElse<V, T[K]>
+            : RecursiveComplexType<V, T[K]>
+      : UndefinedOrElse<V, T[K]>;
 }>;

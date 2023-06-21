@@ -1,4 +1,5 @@
 import { ValidationGroupType } from "../../handler/ValidationHandler";
+import { Class } from "../type/class.type";
 import { BasicValidatorProviderType } from "./type.utility";
 
 export type EqualsType<T> = (obj1: T, obj2: T) => boolean;
@@ -46,8 +47,7 @@ export function hasValue(obj: any): boolean {
     obj === null ||
     obj === false ||
     (Array.isArray(obj) && obj.length === 0) ||
-    (typeof obj === "string" && obj.trim().length === 0) ||
-    (typeof obj === "object" && Object.keys(obj).length === 0)
+    (typeof obj === "string" && obj.trim().length === 0)
   );
 }
 
@@ -158,6 +158,12 @@ export function hash(val: any): number {
   } else {
     return defaultHash(val);
   }
+}
+
+export function isPrimitiveType(type: Class<any>) {
+  return (
+    type === Date || type === String || type === Number || type === Boolean
+  );
 }
 
 export function isArrayUnique<T>(arr: T[], equals: EqualsType<T>): boolean {

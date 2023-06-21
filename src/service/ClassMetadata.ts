@@ -7,7 +7,10 @@ import InferredType from "../model/enum/InferredType";
 import MetadataKey from "../model/enum/MetadataKey";
 import { Class } from "../model/type/class.type";
 import { ValidationClass } from "../model/type/validation-class.type";
-import { isValidationGroupUnion } from "../model/utility/object.utility";
+import {
+  isPrimitiveType,
+  isValidationGroupUnion,
+} from "../model/utility/object.utility";
 import { KeyOf, RecursiveComplexType } from "../model/utility/type.utility";
 import PropertyMetadata from "./PropertyMetadata";
 import ReflectService from "./ReflectService";
@@ -91,15 +94,16 @@ export default class ClassMetadata<T> {
 
       return {
         ...obj,
-        [property]: innerClass
-          ? {
-              node: validationMetadataListByActiveGroup,
-              children: new ClassMetadata(
-                innerClass,
-                ...this._validationGroups
-              ).buildValidators(),
-            }
-          : validationMetadataListByActiveGroup,
+        [property]:
+          innerClass && !isPrimitiveType(innerClass)
+            ? {
+                node: validationMetadataListByActiveGroup,
+                children: new ClassMetadata(
+                  innerClass,
+                  ...this._validationGroups
+                ).buildValidators(),
+              }
+            : validationMetadataListByActiveGroup,
       };
     }, {}) as ValidationData<T>;
   }

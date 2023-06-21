@@ -3,6 +3,7 @@ import MetadataKey from "../model/enum/MetadataKey";
 import { Class } from "../model/type/class.type";
 import { KeyOf } from "../model/utility/type.utility";
 import ReflectService from "./ReflectService";
+import "reflect-metadata";
 
 export default class PropertyMetadata<T> {
   private _parent: Class<T>;
@@ -40,13 +41,16 @@ export default class PropertyMetadata<T> {
   }
 
   private buildClass(): Class<unknown> | null {
-    return (
-      ReflectService.getMetadata<Class<any>>(
-        MetadataKey.SEMANTICS_VALID,
-        this._parent,
-        this._field as string
-      )[0] || null
+    const v1 = ReflectService.getMetadata<Class<any>>(
+      MetadataKey.SEMANTICS_VALID,
+      this._parent,
+      this._field as string
+    )[0];
+    const v2 = ReflectService.getClassFieldTypeReal(
+      this._parent.prototype,
+      this._field as string
     );
+    return v1 ?? v2 ?? null;
   }
 
   private buildType(): InferredType {

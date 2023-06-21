@@ -5,6 +5,7 @@ import { ValidationResult } from "../model/type/validation-result.type";
 import ReflectService from "../service/ReflectService";
 import {
   deepEquals,
+  isPrimitiveType,
   isValidationGroupUnion,
 } from "../model/utility/object.utility";
 import { ValidationClass } from "../model/type/validation-class.type";
@@ -94,7 +95,7 @@ export default class ValidationHandler<T> {
     for (const [_key, validators] of entries) {
       const key = _key as keyof ErrorData<T>;
       const meta = new PropertyMetadata<T>(this._clazz, key);
-      if (meta.clazz) {
+      if (meta.clazz && !isPrimitiveType(meta.clazz)) {
         if (meta.is(InferredType.GENERIC_OBJECT)) {
           const innerValidationHandler = new ValidationHandler(
             meta.clazz,
