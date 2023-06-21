@@ -74,6 +74,16 @@ export default class ValidationHandler<T> {
       : this._oldErrors;
   }
 
+  private mutateErrors<T>(
+    errors: ErrorData<T>,
+    key: KeyOf<ErrorData<T>>,
+    newErrors: any
+  ): void {
+    errors[key] = deepEquals(newErrors, this._oldErrors?.[key])
+      ? any(this._oldErrors)?.[key]
+      : any(newErrors);
+  }
+
   validate(state: ValidationClass<T>): StateValidationResult<T> {
     let valid: boolean = true;
     let errors: ErrorData<T> = {} as ErrorData<T>;
@@ -81,8 +91,9 @@ export default class ValidationHandler<T> {
     const instance: any = this._metadata.createInstance(state);
     const entries = Object.entries(this._metadata.validators);
 
-    for (const [key, validators] of entries) {
-      const meta = new PropertyMetadata<T>(this._clazz, key as KeyOf<T>);
+    for (const [_key, validators] of entries) {
+      const key = _key as keyof ErrorData<T>;
+      const meta = new PropertyMetadata<T>(this._clazz, key);
       if (meta.clazz) {
         if (meta.is(InferredType.GENERIC_OBJECT)) {
           const innerValidationHandler = new ValidationHandler(
@@ -95,7 +106,7 @@ export default class ValidationHandler<T> {
           if (!validatorEval.valid) {
             valid = false;
           }
-          errors[key as keyof ErrorData<T>] = any(validatorEval);
+          this.mutateErrors(errors, key, validatorEval);
           continue;
         } else if (meta.is(InferredType.ARRAY)) {
           const innerValidationHandler = new ValidationHandler(
@@ -125,7 +136,7 @@ export default class ValidationHandler<T> {
             }
           );
 
-          errors[key as keyof ErrorData<T>] = any({
+          this.mutateErrors(errors, key, {
             node: parentValidators,
             children: childrenValidators,
           });
@@ -137,7 +148,7 @@ export default class ValidationHandler<T> {
       if (meta.is(InferredType.ARRAY)) {
         const arrayValidators = ReflectService.getMetadata<
           ValidationFnMetadata<any>
-        >(MetadataKey.VALIDATOR_EACH_IN_ARRAY, this._clazz, key).filter((e) =>
+        >(MetadataKey.VALIDATOR_EACH_IN_ARRAY, this._clazz, _key).filter((e) =>
           isValidationGroupUnion(this._groups, e.groups)
         );
 
@@ -164,7 +175,7 @@ export default class ValidationHandler<T> {
             })
         );
 
-        errors[key as keyof ErrorData<T>] = any({
+        this.mutateErrors(errors, key, {
           node: parentValidators,
           children: childrenValidators,
         });
@@ -172,18 +183,18 @@ export default class ValidationHandler<T> {
         continue;
       }
 
-      const fieldErrors = (validators as ValidationFnMetadata<T>[])
+      const newFieldErrors = (validators as ValidationFnMetadata<T>[])
         .filter((validator) =>
           isValidationGroupUnion(this._groups, validator.groups)
         )
         .map((validator) => validator.validate(instance[key], instance))
         .filter((evaluation) => !evaluation.valid);
 
-      if (fieldErrors.length > 0) {
+      if (newFieldErrors.length > 0) {
         valid = false;
       }
 
-      errors[key as keyof ErrorData<T>] = any(fieldErrors);
+      this.mutateErrors(errors, key, newFieldErrors);
     }
 
     this._oldState = state;

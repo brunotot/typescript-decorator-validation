@@ -8,15 +8,26 @@ setLocale(Locale.HR);
 class ParentForm {
   @Required()
   @Password()
-  str?: string;
+  str1?: string;
+
+  @Required()
+  str2?: string;
 }
 
 const groups: ValidationGroupType[] = [];
 const clazz = ParentForm;
 
 const handler = new ValidationHandler(clazz, ...groups);
-const result = handler.validate({
-  str: "",
+const result1 = handler.validate({
+  str1: "",
+  str2: "",
+});
+const result2 = handler.validate({
+  str1: "",
+  str2: "valid",
 });
 
-console.log(JSON.stringify(result, null, 2));
+console.log(JSON.stringify(result1, null, 2));
+console.log(result1 === result2);
+console.log(`Expecting TRUE: ${result1.errors.str1 === result2.errors.str1}`);
+console.log(`Expecting FALSE: ${result1.errors.str2 === result2.errors.str2}`);
