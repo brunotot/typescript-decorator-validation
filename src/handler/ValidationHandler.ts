@@ -90,6 +90,7 @@ export default class ValidationHandler<T> {
     let errors: ErrorData<T> = {} as ErrorData<T>;
 
     const instance: any = this._metadata.createInstance(state);
+    console.log(instance);
     const entries = Object.entries(this._metadata.validators);
 
     for (const [_key, validators] of entries) {

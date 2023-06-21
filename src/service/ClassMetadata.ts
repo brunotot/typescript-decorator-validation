@@ -53,7 +53,7 @@ export default class ClassMetadata<T> {
     for (const [key, value] of entries) {
       const meta = new PropertyMetadata<T>(this._clazz, key as KeyOf<T>);
 
-      if (meta.clazz) {
+      if (meta.clazz && !isPrimitiveType(meta.clazz)) {
         if (meta.is(InferredType.GENERIC_OBJECT)) {
           const innerValidationHandler = new ClassMetadata(
             meta.clazz,

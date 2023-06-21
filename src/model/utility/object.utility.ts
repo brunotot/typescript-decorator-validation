@@ -47,7 +47,8 @@ export function hasValue(obj: any): boolean {
     obj === null ||
     obj === false ||
     (Array.isArray(obj) && obj.length === 0) ||
-    (typeof obj === "string" && obj.trim().length === 0)
+    (typeof obj === "string" && obj.trim().length === 0) ||
+    (obj instanceof Date && obj.toString() === "Invalid Date")
   );
 }
 
