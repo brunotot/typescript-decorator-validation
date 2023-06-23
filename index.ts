@@ -8,6 +8,7 @@ import { Class } from "./src/model/type/class.type";
 import { ValidationClass } from "./src/model/type/validation-class.type";
 import ValidationHandler, {
   ValidationFn,
+  SimpleErrorData,
 } from "./src/handler/ValidationHandler";
 import { ValidationGroup } from "./src/handler/ValidationGroup";
 import { Locale, getLocale, setLocale } from "./src/model/messages/Locale";
@@ -18,6 +19,7 @@ export type {
   ValidationFn,
   ErrorData,
   ValidationClass,
+  SimpleErrorData,
 };
 
 export {
