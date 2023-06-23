@@ -63,7 +63,7 @@ export type OmitNever<T> = Pick<
   }>
 >;
 
-type EndNode<CHILD, PARENT = CHILD> = {
+export type EndNode<CHILD, PARENT = CHILD> = {
   node: PARENT;
   children: CHILD[];
 };

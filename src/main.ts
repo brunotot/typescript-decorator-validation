@@ -25,15 +25,11 @@ const handler = new ValidationHandler(clazz, ...groups);
 const result1 = handler.validate({
   str1: "",
   str2: "",
-  someDate: new Date(),
+  someDate: new Date(Date.parse("LOL")),
 });
-console.log(result1.errors.someDate);
-/*const result2 = handler.validate({
+const result2 = handler.validate({
   str1: "",
   str2: "valid",
+  someDate: new Date(),
 });
-
-console.log(JSON.stringify(result1, null, 2));
-console.log(result1 === result2);
-console.log(`Expecting TRUE: ${result1.errors.str1 === result2.errors.str1}`);
-console.log(`Expecting FALSE: ${result1.errors.str2 === result2.errors.str2}`);*/
+console.log(result1);

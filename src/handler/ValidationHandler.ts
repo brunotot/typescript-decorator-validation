@@ -3,16 +3,19 @@ import { Class } from "../model/type/class.type";
 import { ErrorData } from "../model/type/error-data.type";
 import { ValidationResult } from "../model/type/validation-result.type";
 import ReflectService from "../service/ReflectService";
-import {
-  deepEquals,
-  isPrimitiveType,
-  isValidationGroupUnion,
-} from "../model/utility/object.utility";
 import { ValidationClass } from "../model/type/validation-class.type";
-import InferredType from "../model/enum/InferredType";
-import { KeyOf, OmitNever } from "../model/utility/type.utility";
 import PropertyMetadata from "../service/PropertyMetadata";
 import ClassMetadata from "../service/ClassMetadata";
+import {
+  deepEquals,
+  isValidationGroupUnion,
+} from "../model/utility/object.utility";
+import {
+  EndNode,
+  KeyOf,
+  OmitNever,
+  RecursiveComplexType,
+} from "../model/utility/type.utility";
 
 export type ValidationFn<T> = (value: T, context?: any) => ValidationResult;
 
@@ -45,166 +48,317 @@ function any(any: any): any {
 }
 
 function array(any: any): any[] {
-  return any as any[];
+  return (any ?? []) as any[];
 }
+
+export type ValidationHandlerStateType<T> = {
+  valid: boolean;
+  errors: ErrorData<T>;
+  state: ValidationClass<T>;
+  simpleErrors: SimpleErrorData<T>;
+};
+
+export type SimpleErrorData<T> = RecursiveComplexType<T, string[]>;
+
+export type StateValidationResultGroup<T> = {
+  valid: boolean;
+  detailedErrors: ErrorData<T>;
+  errors: SimpleErrorData<T>;
+};
+
+export type ValidityErrorsType =
+  | StateValidationResult<any>
+  | StateValidationResult<any>[]
+  | ValidationResult[]
+  | ValidationResult[][];
+
+export type ValidationHandlerCache<T> = Partial<{
+  state: ValidationClass<T>;
+  hasErrors: boolean;
+  detailedErrors: ErrorData<T>;
+  errors: SimpleErrorData<T>;
+}>;
 
 export default class ValidationHandler<T> {
   private _clazz: Class<T>;
-  private _oldState?: ValidationClass<T>;
-  private _oldHasErrors?: boolean;
-  private _oldErrors?: ErrorData<T>;
   private _groups: ValidationGroupType[];
   private _metadata: ClassMetadata<T>;
+  private _cache: ValidationHandlerCache<T>;
 
   constructor(clazz: Class<T>, ...groups: ValidationGroupType[]) {
     this._clazz = clazz;
     this._groups = Array.from(new Set(groups));
     this._metadata = new ClassMetadata(clazz, ...groups);
+    this._cache = {};
   }
 
   hasErrors(state: ValidationClass<T>): boolean {
-    return this._oldHasErrors === undefined ||
-      !deepEquals(this._oldState, state)
-      ? !this.validate(state).valid
-      : this._oldHasErrors;
+    return this.tryGetCache(
+      state,
+      !!this._cache.hasErrors,
+      () => !this.validate(state).detailedErrors
+    );
   }
 
-  getErrors(state: ValidationClass<T>): ErrorData<T> {
-    return this._oldErrors === undefined || !deepEquals(this._oldState, state)
-      ? this.validate(state).errors
-      : this._oldErrors;
+  getDetailedErrors(state: ValidationClass<T>): ErrorData<T> {
+    return this.tryGetCache(
+      state,
+      this._cache.detailedErrors!,
+      () => this.validate(state).detailedErrors
+    );
   }
 
-  private mutateErrors<T>(
-    errors: ErrorData<T>,
-    key: KeyOf<ErrorData<T>>,
-    newErrors: any
-  ): void {
-    errors[key] = deepEquals(newErrors, this._oldErrors?.[key])
-      ? any(this._oldErrors)?.[key]
-      : any(newErrors);
+  getErrors(state: ValidationClass<T>): SimpleErrorData<T> {
+    return this.tryGetCache(
+      state,
+      this._cache.errors!,
+      () => this.validate(state).errors
+    );
   }
 
-  validate(state: ValidationClass<T>): StateValidationResult<T> {
+  validate(state: ValidationClass<T>): StateValidationResultGroup<T> {
     let valid: boolean = true;
     let errors: ErrorData<T> = {} as ErrorData<T>;
+    let simpleErrors: SimpleErrorData<T> = {} as SimpleErrorData<T>;
 
     const instance: any = this._metadata.createInstance(state);
     const entries = Object.entries(this._metadata.validators);
 
-    for (const [_key, validators] of entries) {
+    // prettier-ignore
+    type ErrorDataApplierType<K = undefined> = (key: keyof ErrorData<T>, meta: PropertyMetadata<T>, validators: K) => void;
+
+    // prettier-ignore
+    const collectErrorData = (key: KeyOf<ErrorData<T>>, parentData: any, newSimpleErrorsValue: any, childData?: any) => {
+      if (Array.isArray(childData)) {
+        valid = this.recalculateValidity(parentData, valid);
+        valid = this.recalculateValidity(childData, valid);
+        const data = { node: parentData, children: childData };
+
+        this.mutateErrors(
+          key,
+          errors,
+          data,
+          simpleErrors,
+          newSimpleErrorsValue
+        );
+      } else {
+        valid = this.recalculateValidity(parentData, valid);
+
+        this.mutateErrors(
+          key,
+          errors,
+          parentData,
+          simpleErrors,
+          newSimpleErrorsValue
+        );
+      }
+    };
+
+    // prettier-ignore
+    const handlePrimitive: ErrorDataApplierType<ValidationFnMetadata<any>[]> = (key, _, validators) => {
+      const primitiveErrors = this.extractInvalidResults(
+        validators,
+        instance[key],
+        instance
+      );
+      collectErrorData(
+        key,
+        primitiveErrors,
+        primitiveErrors.map((e) => e.message)
+      );
+    };
+
+    // prettier-ignore
+    const handlePrimitiveArray: ErrorDataApplierType<ValidationFnMetadata<any>[]> = (key, _, validators) => {
+      const stateValueArray = array(any(state)[key]);
+
+      const primitiveArrayValidators = ReflectService.getMetadata<ValidationFnMetadata<any>>(
+        MetadataKey.VALIDATOR_EACH_IN_ARRAY,
+        this._clazz, 
+        key as string
+      );
+
+      const parentValidators = this.extractInvalidResults(
+        validators,
+        stateValueArray,
+        state
+      );
+
+      const childrenValidators = stateValueArray.map((v: any) =>
+        this.extractInvalidResults(primitiveArrayValidators, v, state)
+      );
+
+      collectErrorData(
+        key,
+        parentValidators,
+        {
+          node: parentValidators.map((e) => e.message),
+          children: childrenValidators.map((e) =>
+            e.map(({ message }) => message)
+          ),
+        },
+        childrenValidators
+      );
+    };
+
+    // prettier-ignore
+    const handleObject: ErrorDataApplierType = (key, meta) => {
+      const innerValidationHandler = new ValidationHandler(
+        meta.clazz!,
+        ...this._groups
+      );
+      const { detailedErrors, errors } = innerValidationHandler.validate(
+        any(state)[key]
+      );
+      collectErrorData(key, detailedErrors, errors);
+    };
+
+    // prettier-ignore
+    const handleObjectArray: ErrorDataApplierType<EndNode<ValidationFnMetadata<any>[]>> = (key, meta, validators) => {
+      const innerValidationHandler = new ValidationHandler(
+        meta.clazz!,
+        ...this._groups
+      );
+      const stateValueArray: any[] = array(any(state)[key]);
+
+      const parentValidators = this.extractInvalidResults(
+        validators.node,
+        stateValueArray,
+        state
+      );
+
+      const childrenValidators = stateValueArray.map((value: Object) =>
+        innerValidationHandler.validate(value)
+      );
+
+      collectErrorData(
+        key,
+        parentValidators,
+        {
+          node: parentValidators.map((e) => e.message),
+          children: childrenValidators.map(({ errors }) => errors),
+        },
+        childrenValidators
+      );
+    };
+
+    for (const [_key, _validators] of entries) {
+      const validators = _validators as any;
       const key = _key as keyof ErrorData<T>;
       const meta = new PropertyMetadata<T>(this._clazz, key);
-      if (meta.clazz && !isPrimitiveType(meta.clazz)) {
-        if (meta.is(InferredType.GENERIC_OBJECT)) {
-          const innerValidationHandler = new ValidationHandler(
-            meta.clazz,
-            ...this._groups
-          );
-          const validatorEval = innerValidationHandler.validate(
-            any(state)[key]
-          );
-          if (!validatorEval.valid) {
-            valid = false;
-          }
-          this.mutateErrors(errors, key, validatorEval);
-          continue;
-        } else if (meta.is(InferredType.ARRAY)) {
-          const innerValidationHandler = new ValidationHandler(
-            meta.clazz,
-            ...this._groups
-          );
-          const stateValueArray: any[] = any(state)[key];
+      const typeGroup = meta.typeGroup;
 
-          const parentValidators: any[] = (
-            (validators as any).node as ValidationFnMetadata<any>[]
-          )
-            .map((validator) => validator.validate(stateValueArray, any(state)))
-            .filter((evaluation) => {
-              if (!evaluation.valid) {
-                valid = false;
-              }
-              return !evaluation.valid;
-            });
-
-          const childrenValidators = stateValueArray.map(
-            (innerValue: Object) => {
-              const validatorEval = innerValidationHandler.validate(innerValue);
-              if (!validatorEval.valid) {
-                valid = false;
-              }
-              return validatorEval;
-            }
-          );
-
-          this.mutateErrors(errors, key, {
-            node: parentValidators,
-            children: childrenValidators,
-          });
-
-          continue;
+      switch (typeGroup) {
+        case "OBJECT": {
+          handleObject(key, meta, validators);
+          break;
+        }
+        case "OBJECT_ARRAY": {
+          handleObjectArray(key, meta, validators);
+          break;
+        }
+        case "PRIMITIVE_ARRAY": {
+          handlePrimitiveArray(key, meta, validators);
+          break;
+        }
+        case "PRIMITIVE": {
+          handlePrimitive(key, meta, validators);
+          break;
         }
       }
-
-      if (meta.is(InferredType.ARRAY)) {
-        const arrayValidators = ReflectService.getMetadata<
-          ValidationFnMetadata<any>
-        >(MetadataKey.VALIDATOR_EACH_IN_ARRAY, this._clazz, _key).filter((e) =>
-          isValidationGroupUnion(this._groups, e.groups)
-        );
-
-        const stateValueArray = array(any(state)[key]);
-        const parentValidators = (validators as ValidationFnMetadata<any>[])
-          .map((validator) => {
-            return validator.validate(stateValueArray, any(state));
-          })
-          .filter((evaluation) => {
-            if (!evaluation.valid) {
-              valid = false;
-            }
-            return !evaluation.valid;
-          });
-
-        const childrenValidators = stateValueArray.map((v: any) =>
-          arrayValidators
-            .map((validator) => validator.validate(v, any(state)))
-            .filter((evaluation) => {
-              if (!evaluation.valid) {
-                valid = false;
-              }
-              return !evaluation.valid;
-            })
-        );
-
-        this.mutateErrors(errors, key, {
-          node: parentValidators,
-          children: childrenValidators,
-        });
-
-        continue;
-      }
-
-      const newFieldErrors = (validators as ValidationFnMetadata<T>[])
-        .filter((validator) =>
-          isValidationGroupUnion(this._groups, validator.groups)
-        )
-        .map((validator) => validator.validate(instance[key], instance))
-        .filter((evaluation) => !evaluation.valid);
-
-      if (newFieldErrors.length > 0) {
-        valid = false;
-      }
-
-      this.mutateErrors(errors, key, newFieldErrors);
     }
 
-    this._oldState = state;
-    this._oldHasErrors = !valid;
-    this._oldErrors = errors;
+    this.saveCache({
+      detailedErrors: errors,
+      errors: simpleErrors,
+      hasErrors: !valid,
+      state,
+    });
 
     return {
       valid,
-      errors,
+      detailedErrors: errors,
+      errors: simpleErrors,
     };
+  }
+
+  private saveCache(cache: ValidationHandlerCache<T>): void {
+    Object.entries(cache).forEach(([key, value]) => {
+      (this._cache as any)[key] = value;
+    });
+  }
+
+  private extractInvalidResults<T>(
+    validators: ValidationFnMetadata<T>[],
+    value: T,
+    parentInstance: any
+  ) {
+    return validators
+      .filter(({ groups }) => isValidationGroupUnion(this._groups, groups))
+      .map(({ validate }) => validate(value, parentInstance))
+      .filter(({ valid }) => !valid);
+  }
+
+  private mutateValueOrUseCache<K extends object>(
+    key: KeyOf<K>,
+    mutationParent: K,
+    mutationValue: K[KeyOf<K>],
+    cacheParent: K | undefined
+  ) {
+    const cacheValue = cacheParent?.[key];
+    const isNoChange = deepEquals(mutationValue, cacheValue);
+    mutationParent[key] = isNoChange ? any(cacheValue) : any(mutationValue);
+  }
+
+  private mutateErrors<T>(
+    key: KeyOf<ErrorData<T>>,
+    errorsHolder: ErrorData<T>,
+    errorsValue: any,
+    simpleErrorsHolder: SimpleErrorData<any>,
+    simpleErrorsValue: any
+  ) {
+    this.mutateValueOrUseCache(
+      key,
+      errorsHolder,
+      errorsValue,
+      this._cache.detailedErrors as any
+    );
+    this.mutateValueOrUseCache(
+      key,
+      simpleErrorsHolder,
+      simpleErrorsValue,
+      this._cache.errors as any
+    );
+  }
+
+  private tryGetCache<K>(
+    state: ValidationClass<T>,
+    cacheValue: K,
+    valueGetter: () => K
+  ): K {
+    return cacheValue === undefined || !deepEquals(this._cache.state, state)
+      ? valueGetter()
+      : cacheValue;
+  }
+
+  // prettier-ignore
+  private recalculateValidity(errs: ValidityErrorsType, current: boolean) {
+    return current !== undefined && !current 
+      ? false 
+      : "errors" in errs
+        ? !errs.valid 
+          ? false
+          : current
+        : !errs.length 
+          ? current
+          : Array.isArray(errs[0])
+            ? errs.some((s) => !!(s as ValidationResult[]).length)
+              ? false
+              : current
+            : "errors" in errs[0]
+              ? !!errs.length
+                  ? false
+                  : current
+              : false;
   }
 }
