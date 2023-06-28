@@ -1,6 +1,8 @@
-import ValidatorService from "../../../service/ValidatorService";
+import ValidatorService, {
+  NullableType,
+} from "../../../service/ValidatorService";
 import ErrorMessage from "../../../model/messages/ErrorMessage";
-import InferredType from "../../../model/enum/InferredType";
+
 import {
   extractGroupsFromValidatorProps,
   extractMessageFromValidatorProps,
@@ -25,13 +27,12 @@ const DEFAULTS: BasicValidatorProviderTypeMandatoryMessage<
   message: ErrorMessage.ArrayUnique(),
 };
 
-export default function ArrayUnique<T>(
-  props: BasicValidatorProviderType<string, ArrayUniqueType<T>> = DEFAULTS
+export default function ArrayUnique<K, T extends NullableType<K[]>>(
+  props: BasicValidatorProviderType<string, ArrayUniqueType<K>> = DEFAULTS
 ) {
   const hashFn = typeof props === "string" ? hash : props.hash ?? hash;
 
-  return ValidatorService.buildFieldValidatorDecorator<any[]>({
-    expectedType: InferredType.ARRAY,
+  return ValidatorService.buildFieldValidatorDecorator<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (array) => ({
       key: "ArrayUnique",
@@ -40,7 +41,7 @@ export default function ArrayUnique<T>(
         ErrorMessage.ArrayUnique()
       ),
       valid: isArrayUnique(
-        array,
+        array ?? [],
         (obj1, obj2) => hashFn(obj1) === hashFn(obj2)
       ),
     }),

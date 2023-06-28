@@ -1,8 +1,11 @@
 import { MessageFormatType } from "../ErrorMessage";
 
 const MessageFormatHr: MessageFormatType = {
+  TodayDate: `Datum {0} mora biti današnji datum`,
+  FutureDate: `Datum {0} mora biti datum u budućnosti`,
+  PastDate: `Datum {0} mora biti datum u prošlosti`,
   ArrayEmpty: `Lista mora biti prazna.`,
-  ArrayContains: `Lista mora sadržavati sljedeći element: {0} `,
+  ArrayContains: `Lista mora sadržavati sljedeći element: {0}`,
   Decimal: `Broj mora biti decimalan ali je {0}`,
   ArraySizeMin: `Lista mora sadržavati minimalno {0} elemenata ali sadržava {1}.`,
   ArraySizeRange: `Lista mora sadržavati između {0} i {1} elemenata ali sadržava {2}.`,
@@ -10,7 +13,7 @@ const MessageFormatHr: MessageFormatType = {
   ArraySizeExact: `Lista mora sadržavati točno {0} elemenata ali sadržava {1}.`,
   MinLength: `Unos mora sadržavati barem {0} znakova`,
   MaxLength: `Unos ne smije sadržavati više od {0} znakova`,
-  NotEmpty: "Unos je obavezan",
+  Required: "Unos je obavezan",
   Pattern: `Unos ne zadovoljava regularni izraz: "{0}"`,
   Email: "Unos nije pravilni email",
   PasswordUppercaseViolation: `Lozinka mora sadržavati barem 1 veliko slovo`,

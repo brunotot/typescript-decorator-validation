@@ -1,26 +1,34 @@
 import ValidatorService, {
   NullableType,
 } from "../../../service/ValidatorService";
-
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 import {
+  evaluateNullableValidity,
   extractGroupsFromValidatorProps,
   extractMessageFromValidatorProps,
 } from "../../../model/utility/object.utility";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 
-export default function Integer<T extends NullableType<number>>(
+function isFutureDate(date: NullableType<Date>): boolean {
+  // TODO: Maybe bump nullable validity to higher hierarchy
+  return evaluateNullableValidity(date, (d) => {
+    const currentDate = new Date();
+    return d.getTime() > currentDate.getTime();
+  });
+}
+
+export default function FutureDate<T extends NullableType<Date>>(
   props?: BasicValidatorProviderType
 ) {
   return ValidatorService.buildFieldValidatorDecorator<T>({
     groups: extractGroupsFromValidatorProps(props),
-    isValid: (num) => ({
-      key: "Integer",
+    isValid: (date) => ({
+      key: "FutureDate",
       message: extractMessageFromValidatorProps(
         props,
-        ErrorMessage.Integer(num)
+        ErrorMessage.FutureDate(date)
       ),
-      valid: num !== undefined && num !== null && Number.isInteger(num),
+      valid: isFutureDate(date),
     }),
   });
 }

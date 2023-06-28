@@ -1,18 +1,17 @@
-import ValidatorService from "../../../service/ValidatorService";
 import ErrorMessage from "../../../model/messages/ErrorMessage";
+import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 import {
   extractGroupsFromValidatorProps,
   extractMessageFromValidatorProps,
 } from "../../../model/utility/object.utility";
-import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
+import ValidatorService, {
+  NullableType,
+} from "../../../service/ValidatorService";
 
-const DEFAULTS: BasicValidatorProviderType = {
-  groups: [],
-  message: ErrorMessage.Truthy(),
-};
-
-export default function Truthy(props: BasicValidatorProviderType = DEFAULTS) {
-  return ValidatorService.buildFieldValidatorDecorator<any>({
+export default function Truthy<T extends NullableType>(
+  props?: BasicValidatorProviderType
+) {
+  return ValidatorService.buildFieldValidatorDecorator<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (value) => ({
       key: "Truthy",

@@ -1,4 +1,6 @@
-import ValidatorService from "../../../service/ValidatorService";
+import ValidatorService, {
+  NullableType,
+} from "../../../service/ValidatorService";
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 import {
@@ -7,12 +9,14 @@ import {
   hasValue,
 } from "../../../model/utility/object.utility";
 
-export default function Required(props?: BasicValidatorProviderType) {
-  return ValidatorService.buildFieldValidatorDecorator<any>({
+export default function Required<T extends NullableType>(
+  props?: BasicValidatorProviderType
+) {
+  return ValidatorService.buildFieldValidatorDecorator<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (value) => ({
-      key: "NotEmpty",
-      message: extractMessageFromValidatorProps(props, ErrorMessage.NotEmpty()),
+      key: "Required",
+      message: extractMessageFromValidatorProps(props, ErrorMessage.Required()),
       valid: hasValue(value),
     }),
   });

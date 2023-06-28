@@ -1,35 +1,51 @@
-import { ValidationHandler } from "..";
-import Required from "./decorators/validators/any/Required";
-import Password from "./decorators/validators/string/Password";
-import { ValidationGroupType } from "./handler/ValidationHandler";
+import strategy from "./model/const/Strategy";
+import { Rule, ValidationHandler, ValidationResult, validators } from "..";
 import { Locale, setLocale } from "./model/messages/Locale";
+import PropertyMetadata from "./model/const/PropertyMetadata";
+import Required from "./decorators/validators/any/Required";
+import foreach from "./decorators/validators/array/foreach";
+import MinLength from "./decorators/validators/string/MinLength";
+import Password from "./decorators/validators/string/Password";
+import { RecursiveComplexType } from "./model/utility/type.utility";
 
 setLocale(Locale.HR);
 
-class ParentForm {
-  @Required()
-  @Password()
-  str1?: string;
-
-  @Required()
-  str2?: string;
-
-  @Required()
-  someDate?: Date;
+class SomeClassNew {
+  @strategy.primitive()
+  b?: number;
 }
 
-const groups: ValidationGroupType[] = [];
-const clazz = ParentForm;
+class SomeClass {
+  @strategy.objectArray(() => SomeClassNew)
+  a?: SomeClassNew[];
+}
 
-const handler = new ValidationHandler(clazz, ...groups);
-const result1 = handler.validate({
-  str1: "",
-  str2: "",
-  someDate: new Date(Date.parse("LOL")),
+class ParentForm {
+  @strategy.primitive(() => String)
+  @MinLength(5)
+  username?: string;
+
+  @strategy.primitive(() => String)
+  @Password()
+  password?: string;
+
+  @strategy.primitive(() => Date)
+  @validators.date.FutureDate()
+  date?: Date;
+
+  @Required()
+  @foreach(Required(), MinLength(1))
+  @strategy.primitiveArray(() => String)
+  emails?: string[];
+
+  @strategy.objectArray(() => SomeClass)
+  complex?: SomeClass[];
+}
+
+const handler = new ValidationHandler(ParentForm);
+const result = handler.validate({
+  emails: [""],
+  complex: [],
+  date: new Date(),
 });
-const result2 = handler.validate({
-  str1: "",
-  str2: "valid",
-  someDate: new Date(),
-});
-console.log(result1);
+console.log(JSON.stringify(result.detailedErrors, null, 2));

@@ -1,5 +1,7 @@
-import ValidatorService from "../../../service/ValidatorService";
-import InferredType from "../../../model/enum/InferredType";
+import ValidatorService, {
+  NullableType,
+} from "../../../service/ValidatorService";
+
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 import {
@@ -26,9 +28,10 @@ function isValidCreditCardNumber(str: string): boolean {
   return sum % 10 === 0;
 }
 
-export default function CreditCardNumber(props?: BasicValidatorProviderType) {
-  return ValidatorService.buildFieldValidatorDecorator<string>({
-    expectedType: InferredType.STRING,
+export default function CreditCardNumber<T extends NullableType<string>>(
+  props?: BasicValidatorProviderType
+) {
+  return ValidatorService.buildFieldValidatorDecorator<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (value) => ({
       key: "CreditCardNumber",
@@ -36,7 +39,7 @@ export default function CreditCardNumber(props?: BasicValidatorProviderType) {
         props,
         ErrorMessage.CreditCardNumber()
       ),
-      valid: isValidCreditCardNumber(value),
+      valid: value == null ? true : isValidCreditCardNumber(value),
     }),
   });
 }

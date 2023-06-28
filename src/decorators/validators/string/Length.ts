@@ -1,5 +1,7 @@
-import ValidatorService from "../../../service/ValidatorService";
-import InferredType from "../../../model/enum/InferredType";
+import ValidatorService, {
+  NullableType,
+} from "../../../service/ValidatorService";
+
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 import {
@@ -12,12 +14,11 @@ type LengthType = {
   max: number;
 };
 
-export default function Length<T>(
+export default function Length<T extends NullableType<string>>(
   props: BasicValidatorProviderType<LengthType, LengthType>
 ) {
   const { min, max } = props;
-  return ValidatorService.buildFieldValidatorDecorator<T[]>({
-    expectedType: InferredType.STRING,
+  return ValidatorService.buildFieldValidatorDecorator<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (value) => ({
       key: "Length",

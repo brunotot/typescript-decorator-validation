@@ -1,5 +1,7 @@
-import ValidatorService from "../../../service/ValidatorService";
-import InferredType from "../../../model/enum/InferredType";
+import ValidatorService, {
+  NullableType,
+} from "../../../service/ValidatorService";
+
 import {
   PredicateType,
   extractGroupsFromValidatorProps,
@@ -10,11 +12,10 @@ export type ArrayOneType<T> = {
   test: PredicateType<T>;
 };
 
-export default function ArrayOne<T>(
-  props: BasicValidatorProviderTypeMandatoryMessage<ArrayOneType<T>>
+export default function ArrayOne<K, T extends NullableType<K[]>>(
+  props: BasicValidatorProviderTypeMandatoryMessage<ArrayOneType<K>>
 ) {
-  return ValidatorService.buildFieldValidatorDecorator<any[]>({
-    expectedType: InferredType.ARRAY,
+  return ValidatorService.buildFieldValidatorDecorator<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (array) => ({
       key: "ArrayOne",

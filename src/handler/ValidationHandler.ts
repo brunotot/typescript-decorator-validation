@@ -1,11 +1,10 @@
 import MetadataKey from "../model/enum/MetadataKey";
-import { Class } from "../model/type/class.type";
-import { ErrorData } from "../model/type/error-data.type";
-import { ValidationResult } from "../model/type/validation-result.type";
+import { Class } from "../model/type/Class.type";
+import { ErrorData } from "../model/type/ErrorData.type";
+import { ValidationResult } from "../model/type/ValidationResult.type";
 import ReflectService from "../service/ReflectService";
-import { ValidationClass } from "../model/type/validation-class.type";
-import PropertyMetadata from "../service/PropertyMetadata";
-import ClassMetadata from "../service/ClassMetadata";
+import { ValidationClass } from "../model/type/ValidationClass.type";
+import PropertyMetadata from "../model/const/PropertyMetadata";
 import {
   deepEquals,
   isValidationGroupUnion,
@@ -16,6 +15,7 @@ import {
   OmitNever,
   RecursiveComplexType,
 } from "../model/utility/type.utility";
+import ClassMetadata from "../model/const/ClassMetadata";
 
 export type ValidationFn<T> = (value: T, context?: any) => ValidationResult;
 
@@ -42,14 +42,6 @@ export type ValidationData<T> = OmitNever<{
       : ValidationData<T[K]>
     : ValidationFn<T[K]>[];
 }>;
-
-function any(any: any): any {
-  return any as any;
-}
-
-function array(any: any): any[] {
-  return (any ?? []) as any[];
-}
 
 export type ValidationHandlerStateType<T> = {
   valid: boolean;
@@ -170,7 +162,7 @@ export default class ValidationHandler<T> {
 
     // prettier-ignore
     const handlePrimitiveArray: ErrorDataApplierType<ValidationFnMetadata<any>[]> = (key, _, validators) => {
-      const stateValueArray = array(any(state)[key]);
+      const stateValueArray = ((state as any)[key] as any[]);
 
       const primitiveArrayValidators = ReflectService.getMetadata<ValidationFnMetadata<any>>(
         MetadataKey.VALIDATOR_EACH_IN_ARRAY,
@@ -208,7 +200,7 @@ export default class ValidationHandler<T> {
         ...this._groups
       );
       const { detailedErrors, errors } = innerValidationHandler.validate(
-        any(state)[key]
+        (state as any)[key]
       );
       collectErrorData(key, detailedErrors, errors);
     };
@@ -219,7 +211,7 @@ export default class ValidationHandler<T> {
         meta.clazz!,
         ...this._groups
       );
-      const stateValueArray: any[] = array(any(state)[key]);
+      const stateValueArray: any[] = ((state as any)[key] as any[]);
 
       const parentValidators = this.extractInvalidResults(
         validators.node,
@@ -246,9 +238,8 @@ export default class ValidationHandler<T> {
       const validators = _validators as any;
       const key = _key as keyof ErrorData<T>;
       const meta = new PropertyMetadata<T>(this._clazz, key);
-      const typeGroup = meta.typeGroup;
 
-      switch (typeGroup) {
+      switch (meta.type) {
         case "OBJECT": {
           handleObject(key, meta, validators);
           break;
@@ -307,7 +298,7 @@ export default class ValidationHandler<T> {
   ) {
     const cacheValue = cacheParent?.[key];
     const isNoChange = deepEquals(mutationValue, cacheValue);
-    mutationParent[key] = isNoChange ? any(cacheValue) : any(mutationValue);
+    mutationParent[key] = isNoChange ? (cacheValue as any) : mutationValue;
   }
 
   private mutateErrors<T>(

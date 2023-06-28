@@ -1,15 +1,9 @@
 {
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
-  },
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "declaration": true,
     "outDir": "dist",
     "declarationDir": "dist/types",
-    "target": "ESNext",
+    "target": "ES6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -22,5 +16,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react"
-  }
+  },
+  "exclude": ["tests"]
 }

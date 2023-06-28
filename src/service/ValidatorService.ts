@@ -1,90 +1,79 @@
 import ReflectService from "./ReflectService";
 import MetadataKey from "../model/enum/MetadataKey";
-import InferredType from "../model/enum/InferredType";
-import ErrorMessage from "../model/messages/ErrorMessage";
 import {
   ValidationFn,
   ValidationFnMetadata,
+  ValidationGroupType,
 } from "../handler/ValidationHandler";
 import { ValidationGroupParamType } from "../model/utility/type.utility";
+import { FieldDecoratorType, buildFieldDecorator } from "./DecoratorService";
 
 export type FieldValidatorBuilderProps<T> = {
   isValid: ValidationFn<T>;
-  expectedType?: InferredType | InferredType[];
-  validateType?: boolean;
   metadataKey?: MetadataKey;
   groups?: ValidationGroupParamType;
 };
 
-export type DecoratorType = (target: any, property: string) => void;
+export type DecoratorReturnType<PARENT, FIELD_TYPE> = (
+  this: PARENT,
+  value: FIELD_TYPE
+) => FIELD_TYPE;
 
 export type ValidatorMetadataType<T> = {
   validationFn: ValidationFn<T>;
   groups: ValidationGroupParamType;
 };
 
+export type NullableType<GUARD = undefined> = GUARD extends undefined
+  ? any
+  : GUARD | undefined | null;
+
 class ValidatorService {
   buildFieldValidatorDecorator<T>({
     isValid,
-    expectedType,
-    validateType = true,
     metadataKey = MetadataKey.VALIDATOR_FIELD,
     groups = [],
-  }: FieldValidatorBuilderProps<T>): DecoratorType {
+  }: FieldValidatorBuilderProps<T>): FieldDecoratorType<any, T> {
     const groupsArray = Array.isArray(groups)
       ? groups
       : groups !== undefined
       ? [groups]
       : [];
-    const expectedTypeNormalized = expectedType ?? [InferredType.ANY];
-    const expectedTypeArray = Array.isArray(expectedTypeNormalized)
-      ? expectedTypeNormalized
-      : [expectedTypeNormalized];
-    return (target: any, property: string) => {
-      if (validateType) {
-        this.requireType(target, property, expectedTypeArray);
-      }
-      ReflectService.setMetadata<ValidationFnMetadata<T>>(
-        metadataKey,
-        { validate: isValid, groups: groupsArray },
-        target.constructor,
+
+    return buildFieldDecorator<T>((target, property) => {
+      saveMetadata({
+        target,
         property,
-        (v) => v.validate
-      );
-    };
+        groupsArray,
+        metadataKey,
+        isValid,
+      });
+    });
   }
+}
 
-  private requireType(
-    target: any,
-    property: string,
-    expectedType: InferredType[]
-  ) {
-    if (!ReflectService.validateType(target, property)) {
-      return;
-    }
+type SaveMetadataProps<T> = {
+  target: any;
+  property: string;
+  groupsArray: ValidationGroupType[];
+  metadataKey: MetadataKey;
+  isValid: ValidationFn<T>;
+};
 
-    if (expectedType.includes(InferredType.ANY)) {
-      return;
-    }
-    const actualType = ReflectService.getClassFieldType(target, property);
-
-    if (actualType === InferredType.FUNCTION) {
-      return;
-    }
-
-    if (!expectedType.includes(actualType)) {
-      const className: string = target.constructor.name;
-      const classNameSanitized = className.slice(0, className.length - 1);
-      throw new Error(
-        ErrorMessage.IncompatibleTypes(
-          classNameSanitized,
-          property,
-          expectedType,
-          actualType
-        )
-      );
-    }
-  }
+function saveMetadata<T>({
+  target,
+  property,
+  groupsArray,
+  metadataKey,
+  isValid,
+}: SaveMetadataProps<T>) {
+  ReflectService.setMetadata<ValidationFnMetadata<T>>(
+    metadataKey,
+    { validate: isValid, groups: groupsArray },
+    target.constructor,
+    property,
+    (v) => v.validate
+  );
 }
 
 export default new ValidatorService();

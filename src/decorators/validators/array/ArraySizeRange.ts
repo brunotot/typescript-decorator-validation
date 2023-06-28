@@ -1,5 +1,7 @@
-import ValidatorService from "../../../service/ValidatorService";
-import InferredType from "../../../model/enum/InferredType";
+import ValidatorService, {
+  NullableType,
+} from "../../../service/ValidatorService";
+
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 import {
@@ -12,13 +14,12 @@ type ArraySizeRangeType = {
   max: number;
 };
 
-export default function ArraySizeRange<T>(
+export default function ArraySizeRange<K, T extends NullableType<K[]>>(
   props: BasicValidatorProviderType<ArraySizeRangeType, ArraySizeRangeType>
 ) {
   const min = typeof props === "number" ? props : props.min;
   const max = typeof props === "number" ? props : props.max;
-  return ValidatorService.buildFieldValidatorDecorator<T[]>({
-    expectedType: InferredType.ARRAY,
+  return ValidatorService.buildFieldValidatorDecorator<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (array) => ({
       key: "ArraySizeRange",

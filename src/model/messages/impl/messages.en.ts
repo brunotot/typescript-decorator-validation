@@ -1,8 +1,11 @@
 import { MessageFormatType } from "../ErrorMessage";
 
 const MessageFormatEn: MessageFormatType = {
+  TodayDate: `Date {0} must be today's date (current)`,
+  FutureDate: `Date {0} must be a date in the future`,
+  PastDate: `Date {0} must be a date in the past`,
   ArrayEmpty: `Array must be empty.`,
-  ArrayContains: `Array must contain the following element: {0} `,
+  ArrayContains: `Array must contain the following element: {0}`,
   Decimal: `Value must be a decimal number but is {0}`,
   ArraySizeMin: `Array must contain minimally {0} elements but contains {1}.`,
   ArraySizeRange: `Array must contain between {0} and {1} elements but contains {2}.`,
@@ -10,7 +13,7 @@ const MessageFormatEn: MessageFormatType = {
   ArraySizeExact: `Array must contain exactly {0} elements but contains {1}.`,
   MinLength: `Field must contain at least {0} characters`,
   MaxLength: `Field cannot contain more than {0} characters`,
-  NotEmpty: "Field is mandatory",
+  Required: "Field is mandatory",
   Pattern: `Value doesn't conform regular expression "{0}"`,
   Email: "Value is not a valid email",
   PasswordUppercaseViolation: `Password must contain at least 1 uppercase letter`,

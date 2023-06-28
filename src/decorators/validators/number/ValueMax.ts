@@ -1,5 +1,7 @@
-import ValidatorService from "../../../service/ValidatorService";
-import InferredType from "../../../model/enum/InferredType";
+import ValidatorService, {
+  NullableType,
+} from "../../../service/ValidatorService";
+
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 import {
   extractGroupsFromValidatorProps,
@@ -11,12 +13,11 @@ type ValueMaxType = {
   value: number;
 };
 
-export default function ValueMax(
+export default function ValueMax<T extends NullableType<number>>(
   props: BasicValidatorProviderType<number, ValueMaxType>
 ) {
   const max = typeof props === "number" ? props : props.value;
-  return ValidatorService.buildFieldValidatorDecorator<number>({
-    expectedType: InferredType.NUMBER,
+  return ValidatorService.buildFieldValidatorDecorator<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (value) => ({
       key: "ValueMax",
@@ -24,7 +25,7 @@ export default function ValueMax(
         props,
         ErrorMessage.ValueMax(max, value)
       ),
-      valid: value <= max,
+      valid: value == null ? true : value <= max,
     }),
   });
 }

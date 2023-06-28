@@ -1,8 +1,8 @@
 enum MetadataKey {
-  VALIDATOR_FIELD = `typescript-decorator-validation:validators:field`,
-  SEMANTICS_VALID = `typescript-decorator-validation:semantics:valid`,
-  VALIDATE_TYPE = `typescript-decorator-validation:validate-type`,
-  VALIDATOR_EACH_IN_ARRAY = `typescript-decorator-validation:validator-each`,
+  VALIDATOR_FIELD = `tdv:validators:field`,
+  VALIDATOR_EACH_IN_ARRAY = `tdv:validator-each`,
+  TYPE_GROUP = "tdv:type-group",
+  CONSTRUCTOR_CREATOR = "tdv:constructor-creator",
 }
 
 export default MetadataKey;

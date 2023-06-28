@@ -1,16 +1,15 @@
-import InferredType from "./src/model/enum/InferredType";
-import Rule from "./src/decorators/validators/custom/Rule";
+import Rule from "./src/decorators/Rule";
 import { validators } from "./src/model/const/Validators";
 import ValidatorService from "./src/service/ValidatorService";
-import { ValidationResult } from "./src/model/type/validation-result.type";
-import { ErrorData } from "./src/model/type/error-data.type";
-import { Class } from "./src/model/type/class.type";
-import { ValidationClass } from "./src/model/type/validation-class.type";
+import { ValidationResult } from "./src/model/type/ValidationResult.type";
+import { ErrorData } from "./src/model/type/ErrorData.type";
+import { Class } from "./src/model/type/Class.type";
+import { ValidationClass } from "./src/model/type/ValidationClass.type";
 import ValidationHandler, {
   ValidationFn,
   SimpleErrorData,
 } from "./src/handler/ValidationHandler";
-import { ValidationGroup } from "./src/handler/ValidationGroup";
+import { ValidationGroup } from "./src/model/enum/ValidationGroup";
 import { Locale, getLocale, setLocale } from "./src/model/messages/Locale";
 
 export type {
@@ -24,7 +23,6 @@ export type {
 
 export {
   ValidationGroup,
-  InferredType,
   ValidatorService,
   validators,
   Rule,

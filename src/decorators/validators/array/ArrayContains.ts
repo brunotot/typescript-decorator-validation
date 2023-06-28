@@ -1,5 +1,7 @@
-import ValidatorService from "../../../service/ValidatorService";
-import InferredType from "../../../model/enum/InferredType";
+import ValidatorService, {
+  NullableType,
+} from "../../../service/ValidatorService";
+
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 import {
   extractGroupsFromValidatorProps,
@@ -11,11 +13,10 @@ export type ArrayContainsType<T> = {
   value: T;
 };
 
-export default function ArrayContains<T>(
-  props: BasicValidatorProviderType<ArrayContainsType<T>, ArrayContainsType<T>>
+export default function ArrayContains<K, T extends NullableType<K[]>>(
+  props: BasicValidatorProviderType<ArrayContainsType<K>, ArrayContainsType<K>>
 ) {
-  return ValidatorService.buildFieldValidatorDecorator<T[]>({
-    expectedType: InferredType.ARRAY,
+  return ValidatorService.buildFieldValidatorDecorator<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (array) => ({
       key: "ArrayContains",
@@ -23,7 +24,7 @@ export default function ArrayContains<T>(
         props,
         ErrorMessage.ArrayContains(props.value)
       ),
-      valid: (array ?? []).includes(props.value),
+      valid: ((array ?? []) as any[]).includes(props.value),
     }),
   });
 }

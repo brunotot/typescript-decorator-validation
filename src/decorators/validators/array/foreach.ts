@@ -1,16 +1,23 @@
-import { DecoratorType } from "../../../service/ValidatorService";
+import { NullableType } from "../../../service/ValidatorService";
 import ReflectService from "../../../service/ReflectService";
-import MetadataKey from "../../../model/enum/MetadataKey";
+import {
+  FieldDecoratorType,
+  buildFieldDecorator,
+} from "../../../service/DecoratorService";
 
-export default function foreach<T>(...validators: DecoratorType[]) {
-  return (target: any, property: string) => {
-    validators.forEach((validator) =>
-      ReflectService.addExternalValidatorImpl(
-        MetadataKey.VALIDATOR_EACH_IN_ARRAY,
+type ExtractArrayType<T> = T extends (infer U)[] ? U : never;
+
+export default function foreach<T extends NullableType<any[]>>(
+  ...validators: FieldDecoratorType<any, ExtractArrayType<T>>[]
+): FieldDecoratorType<any, T> {
+  return buildFieldDecorator<T>((target, property, _, ctx) => {
+    validators.forEach((validator) => {
+      ReflectService.applyForeachValidator(
         target,
         property,
-        validator
-      )
-    );
-  };
+        validator,
+        ctx as any
+      );
+    });
+  });
 }

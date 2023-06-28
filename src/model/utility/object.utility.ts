@@ -1,5 +1,5 @@
 import { ValidationGroupType } from "../../handler/ValidationHandler";
-import { Class } from "../type/class.type";
+import { NullableType } from "../../service/ValidatorService";
 import { BasicValidatorProviderType } from "./type.utility";
 
 export type EqualsType<T> = (obj1: T, obj2: T) => boolean;
@@ -41,7 +41,16 @@ export function isValidationGroupUnion(
     : !validatorGroups.length;
 }
 
-export function hasValue(obj: any): boolean {
+export function evaluateNullableValidity<T>(
+  object: NullableType<T>,
+  isValid: (value: T) => boolean
+) {
+  return !hasValue(object) ? true : isValid(object);
+}
+
+export function hasValue<T>(
+  obj: T | undefined
+): obj is NonNullable<typeof obj> {
   return !(
     obj === undefined ||
     obj === null ||
@@ -159,12 +168,6 @@ export function hash(val: any): number {
   } else {
     return defaultHash(val);
   }
-}
-
-export function isPrimitiveType(type: Class<any>) {
-  return (
-    type === Date || type === String || type === Number || type === Boolean
-  );
 }
 
 export function isArrayUnique<T>(arr: T[], equals: EqualsType<T>): boolean {

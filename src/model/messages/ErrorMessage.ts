@@ -23,13 +23,15 @@ const LocaleMessageService = {
   [Locale.EN]: MessageFormatEn,
 };
 
-function t(key: string, ...args: any[]): string {
+export function t(key: string, ...args: any[]): string {
   const locale = getLocale();
   const service = LocaleMessageService[locale];
   return sprintf(service[key], ...args);
 }
 
 const ErrorMessage: ErrorMessageType = {
+  FutureDate: (date: Date) => t("FutureDate", date?.toDateString()),
+  PastDate: (date: Date) => t("PastDate", date?.toDateString()),
   ArrayEmpty: () => t("ArrayEmpty"),
   ArrayContains: (o: any) => t("ArrayContains", JSON.stringify(o, null, 2)),
   Decimal: (actual: number) => t("Decimal", actual),
@@ -55,7 +57,7 @@ const ErrorMessage: ErrorMessageType = {
     ),
   MinLength: (min: number) => t("MinLength", min),
   MaxLength: (max: number) => t("MaxLength", max),
-  NotEmpty: () => t("NotEmpty"),
+  Required: () => t("Required"),
   Pattern: (regex: string) => t("Pattern", regex),
   Email: () => t("Email"),
   PasswordUppercaseViolation: () => t("PasswordUppercaseViolation"),

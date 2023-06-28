@@ -1,6 +1,8 @@
-import ValidatorService from "../../../service/ValidatorService";
+import ValidatorService, {
+  NullableType,
+} from "../../../service/ValidatorService";
 import ErrorMessage from "../../../model/messages/ErrorMessage";
-import InferredType from "../../../model/enum/InferredType";
+
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 
 const DEFAULT_KEY = "Pattern";
@@ -10,7 +12,7 @@ export type PatternType = {
   key?: string;
 };
 
-export default function Pattern(
+export default function Pattern<T extends NullableType<string>>(
   props: BasicValidatorProviderType<RegExp, PatternType>
 ) {
   const isPropsRegex = props instanceof RegExp;
@@ -25,8 +27,7 @@ export default function Pattern(
     isPropsRegex || !(props as any).message
       ? ErrorMessage.Pattern(regexString)
       : (props as any).message!;
-  return ValidatorService.buildFieldValidatorDecorator<string>({
-    expectedType: InferredType.STRING,
+  return ValidatorService.buildFieldValidatorDecorator<T>({
     isValid: (value) => ({
       key,
       message: errorMessage,

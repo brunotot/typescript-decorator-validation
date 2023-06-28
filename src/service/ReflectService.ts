@@ -1,12 +1,8 @@
 import MetadataKey from "../model/enum/MetadataKey";
-import InferredType from "../model/enum/InferredType";
 import "reflect-metadata";
-import {
-  ValidationFn,
-  ValidationFnMetadata,
-} from "../handler/ValidationHandler";
-import { DecoratorType } from "./ValidatorService";
-import { Class } from "../model/type/class.type";
+import { ValidationFnMetadata } from "../handler/ValidationHandler";
+import { Class } from "../model/type/Class.type";
+import { FieldDecoratorType } from "./DecoratorService";
 
 type ConstructorType = { new (): any };
 
@@ -17,15 +13,14 @@ class ReflectService {
     };
   }
 
-  addExternalValidatorImpl<T>(
-    key: MetadataKey,
+  applyForeachValidator<T>(
     target: any,
     property: string,
-    validator: DecoratorType
+    decoratorFn: FieldDecoratorType<any, T>,
+    ctx: ClassFieldDecoratorContext<any, T>
   ) {
-    this.validateType(target.constructor, property, false);
-    validator(target, property);
-    this.validateType(target.constructor, property, true);
+    const execFn = decoratorFn(undefined, ctx);
+    execFn.call(target, undefined!);
     const isValidList = this.getMetadata<ValidationFnMetadata<T>>(
       MetadataKey.VALIDATOR_FIELD,
       target.constructor,
@@ -39,27 +34,12 @@ class ReflectService {
       metadata,
       (e) => e.validate
     );
-    this.setMetadata(key, metadata, target.constructor, property);
-  }
-
-  validateType(target: any, property: string, value?: boolean): boolean {
-    if (value === undefined) {
-      return !!Reflect.getMetadata(MetadataKey.VALIDATE_TYPE, target, property);
-    }
-    Reflect.defineMetadata(MetadataKey.VALIDATE_TYPE, value, target, property);
-    return value;
-  }
-
-  getClassGetterType(target: any, property: string): InferredType {
-    return this.getFieldType(target, property, "design:returntype");
-  }
-
-  getClassFieldTypeReal(target: any, property: string): Class<any> {
-    return Reflect.getMetadata("design:type", target, property) as Class<any>;
-  }
-
-  getClassFieldType(target: any, property: string): InferredType {
-    return this.getFieldType(target, property, "design:type");
+    this.setMetadata(
+      MetadataKey.VALIDATOR_EACH_IN_ARRAY,
+      metadata,
+      target.constructor,
+      property
+    );
   }
 
   getClassFieldNames(constructor: ConstructorType): string[] {
@@ -121,24 +101,6 @@ class ReflectService {
     return Object.getOwnPropertyNames(object).filter(
       (property) => property !== "constructor"
     );
-  }
-
-  private getFieldType(
-    target: any,
-    property: string,
-    identifier: string
-  ): InferredType {
-    const meta = Reflect.getMetadata(identifier, target, property);
-    if (!meta) {
-      return InferredType.VOID;
-    }
-    const type = meta.name;
-    for (const inferredType in InferredType) {
-      if ((InferredType as any)[inferredType] === type) {
-        return type;
-      }
-    }
-    return InferredType.GENERIC_OBJECT;
   }
 }
 

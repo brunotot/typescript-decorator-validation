@@ -1,6 +1,6 @@
-import { ValidationFn } from "../../../handler/ValidationHandler";
-import { ValidationGroupParamType } from "../../../model/utility/type.utility";
-import ValidatorService from "../../../service/ValidatorService";
+import { ValidationFn } from "../handler/ValidationHandler";
+import { ValidationGroupParamType } from "../model/utility/type.utility";
+import ValidatorService from "../service/ValidatorService";
 
 export type RuleProps<T> =
   | ValidationFn<T>

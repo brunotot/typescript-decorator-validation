@@ -1,4 +1,4 @@
-import Rule from "../../decorators/validators/custom/Rule";
+import Rule from "../../decorators/Rule";
 import Digits from "../../decorators/validators/number/Digits";
 import ValueMax from "../../decorators/validators/number/ValueMax";
 import ValueRange from "../../decorators/validators/number/ValueRange";
@@ -16,12 +16,8 @@ import NonPositive from "../../decorators/validators/number/NonPositive";
 import Positive from "../../decorators/validators/number/Positive";
 import Alpha from "../../decorators/validators/string/Alpha";
 import CreditCardNumber from "../../decorators/validators/string/CreditCardNumber";
-import Date from "../../decorators/validators/string/Date";
 import IPAddress from "../../decorators/validators/string/IPAddress";
-import JSON from "../../decorators/validators/string/JSON";
 import Numeric from "../../decorators/validators/string/Numeric";
-import XML from "../../decorators/validators/string/XML";
-import Time from "../../decorators/validators/string/Time";
 import Required from "../../decorators/validators/any/Required";
 import ArrayContains from "../../decorators/validators/array/ArrayContains";
 import ArrayEmpty from "../../decorators/validators/array/ArrayEmpty";
@@ -40,6 +36,9 @@ import ExactLength from "../../decorators/validators/string/ExactLength";
 import Length from "../../decorators/validators/string/Length";
 import MaxLength from "../../decorators/validators/string/MaxLength";
 import MinLength from "../../decorators/validators/string/MinLength";
+import FutureDate from "../../decorators/validators/date/FutureDate";
+import PastDate from "../../decorators/validators/date/PastDate";
+import TodayDate from "../../decorators/validators/date/TodayDate";
 
 const any = {
   Truthy,
@@ -82,6 +81,13 @@ const number = {
   Positive,
 };
 
+const date = {
+  ...any,
+  FutureDate,
+  PastDate,
+  TodayDate,
+};
+
 const string = {
   ...any,
   Email,
@@ -90,12 +96,8 @@ const string = {
   URL,
   Alpha,
   CreditCardNumber,
-  Date,
   IPAddress,
-  JSON,
   Numeric,
-  XML,
-  Time,
   ExactLength,
   Length,
   MaxLength,
@@ -113,6 +115,7 @@ const validators = {
   number,
   string,
   custom,
+  date,
 };
 
 export { validators };
