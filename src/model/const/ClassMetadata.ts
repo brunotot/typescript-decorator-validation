@@ -122,8 +122,10 @@ export default class ClassMetadata<T> {
 
   private buildFieldNames(): KeyOf<T>[] {
     return [
-      ...ReflectService.getClassFieldNames(this._clazz),
-      ...ReflectService.getClassGetterNames(this._clazz),
-    ] as KeyOf<T>[];
+      ...new Set([
+        ...ReflectService.getClassFieldNames(this._clazz),
+        ...ReflectService.getClassGetterNames(this._clazz),
+      ] as KeyOf<T>[]),
+    ];
   }
 }

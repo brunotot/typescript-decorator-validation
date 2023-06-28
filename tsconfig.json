@@ -17,5 +17,5 @@
     "isolatedModules": true,
     "jsx": "react"
   },
-  "exclude": ["tests"]
+  "exclude": ["tests", "jest.config.js"]
 }
