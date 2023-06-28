@@ -11,6 +11,7 @@ import ValidationHandler, {
 } from "./src/handler/ValidationHandler";
 import { ValidationGroup } from "./src/model/enum/ValidationGroup";
 import { Locale, getLocale, setLocale } from "./src/model/messages/Locale";
+import strategy from "./src/model/const/Strategy";
 
 export type {
   Class,
@@ -22,6 +23,7 @@ export type {
 };
 
 export {
+  strategy,
   ValidationGroup,
   ValidatorService,
   validators,
