@@ -12,6 +12,7 @@ setLocale(Locale.HR);
 
 class SomeClassNew {
   @strategy.primitive()
+  @validators.number.Required()
   b?: number;
 }
 
@@ -42,10 +43,36 @@ class ParentForm {
   complex?: SomeClass[];
 }
 
-const handler = new ValidationHandler(ParentForm);
-const result = handler.validate({
+//const handler = new ValidationHandler(ParentForm);
+/*const result = handler.validate({
   emails: [""],
   complex: [],
   date: new Date(),
+});*/
+//console.log(JSON.stringify(result.detailedErrors, null, 2));
+
+class RandomClass {
+  @validators.string.Required()
+  a?: string;
+  @validators.number.Required()
+  b?: number;
+  @validators.boolean.Truthy()
+  c?: boolean;
+  @strategy.object(() => SomeClass)
+  d?: SomeClass;
+}
+
+const handler = new ValidationHandler(RandomClass);
+const result = handler.validate({
+  a: undefined,
+  b: 1,
+  c: true,
+  d: {
+    a: [
+      {
+        b: undefined,
+      },
+    ],
+  },
 });
-console.log(JSON.stringify(result.detailedErrors, null, 2));
+console.log(JSON.stringify(result.errors, null, 2));

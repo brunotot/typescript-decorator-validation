@@ -211,7 +211,7 @@ export default class ValidationHandler<T> {
         meta.clazz!,
         ...this._groups
       );
-      const stateValueArray: any[] = ((state as any)[key] as any[]);
+      const stateValueArray: any[] = (((state as any)?.[key] ?? [])as any[]);
 
       const parentValidators = this.extractInvalidResults(
         validators.node,

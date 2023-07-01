@@ -96,7 +96,7 @@ type RecursiveComplexTypeNullable<T, V = undefined> = OmitNever<{
               >
           : $<T[K]> extends Date
             ? UndefinedOrElse<V, $<T[K]>>
-            : RecursiveComplexType<T[K], V>
+            : RecursiveComplexType<$<T[K]>, V>
       : UndefinedOrElse<V, $<T[K]>>;
 }>;
 
