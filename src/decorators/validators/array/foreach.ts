@@ -1,7 +1,7 @@
 import { NullableType } from "../../../service/ValidatorService";
-import ReflectService from "../../../service/ReflectService";
 import {
   FieldDecoratorType,
+  applyForeachValidator,
   buildFieldDecorator,
 } from "../../../service/DecoratorService";
 
@@ -12,12 +12,7 @@ export default function foreach<T extends NullableType<any[]>>(
 ): FieldDecoratorType<any, T> {
   return buildFieldDecorator<T>((target, property, _, ctx) => {
     validators.forEach((validator) => {
-      ReflectService.applyForeachValidator(
-        target,
-        property,
-        validator,
-        ctx as any
-      );
+      applyForeachValidator(target, property, validator, ctx as any);
     });
   });
 }

@@ -2,8 +2,7 @@ import { NullableType } from "../../service/ValidatorService";
 import { buildFieldDecorator } from "../../service/DecoratorService";
 import { PropertyTypeGroup } from "./PropertyMetadata";
 import { Class } from "../type/Class.type";
-import MetadataKey from "../enum/MetadataKey";
-import ReflectionService from "../../service/ReflectionService";
+import MetadataService from "../../service/MetadataService";
 
 export type ConstructorCreatorType<T> = () => Class<T>;
 
@@ -23,21 +22,13 @@ function setConstructorCreator(
   constructorCreator: ConstructorCreatorType<any>
 ) {
   if (!constructorCreator) return;
-  ReflectionService.set<ConstructorCreatorType<any>>(
-    target,
-    name,
-    MetadataKey.CONSTRUCTOR_CREATOR,
-    constructorCreator
-  );
+  new MetadataService(target.constructor)
+    .get(name)
+    .setConstructorCreator(constructorCreator);
 }
 
 function setTypeGroup(target: any, name: string, typeGroup: PropertyTypeGroup) {
-  ReflectionService.set<PropertyTypeGroup>(
-    target,
-    name,
-    MetadataKey.TYPE_GROUP,
-    typeGroup
-  );
+  new MetadataService(target.constructor).get(name).setTypeGroup(typeGroup);
 }
 
 function primitive<T extends NullableType<string | number | boolean | Date>, C>(

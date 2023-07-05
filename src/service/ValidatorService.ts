@@ -1,12 +1,11 @@
-import ReflectService from "./ReflectService";
 import MetadataKey from "../model/enum/MetadataKey";
-import {
-  ValidationFn,
-  ValidationFnMetadata,
-  ValidationGroupType,
-} from "../handler/ValidationHandler";
 import { ValidationGroupParamType } from "../model/utility/type.utility";
 import { FieldDecoratorType, buildFieldDecorator } from "./DecoratorService";
+import MetadataService from "./MetadataService";
+import {
+  ValidationFn,
+  ValidationGroupType,
+} from "../handler/ValidationHandler";
 
 export type FieldValidatorBuilderProps<T> = {
   isValid: ValidationFn<T>;
@@ -28,52 +27,43 @@ export type NullableType<GUARD = undefined> = GUARD extends undefined
   ? any
   : GUARD | undefined | null;
 
-class ValidatorService {
-  buildFieldValidatorDecorator<T>({
-    isValid,
-    metadataKey = MetadataKey.VALIDATOR_FIELD,
-    groups = [],
-  }: FieldValidatorBuilderProps<T>): FieldDecoratorType<any, T> {
-    const groupsArray = Array.isArray(groups)
-      ? groups
-      : groups !== undefined
-      ? [groups]
-      : [];
+type SaveMetadataProps = {
+  target: any;
+  property: string;
+  groups?: ValidationGroupParamType;
+  isValid: ValidationFn<unknown>;
+};
 
+class ValidatorService {
+  buildFieldValidatorDecorator<T>(
+    props: FieldValidatorBuilderProps<T>
+  ): FieldDecoratorType<any, T> {
     return buildFieldDecorator<T>((target, property) => {
       saveMetadata({
         target,
         property,
-        groupsArray,
-        metadataKey,
-        isValid,
+        groups: props.groups,
+        isValid: props.isValid as any,
       });
     });
   }
 }
 
-type SaveMetadataProps<T> = {
-  target: any;
-  property: string;
-  groupsArray: ValidationGroupType[];
-  metadataKey: MetadataKey;
-  isValid: ValidationFn<T>;
-};
+function normalizeGroups(groups?: ValidationGroupParamType) {
+  return Array.isArray(groups)
+    ? groups
+    : groups !== undefined
+    ? [groups]
+    : ([] as ValidationGroupType[]);
+}
 
-function saveMetadata<T>({
-  target,
-  property,
-  groupsArray,
-  metadataKey,
-  isValid,
-}: SaveMetadataProps<T>) {
-  ReflectService.setMetadata<ValidationFnMetadata<T>>(
-    metadataKey,
-    { validate: isValid, groups: groupsArray },
-    target.constructor,
-    property,
-    (v) => v.validate
-  );
+function saveMetadata(props: SaveMetadataProps) {
+  const service = new MetadataService(props.target.constructor);
+  const metadata = service.get(props.property);
+  metadata.appendNode({
+    groups: normalizeGroups(props.groups),
+    validate: props.isValid,
+  });
 }
 
 export default new ValidatorService();

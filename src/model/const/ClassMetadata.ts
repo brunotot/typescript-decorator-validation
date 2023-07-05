@@ -3,13 +3,14 @@ import {
   ValidationFnMetadata,
   ValidationGroupType,
 } from "../../handler/ValidationHandler";
-import ReflectService from "../../service/ReflectService";
-import MetadataKey from "../enum/MetadataKey";
 import PropertyMetadata from "./PropertyMetadata";
 import { Class } from "../type/Class.type";
 import { ValidationClass } from "../type/ValidationClass.type";
 import { isValidationGroupUnion } from "../utility/object.utility";
 import { KeyOf } from "../utility/type.utility";
+import MetadataService, {
+  getClassFieldNames,
+} from "../../service/MetadataService";
 
 export default class ClassMetadata<T> {
   private _clazz: Class<T>;
@@ -113,19 +114,10 @@ export default class ClassMetadata<T> {
   private getValidationMetadata<T>(
     property: string
   ): ValidationFnMetadata<T>[] {
-    return ReflectService.getMetadata(
-      MetadataKey.VALIDATOR_FIELD,
-      this._clazz,
-      property
-    );
+    return new MetadataService(this._clazz).get(property).node as any;
   }
 
   private buildFieldNames(): KeyOf<T>[] {
-    return [
-      ...new Set([
-        ...ReflectService.getClassFieldNames(this._clazz),
-        ...ReflectService.getClassGetterNames(this._clazz),
-      ] as KeyOf<T>[]),
-    ];
+    return getClassFieldNames(this._clazz) as KeyOf<T>[];
   }
 }

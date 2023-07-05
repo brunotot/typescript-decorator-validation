@@ -1,13 +1,14 @@
 import strategy from "./model/const/Strategy";
-import { Rule, ValidationHandler, ValidationResult, validators } from "..";
+import { ValidationHandler, validators } from "..";
 import { Locale, setLocale } from "./model/messages/Locale";
-import PropertyMetadata from "./model/const/PropertyMetadata";
 import Required from "./decorators/validators/any/Required";
 import foreach from "./decorators/validators/array/foreach";
 import MinLength from "./decorators/validators/string/MinLength";
 import Password from "./decorators/validators/string/Password";
-import { RecursiveComplexType } from "./model/utility/type.utility";
+import MetadataService from "./service/MetadataService";
+import Email from "./decorators/validators/string/Email";
 
+(Symbol as any).metadata ??= Symbol("Symbol.metadata");
 setLocale(Locale.HR);
 
 class SomeClassNew {
@@ -18,6 +19,7 @@ class SomeClassNew {
 
 class SomeClass {
   @strategy.objectArray(() => SomeClassNew)
+  @validators.array.ArraySizeExact(2)
   a?: SomeClassNew[];
 }
 
@@ -53,6 +55,7 @@ class ParentForm {
 
 class RandomClass {
   @validators.string.Required()
+  @validators.string.Email()
   a?: string;
   @validators.number.Required()
   b?: number;
@@ -60,6 +63,10 @@ class RandomClass {
   c?: boolean;
   @strategy.object(() => SomeClass)
   d?: SomeClass;
+  @strategy.primitiveArray()
+  @validators.array.foreach(Email())
+  @Required()
+  e?: string[];
 }
 
 const handler = new ValidationHandler(RandomClass);
@@ -76,3 +83,5 @@ const result = handler.validate({
   },
 });
 console.log(JSON.stringify(result.errors, null, 2));
+
+//new MetadataService(RandomClass).log();

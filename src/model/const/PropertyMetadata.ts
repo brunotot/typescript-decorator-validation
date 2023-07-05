@@ -1,8 +1,6 @@
-import MetadataKey from "../enum/MetadataKey";
 import { Class } from "../type/Class.type";
 import { KeyOf } from "../utility/type.utility";
-import ReflectionService from "../../service/ReflectionService";
-import { ConstructorCreatorType } from "./Strategy";
+import MetadataService from "../../service/MetadataService";
 
 export type PropertyTypeGroup =
   | "PRIMITIVE_ARRAY"
@@ -40,22 +38,14 @@ export default class PropertyMetadata<T> {
   }
 
   private buildTypeGroup(): PropertyTypeGroup {
-    return (
-      ReflectionService.get<PropertyTypeGroup>(
-        this._owner,
-        this._name,
-        MetadataKey.TYPE_GROUP
-      ) ?? "PRIMITIVE"
-    );
+    return new MetadataService(this._owner).get(this._name as string).typeGroup;
   }
 
   private buildClass(): Class<unknown> | null {
     return (
-      ReflectionService.get<ConstructorCreatorType<any>>(
-        this._owner,
-        this._name,
-        MetadataKey.CONSTRUCTOR_CREATOR
-      )?.() ?? null
+      new MetadataService(this._owner)
+        .get(this._name as string)
+        .constructorCreator?.() ?? null
     );
   }
 }

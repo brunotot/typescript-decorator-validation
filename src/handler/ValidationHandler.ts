@@ -1,8 +1,6 @@
-import MetadataKey from "../model/enum/MetadataKey";
 import { Class } from "../model/type/Class.type";
 import { ErrorData } from "../model/type/ErrorData.type";
 import { ValidationResult } from "../model/type/ValidationResult.type";
-import ReflectService from "../service/ReflectService";
 import { ValidationClass } from "../model/type/ValidationClass.type";
 import PropertyMetadata from "../model/const/PropertyMetadata";
 import {
@@ -16,6 +14,7 @@ import {
   RecursiveComplexType,
 } from "../model/utility/type.utility";
 import ClassMetadata from "../model/const/ClassMetadata";
+import MetadataService from "../service/MetadataService";
 
 export type ValidationFn<T> = (value: T, context?: any) => ValidationResult;
 
@@ -164,19 +163,16 @@ export default class ValidationHandler<T> {
     const handlePrimitiveArray: ErrorDataApplierType<ValidationFnMetadata<any>[]> = (key, _, validators) => {
       const stateValueArray = ((state as any)[key] as any[]);
 
-      const primitiveArrayValidators = ReflectService.getMetadata<ValidationFnMetadata<any>>(
-        MetadataKey.VALIDATOR_EACH_IN_ARRAY,
-        this._clazz, 
-        key as string
-      );
+      const prop = new MetadataService(this._clazz).get(key as string);
+      const primitiveArrayValidators = prop.node;
 
       const parentValidators = this.extractInvalidResults(
-        validators,
+        prop.node as any,
         stateValueArray,
         state
       );
 
-      const childrenValidators = stateValueArray.map((v: any) =>
+      const childrenValidators = (stateValueArray ?? []).map((v: any) =>
         this.extractInvalidResults(primitiveArrayValidators, v, state)
       );
 
