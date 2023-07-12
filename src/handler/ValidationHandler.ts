@@ -10,10 +10,10 @@ import {
 import {
   EndNode,
   KeyOf,
-  OmitNever,
-  RecursiveComplexType,
+  EvaluatedStrategy,
 } from "../model/utility/type.utility";
 import ClassMetadata from "../model/const/ClassMetadata";
+import { OmitNever } from "../model/type/helper/OmitNever";
 import MetadataService from "../service/MetadataService";
 
 export type ValidationFn<T> = (value: T, context?: any) => ValidationResult;
@@ -49,7 +49,7 @@ export type ValidationHandlerStateType<T> = {
   simpleErrors: SimpleErrorData<T>;
 };
 
-export type SimpleErrorData<T> = RecursiveComplexType<T, string[]>;
+export type SimpleErrorData<T> = EvaluatedStrategy<T, string[]>;
 
 export type StateValidationResultGroup<T> = {
   valid: boolean;
@@ -129,7 +129,7 @@ export default class ValidationHandler<T> {
           key,
           errors,
           data,
-          simpleErrors,
+          (simpleErrors as any),
           newSimpleErrorsValue
         );
       } else {
@@ -139,7 +139,7 @@ export default class ValidationHandler<T> {
           key,
           errors,
           parentData,
-          simpleErrors,
+          (simpleErrors as any),
           newSimpleErrorsValue
         );
       }

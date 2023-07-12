@@ -2,12 +2,6 @@ import { Class, ConstructorType } from "../model/type/Class.type";
 import { Context, MetadataType } from "../model/type/Context.type";
 import ValidatorMetadata from "./ValidatorMetadata";
 
-declare global {
-  interface SymbolConstructor {
-    readonly metadata: unique symbol;
-  }
-}
-
 function metaPropKey(name: string) {
   return `__tdv[${name}]__`;
 }

@@ -13,6 +13,8 @@ import { ValidationGroup } from "./src/model/enum/ValidationGroup";
 import { Locale, getLocale, setLocale } from "./src/model/messages/Locale";
 import strategy from "./src/model/const/Strategy";
 
+export interface PrimitiveSetAppend {}
+
 export type {
   Class,
   ValidationResult,

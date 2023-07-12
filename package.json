@@ -29,9 +29,7 @@
     "url": "https://github.com/brunotot/typescript-decorator-validation/issues"
   },
   "homepage": "https://github.com/brunotot/typescript-decorator-validation#readme",
-  "dependencies": {
-    "reflect-metadata": "^0.1.13"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.1",

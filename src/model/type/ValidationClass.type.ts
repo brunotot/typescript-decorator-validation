@@ -1,3 +1,3 @@
-import { RecursiveComplexType } from "../utility/type.utility";
+import { EvaluatedStrategy } from "../utility/type.utility";
 
-export type ValidationClass<T> = RecursiveComplexType<T, undefined>;
+export type ValidationClass<T> = EvaluatedStrategy<T, undefined>;

@@ -1,5 +1,8 @@
 import { ValidationGroupType } from "../../handler/ValidationHandler";
 import ErrorMessage from "../messages/ErrorMessage";
+import { OmitNever } from "../type/helper/OmitNever";
+import { SomeClass } from "./../../main";
+import { PrimitiveSetAppend } from "../../../index";
 
 export type KeyOf<T> = keyof T;
 
@@ -54,15 +57,7 @@ export function extractDefaultValidatorProps<T>(
   };
 }
 
-type Values<T> = T[KeyOf<T>];
-
-export type OmitNever<T> = Pick<
-  T,
-  Values<{
-    [Prop in KeyOf<T>]: [T[Prop]] extends [never] ? never : Prop;
-  }>
->;
-
+export type _ = undefined;
 export type EndNode<CHILD, PARENT = CHILD> = {
   node: PARENT;
   children: CHILD[];
@@ -74,56 +69,82 @@ export type UndefinedOrElse<
   FALSE = PREDICATE
 > = PREDICATE extends undefined ? TRUE : FALSE;
 
-type $<T> = NonNullable<T>;
+export type PrimitiveSet = [string, number, boolean, bigint, Date];
+export type FunctionType = Function;
+export type ObjectType = object;
+export type PrimitiveType = [
+  ...PrimitiveSet,
+  ...(PrimitiveSetAppend extends { values: infer T extends readonly unknown[] }
+    ? T
+    : [])
+];
+export type ArrayType = any[];
+
+export type PrimitiveStrategy<TActual, TReplacer> = UndefinedOrElse<
+  TReplacer,
+  NonNullable<TActual>
+>;
+export type FunctionStrategy = never;
+
+export type isAnyOf<
+  TCheck,
+  TPossibilities extends ArrayType
+> = NonNullable<TCheck> extends TPossibilities[number] ? true : never;
+
+export type isObject<T> = NonNullable<T> extends ObjectType ? true : never;
+export type isFunction<T> = NonNullable<T> extends FunctionType ? true : never;
+export type isArray<T> = NonNullable<T> extends ArrayType ? true : never;
+export type isPrimitive<T> = isAnyOf<T, PrimitiveType>;
+//     ^?
+export type isUndefined<T> = T extends undefined ? true : never;
 
 // prettier-ignore
-type RecursiveComplexTypeNullable<T, V = undefined> = OmitNever<{
-  [K in KeyOf<T>]: 
-    $<T[K]> extends object
-      ? $<T[K]> extends Function
-        ? never
-        : $<T[K]> extends (infer U)[]
-          ? $<U> extends object
-            ? UndefinedOrElse<
-                V, 
-                RecursiveComplexType<U, V>[], 
-                EndNode<RecursiveComplexType<U, V>, V>
-              >
-            : UndefinedOrElse<
-                V, 
-                T[K], 
-                EndNode<V>
-              >
-          : $<T[K]> extends Date
-            ? UndefinedOrElse<V, $<T[K]>>
-            : RecursiveComplexType<$<T[K]>, V>
-      : UndefinedOrElse<V, $<T[K]>>;
-}>;
+export type ArrayStrategy<TActual, TReplacer> = TActual extends (infer U)[]
+  ? true extends isObject<U>
+    ? UndefinedOrElse<
+        TReplacer, 
+        EvaluatedStrategy<U, TReplacer>[], 
+        EndNode<EvaluatedStrategy<U, TReplacer>, TReplacer>
+      >
+    : UndefinedOrElse<
+        TReplacer, 
+        TActual, 
+        EndNode<TReplacer>
+      >
+  : never;
+
+export type ObjectStrategy<TActual, TReplacer> = EvaluatedStrategy<
+  NonNullable<TActual>,
+  TReplacer
+>;
 
 // prettier-ignore
-type RecursiveComplexTypeNonNullable<T, V = undefined> = OmitNever<{
-  [K in KeyOf<T>]-?: 
-    $<T[K]> extends object
-      ? $<T[K]> extends Function
-        ? never
-        : $<T[K]> extends (infer U)[]
-          ? $<U> extends object
-            ? UndefinedOrElse<
-                V, 
-                RecursiveComplexType<$<U>, V>[], 
-                EndNode<RecursiveComplexType<$<U>, V>, V>
-              >
-            : UndefinedOrElse<
-                V, 
-                T[K], 
-                EndNode<V>
-              >
-          : $<T[K]> extends Date
-            ? UndefinedOrElse<V, $<T[K]>>
-            : RecursiveComplexType<$<T[K]>, V>
-      : UndefinedOrElse<V, $<T[K]>>;
-}>;
+export type FieldStrategy<TActual, TKey extends KeyOf<TActual>, TStrat> =
 
-export type RecursiveComplexType<T, V = undefined> = V extends undefined
-  ? RecursiveComplexTypeNullable<T, V>
-  : RecursiveComplexTypeNonNullable<T, V>;
+  true extends isPrimitive<TActual[TKey]>
+    ?PrimitiveStrategy<TActual[TKey], TStrat>
+
+  :true extends isFunction<TActual[TKey]>
+      ?FunctionStrategy
+
+  :true extends isArray<TActual[TKey]>
+      ?ArrayStrategy<TActual[TKey], TStrat> 
+
+  :true extends isObject<TActual[TKey]>
+    ?ObjectStrategy<TActual[TKey], TStrat>
+
+:never;
+
+// prettier-ignore
+export type StrategyOptional<TActual> = {
+  [TKey in KeyOf<TActual>]: FieldStrategy<TActual, TKey, _>
+};
+
+// prettier-ignore
+export type StrategyMandatory<TActual, TStrat> = {
+  [TKey in KeyOf<TActual>]-?: FieldStrategy<TActual, TKey, TStrat>
+};
+
+export type EvaluatedStrategy<T, V = undefined> = true extends isUndefined<V>
+  ? OmitNever<StrategyOptional<T>>
+  : OmitNever<StrategyMandatory<T, V>>;

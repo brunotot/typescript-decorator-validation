@@ -1,4 +1,4 @@
-import { RecursiveComplexType } from "../utility/type.utility";
+import { EvaluatedStrategy } from "../utility/type.utility";
 import { ValidationResult } from "./ValidationResult.type";
 
-export type ErrorData<T> = RecursiveComplexType<T, ValidationResult[]>;
+export type ErrorData<T> = EvaluatedStrategy<T, ValidationResult[]>;

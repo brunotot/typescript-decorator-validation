@@ -5,8 +5,7 @@ import Required from "./decorators/validators/any/Required";
 import foreach from "./decorators/validators/array/foreach";
 import MinLength from "./decorators/validators/string/MinLength";
 import Password from "./decorators/validators/string/Password";
-import MetadataService from "./service/MetadataService";
-import Email from "./decorators/validators/string/Email";
+import { PrimitiveType } from "./model/utility/type.utility";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 setLocale(Locale.HR);
@@ -17,7 +16,7 @@ class SomeClassNew {
   b?: number;
 }
 
-class SomeClass {
+export class SomeClass {
   @strategy.objectArray(() => SomeClassNew)
   @validators.array.ArraySizeExact(2)
   a?: SomeClassNew[];
@@ -26,7 +25,7 @@ class SomeClass {
 class ParentForm {
   @strategy.primitive(() => String)
   @MinLength(5)
-  username?: string;
+  username!: string;
 
   @strategy.primitive(() => String)
   @Password()
@@ -34,7 +33,7 @@ class ParentForm {
 
   @strategy.primitive(() => Date)
   @validators.date.FutureDate()
-  date?: Date;
+  date!: Date;
 
   @Required()
   @foreach(Required(), MinLength(1))
@@ -53,7 +52,7 @@ class ParentForm {
 });*/
 //console.log(JSON.stringify(result.detailedErrors, null, 2));
 
-class RandomClass {
+export class RandomClass {
   @validators.string.Required()
   @validators.string.Email()
   a?: string;
@@ -62,12 +61,13 @@ class RandomClass {
   @validators.boolean.Truthy()
   c?: boolean;
   @strategy.object(() => SomeClass)
-  d?: SomeClass;
-  @strategy.primitiveArray()
-  @validators.array.foreach(Email())
-  @Required()
-  e?: string[];
+  d!: SomeClass;
 }
+type Test = PrimitiveType;
+//    ^?
+
+type TestSmth = SomeClass extends PrimitiveType ? true : false;
+//    ^?
 
 const handler = new ValidationHandler(RandomClass);
 const result = handler.validate({
@@ -82,6 +82,10 @@ const result = handler.validate({
     ],
   },
 });
-console.log(JSON.stringify(result.errors, null, 2));
 
-//new MetadataService(RandomClass).log();
+result.errors;
+
+type PrimitiveEvaluation = PrimitiveType;
+//    ^?
+
+console.log(JSON.stringify(result.errors, null, 2));
