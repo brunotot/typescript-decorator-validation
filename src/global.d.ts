@@ -9,6 +9,6 @@ declare module "../index" {
 
 declare global {
   interface SymbolConstructor {
-    readonly metadata: unique symbol;
+    metadata: unique symbol;
   }
 }

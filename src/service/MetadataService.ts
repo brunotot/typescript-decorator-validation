@@ -2,6 +2,8 @@ import { Class, ConstructorType } from "../model/type/Class.type";
 import { Context, MetadataType } from "../model/type/Context.type";
 import ValidatorMetadata from "./ValidatorMetadata";
 
+(Symbol as any).metadata ??= Symbol("Symbol.metadata");
+
 function metaPropKey(name: string) {
   return `__tdv[${name}]__`;
 }
@@ -20,11 +22,13 @@ function getPropertyNames(object: any): string[] {
   );
 }
 
-export function createMetaIfEmpty(context: Context) {
-  const { name, metadata } = context;
-  const metaKey = metaPropKey(name);
-  if (!(metaKey in metadata)) {
-    metadata[metaKey] = new ValidatorMetadata();
+export function createMetaIfEmpty(ctx: Context) {
+  const metaKey = metaPropKey(ctx.name);
+  if (!ctx.metadata) {
+    ctx.metadata = {};
+  }
+  if (!(metaKey in ctx.metadata)) {
+    ctx.metadata[metaKey] = new ValidatorMetadata();
   }
 }
 
@@ -34,11 +38,12 @@ export default class MetadataService<T = unknown> {
 
   constructor(clazz: Class<T>) {
     this.clazz = clazz;
-    this.metadata = (this.clazz as any)[Symbol.metadata] as MetadataType;
+    this.metadata = (this.clazz as any)[Symbol.metadata];
   }
 
   get(field: string): ValidatorMetadata<unknown> {
-    return this.metadata[metaPropKey(field)] as ValidatorMetadata<unknown>;
+    return (this.metadata[metaPropKey(field)] ??
+      new ValidatorMetadata()) as ValidatorMetadata<unknown>;
   }
 
   log() {

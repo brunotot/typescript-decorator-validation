@@ -2,20 +2,18 @@ import { Class } from "../model/type/Class.type";
 import { ErrorData } from "../model/type/ErrorData.type";
 import { ValidationResult } from "../model/type/ValidationResult.type";
 import { ValidationClass } from "../model/type/ValidationClass.type";
+import { KeyOf, EvaluatedStrategy } from "../model/utility/type.utility";
+import { DeducedArray } from "../model/type/namespace/Strategy.ns";
 import PropertyMetadata from "../model/const/PropertyMetadata";
+import ClassMetadata from "../model/const/ClassMetadata";
+import MetadataService from "../service/MetadataService";
 import {
   deepEquals,
   isValidationGroupUnion,
 } from "../model/utility/object.utility";
-import {
-  EndNode,
-  KeyOf,
-  EvaluatedStrategy,
-} from "../model/utility/type.utility";
-import ClassMetadata from "../model/const/ClassMetadata";
-import { OmitNever } from "../model/type/helper/OmitNever";
-import MetadataService from "../service/MetadataService";
 
+export type ValidationGroupType = string | number;
+export type SimpleErrorData<T> = EvaluatedStrategy<T, string[]>;
 export type ValidationFn<T> = (value: T, context?: any) => ValidationResult;
 
 export type ValidationFnMetadata<T> = {
@@ -23,24 +21,10 @@ export type ValidationFnMetadata<T> = {
   validate: ValidationFn<T>;
 };
 
-export type ValidationGroupType = string | number;
-
 export type StateValidationResult<T> = {
   valid: boolean;
   errors: ErrorData<T>;
 };
-
-export type ValidationData<T> = OmitNever<{
-  [K in KeyOf<T>]: T[K] extends object
-    ? T[K] extends Function
-      ? never
-      : T[K] extends any[]
-      ? T[K][number] extends object | any[]
-        ? ValidationData<T[K][number]>[]
-        : ValidationFn<T[K]>[][]
-      : ValidationData<T[K]>
-    : ValidationFn<T[K]>[];
-}>;
 
 export type ValidationHandlerStateType<T> = {
   valid: boolean;
@@ -48,8 +32,6 @@ export type ValidationHandlerStateType<T> = {
   state: ValidationClass<T>;
   simpleErrors: SimpleErrorData<T>;
 };
-
-export type SimpleErrorData<T> = EvaluatedStrategy<T, string[]>;
 
 export type StateValidationResultGroup<T> = {
   valid: boolean;
@@ -160,7 +142,7 @@ export default class ValidationHandler<T> {
     };
 
     // prettier-ignore
-    const handlePrimitiveArray: ErrorDataApplierType<ValidationFnMetadata<any>[]> = (key, _, validators) => {
+    const handlePrimitiveArray: ErrorDataApplierType<ValidationFnMetadata<any>[]> = (key) => {
       const stateValueArray = ((state as any)[key] as any[]);
 
       const prop = new MetadataService(this._clazz).get(key as string);
@@ -202,7 +184,7 @@ export default class ValidationHandler<T> {
     };
 
     // prettier-ignore
-    const handleObjectArray: ErrorDataApplierType<EndNode<ValidationFnMetadata<any>[]>> = (key, meta, validators) => {
+    const handleObjectArray: ErrorDataApplierType<DeducedArray<ValidationFnMetadata<any>[]>> = (key, meta, validators) => {
       const innerValidationHandler = new ValidationHandler(
         meta.clazz!,
         ...this._groups

@@ -64,6 +64,7 @@ function saveMetadata(props: SaveMetadataProps) {
     groups: normalizeGroups(props.groups),
     validate: props.isValid,
   });
+  console.log(metadata);
 }
 
 export default new ValidatorService();

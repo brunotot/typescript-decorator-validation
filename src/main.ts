@@ -5,7 +5,7 @@ import Required from "./decorators/validators/any/Required";
 import foreach from "./decorators/validators/array/foreach";
 import MinLength from "./decorators/validators/string/MinLength";
 import Password from "./decorators/validators/string/Password";
-import { PrimitiveType } from "./model/utility/type.utility";
+import { TypeGroup } from "./model/type/namespace/TypeGroup.ns";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 setLocale(Locale.HR);
@@ -60,13 +60,14 @@ export class RandomClass {
   b?: number;
   @validators.boolean.Truthy()
   c?: boolean;
-  @strategy.object(() => SomeClass)
+  @validators.any.Required()
   d!: SomeClass;
-}
-type Test = PrimitiveType;
-//    ^?
 
-type TestSmth = SomeClass extends PrimitiveType ? true : false;
+  test() {}
+}
+// TODO: runtime validation for array
+
+type PrimitiveEvaluation = TypeGroup.Primitive;
 //    ^?
 
 const handler = new ValidationHandler(RandomClass);
@@ -74,18 +75,9 @@ const result = handler.validate({
   a: undefined,
   b: 1,
   c: true,
-  d: {
-    a: [
-      {
-        b: undefined,
-      },
-    ],
-  },
+  d: null as any,
 });
 
 result.errors;
-
-type PrimitiveEvaluation = PrimitiveType;
-//    ^?
 
 console.log(JSON.stringify(result.errors, null, 2));

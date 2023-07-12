@@ -1,5 +1,4 @@
 import {
-  ValidationData,
   ValidationFnMetadata,
   ValidationGroupType,
 } from "../../handler/ValidationHandler";
@@ -16,7 +15,7 @@ export default class ClassMetadata<T> {
   private _clazz: Class<T>;
   private _fieldNames: KeyOf<T>[];
   private _validationGroups: ValidationGroupType[];
-  private _validators: ValidationData<T>;
+  private _validators: ValidationClass<T>;
 
   constructor(clazz: Class<T>, ...validationGroups: ValidationGroupType[]) {
     this._clazz = clazz;
@@ -84,7 +83,7 @@ export default class ClassMetadata<T> {
     return instance as T;
   }
 
-  private buildValidators<T>(): ValidationData<T> {
+  private buildValidators<T>(): ValidationClass<T> {
     return this._fieldNames.reduce((obj, property) => {
       const fieldMetadata = new PropertyMetadata(this._clazz, property);
       const innerClass = fieldMetadata.clazz;
@@ -108,7 +107,7 @@ export default class ClassMetadata<T> {
             }
           : validationMetadataListByActiveGroup,
       };
-    }, {}) as ValidationData<T>;
+    }, {}) as ValidationClass<T>;
   }
 
   private getValidationMetadata<T>(

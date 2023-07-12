@@ -8,6 +8,7 @@ class Mock {
 }
 
 const handler = new ValidationHandler(Mock);
+console.log(handler);
 
 test("@Required -> string -> invalid", () => {
   const res = handler.validate({ value: "" });
