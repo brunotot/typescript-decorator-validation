@@ -1,5 +1,6 @@
 import { Class } from "../model/type/Class.type";
 import { Context, MetadataType } from "../model/type/Context.type";
+import ValidationProcessor from "./ValidationProcessor";
 
 const META_KEY = "tdv:metadata-processor";
 
@@ -8,6 +9,12 @@ export default class MetadataProcessor {
 
   private constructor() {
     this.#data = new Map();
+  }
+
+  getValidationProcessor<T = unknown>(key: string) {
+    const validate = this.getOrDefault(key, () => new ValidationProcessor<T>());
+    this.set(key, validate);
+    return validate;
   }
 
   getOrDefault<T>(key: string, defaultValueSupplier: () => T): T {

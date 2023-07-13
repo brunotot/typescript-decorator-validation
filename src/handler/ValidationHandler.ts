@@ -11,6 +11,7 @@ import {
   deepEquals,
   isValidationGroupUnion,
 } from "../model/utility/object.utility";
+import { time } from "../model/utility/decorator.utility";
 
 export type ValidationGroupType = string | number;
 export type SimpleErrorData<T> = EvaluatedStrategy<T, string[]>;
@@ -55,13 +56,13 @@ export type ValidationHandlerCache<T> = Partial<{
 export default class ValidationHandler<T> {
   private _clazz: Class<T>;
   private _groups: ValidationGroupType[];
-  private _metadata: ClassMetadata<T>;
+  private _metadata!: ClassMetadata<T>;
   private _cache: ValidationHandlerCache<T>;
 
   constructor(clazz: Class<T>, ...groups: ValidationGroupType[]) {
     this._clazz = clazz;
     this._groups = Array.from(new Set(groups));
-    this._metadata = new ClassMetadata(clazz, ...groups);
+    //this._metadata = new ClassMetadata(clazz, ...groups);
     this._cache = {};
   }
 
@@ -89,10 +90,19 @@ export default class ValidationHandler<T> {
     );
   }
 
+  @time
   validate(state: ValidationClass<T>): StateValidationResultGroup<T> {
     let valid: boolean = true;
     let errors: ErrorData<T> = {} as ErrorData<T>;
     let simpleErrors: SimpleErrorData<T> = {} as SimpleErrorData<T>;
+
+    if (!this._metadata) {
+      this._metadata = new ClassMetadata(
+        this._clazz,
+        state as T,
+        ...this._groups
+      );
+    }
 
     const instance: any = this._metadata.createInstance(state);
     const entries = Object.entries(this._metadata.validators);
@@ -215,7 +225,11 @@ export default class ValidationHandler<T> {
     for (const [_key, _validators] of entries) {
       const validators = _validators as any;
       const key = _key as keyof ErrorData<T>;
-      const meta = new PropertyMetadata<T>(this._clazz, key);
+      const meta = new PropertyMetadata<T>(
+        this._clazz,
+        key,
+        (state as any)[key]
+      );
 
       switch (meta.type) {
         case "OBJECT": {

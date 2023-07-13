@@ -6,8 +6,9 @@ import {
   extractMessageFromValidatorProps,
   hasValue,
 } from "../../../model/utility/object.utility";
+import { AcceptableDecoratorFieldType } from "../../../model/type/Context.type";
 
-export default function Required<T extends Nullable>(
+export default function Required<T extends AcceptableDecoratorFieldType>(
   props?: BasicValidatorProviderType
 ) {
   return ValidatorService.validatorDecoratorFactory<T>({

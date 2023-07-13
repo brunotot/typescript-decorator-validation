@@ -1,6 +1,7 @@
 import { Class } from "../type/Class.type";
 import { KeyOf } from "../utility/type.utility";
 import MetadataService from "../../service/MetadataService";
+import MetadataProcessor from "../../processor/MetadataProcessor";
 
 export type PropertyTypeGroup =
   | "PRIMITIVE_ARRAY"
@@ -30,7 +31,10 @@ export default class PropertyMetadata<T> {
     return this._type;
   }
 
-  constructor(clazz: Class<T>, field: KeyOf<T>) {
+  #runtimeValue: any;
+
+  constructor(clazz: Class<T>, field: KeyOf<T>, runtimeValue: unknown) {
+    this.#runtimeValue = runtimeValue as T;
     this._owner = clazz;
     this._name = field;
     this._clazz = this.buildClass();
@@ -38,13 +42,32 @@ export default class PropertyMetadata<T> {
   }
 
   private buildTypeGroup(): PropertyTypeGroup {
-    return new MetadataService(this._owner).get(this._name as string).typeGroup;
+    const p = MetadataProcessor.fromClass(this._owner);
+    const vp = p.getValidationProcessor(this._name as string);
+    if (!vp.isInitialTypeGroup) {
+      return vp.typeGroup;
+    }
+    const value = this.#runtimeValue;
+
+    const res = Array.isArray(value)
+      ? vp.constructorCreator
+        ? "OBJECT_ARRAY"
+        : "PRIMITIVE_ARRAY"
+      : vp.constructorCreator
+      ? "OBJECT"
+      : "PRIMITIVE";
+
+    /* if (typeof res === "object") {
+      throw new Error("Not a primitive: ", res);
+    } */
+
+    return res;
   }
 
   private buildClass(): Class<unknown> | null {
     return (
-      new MetadataService(this._owner)
-        .get(this._name as string)
+      MetadataProcessor.fromClass(this._owner)
+        .getValidationProcessor(this._name as string)
         .constructorCreator?.() ?? null
     );
   }

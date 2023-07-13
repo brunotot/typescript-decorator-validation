@@ -43,7 +43,5 @@ export default class MetadataService<T = unknown> {
       new ValidatorMetadata()) as ValidatorMetadata<unknown>;
   }
 
-  log() {
-    //console.log(this.metadata);
-  }
+  log() {}
 }

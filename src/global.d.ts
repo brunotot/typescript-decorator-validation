@@ -1,6 +1,8 @@
 import { SomeClass } from "./main";
 import { PrimitiveSetAppend } from "../index";
 
+(Symbol as any).metadata ??= Symbol("Symbol.metadata");
+
 // This is an example
 declare module "../index" {
   interface PrimitiveSetAppend {

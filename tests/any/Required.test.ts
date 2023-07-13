@@ -1,6 +1,7 @@
 import ValidationHandler from "../../src/handler/ValidationHandler";
 import { validators } from "../../src/model/const/Validators";
 import { t } from "../../src/model/messages/ErrorMessage";
+import "./../../src/global";
 
 class Mock {
   @validators.string.Required()
@@ -8,7 +9,6 @@ class Mock {
 }
 
 const handler = new ValidationHandler(Mock);
-console.log(handler);
 
 test("@Required -> string -> invalid", () => {
   const res = handler.validate({ value: "" });

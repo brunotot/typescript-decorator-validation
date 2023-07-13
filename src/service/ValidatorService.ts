@@ -1,13 +1,10 @@
-import MetadataKey from "../model/enum/MetadataKey";
 import { ValidationGroupParamType } from "../model/utility/type.utility";
 import { Decorator, buildDecorator } from "./DecoratorService";
-import MetadataService from "./MetadataService";
+import MetadataProcessor from "../processor/MetadataProcessor";
 import {
   ValidationFn,
   ValidationGroupType,
 } from "../handler/ValidationHandler";
-import MetadataProcessor from "../processor/MetadataProcessor";
-import ValidationProcessor from "../processor/ValidationProcessor";
 
 export type ValidatorBuilder<T> = {
   isValid: ValidationFn<T>;
@@ -17,13 +14,6 @@ export type ValidatorBuilder<T> = {
 export type Nullable<GUARD = undefined> = GUARD extends undefined
   ? any
   : GUARD | undefined | null;
-
-type SaveMetadataProps = {
-  key: string;
-  processor: MetadataProcessor;
-  groups?: ValidationGroupParamType;
-  isValid: ValidationFn<any>;
-};
 
 class ValidatorService {
   validatorDecoratorFactory<T>(builder: ValidatorBuilder<T>): Decorator<T> {
@@ -47,9 +37,8 @@ function saveMetadata(
   groups: ValidationGroupParamType,
   isValid: ValidationFn<any>
 ) {
-  const validate = processor.getOrDefault(key, () => new ValidationProcessor());
-  processor.set(key, validate);
-  validate.appendChild({
+  const validate = processor.getValidationProcessor(key);
+  validate.appendNode({
     groups: getSanitizedGroups(groups),
     validate: isValid,
   });

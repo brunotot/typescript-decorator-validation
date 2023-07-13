@@ -3,15 +3,18 @@ import MetadataProcessor from "../processor/MetadataProcessor";
 
 export type Decorator<T = unknown> = (target: any, context: Context<T>) => void;
 
-export type DecoratorSupplier = (
+export type DecoratorSupplier<T = unknown> = (
   name: string,
-  processor: MetadataProcessor
+  processor: MetadataProcessor,
+  context: Context<T>
 ) => void;
 
-export function buildDecorator<T>(decoration: DecoratorSupplier): Decorator<T> {
+export function buildDecorator<T>(
+  decoration: DecoratorSupplier<T>
+): Decorator<T> {
   return function (_, context) {
     const name = context.name;
     const metadataProcessor = MetadataProcessor.fromContext(context);
-    decoration(name, metadataProcessor);
+    decoration(name, metadataProcessor, context);
   };
 }
