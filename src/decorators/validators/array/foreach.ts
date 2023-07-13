@@ -1,16 +1,16 @@
-import { NullableType } from "../../../service/ValidatorService";
+import { Nullable } from "../../../service/ValidatorService";
 import {
-  FieldDecoratorType,
+  Decorator,
   applyForeachValidator,
-  buildFieldDecorator,
+  buildDecorator,
 } from "../../../service/DecoratorService";
 
 type ExtractArrayType<T> = T extends (infer U)[] ? U : never;
 
-export default function foreach<T extends NullableType<any[]>>(
-  ...validators: FieldDecoratorType<any, ExtractArrayType<T>>[]
-): FieldDecoratorType<any, T> {
-  return buildFieldDecorator<T>((target, property, _, ctx) => {
+export default function foreach<T extends Nullable<any[]>>(
+  ...validators: Decorator<any, ExtractArrayType<T>>[]
+): Decorator<any, T> {
+  return buildDecorator<T>((target, property, _, ctx) => {
     validators.forEach((validator) => {
       applyForeachValidator(target, property, validator, ctx as any);
     });

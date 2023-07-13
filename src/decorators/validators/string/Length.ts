@@ -1,6 +1,4 @@
-import ValidatorService, {
-  NullableType,
-} from "../../../service/ValidatorService";
+import ValidatorService, { Nullable } from "../../../service/ValidatorService";
 
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
@@ -14,11 +12,11 @@ type LengthType = {
   max: number;
 };
 
-export default function Length<T extends NullableType<string>>(
+export default function Length<T extends Nullable<string>>(
   props: BasicValidatorProviderType<LengthType, LengthType>
 ) {
   const { min, max } = props;
-  return ValidatorService.buildFieldValidatorDecorator<T>({
+  return ValidatorService.validatorDecoratorFactory<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (value) => ({
       key: "Length",

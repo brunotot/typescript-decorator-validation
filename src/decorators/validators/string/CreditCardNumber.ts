@@ -1,6 +1,4 @@
-import ValidatorService, {
-  NullableType,
-} from "../../../service/ValidatorService";
+import ValidatorService, { Nullable } from "../../../service/ValidatorService";
 
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
@@ -28,10 +26,10 @@ function isValidCreditCardNumber(str: string): boolean {
   return sum % 10 === 0;
 }
 
-export default function CreditCardNumber<T extends NullableType<string>>(
+export default function CreditCardNumber<T extends Nullable<string>>(
   props?: BasicValidatorProviderType
 ) {
-  return ValidatorService.buildFieldValidatorDecorator<T>({
+  return ValidatorService.validatorDecoratorFactory<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (value) => ({
       key: "CreditCardNumber",

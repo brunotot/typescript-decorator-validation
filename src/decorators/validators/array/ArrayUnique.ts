@@ -1,6 +1,4 @@
-import ValidatorService, {
-  NullableType,
-} from "../../../service/ValidatorService";
+import ValidatorService, { Nullable } from "../../../service/ValidatorService";
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 
 import {
@@ -27,12 +25,12 @@ const DEFAULTS: BasicValidatorProviderTypeMandatoryMessage<
   message: ErrorMessage.ArrayUnique(),
 };
 
-export default function ArrayUnique<K, T extends NullableType<K[]>>(
+export default function ArrayUnique<K, T extends Nullable<K[]>>(
   props: BasicValidatorProviderType<string, ArrayUniqueType<K>> = DEFAULTS
 ) {
   const hashFn = typeof props === "string" ? hash : props.hash ?? hash;
 
-  return ValidatorService.buildFieldValidatorDecorator<T>({
+  return ValidatorService.validatorDecoratorFactory<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (array) => ({
       key: "ArrayUnique",

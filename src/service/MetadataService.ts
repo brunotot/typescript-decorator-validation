@@ -24,9 +24,6 @@ function getPropertyNames(object: any): string[] {
 
 export function createMetaIfEmpty(ctx: Context) {
   const metaKey = metaPropKey(ctx.name);
-  if (!ctx.metadata) {
-    ctx.metadata = {};
-  }
   if (!(metaKey in ctx.metadata)) {
     ctx.metadata[metaKey] = new ValidatorMetadata();
   }
@@ -47,6 +44,6 @@ export default class MetadataService<T = unknown> {
   }
 
   log() {
-    console.log(this.metadata);
+    //console.log(this.metadata);
   }
 }

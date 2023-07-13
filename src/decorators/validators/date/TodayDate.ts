@@ -1,6 +1,4 @@
-import ValidatorService, {
-  NullableType,
-} from "../../../service/ValidatorService";
+import ValidatorService, { Nullable } from "../../../service/ValidatorService";
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 import {
   evaluateNullableValidity,
@@ -9,7 +7,7 @@ import {
 } from "../../../model/utility/object.utility";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 
-function isTodayDate(date: NullableType<Date>): boolean {
+function isTodayDate(date: Nullable<Date>): boolean {
   return evaluateNullableValidity(date, (d) => {
     const currentDate = new Date();
     return (
@@ -20,10 +18,10 @@ function isTodayDate(date: NullableType<Date>): boolean {
   });
 }
 
-export default function TodayDate<T extends NullableType<Date>>(
+export default function TodayDate<T extends Nullable<Date>>(
   props?: BasicValidatorProviderType
 ) {
-  return ValidatorService.buildFieldValidatorDecorator<T>({
+  return ValidatorService.validatorDecoratorFactory<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (date) => ({
       key: "TodayDate",

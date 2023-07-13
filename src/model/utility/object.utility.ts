@@ -1,5 +1,5 @@
 import { ValidationGroupType } from "../../handler/ValidationHandler";
-import { NullableType } from "../../service/ValidatorService";
+import { Nullable } from "../../service/ValidatorService";
 import { BasicValidatorProviderType } from "./type.utility";
 
 export type EqualsType<T> = (obj1: T, obj2: T) => boolean;
@@ -42,7 +42,7 @@ export function isValidationGroupUnion(
 }
 
 export function evaluateNullableValidity<T>(
-  object: NullableType<T>,
+  object: Nullable<T>,
   isValid: (value: T) => boolean
 ) {
   return !hasValue(object) ? true : isValid(object);

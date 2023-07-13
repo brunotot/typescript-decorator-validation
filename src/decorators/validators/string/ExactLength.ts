@@ -1,6 +1,4 @@
-import ValidatorService, {
-  NullableType,
-} from "../../../service/ValidatorService";
+import ValidatorService, { Nullable } from "../../../service/ValidatorService";
 
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
@@ -13,11 +11,11 @@ type ExactLengthType = {
   value: number;
 };
 
-export default function ExactLength<T extends NullableType<string>>(
+export default function ExactLength<T extends Nullable<string>>(
   props: BasicValidatorProviderType<number, ExactLengthType>
 ) {
   const exact = typeof props === "number" ? props : props.value;
-  return ValidatorService.buildFieldValidatorDecorator<T>({
+  return ValidatorService.validatorDecoratorFactory<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (value) => ({
       key: "ExactLength",

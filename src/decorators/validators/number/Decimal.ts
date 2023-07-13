@@ -1,6 +1,4 @@
-import ValidatorService, {
-  NullableType,
-} from "../../../service/ValidatorService";
+import ValidatorService, { Nullable } from "../../../service/ValidatorService";
 
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
@@ -9,10 +7,10 @@ import {
   extractMessageFromValidatorProps,
 } from "../../../model/utility/object.utility";
 
-export default function Decimal<T extends NullableType<number>>(
+export default function Decimal<T extends Nullable<number>>(
   props?: BasicValidatorProviderType<number>
 ) {
-  return ValidatorService.buildFieldValidatorDecorator<T>({
+  return ValidatorService.validatorDecoratorFactory<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (value) => ({
       key: "Decimal",

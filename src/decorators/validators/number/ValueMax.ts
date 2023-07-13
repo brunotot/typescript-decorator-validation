@@ -1,6 +1,4 @@
-import ValidatorService, {
-  NullableType,
-} from "../../../service/ValidatorService";
+import ValidatorService, { Nullable } from "../../../service/ValidatorService";
 
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 import {
@@ -13,11 +11,11 @@ type ValueMaxType = {
   value: number;
 };
 
-export default function ValueMax<T extends NullableType<number>>(
+export default function ValueMax<T extends Nullable<number>>(
   props: BasicValidatorProviderType<number, ValueMaxType>
 ) {
   const max = typeof props === "number" ? props : props.value;
-  return ValidatorService.buildFieldValidatorDecorator<T>({
+  return ValidatorService.validatorDecoratorFactory<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (value) => ({
       key: "ValueMax",

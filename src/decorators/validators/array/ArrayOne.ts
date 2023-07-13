@@ -1,6 +1,4 @@
-import ValidatorService, {
-  NullableType,
-} from "../../../service/ValidatorService";
+import ValidatorService, { Nullable } from "../../../service/ValidatorService";
 
 import {
   PredicateType,
@@ -12,10 +10,10 @@ export type ArrayOneType<T> = {
   test: PredicateType<T>;
 };
 
-export default function ArrayOne<K, T extends NullableType<K[]>>(
+export default function ArrayOne<K, T extends Nullable<K[]>>(
   props: BasicValidatorProviderTypeMandatoryMessage<ArrayOneType<K>>
 ) {
-  return ValidatorService.buildFieldValidatorDecorator<T>({
+  return ValidatorService.validatorDecoratorFactory<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (array) => ({
       key: "ArrayOne",

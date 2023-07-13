@@ -1,6 +1,18 @@
+import { Nullable } from "../../service/ValidatorService";
+
 export type MetadataType = Record<PropertyKey, unknown>;
 
-export interface Context {
+export type AcceptableDecoratorFieldType<T> = Nullable<T | (() => T)>;
+
+export type ContextKind = "field" | "method" | "getter";
+
+export type Context<Accept = unknown> = Readonly<{
+  kind: ContextKind;
+  static: boolean;
+  private: boolean;
   name: string;
   metadata: MetadataType;
-}
+  access: {
+    get(object: any): Accept;
+  };
+}>;

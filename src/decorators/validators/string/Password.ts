@@ -1,6 +1,4 @@
-import ValidatorService, {
-  NullableType,
-} from "../../../service/ValidatorService";
+import ValidatorService, { Nullable } from "../../../service/ValidatorService";
 
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
@@ -53,7 +51,7 @@ function isPasswordChunkInvalid(
   return matchers === null || matchers.length === 0;
 }
 
-export default function Password<T extends NullableType<string>>(
+export default function Password<T extends Nullable<string>>(
   cfg: BasicValidatorProviderType<string, PasswordProps> = {
     ...DEFAULT_PROPS,
     message: undefined,
@@ -76,7 +74,7 @@ export default function Password<T extends NullableType<string>>(
     };
   }
 
-  return ValidatorService.buildFieldValidatorDecorator<T>({
+  return ValidatorService.validatorDecoratorFactory<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (string) => {
       const str = string ?? "";

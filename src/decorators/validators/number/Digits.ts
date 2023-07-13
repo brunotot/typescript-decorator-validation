@@ -1,6 +1,4 @@
-import ValidatorService, {
-  NullableType,
-} from "../../../service/ValidatorService";
+import ValidatorService, { Nullable } from "../../../service/ValidatorService";
 
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
@@ -36,11 +34,11 @@ function validateDigits(
   return integerPart.length <= maxInteger && fractionPart.length <= maxFraction;
 }
 
-export default function Digits<T extends NullableType<number>>(
+export default function Digits<T extends Nullable<number>>(
   props: BasicValidatorProviderType<DigitsType, DigitsType>
 ) {
   const { maxInteger = Infinity, maxFraction = Infinity } = props;
-  return ValidatorService.buildFieldValidatorDecorator<T>({
+  return ValidatorService.validatorDecoratorFactory<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (value) => ({
       key: "Digits",

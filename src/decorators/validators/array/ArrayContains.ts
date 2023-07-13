@@ -1,6 +1,4 @@
-import ValidatorService, {
-  NullableType,
-} from "../../../service/ValidatorService";
+import ValidatorService, { Nullable } from "../../../service/ValidatorService";
 
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
 import {
@@ -13,10 +11,10 @@ export type ArrayContainsType<T> = {
   value: T;
 };
 
-export default function ArrayContains<K, T extends NullableType<K[]>>(
+export default function ArrayContains<K, T extends Nullable<K[]>>(
   props: BasicValidatorProviderType<ArrayContainsType<K>, ArrayContainsType<K>>
 ) {
-  return ValidatorService.buildFieldValidatorDecorator<T>({
+  return ValidatorService.validatorDecoratorFactory<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (array) => ({
       key: "ArrayContains",

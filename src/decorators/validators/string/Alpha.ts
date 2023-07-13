@@ -4,10 +4,10 @@ import {
   extractMessageFromValidatorProps,
 } from "../../../model/utility/object.utility";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
-import { NullableType } from "../../../service/ValidatorService";
+import { Nullable } from "../../../service/ValidatorService";
 import Pattern from "./Pattern";
 
-export default function Alpha<T extends NullableType<string>>(
+export default function Alpha<T extends Nullable<string>>(
   props?: BasicValidatorProviderType
 ) {
   return Pattern<T>({

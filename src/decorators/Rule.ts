@@ -10,7 +10,7 @@ export type RuleProps<T> =
     };
 
 export default function Rule<T>(props: RuleProps<T>) {
-  return ValidatorService.buildFieldValidatorDecorator<T>({
+  return ValidatorService.validatorDecoratorFactory<T>({
     isValid: "isValid" in props ? props.isValid : props,
     groups: "isValid" in props ? props.groups : [],
   });

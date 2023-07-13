@@ -1,6 +1,4 @@
-import ValidatorService, {
-  NullableType,
-} from "../../../service/ValidatorService";
+import ValidatorService, { Nullable } from "../../../service/ValidatorService";
 
 import ErrorMessage from "../../../model/messages/ErrorMessage";
 import { BasicValidatorProviderType } from "../../../model/utility/type.utility";
@@ -13,11 +11,11 @@ type ArraySizeExactType = {
   value: number;
 };
 
-export default function ArraySizeExact<K, T extends NullableType<K[]>>(
+export default function ArraySizeExact<K, T extends Nullable<K[]>>(
   props: BasicValidatorProviderType<number, ArraySizeExactType>
 ) {
   const exact = typeof props === "number" ? props : props.value;
-  return ValidatorService.buildFieldValidatorDecorator<T>({
+  return ValidatorService.validatorDecoratorFactory<T>({
     groups: extractGroupsFromValidatorProps(props),
     isValid: (array) => ({
       key: "ArraySizeExact",
