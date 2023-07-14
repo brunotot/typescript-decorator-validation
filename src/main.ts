@@ -1,4 +1,4 @@
-import { ValidationHandler } from "..";
+import { Locale, ValidationHandler, setLocale } from "..";
 import Required from "./decorators/validators/any/Required";
 import Truthy from "./decorators/validators/any/Truthy";
 import { valid } from "./decorators/validators/any/valid";
@@ -9,9 +9,7 @@ import MinLength from "./decorators/validators/string/MinLength";
 import Password from "./decorators/validators/string/Password";
 import { TypeGroup } from "./model/type/namespace/TypeGroup.ns";
 
-// TODO: runtime validation for array
-// TODO LIBRARY ZA VIZUALIZACIJU CMD texta mozda?
-//setLocale(Locale.HR);
+setLocale(Locale.HR);
 
 export class SomeClass {
   idk?: string;
