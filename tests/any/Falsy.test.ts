@@ -1,18 +1,18 @@
 import { IMock } from "../common/ValidationHandlerMock";
 import { Nullable } from "../../src/service/ValidatorService";
 import { standardTest } from "../common/TestFactory";
-import Required from "../../src/decorators/validators/any/Required";
+import Falsy from "../../src/decorators/validators/any/Falsy";
 
 /*** Data ***/
 type Type = Nullable<any>;
 const type = "any";
-const identifier = "Required";
-const successData: Type[] = ["lorem", true, 0, -1, 1, new Date(), ["lorem"]];
-const errorData: Type[] = [false, null, undefined, "", []];
+const identifier = "Falsy";
+const successData: Type[] = [false, "", 0, undefined, null];
+const errorData: Type[] = [true, "X", []];
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @Required()
+  @Falsy()
   value: Type;
 }
 

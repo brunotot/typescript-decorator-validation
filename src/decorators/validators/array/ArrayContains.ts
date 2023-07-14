@@ -11,7 +11,7 @@ export type ArrayContainsType<T> = {
   value: T;
 };
 
-export default function ArrayContains<K, T extends Nullable<K[]>>(
+export default function ArrayContains<K, T extends K[]>(
   props: BasicValidatorProviderType<ArrayContainsType<K>, ArrayContainsType<K>>
 ) {
   return ValidatorService.validatorDecoratorFactory<T>({

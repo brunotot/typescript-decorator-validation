@@ -10,7 +10,7 @@ export type ArrayNoneType<T> = {
   test: PredicateType<T>;
 };
 
-export default function ArrayNone<K, T extends Nullable<K[]>>(
+export default function ArrayNone<K, T extends K[]>(
   props: BasicValidatorProviderTypeMandatoryMessage<ArrayNoneType<K>>
 ) {
   return ValidatorService.validatorDecoratorFactory<T>({

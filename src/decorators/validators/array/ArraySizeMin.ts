@@ -11,7 +11,7 @@ type ArraySizeMinType = {
   value: number;
 };
 
-export default function ArraySizeMin<K, T extends Nullable<K[]>>(
+export default function ArraySizeMin<K, T extends K[]>(
   props: BasicValidatorProviderType<number, ArraySizeMinType>
 ) {
   const min = typeof props === "number" ? props : props.value;

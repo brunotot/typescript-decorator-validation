@@ -7,7 +7,7 @@ import {
   extractMessageFromValidatorProps,
 } from "../../../model/utility/object.utility";
 
-export default function ArrayEmpty<K, T extends Nullable<K[]>>(
+export default function ArrayEmpty<K, T extends K[]>(
   props?: BasicValidatorProviderType
 ) {
   return ValidatorService.validatorDecoratorFactory<T>({

@@ -5,6 +5,8 @@ export function time<This, Args extends any[], Return>(
     (this: This, ...args: Args) => Return
   >
 ) {
+  if (testsRunning()) return;
+
   const methodName = String(context.name);
   function replacementMethod(this: This, ...args: Args): Return {
     const start = performance.now();
@@ -18,4 +20,8 @@ export function time<This, Args extends any[], Return>(
     return result;
   }
   return replacementMethod;
+}
+
+function testsRunning() {
+  return process.env.JEST_WORKER_ID !== undefined;
 }

@@ -11,7 +11,7 @@ type ArraySizeMaxType = {
   value: number;
 };
 
-export default function ArraySizeMax<K, T extends Nullable<K[]>>(
+export default function ArraySizeMax<K, T extends K[]>(
   props: BasicValidatorProviderType<number, ArraySizeMaxType>
 ) {
   const max = typeof props === "number" ? props : props.value;

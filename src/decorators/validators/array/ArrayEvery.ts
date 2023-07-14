@@ -10,7 +10,7 @@ export type ArrayEveryType<T> = {
   test: PredicateType<T>;
 };
 
-export default function ArrayEvery<K, T extends Nullable<K[]>>(
+export default function ArrayEvery<K, T extends K[]>(
   props: BasicValidatorProviderTypeMandatoryMessage<ArrayEveryType<K>>
 ) {
   return ValidatorService.validatorDecoratorFactory<T>({

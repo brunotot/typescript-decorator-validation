@@ -25,7 +25,7 @@ const DEFAULTS: BasicValidatorProviderTypeMandatoryMessage<
   message: ErrorMessage.ArrayUnique(),
 };
 
-export default function ArrayUnique<K, T extends Nullable<K[]>>(
+export default function ArrayUnique<K, T extends K[]>(
   props: BasicValidatorProviderType<string, ArrayUniqueType<K>> = DEFAULTS
 ) {
   const hashFn = typeof props === "string" ? hash : props.hash ?? hash;

@@ -12,6 +12,7 @@ import {
   isValidationGroupUnion,
 } from "../model/utility/object.utility";
 import { time } from "../model/utility/decorator.utility";
+import MetadataProcessor from "../processor/MetadataProcessor";
 
 export type ValidationGroupType = string | number;
 export type SimpleErrorData<T> = EvaluatedStrategy<T, string[]>;
@@ -91,9 +92,10 @@ export default class ValidationHandler<T> {
   }
 
   @time
-  validate(state: ValidationClass<T>): StateValidationResultGroup<T> {
+  validate(state0?: ValidationClass<T>): StateValidationResultGroup<T> {
     let valid: boolean = true;
     let errors: ErrorData<T> = {} as ErrorData<T>;
+    const state: ValidationClass<T> = state0 ?? ({} as ValidationClass<T>);
     let simpleErrors: SimpleErrorData<T> = {} as SimpleErrorData<T>;
 
     if (!this._metadata) {
@@ -155,7 +157,7 @@ export default class ValidationHandler<T> {
     const handlePrimitiveArray: ErrorDataApplierType<ValidationFnMetadata<any>[]> = (key) => {
       const stateValueArray = ((state as any)[key] as any[]);
 
-      const prop = new MetadataService(this._clazz).get(key as string);
+      const prop = MetadataProcessor.fromClass(this._clazz).getValidationProcessor(key as string)
       const primitiveArrayValidators = prop.node;
 
       const parentValidators = this.extractInvalidResults(

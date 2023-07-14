@@ -1,7 +1,9 @@
 import { ValidationGroupType } from "../../handler/ValidationHandler";
 import ErrorMessage from "../messages/ErrorMessage";
+import { WritableKeyOf } from "../type/WritableKeyOf";
 import { Condition } from "../type/namespace/Condition.ns";
 import { Strategy } from "../type/namespace/Strategy.ns";
+import { TypeGroup } from "../type/namespace/TypeGroup.ns";
 import { $ } from "../type/namespace/Utility.ns";
 
 export type KeyOf<T> = keyof T;
@@ -75,7 +77,7 @@ export type FieldStrategy<TActual, TKey extends KeyOf<TActual>, TStrat> =
 :never;
 
 export type StrategyOptional<TActual> = {
-  [TKey in KeyOf<TActual>]: FieldStrategy<TActual, TKey, $._>;
+  [TKey in WritableKeyOf<TActual>]?: FieldStrategy<TActual, TKey, $._>;
 };
 
 export type StrategyMandatory<TActual, TStrat> = {

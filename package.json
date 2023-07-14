@@ -11,7 +11,7 @@
     "deploy:minor": "npm i && git commit -am 'update package-lock.json' && npm version minor && npm run build && cd dist && npm publish --access=public && git push",
     "deploy:major": "npm i && git commit -am 'update package-lock.json' && npm version major && npm run build && cd dist && npm publish --access=public && git push",
     "deploy:patch": "npm i && git commit -am 'update package-lock.json' && npm version patch && npm run build && cd dist && npm publish --access=public && git push",
-    "test": "npx jest",
+    "test": "export TS_JEST_DISABLE_VER_CHECKER=true && npx jest",
     "main": "ts-node src/main.ts"
   },
   "repository": {
@@ -29,13 +29,16 @@
     "url": "https://github.com/brunotot/typescript-decorator-validation/issues"
   },
   "homepage": "https://github.com/brunotot/typescript-decorator-validation#readme",
-  "dependencies": {},
+  "pre-commit": [
+    "test"
+  ],
   "devDependencies": {
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.1",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "jest": "^29.5.0",
+    "pre-commit": "^1.2.2",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.0-beta"

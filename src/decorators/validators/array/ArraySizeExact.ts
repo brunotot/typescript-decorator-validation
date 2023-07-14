@@ -11,7 +11,7 @@ type ArraySizeExactType = {
   value: number;
 };
 
-export default function ArraySizeExact<K, T extends Nullable<K[]>>(
+export default function ArraySizeExact<K, T extends K[]>(
   props: BasicValidatorProviderType<number, ArraySizeExactType>
 ) {
   const exact = typeof props === "number" ? props : props.value;

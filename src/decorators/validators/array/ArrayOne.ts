@@ -10,7 +10,7 @@ export type ArrayOneType<T> = {
   test: PredicateType<T>;
 };
 
-export default function ArrayOne<K, T extends Nullable<K[]>>(
+export default function ArrayOne<K, T extends K[]>(
   props: BasicValidatorProviderTypeMandatoryMessage<ArrayOneType<K>>
 ) {
   return ValidatorService.validatorDecoratorFactory<T>({

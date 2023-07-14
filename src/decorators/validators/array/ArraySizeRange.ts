@@ -12,7 +12,7 @@ type ArraySizeRangeType = {
   max: number;
 };
 
-export default function ArraySizeRange<K, T extends Nullable<K[]>>(
+export default function ArraySizeRange<K, T extends K[]>(
   props: BasicValidatorProviderType<ArraySizeRangeType, ArraySizeRangeType>
 ) {
   const min = typeof props === "number" ? props : props.min;

@@ -2,9 +2,7 @@ import { Nullable } from "../../service/ValidatorService";
 
 export type MetadataType = Record<PropertyKey, unknown>;
 
-export type AcceptableDecoratorFieldType<T = unknown> = Nullable<
-  T | ((...args: any[]) => T)
->;
+export type AcceptableDecoratorFieldType<T = unknown> = Nullable<T | (() => T)>;
 
 export type ContextKind = "field" | "method" | "getter";
 
