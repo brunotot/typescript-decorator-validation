@@ -11,7 +11,7 @@
     "deploy:minor": "npm i && git commit -am 'update package-lock.json' && npm version minor && npm run build && cd dist && npm publish --access=public && git push",
     "deploy:major": "npm i && git commit -am 'update package-lock.json' && npm version major && npm run build && cd dist && npm publish --access=public && git push",
     "deploy:patch": "npm i && git commit -am 'update package-lock.json' && npm version patch && npm run build && cd dist && npm publish --access=public && git push",
-    "test": "npx jest",
+    "test": "export TS_JEST_DISABLE_VER_CHECKER=true && npx jest",
     "main": "ts-node src/main.ts"
   },
   "repository": {
