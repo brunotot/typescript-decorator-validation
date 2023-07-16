@@ -6,8 +6,8 @@ import { ValidationClass } from "./src/model/type/ValidationClass.type";
 import ValidationHandler, {
   ValidationFn,
   SimpleErrorData,
-} from "./src/handler/ValidationHandler";
-import { ValidationGroup } from "./src/model/enum/ValidationGroup";
+} from "./src/processor/EntityProcessor";
+import { ValidationGroup } from "./src/model/const/ValidationGroup";
 import { Locale, getLocale, setLocale } from "./src/messages/model/Locale";
 import Rule from "./validators/impl/any/Rule";
 import ValidatorFactory from "./validators/common/ValidatorFactory";

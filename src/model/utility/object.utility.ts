@@ -1,4 +1,4 @@
-import { ValidationGroupType } from "../../handler/ValidationHandler";
+import { ValidationGroupType } from "../../processor/EntityProcessor";
 import { ConstructorType } from "../type/Class.type";
 import { BasicValidatorProviderType, Nullable } from "./type.utility";
 

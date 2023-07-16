@@ -1,7 +1,7 @@
 import {
   ValidationFnMetadata,
   ValidationGroupType,
-} from "../../handler/ValidationHandler";
+} from "../../processor/EntityProcessor";
 import PropertyMetadata from "./PropertyMetadata";
 import { Class } from "../type/Class.type";
 import { ValidationClass } from "../type/ValidationClass.type";

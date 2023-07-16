@@ -1,8 +1,8 @@
+import { AcceptableDecoratorFieldType } from "../../../src/model/type/Context.type";
 import {
   Decorator,
   buildDecorator,
-} from "../../../src/service/DecoratorService";
-import { AcceptableDecoratorFieldType } from "../../../src/model/type/Context.type";
+} from "../../../src/model/utility/decorator.utility";
 
 type ExtractArrayType<T> = T extends (infer U)[] ? U : never;
 

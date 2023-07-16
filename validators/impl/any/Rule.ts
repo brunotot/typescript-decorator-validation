@@ -1,4 +1,4 @@
-import { ValidationFn } from "../../../src/handler/ValidationHandler";
+import { ValidationFn } from "../../../src/processor/EntityProcessor";
 import { ValidationGroupParamType } from "../../../src/model/utility/type.utility";
 import ValidatorFactory from "../../common/ValidatorFactory";
 

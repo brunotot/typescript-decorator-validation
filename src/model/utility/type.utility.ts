@@ -1,7 +1,7 @@
 import {
   ValidationFn,
   ValidationGroupType,
-} from "../../handler/ValidationHandler";
+} from "../../processor/EntityProcessor";
 import ErrorMessage from "../../messages/impl/ErrorMessage";
 import { WritableKeyOf } from "../type/WritableKeyOf";
 import { Condition } from "../type/namespace/Condition.ns";

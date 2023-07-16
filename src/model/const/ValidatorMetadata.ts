@@ -1,4 +1,4 @@
-import { ValidationFnMetadata } from "../../handler/ValidationHandler";
+import { ValidationFnMetadata } from "../../processor/EntityProcessor";
 import { PropertyTypeGroup } from "./PropertyMetadata";
 import { ConstructorCreatorType } from "../../processor/ValidationProcessor";
 

@@ -1,3 +1,6 @@
+import MetadataProcessor from "../../processor/MetadataProcessor";
+import { Context } from "../type/Context.type";
+
 function logTime(
   classNameOrInstance: any,
   methodName: string,
@@ -35,4 +38,22 @@ export function time<This, Args extends any[], Return>(
 
 function testsRunning() {
   return globalThis?.process.env.JEST_WORKER_ID !== undefined;
+}
+
+export type Decorator<T = unknown> = (target: any, context: Context<T>) => void;
+
+export type DecoratorSupplier<T = unknown> = (
+  name: string,
+  processor: MetadataProcessor,
+  context: Context<T>
+) => void;
+
+export function buildDecorator<T>(
+  decoration: DecoratorSupplier<T>
+): Decorator<T> {
+  return function (_, context) {
+    const name = context.name;
+    const metadataProcessor = MetadataProcessor.fromContext(context);
+    decoration(name, metadataProcessor, context);
+  };
 }

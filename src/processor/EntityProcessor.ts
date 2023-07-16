@@ -11,7 +11,7 @@ import {
   isValidationGroupUnion,
 } from "../model/utility/object.utility";
 import { time } from "../model/utility/decorator.utility";
-import MetadataProcessor from "../processor/MetadataProcessor";
+import MetadataProcessor from "./MetadataProcessor";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 

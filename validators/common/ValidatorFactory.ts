@@ -1,13 +1,16 @@
 import {
   ValidationFn,
   ValidationGroupType,
-} from "../../src/handler/ValidationHandler";
+} from "../../src/processor/EntityProcessor";
+import {
+  Decorator,
+  buildDecorator,
+} from "../../src/model/utility/decorator.utility";
 import {
   ValidationGroupParamType,
   ValidatorBuilder,
 } from "../../src/model/utility/type.utility";
 import MetadataProcessor from "../../src/processor/MetadataProcessor";
-import { Decorator, buildDecorator } from "../../src/service/DecoratorService";
 
 class ValidatorFactory {
   make<T>(builder: ValidatorBuilder<T>): Decorator<T> {
