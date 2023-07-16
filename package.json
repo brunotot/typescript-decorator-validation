@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run test && npm run clean && tsc && cp package.json README.md ./dist",
+    "build": "npm run test && npm run clean && tsc && cp package.json README.md ./dist && rm ./dist/src/main.js && rm ./dist/types/src/main.d.ts",
     "deploy:minor": "npm i && git commit -am 'update package-lock.json' && npm version minor && npm run build && cd dist && npm publish --access=public && git push",
     "deploy:major": "npm i && git commit -am 'update package-lock.json' && npm version major && npm run build && cd dist && npm publish --access=public && git push",
     "deploy:patch": "npm i && git commit -am 'update package-lock.json' && npm version patch && npm run build && cd dist && npm publish --access=public && git push",
