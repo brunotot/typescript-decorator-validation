@@ -5,11 +5,11 @@ import {
 import PropertyMetadata from "./PropertyMetadata";
 import { Class } from "../type/Class.type";
 import { ValidationClass } from "../type/ValidationClass.type";
-import { isValidationGroupUnion } from "../utility/object.utility";
-import { KeyOf } from "../utility/type.utility";
-import MetadataService, {
+import {
   getClassFieldNames,
-} from "../../service/MetadataService";
+  isValidationGroupUnion,
+} from "../utility/object.utility";
+import { KeyOf } from "../utility/type.utility";
 import MetadataProcessor from "../../processor/MetadataProcessor";
 
 export default class ClassMetadata<T> {

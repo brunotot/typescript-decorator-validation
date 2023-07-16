@@ -1,6 +1,6 @@
 import { ValidationGroupType } from "../../handler/ValidationHandler";
-import { Nullable } from "../../service/ValidatorService";
-import { BasicValidatorProviderType } from "./type.utility";
+import { ConstructorType } from "../type/Class.type";
+import { BasicValidatorProviderType, Nullable } from "./type.utility";
 
 export type EqualsType<T> = (obj1: T, obj2: T) => boolean;
 
@@ -181,4 +181,24 @@ export function isArrayUnique<T>(arr: T[], equals: EqualsType<T>): boolean {
     set.add(val);
   }
   return true;
+}
+
+export function sprintf(str: string, ...args: any[]) {
+  return str.replace(/{(\d+)}/g, function (match, number) {
+    return typeof args[number] != "undefined" ? args[number] : match;
+  });
+}
+
+export function getClassFieldNames(constructor: ConstructorType): string[] {
+  const instance = new constructor();
+  return [
+    ...getPropertyNames(instance),
+    ...getPropertyNames(instance.__proto__),
+  ];
+}
+
+function getPropertyNames(object: any): string[] {
+  return Object.getOwnPropertyNames(object).filter(
+    (property) => property !== "constructor"
+  );
 }

@@ -1,3 +1,18 @@
+function logTime(
+  classNameOrInstance: any,
+  methodName: string,
+  start: number,
+  end: number
+) {
+  console.log(
+    `\u001b[34;1m[\u001b[32m⏰${new Date().toISOString()}\u001b[34;1m] \u001b[0m${
+      typeof classNameOrInstance === "string"
+        ? classNameOrInstance
+        : classNameOrInstance.constructor.name
+    }::${methodName} \u001b[32;1m${(end - start).toFixed(2)}ms\u001b[0m`
+  );
+}
+
 export function time<This, Args extends any[], Return>(
   target: (this: This, ...args: Args) => Return,
   context: ClassMethodDecoratorContext<
@@ -12,16 +27,12 @@ export function time<This, Args extends any[], Return>(
     const start = performance.now();
     const result = target.call(this, ...args);
     const end = performance.now();
-    console.log(
-      `\u001b[34;1m[\u001b[32m⏰${new Date().toISOString()}\u001b[34;1m] \u001b[0m${
-        (this as any).constructor.name
-      }::${methodName} \u001b[32;1m${(end - start).toFixed(2)}ms\u001b[0m\n`
-    );
+    logTime(this, methodName, start, end);
     return result;
   }
   return replacementMethod;
 }
 
 function testsRunning() {
-  return process.env.JEST_WORKER_ID !== undefined;
+  return globalThis?.process.env.JEST_WORKER_ID !== undefined;
 }

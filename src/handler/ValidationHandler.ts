@@ -6,13 +6,14 @@ import { KeyOf, EvaluatedStrategy } from "../model/utility/type.utility";
 import { DeducedArray } from "../model/type/namespace/Strategy.ns";
 import PropertyMetadata from "../model/const/PropertyMetadata";
 import ClassMetadata from "../model/const/ClassMetadata";
-import MetadataService from "../service/MetadataService";
 import {
   deepEquals,
   isValidationGroupUnion,
 } from "../model/utility/object.utility";
 import { time } from "../model/utility/decorator.utility";
 import MetadataProcessor from "../processor/MetadataProcessor";
+
+(Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
 export type ValidationGroupType = string | number;
 export type SimpleErrorData<T> = EvaluatedStrategy<T, string[]>;

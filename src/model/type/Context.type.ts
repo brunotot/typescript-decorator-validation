@@ -1,4 +1,4 @@
-import { Nullable } from "../../service/ValidatorService";
+import { Nullable } from "../utility/type.utility";
 
 export type MetadataType = Record<PropertyKey, unknown>;
 

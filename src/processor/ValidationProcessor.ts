@@ -1,6 +1,8 @@
 import { ValidationFnMetadata } from "../handler/ValidationHandler";
 import { PropertyTypeGroup } from "../model/const/PropertyMetadata";
-import { ConstructorCreatorType } from "../model/const/Strategy";
+import { Class } from "../model/type/Class.type";
+
+export type ConstructorCreatorType<T> = () => Class<T>;
 
 export default class ValidationProcessor<T = unknown> {
   node: ValidationFnMetadata<T>[] = [];

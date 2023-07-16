@@ -1,5 +1,8 @@
-import { ValidationGroupType } from "../../handler/ValidationHandler";
-import ErrorMessage from "../messages/ErrorMessage";
+import {
+  ValidationFn,
+  ValidationGroupType,
+} from "../../handler/ValidationHandler";
+import ErrorMessage from "../../messages/impl/ErrorMessage";
 import { WritableKeyOf } from "../type/WritableKeyOf";
 import { Condition } from "../type/namespace/Condition.ns";
 import { Strategy } from "../type/namespace/Strategy.ns";
@@ -41,6 +44,15 @@ export type DefaultValidatorProps<T> = {
   value: T;
   message: string;
 };
+
+export type ValidatorBuilder<T> = {
+  isValid: ValidationFn<T>;
+  groups?: ValidationGroupParamType;
+};
+
+export type Nullable<GUARD = undefined> = GUARD extends undefined
+  ? any
+  : GUARD | undefined | null;
 
 export function extractDefaultValidatorProps<T>(
   props: ValueOrObjectValidatorProps<T>,

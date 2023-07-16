@@ -1,6 +1,5 @@
 import { Class } from "../type/Class.type";
 import { KeyOf } from "../utility/type.utility";
-import MetadataService from "../../service/MetadataService";
 import MetadataProcessor from "../../processor/MetadataProcessor";
 
 export type PropertyTypeGroup =
@@ -49,19 +48,13 @@ export default class PropertyMetadata<T> {
     }
     const value = this.#runtimeValue;
 
-    const res = Array.isArray(value)
+    return Array.isArray(value)
       ? vp.constructorCreator
         ? "OBJECT_ARRAY"
         : "PRIMITIVE_ARRAY"
       : vp.constructorCreator
       ? "OBJECT"
       : "PRIMITIVE";
-
-    /* if (typeof res === "object") {
-      throw new Error("Not a primitive: ", res);
-    } */
-
-    return res;
   }
 
   private buildClass(): Class<unknown> | null {

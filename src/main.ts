@@ -1,15 +1,15 @@
-import { Locale, ValidationHandler, setLocale } from "..";
-import Required from "./decorators/validators/any/Required";
-import Truthy from "./decorators/validators/any/Truthy";
-import { valid } from "./decorators/validators/any/valid";
-import Email from "./decorators/validators/string/Email";
-import ExactLength from "./decorators/validators/string/ExactLength";
-import MaxLength from "./decorators/validators/string/MaxLength";
-import MinLength from "./decorators/validators/string/MinLength";
-import Password from "./decorators/validators/string/Password";
+import { ValidationHandler, setLocale } from "..";
+import Required from "../validators/impl/any/Required";
+import Truthy from "../validators/impl/any/Truthy";
+import { valid } from "../validators/impl/any/valid";
+import Email from "../validators/impl/string/Email";
+import ExactLength from "../validators/impl/string/ExactLength";
+import MaxLength from "../validators/impl/string/MaxLength";
+import MinLength from "../validators/impl/string/MinLength";
+import Password from "../validators/impl/string/Password";
 import { TypeGroup } from "./model/type/namespace/TypeGroup.ns";
 
-setLocale(Locale.HR);
+setLocale("hr");
 
 export class SomeClass {
   idk?: string;
@@ -57,6 +57,8 @@ type AddressFormType = TypeGroup.Primitive;
 function main() {
   const handler = new ValidationHandler(UserForm);
   const result = handler.validate();
+
+  result.errors.addressForm.country;
 
   result.errors.passwordsMatch;
 
