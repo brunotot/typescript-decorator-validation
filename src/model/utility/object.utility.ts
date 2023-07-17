@@ -56,7 +56,7 @@ export function hasValue<T>(
   );
 }
 
-export const deepEquals: $.Equals<any> = (val1: any, val2: any) => {
+export function deepEquals(val1: any, val2: any): boolean {
   if (val1 === val2) {
     return true;
   } else if (typeof val1 !== typeof val2) {
@@ -86,7 +86,7 @@ export const deepEquals: $.Equals<any> = (val1: any, val2: any) => {
   } else {
     return false;
   }
-};
+}
 
 export function hash(val: any): number {
   function stringHash(str: string): number {

@@ -4,9 +4,9 @@ import { Class } from "./src/model/type/Class.type";
 import { Errors } from "./src/model/type/Errors.type";
 import { Payload } from "./src/model/type/Payload.type";
 import { Locale, getLocale, setLocale } from "./src/messages/model/Locale";
-import validators from "./src/model/const/Validators";
 import { makeValidator } from "./src/decorators/facade/validator.facade";
 import Rule from "./validators/any/Rule";
+import validators from "./validators";
 import ValidationHandler, {
   ValidationFn,
 } from "./src/processor/EntityProcessor";
