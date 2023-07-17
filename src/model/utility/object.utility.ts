@@ -1,12 +1,7 @@
 import { ValidationGroupType } from "../../processor/EntityProcessor";
 import { ConstructorType } from "../type/Class.type";
+import { $ } from "../type/namespace/Utility.ns";
 import { BasicValidatorProviderType, Nullable } from "./type.utility";
-
-export type EqualsType<T> = (obj1: T, obj2: T) => boolean;
-
-export type HashFunctionType<T> = (obj: T) => number;
-
-export type PredicateType<T> = (value: T, index: number, array: T[]) => boolean;
 
 export function extractMessageFromValidatorProps<T extends object>(
   provider: BasicValidatorProviderType<any, T>,
@@ -61,7 +56,7 @@ export function hasValue<T>(
   );
 }
 
-export const deepEquals: EqualsType<any> = (val1: any, val2: any) => {
+export const deepEquals: $.Equals<any> = (val1: any, val2: any) => {
   if (val1 === val2) {
     return true;
   } else if (typeof val1 !== typeof val2) {
@@ -170,7 +165,7 @@ export function hash(val: any): number {
   }
 }
 
-export function isArrayUnique<T>(arr: T[], equals: EqualsType<T>): boolean {
+export function isArrayUnique<T>(arr: T[], equals: $.Equals<T>): boolean {
   const set = new Set<T>();
   for (const val of arr) {
     for (const el of set) {

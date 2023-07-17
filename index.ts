@@ -1,32 +1,30 @@
-import { validators } from "./src/model/const/Validators";
-import { ValidationResult } from "./src/model/type/ValidationResult.type";
-import { ErrorData } from "./src/model/type/ErrorData.type";
+import { Validation } from "./src/model/type/Validation.type";
+import { DetailedErrors } from "./src/model/type/DetailedErrors.type";
 import { Class } from "./src/model/type/Class.type";
-import { ValidationClass } from "./src/model/type/ValidationClass.type";
+import { Errors } from "./src/model/type/Errors.type";
+import { Payload } from "./src/model/type/Payload.type";
+import { Locale, getLocale, setLocale } from "./src/messages/model/Locale";
+import validators from "./src/model/const/Validators";
+import { makeValidator } from "./src/decorators/facade/validator.facade";
+import Rule from "./validators/any/Rule";
 import ValidationHandler, {
   ValidationFn,
-  SimpleErrorData,
 } from "./src/processor/EntityProcessor";
-import { ValidationGroup } from "./src/model/const/ValidationGroup";
-import { Locale, getLocale, setLocale } from "./src/messages/model/Locale";
-import Rule from "./validators/impl/any/Rule";
-import ValidatorFactory from "./validators/common/ValidatorFactory";
 
 export interface PrimitiveSetAppend {}
 
 export type {
   Class,
-  ValidationResult,
+  Validation,
   ValidationFn,
-  ErrorData,
-  ValidationClass,
-  SimpleErrorData,
+  DetailedErrors,
+  Payload,
+  Errors,
   Locale,
 };
 
 export {
-  ValidationGroup,
-  ValidatorFactory,
+  makeValidator,
   validators,
   Rule,
   ValidationHandler,

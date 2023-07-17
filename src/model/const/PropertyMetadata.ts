@@ -1,6 +1,6 @@
 import { Class } from "../type/Class.type";
-import { KeyOf } from "../utility/type.utility";
 import MetadataProcessor from "../../processor/MetadataProcessor";
+import { $ } from "../type/namespace/Utility.ns";
 
 export type PropertyTypeGroup =
   | "PRIMITIVE_ARRAY"
@@ -10,7 +10,7 @@ export type PropertyTypeGroup =
 
 export default class PropertyMetadata<T> {
   private _owner: Class<T>;
-  private _name: KeyOf<T>;
+  private _name: $.Keys<T>;
   private _clazz: Class<unknown> | null;
   private _type: PropertyTypeGroup;
 
@@ -32,7 +32,7 @@ export default class PropertyMetadata<T> {
 
   #runtimeValue: any;
 
-  constructor(clazz: Class<T>, field: KeyOf<T>, runtimeValue: unknown) {
+  constructor(clazz: Class<T>, field: $.Keys<T>, runtimeValue: unknown) {
     this.#runtimeValue = runtimeValue as T;
     this._owner = clazz;
     this._name = field;

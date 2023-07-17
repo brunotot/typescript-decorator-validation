@@ -1,23 +1,23 @@
-import {
-  ValidationFnMetadata,
-  ValidationGroupType,
-} from "../../processor/EntityProcessor";
-import PropertyMetadata from "./PropertyMetadata";
+import { $ } from "../type/namespace/Utility.ns";
 import { Class } from "../type/Class.type";
-import { ValidationClass } from "../type/ValidationClass.type";
+import { Payload } from "../type/Payload.type";
+import MetadataProcessor from "../../processor/MetadataProcessor";
+import PropertyMetadata from "./PropertyMetadata";
 import {
   getClassFieldNames,
   isValidationGroupUnion,
 } from "../utility/object.utility";
-import { KeyOf } from "../utility/type.utility";
-import MetadataProcessor from "../../processor/MetadataProcessor";
+import {
+  ValidationFnMetadata,
+  ValidationGroupType,
+} from "../../processor/EntityProcessor";
 
 export default class ClassMetadata<T> {
   #runtimeValue: T;
   private _clazz: Class<T>;
-  private _fieldNames: KeyOf<T>[];
+  private _fieldNames: $.Keys<T>[];
   private _validationGroups: ValidationGroupType[];
-  private _validators: ValidationClass<T>;
+  private _validators: Payload<T>;
 
   constructor(
     clazz: Class<T>,
@@ -39,7 +39,7 @@ export default class ClassMetadata<T> {
     return this._validators;
   }
 
-  createInstance(state: ValidationClass<T>): T {
+  createInstance(state: Payload<T>): T {
     const instance: any = new this._clazz();
     const entries = Object.entries(state || {});
 
@@ -73,7 +73,11 @@ export default class ClassMetadata<T> {
     };
 
     for (const [key, value] of entries) {
-      const meta = new PropertyMetadata<T>(this._clazz, key as KeyOf<T>, value);
+      const meta = new PropertyMetadata<T>(
+        this._clazz,
+        key as $.Keys<T>,
+        value
+      );
       switch (meta.type) {
         case "OBJECT": {
           handleObject(meta, key, value);
@@ -92,7 +96,7 @@ export default class ClassMetadata<T> {
     return instance as T;
   }
 
-  private buildValidators<T>(): ValidationClass<T> {
+  private buildValidators<T>(): Payload<T> {
     return this._fieldNames.reduce((obj, property) => {
       const fieldMetadata = new PropertyMetadata(
         this._clazz,
@@ -121,7 +125,7 @@ export default class ClassMetadata<T> {
             }
           : validationMetadataListByActiveGroup,
       };
-    }, {}) as ValidationClass<T>;
+    }, {}) as Payload<T>;
   }
 
   private getValidationMetadata<T>(
@@ -132,7 +136,7 @@ export default class ClassMetadata<T> {
     ).node;
   }
 
-  private buildFieldNames(): KeyOf<T>[] {
-    return getClassFieldNames(this._clazz) as KeyOf<T>[];
+  private buildFieldNames(): $.Keys<T>[] {
+    return getClassFieldNames(this._clazz) as $.Keys<T>[];
   }
 }

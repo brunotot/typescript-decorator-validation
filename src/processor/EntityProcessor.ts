@@ -1,8 +1,7 @@
 import { Class } from "../model/type/Class.type";
-import { ErrorData } from "../model/type/ErrorData.type";
-import { ValidationResult } from "../model/type/ValidationResult.type";
-import { ValidationClass } from "../model/type/ValidationClass.type";
-import { KeyOf, EvaluatedStrategy } from "../model/utility/type.utility";
+import { DetailedErrors } from "../model/type/DetailedErrors.type";
+import { Validation } from "../model/type/Validation.type";
+import { Payload } from "../model/type/Payload.type";
 import { DeducedArray } from "../model/type/namespace/Strategy.ns";
 import PropertyMetadata from "../model/const/PropertyMetadata";
 import ClassMetadata from "../model/const/ClassMetadata";
@@ -10,14 +9,15 @@ import {
   deepEquals,
   isValidationGroupUnion,
 } from "../model/utility/object.utility";
-import { time } from "../model/utility/decorator.utility";
 import MetadataProcessor from "./MetadataProcessor";
+import { $ } from "../model/type/namespace/Utility.ns";
+import { Errors } from "../model/type/Errors.type";
+import stopwatch from "../decorators/impl/stopwatch.decorator";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
 export type ValidationGroupType = string | number;
-export type SimpleErrorData<T> = EvaluatedStrategy<T, string[]>;
-export type ValidationFn<T> = (value: T, context?: any) => ValidationResult;
+export type ValidationFn<T> = (value: T, context?: any) => Validation;
 
 export type ValidationFnMetadata<T> = {
   groups: ValidationGroupType[];
@@ -26,33 +26,33 @@ export type ValidationFnMetadata<T> = {
 
 export type StateValidationResult<T> = {
   valid: boolean;
-  errors: ErrorData<T>;
+  errors: DetailedErrors<T>;
 };
 
 export type ValidationHandlerStateType<T> = {
   valid: boolean;
-  errors: ErrorData<T>;
-  state: ValidationClass<T>;
-  simpleErrors: SimpleErrorData<T>;
+  errors: DetailedErrors<T>;
+  state: Payload<T>;
+  simpleErrors: Errors<T>;
 };
 
 export type StateValidationResultGroup<T> = {
   valid: boolean;
-  detailedErrors: ErrorData<T>;
-  errors: SimpleErrorData<T>;
+  detailedErrors: DetailedErrors<T>;
+  errors: Errors<T>;
 };
 
 export type ValidityErrorsType =
   | StateValidationResult<any>
   | StateValidationResult<any>[]
-  | ValidationResult[]
-  | ValidationResult[][];
+  | Validation[]
+  | Validation[][];
 
 export type ValidationHandlerCache<T> = Partial<{
-  state: ValidationClass<T>;
+  state: Payload<T>;
   hasErrors: boolean;
-  detailedErrors: ErrorData<T>;
-  errors: SimpleErrorData<T>;
+  detailedErrors: DetailedErrors<T>;
+  errors: Errors<T>;
 }>;
 
 export default class ValidationHandler<T> {
@@ -64,11 +64,10 @@ export default class ValidationHandler<T> {
   constructor(clazz: Class<T>, ...groups: ValidationGroupType[]) {
     this._clazz = clazz;
     this._groups = Array.from(new Set(groups));
-    //this._metadata = new ClassMetadata(clazz, ...groups);
     this._cache = {};
   }
 
-  hasErrors(state: ValidationClass<T>): boolean {
+  hasErrors(state: Payload<T>): boolean {
     return this.tryGetCache(
       state,
       !!this._cache.hasErrors,
@@ -76,7 +75,7 @@ export default class ValidationHandler<T> {
     );
   }
 
-  getDetailedErrors(state: ValidationClass<T>): ErrorData<T> {
+  getDetailedErrors(state: Payload<T>): DetailedErrors<T> {
     return this.tryGetCache(
       state,
       this._cache.detailedErrors!,
@@ -84,7 +83,7 @@ export default class ValidationHandler<T> {
     );
   }
 
-  getErrors(state: ValidationClass<T>): SimpleErrorData<T> {
+  getErrors(state: Payload<T>): Errors<T> {
     return this.tryGetCache(
       state,
       this._cache.errors!,
@@ -92,12 +91,12 @@ export default class ValidationHandler<T> {
     );
   }
 
-  @time
-  validate(state0?: ValidationClass<T>): StateValidationResultGroup<T> {
+  @stopwatch
+  validate(state0?: Payload<T>): StateValidationResultGroup<T> {
     let valid: boolean = true;
-    let errors: ErrorData<T> = {} as ErrorData<T>;
-    const state: ValidationClass<T> = state0 ?? ({} as ValidationClass<T>);
-    let simpleErrors: SimpleErrorData<T> = {} as SimpleErrorData<T>;
+    let errors: DetailedErrors<T> = {} as DetailedErrors<T>;
+    const state: Payload<T> = state0 ?? ({} as Payload<T>);
+    let simpleErrors: Errors<T> = {} as Errors<T>;
 
     if (!this._metadata) {
       this._metadata = new ClassMetadata(
@@ -111,10 +110,10 @@ export default class ValidationHandler<T> {
     const entries = Object.entries(this._metadata.validators);
 
     // prettier-ignore
-    type ErrorDataApplierType<K = undefined> = (key: keyof ErrorData<T>, meta: PropertyMetadata<T>, validators: K) => void;
+    type ErrorDataApplierType<K = undefined> = (key: keyof DetailedErrors<T>, meta: PropertyMetadata<T>, validators: K) => void;
 
     // prettier-ignore
-    const collectErrorData = (key: KeyOf<ErrorData<T>>, parentData: any, newSimpleErrorsValue: any, childData?: any) => {
+    const collectErrorData = (key: $.Keys<DetailedErrors<T>>, parentData: any, newSimpleErrorsValue: any, childData?: any) => {
       if (Array.isArray(childData)) {
         valid = this.recalculateValidity(parentData, valid);
         valid = this.recalculateValidity(childData, valid);
@@ -227,7 +226,7 @@ export default class ValidationHandler<T> {
 
     for (const [_key, _validators] of entries) {
       const validators = _validators as any;
-      const key = _key as keyof ErrorData<T>;
+      const key = _key as keyof DetailedErrors<T>;
       const meta = new PropertyMetadata<T>(
         this._clazz,
         key,
@@ -286,9 +285,9 @@ export default class ValidationHandler<T> {
   }
 
   private mutateValueOrUseCache<K extends object>(
-    key: KeyOf<K>,
+    key: $.Keys<K>,
     mutationParent: K,
-    mutationValue: K[KeyOf<K>],
+    mutationValue: K[$.Keys<K>],
     cacheParent: K | undefined
   ) {
     const cacheValue = cacheParent?.[key];
@@ -297,10 +296,10 @@ export default class ValidationHandler<T> {
   }
 
   private mutateErrors<T>(
-    key: KeyOf<ErrorData<T>>,
-    errorsHolder: ErrorData<T>,
+    key: $.Keys<DetailedErrors<T>>,
+    errorsHolder: DetailedErrors<T>,
     errorsValue: any,
-    simpleErrorsHolder: SimpleErrorData<any>,
+    simpleErrorsHolder: Errors<any>,
     simpleErrorsValue: any
   ) {
     this.mutateValueOrUseCache(
@@ -318,7 +317,7 @@ export default class ValidationHandler<T> {
   }
 
   private tryGetCache<K>(
-    state: ValidationClass<T>,
+    state: Payload<T>,
     cacheValue: K,
     valueGetter: () => K
   ): K {
@@ -338,7 +337,7 @@ export default class ValidationHandler<T> {
         : !errs.length 
           ? current
           : Array.isArray(errs[0])
-            ? errs.some((s) => !!(s as ValidationResult[]).length)
+            ? errs.some((s) => !!(s as Validation[]).length)
               ? false
               : current
             : "errors" in errs[0]

@@ -1,15 +1,11 @@
+import ErrorMessage from "../../messages/impl/ErrorMessage";
+import { Condition } from "../type/namespace/Condition.ns";
+import { Strategy } from "../type/namespace/Strategy.ns";
+import { $ } from "../type/namespace/Utility.ns";
 import {
   ValidationFn,
   ValidationGroupType,
 } from "../../processor/EntityProcessor";
-import ErrorMessage from "../../messages/impl/ErrorMessage";
-import { WritableKeyOf } from "../type/WritableKeyOf";
-import { Condition } from "../type/namespace/Condition.ns";
-import { Strategy } from "../type/namespace/Strategy.ns";
-import { TypeGroup } from "../type/namespace/TypeGroup.ns";
-import { $ } from "../type/namespace/Utility.ns";
-
-export type KeyOf<T> = keyof T;
 
 export type BasicValidatorProviderTypeMandatoryMessage<T extends object = {}> =
   ValidatorDecoratorCommonPropsMandatoryMessage<T>;
@@ -56,7 +52,7 @@ export type Nullable<GUARD = undefined> = GUARD extends undefined
 
 export function extractDefaultValidatorProps<T>(
   props: ValueOrObjectValidatorProps<T>,
-  errorMessageKey: KeyOf<typeof ErrorMessage>
+  errorMessageKey: $.Keys<typeof ErrorMessage>
 ): DefaultValidatorProps<T> {
   const errorMessageFn = ErrorMessage[errorMessageKey] as any;
   const isComplexObject =
@@ -72,7 +68,7 @@ export function extractDefaultValidatorProps<T>(
 }
 
 // prettier-ignore
-export type FieldStrategy<TActual, TKey extends KeyOf<TActual>, TStrat> =
+export type FieldStrategy<TActual, TKey extends $.Keys<TActual>, TStrat> =
 
   true extends Condition.isPrimitive<TActual[TKey]>
     ?Strategy.Primitive<TActual[TKey], TStrat>
@@ -89,11 +85,11 @@ export type FieldStrategy<TActual, TKey extends KeyOf<TActual>, TStrat> =
 :never;
 
 export type StrategyOptional<TActual> = {
-  [TKey in WritableKeyOf<TActual>]?: FieldStrategy<TActual, TKey, $._>;
+  [TKey in $.WritableKeys<TActual>]?: FieldStrategy<TActual, TKey, $._>;
 };
 
 export type StrategyMandatory<TActual, TStrat> = {
-  [TKey in KeyOf<TActual>]-?: FieldStrategy<TActual, TKey, TStrat>;
+  [TKey in $.Keys<TActual>]-?: FieldStrategy<TActual, TKey, TStrat>;
 };
 
 // prettier-ignore

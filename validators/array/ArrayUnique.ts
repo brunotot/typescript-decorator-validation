@@ -1,0 +1,47 @@
+import { makeValidator } from "../../src/decorators/facade/validator.facade";
+import ErrorMessage from "../../src/messages/impl/ErrorMessage";
+
+import {
+  extractGroupsFromValidatorProps,
+  extractMessageFromValidatorProps,
+  hash,
+  isArrayUnique,
+} from "../../src/model/utility/object.utility";
+import {
+  BasicValidatorProviderType,
+  BasicValidatorProviderTypeMandatoryMessage,
+} from "../../src/model/utility/type.utility";
+import { $ } from "../../src/model/type/namespace/Utility.ns";
+
+export type ArrayUniqueType<T> = {
+  hash?: $.HashGenerator<T>;
+};
+
+const DEFAULTS: BasicValidatorProviderTypeMandatoryMessage<
+  ArrayUniqueType<any>
+> = {
+  hash,
+  groups: [],
+  message: ErrorMessage.ArrayUnique(),
+};
+
+export default function ArrayUnique<K, T extends K[]>(
+  props: BasicValidatorProviderType<string, ArrayUniqueType<K>> = DEFAULTS
+) {
+  const hashFn = typeof props === "string" ? hash : props.hash ?? hash;
+
+  return makeValidator<T>({
+    groups: extractGroupsFromValidatorProps(props),
+    isValid: (array) => ({
+      key: "ArrayUnique",
+      message: extractMessageFromValidatorProps(
+        props,
+        ErrorMessage.ArrayUnique()
+      ),
+      valid: isArrayUnique(
+        array ?? [],
+        (obj1, obj2) => hashFn(obj1) === hashFn(obj2)
+      ),
+    }),
+  });
+}

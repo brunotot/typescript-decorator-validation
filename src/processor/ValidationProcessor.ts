@@ -1,15 +1,13 @@
 import { ValidationFnMetadata } from "./EntityProcessor";
 import { PropertyTypeGroup } from "../model/const/PropertyMetadata";
-import { Class } from "../model/type/Class.type";
-
-export type ConstructorCreatorType<T> = () => Class<T>;
+import { ClassCreator } from "../model/type/Class.type";
 
 export default class ValidationProcessor<T = unknown> {
   node: ValidationFnMetadata<T>[] = [];
   children: ValidationFnMetadata<T>[] = [];
   #isInitialTypeGroup: boolean = true;
   #typeGroup: PropertyTypeGroup = "PRIMITIVE";
-  constructorCreator?: ConstructorCreatorType<T>;
+  constructorCreator?: ClassCreator<T>;
 
   get isInitialTypeGroup() {
     return this.#isInitialTypeGroup;

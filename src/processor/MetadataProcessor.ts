@@ -1,5 +1,8 @@
+import {
+  DecoratorContext,
+  DecoratorContextMetadata,
+} from "../decorators/types/DecoratorContext.type";
 import { Class } from "../model/type/Class.type";
-import { Context, MetadataType } from "../model/type/Context.type";
 import ValidationProcessor from "./ValidationProcessor";
 
 const META_KEY = "tdv:metadata-processor";
@@ -36,7 +39,7 @@ export default class MetadataProcessor {
     console.log(this.#data);
   }
 
-  static fromContext(context: Context<unknown>): MetadataProcessor {
+  static fromContext(context: DecoratorContext<unknown>): MetadataProcessor {
     return MetadataProcessor.#buildProcessor(context.metadata);
   }
 
@@ -45,7 +48,7 @@ export default class MetadataProcessor {
     return MetadataProcessor.#buildProcessor(clazz[Symbol.metadata]);
   }
 
-  static #buildProcessor(meta: MetadataType): MetadataProcessor {
+  static #buildProcessor(meta: DecoratorContextMetadata): MetadataProcessor {
     if (META_KEY in meta && meta[META_KEY] instanceof MetadataProcessor) {
       return meta[META_KEY];
     }

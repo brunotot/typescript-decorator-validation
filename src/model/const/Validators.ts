@@ -1,44 +1,44 @@
-import Rule from "../../../validators/impl/any/Required";
-import Digits from "../../../validators/impl/number/Digits";
-import ValueMax from "../../../validators/impl/number/ValueMax";
-import ValueRange from "../../../validators/impl/number/ValueRange";
-import Email from "../../../validators/impl/string/Email";
-import Password from "../../../validators/impl/string/Password";
-import Pattern from "../../../validators/impl/string/Pattern";
-import URL from "../../../validators/impl/string/URL";
-import Truthy from "../../../validators/impl/any/Truthy";
-import Falsy from "../../../validators/impl/any/Falsy";
-import Decimal from "../../../validators/impl/number/Decimal";
-import Integer from "../../../validators/impl/number/Integer";
-import Negative from "../../../validators/impl/number/Negative";
-import NonNegative from "../../../validators/impl/number/NonNegative";
-import NonPositive from "../../../validators/impl/number/NonPositive";
-import Positive from "../../../validators/impl/number/Positive";
-import Alpha from "../../../validators/impl/string/Alpha";
-import CreditCardNumber from "../../../validators/impl/string/CreditCardNumber";
-import IPAddress from "../../../validators/impl/string/IPAddress";
-import Numeric from "../../../validators/impl/string/Numeric";
-import Required from "../../../validators/impl/any/Required";
-import ArrayContains from "../../../validators/impl/array/ArrayContains";
-import ArrayEmpty from "../../../validators/impl/array/ArrayEmpty";
-import ArrayEvery from "../../../validators/impl/array/ArrayEvery";
-import ArrayUnique from "../../../validators/impl/array/ArrayUnique";
-import ArraySizeExact from "../../../validators/impl/array/ArraySizeExact";
-import foreach from "../../../validators/impl/array/foreach";
-import ArraySizeMax from "../../../validators/impl/array/ArraySizeMax";
-import ArraySizeMin from "../../../validators/impl/array/ArraySizeMin";
-import ArraySizeRange from "../../../validators/impl/array/ArraySizeRange";
-import ArrayNone from "../../../validators/impl/array/ArrayNone";
-import ArrayOne from "../../../validators/impl/array/ArrayOne";
-import ArraySome from "../../../validators/impl/array/ArraySome";
-import ValueMin from "../../../validators/impl/number/ValueMin";
-import ExactLength from "../../../validators/impl/string/ExactLength";
-import Length from "../../../validators/impl/string/Length";
-import MaxLength from "../../../validators/impl/string/MaxLength";
-import MinLength from "../../../validators/impl/string/MinLength";
-import FutureDate from "../../../validators/impl/date/FutureDate";
-import PastDate from "../../../validators/impl/date/PastDate";
-import TodayDate from "../../../validators/impl/date/TodayDate";
+import Digits from "../../../validators/number/Digits";
+import ValueMax from "../../../validators/number/ValueMax";
+import ValueRange from "../../../validators/number/ValueRange";
+import Email from "../../../validators/string/Email";
+import Password from "../../../validators/string/Password";
+import Pattern from "../../../validators/string/Pattern";
+import URL from "../../../validators/string/URL";
+import Truthy from "../../../validators/any/Truthy";
+import Falsy from "../../../validators/any/Falsy";
+import Decimal from "../../../validators/number/Decimal";
+import Integer from "../../../validators/number/Integer";
+import Negative from "../../../validators/number/Negative";
+import NonNegative from "../../../validators/number/NonNegative";
+import NonPositive from "../../../validators/number/NonPositive";
+import Positive from "../../../validators/number/Positive";
+import Alpha from "../../../validators/string/Alpha";
+import CreditCardNumber from "../../../validators/string/CreditCardNumber";
+import IPAddress from "../../../validators/string/IPAddress";
+import Numeric from "../../../validators/string/Numeric";
+import Required from "../../../validators/any/Required";
+import ArrayContains from "../../../validators/array/ArrayContains";
+import ArrayEmpty from "../../../validators/array/ArrayEmpty";
+import ArrayEvery from "../../../validators/array/ArrayEvery";
+import ArrayUnique from "../../../validators/array/ArrayUnique";
+import ArraySizeExact from "../../../validators/array/ArraySizeExact";
+import foreach from "../../../validators/array/foreach";
+import ArraySizeMax from "../../../validators/array/ArraySizeMax";
+import ArraySizeMin from "../../../validators/array/ArraySizeMin";
+import ArraySizeRange from "../../../validators/array/ArraySizeRange";
+import ArrayNone from "../../../validators/array/ArrayNone";
+import ArrayOne from "../../../validators/array/ArrayOne";
+import ArraySome from "../../../validators/array/ArraySome";
+import ValueMin from "../../../validators/number/ValueMin";
+import ExactLength from "../../../validators/string/ExactLength";
+import Length from "../../../validators/string/Length";
+import MaxLength from "../../../validators/string/MaxLength";
+import MinLength from "../../../validators/string/MinLength";
+import FutureDate from "../../../validators/date/FutureDate";
+import PastDate from "../../../validators/date/PastDate";
+import TodayDate from "../../../validators/date/TodayDate";
+import Rule from "../../../validators/any/Rule";
 
 const any = {
   Truthy,
@@ -104,18 +104,14 @@ const string = {
   MinLength,
 };
 
-const custom = {
-  Rule,
-};
-
 const validators = {
   any,
   array,
   boolean,
   number,
   string,
-  custom,
   date,
+  Rule,
 };
 
-export { validators };
+export default validators;

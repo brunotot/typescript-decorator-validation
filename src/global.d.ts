@@ -15,7 +15,7 @@ declare global {
     metadata: unique symbol;
   }
   interface ClassFieldDecoratorContext<This = unknown, Value = unknown> {
-    readonly metadata: MetadataType;
+    readonly metadata: DecoratorContextMetadata;
   }
   interface ClassMethodDecoratorContext<
     This = unknown,
@@ -24,9 +24,9 @@ declare global {
       ...args: any
     ) => any
   > {
-    readonly metadata: MetadataType;
+    readonly metadata: DecoratorContextMetadata;
   }
   interface ClassGetterDecoratorContext<This = unknown, Value = unknown> {
-    readonly metadata: MetadataType;
+    readonly metadata: DecoratorContextMetadata;
   }
 }

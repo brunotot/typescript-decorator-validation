@@ -1,13 +1,14 @@
-import { ValidationHandler, setLocale } from "..";
-import Required from "../validators/impl/any/Required";
-import Truthy from "../validators/impl/any/Truthy";
-import { valid } from "../validators/impl/any/valid";
-import Email from "../validators/impl/string/Email";
-import ExactLength from "../validators/impl/string/ExactLength";
-import MaxLength from "../validators/impl/string/MaxLength";
-import MinLength from "../validators/impl/string/MinLength";
-import Password from "../validators/impl/string/Password";
+import { Rule, ValidationHandler, setLocale } from "..";
+import Required from "../validators/any/Required";
+import Truthy from "../validators/any/Truthy";
+import { valid } from "../validators/any/valid";
+import Email from "../validators/string/Email";
+import ExactLength from "../validators/string/ExactLength";
+import MaxLength from "../validators/string/MaxLength";
+import MinLength from "../validators/string/MinLength";
+import Password from "../validators/string/Password";
 import { TypeGroup } from "./model/type/namespace/TypeGroup.ns";
+import { Nullable } from "./model/utility/type.utility";
 
 setLocale("hr");
 
@@ -15,9 +16,21 @@ export class SomeClass {
   idk?: string;
 }
 
+function CustomRule<T extends Nullable<string>>(charCount: number = 5) {
+  return Rule<T>({
+    groups: [],
+    isValid: (v: T) => ({
+      key: "CustomRule",
+      message: `Text must have exactly ${charCount} characters`,
+      valid: v?.length === charCount,
+    }),
+  });
+}
+
 export class AddressForm {
   @ExactLength(2)
   @Required()
+  @CustomRule()
   country?: string;
 }
 
@@ -57,11 +70,6 @@ type AddressFormType = TypeGroup.Primitive;
 function main() {
   const handler = new ValidationHandler(UserForm);
   const result = handler.validate();
-
-  result.errors.addressForm.country;
-
-  result.errors.passwordsMatch;
-
   console.log(JSON.stringify(result.errors, null, 2));
 }
 
