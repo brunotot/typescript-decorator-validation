@@ -1,4 +1,4 @@
-import { $ } from "../../model/type/namespace/Utility.ns";
+import { $ } from "../../types/namespace/Utility.ns";
 
 const FontColor = {
   r: "\u001b[31m",

@@ -1,22 +1,17 @@
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import {
-  extractGroupsFromValidatorProps,
-  extractMessageFromValidatorProps,
-} from "../../src/model/utility/object.utility";
-import {
-  BasicValidatorProviderType,
-  Nullable,
-} from "../../src/model/utility/type.utility";
+import { $ } from "../../src/types/namespace/Utility.ns";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
 import Pattern from "./Pattern";
+import { extractGroups, extractMessage } from "../../src/utils/object.utils";
 
-export default function Email<T extends Nullable<string>>(
-  props?: BasicValidatorProviderType
+export default function Email<T extends $.Nullable<string>>(
+  props?: DecoratorPartialProps
 ) {
   return Pattern<T>({
     key: "Email",
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     regex:
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-    message: extractMessageFromValidatorProps(props, ErrorMessage.Email()),
+    message: extractMessage(props, ErrorMessage.Email()),
   });
 }

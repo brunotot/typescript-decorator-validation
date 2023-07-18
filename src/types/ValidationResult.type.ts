@@ -1,4 +1,4 @@
-export type Validation = {
+export type ValidationResult = {
   key: string;
   message: string;
   valid: boolean;

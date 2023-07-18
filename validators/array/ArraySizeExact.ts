@@ -1,25 +1,22 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
 
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import { BasicValidatorProviderType } from "../../src/model/utility/type.utility";
-import {
-  extractGroupsFromValidatorProps,
-  extractMessageFromValidatorProps,
-} from "../../src/model/utility/object.utility";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import { extractGroups, extractMessage } from "../../src/utils/object.utils";
 
 type ArraySizeExactType = {
   value: number;
 };
 
 export default function ArraySizeExact<K, T extends K[]>(
-  props: BasicValidatorProviderType<number, ArraySizeExactType>
+  props: DecoratorPartialProps<number, ArraySizeExactType>
 ) {
   const exact = typeof props === "number" ? props : props.value;
   return makeValidator<T>({
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     isValid: (array) => ({
       key: "ArraySizeExact",
-      message: extractMessageFromValidatorProps(
+      message: extractMessage(
         props,
         ErrorMessage.ArraySizeExact(exact, (array ?? []).length)
       ),

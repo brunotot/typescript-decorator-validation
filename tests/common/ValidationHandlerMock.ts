@@ -1,5 +1,5 @@
-import { ValidationHandler } from "../..";
-import "../../src/global.d.ts";
+import EntityProcessor from "../../src/model/processor/EntityProcessor";
+import "./../../polyfill.d.ts";
 
 export interface IMock<T> {
   value: T;
@@ -10,7 +10,7 @@ export function buildIOName(key: string, valid: boolean, type: string) {
 }
 
 export default class ValidationHandlerMock<T> {
-  constructor(private handler: ValidationHandler<IMock<T>>) {}
+  constructor(private handler: EntityProcessor<IMock<T>>) {}
 
   expect(data: T[], valid: boolean) {
     data.forEach((value) => {

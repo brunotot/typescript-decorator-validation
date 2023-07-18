@@ -1,31 +1,22 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
-
-import {
-  BasicValidatorProviderType,
-  Nullable,
-} from "../../src/model/utility/type.utility";
-import {
-  extractGroupsFromValidatorProps,
-  extractMessageFromValidatorProps,
-} from "../../src/model/utility/object.utility";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
+import { $ } from "../../src/types/namespace/Utility.ns";
+import { extractGroups, extractMessage } from "../../src/utils/object.utils";
 
 type ValueMinType = {
   value: number;
 };
 
-export default function ValueMin<T extends Nullable<number>>(
-  props: BasicValidatorProviderType<number, ValueMinType>
+export default function ValueMin<T extends $.Nullable<number>>(
+  props: DecoratorPartialProps<number, ValueMinType>
 ) {
   const min = typeof props === "number" ? props : props.value;
   return makeValidator<T>({
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     isValid: (value) => ({
       key: "ValueMin",
-      message: extractMessageFromValidatorProps(
-        props,
-        ErrorMessage.ValueMin(min, value!)
-      ),
+      message: extractMessage(props, ErrorMessage.ValueMin(min, value!)),
       valid: value == null ? true : value >= min,
     }),
   });

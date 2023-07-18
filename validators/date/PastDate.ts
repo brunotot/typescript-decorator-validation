@@ -1,33 +1,28 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
+import { $ } from "../../src/types/namespace/Utility.ns";
 import {
   evaluateNullableValidity,
-  extractGroupsFromValidatorProps,
-  extractMessageFromValidatorProps,
-} from "../../src/model/utility/object.utility";
-import {
-  BasicValidatorProviderType,
-  Nullable,
-} from "../../src/model/utility/type.utility";
+  extractGroups,
+  extractMessage,
+} from "../../src/utils/object.utils";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
 
-function isPastDate(date: Nullable<Date>): boolean {
+function isPastDate(date: $.Nullable<Date>): boolean {
   return evaluateNullableValidity(date, (d) => {
     const currentDate = new Date();
     return d.getTime() < currentDate.getTime();
   });
 }
 
-export default function PastDate<T extends Nullable<Date>>(
-  props?: BasicValidatorProviderType
+export default function PastDate<T extends $.Nullable<Date>>(
+  props?: DecoratorPartialProps
 ) {
   return makeValidator<T>({
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     isValid: (date) => ({
       key: "PastDate",
-      message: extractMessageFromValidatorProps(
-        props,
-        ErrorMessage.PastDate(date!)
-      ),
+      message: extractMessage(props, ErrorMessage.PastDate(date!)),
       valid: isPastDate(date),
     }),
   });

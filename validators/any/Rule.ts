@@ -1,12 +1,12 @@
-import { ValidationGroupParamType } from "../../src/model/utility/type.utility";
+import { ValidationGroupProp } from "../../src/decorators/types/DecoratorProps.type";
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
-import { ValidationFn } from "../../src/processor/EntityProcessor";
+import { ValidationEvaluator } from "../../src/types/ValidationEvaluator.type";
 
 export type RuleProps<T> =
-  | ValidationFn<T>
+  | ValidationEvaluator<T>
   | {
-      isValid: ValidationFn<T>;
-      groups?: ValidationGroupParamType;
+      isValid: ValidationEvaluator<T>;
+      groups?: ValidationGroupProp;
     };
 
 export default function Rule<T>(props: RuleProps<T>) {

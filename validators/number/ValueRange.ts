@@ -1,32 +1,23 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
-
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import {
-  BasicValidatorProviderType,
-  Nullable,
-} from "../../src/model/utility/type.utility";
-import {
-  extractGroupsFromValidatorProps,
-  extractMessageFromValidatorProps,
-} from "../../src/model/utility/object.utility";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import { $ } from "../../src/types/namespace/Utility.ns";
+import { extractGroups, extractMessage } from "../../src/utils/object.utils";
 
 export type ValueRangeProps = {
   min: number;
   max: number;
 };
 
-export default function ValueRange<T extends Nullable<number>>(
-  props: BasicValidatorProviderType<ValueRangeProps, ValueRangeProps>
+export default function ValueRange<T extends $.Nullable<number>>(
+  props: DecoratorPartialProps<ValueRangeProps, ValueRangeProps>
 ) {
   const { min, max } = props;
   return makeValidator<T>({
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     isValid: (value) => ({
       key: "ValueRange",
-      message: extractMessageFromValidatorProps(
-        props,
-        ErrorMessage.ValueRange(min, max, value!)
-      ),
+      message: extractMessage(props, ErrorMessage.ValueRange(min, max, value!)),
       valid: value == null ? true : value >= min && value <= max,
     }),
   });

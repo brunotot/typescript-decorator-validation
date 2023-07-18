@@ -1,10 +1,7 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
+import { $ } from "../../src/types/namespace/Utility.ns";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-
-import {
-  BasicValidatorProviderType,
-  Nullable,
-} from "../../src/model/utility/type.utility";
 
 const DEFAULT_KEY = "Pattern";
 
@@ -13,8 +10,8 @@ export type PatternType = {
   key?: string;
 };
 
-export default function Pattern<T extends Nullable<string>>(
-  props: BasicValidatorProviderType<RegExp, PatternType>
+export default function Pattern<T extends $.Nullable<string>>(
+  props: DecoratorPartialProps<RegExp, PatternType>
 ) {
   const isPropsRegex = props instanceof RegExp;
   const key = isPropsRegex

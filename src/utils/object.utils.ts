@@ -1,10 +1,12 @@
-import { ValidationGroupType } from "../../processor/EntityProcessor";
-import { ConstructorType } from "../type/Class.type";
-import { $ } from "../type/namespace/Utility.ns";
-import { BasicValidatorProviderType, Nullable } from "./type.utility";
+import { ConstructorType } from "../types/Class.type";
+import { $ } from "../types/namespace/Utility.ns";
+import {
+  DecoratorPartialProps,
+  ValidationGroup,
+} from "../decorators/types/DecoratorProps.type";
 
-export function extractMessageFromValidatorProps<T extends object>(
-  provider: BasicValidatorProviderType<any, T>,
+export function extractMessage<T extends object>(
+  provider: DecoratorPartialProps<any, T>,
   defaultMessage: string
 ) {
   if (!provider) {
@@ -15,8 +17,8 @@ export function extractMessageFromValidatorProps<T extends object>(
   return !!nullableMessage?.length ? nullableMessage : defaultMessage;
 }
 
-export function extractGroupsFromValidatorProps<T extends object>(
-  provider: BasicValidatorProviderType<any, T>
+export function extractGroups<T extends object>(
+  provider: DecoratorPartialProps<any, T>
 ) {
   return typeof provider === "object"
     ? Array.isArray(provider.groups)
@@ -28,8 +30,8 @@ export function extractGroupsFromValidatorProps<T extends object>(
 }
 
 export function isValidationGroupUnion(
-  classGroups: ValidationGroupType[],
-  validatorGroups: ValidationGroupType[]
+  classGroups: ValidationGroup[],
+  validatorGroups: ValidationGroup[]
 ) {
   return classGroups.length
     ? validatorGroups.some((o) => classGroups.includes(o))
@@ -37,7 +39,7 @@ export function isValidationGroupUnion(
 }
 
 export function evaluateNullableValidity<T>(
-  object: Nullable<T>,
+  object: $.Nullable<T>,
   isValid: (value: T) => boolean
 ) {
   return !hasValue(object) ? true : isValid(object);
@@ -137,7 +139,7 @@ export function hash(val: any): number {
   }
 
   function defaultHash(val: any): number {
-    return val
+    return (val ?? "")
       .toString()
       .split("")
       .reduce((hash: number, ch: string) => {

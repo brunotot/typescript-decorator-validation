@@ -1,4 +1,4 @@
-import MetadataProcessor from "../../processor/MetadataProcessor";
+import MetadataProcessor from "../../model/processor/MetadataProcessor";
 import { DecoratorContext } from "./DecoratorContext.type";
 
 export type DecoratorSupplier<T = unknown> = (

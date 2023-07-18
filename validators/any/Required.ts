@@ -1,23 +1,21 @@
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
 import {
-  BasicValidatorProviderType,
-  Nullable,
-} from "../../src/model/utility/type.utility";
-import {
-  extractGroupsFromValidatorProps,
-  extractMessageFromValidatorProps,
+  extractGroups,
+  extractMessage,
   hasValue,
-} from "../../src/model/utility/object.utility";
+} from "../../src/utils/object.utils";
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
+import { $ } from "../../src/types/namespace/Utility.ns";
 
-export default function Required<T extends Nullable>(
-  props?: BasicValidatorProviderType
+export default function Required<T extends $.Nullable>(
+  props?: DecoratorPartialProps
 ) {
   return makeValidator<T>({
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     isValid: (value) => ({
       key: "Required",
-      message: extractMessageFromValidatorProps(props, ErrorMessage.Required()),
+      message: extractMessage(props, ErrorMessage.Required()),
       valid: hasValue(value),
     }),
   });

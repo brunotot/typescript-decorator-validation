@@ -7,8 +7,10 @@ import ExactLength from "../validators/string/ExactLength";
 import MaxLength from "../validators/string/MaxLength";
 import MinLength from "../validators/string/MinLength";
 import Password from "../validators/string/Password";
-import { TypeGroup } from "./model/type/namespace/TypeGroup.ns";
-import { Nullable } from "./model/utility/type.utility";
+import { DecoratorPartialProps } from "./decorators/types/DecoratorProps.type";
+import { TypeGroup } from "./types/namespace/TypeGroup.ns";
+import { $ } from "./types/namespace/Utility.ns";
+import { extractGroups, extractMessage } from "./utils/object.utils";
 
 setLocale("hr");
 
@@ -16,12 +18,16 @@ export class SomeClass {
   idk?: string;
 }
 
-function CustomRule<T extends Nullable<string>>(charCount: number = 5) {
+// prettier-ignore
+function ExactCharCount<T extends $.Nullable<string>>(props: DecoratorPartialProps<number>) {
+  const key = "ExactCharCount";
+  const charCount: number = typeof props === "number" ? props : props.value;
+  const defaultMessage = `Text must have exactly ${charCount} characters`
   return Rule<T>({
-    groups: [],
+    groups: extractGroups(props),
     isValid: (v: T) => ({
-      key: "CustomRule",
-      message: `Text must have exactly ${charCount} characters`,
+      key,
+      message: extractMessage(props, defaultMessage),
       valid: v?.length === charCount,
     }),
   });
@@ -30,8 +36,8 @@ function CustomRule<T extends Nullable<string>>(charCount: number = 5) {
 export class AddressForm {
   @ExactLength(2)
   @Required()
-  @CustomRule()
-  country?: string;
+  @ExactCharCount(10)
+  country!: string;
 }
 
 export class UserForm {

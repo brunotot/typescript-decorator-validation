@@ -1,14 +1,16 @@
-import MetadataProcessor from "../../processor/MetadataProcessor";
+import MetadataProcessor from "../../model/processor/MetadataProcessor";
+import { ValidationEvaluator } from "../../types/ValidationEvaluator.type";
 import { makeDecorator } from "../decorator.factory";
 import { Decorator } from "../types/Decorator.type";
 import {
-  ValidationGroupParamType,
-  ValidatorBuilder,
-} from "../../model/utility/type.utility";
-import {
-  ValidationFn,
-  ValidationGroupType,
-} from "../../processor/EntityProcessor";
+  ValidationGroup,
+  ValidationGroupProp,
+} from "../types/DecoratorProps.type";
+
+export type ValidatorBuilder<T> = {
+  isValid: ValidationEvaluator<T>;
+  groups?: ValidationGroupProp;
+};
 
 export function makeValidator<T>(builder: ValidatorBuilder<T>): Decorator<T> {
   return makeDecorator<T>((key, processor) => {
@@ -16,19 +18,19 @@ export function makeValidator<T>(builder: ValidatorBuilder<T>): Decorator<T> {
   });
 }
 
-function getSanitizedGroups(unsanitizedGroups?: ValidationGroupParamType) {
+function getSanitizedGroups(unsanitizedGroups?: ValidationGroupProp) {
   return Array.isArray(unsanitizedGroups)
     ? unsanitizedGroups
     : unsanitizedGroups !== undefined
     ? [unsanitizedGroups]
-    : ([] as ValidationGroupType[]);
+    : ([] as ValidationGroup[]);
 }
 
 function saveMetadata(
   processor: MetadataProcessor,
   key: string,
-  groups: ValidationGroupParamType,
-  isValid: ValidationFn<any>
+  groups: ValidationGroupProp,
+  isValid: ValidationEvaluator<any>
 ) {
   const validate = processor.getValidationProcessor(key);
   validate.appendNode({

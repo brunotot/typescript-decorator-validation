@@ -3,7 +3,7 @@
     "declaration": true,
     "outDir": "dist",
     "declarationDir": "dist/types",
-    "target": "ES2022",
+    "target": "ES6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,

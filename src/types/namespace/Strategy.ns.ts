@@ -1,4 +1,4 @@
-import { EvaluatedStrategy } from "../../utility/type.utility";
+import { EvaluatedStrategy } from "../EvaluatedStrategy";
 import { Condition } from "./Condition.ns";
 
 export type DeducedArray<TChild, TParent = TChild> = {

@@ -1,31 +1,22 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
-
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import {
-  BasicValidatorProviderType,
-  Nullable,
-} from "../../src/model/utility/type.utility";
-import {
-  extractGroupsFromValidatorProps,
-  extractMessageFromValidatorProps,
-} from "../../src/model/utility/object.utility";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import { extractGroups, extractMessage } from "../../src/utils/object.utils";
+import { $ } from "../../src/types/namespace/Utility.ns";
 
 type ExactLengthType = {
   value: number;
 };
 
-export default function ExactLength<T extends Nullable<string>>(
-  props: BasicValidatorProviderType<number, ExactLengthType>
+export default function ExactLength<T extends $.Nullable<string>>(
+  props: DecoratorPartialProps<number, ExactLengthType>
 ) {
   const exact = typeof props === "number" ? props : props.value;
   return makeValidator<T>({
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     isValid: (value) => ({
       key: "ExactLength",
-      message: extractMessageFromValidatorProps(
-        props,
-        ErrorMessage.ExactLength(exact)
-      ),
+      message: extractMessage(props, ErrorMessage.ExactLength(exact)),
       valid: (value ?? "").length === exact,
     }),
   });

@@ -1,11 +1,8 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
-
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import {
-  BasicValidatorProviderType,
-  Nullable,
-} from "../../src/model/utility/type.utility";
-import { extractGroupsFromValidatorProps } from "../../src/model/utility/object.utility";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import { extractGroups } from "../../src/utils/object.utils";
+import { $ } from "../../src/types/namespace/Utility.ns";
 
 type PasswordProps = {
   uppercase?: boolean;
@@ -54,8 +51,8 @@ function isPasswordChunkInvalid(
   return matchers === null || matchers.length === 0;
 }
 
-export default function Password<T extends Nullable<string>>(
-  cfg: BasicValidatorProviderType<string, PasswordProps> = {
+export default function Password<T extends $.Nullable<string>>(
+  cfg: DecoratorPartialProps<string, PasswordProps> = {
     ...DEFAULT_PROPS,
     message: undefined,
   }
@@ -78,7 +75,7 @@ export default function Password<T extends Nullable<string>>(
   }
 
   return makeValidator<T>({
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     isValid: (string) => {
       const str = string ?? "";
       if (str.length < length) {

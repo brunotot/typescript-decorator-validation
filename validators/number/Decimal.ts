@@ -1,26 +1,18 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
 
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import {
-  BasicValidatorProviderType,
-  Nullable,
-} from "../../src/model/utility/type.utility";
-import {
-  extractGroupsFromValidatorProps,
-  extractMessageFromValidatorProps,
-} from "../../src/model/utility/object.utility";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import { extractGroups, extractMessage } from "../../src/utils/object.utils";
+import { $ } from "../../src/types/namespace/Utility.ns";
 
-export default function Decimal<T extends Nullable<number>>(
-  props?: BasicValidatorProviderType<number>
+export default function Decimal<T extends $.Nullable<number>>(
+  props?: DecoratorPartialProps<number>
 ) {
   return makeValidator<T>({
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     isValid: (value) => ({
       key: "Decimal",
-      message: extractMessageFromValidatorProps(
-        props,
-        ErrorMessage.Decimal(value!)
-      ),
+      message: extractMessage(props, ErrorMessage.Decimal(value!)),
       valid: value !== undefined && value !== null && !Number.isInteger(value),
     }),
   });

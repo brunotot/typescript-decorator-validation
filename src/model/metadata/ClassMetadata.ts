@@ -1,28 +1,26 @@
-import { $ } from "../type/namespace/Utility.ns";
-import { Class } from "../type/Class.type";
-import { Payload } from "../type/Payload.type";
-import MetadataProcessor from "../../processor/MetadataProcessor";
+import { $ } from "../../types/namespace/Utility.ns";
+import { Class } from "../../types/Class.type";
+import { Payload } from "../../types/Payload.type";
+import MetadataProcessor from "../processor/MetadataProcessor";
 import PropertyMetadata from "./PropertyMetadata";
 import {
   getClassFieldNames,
   isValidationGroupUnion,
-} from "../utility/object.utility";
-import {
-  ValidationFnMetadata,
-  ValidationGroupType,
-} from "../../processor/EntityProcessor";
+} from "../../utils/object.utils";
+import { ValidationGroup } from "../../decorators/types/DecoratorProps.type";
+import { ValidationMetadata } from "../../types/ValidationMetadata.type";
 
 export default class ClassMetadata<T> {
   #runtimeValue: T;
   private _clazz: Class<T>;
   private _fieldNames: $.Keys<T>[];
-  private _validationGroups: ValidationGroupType[];
+  private _validationGroups: ValidationGroup[];
   private _validators: Payload<T>;
 
   constructor(
     clazz: Class<T>,
     runtimeValue: T,
-    ...validationGroups: ValidationGroupType[]
+    ...validationGroups: ValidationGroup[]
   ) {
     this.#runtimeValue = runtimeValue;
     this._clazz = clazz;
@@ -105,7 +103,7 @@ export default class ClassMetadata<T> {
       );
       const innerClass = fieldMetadata.clazz;
 
-      const validationFnMetadata: ValidationFnMetadata<T>[] =
+      const validationFnMetadata: ValidationMetadata<T>[] =
         this.getValidationMetadata<T>(property as string);
 
       const validationMetadataListByActiveGroup = validationFnMetadata.filter(
@@ -128,9 +126,7 @@ export default class ClassMetadata<T> {
     }, {}) as Payload<T>;
   }
 
-  private getValidationMetadata<T>(
-    property: string
-  ): ValidationFnMetadata<T>[] {
+  private getValidationMetadata<T>(property: string): ValidationMetadata<T>[] {
     return MetadataProcessor.fromClass(this._clazz).getValidationProcessor(
       property
     ).node;

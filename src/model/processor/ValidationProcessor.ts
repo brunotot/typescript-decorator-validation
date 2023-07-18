@@ -1,10 +1,10 @@
-import { ValidationFnMetadata } from "./EntityProcessor";
-import { PropertyTypeGroup } from "../model/const/PropertyMetadata";
-import { ClassCreator } from "../model/type/Class.type";
+import { PropertyTypeGroup } from "../metadata/PropertyMetadata";
+import { ClassCreator } from "../../types/Class.type";
+import { ValidationMetadata } from "../../types/ValidationMetadata.type";
 
 export default class ValidationProcessor<T = unknown> {
-  node: ValidationFnMetadata<T>[] = [];
-  children: ValidationFnMetadata<T>[] = [];
+  node: ValidationMetadata<T>[] = [];
+  children: ValidationMetadata<T>[] = [];
   #isInitialTypeGroup: boolean = true;
   #typeGroup: PropertyTypeGroup = "PRIMITIVE";
   constructorCreator?: ClassCreator<T>;
@@ -22,11 +22,11 @@ export default class ValidationProcessor<T = unknown> {
     this.#typeGroup = typeGroup;
   }
 
-  appendNode(validator: ValidationFnMetadata<T>) {
+  appendNode(validator: ValidationMetadata<T>) {
     this.node.push(validator);
   }
 
-  appendChild(validator: ValidationFnMetadata<T>) {
+  appendChild(validator: ValidationMetadata<T>) {
     this.children.push(validator);
   }
 }

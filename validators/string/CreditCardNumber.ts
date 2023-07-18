@@ -1,14 +1,8 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
-
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import {
-  BasicValidatorProviderType,
-  Nullable,
-} from "../../src/model/utility/type.utility";
-import {
-  extractGroupsFromValidatorProps,
-  extractMessageFromValidatorProps,
-} from "../../src/model/utility/object.utility";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import { $ } from "../../src/types/namespace/Utility.ns";
+import { extractGroups, extractMessage } from "../../src/utils/object.utils";
 
 function isValidCreditCardNumber(str: string): boolean {
   if (/[^0-9]/.test(str) || str.length < 16) {
@@ -29,17 +23,14 @@ function isValidCreditCardNumber(str: string): boolean {
   return sum % 10 === 0;
 }
 
-export default function CreditCardNumber<T extends Nullable<string>>(
-  props?: BasicValidatorProviderType
+export default function CreditCardNumber<T extends $.Nullable<string>>(
+  props?: DecoratorPartialProps
 ) {
   return makeValidator<T>({
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     isValid: (value) => ({
       key: "CreditCardNumber",
-      message: extractMessageFromValidatorProps(
-        props,
-        ErrorMessage.CreditCardNumber()
-      ),
+      message: extractMessage(props, ErrorMessage.CreditCardNumber()),
       valid: value == null ? true : isValidCreditCardNumber(value),
     }),
   });

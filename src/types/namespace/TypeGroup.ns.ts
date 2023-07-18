@@ -1,4 +1,4 @@
-import { PrimitiveSetAppend } from "../../../..";
+import { PrimitiveSetAppend } from "../../..";
 
 type PrimitiveSet = [string, number, boolean, bigint, Date];
 type PrimitiveOverride<TActual> = TActual extends {

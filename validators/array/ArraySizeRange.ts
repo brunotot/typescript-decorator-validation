@@ -1,11 +1,8 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
 
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import { BasicValidatorProviderType } from "../../src/model/utility/type.utility";
-import {
-  extractGroupsFromValidatorProps,
-  extractMessageFromValidatorProps,
-} from "../../src/model/utility/object.utility";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import { extractGroups, extractMessage } from "../../src/utils/object.utils";
 
 type ArraySizeRangeType = {
   min: number;
@@ -13,15 +10,15 @@ type ArraySizeRangeType = {
 };
 
 export default function ArraySizeRange<K, T extends K[]>(
-  props: BasicValidatorProviderType<ArraySizeRangeType, ArraySizeRangeType>
+  props: DecoratorPartialProps<ArraySizeRangeType, ArraySizeRangeType>
 ) {
   const min = typeof props === "number" ? props : props.min;
   const max = typeof props === "number" ? props : props.max;
   return makeValidator<T>({
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     isValid: (array) => ({
       key: "ArraySizeRange",
-      message: extractMessageFromValidatorProps(
+      message: extractMessage(
         props,
         ErrorMessage.ArraySizeRange(min, max, (array ?? []).length)
       ),

@@ -1,14 +1,9 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
 
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import {
-  BasicValidatorProviderType,
-  Nullable,
-} from "../../src/model/utility/type.utility";
-import {
-  extractGroupsFromValidatorProps,
-  extractMessageFromValidatorProps,
-} from "../../src/model/utility/object.utility";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import { extractGroups, extractMessage } from "../../src/utils/object.utils";
+import { $ } from "../../src/types/namespace/Utility.ns";
 
 export type DigitsType = {
   maxInteger?: number;
@@ -37,15 +32,15 @@ function validateDigits(
   return integerPart.length <= maxInteger && fractionPart.length <= maxFraction;
 }
 
-export default function Digits<T extends Nullable<number>>(
-  props: BasicValidatorProviderType<DigitsType, DigitsType>
+export default function Digits<T extends $.Nullable<number>>(
+  props: DecoratorPartialProps<DigitsType, DigitsType>
 ) {
   const { maxInteger = Infinity, maxFraction = Infinity } = props;
   return makeValidator<T>({
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     isValid: (value) => ({
       key: "Digits",
-      message: extractMessageFromValidatorProps(
+      message: extractMessage(
         props,
         ErrorMessage.Digits(maxInteger, maxFraction)
       ),

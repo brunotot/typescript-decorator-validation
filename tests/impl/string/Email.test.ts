@@ -1,10 +1,10 @@
 import { IMock } from "../../common/ValidationHandlerMock";
 import { standardTest } from "../../common/TestFactory";
-import { Nullable } from "../../../src/model/utility/type.utility";
 import Email from "../../../validators/string/Email";
+import { $ } from "../../../src/types/namespace/Utility.ns";
 
 /*** Data ***/
-type Type = Nullable<string>;
+type Type = $.Nullable<string>;
 const type = "String";
 const identifier = "Email";
 const successData: Type[] = ["mail@mail.com", null, undefined];

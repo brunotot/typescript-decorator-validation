@@ -1,8 +1,9 @@
-import { Class, ValidationHandler } from "../..";
+import { Class } from "../../src/types/Class.type";
 import ValidationHandlerMock, {
   IMock,
   buildIOName,
 } from "./ValidationHandlerMock";
+import EntityProcessor from "../../src/model/processor/EntityProcessor";
 
 export type StandardTestProps<T> = {
   Model: Class<IMock<T>>;
@@ -19,7 +20,7 @@ export function standardTest<T>({
   errorData,
   type,
 }: StandardTestProps<T>) {
-  const handler = new ValidationHandler(Model);
+  const handler = new EntityProcessor(Model);
   const expectService = new ValidationHandlerMock(handler);
 
   describe(buildIOName(identifier, true, type), () => {

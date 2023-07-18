@@ -27,8 +27,14 @@ type _WritableKeys<T> = {
   [P in keyof T]-?: IfEquals<{ [Q in P]: T[P] }, { -readonly [Q in P]: T[P] }, P>
 }[keyof T];
 
+type _Nullable<GUARD = undefined> = GUARD extends undefined
+  ? any
+  : GUARD | undefined | null;
+
 // prettier-ignore
 export namespace $ {
+  export type Nullable<TGuard = undefined> = _Nullable<TGuard>;
+  export type Optional<T extends object> = {[K in keyof T]?: NonNullable<T[K]>};
   export type Equals<T> = (a: T, b: T) => boolean;
   export type Exclude<TFrom, TRemove> = _Exclude<TFrom, TRemove>;
   export type ExcludeNever<TActual> = Exclude<TActual, never>;

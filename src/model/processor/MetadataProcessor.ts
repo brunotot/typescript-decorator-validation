@@ -1,8 +1,8 @@
 import {
   DecoratorContext,
   DecoratorContextMetadata,
-} from "../decorators/types/DecoratorContext.type";
-import { Class } from "../model/type/Class.type";
+} from "../../decorators/types/DecoratorContext.type";
+import { Class } from "../../types/Class.type";
 import ValidationProcessor from "./ValidationProcessor";
 
 const META_KEY = "tdv:metadata-processor";

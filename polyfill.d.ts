@@ -1,14 +1,15 @@
-import { SomeClass } from "./main";
-import { PrimitiveSetAppend } from "../index";
+import { PrimitiveSetAppend } from "./index";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
-// This is an example
-declare module "../index" {
-  interface PrimitiveSetAppend {
-    values: [SomeClass];
-  }
-}
+/*
+ * import MyPrimitiveClass from '...';
+ * declare module "typescript-decorator-validation" {
+ *   interface PrimitiveSetAppend {
+ *     values: [MyPrimitiveClass];
+ *   }
+ * }
+ */
 
 declare global {
   interface SymbolConstructor {

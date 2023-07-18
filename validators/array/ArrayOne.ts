@@ -1,17 +1,17 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
-import { extractGroupsFromValidatorProps } from "../../src/model/utility/object.utility";
-import { BasicValidatorProviderTypeMandatoryMessage } from "../../src/model/utility/type.utility";
-import { $ } from "../../src/model/type/namespace/Utility.ns";
+import { extractGroups } from "../../src/utils/object.utils";
+import { DecoratorImpartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import { $ } from "../../src/types/namespace/Utility.ns";
 
 export type ArrayOneType<T> = {
   test: $.Predicate<T>;
 };
 
 export default function ArrayOne<K, T extends K[]>(
-  props: BasicValidatorProviderTypeMandatoryMessage<ArrayOneType<K>>
+  props: DecoratorImpartialProps<ArrayOneType<K>>
 ) {
   return makeValidator<T>({
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     isValid: (array) => ({
       key: "ArrayOne",
       message: props.message,

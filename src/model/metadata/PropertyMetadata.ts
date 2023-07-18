@@ -1,6 +1,6 @@
-import { Class } from "../type/Class.type";
-import MetadataProcessor from "../../processor/MetadataProcessor";
-import { $ } from "../type/namespace/Utility.ns";
+import { Class } from "../../types/Class.type";
+import MetadataProcessor from "../processor/MetadataProcessor";
+import { $ } from "../../types/namespace/Utility.ns";
 
 export type PropertyTypeGroup =
   | "PRIMITIVE_ARRAY"

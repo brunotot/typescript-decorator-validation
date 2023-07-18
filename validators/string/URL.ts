@@ -1,21 +1,16 @@
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import {
-  extractGroupsFromValidatorProps,
-  extractMessageFromValidatorProps,
-} from "../../src/model/utility/object.utility";
-import {
-  BasicValidatorProviderType,
-  Nullable,
-} from "../../src/model/utility/type.utility";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
 import Pattern from "./Pattern";
+import { $ } from "../../src/types/namespace/Utility.ns";
+import { extractGroups, extractMessage } from "../../src/utils/object.utils";
 
-export default function URL<T extends Nullable<string>>(
-  props?: BasicValidatorProviderType
+export default function URL<T extends $.Nullable<string>>(
+  props?: DecoratorPartialProps
 ) {
   return Pattern<T>({
     key: "URL",
-    message: extractMessageFromValidatorProps(props, ErrorMessage.URL()),
-    groups: extractGroupsFromValidatorProps(props),
+    message: extractMessage(props, ErrorMessage.URL()),
+    groups: extractGroups(props),
     regex:
       /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/,
   });

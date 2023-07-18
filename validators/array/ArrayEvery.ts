@@ -1,17 +1,17 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
-import { extractGroupsFromValidatorProps } from "../../src/model/utility/object.utility";
-import { BasicValidatorProviderTypeMandatoryMessage } from "../../src/model/utility/type.utility";
-import { $ } from "../../src/model/type/namespace/Utility.ns";
+import { extractGroups } from "../../src/utils/object.utils";
+import { DecoratorImpartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import { $ } from "../../src/types/namespace/Utility.ns";
 
 export type ArrayEveryType<T> = {
   test: $.Predicate<T>;
 };
 
 export default function ArrayEvery<K, T extends K[]>(
-  props: BasicValidatorProviderTypeMandatoryMessage<ArrayEveryType<K>>
+  props: DecoratorImpartialProps<ArrayEveryType<K>>
 ) {
   return makeValidator<T>({
-    groups: extractGroupsFromValidatorProps(props),
+    groups: extractGroups(props),
     isValid: (array) => ({
       key: "ArrayEvery",
       message: props.message,

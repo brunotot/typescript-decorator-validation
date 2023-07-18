@@ -1,10 +1,10 @@
 import { IMock } from "../../common/ValidationHandlerMock";
 import { standardTest } from "../../common/TestFactory";
-import { Nullable } from "../../../src/model/utility/type.utility";
 import Required from "../../../validators/any/Required";
+import { $ } from "../../../src/types/namespace/Utility.ns";
 
 /*** Data ***/
-type Type = Nullable<any>;
+type Type = $.Nullable<any>;
 const type = "any";
 const identifier = "Required";
 const successData: Type[] = ["lorem", true, 0, -1, 1, new Date(), ["lorem"]];
