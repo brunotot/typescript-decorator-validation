@@ -1,5 +1,5 @@
 import { $ } from "../types/namespace/Utility.ns";
-import { sprintf } from "../utils/object.utils";
+import { sprintf } from "../utils/string.utils";
 import { getLocale } from "./model/Locale";
 import translations from "./model/Translations";
 

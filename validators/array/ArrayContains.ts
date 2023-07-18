@@ -1,7 +1,6 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
-
 import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
-import { extractGroups, extractMessage } from "../../src/utils/object.utils";
+import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
 
 export type ArrayContainsType<T> = {

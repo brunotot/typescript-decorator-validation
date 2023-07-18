@@ -2,7 +2,7 @@ import { makeValidator } from "../../src/decorators/facade/validator.facade";
 
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
 import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
-import { extractGroups, extractMessage } from "../../src/utils/object.utils";
+import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 
 type ArraySizeMinType = {
   value: number;

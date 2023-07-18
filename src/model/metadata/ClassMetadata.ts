@@ -3,12 +3,10 @@ import { Class } from "../../types/Class.type";
 import { Payload } from "../../types/Payload.type";
 import MetadataProcessor from "../processor/MetadataProcessor";
 import PropertyMetadata from "./PropertyMetadata";
-import {
-  getClassFieldNames,
-  isValidationGroupUnion,
-} from "../../utils/object.utils";
 import { ValidationGroup } from "../../decorators/types/DecoratorProps.type";
 import { ValidationMetadata } from "../../types/ValidationMetadata.type";
+import { getClassFieldNames } from "../../utils/class.utils";
+import { isValidationGroupUnion } from "../../utils/decorator.utils";
 
 export default class ClassMetadata<T> {
   #runtimeValue: T;

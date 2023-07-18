@@ -1,5 +1,5 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
-import { extractGroups } from "../../src/utils/object.utils";
+import { extractGroups } from "../../src/utils/decorator.utils";
 import { DecoratorImpartialProps } from "../../src/decorators/types/DecoratorProps.type";
 import { $ } from "../../src/types/namespace/Utility.ns";
 

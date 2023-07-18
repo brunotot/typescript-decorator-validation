@@ -1,17 +1,13 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-
-import {
-  extractGroups,
-  extractMessage,
-  hash,
-  isArrayUnique,
-} from "../../src/utils/object.utils";
+import { hash } from "../../src/utils/object.utils";
+import { $ } from "../../src/types/namespace/Utility.ns";
+import { isArrayUnique } from "../../src/utils/array.utils";
+import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 import {
   DecoratorPartialProps,
   DecoratorImpartialProps,
 } from "../../src/decorators/types/DecoratorProps.type";
-import { $ } from "../../src/types/namespace/Utility.ns";
 
 export type ArrayUniqueType<T> = {
   hash?: $.HashGenerator<T>;

@@ -8,7 +8,7 @@ import { DetailedErrors } from "../../types/DetailedErrors.type";
 import { ValidationResult } from "../../types/ValidationResult.type";
 import { Payload } from "../../types/Payload.type";
 import { DeducedArray } from "../../types/namespace/Strategy.ns";
-import { deepEquals, isValidationGroupUnion } from "../../utils/object.utils";
+import { deepEquals } from "../../utils/object.utils";
 import { $ } from "../../types/namespace/Utility.ns";
 import { Errors } from "../../types/Errors.type";
 import { ValidationGroup } from "../../decorators/types/DecoratorProps.type";
@@ -19,6 +19,7 @@ import {
   EntityProcessorResult,
   ValidityErrorsType,
 } from "../../types/EntityProcessor.type";
+import { isValidationGroupUnion } from "../../utils/decorator.utils";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 

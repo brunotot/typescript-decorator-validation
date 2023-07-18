@@ -5,7 +5,7 @@ import {
   evaluateNullableValidity,
   extractGroups,
   extractMessage,
-} from "../../src/utils/object.utils";
+} from "../../src/utils/decorator.utils";
 import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
 
 function isTodayDate(date: $.Nullable<Date>): boolean {

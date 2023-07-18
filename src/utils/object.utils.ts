@@ -1,50 +1,3 @@
-import { ConstructorType } from "../types/Class.type";
-import { $ } from "../types/namespace/Utility.ns";
-import {
-  DecoratorPartialProps,
-  ValidationGroup,
-} from "../decorators/types/DecoratorProps.type";
-
-export function extractMessage<T extends object>(
-  provider: DecoratorPartialProps<any, T>,
-  defaultMessage: string
-) {
-  if (!provider) {
-    return defaultMessage;
-  }
-  const nullableMessage =
-    typeof provider === "string" ? provider : provider.message;
-  return !!nullableMessage?.length ? nullableMessage : defaultMessage;
-}
-
-export function extractGroups<T extends object>(
-  provider: DecoratorPartialProps<any, T>
-) {
-  return typeof provider === "object"
-    ? Array.isArray(provider.groups)
-      ? provider.groups
-      : provider.groups !== undefined && provider.groups !== null
-      ? [provider.groups]
-      : []
-    : [];
-}
-
-export function isValidationGroupUnion(
-  classGroups: ValidationGroup[],
-  validatorGroups: ValidationGroup[]
-) {
-  return classGroups.length
-    ? validatorGroups.some((o) => classGroups.includes(o))
-    : !validatorGroups.length;
-}
-
-export function evaluateNullableValidity<T>(
-  object: $.Nullable<T>,
-  isValid: (value: T) => boolean
-) {
-  return !hasValue(object) ? true : isValid(object);
-}
-
 export function hasValue<T>(
   obj: T | undefined
 ): obj is NonNullable<typeof obj> {
@@ -165,37 +118,4 @@ export function hash(val: any): number {
   } else {
     return defaultHash(val);
   }
-}
-
-export function isArrayUnique<T>(arr: T[], equals: $.Equals<T>): boolean {
-  const set = new Set<T>();
-  for (const val of arr) {
-    for (const el of set) {
-      if (equals(val, el)) {
-        return false;
-      }
-    }
-    set.add(val);
-  }
-  return true;
-}
-
-export function sprintf(str: string, ...args: any[]) {
-  return str.replace(/{(\d+)}/g, function (match, number) {
-    return typeof args[number] != "undefined" ? args[number] : match;
-  });
-}
-
-export function getClassFieldNames(constructor: ConstructorType): string[] {
-  const instance = new constructor();
-  return [
-    ...getPropertyNames(instance),
-    ...getPropertyNames(instance.__proto__),
-  ];
-}
-
-function getPropertyNames(object: any): string[] {
-  return Object.getOwnPropertyNames(object).filter(
-    (property) => property !== "constructor"
-  );
 }

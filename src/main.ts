@@ -10,7 +10,7 @@ import Password from "../validators/string/Password";
 import { DecoratorPartialProps } from "./decorators/types/DecoratorProps.type";
 import { TypeGroup } from "./types/namespace/TypeGroup.ns";
 import { $ } from "./types/namespace/Utility.ns";
-import { extractGroups, extractMessage } from "./utils/object.utils";
+import { extractGroups, extractMessage } from "./utils/decorator.utils";
 
 setLocale("hr");
 

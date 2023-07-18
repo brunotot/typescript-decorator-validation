@@ -2,7 +2,7 @@ import ErrorMessage from "../../src/messages/impl/ErrorMessage";
 import { $ } from "../../src/types/namespace/Utility.ns";
 import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
 import Pattern from "./Pattern";
-import { extractGroups, extractMessage } from "../../src/utils/object.utils";
+import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 
 export default function Numeric<T extends $.Nullable<string>>(
   props?: DecoratorPartialProps

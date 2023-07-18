@@ -1,7 +1,7 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
 import { $ } from "../../src/types/namespace/Utility.ns";
-import { extractMessage } from "../../src/utils/object.utils";
+import { extractMessage } from "../../src/utils/decorator.utils";
 import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
 
 export default function NonPositive<T extends $.Nullable<number>>(
