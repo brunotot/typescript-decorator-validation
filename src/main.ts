@@ -1,78 +1,82 @@
-import strategy from "./model/const/Strategy";
-import { Rule, ValidationHandler, ValidationResult, validators } from "..";
-import { Locale, setLocale } from "./model/messages/Locale";
-import PropertyMetadata from "./model/const/PropertyMetadata";
-import Required from "./decorators/validators/any/Required";
-import foreach from "./decorators/validators/array/foreach";
-import MinLength from "./decorators/validators/string/MinLength";
-import Password from "./decorators/validators/string/Password";
-import { RecursiveComplexType } from "./model/utility/type.utility";
+import { EntityProcessor, Rule, setLocale } from "..";
+import Required from "../validators/any/Required";
+import Truthy from "../validators/any/Truthy";
+import { valid } from "../validators/any/valid";
+import ExactLength from "../validators/string/ExactLength";
+import MaxLength from "../validators/string/MaxLength";
+import MinLength from "../validators/string/MinLength";
+import Password from "../validators/string/Password";
+import Email from "../validators/string/regex/impl/Email";
+import { DecoratorPartialProps } from "./decorators/types/DecoratorProps.type";
+import { TypeGroup } from "./types/namespace/TypeGroup.ns";
+import { $ } from "./types/namespace/Utility.ns";
+import { extractGroups, extractMessage } from "./utils/decorator.utils";
 
-setLocale(Locale.HR);
+setLocale("hr");
 
-class SomeClassNew {
-  @strategy.primitive()
-  @validators.number.Required()
-  b?: number;
+export class SomeClass {
+  idk?: string;
 }
 
-class SomeClass {
-  @strategy.objectArray(() => SomeClassNew)
-  a?: SomeClassNew[];
+// prettier-ignore
+function ExactCharCount<T extends $.Nullable<string>>(props: DecoratorPartialProps<number>) {
+  const key = "ExactCharCount";
+  const charCount: number = typeof props === "number" ? props : props.value;
+  const defaultMessage = `Text must have exactly ${charCount} characters`
+  return Rule<T>({
+    groups: extractGroups(props),
+    isValid: (v: T) => ({
+      key,
+      message: extractMessage(props, defaultMessage),
+      valid: v?.length === charCount,
+    }),
+  });
 }
 
-class ParentForm {
-  @strategy.primitive(() => String)
+export class AddressForm {
+  @ExactLength(2)
+  @Required()
+  @ExactCharCount(10)
+  country!: string;
+}
+
+export class UserForm {
   @MinLength(5)
-  username?: string;
+  @MaxLength(10)
+  @Required()
+  firstName?: string;
 
-  @strategy.primitive(() => String)
+  @MinLength(5)
+  @MaxLength(10)
+  @Required()
+  lastName?: string;
+
   @Password()
+  @Required()
   password?: string;
 
-  @strategy.primitive(() => Date)
-  @validators.date.FutureDate()
-  date?: Date;
-
+  @Email()
   @Required()
-  @foreach(Required(), MinLength(1))
-  @strategy.primitiveArray(() => String)
-  emails?: string[];
+  email?: string;
 
-  @strategy.objectArray(() => SomeClass)
-  complex?: SomeClass[];
+  @valid(AddressForm)
+  addressForm?: AddressForm;
+
+  someClass?: SomeClass;
+
+  @Truthy()
+  get passwordsMatch() {
+    return false;
+  }
 }
 
-//const handler = new ValidationHandler(ParentForm);
-/*const result = handler.validate({
-  emails: [""],
-  complex: [],
-  date: new Date(),
-});*/
-//console.log(JSON.stringify(result.detailedErrors, null, 2));
+type AddressFormType = TypeGroup.Primitive;
+//    ^?
 
-class RandomClass {
-  @validators.string.Required()
-  a?: string;
-  @validators.number.Required()
-  b?: number;
-  @validators.boolean.Truthy()
-  c?: boolean;
-  @strategy.object(() => SomeClass)
-  d?: SomeClass;
+function main() {
+  const processor = new EntityProcessor(UserForm);
+  const result = processor.validate();
+  console.log(JSON.stringify(result.errors, null, 2));
 }
 
-const handler = new ValidationHandler(RandomClass);
-const result = handler.validate({
-  a: undefined,
-  b: 1,
-  c: true,
-  d: {
-    a: [
-      {
-        b: undefined,
-      },
-    ],
-  },
-});
-console.log(JSON.stringify(result.errors, null, 2));
+main();
