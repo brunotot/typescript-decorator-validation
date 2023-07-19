@@ -1,18 +1,18 @@
 import { IMock } from "../../common/ValidationHandlerMock";
 import { standardTest } from "../../common/TestFactory";
-import Email from "../../../validators/string/Email";
 import { $ } from "../../../src/types/namespace/Utility.ns";
+import ExactLength from "../../../validators/string/ExactLength";
 
 /*** Data ***/
 type Type = $.Nullable<string>;
 const type = "String";
-const identifier = "Email";
-const successData: Type[] = ["mail@mail.com", null, undefined];
-const errorData: Type[] = ["invalid@~", "vvv@vvv.", "invalid"];
+const identifier = "ExactLength";
+const successData: Type[] = ["123456", "abcdef"];
+const errorData: Type[] = ["", "1", "1234567", undefined, null];
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @Email()
+  @ExactLength(6)
   value: Type;
 }
 

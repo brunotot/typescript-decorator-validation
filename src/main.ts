@@ -1,12 +1,12 @@
-import { Rule, ValidationHandler, setLocale } from "..";
+import { EntityProcessor, Rule, setLocale } from "..";
 import Required from "../validators/any/Required";
 import Truthy from "../validators/any/Truthy";
 import { valid } from "../validators/any/valid";
-import Email from "../validators/string/Email";
 import ExactLength from "../validators/string/ExactLength";
 import MaxLength from "../validators/string/MaxLength";
 import MinLength from "../validators/string/MinLength";
 import Password from "../validators/string/Password";
+import Email from "../validators/string/regex/impl/Email";
 import { DecoratorPartialProps } from "./decorators/types/DecoratorProps.type";
 import { TypeGroup } from "./types/namespace/TypeGroup.ns";
 import { $ } from "./types/namespace/Utility.ns";
@@ -74,8 +74,8 @@ type AddressFormType = TypeGroup.Primitive;
 //    ^?
 
 function main() {
-  const handler = new ValidationHandler(UserForm);
-  const result = handler.validate();
+  const processor = new EntityProcessor(UserForm);
+  const result = processor.validate();
   console.log(JSON.stringify(result.errors, null, 2));
 }
 

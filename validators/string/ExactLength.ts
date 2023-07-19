@@ -4,12 +4,8 @@ import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps
 import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 import { $ } from "../../src/types/namespace/Utility.ns";
 
-type ExactLengthType = {
-  value: number;
-};
-
 export default function ExactLength<T extends $.Nullable<string>>(
-  props: DecoratorPartialProps<number, ExactLengthType>
+  props: DecoratorPartialProps<number>
 ) {
   const exact = typeof props === "number" ? props : props.value;
   return makeValidator<T>({

@@ -3,17 +3,11 @@ import ErrorMessage from "../../src/messages/impl/ErrorMessage";
 import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
 import { extractGroups } from "../../src/utils/decorator.utils";
 import { $ } from "../../src/types/namespace/Utility.ns";
+import RegexConst from "../../src/model/constants/regex.constants";
 
-type PasswordProps = {
-  uppercase?: boolean;
-  lowercase?: boolean;
-  numbers?: boolean;
-  specials?: boolean;
-  length?: number;
-  message?: string;
-};
+type PasswordProps = $.Optional<PasswordRequiredProps>;
 
-export type PasswordRequiredProps = {
+type PasswordRequiredProps = {
   uppercase: boolean;
   lowercase: boolean;
   numbers: boolean;
@@ -29,25 +23,15 @@ const DEFAULT_PROPS: PasswordRequiredProps = {
   length: 8,
 };
 
-type PasswordRegexesType = {
-  uppercase: RegExp;
-  lowercase: RegExp;
-  numbers: RegExp;
-  specials: RegExp;
+const PASSWORD_REGEXES = {
+  uppercase: RegexConst.UPPERCASE_ANYWHERE,
+  lowercase: RegexConst.LOWERCASE_ANYWHERE,
+  numbers: RegexConst.NUMERIC_ANYWHERE,
+  specials: RegexConst.SPECIALS_ANYWHERE,
 };
 
-const PASSWORD_REGEXES: PasswordRegexesType = {
-  uppercase: /[A-Z]/,
-  lowercase: /[a-z]/,
-  numbers: /\d/,
-  specials: /[^a-zA-Z0-9]/,
-};
-
-function isPasswordChunkInvalid(
-  str: string,
-  passwordRegexName: keyof PasswordRegexesType
-): boolean {
-  const matchers = str.match(PASSWORD_REGEXES[passwordRegexName]);
+function isInvalid(text: string, rule: keyof typeof PASSWORD_REGEXES) {
+  const matchers = text.match(PASSWORD_REGEXES[rule]);
   return matchers === null || matchers.length === 0;
 }
 
@@ -66,35 +50,35 @@ export default function Password<T extends $.Nullable<string>>(
   const length = props.length ?? DEFAULT_PROPS.length;
   const definedMessage: string | undefined = props.message;
 
-  function buildConstraintViolation(message: string) {
+  function buildConstraintViolation(message: string, valid: boolean = false) {
     return {
       key: "Password",
       message: !!definedMessage ? definedMessage : message,
-      valid: false,
+      valid,
     };
+  }
+
+  function isValid(str: string) {
+    if (str.length < length)
+      return buildConstraintViolation(ErrorMessage.PasswordLength(length));
+
+    if (uppercase && isInvalid(str, "uppercase"))
+      return buildConstraintViolation(ErrorMessage.PasswordUppercase());
+
+    if (lowercase && isInvalid(str, "lowercase"))
+      return buildConstraintViolation(ErrorMessage.PasswordLowercase());
+
+    if (numbers && isInvalid(str, "numbers"))
+      return buildConstraintViolation(ErrorMessage.PasswordNumbers());
+
+    if (specials && isInvalid(str, "specials"))
+      return buildConstraintViolation(ErrorMessage.PasswordSpecials());
+
+    return buildConstraintViolation("", true);
   }
 
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (string) => {
-      const str = string ?? "";
-      if (str.length < length) {
-        return buildConstraintViolation(ErrorMessage.PasswordLength(length));
-      }
-      if (uppercase && isPasswordChunkInvalid(str, "uppercase"))
-        return buildConstraintViolation(ErrorMessage.PasswordUppercase());
-      if (lowercase && isPasswordChunkInvalid(str, "lowercase"))
-        return buildConstraintViolation(ErrorMessage.PasswordLowercase());
-      if (numbers && isPasswordChunkInvalid(str, "numbers"))
-        return buildConstraintViolation(ErrorMessage.PasswordNumbers());
-      if (specials && isPasswordChunkInvalid(str, "specials"))
-        return buildConstraintViolation(ErrorMessage.PasswordSpecials());
-
-      return {
-        key: "Password",
-        valid: true,
-        message: "",
-      };
-    },
+    isValid: (str) => isValid(str ?? ""),
   });
 }

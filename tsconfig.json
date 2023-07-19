@@ -17,5 +17,6 @@
     "isolatedModules": true,
     "jsx": "react"
   },
-  "exclude": ["tests", "jest.config.js"]
+  "exclude": ["tests", "jest.config.js"],
+  "include": ["src", "polyfill.d.ts"]
 }

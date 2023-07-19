@@ -1,9 +1,7 @@
 import ValueMax from "./number/ValueMax";
 import ValueRange from "./number/ValueRange";
-import Email from "./string/Email";
 import Password from "./string/Password";
-import Pattern from "./string/Pattern";
-import URL from "./string/URL";
+import Pattern from "./string/regex/Pattern";
 import Truthy from "./any/Truthy";
 import Falsy from "./any/Falsy";
 import Decimal from "./number/Decimal";
@@ -12,10 +10,8 @@ import Negative from "./number/Negative";
 import NonNegative from "./number/NonNegative";
 import NonPositive from "./number/NonPositive";
 import Positive from "./number/Positive";
-import Alpha from "./string/Alpha";
-import CreditCardNumber from "./string/CreditCardNumber";
-import IPAddress from "./string/IPAddress";
-import Numeric from "./string/Numeric";
+import Alpha from "./string/regex/impl/Alpha";
+import Numeric from "./string/regex/impl/Numeric";
 import Required from "./any/Required";
 import ArrayContains from "./array/ArrayContains";
 import ArrayEmpty from "./array/ArrayEmpty";
@@ -39,6 +35,12 @@ import PastDate from "./date/PastDate";
 import TodayDate from "./date/TodayDate";
 import Rule from "./any/Rule";
 import Digits from "./number/Digits";
+import Email from "./string/regex/impl/Email";
+import IPAddress from "./string/regex/impl/IPAddress";
+import URL from "./string/regex/impl/URL";
+import Uppercase from "./string/regex/impl/Uppercase";
+import Lowercase from "./string/regex/impl/Lowercase";
+import Alphanumeric from "./string/regex/impl/Alphanumeric";
 
 const any = {
   Truthy,
@@ -95,13 +97,15 @@ const string = {
   Pattern,
   URL,
   Alpha,
-  CreditCardNumber,
   IPAddress,
   Numeric,
   ExactLength,
   Length,
   MaxLength,
   MinLength,
+  Uppercase,
+  Lowercase,
+  Alphanumeric,
 };
 
 const validators = {

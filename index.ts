@@ -26,7 +26,7 @@ export {
   makeValidator,
   validators,
   Rule,
-  EntityProcessor as ValidationHandler,
+  EntityProcessor,
   getLocale,
   setLocale,
 };

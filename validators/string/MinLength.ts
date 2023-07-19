@@ -4,12 +4,8 @@ import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps
 import { $ } from "../../src/types/namespace/Utility.ns";
 import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 
-type MinLengthType = {
-  value: number;
-};
-
 export default function MinLength<T extends $.Nullable<string>>(
-  props: DecoratorPartialProps<number, MinLengthType>
+  props: DecoratorPartialProps<number>
 ) {
   const min = typeof props === "number" ? props : props.value;
   return makeValidator<T>({

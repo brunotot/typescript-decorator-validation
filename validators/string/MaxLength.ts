@@ -4,12 +4,8 @@ import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps
 import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 import { $ } from "../../src/types/namespace/Utility.ns";
 
-type MaxLengthType = {
-  value: number;
-};
-
 export default function MaxLength<T extends $.Nullable<string>>(
-  props: DecoratorPartialProps<number, MaxLengthType>
+  props: DecoratorPartialProps<number>
 ) {
   const max = typeof props === "number" ? props : props.value;
   return makeValidator<T>({

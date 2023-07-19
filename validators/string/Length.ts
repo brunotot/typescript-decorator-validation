@@ -1,6 +1,6 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
 import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import { DecoratorImpartialProps } from "../../src/decorators/types/DecoratorProps.type";
 import { $ } from "../../src/types/namespace/Utility.ns";
 import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 
@@ -10,7 +10,7 @@ type LengthType = {
 };
 
 export default function Length<T extends $.Nullable<string>>(
-  props: DecoratorPartialProps<LengthType, LengthType>
+  props: DecoratorImpartialProps<LengthType>
 ) {
   const { min, max } = props;
   return makeValidator<T>({
