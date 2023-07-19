@@ -29,7 +29,7 @@ function logTime(clazz: any, methodName: string, start: number, end: number) {
 function isDevelopment() {
   // TODO: Implement for production
   // This currently just watches if the tests are running...
-  return globalThis?.process.env.JEST_WORKER_ID !== undefined;
+  return globalThis?.process?.env?.JEST_WORKER_ID !== undefined;
 }
 
 export default function stopwatch<This, Args extends any[], Return>(

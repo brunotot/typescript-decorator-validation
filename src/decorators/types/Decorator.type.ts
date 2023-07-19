@@ -1,6 +1,6 @@
 import { DecoratorContext } from "./DecoratorContext.type";
 
 export type Decorator<T = unknown> = (
-  target: unknown,
+  target: any,
   context: DecoratorContext<T>
 ) => void;

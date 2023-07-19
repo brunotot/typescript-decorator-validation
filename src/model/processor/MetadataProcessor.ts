@@ -45,6 +45,8 @@ export default class MetadataProcessor {
 
   static fromClass<T>(clazz: Class<T>): MetadataProcessor {
     // @ts-ignore
+    clazz[Symbol.metadata] ??= {};
+    // @ts-ignore
     return MetadataProcessor.#buildProcessor(clazz[Symbol.metadata]);
   }
 
