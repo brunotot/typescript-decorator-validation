@@ -9,9 +9,9 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run test && npm run clean && tsc && cp polyfill.d.ts package.json README.md ./dist && rm ./dist/src/main.js && rm ./dist/types/src/main.d.ts",
-    "deploy:minor": "npm i --force && git commit -am 'bump core minor version' && npm version minor --force && npm run build && cd dist && npm publish --access=public && git push",
-    "deploy:major": "npm i --force && git commit -am 'bump core major version' && npm version major --force && npm run build && cd dist && npm publish --access=public && git push",
-    "deploy:patch": "npm i --force && git commit -am 'bump core patch version' && npm version patch --force && npm run build && cd dist && npm publish --access=public && git push",
+    "deploy:minor": "npm cache clean --force && npm i --force && git commit -am 'bump core minor version' && npm version minor --force && npm run build && cd dist && npm publish --access=public && git push",
+    "deploy:major": "npm cache clean --force && npm i --force && git commit -am 'bump core major version' && npm version major --force && npm run build && cd dist && npm publish --access=public && git push",
+    "deploy:patch": "npm cache clean --force && npm i --force && git commit -am 'bump core patch version' && npm version patch --force && npm run build && cd dist && npm publish --access=public && git push",
     "test": "export TS_JEST_DISABLE_VER_CHECKER=true && npx jest",
     "main": "ts-node src/main.ts"
   },
