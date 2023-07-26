@@ -6,7 +6,7 @@ import {
   DetailedErrors,
   EntityProcessor,
   Errors,
-} from "@tdv/core";
+} from "tdv-core";
 
 export type OnChangeHandlerType = (
   event: React.ChangeEvent<HTMLInputElement>

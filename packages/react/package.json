@@ -7,9 +7,9 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc && cp package.json README.md ./dist",
-    "deploy:minor": "npm i --force && git commit -am 'bump minor version' && npm version minor --force && cd dist && npm publish --access=public && git push",
-    "deploy:major": "npm i --force && git commit -am 'bump major version' && npm version major --force && cd dist && npm publish --access=public && git push",
-    "deploy:patch": "npm i --force && git commit -am 'bump patch version' && npm version patch --force && cd dist && npm publish --access=public && git push",
+    "deploy:minor": "npm i --force && git commit -am 'bump react module minor version' && npm version minor --force && cd dist && npm publish --access=public && git push",
+    "deploy:major": "npm i --force && git commit -am 'bump react module major version' && npm version major --force && cd dist && npm publish --access=public && git push",
+    "deploy:patch": "npm i --force && git commit -am 'bump react module patch version' && npm version patch --force && cd dist && npm publish --access=public && git push",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,7 +27,7 @@
   "author": "Bruno Tot",
   "license": "MIT",
   "peerDependencies": {
-    "@tdv/core": "^3.0.0",
+    "tdv-core": "^3.0.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.10",
     "react": "^18.2.0",

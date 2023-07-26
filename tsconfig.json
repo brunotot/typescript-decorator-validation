@@ -16,8 +16,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "paths": {
-      "@tdv/core": ["./packages/core/src"],
-      "@tdv/react": ["./packages/react/src"]
+      "tdv-core": ["./packages/core/src"],
+      "tdv-react": ["./packages/react/src"]
     },
     "references": [
       { "path": "./packages/core" },

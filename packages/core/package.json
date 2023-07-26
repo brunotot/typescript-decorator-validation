@@ -1,6 +1,6 @@
 {
   "name": "tdv-core",
-  "version": "1.0.0",
+  "version": "3.2.0",
   "description": "Typescript form validation using Decorators",
   "main": "index.js",
   "types": "types/index.d.ts",
@@ -10,9 +10,9 @@
     "publish": "npm publish --access=public",
     "clean": "rm -rf dist",
     "build": "npm run test && npm run clean && tsc && cp polyfill.d.ts package.json README.md ./dist && rm ./dist/src/main.js && rm ./dist/types/src/main.d.ts",
-    "deploy:minor": "npm i --force && git commit -am 'update package-lock.json' && npm version minor --force && npm run build && cd dist && npm run publish && git push",
-    "deploy:major": "npm i --force && git commit -am 'update package-lock.json' && npm version major --force && npm run build && cd dist && npm run publish && git push",
-    "deploy:patch": "npm i --force && git commit -am 'update package-lock.json' && npm version patch --force && npm run build && cd dist && npm run publish && git push",
+    "deploy:minor": "npm i --force && git commit -am 'bump core minor version' && npm version minor --force && npm run build && cd dist && npm run publish && git push",
+    "deploy:major": "npm i --force && git commit -am 'bump core major version' && npm version major --force && npm run build && cd dist && npm run publish && git push",
+    "deploy:patch": "npm i --force && git commit -am 'bump core patch version' && npm version patch --force && npm run build && cd dist && npm run publish && git push",
     "test": "export TS_JEST_DISABLE_VER_CHECKER=true && npx jest",
     "main": "ts-node src/main.ts"
   },
