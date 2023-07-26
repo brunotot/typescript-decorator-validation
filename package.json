@@ -14,7 +14,8 @@
     "core/deploy:patch": "cd ./packages/core && npm run deploy:patch",
     "react/deploy:minor": "cd ./packages/react && npm run deploy:minor",
     "react/deploy:major": "cd ./packages/react && npm run deploy:major",
-    "react/deploy:patch": "cd ./packages/react && npm run deploy:patch"
+    "react/deploy:patch": "cd ./packages/react && npm run deploy:patch",
+    "pushAll": "git commit -am \"struct refactor\" && git push"
   },
   "devDependencies": {
     "@types/jest": "^29.5.2",
