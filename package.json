@@ -1,6 +1,6 @@
 {
   "author": "Bruno Tot",
-  "name": "@tdv/monorepo",
+  "name": "tdv-monorepo",
   "private": true,
   "version": "3.1.0",
   "description": "Typescript form validation using Decorators",
