@@ -1,5 +1,5 @@
 {
-  "name": "react-decorate-form",
+  "name": "@tdv/react",
   "version": "1.0.103",
   "description": "React library that allows form validation manipulation through TypeScript Decorators",
   "main": "index.js",
@@ -7,8 +7,15 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc && cp package.json README.md ./dist",
-    "deploy": "npm i && git commit -am 'update package-lock.json' && npm version patch && npm run build && cd dist && npm publish --access=public && git push",
+    "deploy:minor": "npm i --force && git commit -am 'bump minor version' && npm version minor && cd dist && npm publish --access=public && git push",
+    "deploy:major": "npm i --force && git commit -am 'bump major version' && npm version major && cd dist && npm publish --access=public && git push",
+    "deploy:patch": "npm i --force && git commit -am 'bump patch version' && npm version patch && cd dist && npm publish --access=public && git push",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brunotot/typescript-decorator-validation.git",
+    "directory": "packages/react"
   },
   "keywords": [
     "typescript",

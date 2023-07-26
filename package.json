@@ -1,23 +1,20 @@
 {
   "author": "Bruno Tot",
   "name": "@tdv/monorepo",
+  "private": true,
   "version": "3.0.3",
   "description": "Typescript form validation using Decorators",
-  "main": "index.js",
-  "types": "types/index.d.ts",
   "license": "MIT",
-  "homepage": "https://github.com/brunotot/typescript-decorator-validation#readme",
   "scripts": {
-    "main": "ts-node packages/core/src/main.ts"
-  },
-  "keywords": [
-    "typescript",
-    "decorator",
-    "form",
-    "validation"
-  ],
-  "bugs": {
-    "url": "https://github.com/brunotot/typescript-decorator-validation/issues"
+    "core/main": "test -d ./node_modules || npm i --force && ts-node packages/core/src/main.ts",
+    "core/test": "cd ./packages/core && export TS_JEST_DISABLE_VER_CHECKER=true && npx jest",
+    "core/build": "cd ./packages/core && npm run build",
+    "core/deploy:minor": "cd ./packages/core && npm run deploy:minor",
+    "core/deploy:major": "cd ./packages/core && npm run deploy:major",
+    "core/deploy:patch": "cd ./packages/core && npm run deploy:patch",
+    "react/deploy:minor": "cd ./packages/react && npm run deploy:minor",
+    "react/deploy:major": "cd ./packages/react && npm run deploy:major",
+    "react/deploy:patch": "cd ./packages/react && npm run deploy:patch"
   },
   "devDependencies": {
     "@types/jest": "^29.5.2",

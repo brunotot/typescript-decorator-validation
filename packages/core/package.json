@@ -16,7 +16,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brunotot/typescript-decorator-validation.git"
+    "url": "git+https://github.com/brunotot/typescript-decorator-validation.git",
+    "directory": "packages/core"
   },
   "keywords": [
     "typescript",
