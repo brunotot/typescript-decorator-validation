@@ -4,6 +4,7 @@
   "description": "React library that allows form validation manipulation through TypeScript Decorators",
   "main": "index.js",
   "types": "types/index.d.ts",
+  "private": false,
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc && cp package.json README.md ./dist",

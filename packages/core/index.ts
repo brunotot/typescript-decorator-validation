@@ -9,8 +9,10 @@ import Rule from "./validators/any/Rule";
 import validators from "./validators";
 import EntityProcessor from "./src/model/processor/EntityProcessor";
 import { ValidationEvaluator } from "./src/types/ValidationEvaluator.type";
+import { ValidationGroup } from "./src/decorators/types/DecoratorProps.type";
 
 export interface PrimitiveSetAppend {}
+
 
 export type {
   Class,
@@ -20,6 +22,7 @@ export type {
   Payload,
   Errors,
   Locale,
+  ValidationGroup
 };
 
 export {

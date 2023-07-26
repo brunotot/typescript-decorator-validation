@@ -1,4 +1,5 @@
-import useDecoratedValidation from "./src/hooks/useDecoratedValidation";
+import useValidation from "./src/hooks/useValidation";
+
 import {
   validators,
   Rule,
@@ -6,10 +7,10 @@ import {
   setLocale,
   Locale,
   EntityProcessor,
-} from "typescript-decorator-validation";
+} from "tdv-core";
 
-import "typescript-decorator-validation/polyfill.d.ts";
+import "tdv-core/polyfill.d.ts";
 
 export type { ValidationResult, Locale };
 
-export { EntityProcessor, validators, Rule, useDecoratedValidation, setLocale };
+export { EntityProcessor, validators, Rule, useValidation, setLocale };
