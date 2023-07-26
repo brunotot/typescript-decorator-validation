@@ -1,0 +1,46 @@
+{
+  "name": "@tdv/core",
+  "version": "3.0.3",
+  "description": "Typescript form validation using Decorators",
+  "main": "index.js",
+  "types": "types/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run test && npm run clean && tsc && cp polyfill.d.ts package.json README.md ./dist && rm ./dist/src/main.js && rm ./dist/types/src/main.d.ts",
+    "deploy:minor": "npm i --force && git commit -am 'update package-lock.json' && npm version minor && npm run build && cd dist && npm publish --access=public && git push",
+    "deploy:major": "npm i --force && git commit -am 'update package-lock.json' && npm version major && npm run build && cd dist && npm publish --access=public && git push",
+    "deploy:patch": "npm i --force && git commit -am 'update package-lock.json' && npm version patch && npm run build && cd dist && npm publish --access=public && git push",
+    "test": "export TS_JEST_DISABLE_VER_CHECKER=true && npx jest",
+    "main": "ts-node src/main.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brunotot/typescript-decorator-validation.git"
+  },
+  "keywords": [
+    "typescript",
+    "decorator",
+    "form",
+    "validation"
+  ],
+  "author": "Bruno Tot",
+  "bugs": {
+    "url": "https://github.com/brunotot/typescript-decorator-validation/issues"
+  },
+  "homepage": "https://github.com/brunotot/typescript-decorator-validation#readme",
+  "pre-commit": [
+    "test"
+  ],
+  "devDependencies": {
+    "@types/jest": "^29.5.2",
+    "@types/node": "^20.3.1",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "jest": "^29.5.0",
+    "pre-commit": "^1.2.2",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.0-beta"
+  }
+}
