@@ -19,10 +19,6 @@ export default function useValidation<T>({
   const payload = value as Payload<T>;
 
   useEffect(() => {
-    const processorLocal = processor;
-    if (processorLocal) {
-      debugger;
-    }
     setDetailedErrors(processor.getDetailedErrors(payload));
     setErrors(processor.getErrors(payload));
   }, [value]);
