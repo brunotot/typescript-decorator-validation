@@ -28,6 +28,18 @@ export default class EntityProcessor<T> {
   #metadata!: ClassMetadata<T>;
   #cache: EntityProcessorCache<T>;
 
+  get metadata() {
+    return this.#metadata;
+  }
+
+  get cache() {
+    return this.#cache;
+  }
+
+  get groups() {
+    return this.#groups;
+  }
+
   get clazz() {
     return this.#clazz;
   }
