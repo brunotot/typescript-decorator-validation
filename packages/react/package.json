@@ -8,9 +8,9 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc && cp package.json README.md ./dist",
-    "deploy:minor": "npm i --force && npm run build && git commit -am 'bump react module minor version' && npm version minor --force && cd dist && npm publish --access=public && git push",
-    "deploy:major": "npm i --force && npm run build && git commit -am 'bump react module major version' && npm version major --force && cd dist && npm publish --access=public && git push",
-    "deploy:patch": "npm i --force && npm run build && git commit -am 'bump react module patch version' && npm version patch --force && cd dist && npm publish --access=public && git push",
+    "deploy:minor": "npm i --force && git commit -am 'bump react module minor version' && npm version minor --force && npm run build && cd dist && npm publish --access=public && git push",
+    "deploy:major": "npm i --force && git commit -am 'bump react module major version' && npm version major --force && npm run build && cd dist && npm publish --access=public && git push",
+    "deploy:patch": "npm i --force && git commit -am 'bump react module patch version' && npm version patch --force && npm run build && cd dist && npm publish --access=public && git push",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
