@@ -25,6 +25,7 @@ export function makeDecorator<T>(
   decoratorSupplier: DecoratorSupplier<T>
 ): Decorator<T> {
   return function (target, context) {
+    debugger;
     // Hardcoded check for old TS decorators (stage 2 proposal)
     if (isDecoratorsStage2(context)) {
       return makeDecoratorUsingStage2Strategy(
