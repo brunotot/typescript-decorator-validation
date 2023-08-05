@@ -10,6 +10,10 @@ const META_KEY = "tdv:metadata-processor";
 export default class MetadataProcessor {
   #data: Map<string, unknown>;
 
+  get data() {
+    return this.#data;
+  }
+
   private constructor() {
     this.#data = new Map();
   }
