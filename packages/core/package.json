@@ -1,6 +1,6 @@
 {
   "name": "tdv-core",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Typescript form validation using Decorators",
   "main": "index.js",
   "types": "types/index.d.ts",
