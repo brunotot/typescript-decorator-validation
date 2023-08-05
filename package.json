@@ -1,37 +1,22 @@
 {
-  "name": "typescript-decorator-validation",
-  "version": "3.0.3",
+  "author": "Bruno Tot",
+  "name": "tdv-monorepo",
+  "private": true,
+  "version": "3.1.0",
   "description": "Typescript form validation using Decorators",
-  "main": "index.js",
-  "types": "types/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "npm run test && npm run clean && tsc && cp polyfill.d.ts package.json README.md ./dist && rm ./dist/src/main.js && rm ./dist/types/src/main.d.ts",
-    "deploy:minor": "npm i --force && git commit -am 'update package-lock.json' && npm version minor && npm run build && cd dist && npm publish --access=public && git push",
-    "deploy:major": "npm i --force && git commit -am 'update package-lock.json' && npm version major && npm run build && cd dist && npm publish --access=public && git push",
-    "deploy:patch": "npm i --force && git commit -am 'update package-lock.json' && npm version patch && npm run build && cd dist && npm publish --access=public && git push",
-    "test": "export TS_JEST_DISABLE_VER_CHECKER=true && npx jest",
-    "main": "ts-node src/main.ts"
+    "core/main": "test -d ./node_modules || npm i --force && ts-node packages/core/src/main.ts",
+    "core/test": "cd ./packages/core && export TS_JEST_DISABLE_VER_CHECKER=true && npx jest",
+    "core/build": "cd ./packages/core && npm run build",
+    "core/deploy:minor": "cd ./packages/core && npm run deploy:minor",
+    "core/deploy:major": "cd ./packages/core && npm run deploy:major",
+    "core/deploy:patch": "cd ./packages/core && npm run deploy:patch",
+    "react/deploy:minor": "cd ./packages/react && npm run deploy:minor",
+    "react/deploy:major": "cd ./packages/react && npm run deploy:major",
+    "react/deploy:patch": "cd ./packages/react && npm run deploy:patch",
+    "pushAll": "git commit -am \"struct refactor\" && git push"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/brunotot/typescript-decorator-validation.git"
-  },
-  "keywords": [
-    "typescript",
-    "decorator",
-    "form",
-    "validation"
-  ],
-  "author": "Bruno Tot",
-  "bugs": {
-    "url": "https://github.com/brunotot/typescript-decorator-validation/issues"
-  },
-  "homepage": "https://github.com/brunotot/typescript-decorator-validation#readme",
-  "pre-commit": [
-    "test"
-  ],
   "devDependencies": {
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.1",
@@ -42,5 +27,8 @@
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.0-beta"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

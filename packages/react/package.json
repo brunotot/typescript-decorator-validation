@@ -1,0 +1,38 @@
+{
+  "name": "tdv-react",
+  "version": "1.0.0",
+  "description": "React library that allows form validation manipulation through TypeScript Decorators",
+  "main": "index.js",
+  "types": "types/index.d.ts",
+  "private": false,
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc && cp package.json README.md ./dist",
+    "deploy:minor": "npm i --force && git commit -am 'bump react module minor version' && npm version minor --force && npm run build && cd dist && npm publish --access=public && git push",
+    "deploy:major": "npm i --force && git commit -am 'bump react module major version' && npm version major --force && npm run build && cd dist && npm publish --access=public && git push",
+    "deploy:patch": "npm i --force && git commit -am 'bump react module patch version' && npm version patch --force && npm run build && cd dist && npm publish --access=public && git push",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brunotot/typescript-decorator-validation.git",
+    "directory": "packages/react"
+  },
+  "keywords": [
+    "typescript",
+    "react",
+    "decorator",
+    "form",
+    "validation"
+  ],
+  "author": "Bruno Tot",
+  "license": "MIT",
+  "peerDependencies": {
+    "tdv-core": "^0.0.3",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.2.0-beta"
+  }
+}

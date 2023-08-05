@@ -35,7 +35,7 @@ export default class ClassMetadata<T> {
     return this._validators;
   }
 
-  createInstance(state: Payload<T>): T {
+  createInstance(state?: Payload<T>): T {
     const instance: any = new this._clazz();
     const entries = Object.entries(state || {});
 

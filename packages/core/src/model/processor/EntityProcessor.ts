@@ -35,6 +35,13 @@ export default class EntityProcessor<T> {
     this.#cache = {} as EntityProcessorCache<T>;
   }
 
+  public buildEmptyInstance(): T {
+    this.#populateClassMetadata({} as T);
+    const instance = this.#metadata.createInstance();
+    this.#metadata = undefined!;
+    return instance;
+  }
+
   public isValid(state: Payload<T>): boolean {
     return this.#fromCache(state, "valid");
   }
@@ -54,13 +61,7 @@ export default class EntityProcessor<T> {
     let errors: Errors<T> = {} as Errors<T>;
     const state: Payload<T> = payload ?? ({} as Payload<T>);
 
-    if (!this.#metadata) {
-      this.#metadata = new ClassMetadata(
-        this.#clazz,
-        state as T,
-        ...this.#groups
-      );
-    }
+    this.#populateClassMetadata(state as T);
 
     const instance: any = this.#metadata.createInstance(state);
     const entries = Object.entries(this.#metadata.validators);
@@ -221,6 +222,16 @@ export default class EntityProcessor<T> {
       detailedErrors,
       errors,
     };
+  }
+
+  #populateClassMetadata(state: T, forceReinitialize: boolean = false) {
+    if (forceReinitialize || !this.#metadata) {
+      this.#metadata = new ClassMetadata(
+        this.#clazz,
+        state as T,
+        ...this.#groups
+      );
+    }
   }
 
   #saveCache(cache: Partial<EntityProcessorCache<T>>) {
