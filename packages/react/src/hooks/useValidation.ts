@@ -33,5 +33,6 @@ export default function useValidation<T>({
     setValue,
     errors,
     detailedErrors,
+    processor,
   };
 }

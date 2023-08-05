@@ -1,5 +1,5 @@
-import { DetailedErrors, Errors } from "tdv-core";
 import { Dispatch, SetStateAction } from "react";
+import { DetailedErrors, EntityProcessor, Errors } from "tdv-core";
 
 export type DecoratedValidation<T> = {
   value: T;
@@ -7,4 +7,5 @@ export type DecoratedValidation<T> = {
   valid: boolean;
   detailedErrors: DetailedErrors<T>;
   errors: Errors<T>;
+  processor: EntityProcessor<T>;
 };
