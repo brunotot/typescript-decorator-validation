@@ -1,25 +1,24 @@
-import stopwatch from "../../decorators/impl/stopwatch.decorator";
-import PropertyMetadata from "../metadata/PropertyMetadata";
 import ClassMetadata from "../metadata/ClassMetadata";
+import PropertyMetadata from "../metadata/PropertyMetadata";
 import MetadataProcessor from "./MetadataProcessor";
 
+import { ValidationGroup } from "../../decorators/types/DecoratorProps.type";
 import { Class } from "../../types/Class.type";
 import { DetailedErrors } from "../../types/DetailedErrors.type";
-import { ValidationResult } from "../../types/ValidationResult.type";
-import { Payload } from "../../types/Payload.type";
-import { DeducedArray } from "../../types/namespace/Strategy.ns";
-import { deepEquals } from "../../utils/object.utils";
-import { $ } from "../../types/namespace/Utility.ns";
-import { Errors } from "../../types/Errors.type";
-import { ValidationGroup } from "../../decorators/types/DecoratorProps.type";
-import { ValidationMetadata } from "../../types/ValidationMetadata.type";
 import {
   CacheKey,
   EntityProcessorCache,
   EntityProcessorResult,
   ValidityErrorsType,
 } from "../../types/EntityProcessor.type";
+import { Errors } from "../../types/Errors.type";
+import { Payload } from "../../types/Payload.type";
+import { ValidationMetadata } from "../../types/ValidationMetadata.type";
+import { ValidationResult } from "../../types/ValidationResult.type";
+import { DeducedArray } from "../../types/namespace/Strategy.ns";
+import { $ } from "../../types/namespace/Utility.ns";
 import { isValidationGroupUnion } from "../../utils/decorator.utils";
+import { deepEquals } from "../../utils/object.utils";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
@@ -28,6 +27,10 @@ export default class EntityProcessor<T> {
   #groups: ValidationGroup[];
   #metadata!: ClassMetadata<T>;
   #cache: EntityProcessorCache<T>;
+
+  get clazz() {
+    return this.#clazz;
+  }
 
   constructor(clazz: Class<T>, ...groups: ValidationGroup[]) {
     this.#clazz = clazz;
@@ -54,7 +57,7 @@ export default class EntityProcessor<T> {
     return this.#fromCache(state, "errors");
   }
 
-  @stopwatch
+  //@stopwatch
   public validate(payload?: Payload<T>): EntityProcessorResult<T> {
     let valid: boolean = true;
     let detailedErrors: DetailedErrors<T> = {} as DetailedErrors<T>;
