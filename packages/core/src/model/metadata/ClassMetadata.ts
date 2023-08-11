@@ -1,12 +1,12 @@
-import { $ } from "../../types/namespace/Utility.ns";
+import { ValidationGroup } from "../../decorators/types/DecoratorProps.type";
 import { Class } from "../../types/Class.type";
 import { Payload } from "../../types/Payload.type";
-import MetadataProcessor from "../processor/MetadataProcessor";
-import PropertyMetadata from "./PropertyMetadata";
-import { ValidationGroup } from "../../decorators/types/DecoratorProps.type";
 import { ValidationMetadata } from "../../types/ValidationMetadata.type";
+import { $ } from "../../types/namespace/Utility.ns";
 import { getClassFieldNames } from "../../utils/class.utils";
 import { isValidationGroupUnion } from "../../utils/decorator.utils";
+import MetadataProcessor from "../processor/MetadataProcessor";
+import PropertyMetadata from "./PropertyMetadata";
 
 export default class ClassMetadata<T> {
   #runtimeValue: T;

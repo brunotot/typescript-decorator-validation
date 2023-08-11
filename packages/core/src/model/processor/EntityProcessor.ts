@@ -1,7 +1,3 @@
-import ClassMetadata from "../metadata/ClassMetadata";
-import PropertyMetadata from "../metadata/PropertyMetadata";
-import MetadataProcessor from "./MetadataProcessor";
-
 import { ValidationGroup } from "../../decorators/types/DecoratorProps.type";
 import { Class } from "../../types/Class.type";
 import { DetailedErrors } from "../../types/DetailedErrors.type";
@@ -9,7 +5,6 @@ import {
   CacheKey,
   EntityProcessorCache,
   EntityProcessorResult,
-  ValidityErrorsType,
 } from "../../types/EntityProcessor.type";
 import { Errors } from "../../types/Errors.type";
 import { Payload } from "../../types/Payload.type";
@@ -17,8 +12,12 @@ import { ValidationMetadata } from "../../types/ValidationMetadata.type";
 import { ValidationResult } from "../../types/ValidationResult.type";
 import { DeducedArray } from "../../types/namespace/Strategy.ns";
 import { $ } from "../../types/namespace/Utility.ns";
+import { getClassFieldNames } from "../../utils/class.utils";
 import { isValidationGroupUnion } from "../../utils/decorator.utils";
-import { deepEquals } from "../../utils/object.utils";
+import { deepEquals, hasErrors } from "../../utils/object.utils";
+import ClassMetadata from "../metadata/ClassMetadata";
+import PropertyMetadata from "../metadata/PropertyMetadata";
+import MetadataProcessor from "./MetadataProcessor";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
@@ -27,6 +26,7 @@ export default class EntityProcessor<T> {
   #groups: ValidationGroup[];
   #metadata!: ClassMetadata<T>;
   #cache: EntityProcessorCache<T>;
+  #fields: string[];
 
   get metadata() {
     return this.#metadata;
@@ -44,10 +44,15 @@ export default class EntityProcessor<T> {
     return this.#clazz;
   }
 
+  get fields() {
+    return this.#fields;
+  }
+
   constructor(clazz: Class<T>, ...groups: ValidationGroup[]) {
     this.#clazz = clazz;
     this.#groups = Array.from(new Set(groups));
     this.#cache = {} as EntityProcessorCache<T>;
+    this.#fields = getClassFieldNames(clazz);
   }
 
   public buildEmptyInstance(): T {
@@ -71,7 +76,6 @@ export default class EntityProcessor<T> {
 
   //@stopwatch
   public validate(payload?: Payload<T>): EntityProcessorResult<T> {
-    let valid: boolean = true;
     let detailedErrors: DetailedErrors<T> = {} as DetailedErrors<T>;
     let errors: Errors<T> = {} as Errors<T>;
     const state: Payload<T> = payload ?? ({} as Payload<T>);
@@ -87,8 +91,6 @@ export default class EntityProcessor<T> {
     // prettier-ignore
     const collectErrorData = (key: $.Keys<DetailedErrors<T>>, parentData: any, newSimpleErrorsValue: any, childData?: any) => {
       if (Array.isArray(childData)) {
-        valid = this.#recalculateValidity(parentData, valid);
-        valid = this.#recalculateValidity(childData, valid);
         const data = { node: parentData, children: childData };
 
         this.#mutateErrors(
@@ -99,7 +101,6 @@ export default class EntityProcessor<T> {
           newSimpleErrorsValue
         );
       } else {
-        valid = this.#recalculateValidity(parentData, valid);
 
         this.#mutateErrors(
           key,
@@ -225,6 +226,8 @@ export default class EntityProcessor<T> {
       }
     }
 
+    const valid = this.#isValid(errors);
+
     this.#saveCache({
       detailedErrors,
       errors,
@@ -314,24 +317,7 @@ export default class EntityProcessor<T> {
       : cacheValue;
   }
 
-  // prettier-ignore
-  #recalculateValidity(errs: ValidityErrorsType, current: boolean) {
-    return current !== undefined && !current 
-      ? false 
-      : "errors" in errs
-        ? !errs.valid 
-          ? false
-          : current
-        : !errs.length 
-          ? current
-          : Array.isArray(errs[0])
-            ? errs.some((s) => !!(s as ValidationResult[]).length)
-              ? false
-              : current
-            : "errors" in errs[0]
-              ? !!errs.length
-                  ? false
-                  : current
-              : false;
+  #isValid(errors: Errors<T>) {
+    return !hasErrors(errors);
   }
 }

@@ -9,24 +9,22 @@ export default function useValidation<T>({
   groups = [],
 }: DecoratedValidationProps<T>): DecoratedValidation<T> {
   const processor = useMemo(() => new EntityProcessor<T>(model, ...groups), []);
-  const [value, setValue] = useState<T>(
-    defaultValue ?? processor.buildEmptyInstance()
-  );
-  const [detailedErrors, setDetailedErrors] = useState<DetailedErrors<T>>(
-    {} as DetailedErrors<T>
-  );
-  const [errors, setErrors] = useState<Errors<T>>({} as Errors<T>);
-  const payload = value as Payload<T>;
+  const initialForm = defaultValue ?? processor.buildEmptyInstance();
+  const [form, setForm] = useState<T>(initialForm);
+  const payload = form as Payload<T>;
+  const [detailedErrors, setDetailedErrors] = useState({} as DetailedErrors<T>);
+  const [errors, setErrors] = useState({} as Errors<T>);
+  const isValid = processor.isValid(payload);
 
   useEffect(() => {
     setDetailedErrors(processor.getDetailedErrors(payload));
     setErrors(processor.getErrors(payload));
-  }, [value]);
+  }, [form]);
 
   return {
-    valid: processor.isValid(payload),
-    value,
-    setValue,
+    isValid,
+    form,
+    setForm,
     errors,
     detailedErrors,
     processor,

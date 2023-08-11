@@ -1,3 +1,18 @@
+import { Errors } from "../types/Errors.type";
+
+export function hasErrors<T>(data: Errors<T>): boolean {
+  const data0: any = data;
+  if (Array.isArray(data0)) {
+    return data0.some((item) => hasErrors(item));
+  } else if (typeof data0 === "object" && data0 !== null) {
+    return Object.values(data0).some((value: any) => hasErrors(value));
+  } else if (typeof data0 === "string") {
+    return data0.trim() !== "";
+  }
+
+  return false;
+}
+
 export function hasValue<T>(
   obj: T | undefined
 ): obj is NonNullable<typeof obj> {
