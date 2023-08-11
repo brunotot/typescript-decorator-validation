@@ -115,13 +115,19 @@ export default function useForm<T>({
   validationGroups: groups = [],
   onSubmit: onSubmitParam = async () => {},
   onSubmitValidationFail,
-  validateImmediately = false,
+  validateImmediately: validateImmediatelyParam = false,
   standalone = true,
 }: UseFormProps<T>) {
   const ctx = useContext(FormContext);
   const initialSubmitted = !standalone && !!ctx && ctx.submitted;
 
   const [submitted0, setSubmitted] = useState(initialSubmitted);
+  const validateImmediately = standalone
+    ? validateImmediatelyParam
+    : ctx
+    ? ctx.validateImmediately
+    : validateImmediatelyParam;
+
   const submitted = validateImmediately || submitted0;
 
   const {
@@ -198,7 +204,11 @@ export default function useForm<T>({
     []
   ) as ChangeHandlerCache<T>;
 
-  const registerProvider = () => ({ submitted: submitted0, setSubmitted });
+  const providerProps = {
+    submitted: submitted0,
+    setSubmitted,
+    validateImmediately,
+  };
 
   return {
     isValid,
@@ -208,7 +218,7 @@ export default function useForm<T>({
     setForm,
     onSubmit,
     handleChange,
-    registerProvider,
+    providerProps,
     errors: validateImmediately
       ? errors
       : submitted
