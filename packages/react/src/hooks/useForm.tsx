@@ -201,7 +201,6 @@ export default function useForm<T>({
   const registerProvider = () => ({ submitted: submitted0, setSubmitted });
 
   return {
-    errors: submitted ? errors : ({} as Errors<T>),
     isValid,
     submitted,
     cachedHandlers,
@@ -210,5 +209,10 @@ export default function useForm<T>({
     onSubmit,
     handleChange,
     registerProvider,
+    errors: validateImmediately
+      ? errors
+      : submitted
+      ? errors
+      : ({} as Errors<T>),
   };
 }
