@@ -1,9 +1,9 @@
+import EntityProcessor from "../../src/model/processor/EntityProcessor";
 import { Class } from "../../src/types/Class.type";
 import ValidationHandlerMock, {
   IMock,
   buildIOName,
 } from "./ValidationHandlerMock";
-import EntityProcessor from "../../src/model/processor/EntityProcessor";
 
 export type StandardTestProps<T> = {
   Model: Class<IMock<T>>;

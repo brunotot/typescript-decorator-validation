@@ -7,7 +7,7 @@ export function hasErrors<T>(data: Errors<T>): boolean {
   } else if (typeof data0 === "object" && data0 !== null) {
     return Object.values(data0).some((value: any) => hasErrors(value));
   } else if (typeof data0 === "string") {
-    return data0.trim() !== "";
+    return true;
   }
 
   return false;
