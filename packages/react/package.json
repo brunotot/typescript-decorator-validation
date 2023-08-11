@@ -1,6 +1,6 @@
 {
   "name": "tdv-react",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "React library that allows form validation manipulation through TypeScript Decorators",
   "main": "index.js",
   "types": "types/index.d.ts",
@@ -28,7 +28,7 @@
   "author": "Bruno Tot",
   "license": "MIT",
   "peerDependencies": {
-    "tdv-core": "^1.0.7",
+    "tdv-core": "^1.0.8",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.10",
     "react": "^18.2.0",
