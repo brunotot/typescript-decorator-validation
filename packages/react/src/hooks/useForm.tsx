@@ -151,7 +151,7 @@ export default function useForm<T>({
   }, [errors0]);
 
   useEffect(() => {
-    if (!!ctx) {
+    if (!standalone && !!ctx) {
       ctx.setSubmitted(initialSubmitted);
     }
   }, []);
