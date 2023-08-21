@@ -170,7 +170,7 @@ export default function useForm<T>({
   useEffect(() => {
     const contextValue = !!ctx?.submitted;
     const hasParentContext = !!ctx;
-    if (hasParentContext) {
+    if (!standalone && hasParentContext) {
       setSubmitted(contextValue);
     }
   }, [ctx?.submitted]);
