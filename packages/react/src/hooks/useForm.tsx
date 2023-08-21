@@ -120,14 +120,13 @@ export default function useForm<T>({
 }: UseFormProps<T>) {
   const ctx = useContext(FormContext);
   const initialSubmitted = !standalone && !!ctx && ctx.submitted;
-
-  const [submitted0, setSubmitted] = useState(initialSubmitted);
   const validateImmediately = standalone
     ? validateImmediatelyParam
     : ctx
     ? ctx.validateImmediately
     : validateImmediatelyParam;
 
+  const [submitted0, setSubmitted] = useState(initialSubmitted);
   const submitted = validateImmediately || submitted0;
 
   const {
@@ -143,27 +142,41 @@ export default function useForm<T>({
   });
 
   const [errors, setErrors] = useState(errors0);
-  useEffectWhenMounted(whenChanged, [form]);
-  useEffectWhenMounted(() => ctx?.setSubmitted(submitted0), [submitted0]);
 
+  //* Dispatcher function which fires only when
+  //* itself isn't a parent and context exists.
+  const dispatchContext = (bool?: boolean) => {
+    if (!standalone && !!ctx) {
+      ctx?.setSubmitted(!!bool);
+    }
+  };
+
+  //* A wrapper function for setting Submitted value.
+  //* Dispatches to parent only when itself isn't
+  //* a parent and context exists.
+  const handleSetSubmitted = (bool?: boolean) => {
+    const value = !!bool;
+    dispatchContext(value);
+    setSubmitted(value);
+  };
+
+  //* When input data changes execute callback.
+  useEffectWhenMounted(() => whenChanged(), [form]);
+
+  //* When useValidation returns fresh errors object data.
+  useEffectWhenMounted(() => setErrors(errors0), [errors0]);
+
+  //* When submitted flag from context gets changed.
   useEffect(() => {
-    if (!standalone) {
-      setSubmitted(!!ctx?.submitted);
+    const contextValue = !!ctx?.submitted;
+    const hasParentContext = !!ctx;
+    if (hasParentContext) {
+      setSubmitted(contextValue);
     }
   }, [ctx?.submitted]);
 
-  useEffect(() => {
-    setErrors(errors0);
-  }, [errors0]);
-
-  useEffect(() => {
-    if (!standalone && !!ctx) {
-      ctx.setSubmitted(initialSubmitted);
-    }
-  }, []);
-
   const onSubmit = async () => {
-    setSubmitted(true);
+    handleSetSubmitted(true);
 
     if (!isValid) {
       if (submitted) {
@@ -206,7 +219,7 @@ export default function useForm<T>({
 
   const providerProps = {
     submitted: submitted0,
-    setSubmitted,
+    setSubmitted: handleSetSubmitted,
     validateImmediately,
   };
 
