@@ -91,7 +91,7 @@ type ChangeHandlerCache<T> = {
 
 export type UseFormProps<T> = {
   model: Class<T>;
-  defaultValue: T;
+  defaultValue?: T;
   validationGroups?: ValidationGroup[];
   validateImmediately?: boolean;
   standalone?: boolean;
@@ -110,7 +110,7 @@ export type ChangeHandler<T> = <K extends keyof T>(
 export default function useForm<T>({
   // @ts-ignore
   model = emptyClassModel,
-  defaultValue,
+  defaultValue: defaultValue0,
   whenChanged = () => {},
   validationGroups: groups = [],
   onSubmit: onSubmitParam = async () => {},
@@ -118,6 +118,8 @@ export default function useForm<T>({
   validateImmediately: validateImmediatelyParam = false,
   standalone = true,
 }: UseFormProps<T>) {
+  const noArgsConstructedInstance = useMemo(() => new model(), []);
+  const defaultValue = defaultValue0 ?? noArgsConstructedInstance;
   const ctx = useContext(FormContext);
   const initialSubmitted = !standalone && !!ctx && ctx.submitted;
   const validateImmediately = standalone
@@ -154,7 +156,7 @@ export default function useForm<T>({
   //* A wrapper function for setting Submitted value.
   //* Dispatches to parent only when itself isn't
   //* a parent and context exists.
-  const handleSetSubmitted = (bool?: boolean) => {
+  const handleSetSubmitted = (bool: boolean) => {
     const value = !!bool;
     dispatchContext(value);
     setSubmitted(value);
