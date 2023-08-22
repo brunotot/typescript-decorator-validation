@@ -1,8 +1,8 @@
-import React, { Dispatch, SetStateAction, createContext } from "react";
+import React, { createContext } from "react";
 
 type FormContext = {
   submitted: boolean;
-  setSubmitted: Dispatch<SetStateAction<boolean>>;
+  setSubmitted: (bool: boolean) => void;
   validateImmediately: boolean;
 };
 
@@ -11,7 +11,7 @@ export const FormContext = createContext<FormContext | undefined>(undefined);
 export type FormProviderProps = {
   children: React.ReactNode;
   submitted: boolean;
-  setSubmitted: Dispatch<SetStateAction<boolean>>;
+  setSubmitted: (bool: boolean) => void;
   validateImmediately: boolean;
 };
 
