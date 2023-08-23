@@ -7,14 +7,14 @@
   "license": "MIT",
   "scripts": {
     "core/main": "test -d ./node_modules || npm i --force && ts-node packages/core/src/main.ts",
-    "core/test": "cd ./packages/core && export TS_JEST_DISABLE_VER_CHECKER=true && npx jest",
-    "core/build": "cd ./packages/core && npm run build",
-    "core/deploy:minor": "cd ./packages/core && npm run deploy:minor",
-    "core/deploy:major": "cd ./packages/core && npm run deploy:major",
-    "core/deploy:patch": "cd ./packages/core && npm run deploy:patch",
-    "react/deploy:minor": "cd ./packages/react && npm run deploy:minor",
-    "react/deploy:major": "cd ./packages/react && npm run deploy:major",
-    "react/deploy:patch": "cd ./packages/react && npm run deploy:patch",
+    "core/test": "export TS_JEST_DISABLE_VER_CHECKER=true && npx jest --prefix=packages/core",
+    "core/build": "npm run build --prefix=packages/core",
+    "core/deploy:minor": "npm run deploy:minor --prefix=packages/core",
+    "core/deploy:major": "npm run deploy:major --prefix=packages/core",
+    "core/deploy:patch": "npm run deploy:patch --prefix=packages/core",
+    "react/deploy:minor": "npm run deploy:minor --prefix=packages/react",
+    "react/deploy:major": "npm run deploy:major --prefix=packages/react",
+    "react/deploy:patch": "npm run deploy:patch --prefix=packages/react",
     "pushAll": "git commit -am \"struct refactor\" && git push"
   },
   "devDependencies": {
