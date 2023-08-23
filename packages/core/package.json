@@ -9,9 +9,9 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run test && npm run clean && tsc && cp polyfill.d.ts package.json README.md ./dist && rm ./dist/src/main.js && rm ./dist/types/src/main.d.ts",
-    "deploy:minor": "npm cache clean --force && npm i --force && npm version minor --force && npm run build && npm publish --access=public --prefix=dist && git add . && git commit -m 'bump react minor version' && git push",
-    "deploy:major": "npm cache clean --force && npm i --force && npm version major --force && npm run build && npm publish --access=public --prefix=dist && git add . && git commit -m 'bump react major version' && git push",
-    "deploy:patch": "npm cache clean --force && npm i --force && npm version patch --force && npm run build && npm publish --access=public --prefix=dist && git add . && git commit -m 'bump react patch version' && git push",
+    "deploy:minor": "npm cache clean --force && npm i --force && npm version minor --force && npm run build && npm publish --access=public --prefix=dist && git add . && git commit -m 'bump core minor version' && git push",
+    "deploy:major": "npm cache clean --force && npm i --force && npm version major --force && npm run build && npm publish --access=public --prefix=dist && git add . && git commit -m 'bump core major version' && git push",
+    "deploy:patch": "npm cache clean --force && npm i --force && npm version patch --force && npm run build && npm publish --access=public --prefix=dist && git add . && git commit -m 'bump core patch version' && git push",
     "test": "export TS_JEST_DISABLE_VER_CHECKER=true && npx jest",
     "main": "ts-node src/main.ts"
   },
