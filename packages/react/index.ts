@@ -9,7 +9,6 @@ import {
   validators,
 } from "tdv-core";
 
-import "tdv-core/polyfill.d.ts";
 import FormProvider from "./src/contexts/FormContext";
 import useForm from "./src/hooks/useForm";
 

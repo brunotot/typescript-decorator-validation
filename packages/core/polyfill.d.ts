@@ -1,5 +1,3 @@
-import { PrimitiveSetAppend } from "./index";
-
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
 /*
