@@ -1,9 +1,9 @@
-import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
-import { hasValue } from "../../src/utils/object.utils";
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
+import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import ErrorMessage from "../../src/messages/impl/ErrorMessage";
 import { $ } from "../../src/types/namespace/Utility.ns";
 import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
+import { hasValue } from "../../src/utils/object.utils";
 
 export default function Required<T extends $.Nullable>(
   props?: DecoratorPartialProps

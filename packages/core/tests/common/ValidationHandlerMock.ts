@@ -1,5 +1,4 @@
 import EntityProcessor from "../../src/model/processor/EntityProcessor";
-import "./../../polyfill.d.ts";
 
 export interface IMock<T> {
   value: T;
