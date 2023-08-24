@@ -28,7 +28,7 @@
  </a>
  
  <h2 align="center">
-  <a href="https://stackblitz.com/edit/react-ts-d3swd2?file=src%2FApp.tsx&file=src%2Fmodel%2FUserForm.ts">STACKBLITZ DEMO</a>
+  <a href="[https://stackblitz.com/edit/react-ts-d3swd2?file=src%2FApp.tsx&file=src%2Fmodel%2FUserForm.ts](https://stackblitz.com/edit/react-starter-typescript-6cjdjj?file=models%2FExampleModel.ts)">STACKBLITZ DEMO</a>
  </h2>
 </p>
 
