@@ -1,10 +1,12 @@
 <h1 align="center">:rocket: TypeScript Decorator Validation :rocket:</h1>
 
-<p align="center">:star: Class entity validations made easy with the help of 
- <a href="https://www.typescriptlang.org/docs/handbook/decorators.html">@Decorators</a>
+<p align="center">:star: validates forms with TypeScript's native 
+ <a href="https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators">decorators</a>
 </p>
-<p align="center">:star: Allows strict type checking when applying decorator validators</p>
-<p align="center">:star: Works perfectly with existing TypeScript-first applications</p>
+<p align="center">:star: adapts well with existing TypeScript applications</p>
+<p align="center">:star: client-side and server-side supported</p>
+<p align="center">:star: enforces strict type checking</p>
+<p align="center">:star: uses <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html">TypeScript v5</a> syntax</p>
 
 <p align="center">
  <a href="https://npmcharts.com/compare/typescript-decorator-validation?minimal=true">
@@ -32,38 +34,15 @@
 
 - [Installation](#installation)
 - [Contribute](#contribute)
-- [Documentation](#documentation)
-- [Goals and TODOs](#goals-and-todos)
+- [Future goals](#future-goals)
+- [Supported frameworks](#supported-frameworks)
 - [Examples](#examples)
 
 ## Installation
 
-1. Install library dependency
+1. Install core (server-side)
 ```
-npm install typescript-decorator-validation
-```
-2. Allow experimental decorators configuration in your `tsconfig.json`. 
-   <br>This removes IDE errors which could pop-up
-```ts
-{
-  "compilerOptions": {
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    /* ... */
-  }
-}
-```
-3. Add babel configuration to your `tsconfig.json`.
-   <br>This allows for type-safety checking
-```ts
-{
-  plugins: [
-    "babel-plugin-transform-typescript-metadata",
-    ["@babel/plugin-proposal-decorators", { legacy: true }],
-    ["@babel/plugin-proposal-class-properties", { loose: true }],
-  ],
-  presets: ["@babel/preset-typescript"],
-}
+npm install tdv-core
 ```
 
 ## Contribute
@@ -76,45 +55,40 @@ git clone https://github.com/brunotot/typescript-decorator-validation.git
 ```
 4. Checkout a new branch
 ```bash
-git checkout -b "[issue-number]-[issue-description]"
+git checkout -b "[package-name]-[issue-number]-issue-lorem-ipsum"
 ```
 5. Commit and push changes
 6. Open pull request
 
-## Documentation
-
-### [ValidationHandler](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L28)
-
-| Method        | Parameters | Returns | Description |
-|---------------|------------|---------|-------------|
-|`constructor`  |`clazz`:&nbsp;[Class\<T>](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L5)|[ValidationHandler\<T>](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L28)|instantiates `ValidationHandler` class with the given decorated class to validate|
-| `validationData`  |                   | [ValidationData\<T>](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L15) | returns calculated validation data for given class through its metadata decorators           |
-| `hasErrors`       | `state`:&nbsp;Object   | `boolean`          | returns `true` if state object has errors            |
-| `getErrors`       | `state`:&nbsp;Object   | [ErrorData](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L19)        | returns object error state from the calculated validation metadata for the given state object |
-| `validate`        | `state`:&nbsp;Object   | [StateValidationResult](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L23) | returns object state validation result from the calculated validation metadata for the given object state |
-| `buildInstance`   | `state`:&nbsp;Object   | [T](https://github.com/brunotot/typescript-decorator-validation/blob/main/src/handler/ValidationHandler.ts#L36)                | returns instantiated class `T` which is used to construct `ValidationHandler<T>` |
-
-## Goals and TODOs
+## Future goals
 
 - [x] Implement strict type checking
 - [x] Implement predefined decorator validators
-- [ ] Write documentation  
-- [ ] Implement the logic so the library can be used easily in CI tests
+- [ ] Provide fully-fledged documentation  
+- [ ] Implement concise API for CI tests
 - [ ] Implement tests for predefined decorator validators
-- Write implementation libraries for popular front-end frameworks 
-	- [x] [React](https://github.com/brunotot/react-decorate-form)
-	- [ ] Angular
-	- [ ] Svelte
-	- [ ] Vue
-	- [ ] Solid
-	
+- [ ] Write implementation libs for popular front-end frameworks
+
+## Supported Frameworks
+- [x] [view React implementation](https://github.com/brunotot/react-decorate-form)
+- [ ] Angular
+- [ ] Svelte
+- [ ] Vue
+- [ ] Solid
+
+
 ## Examples
 
 A basic TypeScript form can look something like
 ```typescript
-import { validators } from 'react-decorate-form';
+import { validators, EntityProcessor } from 'tdv-core';
 
-export type UserFormFields = {
+/** 
+ *  This is an optional layer of abstraction if the class contains complex
+ *  validation evaluations which shouldn't be registered as properties.
+ *  In this example the "passwordsMatch" field isn't a settable property.
+ */
+ export type UserFormFields = {
   confirmPassword: string;
   firstName: string;
   lastName: string;
@@ -124,14 +98,14 @@ export type UserFormFields = {
 };
 
 export default class UserForm implements UserFormFields {
-  @validators.string.Size({ min: 5 })
-  @validators.string.NotEmpty()
+  @validators.string.MinLength(5)
+  @validators.string.Required()
   firstName!: string;
 
-  @validators.string.NotEmpty()
+  @validators.string.Required()
   lastName!: string;
 
-  @validators.string.NotEmpty()
+  @validators.string.Required()
   @validators.string.Password()
   password!: string;
 
@@ -140,15 +114,56 @@ export default class UserForm implements UserFormFields {
   @validators.string.URL()
   url!: string;
 
-  @validators.number.Range({ min: 18, max: 100 })
+  @validators.number.ValueRange({ min: 18, max: 100 })
   age!: number;
 
-  @validators.boolean.AssertTrue('Passwords must match')
+  @validators.boolean.Truthy("Passwords must match")
   get passwordsMatch(): boolean {
     return this.password === this.confirmPassword;
   }
 }
 ```
-And with some styling we can display the form which can look something like:
 
-![example form](https://github.com/brunotot/typescript-decorator-validation/blob/main/assets/img/example-form-screenshot.png?raw=true)
+And a sample value of type UserForm may look something like
+
+```typescript
+const dummy: Partial<UserFormFields> = {
+  firstName: '',
+  lastName: '',
+  password: "12345",
+  confirmPassword: '',
+  url: '',
+  age: 10,
+};
+```
+
+Now we can inspect the errors of the given sample value
+
+```typescript
+const processor = new EntityProcessor(UserForm);
+const { errors } = processor.validate(dummy);
+console.log(JSON.stringify(errors, null, 2));
+```
+
+And the result is
+```json
+{
+  "firstName": [
+    "Field is mandatory",
+    "Field must contain at least 5 characters"
+  ],
+  "lastName": [
+    "Field is mandatory"
+  ],
+  "password": [
+    "Password must be at least 8 characters long"
+  ],
+  "url": [],
+  "age": [
+    "Value must be greater than or equal to 18 and less than or equal to 100 but is 10"
+  ],
+  "passwordsMatch": [
+    "Passwords must match"
+  ]
+}
+```
