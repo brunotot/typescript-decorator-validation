@@ -1,9 +1,12 @@
 {
   "name": "tdv-react",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "React library that allows form validation manipulation through TypeScript Decorators",
   "main": "dist/index.js",
-  "types": "types/index.d.ts",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "private": false,
   "scripts": {
     "clean": "rm -rf dist",
