@@ -1,21 +1,14 @@
-(Symbol as any).metadata ??= Symbol("Symbol.metadata");
-
-/*
- * import MyPrimitiveClass from '...';
- * declare module "typescript-decorator-validation" {
- *   interface PrimitiveSetAppend {
- *     values: [MyPrimitiveClass];
- *   }
- * }
- */
+import { DecoratorContextMetadata } from "./src/decorators/types/DecoratorContext.type";
 
 declare global {
   interface SymbolConstructor {
-    metadata: unique symbol;
+    readonly metadata: unique symbol;
   }
+
   interface ClassFieldDecoratorContext<This = unknown, Value = unknown> {
     readonly metadata: DecoratorContextMetadata;
   }
+
   interface ClassMethodDecoratorContext<
     This = unknown,
     Value extends (this: This, ...args: any) => any = (
@@ -25,7 +18,10 @@ declare global {
   > {
     readonly metadata: DecoratorContextMetadata;
   }
+
   interface ClassGetterDecoratorContext<This = unknown, Value = unknown> {
     readonly metadata: DecoratorContextMetadata;
   }
 }
+
+Symbol.metadata ??= Symbol("Symbol.metadata");

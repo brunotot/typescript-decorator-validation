@@ -7,6 +7,7 @@ import MaxLength from "../validators/string/MaxLength";
 import MinLength from "../validators/string/MinLength";
 import Password from "../validators/string/Password";
 import Email from "../validators/string/regex/impl/Email";
+import "./../polyfill";
 import { DecoratorPartialProps } from "./decorators/types/DecoratorProps.type";
 import { TypeGroup } from "./types/namespace/TypeGroup.ns";
 import { $ } from "./types/namespace/Utility.ns";
