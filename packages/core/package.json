@@ -1,6 +1,6 @@
 {
   "name": "tdv-core",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "Typescript form validation using Decorators",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -34,6 +34,9 @@
     "url": "https://github.com/brunotot/typescript-decorator-validation/issues"
   },
   "homepage": "https://github.com/brunotot/typescript-decorator-validation#readme",
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  },
   "devDependencies": {
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.1",
