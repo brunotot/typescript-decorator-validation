@@ -1,6 +1,6 @@
 {
   "name": "tdv-react",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "React library that allows form validation manipulation through TypeScript Decorators",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -10,7 +10,7 @@
   "private": false,
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run clean && tsc && cp ../../CODE_OF_CONDUCT.md ../../LICENSE package.json README.md ./dist",
+    "build": "npm run clean && tsc",
     "deploy:minor": "npm cache clean --force && npm i --force && npm version minor --force && npm run build && npm publish --access=public && git add . && git commit -m 'bump react minor version' && git push",
     "deploy:major": "npm cache clean --force && npm i --force && npm version major --force && npm run build && npm publish --access=public && git add . && git commit -m 'bump react major version' && git push",
     "deploy:patch": "npm cache clean --force && npm i --force && npm version patch --force && npm run build && npm publish --access=public && git add . && git commit -m 'bump react patch version' && git push",
