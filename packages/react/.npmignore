@@ -1,9 +1,8 @@
 # Exclude
-/dist
+dist/
 src/
 .gitignore
 index.ts
 node_modules/
 
 # Include
-!dist/*
