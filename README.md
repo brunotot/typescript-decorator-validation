@@ -32,13 +32,13 @@
 
 ## Table of Contents
 
-- [Installation](#installation)
+- [Install](#install)
 - [Contribute](#contribute)
 - [Future goals](#future-goals)
 - [Supported frameworks](#supported-frameworks)
 - [Examples](#examples)
 
-## Installation
+## Install
 
 1. Install core (server-side)
 ```
@@ -70,7 +70,7 @@ git checkout -b "[package-name]-[issue-number]-issue-lorem-ipsum"
 - [ ] Write implementation libs for popular front-end frameworks
 
 ## Supported Frameworks
-- [x] [view React implementation](https://github.com/brunotot/react-decorate-form)
+- [x] [view React implementation](https://github.com/brunotot/typescript-decorator-validation/tree/main/packages/react#readme)
 - [ ] Angular
 - [ ] Svelte
 - [ ] Vue
