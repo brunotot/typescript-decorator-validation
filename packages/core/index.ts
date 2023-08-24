@@ -1,4 +1,3 @@
-import "./polyfill";
 import { makeValidator } from "./src/decorators/facade/validator.facade";
 import { ValidationGroup } from "./src/decorators/types/DecoratorProps.type";
 import { Locale, getLocale, setLocale } from "./src/messages/model/Locale";
