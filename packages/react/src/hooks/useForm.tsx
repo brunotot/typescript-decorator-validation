@@ -98,6 +98,7 @@ export type FormConfig<TClass, TBody = TClass> = {
 };
 
 type ChangeHandlerValue<T, K extends keyof T> = T[K] | ((prev: T[K]) => T[K]);
+type _StripClass<T> = T extends Class<any> ? StripClass<T> : T;
 
 export type ChangeHandler<T> = <K extends keyof T>(
   key: K,
@@ -106,8 +107,8 @@ export type ChangeHandler<T> = <K extends keyof T>(
 
 export default function useForm<
   TClass extends Class<any>,
-  TBody = StripClass<TClass>
->(model: TClass, config?: FormConfig<TClass, TBody>) {
+  TBody = _StripClass<TClass>
+>(model: _StripClass<TClass>, config?: FormConfig<_StripClass<TClass>, TBody>) {
   const defaultValue0 = config?.defaultValue;
   const whenChanged = config?.whenChanged ?? (() => {});
   const groups = config?.validationGroups ?? [];
@@ -132,8 +133,6 @@ export default function useForm<
 
   const [submitted0, setSubmitted] = useState(initialSubmitted);
   const submitted = validateImmediately || submitted0;
-
-  type _StripClass<T> = T extends Class<any> ? StripClass<T> : T;
 
   const {
     form,
@@ -189,7 +188,7 @@ export default function useForm<
       if (submitted) {
         setErrors(newErrors);
       }
-      onSubmitValidationFail?.(newErrors as unknown as Errors<TClass>);
+      onSubmitValidationFail?.(newErrors);
       return;
     }
 
@@ -242,6 +241,6 @@ export default function useForm<
       ? errors
       : submitted
       ? errors
-      : ({} as Errors<TClass>)) as Errors<StripClass<TClass>>,
+      : ({} as Errors<TClass>)) as Errors<_StripClass<TClass>>,
   };
 }
