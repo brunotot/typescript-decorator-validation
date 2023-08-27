@@ -1,4 +1,3 @@
-import "./polyfill";
 import { makeValidator } from "./src/decorators/facade/validator.facade";
 import {
   DecoratorContext,
