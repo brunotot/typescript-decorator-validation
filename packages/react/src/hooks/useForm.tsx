@@ -87,8 +87,7 @@ type ChangeHandlerCache<T> = {
   [K in keyof T]: (value: T[K]) => void;
 };
 
-export type UseFormProps<TClass, TBody = TClass> = {
-  model: Class<TClass>;
+export type FormConfig<TBody> = {
   defaultValue?: TBody;
   validationGroups?: ValidationGroup[];
   validateImmediately?: boolean;
@@ -105,16 +104,21 @@ export type ChangeHandler<T> = <K extends keyof T>(
   value: ChangeHandlerValue<T, K>
 ) => void;
 
-export default function useForm<TClass, TBody = TClass>({
-  model,
-  defaultValue: defaultValue0,
-  whenChanged = () => {},
-  validationGroups: groups = [],
-  onSubmit: onSubmitParam = async () => {},
-  onSubmitValidationFail,
-  validateImmediately: validateImmediatelyParam = false,
-  standalone = true,
-}: UseFormProps<TClass, TBody>) {
+export default function useForm<TClass, TBody = TClass>(
+  model: Class<TClass>,
+  config?: FormConfig<TBody>
+) {
+  const defaultValue0 = config?.defaultValue;
+  const whenChanged = config?.whenChanged ?? (() => {});
+  const groups = config?.validationGroups ?? [];
+  const onSubmitParam = config?.onSubmit ?? (async () => {});
+  const validateImmediatelyParam =
+    config?.validateImmediately === undefined
+      ? false
+      : config?.validateImmediately!;
+  const standalone =
+    config?.standalone === undefined ? true : config.standalone!;
+  const onSubmitValidationFail = config?.onSubmitValidationFail;
   const noArgsConstructedInstance = useMemo(() => new model(), []);
   const defaultValue =
     defaultValue0 ?? (noArgsConstructedInstance as unknown as TBody);
