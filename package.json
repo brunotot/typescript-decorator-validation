@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "core/main": "test -d ./node_modules || npm i --force && ts-node packages/core/src/main.ts",
-    "core/test": "export TS_JEST_DISABLE_VER_CHECKER=true && npx jest --prefix=packages/core",
+    "core/test": "export TS_JEST_DISABLE_VER_CHECKER=true && cd ./packages/core && npx jest",
     "core/build": "npm run build --prefix=packages/core",
     "core/deploy:minor": "npm run deploy:minor --prefix=packages/core",
     "core/deploy:major": "npm run deploy:major --prefix=packages/core",
