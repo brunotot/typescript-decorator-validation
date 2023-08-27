@@ -227,19 +227,21 @@ export default function useForm<TClass, TBody = TClass>(
     validateImmediately,
   };
 
-  return {
-    isValid,
-    isSubmitted: submitted,
-    cachedHandlers,
+  return [
     form,
     setForm,
-    onSubmit,
-    handleChange,
-    providerProps,
-    errors: (validateImmediately
-      ? errors
-      : submitted
-      ? errors
-      : ({} as Errors<TClass>)) as Errors<TClass>,
-  };
+    {
+      isValid,
+      isSubmitted: submitted,
+      cachedHandlers,
+      onSubmit,
+      handleChange,
+      providerProps,
+      errors: (validateImmediately
+        ? errors
+        : submitted
+        ? errors
+        : ({} as Errors<TClass>)) as Errors<TClass>,
+    },
+  ] as const;
 }
