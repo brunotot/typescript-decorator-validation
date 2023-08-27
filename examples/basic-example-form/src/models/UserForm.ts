@@ -1,3 +1,4 @@
+import "tdv-core";
 import { validators } from "tdv-core";
 import AdultAgeValid from "../validators/AdultAgeValid";
 import CaseInsensitiveContains from "../validators/CaseInsensitiveContains";
