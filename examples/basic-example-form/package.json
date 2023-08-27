@@ -13,8 +13,8 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tdv-core": "^1.0.30",
-    "tdv-react": "^1.0.43"
+    "tdv-core": "^1.0.33",
+    "tdv-react": "^1.0.45"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

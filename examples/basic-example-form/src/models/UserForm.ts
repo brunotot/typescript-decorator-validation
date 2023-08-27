@@ -1,4 +1,3 @@
-import "tdv-core";
 import { validators } from "tdv-core";
 import AdultAgeValid from "../validators/AdultAgeValid";
 import CaseInsensitiveContains from "../validators/CaseInsensitiveContains";
@@ -36,7 +35,7 @@ export default class UserForm implements User {
     message: "Passwords must match!",
     groups: "native",
   })
-  private get arePasswordsEqual() {
+  get arePasswordsEqual() {
     return this.password === this.confirmPassword;
   }
 }

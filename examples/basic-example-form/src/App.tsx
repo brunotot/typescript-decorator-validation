@@ -1,4 +1,3 @@
-import "tdv-core";
 import UserFormControls from "./components/controls/UserFormControls";
 
 function App() {
