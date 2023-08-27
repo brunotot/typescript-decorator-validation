@@ -1,5 +1,9 @@
+import "./polyfill";
 import { makeValidator } from "./src/decorators/facade/validator.facade";
-import { DecoratorContextMetadata } from "./src/decorators/types/DecoratorContext.type";
+import {
+  DecoratorContext,
+  DecoratorContextMetadata,
+} from "./src/decorators/types/DecoratorContext.type";
 import { ValidationGroup } from "./src/decorators/types/DecoratorProps.type";
 import { Locale, getLocale, setLocale } from "./src/messages/model/Locale";
 import EntityProcessor from "./src/model/processor/EntityProcessor";
@@ -16,6 +20,7 @@ export interface PrimitiveSetAppend {}
 
 export type {
   Class,
+  DecoratorContext,
   DecoratorContextMetadata,
   DetailedErrors,
   Errors,
