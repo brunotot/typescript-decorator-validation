@@ -19,11 +19,13 @@ export function extractMessage<T extends object>(
 
 export function extractGroups<T extends object>(
   provider: DecoratorPartialProps<any, T>
-) {
-  return typeof provider === "object"
+): ValidationGroup[] {
+  return Array.isArray(provider)
+    ? provider
+    : typeof provider === "object"
     ? Array.isArray(provider.groups)
       ? provider.groups
-      : provider.groups !== undefined && provider.groups !== null
+      : provider.groups
       ? [provider.groups]
       : []
     : [];
