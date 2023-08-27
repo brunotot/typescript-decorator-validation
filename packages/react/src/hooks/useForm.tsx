@@ -229,7 +229,7 @@ export default function useForm<TClass, TBody = TClass>(
 
   return {
     isValid,
-    submitted,
+    isSubmitted: submitted,
     cachedHandlers,
     form,
     setForm,
