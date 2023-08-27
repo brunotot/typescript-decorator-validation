@@ -133,15 +133,17 @@ export default function useForm<
   const [submitted0, setSubmitted] = useState(initialSubmitted);
   const submitted = validateImmediately || submitted0;
 
+  type _StripClass<T> = T extends Class<any> ? StripClass<T> : T;
+
   const {
     form,
     setForm,
     errors: errors0,
     isValid,
     processor,
-  } = useValidation<StripClass<TClass>, TBody>({
+  } = useValidation<_StripClass<TClass>, _StripClass<TBody>>({
     model,
-    defaultValue,
+    defaultValue: defaultValue as _StripClass<TBody>,
     groups,
   });
 
