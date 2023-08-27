@@ -1,5 +1,24 @@
 import { Errors } from "../types/Errors.type";
 
+function hasSetter<T, K extends keyof T>(parent: T, key: K): boolean {
+  const descriptor = Object.getOwnPropertyDescriptor(parent, key);
+  return (
+    !!descriptor &&
+    (descriptor.writable || typeof descriptor.set === "function")
+  );
+}
+
+export function safeSetter<T, K extends keyof T>(parent: T, key: K) {
+  console.log(parent, key, hasSetter(parent, key));
+  console.log(Object.getOwnPropertyDescriptor(parent, key));
+  return (value: T[K] | (() => T[K])) => {
+    if (hasSetter(parent, key)) {
+      console.log("Ovdje svakako");
+      parent[key] = typeof value === "function" ? (value as Function)() : value;
+    }
+  };
+}
+
 export function hasErrors<T>(data: Errors<T>): boolean {
   const data0: any = data;
   if (Array.isArray(data0)) {

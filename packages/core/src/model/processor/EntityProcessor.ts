@@ -80,8 +80,6 @@ export default class EntityProcessor<T> {
     let detailedErrors: DetailedErrors<T> = {} as DetailedErrors<T>;
     const state: Payload<T> = payload ?? (this.#noArgsInstance as Payload<T>);
 
-    this.#setMetadata(state);
-
     const instance: any = this.#metadata.createInstance(state);
     const entries = Object.entries(this.#metadata.validators);
 

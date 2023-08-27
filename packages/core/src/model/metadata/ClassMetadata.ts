@@ -5,6 +5,7 @@ import { ValidationMetadata } from "../../types/ValidationMetadata.type";
 import { $ } from "../../types/namespace/Utility.ns";
 import { getClassFieldNames } from "../../utils/class.utils";
 import { isValidationGroupUnion } from "../../utils/decorator.utils";
+import { safeSetter } from "../../utils/object.utils";
 import MetadataProcessor from "../processor/MetadataProcessor";
 import PropertyMetadata from "./PropertyMetadata";
 
@@ -49,7 +50,10 @@ export default class ClassMetadata<T> {
         instance?.[key],
         ...this._validationGroups
       );
-      instance[key] = innerValidationHandler.createInstance(value);
+      safeSetter(
+        instance,
+        key
+      )(() => innerValidationHandler.createInstance(value));
     };
 
     const handleObjectArray = (
@@ -57,7 +61,7 @@ export default class ClassMetadata<T> {
       key: string,
       value: any[]
     ) => {
-      instance[key] = [];
+      safeSetter(instance, key)([]);
       const innerValidationHandler = new ClassMetadata(
         meta.clazz!,
         instance?.[key],
@@ -84,7 +88,7 @@ export default class ClassMetadata<T> {
           break;
         }
         default: {
-          instance[key] = value;
+          safeSetter(instance, key)(value);
         }
       }
     }
