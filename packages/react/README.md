@@ -44,7 +44,7 @@
 
 1. Install core and react related dependencies
 ```bash
-npm install typescript@latest --save-dev && npm install tdv-core tdv-react
+npm install typescript@latest --save-dev && npm install tdv-core tdv-react --force
 ```
 
 2. Apply polyfill inside `src/main.tsx`
