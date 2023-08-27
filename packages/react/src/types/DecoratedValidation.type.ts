@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 import { DetailedErrors, EntityProcessor, Errors } from "tdv-core";
 
-export type DecoratedValidation<T> = {
-  form: T;
-  setForm: Dispatch<SetStateAction<T>>;
+export type DecoratedValidation<TClass, TBody = TClass> = {
+  form: TBody;
+  setForm: Dispatch<SetStateAction<TBody>>;
   isValid: boolean;
-  detailedErrors: DetailedErrors<T>;
-  errors: Errors<T>;
-  processor: EntityProcessor<T>;
+  detailedErrors: DetailedErrors<TClass>;
+  errors: Errors<TClass>;
+  processor: EntityProcessor<TClass>;
 };

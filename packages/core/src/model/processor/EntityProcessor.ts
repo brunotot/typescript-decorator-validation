@@ -27,6 +27,7 @@ export default class EntityProcessor<T> {
   #metadata!: ClassMetadata<T>;
   #cache: EntityProcessorCache<T>;
   #fields: string[];
+  #noArgsInstance: T;
 
   get metadata() {
     return this.#metadata;
@@ -48,18 +49,17 @@ export default class EntityProcessor<T> {
     return this.#fields;
   }
 
+  get noArgsInstance() {
+    return this.#noArgsInstance;
+  }
+
   constructor(clazz: Class<T>, ...groups: ValidationGroup[]) {
     this.#clazz = clazz;
     this.#groups = Array.from(new Set(groups));
     this.#cache = {} as EntityProcessorCache<T>;
     this.#fields = getClassFieldNames(clazz);
-  }
-
-  public buildEmptyInstance(): T {
-    this.#populateClassMetadata({} as T);
-    const instance = this.#metadata.createInstance();
-    this.#metadata = undefined!;
-    return instance;
+    this.#noArgsInstance = new clazz();
+    this.#setMetadata(this.#noArgsInstance as Payload<T>);
   }
 
   public isValid(state: Payload<T>): boolean {
@@ -76,11 +76,11 @@ export default class EntityProcessor<T> {
 
   //@stopwatch
   public validate(payload?: Payload<T>): EntityProcessorResult<T> {
-    let detailedErrors: DetailedErrors<T> = {} as DetailedErrors<T>;
     let errors: Errors<T> = {} as Errors<T>;
-    const state: Payload<T> = payload ?? ({} as Payload<T>);
+    let detailedErrors: DetailedErrors<T> = {} as DetailedErrors<T>;
+    const state: Payload<T> = payload ?? (this.#noArgsInstance as Payload<T>);
 
-    this.#populateClassMetadata(state as T);
+    this.#setMetadata(state);
 
     const instance: any = this.#metadata.createInstance(state);
     const entries = Object.entries(this.#metadata.validators);
@@ -242,14 +242,12 @@ export default class EntityProcessor<T> {
     };
   }
 
-  #populateClassMetadata(state: T, forceReinitialize: boolean = false) {
-    if (forceReinitialize || !this.#metadata) {
-      this.#metadata = new ClassMetadata(
-        this.#clazz,
-        state as T,
-        ...this.#groups
-      );
-    }
+  #setMetadata(state: Payload<T>) {
+    this.#metadata = new ClassMetadata(
+      this.#clazz,
+      state as T,
+      ...this.#groups
+    );
   }
 
   #saveCache(cache: Partial<EntityProcessorCache<T>>) {

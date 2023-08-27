@@ -1,7 +1,7 @@
 import { Class, ValidationGroup } from "tdv-core";
 
-export type DecoratedValidationProps<T> = {
-  model: Class<T>;
-  defaultValue?: T;
+export type DecoratedValidationProps<TClass, TBody = TClass> = {
+  model: Class<TClass>;
+  defaultValue?: TBody;
   groups?: ValidationGroup[];
 };
