@@ -147,13 +147,15 @@ export default function useForm<TFields>({
   const [submitted0, setSubmitted] = useState(initialSubmitted);
   const submitted = validateImmediately || submitted0;
 
+  type TClassModel = StripClass<typeof model>;
+
   const {
     form,
     setForm,
     errors: errors0,
     isValid,
     processor,
-  } = useValidation<StripClass<typeof model>>({
+  } = useValidation<TClassModel>({
     model,
     defaultValue,
     groups,
@@ -254,6 +256,6 @@ export default function useForm<TFields>({
       ? errors
       : submitted
       ? errors
-      : ({} as Errors<TFields>),
+      : ({} as Errors<TClassModel>),
   };
 }

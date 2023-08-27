@@ -3,17 +3,26 @@ import { DetailedErrors, EntityProcessor, Errors, Payload } from "tdv-core";
 import { DecoratedValidation } from "../types/DecoratedValidation.type";
 import { DecoratedValidationProps } from "../types/DecoratedValidationProps.type";
 
-export default function useValidation<T>({
+export default function useValidation<TClass, TBody = TClass>({
   defaultValue,
   model,
   groups = [],
-}: DecoratedValidationProps<T>): DecoratedValidation<T> {
-  const processor = useMemo(() => new EntityProcessor<T>(model, ...groups), []);
-  const initialForm = defaultValue ?? processor.buildEmptyInstance();
-  const [form, setForm] = useState<T>(initialForm);
-  const payload = form as Payload<T>;
-  const [detailedErrors, setDetailedErrors] = useState({} as DetailedErrors<T>);
-  const [errors, setErrors] = useState({} as Errors<T>);
+}: DecoratedValidationProps<TClass, TBody>): DecoratedValidation<
+  TClass,
+  TBody
+> {
+  const processor = useMemo(
+    () => new EntityProcessor<TClass>(model, ...groups),
+    []
+  );
+  const [form, setForm] = useState<TBody>(
+    defaultValue ?? (processor.noArgsInstance as unknown as TBody)
+  );
+  const payload = form as Payload<TClass>;
+  const [detailedErrors, setDetailedErrors] = useState(
+    {} as DetailedErrors<TClass>
+  );
+  const [errors, setErrors] = useState({} as Errors<TClass>);
   const isValid = processor.isValid(payload);
 
   useEffect(() => {
