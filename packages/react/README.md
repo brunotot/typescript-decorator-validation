@@ -28,7 +28,7 @@
  </a>
  
  <h2 align="center">
-  <a href="https://stackblitz.com/edit/react-starter-typescript-6cjdjj?file=components%2FUserFormControls.tsx">STACKBLITZ DEMO</a>
+  <a href="https://stackblitz.com/edit/react-starter-typescript-6cjdjj?file=components%2Fcontrols%2FUserFormControls.tsx">STACKBLITZ DEMO</a>
  </h2>
 </p>
 
