@@ -2,7 +2,7 @@ import { makeValidator } from "./src/decorators/facade/validator.facade";
 import { ValidationGroup } from "./src/decorators/types/DecoratorProps.type";
 import { Locale, getLocale, setLocale } from "./src/messages/model/Locale";
 import EntityProcessor from "./src/model/processor/EntityProcessor";
-import { Class } from "./src/types/Class.type";
+import { Class, StripClass } from "./src/types/Class.type";
 import { DetailedErrors } from "./src/types/DetailedErrors.type";
 import { Errors } from "./src/types/Errors.type";
 import { Payload } from "./src/types/Payload.type";
@@ -19,6 +19,7 @@ export type {
   Errors,
   Locale,
   Payload,
+  StripClass,
   ValidationEvaluator,
   ValidationGroup,
   ValidationResult,

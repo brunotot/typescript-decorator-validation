@@ -11,6 +11,7 @@ import Email from "../validators/string/regex/impl/Email";
 import { DecoratorPartialProps } from "./decorators/types/DecoratorProps.type";
 import { setLocale } from "./messages/model/Locale";
 import EntityProcessor from "./model/processor/EntityProcessor";
+import { StripClass } from "./types/Class.type";
 import { TypeGroup } from "./types/namespace/TypeGroup.ns";
 import { $ } from "./types/namespace/Utility.ns";
 import { extractGroups, extractMessage } from "./utils/decorator.utils";
@@ -127,3 +128,6 @@ function main() {
 }
 
 main();
+
+type TestType = StripClass<typeof UserForm>;
+//    ^?
