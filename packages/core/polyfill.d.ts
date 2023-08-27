@@ -23,5 +23,3 @@ declare global {
     readonly metadata: DecoratorContextMetadata;
   }
 }
-
-Symbol.metadata ??= Symbol("Symbol.metadata");
