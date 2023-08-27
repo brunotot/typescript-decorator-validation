@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { Class, Errors, ValidationGroup } from "tdv-core";
+import { Class, Errors, StripClass, ValidationGroup } from "tdv-core";
 import { $ } from "tdv-core/src/types/namespace/Utility.ns";
 import { useValidation } from "tdv-react";
 import { FormContext } from "../contexts/FormContext";
@@ -104,10 +104,10 @@ export type ChangeHandler<T> = <K extends keyof T>(
   value: ChangeHandlerValue<T, K>
 ) => void;
 
-export default function useForm<TClass, TBody = TClass>(
-  model: Class<TClass>,
-  config?: FormConfig<TClass, TBody>
-) {
+export default function useForm<
+  TClass extends Class<any>,
+  TBody = StripClass<TClass>
+>(model: TClass, config?: FormConfig<TClass, TBody>) {
   const defaultValue0 = config?.defaultValue;
   const whenChanged = config?.whenChanged ?? (() => {});
   const groups = config?.validationGroups ?? [];
@@ -139,7 +139,7 @@ export default function useForm<TClass, TBody = TClass>(
     errors: errors0,
     isValid,
     processor,
-  } = useValidation<TClass, TBody>({
+  } = useValidation<StripClass<TClass>, TBody>({
     model,
     defaultValue,
     groups,
@@ -187,7 +187,7 @@ export default function useForm<TClass, TBody = TClass>(
       if (submitted) {
         setErrors(newErrors);
       }
-      onSubmitValidationFail?.(newErrors);
+      onSubmitValidationFail?.(newErrors as unknown as Errors<TClass>);
       return;
     }
 
@@ -236,10 +236,10 @@ export default function useForm<TClass, TBody = TClass>(
     onSubmit,
     handleChange,
     providerProps,
-    errors: validateImmediately
+    errors: (validateImmediately
       ? errors
       : submitted
       ? errors
-      : ({} as Errors<TClass>),
+      : ({} as Errors<TClass>)) as Errors<StripClass<TClass>>,
   };
 }
