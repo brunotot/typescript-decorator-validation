@@ -87,13 +87,13 @@ type ChangeHandlerCache<T> = {
   [K in keyof T]: (value: T[K]) => void;
 };
 
-export type FormConfig<TBody> = {
+export type FormConfig<TClass, TBody = TClass> = {
   defaultValue?: TBody;
   validationGroups?: ValidationGroup[];
   validateImmediately?: boolean;
   standalone?: boolean;
   onSubmit?: () => Promise<void> | void;
-  onSubmitValidationFail?: () => void;
+  onSubmitValidationFail?: (errors: Errors<TClass>) => void;
   whenChanged?: () => void;
 };
 
@@ -106,7 +106,7 @@ export type ChangeHandler<T> = <K extends keyof T>(
 
 export default function useForm<TClass, TBody = TClass>(
   model: Class<TClass>,
-  config?: FormConfig<TBody>
+  config?: FormConfig<TClass, TBody>
 ) {
   const defaultValue0 = config?.defaultValue;
   const whenChanged = config?.whenChanged ?? (() => {});
@@ -183,11 +183,11 @@ export default function useForm<TClass, TBody = TClass>(
     handleSetSubmitted(true);
 
     if (!isValid) {
+      const newErrors = submitted ? structuredClone(errors) : errors;
       if (submitted) {
-        const clonedErrors = structuredClone(errors);
-        setErrors(clonedErrors);
+        setErrors(newErrors);
       }
-      onSubmitValidationFail?.();
+      onSubmitValidationFail?.(newErrors);
       return;
     }
 
