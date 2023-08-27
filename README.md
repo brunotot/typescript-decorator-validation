@@ -14,7 +14,7 @@
  </a>
  
  <a href="https://www.npmjs.com/package/typescript-decorator-validation">
-  <img alt="NPM Version" src="https://img.shields.io/npm/v/typescript-decorator-validation.svg" height="20"/>
+  <img alt="NPM Version" src="https://img.shields.io/npm/v/tdv-core.svg" height="20"/>
  </a>
  
  <a href="https://github.com/brunotot/typescript-decorator-validation/graphs/contributors">
