@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { Class, Errors, ValidationGroup } from "tdv-core";
+import { Class, Errors, StripClass, ValidationGroup } from "tdv-core";
 import { $ } from "tdv-core/src/types/namespace/Utility.ns";
 import { useValidation } from "tdv-react";
 import { FormContext } from "../contexts/FormContext";
@@ -89,9 +89,25 @@ type ChangeHandlerCache<T> = {
   [K in keyof T]: (value: T[K]) => void;
 };
 
-export type UseFormProps<T> = {
-  model: Class<T>;
-  defaultValue?: T;
+/**
+ * 
+ * 
+ export type UseFormProps<M> = {
+  model: Class<M>;
+  defaultValue?: M;
+  validationGroups?: ValidationGroup[];
+  validateImmediately?: boolean;
+  standalone?: boolean;
+  onSubmit?: () => Promise<void> | void;
+  onSubmitValidationFail?: () => void;
+  whenChanged?: () => void;
+};
+ * 
+ */
+
+export type UseFormProps<M> = {
+  model: Class<M>;
+  defaultValue?: M;
   validationGroups?: ValidationGroup[];
   validateImmediately?: boolean;
   standalone?: boolean;
@@ -107,7 +123,7 @@ export type ChangeHandler<T> = <K extends keyof T>(
   value: ChangeHandlerValue<T, K>
 ) => void;
 
-export default function useForm<T>({
+export default function useForm<TFields>({
   // @ts-ignore
   model = emptyClassModel,
   defaultValue: defaultValue0,
@@ -117,7 +133,7 @@ export default function useForm<T>({
   onSubmitValidationFail,
   validateImmediately: validateImmediatelyParam = false,
   standalone = true,
-}: UseFormProps<T>) {
+}: UseFormProps<TFields>) {
   const noArgsConstructedInstance = useMemo(() => new model(), []);
   const defaultValue = defaultValue0 ?? noArgsConstructedInstance;
   const ctx = useContext(FormContext);
@@ -137,7 +153,7 @@ export default function useForm<T>({
     errors: errors0,
     isValid,
     processor,
-  } = useValidation<T>({
+  } = useValidation<StripClass<typeof model>>({
     model,
     defaultValue,
     groups,
@@ -192,7 +208,7 @@ export default function useForm<T>({
     await onSubmitParam();
   };
 
-  const handleChange: ChangeHandler<T> = useCallback(
+  const handleChange: ChangeHandler<TFields> = useCallback(
     (key, value) => {
       setForm((prev) => {
         const obj: any = {};
@@ -207,17 +223,17 @@ export default function useForm<T>({
     [setForm]
   );
 
-  const cachedHandlers: ChangeHandlerCache<T> = useMemo(
+  const cachedHandlers: ChangeHandlerCache<TFields> = useMemo(
     () =>
       processor.fields.reduce(
         (prev, prop) => ({
           ...prev,
-          [prop]: (value: any) => handleChange(prop as keyof T, value),
+          [prop]: (value: any) => handleChange(prop as keyof TFields, value),
         }),
         {}
       ),
     []
-  ) as ChangeHandlerCache<T>;
+  ) as ChangeHandlerCache<TFields>;
 
   const providerProps = {
     submitted: submitted0,
@@ -238,6 +254,6 @@ export default function useForm<T>({
       ? errors
       : submitted
       ? errors
-      : ({} as Errors<T>),
+      : ({} as Errors<TFields>),
   };
 }
