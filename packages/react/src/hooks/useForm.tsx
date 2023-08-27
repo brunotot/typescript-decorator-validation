@@ -108,7 +108,7 @@ export type ChangeHandler<T> = <K extends keyof T>(
 export default function useForm<
   TClass extends Class<any>,
   TBody = _StripClass<TClass>
->(model: _StripClass<TClass>, config?: FormConfig<_StripClass<TClass>, TBody>) {
+>(model: _StripClass<TClass>, config?: FormConfig<typeof model, TBody>) {
   const defaultValue0 = config?.defaultValue;
   const whenChanged = config?.whenChanged ?? (() => {});
   const groups = config?.validationGroups ?? [];
