@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { Class, Errors, StripClass, ValidationGroup } from "tdv-core";
+import { Class, Errors, ValidationGroup } from "tdv-core";
 import { $ } from "tdv-core/src/types/namespace/Utility.ns";
 import { useValidation } from "tdv-react";
 import { FormContext } from "../contexts/FormContext";
@@ -83,31 +83,13 @@ function findFirstStringInNestedArray(obj: any): string | null {
   return null;
 }
 
-const emptyClassModel = class {};
-
 type ChangeHandlerCache<T> = {
   [K in keyof T]: (value: T[K]) => void;
 };
 
-/**
- * 
- * 
- export type UseFormProps<M> = {
-  model: Class<M>;
-  defaultValue?: M;
-  validationGroups?: ValidationGroup[];
-  validateImmediately?: boolean;
-  standalone?: boolean;
-  onSubmit?: () => Promise<void> | void;
-  onSubmitValidationFail?: () => void;
-  whenChanged?: () => void;
-};
- * 
- */
-
-export type UseFormProps<M> = {
-  model: Class<M>;
-  defaultValue?: M;
+export type UseFormProps<TClass, TBody = TClass> = {
+  model: Class<TClass>;
+  defaultValue?: TBody;
   validationGroups?: ValidationGroup[];
   validateImmediately?: boolean;
   standalone?: boolean;
@@ -123,9 +105,8 @@ export type ChangeHandler<T> = <K extends keyof T>(
   value: ChangeHandlerValue<T, K>
 ) => void;
 
-export default function useForm<TFields>({
-  // @ts-ignore
-  model = emptyClassModel,
+export default function useForm<TClass, TBody = TClass>({
+  model,
   defaultValue: defaultValue0,
   whenChanged = () => {},
   validationGroups: groups = [],
@@ -133,9 +114,10 @@ export default function useForm<TFields>({
   onSubmitValidationFail,
   validateImmediately: validateImmediatelyParam = false,
   standalone = true,
-}: UseFormProps<TFields>) {
+}: UseFormProps<TClass, TBody>) {
   const noArgsConstructedInstance = useMemo(() => new model(), []);
-  const defaultValue = defaultValue0 ?? noArgsConstructedInstance;
+  const defaultValue =
+    defaultValue0 ?? (noArgsConstructedInstance as unknown as TBody);
   const ctx = useContext(FormContext);
   const initialSubmitted = !standalone && !!ctx && ctx.submitted;
   const validateImmediately = standalone
@@ -147,15 +129,13 @@ export default function useForm<TFields>({
   const [submitted0, setSubmitted] = useState(initialSubmitted);
   const submitted = validateImmediately || submitted0;
 
-  type TClassModel = StripClass<typeof model>;
-
   const {
     form,
     setForm,
     errors: errors0,
     isValid,
     processor,
-  } = useValidation<TClassModel>({
+  } = useValidation<TClass, TBody>({
     model,
     defaultValue,
     groups,
@@ -210,7 +190,7 @@ export default function useForm<TFields>({
     await onSubmitParam();
   };
 
-  const handleChange: ChangeHandler<TFields> = useCallback(
+  const handleChange: ChangeHandler<TBody> = useCallback(
     (key, value) => {
       setForm((prev) => {
         const obj: any = {};
@@ -225,17 +205,17 @@ export default function useForm<TFields>({
     [setForm]
   );
 
-  const cachedHandlers: ChangeHandlerCache<TFields> = useMemo(
+  const cachedHandlers: ChangeHandlerCache<TBody> = useMemo(
     () =>
       processor.fields.reduce(
         (prev, prop) => ({
           ...prev,
-          [prop]: (value: any) => handleChange(prop as keyof TFields, value),
+          [prop]: (value: any) => handleChange(prop as keyof TBody, value),
         }),
         {}
       ),
     []
-  ) as ChangeHandlerCache<TFields>;
+  ) as ChangeHandlerCache<TBody>;
 
   const providerProps = {
     submitted: submitted0,
@@ -256,6 +236,6 @@ export default function useForm<TFields>({
       ? errors
       : submitted
       ? errors
-      : ({} as Errors<TClassModel>),
+      : ({} as Errors<TClass>),
   };
 }
