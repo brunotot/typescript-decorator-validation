@@ -52,6 +52,8 @@ npm install typescript@latest --save-dev && npm install tdv-core tdv-react
 import "tdv-core/dist/polyfill";
 ```
 
+3. :rocket: Done. You are ready to go
+
 ## Contribute
 
 1. Open bash terminal
