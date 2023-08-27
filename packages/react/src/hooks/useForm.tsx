@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { Class, Errors, StripClass, ValidationGroup } from "tdv-core";
+import { Class, Errors, ValidationGroup } from "tdv-core";
 import { $ } from "tdv-core/src/types/namespace/Utility.ns";
 import { useValidation } from "tdv-react";
 import { FormContext } from "../contexts/FormContext";
@@ -98,17 +98,16 @@ export type FormConfig<TClass, TBody = TClass> = {
 };
 
 type ChangeHandlerValue<T, K extends keyof T> = T[K] | ((prev: T[K]) => T[K]);
-type _StripClass<T> = T extends Class<any> ? StripClass<T> : T;
 
 export type ChangeHandler<T> = <K extends keyof T>(
   key: K,
   value: ChangeHandlerValue<T, K>
 ) => void;
 
-export default function useForm<
-  TClass extends Class<any>,
-  TBody = _StripClass<TClass>
->(model: _StripClass<TClass>, config?: FormConfig<typeof model, TBody>) {
+export default function useForm<TClass, TBody = TClass>(
+  model: Class<TClass>,
+  config?: FormConfig<TClass, TBody>
+) {
   const defaultValue0 = config?.defaultValue;
   const whenChanged = config?.whenChanged ?? (() => {});
   const groups = config?.validationGroups ?? [];
@@ -140,9 +139,9 @@ export default function useForm<
     errors: errors0,
     isValid,
     processor,
-  } = useValidation<_StripClass<TClass>, _StripClass<TBody>>({
+  } = useValidation<TClass, TBody>({
     model,
-    defaultValue: defaultValue as _StripClass<TBody>,
+    defaultValue,
     groups,
   });
 
@@ -241,6 +240,6 @@ export default function useForm<
       ? errors
       : submitted
       ? errors
-      : ({} as Errors<TClass>)) as Errors<_StripClass<TClass>>,
+      : ({} as Errors<TClass>)) as Errors<TClass>,
   };
 }
