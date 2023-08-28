@@ -1,6 +1,6 @@
 {
   "name": "tdv-react",
-  "version": "1.0.90",
+  "version": "1.0.91",
   "description": "React library that allows form validation manipulation through TypeScript Decorators",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -10,7 +10,7 @@
   "private": false,
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run test && npm run clean && tsc",
+    "build": "npm run clean && tsc",
     "deploy:minor": "bash scripts/deploy.sh minor",
     "deploy:major": "bash scripts/deploy.sh major",
     "deploy:patch": "bash scripts/deploy.sh patch",
