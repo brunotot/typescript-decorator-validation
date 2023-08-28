@@ -16,5 +16,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react"
-  }
+  },
+  "exclude": ["tests", "jest.config.js"]
 }
