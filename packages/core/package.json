@@ -18,6 +18,9 @@
     "test": "bash ../../scripts/test.sh",
     "main": "ts-node src/main.ts"
   },
+  "transform": {
+    "\\.[jt]sx?$": "babel-jest"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/brunotot/typescript-decorator-validation.git",

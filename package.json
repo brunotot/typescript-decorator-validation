@@ -21,6 +21,11 @@
     "bumpAll:minor": "npm run core/deploy:minor && npm run react/deploy:minor",
     "bumpAll:major": "npm run core/deploy:major && npm run react/deploy:major"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+    }
+  },
   "devDependencies": {
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.1",
