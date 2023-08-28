@@ -2,33 +2,35 @@
 
 VERSION="$1"
 
-CLR_PREFIX="\033[m"
+CLR_PREFIX="\033["
 CLR_SUFFIX="m"
 
+CYAN="0;34"
 GREEN="1;32"
 RESET="0"
+GREY="1;30"
 
-clr() {
+color() {
   local colorCode="${1:-$RESET}"
   echo "$CLR_PREFIX$colorCode$CLR_SUFFIX"
 }
 
-echo -e "$(clr $GREEN)1/6$(clr) Cleaning cache..."
+echo -e "$(color $CYAN)1 $(color)/ $(color $GREY)6$(color) Cleaning cache..."
 npm cache clean --force --silent
 
-echo -e "$(clr $GREEN)2/6$(clr) Installing dependencies..."
+echo -e "$(color $CYAN)2 $(color)/ $(color $GREY)6$(color) Installing dependencies..."
 npm i --force --silent
 
-echo -e "$(clr $GREEN)3/6$(clr) Running build script..."
+echo -e "$(color $CYAN)3 $(color)/ $(color $GREY)6$(color) Running build script..."
 npm run build
 
-echo -e "$(clr $GREEN)4/6$(clr) Bumping version to $VERSION..."
+echo -e "$(color $CYAN)4 $(color)/ $(color $GREY)6$(color) Bumping version to $VERSION..."
 npm version $VERSION --force --silent
 
-echo -e "$(clr $GREEN)5/6$(clr) Publishing package..."
+echo -e "$(color $CYAN)5 $(color)/ $(color $GREY)6$(color) Publishing package..."
 npm publish --access=public --silent
 
-echo -e "$(clr $GREEN)6/6$(clr) Pushing changes..."
+echo -e "$(color $GREEN)6 / 6$(color) Pushing changes..."
 git add .
 git commit -m "bump react $VERSION version"
 git push
