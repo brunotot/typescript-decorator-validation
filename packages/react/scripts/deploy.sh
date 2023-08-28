@@ -2,8 +2,8 @@
 
 VERSION="$1"
 
-CLR_PREFIX="\033[m"
-CLR_SUFFIX="m"
+CLR_PREFIX="\[\033["
+CLR_SUFFIX="m\]"
 
 GREEN="1;32"
 RESET="0"
@@ -12,8 +12,6 @@ clr() {
   local colorCode="${1:-$RESET}"
   echo "$CLR_PREFIX$colorCode$CLR_SUFFIX"
 }
-
-result=$(clr GREEN)
 
 echo -e "$(clr GREEN)1/6$(clr) Cleaning cache..."
 npm cache clean --force --silent
