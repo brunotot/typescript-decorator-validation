@@ -30,7 +30,7 @@ npm version $VERSION --force --silent
 echo -e "$(color $CYAN)5 $(color)/ $(color $GREY)6$(color) Publishing package..."
 npm publish --access=public --silent
 
-echo -e "$(color $GREEN)6 $(color)/ 6$(color $GREEN) Pushing changes..."
+echo -e "$(color $GREEN)6 $(color)/ $(color $GREEN)6 $(color)Pushing changes..."
 git add .
 git commit -m "bump react $VERSION version" --quiet -u
 git push --quiet -u --no-progress
