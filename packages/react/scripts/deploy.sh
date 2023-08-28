@@ -10,7 +10,7 @@ npm cache clean --force --silent
 stop "/"
 
 start "$(color $CYAN)2 $(color)" " $(color $GREY)6$(color) Installing dependencies..."
-npm i --force --silent
+npm i --force --silent --no-progress
 stop "/"
 
 start "$(color $CYAN)3 $(color)" " $(color $GREY)6$(color) Running build script..."
@@ -33,4 +33,4 @@ git commit -m "bump react $VERSION version" --quiet -u
 git push --quiet -u --no-progress >/dev/null 2>&1
 stop "/"
 
-echo -e "\n    🚀 $(color $GREEN)Done!$(color)\n    ⭐ v$VERSION_NUMBER\n"
+echo -e "\n\n    🚀 $(color $GREEN)Done!$(color)\n    ⭐ v$VERSION_NUMBER\n"
