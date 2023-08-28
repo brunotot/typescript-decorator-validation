@@ -1,6 +1,6 @@
 {
   "name": "tdv-react",
-  "version": "1.0.47",
+  "version": "1.0.48",
   "description": "React library that allows form validation manipulation through TypeScript Decorators",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -11,9 +11,9 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run test && npm run clean && tsc",
-    "deploy:minor": "npm cache clean --force && npm i --force && npm run build && npm version minor --force && npm publish --access=public && git add . && git commit -m 'bump react minor version' && git push",
-    "deploy:major": "npm cache clean --force && npm i --force && npm run build && npm version major --force && npm publish --access=public && git add . && git commit -m 'bump react major version' && git push",
-    "deploy:patch": "npm cache clean --force && npm i --force && npm run build && npm version patch --force && npm publish --access=public && git add . && git commit -m 'bump react patch version' && git push",
+    "deploy:minor": "npm cache clean --force --silent && npm i --force --silent && npm run build && npm version minor --force --silent && npm publish --access=public && git add . && git commit -m 'bump react minor version' && git push",
+    "deploy:major": "npm cache clean --force --silent && npm i --force --silent && npm run build && npm version major --force --silent && npm publish --access=public && git add . && git commit -m 'bump react major version' && git push",
+    "deploy:patch": "npm cache clean --force --silent && npm i --force --silent && npm run build && npm version patch --force --silent && npm publish --access=public && git add . && git commit -m 'bump react patch version' && git push",
     "test": "jest"
   },
   "repository": {
