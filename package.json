@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "core/main": "test -d ./node_modules || npm i --force && ts-node packages/core/src/main.ts",
-    "core/test": "export TS_JEST_DISABLE_VER_CHECKER=true && cd ./packages/core && npx jest",
+    "core/test": "npm run test --prefix=packages/core",
     "core/build": "npm run build --prefix=packages/core",
     "core/deploy:minor": "npm run deploy:minor --prefix=packages/core",
     "core/deploy:major": "npm run deploy:major --prefix=packages/core",
@@ -15,6 +15,7 @@
     "react/deploy:minor": "npm run deploy:minor --prefix=packages/react",
     "react/deploy:major": "npm run deploy:major --prefix=packages/react",
     "react/deploy:patch": "npm run deploy:patch --prefix=packages/react",
+    "react/test": "npm run test --prefix=packages/react",
     "pushAll": "git add . && git commit -m \"struct refactor\" && git push",
     "bumpAll:patch": "npm run core/deploy:patch && npm run react/deploy:patch",
     "bumpAll:minor": "npm run core/deploy:minor && npm run react/deploy:minor",
