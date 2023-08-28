@@ -25,7 +25,7 @@ echo -e "$(color $CYAN)3 $(color)/ $(color $GREY)6$(color) Running build script.
 npm run build >/dev/null 2>&1
 
 echo -e "$(color $CYAN)4 $(color)/ $(color $GREY)6$(color) Bumping version to $VERSION..."
-npm version $VERSION --force --silent >/dev/null 2>&1
+UPDATED_VERSION=$(npm version $VERSION --force --silent >/dev/null 2>&1)
 
 echo -e "$(color $CYAN)5 $(color)/ $(color $GREY)6$(color) Publishing package..."
 npm publish --access=public --silent
@@ -35,4 +35,4 @@ git add .
 git commit -m "bump react $VERSION version" --quiet -u
 git push --quiet -u --no-progress >/dev/null 2>&1
 
-echo -e "\n    🚀 $(color $GREEN)Done!$(color)\n"
+echo -e "\n    🚀 $(color $GREEN)Done!$(color)\n    v$UPDATED_VERSION"
