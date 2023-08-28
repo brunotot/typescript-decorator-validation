@@ -14,7 +14,12 @@ npm i --force --silent --no-progress
 stop "/"
 
 echo -e "\n$(color $CYAN)3 $(color)/ $(color $GREY)7$(color) Running tests..."
-npm test --silent
+./scripts/test.sh
+
+if [ $? -ne 0 ]; then
+  echo -e "\n    ❌ $(color $RED)Error!$(color $GREY)\n    ℹ️  Deployment stopped due to some tests failing\n"
+  exit 1
+fi
 
 start "$(color $CYAN)4 $(color)" " $(color $GREY)7$(color) Running build script..."
 npm run build >/dev/null 2>&1
