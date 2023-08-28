@@ -35,4 +35,4 @@ git add .
 git commit -m "bump react $VERSION version" --quiet -u
 git push --quiet -u --no-progress >/dev/null 2>&1
 
-echo -e "\n\t🚀 Done\n"
+echo -e "\n    🚀 $(color $GREEN)Done!$(color)\n"
