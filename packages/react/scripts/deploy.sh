@@ -26,9 +26,9 @@ npm run build >/dev/null 2>&1
 
 echo -e "$(color $CYAN)4 $(color)/ $(color $GREY)6$(color) Bumping version to $VERSION..."
 UPDATED_VERSION=$(npm version $VERSION --force --silent)
-echo "$UPDATED_VERSION"
+echo "UPDATED_VERSION=$UPDATED_VERSION"
 VERSION_NUMBER=$(echo "$UPDATED_VERSION" | cut -d '"' -f 2)
-echo "$VERSION_NUMBER"
+echo "VERSION_NUMBER=$VERSION_NUMBER"
 
 echo -e "$(color $CYAN)5 $(color)/ $(color $GREY)6$(color) Publishing package..."
 npm publish --access=public --silent
