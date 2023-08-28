@@ -25,7 +25,7 @@ echo -e "$(color $CYAN)3 $(color)/ $(color $GREY)6$(color) Running build script.
 npm run build
 
 echo -e "$(color $CYAN)4 $(color)/ $(color $GREY)6$(color) Bumping version to $VERSION..."
-npm version $VERSION --force --silent
+npm version $VERSION --force --silent --no-warnings
 
 echo -e "$(color $CYAN)5 $(color)/ $(color $GREY)6$(color) Publishing package..."
 npm publish --access=public --silent
