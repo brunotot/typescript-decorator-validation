@@ -15,7 +15,7 @@
     "deploy:minor": "npm cache clean --force && npm i --force && npm version minor --force && npm run build && npm publish --access=public && git add . && git commit -m 'bump core minor version' && git push",
     "deploy:major": "npm cache clean --force && npm i --force && npm version major --force && npm run build && npm publish --access=public && git add . && git commit -m 'bump core major version' && git push",
     "deploy:patch": "npm cache clean --force && npm i --force && npm version patch --force && npm run build && npm publish --access=public && git add . && git commit -m 'bump core patch version' && git push",
-    "test": "export TS_JEST_DISABLE_VER_CHECKER=true && npm i --force && npx jest",
+    "test": "export TS_JEST_DISABLE_VER_CHECKER=true && npm i --silent --force && npx jest",
     "main": "ts-node src/main.ts"
   },
   "repository": {

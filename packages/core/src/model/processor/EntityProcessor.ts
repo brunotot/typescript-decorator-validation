@@ -130,15 +130,16 @@ export default class EntityProcessor<T> {
 
       const prop = MetadataProcessor.fromClass(this.#clazz).getValidationProcessor(key as string)
       const primitiveArrayValidators = prop.node;
+      const childrenArrayValidators = prop.children;
 
       const parentValidators = this.#extractInvalidResults(
-        prop.node as any,
+        primitiveArrayValidators,
         stateValueArray,
         state
       );
 
       const childrenValidators = (stateValueArray ?? []).map((v: any) =>
-        this.#extractInvalidResults(primitiveArrayValidators, v, state)
+        this.#extractInvalidResults(childrenArrayValidators, v, state)
       );
 
       collectErrorData(

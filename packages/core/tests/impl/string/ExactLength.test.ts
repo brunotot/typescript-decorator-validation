@@ -1,7 +1,7 @@
-import { IMock } from "../../common/ValidationHandlerMock";
-import { standardTest } from "../../common/TestFactory";
 import { $ } from "../../../src/types/namespace/Utility.ns";
 import ExactLength from "../../../validators/string/ExactLength";
+import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
 type Type = $.Nullable<string>;
