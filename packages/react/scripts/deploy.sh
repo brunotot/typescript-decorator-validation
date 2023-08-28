@@ -18,7 +18,7 @@ npm run build >/dev/null 2>&1
 stop "/"
 
 start "$(color $CYAN)4 $(color)" " $(color $GREY)6$(color) Bumping version to $VERSION..."
-UPDATED_VERSION=$(npm version $VERSION --force --silent)
+UPDATED_VERSION=$(npm version $VERSION --force --silent --no-progress)
 VERSION=$(echo "$UPDATED_VERSION" | sed '1d' | cut -d 'v' -f 2)
 VERSION_NUMBER="${VERSION#v}"
 stop "/"
