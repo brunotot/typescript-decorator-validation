@@ -1,7 +1,5 @@
 #!/bin/bash
 
-VERSION="$1"
-
 CLR_PREFIX="\033["
 CLR_SUFFIX="m"
 
@@ -14,6 +12,8 @@ color() {
   local colorCode="${1:-$RESET}"
   echo "$CLR_PREFIX$colorCode$CLR_SUFFIX"
 }
+
+VERSION="$1"
 
 echo -e "$(color $CYAN)1 $(color)/ $(color $GREY)6$(color) Cleaning cache..."
 npm cache clean --force --silent
