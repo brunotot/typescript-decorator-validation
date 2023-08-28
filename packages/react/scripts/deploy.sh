@@ -22,15 +22,15 @@ echo -e "$(color $CYAN)2 $(color)/ $(color $GREY)6$(color) Installing dependenci
 npm i --force --silent
 
 echo -e "$(color $CYAN)3 $(color)/ $(color $GREY)6$(color) Running build script..."
-npm run build
+npm run build >/dev/null 2>&1
 
 echo -e "$(color $CYAN)4 $(color)/ $(color $GREY)6$(color) Bumping version to $VERSION..."
-npm version $VERSION --force --loglevel silent
+npm version $VERSION --force --silent
 
 echo -e "$(color $CYAN)5 $(color)/ $(color $GREY)6$(color) Publishing package..."
 npm publish --access=public --silent
 
-echo -e "$(color $GREEN)6 / 6$(color) Pushing changes..."
+echo -e "$(color $GREEN)6 $(color)/ 6$(color $GREEN) Pushing changes..."
 git add .
 git commit -m "bump react $VERSION version" --quiet -u
 git push --quiet -u --no-progress
