@@ -13,9 +13,8 @@ start "$(color $CYAN)2 $(color)" " $(color $GREY)7$(color) Installing dependenci
 npm i --force --silent --no-progress
 stop "/"
 
-start "$(color $CYAN)3 $(color)" " $(color $GREY)7$(color) Running tests..."
-npm run test --silent >/dev/null 2>&1
-stop "/"
+echo -e "$(color $CYAN)3 $(color)/ $(color $GREY)7$(color) Running tests..."
+npm test
 
 start "$(color $CYAN)4 $(color)" " $(color $GREY)7$(color) Running build script..."
 npm run build >/dev/null 2>&1

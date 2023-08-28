@@ -1,4 +1,4 @@
-import { DecoratorContextMetadata } from "../src/decorators/types/DecoratorContext.type";
+import { DecoratorContextMetadata } from "tdv-core";
 
 declare global {
   interface SymbolConstructor {

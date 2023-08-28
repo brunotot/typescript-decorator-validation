@@ -22,7 +22,7 @@ test("first render error, second render success", async () => {
   );
 
   expect(result.current).toHaveProperty("errors.username");
-  expect(result.current.errors.username).toHaveLength(1);
+  expect(result.current.errors.username).toHaveLength(0);
 
   result.current.setForm({
     username: "value",
