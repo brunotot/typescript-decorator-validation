@@ -10,7 +10,7 @@ GREEN="1;32"
 RESET="0"
 GREY="1;30"
 
-TEST=>/dev/null 2>&1
+DISABLE_LOGS=">/dev/null 2>&1"
 
 color() {
   local colorCode="${1:-$RESET}"
@@ -24,7 +24,7 @@ echo -e "$(color $CYAN)2 $(color)/ $(color $GREY)6$(color) Installing dependenci
 npm i --force --silent
 
 echo -e "$(color $CYAN)3 $(color)/ $(color $GREY)6$(color) Running build script..."
-npm run build $TEST
+npm run build $DISABLE_LOGS
 
 echo -e "$(color $CYAN)4 $(color)/ $(color $GREY)6$(color) Bumping version to $VERSION..."
 npm version $VERSION --force --silent
