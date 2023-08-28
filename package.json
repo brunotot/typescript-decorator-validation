@@ -15,7 +15,7 @@
     "react/deploy:minor": "npm run deploy:minor --prefix=packages/react",
     "react/deploy:major": "npm run deploy:major --prefix=packages/react",
     "react/deploy:patch": "npm run deploy:patch --prefix=packages/react",
-    "pushAll": "git commit -am \"struct refactor\" && git push",
+    "pushAll": "git add . && git commit -m \"struct refactor\" && git push",
     "bumpAll:patch": "npm run core/deploy:patch && npm run react/deploy:patch",
     "bumpAll:minor": "npm run core/deploy:minor && npm run react/deploy:minor",
     "bumpAll:major": "npm run core/deploy:major && npm run react/deploy:major"
