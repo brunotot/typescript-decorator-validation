@@ -1,20 +1,24 @@
 #!/bin/bash
 
-. ./../../scripts/spinner.sh
-. ./../../scripts/colors.sh
+PWD_THIS="$(dirname $0)"
+PWD_MODULE=$PWD_THIS/../packages/$1
 
-VERSION="$1"
+source "${PWD_THIS}/spinner.sh"
+source "${PWD_THIS}/colors.sh"
+
+APP="$1"
+VERSION="$2"
 
 start "$(color $CYAN)1 $(color)" " $(color $GREY)7$(color) Cleaning cache..."
-npm cache clean --force --silent
+(cd $PWD_MODULE && npm cache clean --force --silent)
 stop "/"
 
 start "$(color $CYAN)2 $(color)" " $(color $GREY)7$(color) Installing dependencies..."
-npm i --force --silent --no-progress
+(cd $PWD_MODULE && npm i --force --silent --no-progress)
 stop "/"
 
 echo -e "\n$(color $CYAN)3 $(color)/ $(color $GREY)7$(color) Running tests..."
-./../../scripts/test.sh
+npm test --silent --prefix "$PWD_MODULE"
 
 if [ $? -ne 0 ]; then
   echo -e "\n    ❌ $(color $RED)Error!$(color $GREY)\n    ℹ️  Deployment stopped due to some tests failing\n"
@@ -22,7 +26,7 @@ if [ $? -ne 0 ]; then
 fi
 
 start "$(color $CYAN)4 $(color)" " $(color $GREY)7$(color) Running build script..."
-npm run build >/dev/null 2>&1
+(cd $PWD_MODULE && npm run build >/dev/null 2>&1)
 stop "/"
 
 start "$(color $CYAN)5 $(color)" " $(color $GREY)7$(color) Bumping version to $VERSION..."
@@ -32,7 +36,7 @@ VERSION_NUMBER="${VERSION#v}"
 stop "/"
 
 start "$(color $CYAN)6 $(color)" " $(color $GREY)7$(color) Publishing package..."
-npm publish --access=public --silent
+(cd $PWD_MODULE && npm publish --access=public --silent)
 stop "/"
 
 start "$(color $GREEN)7 $(color)" " $(color $GREEN)7 $(color)Pushing changes..."
