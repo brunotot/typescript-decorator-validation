@@ -45,4 +45,4 @@ git commit -m "bump react $VERSION version" --quiet -u
 git push --quiet -u --no-progress >/dev/null 2>&1
 stop "/"
 
-echo -e "\n\n    🚀 $(color $GREEN)Done!$(color)\n    ⭐ v$VERSION_NUMBER\n"
+echo -e "\n\n    🚀 $(color $GREEN)Done!$(color)\n    ⭐ $(color $CYAN)tdv-$APP $(color)v$VERSION_NUMBER\n"
