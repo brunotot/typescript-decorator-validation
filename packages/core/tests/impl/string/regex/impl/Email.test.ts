@@ -7,7 +7,7 @@ import { IMock } from "../../../../common/ValidationHandlerMock";
 type Type = $.Nullable<string>;
 const type = "String";
 const identifier = "Email";
-const successData: Type[] = ["mail@mail.com", "null", undefined];
+const successData: Type[] = ["mail@mail.com", null, undefined];
 const errorData: Type[] = ["invalid@~", "vvv@vvv.", "invalid"];
 
 /*** Model ***/
