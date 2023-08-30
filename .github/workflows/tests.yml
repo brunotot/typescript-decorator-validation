@@ -9,6 +9,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    container:
+      image: node:12
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
