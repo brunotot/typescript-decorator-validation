@@ -1,6 +1,7 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { validators } from "tdv-core";
 import useValidation from "../../../src/hooks/useValidation";
+import "./../../global";
 
 jest.spyOn(console, "error").mockImplementation(() => {});
 

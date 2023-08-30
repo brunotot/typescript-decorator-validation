@@ -4,4 +4,15 @@ module.exports = {
   testMatch: ["**/*.test.ts", "**/*.test.tsx"],
   transformIgnorePatterns: ["./node_modules/", "./dist/"],
   reporters: ["<rootDir>/../../reporter.js"],
+  moduleFileExtensions: [
+    "js",
+    "mjs",
+    "cjs",
+    "jsx",
+    "ts",
+    "tsx",
+    "json",
+    "node",
+    "d.ts",
+  ],
 };
