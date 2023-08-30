@@ -42,7 +42,7 @@ class TestFileContainerResult {
   }
 
   get filePath() {
-    return this.#filePath;
+    return ` ${this.#filePath} `;
   }
 
   #buildFilePath() {
@@ -73,9 +73,10 @@ class TestFileContainerResult {
   #resultMapper(tr) {
     if (tr.status !== "failed") return "";
     TestFileContainerResult.#errorIndex++;
-    const testDescriptionMsg = this.#descriptions[this.#localErrorIndex];
+    const testDescriptionMsg =
+      "\u001b[31;1m" + this.#descriptions[this.#localErrorIndex] + "\u001b[0m";
     const message = tr.failureMessages.join("");
-    const badgedFilePath = `${this.failBadge} ${this.filePath}\n`;
+    const badgedFilePath = `${this.failBadge} \u001b[47;1m\u001b[30m${this.filePath}\u001b[0m\n`;
     const stackTraceLimit = TestFileContainerResult.#STACK_TRACE_LINE_LIMIT + 1;
     const indexOfAt = this.#getMatchingIndex(message, / +at/g, stackTraceLimit);
     const description = message.substring(0, indexOfAt);
