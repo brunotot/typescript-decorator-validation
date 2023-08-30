@@ -8,7 +8,7 @@ class TestFileContainerResult {
   static #SEPARATOR_CHAR_COUNT = 55;
   static #STACK_TRACE_LINE_LIMIT = 3;
   static #FAILURE_MESSAGE_PREFIX = `  `;
-  static #FAIL_BADGE = `\u001b[43m FAIL \u001b[0m`;
+  static #FAIL_BADGE = `\u001b[43m\u001b[30;1m FAIL \u001b[0m`;
   static #SEPARATOR_BASE = `\n\n${TestFileContainerResult.#SEPARATOR_CHAR.repeat(
     TestFileContainerResult.#SEPARATOR_CHAR_COUNT
   )}\n`;
@@ -51,7 +51,7 @@ class TestFileContainerResult {
     const indexOfLastSlash = relativePath.lastIndexOf("/");
     const restLeft = relativePath.substring(0, indexOfLastSlash);
     const restRight = relativePath.substring(indexOfLastSlash);
-    return `\u001b[30m${restLeft}\u001b[37;1m${restRight}\u001b[31;1m`;
+    return `\u001b[30m${restLeft}\u001b[31;1m${restRight}\u001b[31;1m`;
   }
 
   #getMatchingIndex(string, regex, iteration) {
