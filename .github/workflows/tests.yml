@@ -9,9 +9,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    container:
-      image: node:12
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -23,7 +20,7 @@ jobs:
         run: npm ci
 
       - name: Run Core Tests
-        run: npm run core/test --silent
+        run: npm run core/test
 
       - name: Run React Tests
-        run: npm run react/test --silent
+        run: npm run react/test
