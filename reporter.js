@@ -1,44 +1,57 @@
 const { DefaultReporter } = require("@jest/reporters");
-const { AggregatedResult, TestResult } = require("@jest/test-result");
+const { AssertionResult, TestResult } = require("@jest/test-result");
 
-function logTestFailureDetails(test_result) {
-  if (test_result.status !== "failed") return;
-  console.log("Failed test:", test_result.fullName);
-  for (const err of test_result.failureDetails) {
-    // err will have the properties, like `_custom` and `_stuff`.
-    console.log(err.matcherResult.message);
-  }
-}
+class TestFileContainerResult {
+  static #errorIndex = 0;
 
-class Reporter extends DefaultReporter {
-  errorIndex = 0;
+  static #SEPARATOR_CHAR = "✨";
+  static #SEPARATOR_CHAR_COUNT = 55;
+  static #STACK_TRACE_LINE_LIMIT = 3;
+  static #FAILURE_MESSAGE_PREFIX = `  `;
+  static #FAIL_BADGE = `\u001b[43m FAIL \u001b[0m`;
+  static #SEPARATOR_BASE = `\n\n${TestFileContainerResult.#SEPARATOR_CHAR.repeat(
+    TestFileContainerResult.#SEPARATOR_CHAR_COUNT
+  )}\n`;
+  static #SEPARATOR_COMPLETE = `${TestFileContainerResult.#SEPARATOR_BASE}\n  `;
 
-  constructor() {
-    super(...arguments);
-  }
+  #localErrorIndex;
+  #result;
+  #filePath;
+  #failureMessage;
+  #descriptions;
 
-  onRunStart(aggregatedResults, options) {
-    super.onRunStart(...arguments);
-  }
-
-  onTestStart(test) {
-    super.onTestStart(...arguments);
-  }
-
-  onTestCaseResult(test, testCaseResult) {
-    super.onTestCaseResult(...arguments);
-  }
-
-  onRunComplete() {
-    super.onRunComplete(...arguments);
+  /** @param {TestResult} result */
+  constructor(result) {
+    this.#localErrorIndex = 0;
+    this.#result = result;
+    this.#filePath = this.#buildFilePath();
+    this.#descriptions = this.#buildDescriptions(result.failureMessage);
+    this.#failureMessage = this.#buildFailureMessage();
   }
 
-  onTestResult(test, testResult, aggregatedResults) {
-    super.onTestResult(...arguments);
+  get failureMessage() {
+    return this.#failureMessage;
   }
 
-  testFinished(config, testResult, aggregatedResults) {
-    super.testFinished(...arguments);
+  get failBadge() {
+    return TestFileContainerResult.#FAIL_BADGE;
+  }
+
+  get hasErrors() {
+    return this.#result.testResults.some((t) => t.status === "failed");
+  }
+
+  get filePath() {
+    return this.#filePath;
+  }
+
+  #buildFilePath() {
+    const fp = this.#result.testFilePath;
+    const relativePath = fp.substring(fp.indexOf("tests/"));
+    const indexOfLastSlash = relativePath.lastIndexOf("/");
+    const restLeft = relativePath.substring(0, indexOfLastSlash);
+    const restRight = relativePath.substring(indexOfLastSlash);
+    return `\u001b[30m${restLeft}\u001b[37;1m${restRight}\u001b[31;1m`;
   }
 
   #getMatchingIndex(string, regex, iteration) {
@@ -56,58 +69,75 @@ class Reporter extends DefaultReporter {
     return matchingIndex;
   }
 
-  /** @param {TestResult} result */
-  printTestFileHeader(_testPath, _config, _result) {
-    // NOOP
+  /** @param {AssertionResult} tr */
+  #resultMapper(tr) {
+    if (tr.status !== "failed") return "";
+    TestFileContainerResult.#errorIndex++;
+    const testDescriptionMsg = this.#descriptions[this.#localErrorIndex];
+    const message = tr.failureMessages.join("");
+    const badgedFilePath = `${this.failBadge} ${this.filePath}\n`;
+    const stackTraceLimit = TestFileContainerResult.#STACK_TRACE_LINE_LIMIT + 1;
+    const indexOfAt = this.#getMatchingIndex(message, / +at/g, stackTraceLimit);
+    const description = message.substring(0, indexOfAt);
+    const rest = `  ${testDescriptionMsg}\n  [\u001b[36;1m${
+      TestFileContainerResult.#errorIndex
+    }\u001b[0m] ${description}`;
+    this.#localErrorIndex++;
+    const res = badgedFilePath + this.#replaceExpectedAndReceived(rest);
+    return res.trim();
   }
 
-  /** @param {TestResult} result */
-  printTestFileFailureMessage(_testPath, _config, result) {
-    if (!result.testResults.some((t) => t.status === "failed")) {
-      super.printTestFileFailureMessage(_testPath, _config, result);
-      return;
+  #replaceExpectedAndReceived(str) {
+    return str
+      .replace(/Expected: /g, "  Expected:")
+      .replace(/Received: /g, "  Received:");
+  }
+
+  #buildDescriptions(str) {
+    if (!str) return [];
+    const regex = /●(.*?)\n/g;
+    const matches = [];
+    let match;
+    while ((match = regex.exec(str)) !== null) {
+      matches.push(match[1].trim());
     }
-
-    const fp = result.testFilePath;
-    const relativePath = fp.substring(fp.indexOf("tests/"));
-    const indexOfLastSlash = relativePath.lastIndexOf("/");
-    const restLeft = relativePath.substring(0, indexOfLastSlash);
-    const restRight = relativePath.substring(indexOfLastSlash);
-    const relativePathColored = `\u001b[30m${restLeft}\u001b[37;1m${restRight}\u001b[31;1m`;
-    const failBadgeMsg = `\u001b[43m FAIL \u001b[0m`;
-
-    const string = result.testResults
-      .map((tr) => {
-        if (tr.status !== "failed") {
-          return "";
-        }
-
-        const message = tr.failureMessages.join("");
-        this.errorIndex++;
-
-        return (
-          `${failBadgeMsg} ${relativePathColored}\n  [${this.errorIndex}] ` +
-          message.substring(0, this.#getMatchingIndex(message, / +at/g, 2))
-        );
-      })
-      .filter((o) => !!o)
-      .join(
-        "---------------------------------------------------------------  \n  "
-      );
-    result.failureMessage = `  ${string}`;
-    super.printTestFileFailureMessage(_testPath, _config, result);
+    return matches;
   }
 
-  log(message) {
-    //console.log("LOLACH");
-    process.stderr.write(`${message}\n`);
+  get #headerMessage() {
+    return TestFileContainerResult.#errorIndex > 0
+      ? ""
+      : "\n\n❌ FAILURE ❌" + TestFileContainerResult.#SEPARATOR_BASE + "\n";
   }
 
-  // After each test
-  /*onTestCaseResult(test, test_result, aggregate_result) {
-    console.log("MyCustomReporter onTestCaseResult:");
-    logTestFailureDetails(test_result);
-  }*/
+  #buildFailureMessage() {
+    return (
+      this.#headerMessage +
+      TestFileContainerResult.#FAILURE_MESSAGE_PREFIX +
+      this.#result.testResults
+        .map((tr) => this.#resultMapper(tr))
+        .filter(Boolean)
+        .join(TestFileContainerResult.#SEPARATOR_COMPLETE) +
+      TestFileContainerResult.#SEPARATOR_BASE
+    );
+  }
+}
+
+class Reporter extends DefaultReporter {
+  constructor(config) {
+    super(config);
+  }
+
+  printTestFileHeader(_testPath, _config, _result) {
+    //* NOOP - Prevents Jest from printing test file headers.
+  }
+
+  /** @param {TestResult} result */
+  printTestFileFailureMessage(testPath, config, result) {
+    const container = new TestFileContainerResult(result);
+    container.hasErrors && (result.failureMessage = container.failureMessage);
+    super.printTestFileFailureMessage(testPath, config, result);
+  }
 }
 
 module.exports = Reporter;
