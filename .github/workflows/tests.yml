@@ -20,7 +20,7 @@ jobs:
         run: npm ci --force
 
       - name: Run Core Tests
-        run: npm run core/test
+        run: npm run core/test --silent
 
       - name: Run React Tests
-        run: npm run react/test
+        run: npm run react/test --silent
