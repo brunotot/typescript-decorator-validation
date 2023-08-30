@@ -51,7 +51,7 @@ class TestFileContainerResult {
     const indexOfLastSlash = relativePath.lastIndexOf("/");
     const restLeft = relativePath.substring(0, indexOfLastSlash);
     const restRight = relativePath.substring(indexOfLastSlash);
-    return `\u001b[30m${restLeft}\u001b[31;1m${restRight}\u001b[31;1m`;
+    return `\u001b[30m${restLeft}\u001b[32m${restRight}\u001b[31;1m`;
   }
 
   #getMatchingIndex(string, regex, iteration) {
