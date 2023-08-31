@@ -9,8 +9,9 @@ EMPTY=""
 LOADER_SEQUENCE_1=("⊏" "⊓" "⊐" "⊔")
 LOADER_SEQUENCE_2=("⣾" "⣽" "⣻" "⢿" "⡿" "⣟" "⣯" "⣷")
 LOADER_SEQUENCE_3=("𓃉𓃉𓃉" "𓃉𓃉∘" "𓃉∘°" "∘°∘" "°∘𓃉" "∘𓃉𓃉")
+LOADER_SEQUENCE_4=("|" "/" "-" "\\")
 
-LOADER_SEQUENCE=("|" "/" "-" "\\")
+LOADER_SEQUENCE=("${LOADER_SEQUENCE_4[@]}")
 
 spinner() {
   local delay=0.1
@@ -35,9 +36,3 @@ stop() {
     kill $SPINNER_PID 
     echo -ne "\r$SPINNER_MSG_LEFT$FINISH_REPLACER$SPINNER_MSG_RIGHT"
 }
-
-#echo "Starting the operation..."
-#start "1 " " 3"
-#sleep 5
-#stop "/"
-#echo "Continuing with other tasks..."
