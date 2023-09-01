@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { validators } from "tdv-core";
 import useValidation from "../../../src/hooks/useValidation";
-import "./../../global";
+import "../../global";
 
 jest.spyOn(console, "error").mockImplementation(() => {});
 
@@ -11,22 +11,25 @@ class TestForm {
 }
 
 test("first render error, second render success", async () => {
-  const { result, waitForNextUpdate } = renderHook(() =>
-    useValidation({
-      model: TestForm,
-    })
+  const { result, waitForNextUpdate } = renderHook(
+    () =>
+      useValidation({
+        model: TestForm,
+      }),
+    {
+      initialProps: undefined,
+      wrapper: undefined,
+    }
   );
 
-  const hook = result.current;
+  expect(result.current).toHaveProperty("errors.username");
+  expect(result.current.errors.username).toHaveLength(1);
 
-  expect(hook).toHaveProperty("errors.username");
-  expect(hook.errors.username).toHaveLength(1);
-
-  hook.setForm({
+  result.current.setForm({
     username: "value",
   });
 
   await waitForNextUpdate();
 
-  expect(hook.errors.username).toHaveLength(0);
+  expect(result.current.errors.username).toHaveLength(0);
 });

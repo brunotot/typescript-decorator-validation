@@ -3,7 +3,7 @@ module.exports = {
   testEnvironment: "node",
   testMatch: ["**/*.test.ts"],
   transformIgnorePatterns: ["./node_modules/", "./dist/"],
-  reporters: ["<rootDir>/../../reporter.js"],
+  reporters: ["<rootDir>/../../test-reporter/index.js"],
   moduleFileExtensions: [
     "js",
     "mjs",
