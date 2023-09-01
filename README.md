@@ -37,6 +37,7 @@
 - [Future goals](#future-goals)
 - [Supported frameworks](#supported-frameworks)
 - [Examples](#examples)
+- [Documentation](#documentation)
 
 ## Install
 
@@ -167,3 +168,8 @@ And the result is
   ]
 }
 ```
+
+## Documentation
+- [Core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
+- [React](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html)
+
