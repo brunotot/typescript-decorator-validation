@@ -1,22 +1,21 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "outDir": "dist",
-    "declarationDir": "dist/types",
+    "module": "CommonJS",
     "target": "ES6",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "CommonJS",
+    "outDir": "dist",
+    "declarationDir": "dist/types",
+    "declaration": true,
+    "declarationMap": true,
     "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
+    "esModuleInterop": true,
     "isolatedModules": true,
-    "jsx": "react"
+    "strict": true,
+    "skipLibCheck": true,
+    "allowJs": true
   },
-  "exclude": ["tests", "jest.config.js"],
-  "include": ["src", "polyfill.d.ts"]
+  "include": []
 }

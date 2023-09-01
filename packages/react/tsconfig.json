@@ -1,21 +1,9 @@
 {
+  "extends": "./../../tsconfig.json",
   "compilerOptions": {
-    "declaration": true,
-    "outDir": "dist",
-    "declarationDir": "dist/types",
-    "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "module": "ES2022",
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "module": "ESNext",
     "jsx": "react"
   },
-  "exclude": ["tests", "jest.config.js"]
+  "exclude": ["tests", "jest.config.js"],
+  "include": ["src"]
 }

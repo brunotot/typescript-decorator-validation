@@ -2,8 +2,8 @@
   "author": "Bruno Tot",
   "name": "tdv-monorepo",
   "private": true,
-  "version": "3.1.0",
-  "description": "Typescript form validation using Decorators",
+  "version": "1.0.0",
+  "description": "TypeScript form validation using Decorators",
   "license": "MIT",
   "scripts": {
     "core/main": "test -d ./node_modules || npm i --force && ts-node packages/core/src/main.ts",
@@ -21,25 +21,15 @@
     "bumpAll:minor": "npm run core/deploy:minor && npm run react/deploy:minor",
     "bumpAll:major": "npm run core/deploy:major && npm run react/deploy:major"
   },
-  "jest": {
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
-    }
-  },
   "devDependencies": {
     "@types/jest": "^29.5.2",
-    "@types/node": "^20.3.1",
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.10",
     "jest": "^29.5.0",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
+    "typedoc": "^0.25.0",
     "typescript": "^5.2.0-beta"
   },
   "workspaces": [
     "packages/*"
-  ],
-  "dependencies": {
-    "reflect-metadata": "^0.1.13"
-  }
+  ]
 }
