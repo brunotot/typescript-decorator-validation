@@ -1,0 +1,9 @@
+{
+  "entryPoints": ["packages/*"],
+  "name": "Typescript Decorator Validation",
+  "entryPointStrategy": "packages",
+  "includeVersion": true
+
+  // Useful for debugging
+  // "logLevel": "Verbose"
+}

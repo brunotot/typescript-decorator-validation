@@ -1,7 +1,7 @@
 import Required from "../validators/any/Required";
 import Rule from "../validators/any/Rule";
 import Truthy from "../validators/any/Truthy";
-import { valid } from "../validators/any/valid";
+import valid from "../validators/any/valid";
 import validators from "../validators/index";
 import ExactLength from "../validators/string/ExactLength";
 import MaxLength from "../validators/string/MaxLength";
