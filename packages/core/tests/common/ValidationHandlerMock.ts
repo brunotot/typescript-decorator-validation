@@ -9,12 +9,16 @@ export function buildIOName(key: string, valid: boolean, type: string) {
   return `${valid ? "" : "in"}valid @${key} checks for ${type} variable`;
 }
 
+function buildItMessage(valid: boolean, value: any) {
+  return `should ${valid ? "" : "not "}accept: ${JSON.stringify(value)}`;
+}
+
 export default class ValidationHandlerMock<T> {
   constructor(private handler: EntityProcessor<IMock<T>>) {}
 
   expect(data: T[], valid: boolean) {
     data.forEach((value) => {
-      it(`should ${valid ? "" : "not "}accept: "${value}"`, () => {
+      it(buildItMessage(valid, value), () => {
         const state: any = { value };
         const res = this.handler.validate(state);
         expect(res.valid).toBe(valid);

@@ -1,46 +1,47 @@
-import ValueMax from "./number/ValueMax";
-import ValueRange from "./number/ValueRange";
-import Password from "./string/Password";
-import Pattern from "./string/regex/Pattern";
-import Truthy from "./any/Truthy";
 import Falsy from "./any/Falsy";
+import Required from "./any/Required";
+import Rule from "./any/Rule";
+import Truthy from "./any/Truthy";
+import valid from "./any/valid";
+import ArrayContains from "./array/ArrayContains";
+import ArrayEmpty from "./array/ArrayEmpty";
+import ArrayEvery from "./array/ArrayEvery";
+import ArrayNone from "./array/ArrayNone";
+import ArrayOne from "./array/ArrayOne";
+import ArraySizeExact from "./array/ArraySizeExact";
+import ArraySizeMax from "./array/ArraySizeMax";
+import ArraySizeMin from "./array/ArraySizeMin";
+import ArraySizeRange from "./array/ArraySizeRange";
+import ArraySome from "./array/ArraySome";
+import ArrayUnique from "./array/ArrayUnique";
+import foreach from "./array/foreach";
+import FutureDate from "./date/FutureDate";
+import PastDate from "./date/PastDate";
+import TodayDate from "./date/TodayDate";
 import Decimal from "./number/Decimal";
+import Digits from "./number/Digits";
 import Integer from "./number/Integer";
 import Negative from "./number/Negative";
 import NonNegative from "./number/NonNegative";
 import NonPositive from "./number/NonPositive";
 import Positive from "./number/Positive";
-import Alpha from "./string/regex/impl/Alpha";
-import Numeric from "./string/regex/impl/Numeric";
-import Required from "./any/Required";
-import ArrayContains from "./array/ArrayContains";
-import ArrayEmpty from "./array/ArrayEmpty";
-import ArrayEvery from "./array/ArrayEvery";
-import ArrayUnique from "./array/ArrayUnique";
-import ArraySizeExact from "./array/ArraySizeExact";
-import foreach from "./array/foreach";
-import ArraySizeMax from "./array/ArraySizeMax";
-import ArraySizeMin from "./array/ArraySizeMin";
-import ArraySizeRange from "./array/ArraySizeRange";
-import ArrayNone from "./array/ArrayNone";
-import ArrayOne from "./array/ArrayOne";
-import ArraySome from "./array/ArraySome";
+import ValueMax from "./number/ValueMax";
 import ValueMin from "./number/ValueMin";
+import ValueRange from "./number/ValueRange";
 import ExactLength from "./string/ExactLength";
 import Length from "./string/Length";
 import MaxLength from "./string/MaxLength";
 import MinLength from "./string/MinLength";
-import FutureDate from "./date/FutureDate";
-import PastDate from "./date/PastDate";
-import TodayDate from "./date/TodayDate";
-import Rule from "./any/Rule";
-import Digits from "./number/Digits";
+import Password from "./string/Password";
+import Pattern from "./string/regex/Pattern";
+import Alpha from "./string/regex/impl/Alpha";
+import Alphanumeric from "./string/regex/impl/Alphanumeric";
 import Email from "./string/regex/impl/Email";
 import IPAddress from "./string/regex/impl/IPAddress";
+import Lowercase from "./string/regex/impl/Lowercase";
+import Numeric from "./string/regex/impl/Numeric";
 import URL from "./string/regex/impl/URL";
 import Uppercase from "./string/regex/impl/Uppercase";
-import Lowercase from "./string/regex/impl/Lowercase";
-import Alphanumeric from "./string/regex/impl/Alphanumeric";
 
 const any = {
   Truthy,
@@ -108,6 +109,10 @@ const string = {
   Alphanumeric,
 };
 
+const nested = {
+  valid,
+};
+
 const validators = {
   any,
   array,
@@ -115,6 +120,7 @@ const validators = {
   number,
   string,
   date,
+  nested,
   Rule,
 };
 
