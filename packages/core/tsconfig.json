@@ -4,5 +4,11 @@
     "module": "ESNext"
   },
   "exclude": ["tests", "jest.config.js"],
-  "include": ["src", "polyfills/polyfill.d.ts"]
+  "include": [
+    "src",
+    "src/messages/translations/*.json",
+    "translations",
+    "validators",
+    "polyfills/polyfill.d.ts"
+  ]
 }
