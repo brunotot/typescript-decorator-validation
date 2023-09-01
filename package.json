@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc --build",
     "docs": "typedoc",
-    "generate-docs": "rm -rf docs dist && npm run build --silent && npm run docs --silent",
+    "build-docs": "rm -rf docs dist && npm run build --silent && npm run docs --silent",
     "core/main": "test -d ./node_modules || npm i --force && ts-node packages/core/src/main.ts",
     "core/test": "npm run test --prefix=packages/core",
     "core/build": "npm run build --prefix=packages/core",
