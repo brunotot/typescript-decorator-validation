@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-
-type UseEffectWhenMountedDeps = any[];
+import { UseEffectWhenMountedDeps } from "./types";
 
 export default function useEffectWhenMounted(
   fn: () => void,

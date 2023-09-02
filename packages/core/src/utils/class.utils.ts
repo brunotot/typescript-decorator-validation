@@ -1,10 +1,12 @@
 import { ConstructorType } from "../types/Class.type";
 
-export function getClassFieldNames(constructor: ConstructorType): string[] {
+export function getClassFieldNames<T>(
+  constructor: ConstructorType<T>
+): string[] {
   const instance = new constructor();
   return [
     ...getPropertyNames(instance),
-    ...getPropertyNames(instance.__proto__),
+    ...getPropertyNames((instance as any).__proto__),
   ];
 }
 

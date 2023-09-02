@@ -66,7 +66,7 @@ export type FormProviderProps = {
  *
  * export default function ParentFormControl() {
  *   const { providerProps } = useForm(ParentForm, {
- *     // default value is "true"
+ *     // default value is true
  *     standalone: true
  *   });
  *

@@ -1,3 +1,3 @@
 import { EvaluatedStrategy } from "./EvaluatedStrategy";
 
-export type Errors<T> = EvaluatedStrategy<T, string[]>;
+export type Errors<T> = Partial<EvaluatedStrategy<T, string[]>>;

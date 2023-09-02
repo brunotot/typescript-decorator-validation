@@ -21,13 +21,13 @@ import MetadataProcessor from "./MetadataProcessor";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
-export default class EntityProcessor<T> {
-  #clazz: Class<T>;
+export default class EntityProcessor<TClass, TBody = TClass> {
+  #clazz: Class<TClass>;
   #groups: ValidationGroup[];
-  #metadata!: ClassMetadata<T>;
-  #cache: EntityProcessorCache<T>;
-  #fields: string[];
-  #noArgsInstance: T;
+  #metadata!: ClassMetadata<TClass>;
+  #cache: EntityProcessorCache<TClass>;
+  #fields: (keyof TBody)[];
+  #noArgsInstance: TClass;
 
   get metadata() {
     return this.#metadata;
@@ -53,41 +53,42 @@ export default class EntityProcessor<T> {
     return this.#noArgsInstance;
   }
 
-  constructor(clazz: Class<T>, ...groups: ValidationGroup[]) {
+  constructor(clazz: Class<TClass>, ...groups: ValidationGroup[]) {
     this.#clazz = clazz;
     this.#groups = Array.from(new Set(groups));
-    this.#cache = {} as EntityProcessorCache<T>;
-    this.#fields = getClassFieldNames(clazz);
+    this.#cache = {} as EntityProcessorCache<TClass>;
+    this.#fields = getClassFieldNames(clazz) as (keyof TBody)[];
     this.#noArgsInstance = new clazz();
-    this.#setMetadata(this.#noArgsInstance as Payload<T>);
+    this.#setMetadata(this.#noArgsInstance as Payload<TClass>);
   }
 
-  public isValid(state: Payload<T>): boolean {
+  public isValid(state: Payload<TClass>): boolean {
     return this.#fromCache(state, "valid");
   }
 
-  public getDetailedErrors(state: Payload<T>): DetailedErrors<T> {
+  public getDetailedErrors(state: Payload<TClass>): DetailedErrors<TClass> {
     return this.#fromCache(state, "detailedErrors");
   }
 
-  public getErrors(state: Payload<T>): Errors<T> {
+  public getErrors(state: Payload<TClass>): Errors<TClass> {
     return this.#fromCache(state, "errors");
   }
 
   //@stopwatch
-  public validate(payload?: Payload<T>): EntityProcessorResult<T> {
-    let errors: Errors<T> = {} as Errors<T>;
-    let detailedErrors: DetailedErrors<T> = {} as DetailedErrors<T>;
-    const state: Payload<T> = payload ?? (this.#noArgsInstance as Payload<T>);
+  public validate(payload?: Payload<TClass>): EntityProcessorResult<TClass> {
+    let errors: Errors<TClass> = {} as Errors<TClass>;
+    let detailedErrors: DetailedErrors<TClass> = {} as DetailedErrors<TClass>;
+    const state: Payload<TClass> =
+      payload ?? (this.#noArgsInstance as Payload<TClass>);
 
     const instance: any = this.#metadata.createInstance(state);
     const entries = Object.entries(this.#metadata.validators);
 
     // prettier-ignore
-    type ErrorDataApplierType<K = undefined> = (key: keyof DetailedErrors<T>, meta: PropertyMetadata<T>, validators: K) => void;
+    type ErrorDataApplierType<K = undefined> = (key: keyof DetailedErrors<TClass>, meta: PropertyMetadata<TClass>, validators: K) => void;
 
     // prettier-ignore
-    const collectErrorData = (key: $.Keys<DetailedErrors<T>>, parentData: any, newSimpleErrorsValue: any, childData?: any) => {
+    const collectErrorData = (key: $.Keys<DetailedErrors<TClass>>, parentData: any, newSimpleErrorsValue: any, childData?: any) => {
       if (Array.isArray(childData)) {
         const data = { node: parentData, children: childData };
 
@@ -198,8 +199,8 @@ export default class EntityProcessor<T> {
 
     for (const [_key, _validators] of entries) {
       const validators = _validators as any;
-      const key = _key as keyof DetailedErrors<T>;
-      const meta = new PropertyMetadata<T>(
+      const key = _key as keyof DetailedErrors<TClass>;
+      const meta = new PropertyMetadata<TClass>(
         this.#clazz,
         key,
         (state as any)[key]
@@ -241,15 +242,15 @@ export default class EntityProcessor<T> {
     };
   }
 
-  #setMetadata(state: Payload<T>) {
+  #setMetadata(state: Payload<TClass>) {
     this.#metadata = new ClassMetadata(
       this.#clazz,
-      state as T,
+      state as TClass,
       ...this.#groups
     );
   }
 
-  #saveCache(cache: Partial<EntityProcessorCache<T>>) {
+  #saveCache(cache: Partial<EntityProcessorCache<TClass>>) {
     // @ts-ignore
     Object.entries(cache).forEach(([key, value]) => (this.#cache[key] = value));
   }
@@ -297,10 +298,10 @@ export default class EntityProcessor<T> {
     );
   }
 
-  #fromCache<K extends CacheKey<T>>(
-    state: Payload<T>,
+  #fromCache<K extends CacheKey<TClass>>(
+    state: Payload<TClass>,
     key: K
-  ): EntityProcessorResult<T>[K] {
+  ): EntityProcessorResult<TClass>[K] {
     return this.#tryGetCache(
       state,
       this.#cache[key],
@@ -308,13 +309,17 @@ export default class EntityProcessor<T> {
     );
   }
 
-  #tryGetCache<K>(state: Payload<T>, cacheValue: K, valueGetter: () => K): K {
+  #tryGetCache<K>(
+    state: Payload<TClass>,
+    cacheValue: K,
+    valueGetter: () => K
+  ): K {
     return cacheValue === undefined || !deepEquals(this.#cache.state, state)
       ? valueGetter()
       : cacheValue;
   }
 
-  #isValid(errors: Errors<T>) {
+  #isValid(errors: Errors<TClass>) {
     return !hasErrors(errors);
   }
 }
