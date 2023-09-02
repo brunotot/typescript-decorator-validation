@@ -11,25 +11,18 @@ class TestForm {
 }
 
 test("first render error, second render success", async () => {
-  const { result, waitForNextUpdate } = renderHook(
-    () =>
-      useValidation({
-        model: TestForm,
-      }),
-    {
-      initialProps: undefined,
-      wrapper: undefined,
-    }
+  const { result, waitForNextUpdate } = renderHook(() =>
+    useValidation(TestForm)
   );
 
-  expect(result.current).toHaveProperty("errors.username");
-  expect(result.current.errors.username).toHaveLength(1);
+  expect(result.current[2]).toHaveProperty("errors.username");
+  expect(result.current[2].errors?.username).toHaveLength(1);
 
-  result.current.setForm({
+  result.current[1]({
     username: "value",
   });
 
   await waitForNextUpdate();
 
-  expect(result.current.errors.username).toHaveLength(0);
+  expect(result.current[2].errors.username).toHaveLength(0);
 });

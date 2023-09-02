@@ -38,9 +38,10 @@ import {
  */
 export default function useValidation<TClass, TBody = TClass>(
   model: Class<TClass>,
-  config: UseValidationConfig<TBody>
+  config?: UseValidationConfig<TBody>
 ): UseValidationReturn<TClass, TBody> {
-  const { defaultValue, groups = [] } = config;
+  const defaultValue = config?.defaultValue;
+  const groups = config?.groups ?? [];
   const poc = useMemo(() => new Processor<TClass, TBody>(model, ...groups), []);
   const initialForm = defaultValue ?? poc.noArgsInstance;
   const [form, setForm] = useState<TBody>(initialForm as TBody);
