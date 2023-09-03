@@ -1,20 +1,15 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { Class } from "tdv-core";
 import { useValidation } from "tdv-react";
-import { FormContext, FormProviderProps } from "../../contexts/FormContext";
-import useEffectWhenMounted from "../useEffectWhenMounted";
-import {
-  ChangeHandlerMap,
-  FormConfig,
-  SetterFn,
-  UseFormData,
-  UseFormReturn,
-} from "./types";
+import { FormContext } from "../../contexts/FormContext";
+import useEffectWhenMounted from "../useAfterMount";
+import FormContextNamespace from "./../../contexts/FormContext/types";
+import ns from "./types";
 
 export default function useForm<TClass, TBody = TClass>(
   model: Class<TClass>,
-  config?: FormConfig<TClass, TBody>
-): UseFormReturn<TClass, TBody> {
+  config?: ns.UseFormConfig<TClass, TBody>
+): ns.UseFormReturn<TClass, TBody> {
   const defaultValue0 = config?.defaultValue;
   const whenChanged = config?.whenChanged ?? (() => {});
   const groups = config?.validationGroups ?? [];
@@ -95,7 +90,7 @@ export default function useForm<TClass, TBody = TClass>(
     await onSubmitParam();
   };
 
-  const handleChange: SetterFn<TBody> = useCallback(
+  const handleChange: ns.UseFormSetterFn<TBody> = useCallback(
     (key, value) => {
       setForm((prev) => {
         const obj: any = {};
@@ -110,7 +105,7 @@ export default function useForm<TClass, TBody = TClass>(
     [setForm]
   );
 
-  const cachedHandlers: ChangeHandlerMap<TBody> = useMemo(
+  const cachedHandlers: ns.UseFormChangeHandlerMap<TBody> = useMemo(
     () =>
       processor.fields.reduce(
         (prev, prop) => ({
@@ -120,15 +115,18 @@ export default function useForm<TClass, TBody = TClass>(
         {}
       ),
     []
-  ) as ChangeHandlerMap<TBody>;
+  ) as ns.UseFormChangeHandlerMap<TBody>;
 
-  const providerProps: Omit<FormProviderProps, "children"> = {
+  const providerProps: Omit<
+    FormContextNamespace.FormProviderProps,
+    "children"
+  > = {
     submitted: submitted,
     setSubmitted: handleSetSubmitted,
     validateImmediately,
   };
 
-  const data: UseFormData<TClass, TBody> = {
+  const data: ns.UseFormData<TClass, TBody> = {
     isValid,
     isSubmitted: isSubmitted,
     cachedHandlers,

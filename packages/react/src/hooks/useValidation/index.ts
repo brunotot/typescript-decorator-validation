@@ -6,11 +6,7 @@ import {
   Payload,
   EntityProcessor as Processor,
 } from "tdv-core";
-import {
-  UseValidationConfig,
-  UseValidationData,
-  UseValidationReturn,
-} from "./types";
+import ns from "./types";
 
 /**
  * `useValidation` hook is responsible for providing form-related
@@ -38,8 +34,8 @@ import {
  */
 export default function useValidation<TClass, TBody = TClass>(
   model: Class<TClass>,
-  config?: UseValidationConfig<TBody>
-): UseValidationReturn<TClass, TBody> {
+  config?: ns.UseValidationConfig<TBody>
+): ns.UseValidationReturn<TClass, TBody> {
   const defaultValue = config?.defaultValue;
   const groups = config?.groups ?? [];
   const poc = useMemo(() => new Processor<TClass, TBody>(model, ...groups), []);
@@ -55,7 +51,7 @@ export default function useValidation<TClass, TBody = TClass>(
     setSimpleErrors(poc.getErrors(payload));
   }, [form]);
 
-  const data: UseValidationData<TClass, TBody> = {
+  const data: ns.UseValidationData<TClass, TBody> = {
     isValid,
     processor: poc,
     errors: simpleErrors,

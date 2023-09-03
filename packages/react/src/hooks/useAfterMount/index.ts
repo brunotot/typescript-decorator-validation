@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { UseEffectWhenMountedDeps } from "./types";
+import ns from "./types";
 
 export default function useEffectWhenMounted(
   fn: () => void,
-  deps: UseEffectWhenMountedDeps
+  deps: ns.UseAfterMountDependencies = []
 ) {
   const [mounted, setMounted] = useState(deps.length === 0);
 

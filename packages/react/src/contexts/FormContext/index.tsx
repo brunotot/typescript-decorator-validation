@@ -1,15 +1,9 @@
 import React, { createContext } from "react";
+import ns from "./types";
 
-type FormContextType = Omit<FormProviderProps, "children"> | undefined;
+type FormContextType = Omit<ns.FormProviderProps, "children"> | undefined;
 
 export const FormContext = createContext<FormContextType>(undefined);
-
-export type FormProviderProps = {
-  children: React.ReactNode;
-  submitted: boolean;
-  setSubmitted: (bool: boolean) => void;
-  validateImmediately: boolean;
-};
 
 /**
  * Provides form-related context to its children.
@@ -84,7 +78,7 @@ export default function FormProvider({
   submitted,
   setSubmitted,
   validateImmediately,
-}: FormProviderProps) {
+}: ns.FormProviderProps) {
   return (
     <FormContext.Provider
       value={{ submitted, setSubmitted, validateImmediately }}
