@@ -87,7 +87,7 @@ commit_message="$emoji[$group]: $message"
 
 # Append ticket ID if provided
 if [ -n "$ticket" ]; then
-  commit_message="$emoji[$group#$ticket]: $message"
+  commit_message="$emoji [$group#$ticket]: $message"
 fi
 
 # Perform the commit
