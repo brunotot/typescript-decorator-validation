@@ -91,5 +91,5 @@ if [ -n "$ticket" ]; then
 fi
 
 # Perform the commit
-git commit -m "$commit_message"
+git commit -m "$commit_message" --quiet -u
 

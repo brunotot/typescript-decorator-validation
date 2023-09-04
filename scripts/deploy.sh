@@ -43,7 +43,7 @@ stop "/"
 
 start "$(color $GREEN)7 $(color)" " $(color $GREEN)7 $(color)Pushing changes..."
 git add .
-git commit -m "bump react $VERSION version" --quiet -u
+bash $PWD_THIS/git-commit.sh --group=release --message="publish tdv-$APP v$VERSION"
 git push --quiet -u --no-progress >/dev/null 2>&1
 stop "/"
 
