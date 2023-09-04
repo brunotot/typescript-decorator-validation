@@ -29,7 +29,7 @@
  </a>
  
  <h2 align="center">
-  <a href="https://stackblitz.com/github/brunotot/typescript-decorator-validation/tree/main/examples/basic-example-form?file=src%2Fcomponents%2Fcontrols%2FUserFormControls.tsx">STACKBLITZ DEMO</a>
+  <a href="https://stackblitz.com/github/brunotot/typescript-decorator-validation/tree/main/packages/react/examples/basic-example-form?file=src%2Fcomponents%2Fcontrols%2FUserFormControls.tsx">STACKBLITZ DEMO</a>
  </h2>
 </p>
 
@@ -43,13 +43,15 @@
 ## Install
 
 1. Install core and react related dependencies
+
 ```bash
 npm install typescript@latest --save-dev && npm install tdv-core tdv-react --force
 ```
 
 2. Apply polyfill inside `src/main.tsx`
+
 ```typescript
-import "tdv-core/dist/polyfill";
+import "tdv-core/dist/polyfill.d.ts";
 ```
 
 3. :rocket: Done. You are ready to go
@@ -59,34 +61,39 @@ import "tdv-core/dist/polyfill";
 1. Open bash terminal
 2. Change directory to your desired position
 3. Clone the repository main branch
+
 ```bash
 git clone https://github.com/brunotot/typescript-decorator-validation.git
 ```
+
 4. Checkout a new branch
+
 ```bash
 git checkout -b "[react]-[issue-number]-issue-lorem-ipsum"
 ```
+
 5. Commit and push changes
 6. Open pull request
 
 ## Future goals
 
 - [x] Implement strict type checking
-- [ ] Provide fully-fledged documentation  
+- [ ] Provide fully-fledged documentation
 - [ ] Implement tests for predefined decorator validators
 
 ## Examples
 
 A basic TypeScript form can look something like
-```typescript
-import { validators, EntityProcessor } from 'tdv-core';
 
-/** 
+```typescript
+import { validators, EntityProcessor } from "tdv-core";
+
+/**
  *  This is an optional layer of abstraction if the class contains complex
  *  validation evaluations which shouldn't be registered as properties.
  *  In this example the "passwordsMatch" field isn't a settable property.
  */
- export type User = {
+export type User = {
   confirmPassword: string;
   firstName: string;
   lastName: string;
@@ -334,5 +341,4 @@ export default function UserFormInput() {
     </>
   );
 }
-
 ```

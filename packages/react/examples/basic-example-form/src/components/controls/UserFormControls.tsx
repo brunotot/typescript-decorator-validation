@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FormProvider, useForm } from "tdv-react";
 import UserForm from "../../models/UserForm";
-import Input from "./../shared/Input";
+import Input from "../shared/Input";
 
 /**
  * Boolean decider whether the initial validation should trigger only after first form submission:
