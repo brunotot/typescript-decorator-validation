@@ -12,6 +12,7 @@ export default class TestReporter extends DefaultReporter {
   ) => {
     if (result.numFailingTests > 0) {
       super.printTestFileHeader(_testPath, _config, result);
+      return;
     }
   };
 }
