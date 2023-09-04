@@ -6,6 +6,35 @@ import useValidation from "../useValidation";
 import FormContextNamespace from "./../../contexts/FormContext/types";
 import ns from "./types";
 
+/**
+ * `useForm` hook is responsible for providing form-related
+ * (getter, setter, memoized change handlers, isValid, isSubmitted, etc...)
+ * and validation-related (data) props to the consumer component.
+ *
+ * Hook is internally invokes {@link useValidation}
+ *
+ * It provides the same destructuring pattern as you may have when
+ * assigning the result of `useState` to a variable. The only key
+ * difference is with the additional 3rd argument which holds extra
+ * form-related and validation-related information. Most notable are
+ * `isValid`, `handleChange`, `errors` and `onSubmit`.
+ *
+ * @example
+ * ```ts
+ * const [form, setForm, {
+ *   isValid,
+ *   isSubmitted,
+ *   cachedHandlers,
+ *   onSubmit,
+ *   handleChange,
+ *   errors,
+ *   providerProps
+ * }] = useForm(MyClass)
+ * ```
+ *
+ * @typeParam TClass - represents parent form class model holding context of current compontent
+ * @typeParam TBody - represents writable scope of `TClass` (it can be TClass itself or a chunk of its fields)
+ */
 export default function useForm<TClass, TBody = TClass>(
   model: Class<TClass>,
   config?: ns.UseFormConfig<TClass, TBody>
