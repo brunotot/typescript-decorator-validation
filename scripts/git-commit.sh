@@ -83,7 +83,7 @@ if [[ ! " ${groups[*]} " =~ " $group " ]]; then
 fi
 
 # Construct the commit message
-commit_message="$emoji[$group]: $message"
+commit_message="$emoji [$group]: $message"
 
 # Append ticket ID if provided
 if [ -n "$ticket" ]; then
