@@ -6,9 +6,10 @@
   "description": "TypeScript form validation using Decorators",
   "license": "MIT",
   "scripts": {
+    "clean": "rm -rf docs dist",
     "build": "tsc --build",
-    "docs": "typedoc",
-    "build-docs": "rm -rf docs dist && npm run build --silent && npm run docs --silent",
+    "docs": "npm i --force --silent && typedoc",
+    "build-docs": "npm run clean && npm run build --silent && npm run docs",
     "core/main": "test -d ./node_modules || npm i --force && ts-node packages/core/src/main.ts",
     "core/test": "npm run test --prefix=packages/core",
     "core/build": "npm run build --prefix=packages/core",
@@ -19,6 +20,7 @@
     "react/deploy:major": "npm run deploy:major --prefix=packages/react",
     "react/deploy:patch": "npm run deploy:patch --prefix=packages/react",
     "react/test": "npm run test --prefix=packages/react",
+    "react/build": "npm run build --prefix=packages/react",
     "pushAll": "git add . && git commit -m \"struct refactor\" && git push",
     "bumpAll:patch": "npm run core/deploy:patch && npm run react/deploy:patch",
     "bumpAll:minor": "npm run core/deploy:minor && npm run react/deploy:minor",
@@ -30,7 +32,7 @@
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "typedoc": "^0.25.0",
-    "typescript": "^5.2.0-beta"
+    "typescript": "^5.2.2"
   },
   "workspaces": [
     "packages/*"

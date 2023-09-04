@@ -1,24 +1,10 @@
 {
+  "extends": "./tsconfig.base.json",
+  "exclude": ["tests", "jest.config.js"],
+  "include": [],
+  "files": [],
   "compilerOptions": {
     "module": "CommonJS",
-    "target": "ES6",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "outDir": "dist",
-    "declarationDir": "dist/types",
-    "declaration": true,
-    "declarationMap": true,
-    "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "isolatedModules": false,
-    "strict": true,
-    "skipLibCheck": true,
-    "allowJs": true,
-    "composite": true
-  },
-  "files": [],
-  "references": [{ "path": "./packages/core" }, { "path": "./packages/react" }],
-  "include": []
+    "outDir": "dist"
+  }
 }

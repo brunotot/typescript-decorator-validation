@@ -1,8 +1,8 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { Class } from "tdv-core";
-import { useValidation } from "tdv-react";
 import { FormContext } from "../../contexts/FormContext";
 import useEffectWhenMounted from "../useAfterMount";
+import useValidation from "../useValidation";
 import FormContextNamespace from "./../../contexts/FormContext/types";
 import ns from "./types";
 

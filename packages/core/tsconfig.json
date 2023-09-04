@@ -1,14 +1,17 @@
 {
   "extends": "./../../tsconfig.json",
-  "compilerOptions": {
-    "module": "ESNext"
-  },
-  "exclude": ["tests", "jest.config.js"],
+  "exclude": ["tests", "jest.config.js", "src/main.ts"],
   "include": [
+    "index.ts",
     "src",
     "src/messages/translations/*.json",
     "translations",
     "validators",
     "polyfills/polyfill.d.ts"
-  ]
+  ],
+  "compilerOptions": {
+    "module": "ESNext",
+    "outDir": "dist",
+    "declarationDir": "dist/types"
+  }
 }

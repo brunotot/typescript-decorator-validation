@@ -1,22 +1,17 @@
 {
   "compilerOptions": {
-    "declarationDir": "dist/types",
-    "declaration": true,
-    "declarationMap": true,
-    "outDir": "dist",
     "target": "ES6",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "CommonJS",
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "isolatedModules": false,
+    "declarationMap": true,
     "skipLibCheck": true,
+    "declaration": true,
     "allowJs": true,
-    "strict": true
-  },
-  "exclude": ["tests", "jest.config.js"],
-  "files": []
+    "strict": true,
+    "isolatedModules": false
+  }
 }
