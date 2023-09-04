@@ -21,10 +21,7 @@
     "react/deploy:patch": "npm run deploy:patch --prefix=packages/react",
     "react/test": "npm run test --prefix=packages/react",
     "react/build": "npm run build --prefix=packages/react",
-    "pushAll": "git add . && git commit -m \"struct refactor\" && git push",
-    "bumpAll:patch": "npm run core/deploy:patch && npm run react/deploy:patch",
-    "bumpAll:minor": "npm run core/deploy:minor && npm run react/deploy:minor",
-    "bumpAll:major": "npm run core/deploy:major && npm run react/deploy:major"
+    "pushAll": "git add . && git commit -m \"struct refactor\" && git push"
   },
   "devDependencies": {
     "@types/jest": "^29.5.2",
