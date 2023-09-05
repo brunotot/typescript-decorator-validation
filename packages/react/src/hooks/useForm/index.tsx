@@ -155,14 +155,20 @@ export default function useForm<TClass, TBody = TClass>(
     validateImmediately,
   };
 
+  const resetForm = () => {
+    setForm(processor.noArgsInstance);
+    handleSetSubmitted(false);
+  };
+
   const data: ns.UseFormData<TClass, TBody> = {
     isValid,
-    isSubmitted: isSubmitted,
+    isSubmitted,
     cachedHandlers,
     onSubmit,
     handleChange,
     providerProps,
     errors: validateImmediately || isSubmitted ? errors : {},
+    resetForm,
   };
 
   return [form, setForm, data];

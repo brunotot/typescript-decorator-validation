@@ -21,6 +21,7 @@ namespace UseFormHook {
     handleChange: UseFormSetterFn<TBody>;
     providerProps: Omit<FormContextNamespace.FormProviderProps, "children">;
     errors: Errors<TClass>;
+    resetForm: () => void;
   };
 
   export type UseFormReturn<TClass, TBody = TClass> = readonly [

@@ -21,13 +21,18 @@ import MetadataProcessor from "./MetadataProcessor";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
+type EntityProcessorConfig<TBody> = {
+  defaultValue?: TBody;
+  groups?: ValidationGroup[];
+};
+
 export default class EntityProcessor<TClass, TBody = TClass> {
   #clazz: Class<TClass>;
   #groups: ValidationGroup[];
   #metadata!: ClassMetadata<TClass>;
   #cache: EntityProcessorCache<TClass>;
   #fields: (keyof TBody)[];
-  #noArgsInstance: TClass;
+  #noArgsInstance: TBody;
 
   get metadata() {
     return this.#metadata;
@@ -53,12 +58,20 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     return this.#noArgsInstance;
   }
 
-  constructor(clazz: Class<TClass>, ...groups: ValidationGroup[]) {
+  #buildEmptyInstance(
+    clazz: Class<TClass>,
+    config?: EntityProcessorConfig<TBody>
+  ) {
+    return (config?.defaultValue ?? new clazz()) as TBody;
+  }
+
+  constructor(clazz: Class<TClass>, config?: EntityProcessorConfig<TBody>) {
+    const groups = config?.groups ?? [];
+    this.#noArgsInstance = this.#buildEmptyInstance(clazz, config);
     this.#clazz = clazz;
     this.#groups = Array.from(new Set(groups));
     this.#cache = {} as EntityProcessorCache<TClass>;
     this.#fields = getClassFieldNames(clazz) as (keyof TBody)[];
-    this.#noArgsInstance = new clazz();
     this.#setMetadata(this.#noArgsInstance as Payload<TClass>);
   }
 
@@ -160,7 +173,10 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     const handleObject: ErrorDataApplierType = (key, meta) => {
       const innerValidationHandler = new EntityProcessor(
         meta.clazz!,
-        ...this.#groups
+        {
+          defaultValue: (this.#noArgsInstance as any)[key],
+          groups: this.#groups
+        }
       );
       const { detailedErrors, errors } = innerValidationHandler.validate(
         (state as any)[key]
@@ -172,7 +188,10 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     const handleObjectArray: ErrorDataApplierType<DeducedArray<ValidationMetadata<any>[]>> = (key, meta, validators) => {
       const innerValidationHandler = new EntityProcessor(
         meta.clazz!,
-        ...this.#groups
+        {
+          defaultValue: (this.#noArgsInstance as any)[key],
+          groups: this.#groups
+        }
       );
       const stateValueArray: any[] = (((state as any)?.[key] ?? [])as any[]);
 
