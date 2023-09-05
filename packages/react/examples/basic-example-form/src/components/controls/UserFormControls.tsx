@@ -140,6 +140,9 @@ export default function UserFormInput() {
 
     /** On submit handler which encapsulates checking validity before proceeding with submission. */
     onSubmit,
+
+    /** Resets the form to its initial value and sets 'isSubmitted' to false */
+    resetForm,
   } = data;
 
   const dateOfBirthValue = form!.dateOfBirth
@@ -202,6 +205,12 @@ export default function UserFormInput() {
             </button>
           )}
           <p>Form changed state count: {numberOfStateChanges}</p>
+          <button
+            style={{ padding: "0.5rem", fontSize: 18, marginTop: 8 }}
+            onClick={resetForm}
+          >
+            <strong>Reset form</strong>
+          </button>
         </div>
       </FormProvider>
     </>
