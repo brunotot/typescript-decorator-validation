@@ -1,11 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
-import {
-  Class,
-  DetailedErrors,
-  EntityProcessor,
-  Errors,
-  Payload,
-} from "tdv-core";
+import { useEffect, useState } from "react";
+import { Class, DetailedErrors, Errors, Payload } from "tdv-core";
+import useEntityProcessor from "../useEntityProcessor";
 import ns from "./types";
 
 /**
@@ -39,7 +34,7 @@ export default function useValidation<TClass, TBody = TClass>(
   const defaultValue = config?.defaultValue;
   const groups = config?.groups ?? [];
   // prettier-ignore
-  const poc = useMemo(() => new EntityProcessor<TClass, TBody>(model, { groups, defaultValue }), []);
+  const poc = useEntityProcessor(model, {groups, defaultValue});
   const initialForm = defaultValue ?? poc.noArgsInstance;
   const [form, setForm] = useState<TBody>(initialForm as TBody);
   const [details, setDetails] = useState({} as DetailedErrors<TClass>);

@@ -21,7 +21,7 @@ import MetadataProcessor from "./MetadataProcessor";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
-type EntityProcessorConfig<TBody> = {
+export type EntityProcessorConfig<TBody> = {
   defaultValue?: TBody;
   groups?: ValidationGroup[];
 };
@@ -58,20 +58,29 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     return this.#noArgsInstance;
   }
 
-  #buildEmptyInstance(
+  public static buildEmptyInstance<TClass, TBody = TClass>(
     clazz: Class<TClass>,
-    config?: EntityProcessorConfig<TBody>
+    defaultValue?: TBody | undefined
   ) {
-    return (config?.defaultValue ?? new clazz()) as TBody;
+    return (defaultValue ?? new clazz()) as TBody;
+  }
+
+  public static getClassFieldNames<TClass, TBody = TClass>(
+    clazz: Class<TClass>
+  ) {
+    return getClassFieldNames(clazz) as (keyof TBody)[];
   }
 
   constructor(clazz: Class<TClass>, config?: EntityProcessorConfig<TBody>) {
     const groups = config?.groups ?? [];
-    this.#noArgsInstance = this.#buildEmptyInstance(clazz, config);
+    this.#noArgsInstance = EntityProcessor.buildEmptyInstance(
+      clazz,
+      config?.defaultValue
+    );
     this.#clazz = clazz;
     this.#groups = Array.from(new Set(groups));
     this.#cache = {} as EntityProcessorCache<TClass>;
-    this.#fields = getClassFieldNames(clazz) as (keyof TBody)[];
+    this.#fields = EntityProcessor.getClassFieldNames(clazz);
     this.#setMetadata(this.#noArgsInstance as Payload<TClass>);
   }
 

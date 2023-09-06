@@ -1,6 +1,27 @@
 import { Dispatch, SetStateAction } from "react";
-import { Errors, ValidationGroup } from "tdv-core";
+import { Condition, Errors, TypeUtils, ValidationGroup } from "tdv-core";
 import FormContextNamespace from "../../contexts/FormContext/types";
+
+// prettier-ignore
+type ObjectPathEvaluator<T, K extends string> = K extends keyof T
+  ? K extends TypeUtils.WritableKeys<T>
+    ? K | `${K}.${PayloadFieldPath<T[K]>}`
+    : ''
+  : never;
+
+// prettier-ignore
+type PayloadFieldPathEvaluator<T> = {
+  [K in keyof T]-?: K extends string
+  ? Condition.isFunction<T[K]> extends true ? never :
+    Condition.isArray<T[K]> extends true ? K :
+    Condition.isObject<T[K]> extends true ? ObjectPathEvaluator<T, K> : 
+    K extends TypeUtils.WritableKeys<T> ? K : never : never;
+}
+
+// prettier-ignore
+type PayloadFieldPath<T> = 
+  Condition.isFunction<T> extends true ? '' : 
+  Condition.isObject<T> extends true ? PayloadFieldPathEvaluator<T>[keyof T] : '';
 
 namespace UseFormHook {
   export type UseFormConfig<TClass, TBody = TClass> = {
@@ -16,12 +37,11 @@ namespace UseFormHook {
   export type UseFormData<TClass, TBody = TClass> = {
     isValid: boolean;
     isSubmitted: boolean;
-    cachedHandlers: UseFormChangeHandlerMap<TBody>;
     onSubmit: () => Promise<void>;
-    handleChange: UseFormSetterFn<TBody>;
+    mutations: UseFormChangeHandlerMap<TBody>;
     providerProps: Omit<FormContextNamespace.FormProviderProps, "children">;
     errors: Errors<TClass>;
-    resetForm: () => void;
+    reset: (...fieldPaths: PayloadFieldPath<TBody>[]) => void;
   };
 
   export type UseFormReturn<TClass, TBody = TClass> = readonly [

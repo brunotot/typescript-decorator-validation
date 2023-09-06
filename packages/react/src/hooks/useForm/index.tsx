@@ -1,7 +1,9 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { Class } from "tdv-core";
 import { FormContext } from "../../contexts/FormContext";
 import useEffectWhenMounted from "../useAfterMount";
+import useMutations from "../useMutations";
+import useReset from "../useReset";
 import useValidation from "../useValidation";
 import FormContextNamespace from "./../../contexts/FormContext/types";
 import ns from "./types";
@@ -119,33 +121,6 @@ export default function useForm<TClass, TBody = TClass>(
     await onSubmitParam();
   };
 
-  const handleChange: ns.UseFormSetterFn<TBody> = useCallback(
-    (key, value) => {
-      setForm((prev) => {
-        const obj: any = {};
-        for (const prop of processor.fields) {
-          obj[prop] = (prev as any)[prop];
-        }
-        obj[key] =
-          typeof value === "function" ? (value as any)(prev[key]) : value;
-        return obj;
-      });
-    },
-    [setForm]
-  );
-
-  const cachedHandlers: ns.UseFormChangeHandlerMap<TBody> = useMemo(
-    () =>
-      processor.fields.reduce(
-        (prev, prop) => ({
-          ...prev,
-          [prop]: (value: any) => handleChange(prop, value),
-        }),
-        {}
-      ),
-    []
-  ) as ns.UseFormChangeHandlerMap<TBody>;
-
   const providerProps: Omit<
     FormContextNamespace.FormProviderProps,
     "children"
@@ -155,20 +130,24 @@ export default function useForm<TClass, TBody = TClass>(
     validateImmediately,
   };
 
-  const resetForm = () => {
-    setForm(processor.noArgsInstance);
-    handleSetSubmitted(false);
-  };
+  const mutations = useMutations(model, { setForm });
+
+  const reset = useReset({
+    form,
+    handleSetSubmitted,
+    setForm,
+    processor,
+    submitted,
+  });
 
   const data: ns.UseFormData<TClass, TBody> = {
     isValid,
     isSubmitted,
-    cachedHandlers,
+    mutations,
     onSubmit,
-    handleChange,
     providerProps,
     errors: validateImmediately || isSubmitted ? errors : {},
-    resetForm,
+    reset,
   };
 
   return [form, setForm, data];
