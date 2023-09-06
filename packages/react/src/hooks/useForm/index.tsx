@@ -26,11 +26,10 @@ import ns from "./types";
  * const [form, setForm, {
  *   isValid,
  *   isSubmitted,
- *   cachedHandlers,
  *   onSubmit,
- *   handleChange,
  *   errors,
- *   providerProps
+ *   providerProps,
+ *   mutations
  * }] = useForm(MyClass)
  * ```
  *

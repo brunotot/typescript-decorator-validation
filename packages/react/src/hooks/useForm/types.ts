@@ -2,27 +2,6 @@ import { Dispatch, SetStateAction } from "react";
 import { Condition, Errors, TypeUtils, ValidationGroup } from "tdv-core";
 import FormContextNamespace from "../../contexts/FormContext/types";
 
-// prettier-ignore
-type ObjectPathEvaluator<T, K extends string> = K extends keyof T
-  ? K extends TypeUtils.WritableKeys<T>
-    ? K | `${K}.${PayloadFieldPath<T[K]>}`
-    : ''
-  : never;
-
-// prettier-ignore
-type PayloadFieldPathEvaluator<T> = {
-  [K in keyof T]-?: K extends string
-  ? Condition.isFunction<T[K]> extends true ? never :
-    Condition.isArray<T[K]> extends true ? K :
-    Condition.isObject<T[K]> extends true ? ObjectPathEvaluator<T, K> : 
-    K extends TypeUtils.WritableKeys<T> ? K : never : never;
-}
-
-// prettier-ignore
-type PayloadFieldPath<T> = 
-  Condition.isFunction<T> extends true ? '' : 
-  Condition.isObject<T> extends true ? PayloadFieldPathEvaluator<T>[keyof T] : '';
-
 namespace UseFormHook {
   export type UseFormConfig<TClass, TBody = TClass> = {
     defaultValue?: TBody;
@@ -62,6 +41,27 @@ namespace UseFormHook {
   export type UseFormChangeHandlerMap<TBody> = {
     [TKey in keyof TBody]: (value: TBody[TKey]) => void;
   };
+
+  // prettier-ignore
+  export type ObjectPathEvaluator<T, K extends string> = K extends keyof T
+    ? K extends TypeUtils.WritableKeys<T>
+      ? K | `${K}.${PayloadFieldPath<T[K]>}`
+      : ''
+    : never;
+
+  // prettier-ignore
+  export type PayloadFieldPathEvaluator<T> = {
+    [K in keyof T]-?: K extends string
+    ? Condition.isFunction<T[K]> extends true ? never :
+      Condition.isArray<T[K]> extends true ? K :
+      Condition.isObject<T[K]> extends true ? ObjectPathEvaluator<T, K> : 
+      K extends TypeUtils.WritableKeys<T> ? K : never : never;
+  }
+
+  // prettier-ignore
+  export type PayloadFieldPath<T> = 
+    Condition.isFunction<T> extends true ? '' : 
+    Condition.isObject<T> extends true ? PayloadFieldPathEvaluator<T>[keyof T] : '';
 }
 
 export default UseFormHook;
