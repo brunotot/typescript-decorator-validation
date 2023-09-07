@@ -8,10 +8,16 @@ function hasSetter<T, K extends keyof T>(parent: T, key: K): boolean {
   );
 }
 
+function isFunctionSetter<T, K extends keyof T>(
+  value: T[K] | (() => T[K])
+): value is () => T[K] {
+  return typeof value === "function";
+}
+
 export function safeSetter<T, K extends keyof T>(parent: T, key: K) {
   return (value: T[K] | (() => T[K])) => {
     if (hasSetter(parent, key)) {
-      parent[key] = typeof value === "function" ? (value as Function)() : value;
+      parent[key] = isFunctionSetter(value) ? value() : value;
     }
   };
 }

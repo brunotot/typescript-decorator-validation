@@ -10,7 +10,6 @@
     "build": "tsc --build",
     "docs": "npm i --force --silent && typedoc",
     "build-docs": "npm run clean && npm run build --silent && npm run docs",
-    "core/main": "test -d ./node_modules || npm i --force && ts-node packages/core/src/main.ts",
     "core/test": "npm run test --prefix=packages/core",
     "core/build": "npm run build --prefix=packages/core",
     "core/deploy:minor": "npm run deploy:minor --prefix=packages/core",

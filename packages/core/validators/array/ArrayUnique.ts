@@ -1,13 +1,12 @@
 import { makeValidator } from "../../src/decorators/facade/validator.facade";
-import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import { hash } from "../../src/utils/object.utils";
-import { $ } from "../../src/types/namespace/Utility.ns";
-import { isArrayUnique } from "../../src/utils/array.utils";
-import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 import {
-  DecoratorPartialProps,
   DecoratorImpartialProps,
+  DecoratorPartialProps,
 } from "../../src/decorators/types/DecoratorProps.type";
+import ErrorMessage from "../../src/messages/impl/ErrorMessage";
+import { $ } from "../../src/types/namespace/Utility.ns";
+import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
+import { hash } from "../../src/utils/object.utils";
 
 export type ArrayUniqueType<T> = {
   hash?: $.HashGenerator<T>;
@@ -18,6 +17,19 @@ const DEFAULTS: DecoratorImpartialProps<ArrayUniqueType<any>> = {
   groups: [],
   message: ErrorMessage.ArrayUnique(),
 };
+
+function isArrayUnique<T>(arr: T[], equals: $.Equals<T>): boolean {
+  const set = new Set<T>();
+  for (const val of arr) {
+    for (const el of set) {
+      if (equals(val, el)) {
+        return false;
+      }
+    }
+    set.add(val);
+  }
+  return true;
+}
 
 export default function ArrayUnique<K, T extends K[]>(
   props: DecoratorPartialProps<string, ArrayUniqueType<K>> = DEFAULTS

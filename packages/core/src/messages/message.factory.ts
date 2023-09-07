@@ -1,7 +1,12 @@
 import { $ } from "../types/namespace/Utility.ns";
-import { sprintf } from "../utils/string.utils";
 import { getLocale } from "./model/Locale";
 import translations from "./model/Translations";
+
+function sprintf(str: string, ...args: any[]) {
+  return str.replace(/{(\d+)}/g, function (match, number) {
+    return typeof args[number] != "undefined" ? args[number] : match;
+  });
+}
 
 export type MessageFn<T extends any[] = []> = $.FuncFactory<T, string>;
 
