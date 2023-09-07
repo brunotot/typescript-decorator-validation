@@ -47,4 +47,13 @@ export namespace $ {
   export type Values<T> = T[$.Keys<T>];
   export type WritableKeys<T> = _WritableKeys<T>;
   export type _ = undefined;
+  export type TArgGet<TParamKey extends keyof TypeParams> = TypeParams[TParamKey];
+  export type TArg<TParamKey extends keyof TypeParams> = $.Values<TArgGet<TParamKey>>;
 }
+
+type TypeParams = {
+  partial: {
+    disabled: "disabled";
+    enabled: "enabled";
+  };
+};

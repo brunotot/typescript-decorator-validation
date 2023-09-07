@@ -33,8 +33,7 @@ export default function useValidation<TClass, TBody = TClass>(
 ): ns.UseValidationReturn<TClass, TBody> {
   const defaultValue = config?.defaultValue;
   const groups = config?.groups ?? [];
-  // prettier-ignore
-  const poc = useEntityProcessor(model, {groups, defaultValue});
+  const poc = useEntityProcessor(model, { groups, defaultValue });
   const initialForm = defaultValue ?? poc.noArgsInstance;
   const [form, setForm] = useState<TBody>(initialForm as TBody);
   const [details, setDetails] = useState({} as DetailedErrors<TClass>);
