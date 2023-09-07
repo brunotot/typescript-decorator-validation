@@ -27,10 +27,7 @@ import ns from "./types";
  * @typeParam TClass - represents parent form class model holding context of current compontent
  * @typeParam TBody - represents writable scope of `TClass` (it can be TClass itself or a chunk of its fields)
  */
-export default function useValidation<
-  TClass,
-  TBody extends Payload<TClass> = Payload<TClass>
->(
+export default function useValidation<TClass, TBody = TClass>(
   model: Class<TClass>,
   { defaultValue, groups }: ns.UseValidationConfig<TBody> = {}
 ): ns.UseValidationReturn<TClass, TBody> {
@@ -40,7 +37,9 @@ export default function useValidation<
   const [simpleErrors, setSimpleErrors] = useState({} as Errors<TClass>);
 
   useEffect(() => {
-    const { errors, detailedErrors } = processor.validate(form);
+    const { errors, detailedErrors } = processor.validate(
+      form as Payload<TClass>
+    );
     setDetails(detailedErrors);
     setSimpleErrors(errors);
   }, [form]);
@@ -49,7 +48,7 @@ export default function useValidation<
     form,
     setForm,
     {
-      isValid: processor.isValid(form),
+      isValid: processor.isValid(form as Payload<TClass>),
       processor,
       errors: simpleErrors,
       detailedErrors: details,

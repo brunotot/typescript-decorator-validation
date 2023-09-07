@@ -27,7 +27,7 @@ export default function UserFormInput() {
   ] = useForm<UserForm>(UserForm, {
     validationGroups: GROUPS,
     onSubmit: () => alert("Congrats, you don't have any validation errors!"),
-    whenChanged: () => setNumberOfStateChanges((p) => ++p),
+    onChange: () => setNumberOfStateChanges((p) => ++p),
     defaultValue: undefined,
     standalone: true,
     validateImmediately: !SUBMIT_BUTTON_TRIGGERS_VALIDATION,

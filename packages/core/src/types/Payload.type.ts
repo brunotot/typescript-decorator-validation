@@ -1,8 +1,7 @@
 import { EvaluatedStrategy } from "./EvaluatedStrategy";
 import { $ } from "./namespace/Utility.ns";
 
-export type Payload<T> = EvaluatedStrategy<
+export type Payload<
   T,
-  undefined,
-  $.TArgGet<"partial">["enabled"]
->;
+  TPartial extends $.TArg<"partial"> = $.TArgGet<"partial">["enabled"]
+> = EvaluatedStrategy<T, undefined, TPartial>;

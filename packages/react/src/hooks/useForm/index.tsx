@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Class, Payload } from "tdv-core";
+import { Class } from "tdv-core";
 import { FormContext } from "../../contexts/FormContext";
 import useEffectWhenMounted from "../useAfterMount";
 import useMutations from "../useMutations";
@@ -35,10 +35,7 @@ import ns from "./types";
  * @typeParam TClass - represents parent form class model holding context of current compontent
  * @typeParam TBody - represents writable scope of `TClass` (it can be TClass itself or a chunk of its fields)
  */
-export default function useForm<
-  TClass,
-  TBody extends Payload<TClass> = Payload<TClass>
->(
+export default function useForm<TClass, TBody = TClass>(
   model: Class<TClass>,
   {
     defaultValue,
