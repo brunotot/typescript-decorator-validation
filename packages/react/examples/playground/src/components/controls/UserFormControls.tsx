@@ -22,7 +22,7 @@ export default function UserFormInput() {
   const [numberOfStateChanges, setNumberOfStateChanges] = useState(0);
   const [
     form,
-    _setForm,
+    _,
     { providerProps, errors, isSubmitted, isValid, onSubmit, reset, mutations },
   ] = useForm<UserForm>(UserForm, {
     validationGroups: GROUPS,
@@ -33,8 +33,6 @@ export default function UserFormInput() {
     validateImmediately: !SUBMIT_BUTTON_TRIGGERS_VALIDATION,
     onSubmitValidationFail,
   });
-
-  console.count("UserFormControls");
 
   const dateOfBirthValue = form!.dateOfBirth
     ? form.dateOfBirth.toISOString().substring(0, 10)

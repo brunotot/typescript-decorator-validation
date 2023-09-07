@@ -13,7 +13,7 @@ import ns from "./types";
  * (getter, setter, memoized change handlers, isValid, isSubmitted, etc...)
  * and validation-related (data) props to the consumer component.
  *
- * Hook is internally invokes {@link useValidation}
+ * Hook internally invokes {@link useValidation}
  *
  * It provides the same destructuring pattern as you may have when
  * assigning the result of `useState` to a variable. The only key
