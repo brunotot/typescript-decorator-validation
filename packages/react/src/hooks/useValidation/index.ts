@@ -27,31 +27,32 @@ import ns from "./types";
  * @typeParam TClass - represents parent form class model holding context of current compontent
  * @typeParam TBody - represents writable scope of `TClass` (it can be TClass itself or a chunk of its fields)
  */
-export default function useValidation<TClass, TBody = TClass>(
+export default function useValidation<
+  TClass,
+  TBody extends Payload<TClass> = Payload<TClass>
+>(
   model: Class<TClass>,
-  config?: ns.UseValidationConfig<TBody>
+  { defaultValue, groups }: ns.UseValidationConfig<TBody> = {}
 ): ns.UseValidationReturn<TClass, TBody> {
-  const defaultValue = config?.defaultValue;
-  const groups = config?.groups ?? [];
-  const poc = useEntityProcessor(model, { groups, defaultValue });
-  const initialForm = defaultValue ?? poc.noArgsInstance;
-  const [form, setForm] = useState<TBody>(initialForm as TBody);
+  const processor = useEntityProcessor(model, { groups, defaultValue });
+  const [form, setForm] = useState<TBody>(processor.noArgsInstance);
   const [details, setDetails] = useState({} as DetailedErrors<TClass>);
   const [simpleErrors, setSimpleErrors] = useState({} as Errors<TClass>);
-  const payload = form as Payload<TClass>;
-  const isValid = poc.isValid(payload);
 
   useEffect(() => {
-    setDetails(poc.getDetailedErrors(payload));
-    setSimpleErrors(poc.getErrors(payload));
+    const { errors, detailedErrors } = processor.validate(form);
+    setDetails(detailedErrors);
+    setSimpleErrors(errors);
   }, [form]);
 
-  const data: ns.UseValidationData<TClass, TBody> = {
-    isValid,
-    processor: poc,
-    errors: simpleErrors,
-    detailedErrors: details,
-  };
-
-  return [form, setForm, data];
+  return [
+    form,
+    setForm,
+    {
+      isValid: processor.isValid(form),
+      processor,
+      errors: simpleErrors,
+      detailedErrors: details,
+    },
+  ];
 }

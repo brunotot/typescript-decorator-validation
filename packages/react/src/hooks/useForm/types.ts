@@ -1,5 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
-import { Condition, Errors, TypeUtils, ValidationGroup } from "tdv-core";
+import {
+  Condition,
+  DetailedErrors,
+  Errors,
+  TypeUtils,
+  ValidationGroup,
+} from "tdv-core";
 import FormContextNamespace from "../../contexts/FormContext/types";
 
 namespace UseFormHook {
@@ -10,7 +16,7 @@ namespace UseFormHook {
     standalone?: boolean;
     onSubmit?: () => Promise<void> | void;
     onSubmitValidationFail?: (errors: Errors<TClass>) => void;
-    whenChanged?: () => void;
+    onChange?: () => void;
   };
 
   export type UseFormData<TClass, TBody = TClass> = {
@@ -20,6 +26,7 @@ namespace UseFormHook {
     mutations: UseFormChangeHandlerMap<TBody>;
     providerProps: Omit<FormContextNamespace.FormProviderProps, "children">;
     errors: Errors<TClass>;
+    detailedErrors: DetailedErrors<TClass>;
     reset: (...fieldPaths: PayloadFieldPath<TBody>[]) => void;
   };
 

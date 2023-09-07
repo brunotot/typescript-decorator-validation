@@ -1,11 +1,10 @@
-import { useContext, useEffect, useMemo, useState } from "react";
-import { Class } from "tdv-core";
+import { useContext, useEffect, useState } from "react";
+import { Class, Payload } from "tdv-core";
 import { FormContext } from "../../contexts/FormContext";
 import useEffectWhenMounted from "../useAfterMount";
 import useMutations from "../useMutations";
 import useReset from "../useReset";
 import useValidation from "../useValidation";
-import FormContextNamespace from "./../../contexts/FormContext/types";
 import ns from "./types";
 
 /**
@@ -36,42 +35,39 @@ import ns from "./types";
  * @typeParam TClass - represents parent form class model holding context of current compontent
  * @typeParam TBody - represents writable scope of `TClass` (it can be TClass itself or a chunk of its fields)
  */
-export default function useForm<TClass, TBody = TClass>(
+export default function useForm<
+  TClass,
+  TBody extends Payload<TClass> = Payload<TClass>
+>(
   model: Class<TClass>,
-  config?: ns.UseFormConfig<TClass, TBody>
+  {
+    defaultValue,
+    onSubmit: onSubmitParam,
+    onSubmitValidationFail,
+    standalone,
+    validateImmediately,
+    validationGroups: groups,
+    onChange,
+  }: ns.UseFormConfig<TClass, TBody> = {
+    onSubmit: async () => {},
+    standalone: true,
+    validateImmediately: false,
+    validationGroups: [],
+    onChange: () => {},
+  }
 ): ns.UseFormReturn<TClass, TBody> {
-  const defaultValue0 = config?.defaultValue;
-  const whenChanged = config?.whenChanged ?? (() => {});
-  const groups = config?.validationGroups ?? [];
-  const onSubmitParam = config?.onSubmit ?? (async () => {});
-  const validateImmediatelyParam =
-    config?.validateImmediately === undefined
-      ? false
-      : config?.validateImmediately!;
-  const standalone =
-    config?.standalone === undefined ? true : config.standalone!;
-  const onSubmitValidationFail = config?.onSubmitValidationFail;
-  const noArgsConstructedInstance = useMemo(() => new model(), []);
-  const defaultValue =
-    defaultValue0 ?? (noArgsConstructedInstance as unknown as TBody);
   const ctx = useContext(FormContext);
-  const initialSubmitted = !standalone && !!ctx && ctx.submitted;
-  const validateImmediately = standalone
-    ? validateImmediatelyParam
-    : ctx
-    ? ctx.validateImmediately
-    : validateImmediatelyParam;
+  // prettier-ignore
+  const [submitted, setSubmitted] = useState(!standalone && !!ctx && ctx.submitted);
+  // prettier-ignore
+  const instantContextValidation = standalone ? validateImmediately! : ctx? ctx.validateImmediately : validateImmediately!;
+  const isSubmitted = instantContextValidation || submitted;
 
-  const [submitted, setSubmitted] = useState(initialSubmitted);
-  const isSubmitted = validateImmediately || submitted;
-
-  const [form, setForm, { errors: errorsSnapshot, isValid, processor }] =
+  const [form, setForm, { errors, detailedErrors, isValid, processor }] =
     useValidation<TClass, TBody>(model, {
       defaultValue,
       groups,
     });
-
-  const [errors, setErrors] = useState(errorsSnapshot);
 
   //* Dispatcher function which fires only when
   //* itself isn't a parent and context exists.
@@ -91,10 +87,7 @@ export default function useForm<TClass, TBody = TClass>(
   };
 
   //* When input data changes execute callback.
-  useEffectWhenMounted(() => whenChanged(), [form]);
-
-  //* When useValidation returns fresh errors object data.
-  useEffectWhenMounted(() => setErrors(errorsSnapshot), [errorsSnapshot]);
+  useEffectWhenMounted(() => onChange?.(), [form]);
 
   //* When submitted flag from context gets changed.
   useEffect(() => {
@@ -107,29 +100,18 @@ export default function useForm<TClass, TBody = TClass>(
 
   const onSubmit = async () => {
     handleSetSubmitted(true);
-
     if (!isValid) {
-      const newErrors = isSubmitted ? structuredClone(errors) : errors;
-      if (isSubmitted) {
-        setErrors(newErrors);
-      }
-      onSubmitValidationFail?.(newErrors);
+      onSubmitValidationFail?.(errors);
       return;
     }
-
-    await onSubmitParam();
+    await onSubmitParam?.();
   };
 
-  const providerProps: Omit<
-    FormContextNamespace.FormProviderProps,
-    "children"
-  > = {
+  const providerProps = {
     submitted: submitted,
     setSubmitted: handleSetSubmitted,
-    validateImmediately,
+    validateImmediately: instantContextValidation,
   };
-
-  const mutations = useMutations(model, { setForm });
 
   const reset = useReset({
     form,
@@ -140,12 +122,13 @@ export default function useForm<TClass, TBody = TClass>(
   });
 
   const data: ns.UseFormData<TClass, TBody> = {
+    mutations: useMutations(model, { setForm }),
     isValid,
     isSubmitted,
-    mutations,
     onSubmit,
     providerProps,
-    errors: validateImmediately || isSubmitted ? errors : {},
+    errors: isSubmitted ? errors : {},
+    detailedErrors: isSubmitted ? detailedErrors : {},
     reset,
   };
 

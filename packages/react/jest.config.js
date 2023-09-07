@@ -4,6 +4,7 @@ module.exports = {
   testMatch: ["**/*.test.ts", "**/*.test.tsx"],
   transformIgnorePatterns: ["./node_modules/", "./dist/"],
   reporters: ["<rootDir>/../../test-reporter/index.js"],
+  modulePathIgnorePatterns: ["<rootDir>/examples"],
   moduleFileExtensions: [
     "js",
     "mjs",
