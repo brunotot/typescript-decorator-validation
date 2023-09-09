@@ -13,5 +13,10 @@
     "allowJs": true,
     "strict": true,
     "isolatedModules": false
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
   }
 }
