@@ -96,7 +96,6 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     return this.#fromCache(state, "errors");
   }
 
-  //@stopwatch
   public validate(payload?: Payload<TClass>): EntityProcessorResult<TClass> {
     let errors: Errors<TClass> = {} as Errors<TClass>;
     let detailedErrors: DetailedErrors<TClass> = {} as DetailedErrors<TClass>;
@@ -151,7 +150,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     const handlePrimitiveArray: ErrorDataApplierType<ValidationMetadata<any>[]> = (key) => {
       const stateValueArray = ((state as any)[key] as any[]);
 
-      const prop = MetadataProcessor.fromClass(this.#clazz).getValidationProcessor(key as string)
+      const prop = MetadataProcessor.inferFrom(this.#clazz).getValidationProcessor(key as string)
       const primitiveArrayValidators = prop.node;
       const childrenArrayValidators = prop.children;
 

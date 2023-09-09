@@ -1,6 +1,6 @@
 import { Class } from "../../types/Class.type";
-import MetadataProcessor from "../processor/MetadataProcessor";
 import { $ } from "../../types/namespace/Utility.ns";
+import MetadataProcessor from "../processor/MetadataProcessor";
 
 export type PropertyTypeGroup =
   | "PRIMITIVE_ARRAY"
@@ -41,11 +41,8 @@ export default class PropertyMetadata<T> {
   }
 
   private buildTypeGroup(): PropertyTypeGroup {
-    const p = MetadataProcessor.fromClass(this._owner);
+    const p = MetadataProcessor.inferFrom(this._owner);
     const vp = p.getValidationProcessor(this._name as string);
-    if (!vp.isInitialTypeGroup) {
-      return vp.typeGroup;
-    }
     const value = this.#runtimeValue;
 
     return Array.isArray(value)
@@ -59,7 +56,7 @@ export default class PropertyMetadata<T> {
 
   private buildClass(): Class<unknown> | null {
     return (
-      MetadataProcessor.fromClass(this._owner)
+      MetadataProcessor.inferFrom(this._owner)
         .getValidationProcessor(this._name as string)
         .constructorCreator?.() ?? null
     );

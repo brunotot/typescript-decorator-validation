@@ -14,7 +14,7 @@ function makeDecoratorUsingStage2Strategy<T>(
 ) {
   const name = context as unknown as string;
   const clazz = target.constructor;
-  const processor = MetadataProcessor.fromClass(clazz);
+  const processor = MetadataProcessor.inferFrom(clazz);
   decoratorSupplier(name, processor, {
     name: name,
     metadata: {},
@@ -36,7 +36,7 @@ export function makeDecorator<T>(
 
     // Regular stage 3 syntax
     const name = context.name;
-    const metadataProcessor = MetadataProcessor.fromContext(context);
+    const metadataProcessor = MetadataProcessor.inferFrom(context.metadata);
     decoratorSupplier(name, metadataProcessor, context);
   };
 }

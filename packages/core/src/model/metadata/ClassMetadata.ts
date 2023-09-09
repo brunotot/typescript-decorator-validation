@@ -129,7 +129,7 @@ export default class ClassMetadata<T> {
   }
 
   private getValidationMetadata<T>(property: string): ValidationMetadata<T>[] {
-    return MetadataProcessor.fromClass(this._clazz).getValidationProcessor(
+    return MetadataProcessor.inferFrom(this._clazz).getValidationProcessor(
       property
     ).node;
   }
