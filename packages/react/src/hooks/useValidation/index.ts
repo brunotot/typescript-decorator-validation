@@ -32,13 +32,13 @@ export default function useValidation<TClass, TBody = TClass>(
   { defaultValue, groups }: ns.UseValidationConfig<TBody> = {}
 ): ns.UseValidationReturn<TClass, TBody> {
   const processor = useEntityProcessor(model, { groups, defaultValue });
-  const [form, setForm] = useState<TBody>(processor.noArgsInstance);
+  const [form, setForm] = useState<TBody>(processor.default);
   const [details, setDetails] = useState({} as DetailedErrors<TClass>);
   const [simpleErrors, setSimpleErrors] = useState({} as Errors<TClass>);
 
   useEffect(() => {
     const { errors, detailedErrors } = processor.validate(
-      form as Payload<TClass>
+      form as Payload<TBody>
     );
     setDetails(detailedErrors);
     setSimpleErrors(errors);
@@ -48,7 +48,7 @@ export default function useValidation<TClass, TBody = TClass>(
     form,
     setForm,
     {
-      isValid: processor.isValid(form as Payload<TClass>),
+      isValid: processor.isValid(form as Payload<TBody>),
       processor,
       errors: simpleErrors,
       detailedErrors: details,
