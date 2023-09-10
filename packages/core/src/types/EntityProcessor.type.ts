@@ -16,8 +16,11 @@ export type ValidityErrorsType =
   | ValidationResult[]
   | ValidationResult[][];
 
-export type EntityProcessorCache<T> = EntityProcessorResult<T> & {
-  state: Payload<T>;
+export type EntityProcessorCache<
+  TClass,
+  TBody = TClass
+> = EntityProcessorResult<TClass> & {
+  state: Payload<TBody>;
 };
 
 export type CacheKey<T> = Exclude<$.Keys<EntityProcessorCache<T>>, "state">;

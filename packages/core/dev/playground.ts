@@ -1,10 +1,21 @@
 import EntityProcessor from "../src/model/processor/EntityProcessor";
-import validators from "../validators/index";
+import MetadataProcessor from "../src/model/processor/MetadataProcessor";
+import Required from "../validators/any/Required";
+import foreach from "../validators/array/foreach";
 
 class TestClass {
-  @validators.string.Required()
-  username!: string;
+  @foreach(Required())
+  array: string[] = [];
 }
 
 const processor = new EntityProcessor(TestClass);
-console.log(processor.validate({}));
+const res = processor.validate({
+  array: ["", "2", "3"],
+});
+console.log(res);
+
+console.log(res.valid);
+
+const meta = MetadataProcessor.inferFrom(TestClass);
+//console.log(meta.data);
+debugger;
