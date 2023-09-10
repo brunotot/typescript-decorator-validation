@@ -1,11 +1,15 @@
 import { DecoratorContextMetadata } from "../../decorators/types/DecoratorContext.type";
 import { Class } from "../../types/Class.type";
-import ValidationProcessor from "./ValidationProcessor";
+import FieldDescriptor from "../descriptor/FieldDescriptor";
 
 export default class MetadataProcessor {
   static #META_KEY = "tdv:metadata-processor" as const;
 
   #content: Map<string, unknown>;
+
+  get data() {
+    return this.#content;
+  }
 
   static inferFrom(strategy: DecoratorContextMetadata | Class<any>) {
     return MetadataProcessor.#isConstructorStrategy(strategy)
@@ -17,8 +21,9 @@ export default class MetadataProcessor {
     this.#content = new Map();
   }
 
-  getValidationProcessor<T = unknown>(key: string) {
-    return this.get(key, () => new ValidationProcessor<T>());
+  field<TClass = unknown>(fieldName: keyof TClass) {
+    const key = fieldName as string;
+    return this.get(key, () => new FieldDescriptor<unknown>(key));
   }
 
   has(key: string) {

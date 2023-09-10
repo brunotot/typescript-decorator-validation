@@ -1,4 +1,4 @@
-export type DecoratorContextMetadata = Record<PropertyKey, unknown>;
+export type DecoratorContextMetadata = DecoratorMetadata;
 
 export type DecoratorContext<Accept = unknown> = Readonly<{
   kind: "field" | "method" | "getter";

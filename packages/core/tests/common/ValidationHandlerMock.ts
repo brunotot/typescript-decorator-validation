@@ -21,6 +21,15 @@ export default class ValidationHandlerMock<T> {
       it(buildItMessage(valid, value), () => {
         const state: any = { value };
         const res = this.handler.validate(state);
+        if (res.valid !== valid) {
+          console.log("Here");
+          console.log(res.detailedErrors);
+          /*console.log(state);
+          console.log((this.handler.schema.value as any).rules.root.contents);
+          console.log(
+            (this.handler.schema.value as any).rules.foreach.contents
+          );*/
+        }
         expect(res.valid).toBe(valid);
         const cachedErrors = this.handler.getErrors(state);
         expect(res.errors === cachedErrors).toBe(true);

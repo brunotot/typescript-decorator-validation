@@ -32,8 +32,8 @@ function saveMetadata(
   groups: ValidationGroupProp,
   isValid: ValidationEvaluator<any>
 ) {
-  const validate = processor.getValidationProcessor(key);
-  validate.appendNode({
+  const validate = processor.field(key);
+  validate.rules.root.add({
     groups: getSanitizedGroups(groups),
     validate: isValid,
   });
