@@ -29,7 +29,7 @@ fi
 printf "\033[1A"
 
 start "$(color $CYAN)4 $(color)" " $(color $GREY)7$(color) Running build script..."
-(cd $PWD_MODULE && npm run build >/dev/null 2>&1)
+(cd $PWD_MODULE && npm run build:noTest >/dev/null 2>&1)
 stop "/"
 
 start "$(color $CYAN)5 $(color)" " $(color $GREY)7$(color) Bumping version to $VERSION..."

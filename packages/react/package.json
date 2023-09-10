@@ -10,7 +10,7 @@
   "private": false,
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run test && npm run clean && tsc",
+    "build": "npm run test && npm run build:noTest",
     "build:noTest": "npm run clean && tsc",
     "deploy:minor": "bash ../../scripts/deploy.sh react minor",
     "deploy:major": "bash ../../scripts/deploy.sh react major",
