@@ -31,15 +31,6 @@ export function extractGroups<T extends object>(
     : [];
 }
 
-export function isValidationGroupUnion(
-  classGroups: ValidationGroup[],
-  validatorGroups: ValidationGroup[]
-) {
-  return classGroups.length
-    ? validatorGroups.some((o) => classGroups.includes(o))
-    : !validatorGroups.length;
-}
-
 export function evaluateNullableValidity<T>(
   object: $.Nullable<T>,
   isValid: (value: T) => boolean

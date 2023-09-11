@@ -21,9 +21,13 @@ export default class ClassDescriptor<TClass = unknown>
   implements IDescriptor<TClass>
 {
   #default: TClass;
+
   #class: Class<TClass>;
+
   #groups: ValidationGroup[];
+
   #schema: Descriptors<TClass>;
+
   #name?: string;
 
   get name() {

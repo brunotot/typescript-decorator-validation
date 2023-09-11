@@ -12,10 +12,11 @@ const processor = new EntityProcessor(TestClass);
 const res = processor.validate({
   array: ["", "2", "3"],
 });
-console.log(res);
+//console.log(res);
 
-console.log(res.valid);
+//console.log(res.valid);
 
 const meta = MetadataProcessor.inferFrom(TestClass);
 //console.log(meta.data);
+console.log(processor.schema);
 debugger;

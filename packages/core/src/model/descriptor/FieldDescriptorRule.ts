@@ -2,7 +2,13 @@ import { ValidationGroup } from "../../decorators/types/DecoratorProps.type";
 import { Payload } from "../../types/Payload.type";
 import { ValidationMetadata } from "../../types/ValidationMetadata.type";
 import { ValidationResult } from "../../types/ValidationResult.type";
-import { isValidationGroupUnion } from "../../utils/decorator.utils";
+
+function validationGroupPredicate<TFieldType>(groups: ValidationGroup[]) {
+  return (meta: ValidationMetadata<TFieldType>) =>
+    groups.length
+      ? meta.groups.some((o) => groups.includes(o))
+      : !meta.groups.length;
+}
 
 export default class FieldDescriptorRule<TFieldType> {
   #contents: ValidationMetadata<TFieldType>[];
@@ -20,15 +26,10 @@ export default class FieldDescriptorRule<TFieldType> {
     payload: Payload<TBody>,
     groups: ValidationGroup[]
   ): ValidationResult[] {
-    return this.validators(groups)
+    return this.#contents
+      .filter(validationGroupPredicate(groups))
       .map(({ validate }) => validate(value, payload))
       .filter(({ valid }) => !valid);
-  }
-
-  validators(groups: ValidationGroup[]) {
-    return this.contents.filter((meta) =>
-      isValidationGroupUnion(groups, meta.groups)
-    );
   }
 
   pop() {

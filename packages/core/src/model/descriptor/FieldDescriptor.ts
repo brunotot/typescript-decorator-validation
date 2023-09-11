@@ -17,10 +17,13 @@ export default class FieldDescriptor<FieldType>
   implements IDescriptor<FieldType>
 {
   #rules: FieldDescriptorRules<FieldType>;
+
   #name: string;
+
   host?: Class<unknown>;
 
   default?: FieldType;
+
   class?: Class<any>;
 
   get name(): string {
