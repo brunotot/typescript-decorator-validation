@@ -11,11 +11,10 @@ import { Errors } from "../../types/Errors.type";
 import { getClassFieldNames } from "../../utils/class.utils";
 import { deepEquals, hasErrors } from "../../utils/object.utils";
 import ClassDescriptor, { Descriptor } from "../descriptor/ClassDescriptor";
-import ValidationStrategy from "../validation-strategy/ValidationStrategy";
-import ObjectArrayValidationStrategy from "../validation-strategy/impl/ObjectArrayValidationStrategy";
-import ObjectValidationStrategy from "../validation-strategy/impl/ObjectValidationStrategy";
-import PrimitiveArrayValidationStrategy from "../validation-strategy/impl/PrimitiveArrayValidationStrategy";
-import PrimitiveValidationStrategy from "../validation-strategy/impl/PrimitiveValidationStrategy";
+import ObjectArrayStrat from "../validation-strategy/impl/ObjectArrayStrat";
+import ObjectStrat from "../validation-strategy/impl/ObjectStrat";
+import PrimitiveArrayStrat from "../validation-strategy/impl/PrimitiveArrayStrat";
+import PrimitiveStrat from "../validation-strategy/impl/PrimitiveStrat";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
@@ -91,29 +90,27 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     const state = payload ?? this.default;
     const descriptors = Object.values<Descriptor<unknown>>(this.schema);
 
-    let errors: any = {};
-    let detailedErrors: any = {};
+    let errors: Errors<TClass> = {};
+    let detailedErrors: DetailedErrors<TClass> = {};
 
-    const executeStrategy = (
-      descriptor: Descriptor<unknown>,
-      strategyImplClass: Class<ValidationStrategy>
-    ) => {
+    const validateDescriptor = (descriptor: Descriptor<unknown>) => {
+      const strategyImplClass = exec[descriptor.strategy];
       const key = descriptor.name;
       const stratImpl = new strategyImplClass(descriptor, this.default?.[key]);
       const result = stratImpl.test(state[key], state, this.groups);
-      detailedErrors[key] = result[0];
-      errors[key] = result[1];
+      (detailedErrors as any)[key] = result[0];
+      (errors as any)[key] = result[1];
     };
 
     // prettier-ignore
     const exec = {
-      "PRIMITIVE_ARRAY": PrimitiveArrayValidationStrategy,
-         "OBJECT_ARRAY": ObjectArrayValidationStrategy,
-            "PRIMITIVE": PrimitiveValidationStrategy,
-               "OBJECT": ObjectValidationStrategy        
+      "PRIMITIVE_ARRAY": PrimitiveArrayStrat,
+         "OBJECT_ARRAY": ObjectArrayStrat,
+            "PRIMITIVE": PrimitiveStrat,
+               "OBJECT": ObjectStrat        
     }
 
-    descriptors.forEach((d) => executeStrategy(d, exec[d.strategy]));
+    descriptors.forEach(validateDescriptor);
 
     return this.#saveCache({
       valid: this.#isValid(errors),

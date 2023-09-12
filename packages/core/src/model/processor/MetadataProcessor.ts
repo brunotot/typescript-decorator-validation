@@ -46,7 +46,7 @@ export default class MetadataProcessor {
   }
 
   static #fromMetadata(metadata: DecoratorContextMetadata): MetadataProcessor {
-    return MetadataProcessor.#buildProcessor(metadata);
+    return MetadataProcessor.#buildProcessor(metadata ?? {});
   }
 
   static #fromConstructor(constructor: Class<any>) {

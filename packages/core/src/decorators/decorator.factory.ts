@@ -36,6 +36,9 @@ export function makeDecorator<T>(
 
     // Regular stage 3 syntax
     const name = context.name;
+    if (!context.metadata) {
+      console.log(JSON.stringify(context));
+    }
     const metadataProcessor = MetadataProcessor.inferFrom(context.metadata);
     decoratorSupplier(name, metadataProcessor, context);
   };
