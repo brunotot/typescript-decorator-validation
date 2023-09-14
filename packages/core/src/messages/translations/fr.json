@@ -43,5 +43,5 @@
   "ValueRange": "La valeur doit être supérieure ou égale à {0} et inférieure ou égale à {1} mais est {2}",
   "XML": "La chaîne donnée n'est pas un XML valide",
   "Uppercase": "La chaîne donnée doit contenir uniquement des caractères majuscules",
-  "Lowercase": "La chaîne donnée doit contenir uniquement des caractères minuscules"
+  "Lowercase": "La chaîne donnée ne doit contenir que des caractères minuscules"
 }
