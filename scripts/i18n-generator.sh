@@ -2,6 +2,7 @@
 
 PWD_THIS="$(dirname $0)"
 PWD_MODULE=$PWD_THIS/../packages/core
+API_KEY=AIzaSyDe8OgFlm_W6qegW3cY0gaNoyT5ZbUUJvo
 
 # Function to show usage and description
 show_help() {
@@ -53,9 +54,7 @@ fi
 for lang in "${languages[@]}"; do
   # Check if the language is valid
   if is_valid_language "$lang"; then
-    echo "Generating translations for $lang..."
-    i18n-auto-translation -k AIzaSyDe8OgFlm_W6qegW3cY0gaNoyT5ZbUUJvo -d $PWD_MODULE/src/messages/translations -t "$lang" -f "$default_lang"
-    echo "Translations for $lang generated successfully."
+    i18n-auto-translation -k "$API_KEY" -d $PWD_MODULE/src/messages/translations -t "$lang" -f "$default_lang"
   else
     echo "Error: Invalid language code: $lang. Skipping..."
   fi
