@@ -43,6 +43,8 @@ is_valid_language() {
   fi
 }
 
+npm i i18n-auto-translation --save-dev --silent
+
 # Check if at least one language is provided
 if [ ${#languages[@]} -eq 0 ]; then
   echo "Error: At least one language must be provided."
