@@ -1,5 +1,5 @@
-import { ValidationGroupProp } from "../../src/decorators/types/DecoratorProps.type";
-import { makeValidator } from "../../src/decorators/facade/validator.facade";
+import { makeValidator } from "../../src/decorators/decorator.facade";
+import { ValidationGroupProp } from "../../src/decorators/decorator.types";
 import { ValidationEvaluator } from "../../src/types/ValidationEvaluator.type";
 
 export type RuleProps<T> =

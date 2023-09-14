@@ -1,4 +1,4 @@
-import { DecoratorContextMetadata } from "../../decorators/types/DecoratorContext.type";
+import { DecoratorContextMetadata } from "../../decorators/decorator.types";
 import { Class } from "../../types/Class.type";
 import FieldDescriptor from "../descriptor/FieldDescriptor";
 

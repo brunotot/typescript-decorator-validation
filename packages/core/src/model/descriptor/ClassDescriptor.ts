@@ -1,4 +1,4 @@
-import { ValidationGroup } from "../../decorators/types/DecoratorProps.type";
+import { ValidationGroup } from "../../decorators/decorator.types";
 import { Class } from "../../types/Class.type";
 import { getClassFieldNames } from "../../utils/class.utils";
 import MetadataProcessor from "../processor/MetadataProcessor";

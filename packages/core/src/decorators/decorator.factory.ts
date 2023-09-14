@@ -1,7 +1,9 @@
 import MetadataProcessor from "../model/processor/MetadataProcessor";
-import { Decorator } from "./types/Decorator.type";
-import { DecoratorContext } from "./types/DecoratorContext.type";
-import { DecoratorSupplier } from "./types/DecoratorSupplier.type";
+import {
+  Decorator,
+  DecoratorContext,
+  DecoratorSupplier,
+} from "./decorator.types";
 
 function isDecoratorsStage2(context: DecoratorContext) {
   return typeof context === "string";

@@ -1,4 +1,4 @@
-import { ValidationGroup } from "../../decorators/types/DecoratorProps.type";
+import { ValidationGroup } from "../../decorators/decorator.types";
 import { Payload } from "../../types/Payload.type";
 import { ValidationMetadata } from "../../types/ValidationMetadata.type";
 import { ValidationResult } from "../../types/ValidationResult.type";

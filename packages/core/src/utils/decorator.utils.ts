@@ -1,7 +1,7 @@
 import {
   DecoratorPartialProps,
   ValidationGroup,
-} from "../decorators/types/DecoratorProps.type";
+} from "../decorators/decorator.types";
 import { $ } from "../types/namespace/Utility.ns";
 import { hasValue } from "./object.utils";
 

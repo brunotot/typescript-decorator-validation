@@ -1,7 +1,7 @@
-import { makeValidator } from "../../src/decorators/facade/validator.facade";
-import { extractGroups } from "../../src/utils/decorator.utils";
-import { DecoratorImpartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import { makeValidator } from "../../src/decorators/decorator.facade";
+import { DecoratorImpartialProps } from "../../src/decorators/decorator.types";
 import { $ } from "../../src/types/namespace/Utility.ns";
+import { extractGroups } from "../../src/utils/decorator.utils";
 
 export type ArrayNoneType<T> = {
   test: $.Predicate<T>;

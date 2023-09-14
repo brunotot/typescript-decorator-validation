@@ -1,9 +1,9 @@
-import { makeValidator } from "../../src/decorators/facade/validator.facade";
+import { makeValidator } from "../../src/decorators/decorator.facade";
 
-import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
-import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
+import { DecoratorPartialProps } from "../../src/decorators/decorator.types";
+import ErrorMessage from "../../src/messages/model/errors";
 import { $ } from "../../src/types/namespace/Utility.ns";
+import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 
 export type DigitsType = {
   maxInteger?: number;

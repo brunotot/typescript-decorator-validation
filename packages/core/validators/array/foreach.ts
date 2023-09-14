@@ -1,5 +1,5 @@
 import { makeDecorator } from "../../src/decorators/decorator.factory";
-import { Decorator } from "../../src/decorators/types/Decorator.type";
+import { Decorator } from "../../src/decorators/decorator.types";
 
 type ExtractArrayType<T> = T extends (infer U)[] ? U : never;
 

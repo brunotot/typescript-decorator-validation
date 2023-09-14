@@ -1,20 +1,23 @@
-import MetadataProcessor from "../../model/processor/MetadataProcessor";
-import { ValidationEvaluator } from "../../types/ValidationEvaluator.type";
-import { makeDecorator } from "../decorator.factory";
-import { Decorator } from "../types/Decorator.type";
+import MetadataProcessor from "../model/processor/MetadataProcessor";
+import { ValidationEvaluator } from "../types/ValidationEvaluator.type";
+import { makeDecorator } from "./decorator.factory";
 import {
+  Decorator,
   ValidationGroup,
   ValidationGroupProp,
-} from "../types/DecoratorProps.type";
+} from "./decorator.types";
 
 export type ValidatorBuilder<T> = {
   isValid: ValidationEvaluator<T>;
   groups?: ValidationGroupProp;
 };
 
-export function makeValidator<T>(builder: ValidatorBuilder<T>): Decorator<T> {
+export function makeValidator<T>({
+  groups,
+  isValid,
+}: ValidatorBuilder<T>): Decorator<T> {
   return makeDecorator<T>((key, processor) => {
-    saveMetadata(processor, key, builder.groups!, builder.isValid);
+    saveMetadata(processor, key, isValid, groups);
   });
 }
 
@@ -29,11 +32,12 @@ function getSanitizedGroups(unsanitizedGroups?: ValidationGroupProp) {
 function saveMetadata(
   processor: MetadataProcessor,
   key: string,
-  groups: ValidationGroupProp,
-  isValid: ValidationEvaluator<any>
+  isValid: ValidationEvaluator<any>,
+  groups?: ValidationGroupProp
 ) {
-  const validate = processor.field(key);
-  validate.rules.root.add({
+  const fieldDescriptor = processor.field(key);
+  const rootRules = fieldDescriptor.rules.root;
+  rootRules.add({
     groups: getSanitizedGroups(groups),
     validate: isValid,
   });

@@ -1,12 +1,12 @@
-import ErrorMessage from "../../../../src/messages/impl/ErrorMessage";
+import { DecoratorPartialProps } from "../../../../src/decorators/decorator.types";
+import ErrorMessage from "../../../../src/messages/model/errors";
+import RegexConst from "../../../../src/model/constants/regex.constants";
 import { $ } from "../../../../src/types/namespace/Utility.ns";
-import { DecoratorPartialProps } from "../../../../src/decorators/types/DecoratorProps.type";
-import Pattern from "../Pattern";
 import {
   extractGroups,
   extractMessage,
 } from "../../../../src/utils/decorator.utils";
-import RegexConst from "../../../../src/model/constants/regex.constants";
+import Pattern from "../Pattern";
 
 export default function Lowercase<T extends $.Nullable<string>>(
   props?: DecoratorPartialProps

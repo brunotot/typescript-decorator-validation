@@ -1,10 +1,11 @@
-import { makeValidator } from "./src/decorators/facade/validator.facade";
+import { makeValidator } from "./src/decorators/decorator.facade";
 import {
   DecoratorContext,
   DecoratorContextMetadata,
-} from "./src/decorators/types/DecoratorContext.type";
-import { ValidationGroup } from "./src/decorators/types/DecoratorProps.type";
-import { Locale, getLocale, setLocale } from "./src/messages/model/Locale";
+  ValidationGroup,
+} from "./src/decorators/decorator.types";
+import { Locale } from "./src/messages/message.types";
+import { getLocale, setLocale } from "./src/messages/model/locale";
 import EntityProcessor, {
   EntityProcessorConfig,
 } from "./src/model/processor/EntityProcessor";

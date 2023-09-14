@@ -1,6 +1,5 @@
-import { $ } from "../types/namespace/Utility.ns";
-import { getLocale } from "./model/Locale";
-import translations from "./model/Translations";
+import { getLocale } from "./model/locale";
+import localizedMessages from "./model/messages";
 
 function sprintf(str: string, ...args: any[]) {
   return str.replace(/{(\d+)}/g, function (match, number) {
@@ -8,11 +7,11 @@ function sprintf(str: string, ...args: any[]) {
   });
 }
 
-export type MessageFn<T extends any[] = []> = $.FuncFactory<T, string>;
-
 // Central method for getting translation handlers.
-export function t(key: string, ...args: any[]): string {
+const t = (key: string, ...args: any[]) => {
   const locale = getLocale();
-  const service = translations[locale];
+  const service = localizedMessages[locale];
   return sprintf(service[key], ...args);
-}
+};
+
+export default t;

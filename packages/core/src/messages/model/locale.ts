@@ -1,4 +1,4 @@
-export type Locale = "hr" | "en";
+import { Locale } from "../message.types";
 
 let locale: Locale = "en";
 

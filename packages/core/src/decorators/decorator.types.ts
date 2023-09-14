@@ -1,4 +1,23 @@
-import { $ } from "../../types/namespace/Utility.ns";
+import MetadataProcessor from "../model/processor/MetadataProcessor";
+import { $ } from "../types/namespace/Utility.ns";
+
+export type Decorator<T = unknown> = (
+  target: any,
+  context: DecoratorContext<T>
+) => void;
+
+export type DecoratorContextMetadata = DecoratorMetadata;
+
+export type DecoratorContext<Accept = unknown> = Readonly<{
+  kind: "field" | "method" | "getter";
+  static: boolean;
+  private: boolean;
+  name: string;
+  metadata: DecoratorContextMetadata;
+  access: {
+    get(object: any): Accept;
+  };
+}>;
 
 export type ValidationGroup = string | number | symbol;
 
@@ -33,3 +52,9 @@ type DecoratorGroupsProps = {
 type DecoratorMessageProps = {
   message: string;
 };
+
+export type DecoratorSupplier<T = unknown> = (
+  name: string,
+  processor: MetadataProcessor,
+  context: DecoratorContext<T>
+) => void;

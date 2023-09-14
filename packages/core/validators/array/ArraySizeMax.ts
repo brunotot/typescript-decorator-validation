@@ -1,7 +1,7 @@
-import { makeValidator } from "../../src/decorators/facade/validator.facade";
+import { makeValidator } from "../../src/decorators/decorator.facade";
 
-import ErrorMessage from "../../src/messages/impl/ErrorMessage";
-import { DecoratorPartialProps } from "../../src/decorators/types/DecoratorProps.type";
+import { DecoratorPartialProps } from "../../src/decorators/decorator.types";
+import ErrorMessage from "../../src/messages/model/errors";
 import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 
 type ArraySizeMaxType = {

@@ -1,4 +1,4 @@
-import { ValidationGroup } from "../../../decorators/types/DecoratorProps.type";
+import { ValidationGroup } from "../../../decorators/decorator.types";
 import {
   ValidationResult,
   buildSimpleErrors,

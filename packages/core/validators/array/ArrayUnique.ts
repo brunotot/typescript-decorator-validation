@@ -1,9 +1,9 @@
-import { makeValidator } from "../../src/decorators/facade/validator.facade";
+import { makeValidator } from "../../src/decorators/decorator.facade";
 import {
   DecoratorImpartialProps,
   DecoratorPartialProps,
-} from "../../src/decorators/types/DecoratorProps.type";
-import ErrorMessage from "../../src/messages/impl/ErrorMessage";
+} from "../../src/decorators/decorator.types";
+import ErrorMessage from "../../src/messages/model/errors";
 import { $ } from "../../src/types/namespace/Utility.ns";
 import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 import { hash } from "../../src/utils/object.utils";

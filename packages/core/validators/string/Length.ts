@@ -1,6 +1,6 @@
-import { makeValidator } from "../../src/decorators/facade/validator.facade";
-import { DecoratorImpartialProps } from "../../src/decorators/types/DecoratorProps.type";
-import ErrorMessage from "../../src/messages/impl/ErrorMessage";
+import { makeValidator } from "../../src/decorators/decorator.facade";
+import { DecoratorImpartialProps } from "../../src/decorators/decorator.types";
+import ErrorMessage from "../../src/messages/model/errors";
 import { $ } from "../../src/types/namespace/Utility.ns";
 import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 
