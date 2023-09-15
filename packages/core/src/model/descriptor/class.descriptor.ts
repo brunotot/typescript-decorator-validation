@@ -1,8 +1,24 @@
 import { ValidationGroup } from "../../decorators/decorator.types";
 import { Class } from "../../types/Class.type";
-import { getClassFieldNames } from "../../utils/class.utils";
 import MetadataProcessor from "../processor/metadata.processor";
 import FieldDescriptor, { PropertyTypeGroup } from "./field.descriptor";
+
+export function getClassFieldNames<TClass>(
+  constructor: Class<TClass>
+): (keyof TClass)[] {
+  const getPropertyNames = (classInstance: any) => {
+    return Object.getOwnPropertyNames(classInstance ?? {}).filter(
+      (property) => property !== "constructor"
+    );
+  };
+  const instance: any = new constructor();
+  const prototype = instance.__proto__;
+  const instanceProps = getPropertyNames(instance);
+  const prototypeProps = getPropertyNames(prototype);
+  const uniquePropsSet = new Set([...instanceProps, ...prototypeProps]);
+  const uniquePropsArray = [...uniquePropsSet];
+  return uniquePropsArray as (keyof TClass)[];
+}
 
 export interface IDescriptor<TClass = unknown> {
   class?: Class<TClass>;

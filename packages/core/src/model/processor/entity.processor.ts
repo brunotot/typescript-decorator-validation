@@ -8,7 +8,6 @@ import {
   EntityProcessorResult,
 } from "../../types/EntityProcessor.type";
 import { Errors } from "../../types/Errors.type";
-import { getClassFieldNames } from "../../utils/class.utils";
 import { deepEquals, hasErrors } from "../../utils/object.utils";
 import StrategyRegister from "../constants/strategy.constants";
 import ClassDescriptor, { Descriptor } from "../descriptor/class.descriptor";
@@ -49,12 +48,6 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     defaultValue?: TBody | undefined
   ) {
     return (defaultValue ?? new clazz()) as TBody;
-  }
-
-  public static getClassFieldNames<TClass, TBody = TClass>(
-    clazz: Class<TClass>
-  ) {
-    return getClassFieldNames(clazz) as unknown as (keyof TBody)[];
   }
 
   constructor(clazz: Class<TClass>, config?: EntityProcessorConfig<TBody>) {

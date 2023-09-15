@@ -6,6 +6,7 @@ import {
 } from "./src/decorators/decorator.types";
 import { Locale } from "./src/messages/message.types";
 import { getLocale, setLocale } from "./src/messages/model/locale";
+import { getClassFieldNames } from "./src/model/descriptor/class.descriptor";
 import EntityProcessor, {
   EntityProcessorConfig,
 } from "./src/model/processor/entity.processor";
@@ -41,6 +42,7 @@ export type {
 export {
   EntityProcessor,
   Rule,
+  getClassFieldNames,
   getLocale,
   makeValidator,
   setLocale,

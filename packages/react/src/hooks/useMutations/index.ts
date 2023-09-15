@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Class, EntityProcessor } from "tdv-core";
+import { Class, getClassFieldNames } from "tdv-core";
 import UseFormNamespace from "./../useForm/types";
 import ns from "./types";
 
@@ -7,10 +7,7 @@ export default function useMutations<TClass, TBody = TClass>(
   clazz: Class<TClass>,
   { setForm }: ns.UseMutationsConfig<TBody>
 ): UseFormNamespace.UseFormChangeHandlerMap<TBody> {
-  const fields = useMemo(
-    () => EntityProcessor.getClassFieldNames<TClass, TBody>(clazz),
-    []
-  );
+  const fields = useMemo(() => getClassFieldNames(clazz), []);
 
   const handleChange: UseFormNamespace.UseFormSetterFn<TBody> = (
     key,
@@ -32,7 +29,8 @@ export default function useMutations<TClass, TBody = TClass>(
       fields.reduce(
         (prev, prop) => ({
           ...prev,
-          [prop]: (value: any) => handleChange(prop, value),
+          [prop]: (value: any) =>
+            handleChange(prop as unknown as keyof TBody, value),
         }),
         {}
       ),
