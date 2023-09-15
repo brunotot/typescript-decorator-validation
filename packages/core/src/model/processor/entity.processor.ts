@@ -1,5 +1,6 @@
 import { Payload } from "tdv-core";
 import { ValidationGroup } from "../../decorators/decorator.types";
+import { deepEquals, hasErrors } from "../../shared";
 import { Class } from "../../types/Class.type";
 import { DetailedErrors } from "../../types/DetailedErrors.type";
 import {
@@ -8,7 +9,6 @@ import {
   EntityProcessorResult,
 } from "../../types/EntityProcessor.type";
 import { Errors } from "../../types/Errors.type";
-import { deepEquals, hasErrors } from "../../utils/object.utils";
 import StrategyRegister from "../constants/strategy.constants";
 import ClassDescriptor, { Descriptor } from "../descriptor/class.descriptor";
 

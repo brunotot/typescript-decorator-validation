@@ -8,8 +8,8 @@ import {
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/model/errors";
+import { hash } from "../../src/shared";
 import { $ } from "../../src/types/namespace/Utility.ns";
-import { hash } from "../../src/utils/object.utils";
 
 export type ArrayUniqueType<T> = {
   hash?: $.HashGenerator<T>;

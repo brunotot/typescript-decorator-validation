@@ -1,5 +1,5 @@
+import { hasValue } from "../shared";
 import { $ } from "../types/namespace/Utility.ns";
-import { hasValue } from "../utils/object.utils";
 import { DecoratorPartialProps, ValidationGroup } from "./decorator.types";
 
 export function extractMessage<T extends object>(

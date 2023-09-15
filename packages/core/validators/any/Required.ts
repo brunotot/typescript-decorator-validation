@@ -5,8 +5,8 @@ import {
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/model/errors";
+import { hasValue } from "../../src/shared";
 import { $ } from "../../src/types/namespace/Utility.ns";
-import { hasValue } from "../../src/utils/object.utils";
 
 export default function Required<T extends $.Nullable>(
   props?: DecoratorPartialProps
