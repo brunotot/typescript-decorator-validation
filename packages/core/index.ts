@@ -9,7 +9,7 @@ import { getLocale, setLocale } from "./src/messages/model/locale";
 import EntityProcessor, {
   EntityProcessorConfig,
 } from "./src/model/processor/EntityProcessor";
-import { Class, StripClass } from "./src/types/Class.type";
+import { Class } from "./src/types/Class.type";
 import { DetailedErrors } from "./src/types/DetailedErrors.type";
 import { Errors } from "./src/types/Errors.type";
 import { Payload } from "./src/types/Payload.type";
@@ -32,7 +32,6 @@ export type {
   Errors,
   Locale,
   Payload,
-  StripClass,
   $ as TypeUtils,
   ValidationEvaluator,
   ValidationGroup,
