@@ -1,6 +1,6 @@
 import { $ } from "../types/namespace/Utility.ns";
 
-export type Locale = "hr" | "en" | "de" | "es" | "fr" | "it";
+export type Locale = "hr" | "en" | "de" | "es" | "fr" | "it" | "nl";
 
 export type LocaleDefault = "en";
 

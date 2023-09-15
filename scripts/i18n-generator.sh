@@ -50,7 +50,7 @@ is_valid_language() {
   fi
 }
 
-npm i i18n-auto-translation --save-dev --silent
+npm i i18n-auto-translation -g --silent
 
 # Check if at least one language is provided
 if [ ${#languages[@]} -eq 0 ]; then
