@@ -5,6 +5,7 @@ import * as MessageFormatEs from "../translations/es.json";
 import * as MessageFormatFr from "../translations/fr.json";
 import * as MessageFormatHr from "../translations/hr.json";
 import * as MessageFormatIt from "../translations/it.json";
+import * as MessageFormatNl from "../translations/nl.json";
 
 export type LocalizedMessages = Record<Locale, Messages>;
 
@@ -17,6 +18,7 @@ const localizedMessages: LocalizedMessages = {
   es: MessageFormatEs,
   fr: MessageFormatFr,
   it: MessageFormatIt,
+  nl: MessageFormatNl,
 };
 
 export default localizedMessages;
