@@ -4,6 +4,8 @@ import FieldDescriptor from "../model/descriptor/field.descriptor";
 import { EntityProcessorConfig } from "../model/processor/entity.processor";
 import MetadataProcessor from "../model/processor/metadata.processor";
 
+//! TODO: Add function strategy and getter strategy
+
 export default abstract class ValidationStrategy<
   TFieldType = any,
   TDetailedResult = any,
