@@ -1,8 +1,8 @@
-import { ValidationGroup } from "../../decorators/decorator.types";
-import { Descriptor } from "../descriptor/class.descriptor";
-import FieldDescriptor from "../descriptor/field.descriptor";
-import { EntityProcessorConfig } from "../processor/entity.processor";
-import MetadataProcessor from "../processor/metadata.processor";
+import { ValidationGroup } from "../decorators/decorator.types";
+import { Descriptor } from "../model/descriptor/class.descriptor";
+import FieldDescriptor from "../model/descriptor/field.descriptor";
+import { EntityProcessorConfig } from "../model/processor/entity.processor";
+import MetadataProcessor from "../model/processor/metadata.processor";
 
 export default abstract class ValidationStrategy<
   TFieldType = any,

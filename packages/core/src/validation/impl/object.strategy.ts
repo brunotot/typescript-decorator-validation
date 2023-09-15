@@ -1,12 +1,12 @@
-import { ValidationGroup } from "../../../decorators/decorator.types";
-import { DetailedErrors } from "../../../types/DetailedErrors.type";
-import { Errors } from "../../../types/Errors.type";
+import { ValidationGroup } from "../../decorators/decorator.types";
+import { Descriptor } from "../../model/descriptor/class.descriptor";
+import EntityProcessor from "../../model/processor/entity.processor";
+import { DetailedErrors } from "../../types/DetailedErrors.type";
+import { Errors } from "../../types/Errors.type";
 import {
   ValidationResult,
   buildSimpleErrors,
-} from "../../../types/ValidationResult.type";
-import { Descriptor } from "../../descriptor/class.descriptor";
-import EntityProcessor from "../../processor/entity.processor";
+} from "../../types/ValidationResult.type";
 import ValidationStrategy from "../strategy";
 
 type ObjectSimpleErrors<F> = {

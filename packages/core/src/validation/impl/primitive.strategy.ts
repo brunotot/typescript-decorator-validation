@@ -1,9 +1,9 @@
-import { ValidationGroup } from "../../../decorators/decorator.types";
+import { ValidationGroup } from "../../decorators/decorator.types";
+import { Descriptor } from "../../model/descriptor/class.descriptor";
 import {
   ValidationResult,
   buildSimpleErrors,
-} from "../../../types/ValidationResult.type";
-import { Descriptor } from "../../descriptor/class.descriptor";
+} from "../../types/ValidationResult.type";
 import ValidationStrategy from "../strategy";
 
 export default class PrimitiveStrat<F> extends ValidationStrategy<
