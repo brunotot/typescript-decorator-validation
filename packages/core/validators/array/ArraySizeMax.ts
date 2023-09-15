@@ -1,8 +1,11 @@
 import { makeValidator } from "../../src/decorators/decorator.facade";
 
 import { DecoratorPartialProps } from "../../src/decorators/decorator.types";
+import {
+  extractGroups,
+  extractMessage,
+} from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/model/errors";
-import { extractGroups, extractMessage } from "../../src/utils/decorator.utils";
 
 type ArraySizeMaxType = {
   value: number;

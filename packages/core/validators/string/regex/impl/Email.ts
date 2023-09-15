@@ -1,11 +1,11 @@
 import { DecoratorPartialProps } from "../../../../src/decorators/decorator.types";
-import ErrorMessage from "../../../../src/messages/model/errors";
-import RegexConst from "../../../../src/model/constants/regex.constants";
-import { $ } from "../../../../src/types/namespace/Utility.ns";
 import {
   extractGroups,
   extractMessage,
-} from "../../../../src/utils/decorator.utils";
+} from "../../../../src/decorators/decorator.utils";
+import ErrorMessage from "../../../../src/messages/model/errors";
+import RegexConst from "../../../../src/model/constants/regex.constants";
+import { $ } from "../../../../src/types/namespace/Utility.ns";
 import Pattern from "./../../regex/Pattern";
 
 export default function Email<T extends $.Nullable<string>>(

@@ -1,9 +1,9 @@
 import { makeValidator } from "../../src/decorators/decorator.facade";
 import { DecoratorPartialProps } from "../../src/decorators/decorator.types";
+import { extractGroups } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/model/errors";
 import RegexConst from "../../src/model/constants/regex.constants";
 import { $ } from "../../src/types/namespace/Utility.ns";
-import { extractGroups } from "../../src/utils/decorator.utils";
 
 type PasswordProps = $.Optional<PasswordRequiredProps>;
 

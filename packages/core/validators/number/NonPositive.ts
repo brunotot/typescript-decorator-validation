@@ -1,8 +1,8 @@
 import { makeValidator } from "../../src/decorators/decorator.facade";
 import { DecoratorPartialProps } from "../../src/decorators/decorator.types";
+import { extractMessage } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/model/errors";
 import { $ } from "../../src/types/namespace/Utility.ns";
-import { extractMessage } from "../../src/utils/decorator.utils";
 
 export default function NonPositive<T extends $.Nullable<number>>(
   props?: DecoratorPartialProps
