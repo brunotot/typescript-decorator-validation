@@ -3,8 +3,8 @@ import {
   ValidationResult,
   buildSimpleErrors,
 } from "../../../types/ValidationResult.type";
-import { Descriptor } from "../../descriptor/ClassDescriptor";
-import ValidationStrategy from "../ValidationStrategy";
+import { Descriptor } from "../../descriptor/class.descriptor";
+import ValidationStrategy from "../strategy";
 
 export default class PrimitiveStrat<F> extends ValidationStrategy<
   F,

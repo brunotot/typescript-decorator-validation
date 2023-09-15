@@ -10,11 +10,8 @@ import {
 import { Errors } from "../../types/Errors.type";
 import { getClassFieldNames } from "../../utils/class.utils";
 import { deepEquals, hasErrors } from "../../utils/object.utils";
-import ClassDescriptor, { Descriptor } from "../descriptor/ClassDescriptor";
-import ObjectArrayStrat from "../validation-strategy/impl/ObjectArrayStrat";
-import ObjectStrat from "../validation-strategy/impl/ObjectStrat";
-import PrimitiveArrayStrat from "../validation-strategy/impl/PrimitiveArrayStrat";
-import PrimitiveStrat from "../validation-strategy/impl/PrimitiveStrat";
+import StrategyRegister from "../constants/strategy.constants";
+import ClassDescriptor, { Descriptor } from "../descriptor/class.descriptor";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
@@ -88,29 +85,17 @@ export default class EntityProcessor<TClass, TBody = TClass> {
 
   public validate(payload?: Payload<TBody>): EntityProcessorResult<TClass> {
     const state = payload ?? this.default;
-    const descriptors = Object.values<Descriptor<unknown>>(this.schema);
+    const errors: Errors<TClass> = {};
+    const detailedErrors: DetailedErrors<TClass> = {};
 
-    let errors: Errors<TClass> = {};
-    let detailedErrors: DetailedErrors<TClass> = {};
-
-    const validateDescriptor = (descriptor: Descriptor<unknown>) => {
-      const strategyImplClass = exec[descriptor.strategy];
+    this.#fieldDescriptors.forEach((descriptor) => {
       const key = descriptor.name;
+      const strategyImplClass = StrategyRegister[descriptor.strategy];
       const stratImpl = new strategyImplClass(descriptor, this.default?.[key]);
       const result = stratImpl.test(state[key], state, this.groups);
       (detailedErrors as any)[key] = result[0];
       (errors as any)[key] = result[1];
-    };
-
-    // prettier-ignore
-    const exec = {
-      "PRIMITIVE_ARRAY": PrimitiveArrayStrat,
-         "OBJECT_ARRAY": ObjectArrayStrat,
-            "PRIMITIVE": PrimitiveStrat,
-               "OBJECT": ObjectStrat        
-    }
-
-    descriptors.forEach(validateDescriptor);
+    });
 
     return this.#saveCache({
       valid: this.#isValid(errors),
@@ -118,6 +103,10 @@ export default class EntityProcessor<TClass, TBody = TClass> {
       errors,
       state,
     });
+  }
+
+  get #fieldDescriptors() {
+    return Object.values<Descriptor<unknown>>(this.schema);
   }
 
   #saveCache(cache: Partial<EntityProcessorCache<TClass, TBody>>) {

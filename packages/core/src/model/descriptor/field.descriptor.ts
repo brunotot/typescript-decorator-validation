@@ -1,6 +1,6 @@
 import { Class } from "../../types/Class.type";
-import { IDescriptor } from "./ClassDescriptor";
-import FieldDescriptorRule from "./FieldDescriptorRule";
+import ValidationRuleProcessor from "../processor/validation-rule.processor";
+import { IDescriptor } from "./class.descriptor";
 
 export type PropertyTypeGroup =
   | "PRIMITIVE_ARRAY"
@@ -9,8 +9,8 @@ export type PropertyTypeGroup =
   | "PRIMITIVE";
 
 export type FieldDescriptorRules<FieldType> = {
-  root: FieldDescriptorRule<FieldType>;
-  foreach: FieldDescriptorRule<FieldType>;
+  root: ValidationRuleProcessor<FieldType>;
+  foreach: ValidationRuleProcessor<FieldType>;
 };
 
 export default class FieldDescriptor<FieldType>
@@ -37,8 +37,8 @@ export default class FieldDescriptor<FieldType>
   constructor(name: string) {
     this.#name = name;
     this.#rules = {
-      root: new FieldDescriptorRule(),
-      foreach: new FieldDescriptorRule(),
+      root: new ValidationRuleProcessor(),
+      foreach: new ValidationRuleProcessor(),
     };
   }
 

@@ -1,4 +1,4 @@
-import MetadataProcessor from "../model/processor/MetadataProcessor";
+import MetadataProcessor from "../model/processor/metadata.processor";
 import { ValidationEvaluator } from "../types/ValidationEvaluator.type";
 import { makeDecorator } from "./decorator.factory";
 import {

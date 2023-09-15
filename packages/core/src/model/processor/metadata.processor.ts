@@ -1,6 +1,6 @@
 import { DecoratorContextMetadata } from "../../decorators/decorator.types";
 import { Class } from "../../types/Class.type";
-import FieldDescriptor from "../descriptor/FieldDescriptor";
+import FieldDescriptor from "../descriptor/field.descriptor";
 
 export default class MetadataProcessor {
   static #META_KEY = "tdv:metadata-processor" as const;

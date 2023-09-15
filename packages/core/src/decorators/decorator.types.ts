@@ -1,4 +1,4 @@
-import MetadataProcessor from "../model/processor/MetadataProcessor";
+import MetadataProcessor from "../model/processor/metadata.processor";
 import { $ } from "../types/namespace/Utility.ns";
 
 export type Decorator<T = unknown> = (

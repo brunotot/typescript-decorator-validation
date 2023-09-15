@@ -5,9 +5,9 @@ import {
   ValidationResult,
   buildSimpleErrors,
 } from "../../../types/ValidationResult.type";
-import { Descriptor } from "../../descriptor/ClassDescriptor";
-import EntityProcessor from "../../processor/EntityProcessor";
-import ValidationStrategy from "../ValidationStrategy";
+import { Descriptor } from "../../descriptor/class.descriptor";
+import EntityProcessor from "../../processor/entity.processor";
+import ValidationStrategy from "../strategy";
 
 type ObjectSimpleErrors<F> = {
   node: string[];

@@ -1,8 +1,8 @@
 import { ValidationGroup } from "../../decorators/decorator.types";
 import { Class } from "../../types/Class.type";
 import { getClassFieldNames } from "../../utils/class.utils";
-import MetadataProcessor from "../processor/MetadataProcessor";
-import FieldDescriptor, { PropertyTypeGroup } from "./FieldDescriptor";
+import MetadataProcessor from "../processor/metadata.processor";
+import FieldDescriptor, { PropertyTypeGroup } from "./field.descriptor";
 
 export interface IDescriptor<TClass = unknown> {
   class?: Class<TClass>;

@@ -1,4 +1,4 @@
-import EntityProcessor from "../src/model/processor/EntityProcessor";
+import EntityProcessor from "../src/model/processor/entity.processor";
 import MetadataProcessor from "../src/model/processor/MetadataProcessor";
 import Required from "../validators/any/Required";
 import foreach from "../validators/array/foreach";

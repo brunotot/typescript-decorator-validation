@@ -1,4 +1,4 @@
-import MetadataProcessor from "../model/processor/MetadataProcessor";
+import MetadataProcessor from "../model/processor/metadata.processor";
 import {
   Decorator,
   DecoratorContext,

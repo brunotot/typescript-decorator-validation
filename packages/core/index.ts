@@ -8,7 +8,7 @@ import { Locale } from "./src/messages/message.types";
 import { getLocale, setLocale } from "./src/messages/model/locale";
 import EntityProcessor, {
   EntityProcessorConfig,
-} from "./src/model/processor/EntityProcessor";
+} from "./src/model/processor/entity.processor";
 import { Class } from "./src/types/Class.type";
 import { DetailedErrors } from "./src/types/DetailedErrors.type";
 import { Errors } from "./src/types/Errors.type";

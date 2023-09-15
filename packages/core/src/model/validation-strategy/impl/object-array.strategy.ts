@@ -5,10 +5,10 @@ import {
   ValidationResult,
   buildSimpleErrors,
 } from "../../../types/ValidationResult.type";
-import { Descriptor } from "../../descriptor/ClassDescriptor";
-import EntityProcessor from "../../processor/EntityProcessor";
-import MetadataProcessor from "../../processor/MetadataProcessor";
-import ValidationStrategy from "../ValidationStrategy";
+import { Descriptor } from "../../descriptor/class.descriptor";
+import EntityProcessor from "../../processor/entity.processor";
+import MetadataProcessor from "../../processor/metadata.processor";
+import ValidationStrategy from "../strategy";
 
 type ObjectArraySimpleErrors<F> = {
   node: string[];

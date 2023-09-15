@@ -1,29 +1,8 @@
 import { ValidationGroup } from "../../decorators/decorator.types";
-import { Class } from "../../types/Class.type";
-import { Descriptor } from "../descriptor/ClassDescriptor";
-import FieldDescriptor, {
-  PropertyTypeGroup,
-} from "../descriptor/FieldDescriptor";
-import { EntityProcessorConfig } from "../processor/EntityProcessor";
-import MetadataProcessor from "../processor/MetadataProcessor";
-
-type StrategyMapperType = Record<PropertyTypeGroup, Class<ValidationStrategy>>;
-
-const strategyMapper: StrategyMapperType = {} as any;
-
-export function getStrategyMapper(
-  strategy: PropertyTypeGroup
-): Class<ValidationStrategy> {
-  return strategyMapper[strategy];
-}
-
-export function registerStrategy(
-  strategyClassImplementation: Class<ValidationStrategy>,
-  strategyName: PropertyTypeGroup
-) {
-  strategyMapper[strategyName] = strategyClassImplementation;
-  return strategyClassImplementation;
-}
+import { Descriptor } from "../descriptor/class.descriptor";
+import FieldDescriptor from "../descriptor/field.descriptor";
+import { EntityProcessorConfig } from "../processor/entity.processor";
+import MetadataProcessor from "../processor/metadata.processor";
 
 export default abstract class ValidationStrategy<
   TFieldType = any,

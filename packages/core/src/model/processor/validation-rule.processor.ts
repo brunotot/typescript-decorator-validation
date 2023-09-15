@@ -10,7 +10,7 @@ function validationGroupPredicate<TFieldType>(groups: ValidationGroup[]) {
       : !meta.groups.length;
 }
 
-export default class FieldDescriptorRule<TFieldType> {
+export default class ValidationRuleProcessor<TFieldType> {
   #contents: ValidationMetadata<TFieldType>[];
 
   get contents() {
