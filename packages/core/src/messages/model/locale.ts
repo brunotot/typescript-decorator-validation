@@ -1,6 +1,6 @@
-import { Locale } from "../message.types";
+import { Locale, LocaleDefault } from "../message.types";
 
-let locale: Locale = "en";
+let locale: Locale = LocaleDefault;
 
 function getLocale(): Locale {
   return locale;

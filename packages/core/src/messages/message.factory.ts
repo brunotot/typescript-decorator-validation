@@ -1,5 +1,5 @@
 import { getLocale } from "./model/locale";
-import localizedMessages from "./model/messages";
+import localeMessages from "./model/messages";
 
 function sprintf(str: string, ...args: any[]) {
   return str.replace(/{(\d+)}/g, function (match, number) {
@@ -10,7 +10,7 @@ function sprintf(str: string, ...args: any[]) {
 // Central method for getting translation handlers.
 const t = (key: string, ...args: any[]) => {
   const locale = getLocale();
-  const service = localizedMessages[locale];
+  const service = localeMessages[locale];
   return sprintf(service[key], ...args);
 };
 

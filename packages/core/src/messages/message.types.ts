@@ -1,7 +1,9 @@
-export type Locale = "hr" | "en" | "de" | "es" | "fr" | "it" | "nl";
+export const Locales = ["hr", "en", "de", "es", "fr", "it", "nl"] as const;
 
-export type LocaleDefault = "en";
+export type Locale = (typeof Locales)[number];
 
-export type LocalizedMessages = Record<Locale, Messages>;
+export const LocaleDefault: Locale = "en";
+
+export type LocaleMessages = Record<Locale, Messages>;
 
 export type Messages = Record<string, string>;
