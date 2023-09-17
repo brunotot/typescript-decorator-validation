@@ -1,11 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import {
-  Condition,
-  DetailedErrors,
-  Errors,
-  TdvCore,
-  Validation,
-} from "tdv-core";
+import { DetailedErrors, Errors, TdvCore, Validation } from "tdv-core";
 import FormContextNamespace from "../../contexts/FormContext/types";
 
 namespace UseFormHook {
@@ -59,16 +53,16 @@ namespace UseFormHook {
   // prettier-ignore
   export type PayloadFieldPathEvaluator<T> = {
     [K in keyof T]-?: K extends string
-    ? Condition.isFunction<T[K]> extends true ? never :
-      Condition.isArray<T[K]> extends true ? K :
-      Condition.isObject<T[K]> extends true ? ObjectPathEvaluator<T, K> : 
+    ? TdvCore.Condition.isFunction<T[K]> extends true ? never :
+      TdvCore.Condition.isArray<T[K]> extends true ? K :
+      TdvCore.Condition.isObject<T[K]> extends true ? ObjectPathEvaluator<T, K> : 
       K extends TdvCore.Objects.Inputs<T> ? K : never : never;
   }
 
   // prettier-ignore
   export type PayloadFieldPath<T> = 
-    Condition.isFunction<T> extends true ? '' : 
-    Condition.isObject<T> extends true ? PayloadFieldPathEvaluator<T>[keyof T] : '';
+    TdvCore.Condition.isFunction<T> extends true ? '' : 
+    TdvCore.Condition.isObject<T> extends true ? PayloadFieldPathEvaluator<T>[keyof T] : '';
 }
 
 export default UseFormHook;

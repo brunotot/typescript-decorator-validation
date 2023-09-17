@@ -27,7 +27,6 @@ import {
   getClassFieldNames,
 } from "./src/reflection/service/reflection.service";
 import TdvCore from "./src/types";
-import Condition from "./src/types/namespace/condition.namespace";
 import Validation from "./src/types/namespace/validation.namespace";
 import Class from "./src/types/validation/class.type";
 import DetailedErrors from "./src/types/validation/detailed-errors.type";
@@ -45,7 +44,6 @@ export interface PrimitiveSetAppend {}
 
 export type {
   Class,
-  Condition,
   Decorator,
   DecoratorContext,
   DecoratorContextMetadata,
