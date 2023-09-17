@@ -33,6 +33,10 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     return (defaultValue ?? new clazz()) as TBody;
   }
 
+  get hostDefault() {
+    return this.#hostDefault;
+  }
+
   constructor(clazz: Class<TClass>, config?: EntityProcessorConfig<TBody>) {
     const groups = Array.from(new Set(config?.groups ?? []));
     const defaultValue = EntityProcessor.buildEmptyInstance(

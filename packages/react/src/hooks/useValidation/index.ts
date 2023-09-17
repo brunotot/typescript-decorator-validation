@@ -32,7 +32,7 @@ export default function useValidation<TClass, TBody = TClass>(
   { defaultValue, groups }: ns.UseValidationConfig<TBody> = {}
 ): ns.UseValidationReturn<TClass, TBody> {
   const processor = useEntityProcessor(model, { groups, defaultValue });
-  const [form, setForm] = useState<TBody>(processor.default);
+  const [form, setForm] = useState<TBody>(processor.hostDefault);
   const [details, setDetails] = useState({} as DetailedErrors<TClass>);
   const [simpleErrors, setSimpleErrors] = useState({} as Errors<TClass>);
 
