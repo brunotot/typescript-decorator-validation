@@ -1,10 +1,6 @@
-import { ValidationGroup } from "../../../decorators/decorator.types";
-import { DetailedErrors } from "../../../types/validation/DetailedErrors.type";
-import { Errors } from "../../../types/validation/Errors.type";
-import {
-  ValidationResult,
-  buildSimpleErrors,
-} from "../../../types/validation/ValidationResult.type";
+import Validation from "../../../types/namespace/validation.namespace";
+import DetailedErrors from "../../../types/validation/detailed-errors.type";
+import Errors from "../../../types/validation/errors.type";
 import EntityProcessor from "../../models/entity.processor";
 import ReflectionDescriptor from "../../models/reflection.descriptor";
 import ValidationMetaService from "../../service/impl/reflection.service.validation";
@@ -16,7 +12,7 @@ type ObjectArraySimpleErrors<F> = {
 };
 
 type ObjectArrayDetailedErrors<F> = {
-  node: ValidationResult[];
+  node: Validation.Result[];
   children: DetailedErrors<F>[];
 };
 
@@ -32,7 +28,7 @@ export default class ObjectArrayStrat<F> extends ValidationStrategy<
   test(
     value: any[],
     context: any,
-    groups: ValidationGroup[] = []
+    groups: Validation.Group[] = []
   ): [ObjectArrayDetailedErrors<F>, ObjectArraySimpleErrors<F>] {
     const _value = value ?? [];
     const fieldClass = super.descriptor.thisClass!;
@@ -51,7 +47,7 @@ export default class ObjectArrayStrat<F> extends ValidationStrategy<
     };
 
     const objectArraySimpleErrors = {
-      node: buildSimpleErrors(rootResult),
+      node: Validation.buildSimpleErrors(rootResult),
       children: _value.map((v) =>
         new EntityProcessor<F>(
           fieldClass,

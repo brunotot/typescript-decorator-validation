@@ -1,10 +1,10 @@
-import { $ } from "../../../src/types/namespace/Utility.ns";
+import $ from "../../../src/types";
 import Rule from "../../../validators/any/Rule";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Nullable<string>;
+type Type = $.Objects.Optional<string>;
 const type = "String";
 const identifier = "Rule";
 const successData: Type[] = [null, undefined, "", "test123", "123test"];

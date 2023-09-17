@@ -1,10 +1,10 @@
-import { $ } from "../../../src/types/namespace/Utility.ns";
+import $ from "../../../src/types";
 import ExactLength from "../../../validators/string/ExactLength";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Nullable<string>;
+type Type = $.Objects.Optional<string>;
 const type = "String";
 const identifier = "ExactLength";
 const successData: Type[] = ["123456", "abcdef"];

@@ -1,10 +1,10 @@
-import { $ } from "../../../../../src/types/namespace/Utility.ns";
+import $ from "../../../../../src/types";
 import IPAddress from "../../../../../validators/string/regex/impl/IPAddress";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Nullable<string>;
+type Type = $.Objects.Optional<string>;
 const type = "String";
 const identifier = "IPAddress";
 const successData: Type[] = ["192.168.1.0", "", null, undefined];

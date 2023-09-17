@@ -1,5 +1,5 @@
 import ValidationMetaService from "../reflection/service/impl/reflection.service.validation";
-import { $ } from "../types/namespace/Utility.ns";
+import Validation from "../types/namespace/validation.namespace";
 
 export type Decorator<T = unknown> = (
   target: any,
@@ -19,39 +19,28 @@ export type DecoratorContext<Accept = unknown> = Readonly<{
   };
 }>;
 
-export type ValidationGroup = string | number | symbol;
-
-export type ValidationGroupProp = ValidationGroup | ValidationGroup[];
-
-export type DecoratorImpartialProps<T extends object = {}> =
-  DecoratorMessageMandatoryPropsGroup<T>;
+export type DecoratorImpartialProps<T extends object = {}> = T & {
+  groups?: Validation.SpreadableGroup;
+} & {
+  message: string;
+};
 
 export type DecoratorPartialProps<
   V = string,
   T extends object = DecoratorValueProps<V>
-> = V | DecoratorMessageOptionalPropsGroup<T>;
+> =
+  | V
+  | (T & {
+      groups?: Validation.SpreadableGroup;
+    } & Partial<{
+        message: string;
+      }>);
 
-type DecoratorValueProps<T> = T extends string
+export type DecoratorValueProps<T> = T extends string
   ? {}
   : {
       value: T;
     };
-
-type DecoratorMessageOptionalPropsGroup<T extends object> = T &
-  DecoratorGroupsProps &
-  $.Optional<DecoratorMessageProps>;
-
-type DecoratorMessageMandatoryPropsGroup<T extends object> = T &
-  DecoratorGroupsProps &
-  DecoratorMessageProps;
-
-type DecoratorGroupsProps = {
-  groups?: ValidationGroupProp;
-};
-
-type DecoratorMessageProps = {
-  message: string;
-};
 
 export type DecoratorSupplier<T = unknown> = (
   name: string,

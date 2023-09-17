@@ -1,10 +1,10 @@
-import { $ } from "../../../src/types/namespace/Utility.ns";
+import $ from "../../../src/types";
 import MinLength from "../../../validators/string/MinLength";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Nullable<string>;
+type Type = $.Objects.Optional<string>;
 const type = "String";
 const identifier = "MinLength";
 const successData: Type[] = ["1234567890", "aaaaaaaaaaaaaaaaaaaa"];

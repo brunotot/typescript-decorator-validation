@@ -1,15 +1,13 @@
 import { makeValidator } from "../../../src/decorators/decorator.facade";
 import { DecoratorImpartialProps } from "../../../src/decorators/decorator.types";
 import { extractGroups } from "../../../src/decorators/decorator.utils";
-import { $ } from "../../../src/types/namespace/Utility.ns";
+import $ from "../../../src/types";
 
-export type PatternType = {
-  regex: RegExp;
-  key?: string;
-};
-
-export default function Pattern<T extends $.Nullable<string>>(
-  props: DecoratorImpartialProps<PatternType>
+export default function Pattern<T extends $.Objects.Optional<string>>(
+  props: DecoratorImpartialProps<{
+    regex: RegExp;
+    key?: string;
+  }>
 ) {
   return makeValidator<T>({
     groups: extractGroups(props.groups),

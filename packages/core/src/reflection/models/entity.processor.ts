@@ -1,30 +1,21 @@
-import { ValidationGroup } from "../../decorators/decorator.types";
 import { deepEquals, hasErrors } from "../../shared";
-import { Class } from "../../types/validation/Class.type";
-import { DetailedErrors } from "../../types/validation/DetailedErrors.type";
-import {
-  CacheKey,
-  EntityProcessorCache,
-  EntityProcessorResult,
-} from "../../types/validation/EntityProcessor.type";
-import { Errors } from "../../types/validation/Errors.type";
-import { Payload } from "../../types/validation/Payload.type";
+import ns from "../../types/namespace/entity-processor.namespace";
+import Validation from "../../types/namespace/validation.namespace";
+import Class from "../../types/validation/class.type";
+import DetailedErrors from "../../types/validation/detailed-errors.type";
+import Errors from "../../types/validation/errors.type";
+import Payload from "../../types/validation/payload.type";
 import ValidationMetaService from "../service/impl/reflection.service.validation";
 import { getClassFieldNames } from "../service/reflection.service";
 import { ReflectionStrategyImpl } from "./reflection.strategy";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
-export type EntityProcessorConfig<TBody> = {
-  defaultValue?: TBody;
-  groups?: ValidationGroup[];
-};
-
 export default class EntityProcessor<TClass, TBody = TClass> {
   #meta: ValidationMetaService;
-  #groups: ValidationGroup[];
-  #hostDefault: TBody;
-  #cache: EntityProcessorCache<TClass>;
+  #groups: Validation.Group[];
+  #hostDefault: any;
+  #cache: ns.Cache<TClass>;
 
   public static buildEmptyInstance<TClass, TBody = TClass>(
     clazz: Class<TClass>,
@@ -37,7 +28,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     return this.#hostDefault;
   }
 
-  constructor(clazz: Class<TClass>, config?: EntityProcessorConfig<TBody>) {
+  constructor(clazz: Class<TClass>, config?: ns.Config<TBody>) {
     const groups = Array.from(new Set(config?.groups ?? []));
     const defaultValue = EntityProcessor.buildEmptyInstance(
       clazz,
@@ -45,7 +36,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     );
     this.#groups = groups;
     this.#hostDefault = defaultValue;
-    this.#cache = {} as EntityProcessorCache<TClass>;
+    this.#cache = {} as ns.Cache<TClass>;
     this.#meta = ValidationMetaService.inject(clazz);
   }
 
@@ -61,7 +52,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     return this.#fromCache(state, "errors");
   }
 
-  public validate(payload?: Payload<TBody>): EntityProcessorResult<TClass> {
+  public validate(payload?: Payload<TBody>): ns.Result<TClass> {
     const state = payload ?? new this.#meta.class();
     const errors: Errors<TClass> = {};
     const detailedErrors: DetailedErrors<TClass> = {};
@@ -90,7 +81,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     });
   }
 
-  #saveCache(cache: Partial<EntityProcessorCache<TClass, TBody>>) {
+  #saveCache(cache: Partial<ns.Cache<TClass, TBody>>) {
     // @ts-ignore
     Object.entries(cache).forEach(([key, value]) => (this.#cache[key] = value));
     return {
@@ -100,10 +91,10 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     };
   }
 
-  #fromCache<K extends CacheKey<TClass>>(
+  #fromCache<K extends ns.CacheKey<TClass>>(
     state: Payload<TBody>,
     key: K
-  ): EntityProcessorResult<TClass>[K] {
+  ): ns.Result<TClass>[K] {
     return this.#tryGetCache(
       state,
       this.#cache[key],

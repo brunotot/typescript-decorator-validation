@@ -3,25 +3,7 @@ import { DecoratorPartialProps } from "../../src/decorators/decorator.types";
 import { extractGroups } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
 import RegexConst from "../../src/models/regex.constants";
-import { $ } from "../../src/types/namespace/Utility.ns";
-
-type PasswordProps = $.Optional<PasswordRequiredProps>;
-
-type PasswordRequiredProps = {
-  uppercase: boolean;
-  lowercase: boolean;
-  numbers: boolean;
-  specials: boolean;
-  length: number;
-};
-
-const DEFAULT_PROPS: PasswordRequiredProps = {
-  uppercase: false,
-  lowercase: true,
-  numbers: false,
-  specials: false,
-  length: 8,
-};
+import $ from "../../src/types";
 
 const PASSWORD_REGEXES = {
   uppercase: RegexConst.UPPERCASE_ANYWHERE,
@@ -35,20 +17,35 @@ function isInvalid(text: string, rule: keyof typeof PASSWORD_REGEXES) {
   return matchers === null || matchers.length === 0;
 }
 
-export default function Password<T extends $.Nullable<string>>(
-  cfg: DecoratorPartialProps<string, PasswordProps> = {
-    ...DEFAULT_PROPS,
-    message: undefined,
-  }
+export default function Password<T extends $.Objects.Optional<string>>(
+  cfg?: DecoratorPartialProps<
+    string,
+    Partial<{
+      uppercase: boolean;
+      lowercase: boolean;
+      numbers: boolean;
+      specials: boolean;
+      length: number;
+    }>
+  >
 ) {
   const props =
-    typeof cfg === "string" ? { ...DEFAULT_PROPS, message: cfg } : cfg;
-  const uppercase = props.uppercase ?? DEFAULT_PROPS.uppercase;
-  const lowercase = props.lowercase ?? DEFAULT_PROPS.lowercase;
-  const numbers = props.numbers ?? DEFAULT_PROPS.numbers;
-  const specials = props.specials ?? DEFAULT_PROPS.specials;
-  const length = props.length ?? DEFAULT_PROPS.length;
-  const definedMessage: string | undefined = props.message;
+    typeof cfg === "string"
+      ? {
+          uppercase: false,
+          lowercase: true,
+          numbers: false,
+          specials: false,
+          length: 8,
+          message: cfg,
+        }
+      : cfg;
+  const uppercase = props?.uppercase ?? false;
+  const lowercase = props?.lowercase ?? true;
+  const numbers = props?.numbers ?? false;
+  const specials = props?.specials ?? false;
+  const length = props?.length ?? 8;
+  const definedMessage: string | undefined = props?.message;
 
   function buildConstraintViolation(message: string, valid: boolean = false) {
     return {

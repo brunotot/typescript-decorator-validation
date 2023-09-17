@@ -1,10 +1,9 @@
+import { TdvCore } from "tdv-core";
 import { makeDecorator } from "../../src/decorators/decorator.factory";
 import { Decorator } from "../../src/decorators/decorator.types";
 
-type ExtractArrayType<T> = T extends (infer U)[] ? U : never;
-
 export default function foreach<T extends NonNullable<any[] | (() => any[])>>(
-  ...validators: Decorator<ExtractArrayType<T>>[]
+  ...validators: Decorator<TdvCore.Helper.ExtractArrayType<T>>[]
 ): Decorator<T> {
   return makeDecorator<T>((property, processor, context) => {
     processor.descriptor<any, any>(property).thisDefault = [];

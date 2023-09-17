@@ -1,10 +1,10 @@
-import { $ } from "../../../src/types/namespace/Utility.ns";
+import $ from "../../../src/types";
 import ValueMax from "../../../validators/number/ValueMax";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Nullable<number>;
+type Type = $.Objects.Optional<number>;
 const type = "Number";
 const identifier = "ValueMax";
 const successData: Type[] = [1, 5, 7, 10, undefined, null];

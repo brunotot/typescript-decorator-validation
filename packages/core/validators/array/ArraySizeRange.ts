@@ -1,5 +1,4 @@
 import { makeValidator } from "../../src/decorators/decorator.facade";
-
 import { DecoratorPartialProps } from "../../src/decorators/decorator.types";
 import {
   extractGroups,
@@ -7,13 +6,17 @@ import {
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
 
-type ArraySizeRangeType = {
-  min: number;
-  max: number;
-};
-
 export default function ArraySizeRange<K, T extends K[]>(
-  props: DecoratorPartialProps<ArraySizeRangeType, ArraySizeRangeType>
+  props: DecoratorPartialProps<
+    {
+      min: number;
+      max: number;
+    },
+    {
+      min: number;
+      max: number;
+    }
+  >
 ) {
   const min = typeof props === "number" ? props : props.min;
   const max = typeof props === "number" ? props : props.max;

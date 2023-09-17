@@ -1,10 +1,10 @@
-import { $ } from "../../../../../src/types/namespace/Utility.ns";
+import $ from "../../../../../src/types";
 import Numeric from "../../../../../validators/string/regex/impl/Numeric";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Nullable<string>;
+type Type = $.Objects.Optional<string>;
 const type = "String";
 const identifier = "Numeric";
 const successData: Type[] = ["123456", "", null, undefined];

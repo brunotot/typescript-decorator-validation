@@ -1,7 +1,8 @@
-import { EntityProcessorConfig } from "tdv-core";
+import { TdvCore } from "tdv-core";
 
 namespace UseEntityProcessorHook {
-  export type UseEntityProcessorConfig<TBody> = EntityProcessorConfig<TBody>;
+  export type UseEntityProcessorConfig<TBody> =
+    TdvCore.EntityProcessor.Config<TBody>;
 }
 
 export default UseEntityProcessorHook;

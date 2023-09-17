@@ -1,10 +1,10 @@
-import { IMock } from "../../common/ValidationHandlerMock";
-import { standardTest } from "../../common/TestFactory";
+import $ from "../../../src/types";
 import Truthy from "../../../validators/any/Truthy";
-import { $ } from "../../../src/types/namespace/Utility.ns";
+import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Nullable<any>;
+type Type = $.Objects.Optional<any>;
 const type = "any";
 const identifier = "Truthy";
 const successData: Type[] = [true, "X", []];

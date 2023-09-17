@@ -1,4 +1,4 @@
-import { Class } from "../../types/validation/Class.type";
+import Class from "../../types/validation/class.type";
 import ObjectArrayStrat from "../validation/impl/object-array.strategy";
 import ObjectStrat from "../validation/impl/object.strategy";
 import PrimitiveArrayStrat from "../validation/impl/primitive-array.strategy";

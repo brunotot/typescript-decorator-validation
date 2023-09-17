@@ -1,4 +1,4 @@
-import { Class } from "../../types/validation/Class.type";
+import Class from "../../types/validation/class.type";
 import ValidationMetaService from "../service/impl/reflection.service.validation";
 import { getClassFieldDescriptor } from "../service/reflection.service";
 import ReflectionRule from "./reflection.rule";
@@ -12,7 +12,7 @@ export type FieldDescriptorRules<FieldType> = {
   foreach: ReflectionRule<FieldType>;
 };
 
-type ReflectionDescriptorName<HostClass> = keyof HostClass | undefined;
+export type ReflectionDescriptorName<HostClass> = keyof HostClass | undefined;
 
 export type DescriptorProps<
   This,
@@ -23,11 +23,11 @@ export type DescriptorProps<
   hostDefault?: HostClass;
   thisClass?: Class<This>;
   thisName?: Name;
-  thisDefault?: _This<HostClass, Name>;
-  rules?: FieldDescriptorRules<_This<HostClass, Name>>;
+  thisDefault?: ReflectionDescriptorThis<HostClass, Name>;
+  rules?: FieldDescriptorRules<ReflectionDescriptorThis<HostClass, Name>>;
 };
 
-type _This<
+export type ReflectionDescriptorThis<
   HostClass,
   Name extends ReflectionDescriptorName<HostClass> = undefined
 > = Name extends keyof HostClass ? HostClass[Name] : HostClass;
@@ -41,8 +41,8 @@ export default class ReflectionDescriptor<
   hostDefault?: HostClass;
   thisClass?: Class<This>;
   thisName?: Name;
-  thisDefault?: _This<HostClass, Name>;
-  rules: FieldDescriptorRules<_This<HostClass, Name>>;
+  thisDefault?: ReflectionDescriptorThis<HostClass, Name>;
+  rules: FieldDescriptorRules<ReflectionDescriptorThis<HostClass, Name>>;
 
   constructor({
     hostClass,

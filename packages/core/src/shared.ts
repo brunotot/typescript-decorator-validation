@@ -1,4 +1,4 @@
-import { Errors } from "./types/validation/Errors.type";
+import Errors from "./types/validation/errors.type";
 
 export function hasErrors<T>(data: Errors<T>): boolean {
   const data0: any = data;

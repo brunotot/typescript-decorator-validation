@@ -1,10 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import {
-  DetailedErrors,
-  EntityProcessor,
-  Errors,
-  ValidationGroup,
-} from "tdv-core";
+import { DetailedErrors, EntityProcessor, Errors, Validation } from "tdv-core";
 
 namespace UseValidationHook {
   export type UseValidationData<TClass, TBody = TClass> = {
@@ -22,7 +17,7 @@ namespace UseValidationHook {
 
   export type UseValidationConfig<TBody> = {
     defaultValue?: TBody;
-    groups?: ValidationGroup[];
+    groups?: Validation.Group[];
   };
 }
 

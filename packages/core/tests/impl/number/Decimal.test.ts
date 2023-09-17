@@ -1,10 +1,10 @@
-import { $ } from "../../../src/types/namespace/Utility.ns";
+import $ from "../../../src/types";
 import Decimal from "../../../validators/number/Decimal";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Nullable<number>;
+type Type = $.Objects.Optional<number>;
 const type = "Number";
 const identifier = "Decimal";
 const successData: Type[] = [1.25, 23.15, 677.999];

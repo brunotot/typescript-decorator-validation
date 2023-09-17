@@ -1,6 +1,7 @@
 import { hasValue } from "../shared";
-import { $ } from "../types/namespace/Utility.ns";
-import { DecoratorPartialProps, ValidationGroup } from "./decorator.types";
+import $ from "../types";
+import Validation from "../types/namespace/validation.namespace";
+import { DecoratorPartialProps } from "./decorator.types";
 
 export function extractMessage<T extends object>(
   provider: DecoratorPartialProps<any, T>,
@@ -16,7 +17,7 @@ export function extractMessage<T extends object>(
 
 export function extractGroups<T extends object>(
   provider: DecoratorPartialProps<any, T>
-): ValidationGroup[] {
+): Validation.Group[] {
   return Array.isArray(provider)
     ? provider
     : typeof provider === "object"
@@ -29,7 +30,7 @@ export function extractGroups<T extends object>(
 }
 
 export function evaluateNullableValidity<T>(
-  object: $.Nullable<T>,
+  object: $.Objects.Optional<T>,
   isValid: (value: T) => boolean
 ) {
   return !hasValue(object) ? true : isValid(object);

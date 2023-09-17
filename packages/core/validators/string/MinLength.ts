@@ -5,9 +5,9 @@ import {
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
-import { $ } from "../../src/types/namespace/Utility.ns";
+import $ from "../../src/types";
 
-export default function MinLength<T extends $.Nullable<string>>(
+export default function MinLength<T extends $.Objects.Optional<string>>(
   props: DecoratorPartialProps<number>
 ) {
   const min = typeof props === "number" ? props : props.value;

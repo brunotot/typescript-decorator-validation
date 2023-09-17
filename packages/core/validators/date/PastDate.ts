@@ -6,16 +6,16 @@ import {
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
-import { $ } from "../../src/types/namespace/Utility.ns";
+import $ from "../../src/types";
 
-function isPastDate(date: $.Nullable<Date>): boolean {
+function isPastDate(date: $.Objects.Optional<Date>): boolean {
   return evaluateNullableValidity(date, (d) => {
     const currentDate = new Date();
     return d.getTime() < currentDate.getTime();
   });
 }
 
-export default function PastDate<T extends $.Nullable<Date>>(
+export default function PastDate<T extends $.Objects.Optional<Date>>(
   props?: DecoratorPartialProps
 ) {
   return makeValidator<T>({

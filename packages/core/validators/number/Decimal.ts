@@ -6,9 +6,9 @@ import {
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
-import { $ } from "../../src/types/namespace/Utility.ns";
+import $ from "../../src/types";
 
-export default function Decimal<T extends $.Nullable<number>>(
+export default function Decimal<T extends $.Objects.Optional<number>>(
   props?: DecoratorPartialProps<number>
 ) {
   return makeValidator<T>({

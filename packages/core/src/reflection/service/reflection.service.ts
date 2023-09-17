@@ -1,5 +1,5 @@
 import { DecoratorContext } from "../../decorators/decorator.types";
-import { Class } from "../../types/validation/Class.type";
+import Class from "../../types/validation/class.type";
 
 export function getClassFieldDescriptor<TClass>(
   constructor: Class<TClass>,

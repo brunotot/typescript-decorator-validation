@@ -5,9 +5,9 @@ import {
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
-import { $ } from "../../src/types/namespace/Utility.ns";
+import $ from "../../src/types";
 
-export default function Truthy<T extends $.Nullable>(
+export default function Truthy<T extends $.Objects.Optional>(
   props?: DecoratorPartialProps
 ) {
   return makeValidator<T>({

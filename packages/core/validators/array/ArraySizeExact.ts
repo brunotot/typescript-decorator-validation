@@ -7,12 +7,13 @@ import {
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
 
-type ArraySizeExactType = {
-  value: number;
-};
-
 export default function ArraySizeExact<K, T extends K[]>(
-  props: DecoratorPartialProps<number, ArraySizeExactType>
+  props: DecoratorPartialProps<
+    number,
+    {
+      value: number;
+    }
+  >
 ) {
   const exact = typeof props === "number" ? props : props.value;
   return makeValidator<T>({

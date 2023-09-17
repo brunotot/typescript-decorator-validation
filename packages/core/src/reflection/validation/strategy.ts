@@ -1,5 +1,5 @@
-import { ValidationGroup } from "../../decorators/decorator.types";
-import { EntityProcessorConfig } from "../models/entity.processor";
+import EntityProcessorNs from "../../types/namespace/entity-processor.namespace";
+import Validation from "../../types/namespace/validation.namespace";
 import ReflectionDescriptor from "../models/reflection.descriptor";
 import ValidationMetaService from "../service/impl/reflection.service.validation";
 
@@ -21,8 +21,8 @@ export default abstract class ValidationStrategy<
   }
 
   protected getEntityProcessorConfig(
-    groups: ValidationGroup[]
-  ): EntityProcessorConfig<TFieldType> {
+    groups: Validation.Group[]
+  ): EntityProcessorNs.Config<TFieldType> {
     return {
       defaultValue: this.defaultValue,
       groups,
@@ -60,6 +60,6 @@ export default abstract class ValidationStrategy<
   abstract test(
     value: any,
     context: any,
-    groups?: ValidationGroup[]
+    groups?: Validation.Group[]
   ): [TDetailedResult, TSimpleResult];
 }

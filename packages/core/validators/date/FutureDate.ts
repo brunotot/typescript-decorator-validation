@@ -6,9 +6,9 @@ import {
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
-import { $ } from "../../src/types/namespace/Utility.ns";
+import $ from "../../src/types";
 
-function isFutureDate(date: $.Nullable<Date>): boolean {
+function isFutureDate(date: $.Objects.Optional<Date>): boolean {
   // TODO: Maybe bump nullable validity to higher hierarchy
   return evaluateNullableValidity(date, (d) => {
     const currentDate = new Date();
@@ -16,7 +16,7 @@ function isFutureDate(date: $.Nullable<Date>): boolean {
   });
 }
 
-export default function FutureDate<T extends $.Nullable<Date>>(
+export default function FutureDate<T extends $.Objects.Optional<Date>>(
   props?: DecoratorPartialProps
 ) {
   return makeValidator<T>({

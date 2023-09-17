@@ -9,19 +9,18 @@ import {
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
 import { hash } from "../../src/shared";
-import { $ } from "../../src/types/namespace/Utility.ns";
+import $ from "../../src/types";
+import Objects from "../../src/types/namespace/objects.namespace";
 
-export type ArrayUniqueType<T> = {
-  hash?: $.HashGenerator<T>;
-};
-
-const DEFAULTS: DecoratorImpartialProps<ArrayUniqueType<any>> = {
+const DEFAULTS: DecoratorImpartialProps<{
+  hash?: $.Objects.Hash<any>;
+}> = {
   hash,
   groups: [],
   message: ErrorMessage.ArrayUnique(),
 };
 
-function isArrayUnique<T>(arr: T[], equals: $.Equals<T>): boolean {
+function isArrayUnique<T>(arr: T[], equals: Objects.Equals<T>): boolean {
   const set = new Set<T>();
   for (const val of arr) {
     for (const el of set) {
@@ -35,7 +34,12 @@ function isArrayUnique<T>(arr: T[], equals: $.Equals<T>): boolean {
 }
 
 export default function ArrayUnique<K, T extends K[]>(
-  props: DecoratorPartialProps<string, ArrayUniqueType<K>> = DEFAULTS
+  props: DecoratorPartialProps<
+    string,
+    {
+      hash?: $.Objects.Hash<K>;
+    }
+  > = DEFAULTS
 ) {
   const hashFn = typeof props === "string" ? hash : props.hash ?? hash;
 

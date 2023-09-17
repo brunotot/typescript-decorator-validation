@@ -5,15 +5,13 @@ import {
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
-import { $ } from "../../src/types/namespace/Utility.ns";
+import $ from "../../src/types";
 
-type LengthType = {
-  min: number;
-  max: number;
-};
-
-export default function Length<T extends $.Nullable<string>>(
-  props: DecoratorImpartialProps<LengthType>
+export default function Length<T extends $.Objects.Optional<string>>(
+  props: DecoratorImpartialProps<{
+    min: number;
+    max: number;
+  }>
 ) {
   const { min, max } = props;
   return makeValidator<T>({

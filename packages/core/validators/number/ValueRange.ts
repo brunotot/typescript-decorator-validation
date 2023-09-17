@@ -5,15 +5,19 @@ import {
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
-import { $ } from "../../src/types/namespace/Utility.ns";
+import $ from "../../src/types";
 
-export type ValueRangeProps = {
-  min: number;
-  max: number;
-};
-
-export default function ValueRange<T extends $.Nullable<number>>(
-  props: DecoratorPartialProps<ValueRangeProps, ValueRangeProps>
+export default function ValueRange<T extends $.Objects.Optional<number>>(
+  props: DecoratorPartialProps<
+    {
+      min: number;
+      max: number;
+    },
+    {
+      min: number;
+      max: number;
+    }
+  >
 ) {
   const { min, max } = props;
   return makeValidator<T>({

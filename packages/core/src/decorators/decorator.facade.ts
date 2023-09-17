@@ -1,39 +1,30 @@
 import ValidationMetaService from "../reflection/service/impl/reflection.service.validation";
-import { ValidationEvaluator } from "../types/validation/ValidationEvaluator.type";
+import Validation from "../types/namespace/validation.namespace";
 import { makeDecorator } from "./decorator.factory";
-import {
-  Decorator,
-  ValidationGroup,
-  ValidationGroupProp,
-} from "./decorator.types";
-
-export type ValidatorBuilder<T> = {
-  isValid: ValidationEvaluator<T>;
-  groups?: ValidationGroupProp;
-};
+import { Decorator } from "./decorator.types";
 
 export function makeValidator<T>({
   groups,
   isValid,
-}: ValidatorBuilder<T>): Decorator<T> {
+}: Validation.Builder<T>): Decorator<T> {
   return makeDecorator<T>((key, processor) => {
     saveMetadata(processor, key, isValid, groups);
   });
 }
 
-function getSanitizedGroups(unsanitizedGroups?: ValidationGroupProp) {
+function getSanitizedGroups(unsanitizedGroups?: Validation.SpreadableGroup) {
   return Array.isArray(unsanitizedGroups)
     ? unsanitizedGroups
     : unsanitizedGroups !== undefined
     ? [unsanitizedGroups]
-    : ([] as ValidationGroup[]);
+    : ([] as Validation.Group[]);
 }
 
 function saveMetadata(
   meta: ValidationMetaService,
   key: string,
-  isValid: ValidationEvaluator<any>,
-  groups?: ValidationGroupProp
+  isValid: Validation.Evaluator<any>,
+  groups?: Validation.SpreadableGroup
 ) {
   const fieldDescriptor = meta.descriptor<any, string>(key);
   const rootRules = fieldDescriptor.rules.root;

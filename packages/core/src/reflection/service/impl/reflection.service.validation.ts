@@ -5,9 +5,9 @@ import MetaService, {
   isClass,
 } from "../reflection.service";
 
-type ValidationMetaEntry = Map<string, ReflectionDescriptor<any, any, any>>;
-
-export default class ValidationMetaService extends MetaService<ValidationMetaEntry> {
+export default class ValidationMetaService extends MetaService<
+  Map<string, ReflectionDescriptor<any, any, any>>
+> {
   public static inject(strategy: MetaStrategy): ValidationMetaService {
     return new ValidationMetaService(strategy);
   }

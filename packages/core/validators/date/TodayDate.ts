@@ -6,9 +6,9 @@ import {
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
-import { $ } from "../../src/types/namespace/Utility.ns";
+import $ from "../../src/types";
 
-function isTodayDate(date: $.Nullable<Date>): boolean {
+function isTodayDate(date: $.Objects.Optional<Date>): boolean {
   return evaluateNullableValidity(date, (d) => {
     const currentDate = new Date();
     return (
@@ -19,7 +19,7 @@ function isTodayDate(date: $.Nullable<Date>): boolean {
   });
 }
 
-export default function TodayDate<T extends $.Nullable<Date>>(
+export default function TodayDate<T extends $.Objects.Optional<Date>>(
   props?: DecoratorPartialProps
 ) {
   return makeValidator<T>({

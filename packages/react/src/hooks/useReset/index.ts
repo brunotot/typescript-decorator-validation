@@ -9,7 +9,7 @@ export default function useReset<TClass, TBody = TClass>({
   handleSetSubmitted,
 }: ns.UseResetConfig<TClass, TBody>) {
   const reset: UseFormNamespace.UseFormData<TBody>["reset"] = (...paths) => {
-    const noArgsInstance = processor.default;
+    const noArgsInstance = processor.hostDefault;
 
     if (paths.length === 0) {
       setForm(noArgsInstance);

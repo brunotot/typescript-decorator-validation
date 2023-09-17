@@ -1,8 +1,4 @@
-import { ValidationGroup } from "../../../decorators/decorator.types";
-import {
-  ValidationResult,
-  buildSimpleErrors,
-} from "../../../types/validation/ValidationResult.type";
+import Validation from "../../../types/namespace/validation.namespace";
 import ReflectionDescriptor from "../../models/reflection.descriptor";
 import ValidationStrategy from "../strategy";
 
@@ -12,8 +8,8 @@ type PrimitiveArraySimpleErrors = {
 };
 
 type PrimitiveArrayDetailedErrors = {
-  node: ValidationResult[];
-  children: ValidationResult[][];
+  node: Validation.Result[];
+  children: Validation.Result[][];
 };
 
 export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
@@ -28,7 +24,7 @@ export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
   test(
     value: any[],
     context: any,
-    groups: ValidationGroup[] = []
+    groups: Validation.Group[] = []
   ): [PrimitiveArrayDetailedErrors, PrimitiveArraySimpleErrors] {
     const valueArray = value ?? [];
     const rootRules = super.fieldDescriptor!.rules.root;
@@ -43,7 +39,7 @@ export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
     };
 
     const primitiveArraySimpleErrors = {
-      node: buildSimpleErrors(rootResult),
+      node: Validation.buildSimpleErrors(rootResult),
       children: primitiveArrayDetailedErrors.children.map((v) =>
         v.map((r) => r.message)
       ),

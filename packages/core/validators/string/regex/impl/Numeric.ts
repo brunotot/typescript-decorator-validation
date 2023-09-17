@@ -5,10 +5,10 @@ import {
 } from "../../../../src/decorators/decorator.utils";
 import ErrorMessage from "../../../../src/messages/models/errors";
 import RegexConst from "../../../../src/models/regex.constants";
-import { $ } from "../../../../src/types/namespace/Utility.ns";
+import $ from "../../../../src/types";
 import Pattern from "../Pattern";
 
-export default function Numeric<T extends $.Nullable<string>>(
+export default function Numeric<T extends $.Objects.Optional<string>>(
   props?: DecoratorPartialProps
 ) {
   return Pattern<T>({

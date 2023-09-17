@@ -6,12 +6,7 @@ import {
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
-import { $ } from "../../src/types/namespace/Utility.ns";
-
-export type DigitsType = {
-  maxInteger?: number;
-  maxFraction?: number;
-};
+import $ from "../../src/types";
 
 function validateDigits(
   number: number,
@@ -35,8 +30,17 @@ function validateDigits(
   return integerPart.length <= maxInteger && fractionPart.length <= maxFraction;
 }
 
-export default function Digits<T extends $.Nullable<number>>(
-  props: DecoratorPartialProps<DigitsType, DigitsType>
+export default function Digits<T extends $.Objects.Optional<number>>(
+  props: DecoratorPartialProps<
+    {
+      maxInteger?: number;
+      maxFraction?: number;
+    },
+    {
+      maxInteger?: number;
+      maxFraction?: number;
+    }
+  >
 ) {
   const { maxInteger = Infinity, maxFraction = Infinity } = props;
   return makeValidator<T>({

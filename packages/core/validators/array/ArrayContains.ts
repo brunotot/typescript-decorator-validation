@@ -6,12 +6,15 @@ import {
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
 
-export type ArrayContainsType<T> = {
-  value: T;
-};
-
 export default function ArrayContains<K, T extends K[]>(
-  props: DecoratorPartialProps<ArrayContainsType<K>, ArrayContainsType<K>>
+  props: DecoratorPartialProps<
+    {
+      value: K;
+    },
+    {
+      value: K;
+    }
+  >
 ) {
   return makeValidator<T>({
     groups: extractGroups(props),

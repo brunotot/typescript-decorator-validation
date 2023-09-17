@@ -1,10 +1,10 @@
-import { $ } from "../../../src/types/namespace/Utility.ns";
+import $ from "../../../src/types";
 import ValueMin from "../../../validators/number/ValueMin";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Nullable<number>;
+type Type = $.Objects.Optional<number>;
 const type = "Number";
 const identifier = "ValueMin";
 const successData: Type[] = [10, 15, 20, 100, undefined, null];

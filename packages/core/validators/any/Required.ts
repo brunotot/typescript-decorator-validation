@@ -6,9 +6,9 @@ import {
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
 import { hasValue } from "../../src/shared";
-import { $ } from "../../src/types/namespace/Utility.ns";
+import $ from "../../src/types";
 
-export default function Required<T extends $.Nullable>(
+export default function Required<T extends $.Objects.Optional>(
   props?: DecoratorPartialProps
 ) {
   return makeValidator<T>({

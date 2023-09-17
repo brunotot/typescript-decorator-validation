@@ -5,14 +5,15 @@ import {
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
-import { $ } from "../../src/types/namespace/Utility.ns";
+import $ from "../../src/types";
 
-type ValueMinType = {
-  value: number;
-};
-
-export default function ValueMin<T extends $.Nullable<number>>(
-  props: DecoratorPartialProps<number, ValueMinType>
+export default function ValueMin<T extends $.Objects.Optional<number>>(
+  props: DecoratorPartialProps<
+    number,
+    {
+      value: number;
+    }
+  >
 ) {
   const min = typeof props === "number" ? props : props.value;
   return makeValidator<T>({

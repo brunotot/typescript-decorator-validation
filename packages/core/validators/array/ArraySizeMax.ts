@@ -6,13 +6,13 @@ import {
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
-
-type ArraySizeMaxType = {
-  value: number;
-};
-
 export default function ArraySizeMax<K, T extends K[]>(
-  props: DecoratorPartialProps<number, ArraySizeMaxType>
+  props: DecoratorPartialProps<
+    number,
+    {
+      value: number;
+    }
+  >
 ) {
   const max = typeof props === "number" ? props : props.value;
   return makeValidator<T>({

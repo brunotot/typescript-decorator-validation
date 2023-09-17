@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Class, DetailedErrors, Errors, Payload } from "tdv-core";
+import { Class, DetailedErrors, Errors } from "tdv-core";
 import useEntityProcessor from "../useEntityProcessor";
 import ns from "./types";
 
@@ -31,15 +31,16 @@ export default function useValidation<TClass, TBody = TClass>(
   model: Class<TClass>,
   { defaultValue, groups }: ns.UseValidationConfig<TBody> = {}
 ): ns.UseValidationReturn<TClass, TBody> {
-  const processor = useEntityProcessor(model, { groups, defaultValue });
+  const processor = useEntityProcessor<TClass, TBody>(model, {
+    groups,
+    defaultValue,
+  });
   const [form, setForm] = useState<TBody>(processor.hostDefault);
   const [details, setDetails] = useState({} as DetailedErrors<TClass>);
   const [simpleErrors, setSimpleErrors] = useState({} as Errors<TClass>);
 
   useEffect(() => {
-    const { errors, detailedErrors } = processor.validate(
-      form as Payload<TBody>
-    );
+    const { errors, detailedErrors } = processor.validate(form!);
     setDetails(detailedErrors);
     setSimpleErrors(errors);
   }, [form]);
@@ -48,7 +49,7 @@ export default function useValidation<TClass, TBody = TClass>(
     form,
     setForm,
     {
-      isValid: processor.isValid(form as Payload<TBody>),
+      isValid: processor.isValid(form!),
       processor,
       errors: simpleErrors,
       detailedErrors: details,

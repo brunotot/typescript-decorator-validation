@@ -3,15 +3,15 @@ import {
   Condition,
   DetailedErrors,
   Errors,
-  TypeUtils,
-  ValidationGroup,
+  TdvCore,
+  Validation,
 } from "tdv-core";
 import FormContextNamespace from "../../contexts/FormContext/types";
 
 namespace UseFormHook {
   export type UseFormConfig<TClass, TBody = TClass> = {
     defaultValue?: TBody;
-    validationGroups?: ValidationGroup[];
+    validationGroups?: Validation.Group[];
     validateImmediately?: boolean;
     standalone?: boolean;
     onSubmit?: () => Promise<void> | void;
@@ -51,7 +51,7 @@ namespace UseFormHook {
 
   // prettier-ignore
   export type ObjectPathEvaluator<T, K extends string> = K extends keyof T
-    ? K extends TypeUtils.WritableKeys<T>
+    ? K extends TdvCore.Objects.Inputs<T>
       ? K | `${K}.${PayloadFieldPath<T[K]>}`
       : ''
     : never;
@@ -62,7 +62,7 @@ namespace UseFormHook {
     ? Condition.isFunction<T[K]> extends true ? never :
       Condition.isArray<T[K]> extends true ? K :
       Condition.isObject<T[K]> extends true ? ObjectPathEvaluator<T, K> : 
-      K extends TypeUtils.WritableKeys<T> ? K : never : never;
+      K extends TdvCore.Objects.Inputs<T> ? K : never : never;
   }
 
   // prettier-ignore

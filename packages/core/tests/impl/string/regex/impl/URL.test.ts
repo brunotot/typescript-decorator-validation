@@ -1,10 +1,10 @@
-import { $ } from "../../../../../src/types/namespace/Utility.ns";
+import $ from "../../../../../src/types";
 import URL from "../../../../../validators/string/regex/impl/URL";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Nullable<string>;
+type Type = $.Objects.Optional<string>;
 const type = "String";
 const identifier = "URL";
 const successData: Type[] = [

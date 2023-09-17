@@ -1,10 +1,10 @@
-import { $ } from "../../../src/types/namespace/Utility.ns";
+import $ from "../../../src/types";
 import Digits from "../../../validators/number/Digits";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Nullable<number>;
+type Type = $.Objects.Optional<number>;
 const type = "Number";
 const identifier = "Digits";
 const successData: Type[] = [1.123, 12.1234, undefined, null];

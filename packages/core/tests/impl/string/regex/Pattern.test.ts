@@ -1,11 +1,11 @@
 import RegexConst from "../../../../src/models/regex.constants";
-import { $ } from "../../../../src/types/namespace/Utility.ns";
+import $ from "../../../../src/types";
 import Pattern from "../../../../validators/string/regex/Pattern";
 import { standardTest } from "../../../common/TestFactory";
 import { IMock } from "../../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Nullable<string>;
+type Type = $.Objects.Optional<string>;
 const type = "String";
 const identifier = "Pattern";
 const successData: Type[] = ["abcdef", "aaa", null, undefined];
