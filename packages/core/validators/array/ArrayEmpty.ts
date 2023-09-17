@@ -5,7 +5,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/model/errors";
+import ErrorMessage from "../../src/messages/models/errors";
 
 export default function ArrayEmpty<K, T extends K[]>(
   props?: DecoratorPartialProps

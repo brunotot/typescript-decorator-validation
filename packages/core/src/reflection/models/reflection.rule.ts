@@ -1,7 +1,7 @@
 import { ValidationGroup } from "../../decorators/decorator.types";
-import { Payload } from "../../types/Payload.type";
-import { ValidationMetadata } from "../../types/ValidationMetadata.type";
-import { ValidationResult } from "../../types/ValidationResult.type";
+import { Payload } from "../../types/validation/Payload.type";
+import { ValidationMetadata } from "../../types/validation/ValidationMetadata.type";
+import { ValidationResult } from "../../types/validation/ValidationResult.type";
 
 function validationGroupPredicate<TFieldType>(groups: ValidationGroup[]) {
   return (meta: ValidationMetadata<TFieldType>) =>
@@ -10,7 +10,7 @@ function validationGroupPredicate<TFieldType>(groups: ValidationGroup[]) {
       : !meta.groups.length;
 }
 
-export default class ValidationRuleProcessor<TFieldType> {
+export default class ReflectionRule<TFieldType> {
   #contents: ValidationMetadata<TFieldType>[];
 
   get contents() {

@@ -1,5 +1,5 @@
-import MetadataProcessor from "../model/processor/metadata.processor";
-import { ValidationEvaluator } from "../types/ValidationEvaluator.type";
+import ValidationMetaService from "../reflection/service/impl/reflection.service.validation";
+import { ValidationEvaluator } from "../types/validation/ValidationEvaluator.type";
 import { makeDecorator } from "./decorator.factory";
 import {
   Decorator,
@@ -30,12 +30,12 @@ function getSanitizedGroups(unsanitizedGroups?: ValidationGroupProp) {
 }
 
 function saveMetadata(
-  processor: MetadataProcessor,
+  meta: ValidationMetaService,
   key: string,
   isValid: ValidationEvaluator<any>,
   groups?: ValidationGroupProp
 ) {
-  const fieldDescriptor = processor.field(key);
+  const fieldDescriptor = meta.descriptor<any, string>(key);
   const rootRules = fieldDescriptor.rules.root;
   rootRules.add({
     groups: getSanitizedGroups(groups),

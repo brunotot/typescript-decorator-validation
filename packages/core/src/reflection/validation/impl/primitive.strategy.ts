@@ -1,9 +1,9 @@
-import { ValidationGroup } from "../../decorators/decorator.types";
-import { Descriptor } from "../../model/descriptor/class.descriptor";
+import { ValidationGroup } from "../../../decorators/decorator.types";
 import {
   ValidationResult,
   buildSimpleErrors,
-} from "../../types/ValidationResult.type";
+} from "../../../types/validation/ValidationResult.type";
+import ReflectionDescriptor from "../../models/reflection.descriptor";
 import ValidationStrategy from "../strategy";
 
 export default class PrimitiveStrat<F> extends ValidationStrategy<
@@ -11,7 +11,7 @@ export default class PrimitiveStrat<F> extends ValidationStrategy<
   ValidationResult[],
   string[]
 > {
-  constructor(descriptor: Descriptor<F>, defaultValue: F) {
+  constructor(descriptor: ReflectionDescriptor<F, any>, defaultValue: F) {
     super(descriptor, defaultValue);
   }
 
@@ -20,7 +20,7 @@ export default class PrimitiveStrat<F> extends ValidationStrategy<
     context: any,
     groups: ValidationGroup[] = []
   ): [ValidationResult[], string[]] {
-    const rootResult = super.fieldDescriptor.rules.root.validate(
+    const rootResult = this.fieldDescriptor!.rules.root.validate(
       value,
       context,
       groups

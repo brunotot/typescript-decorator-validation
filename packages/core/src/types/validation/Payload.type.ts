@@ -1,5 +1,5 @@
+import { $ } from "../namespace/Utility.ns";
 import { EvaluatedStrategy } from "./EvaluatedStrategy";
-import { $ } from "./namespace/Utility.ns";
 
 export type Payload<
   T,

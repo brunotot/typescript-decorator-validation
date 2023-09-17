@@ -1,6 +1,6 @@
-import { Condition } from "./namespace/Condition.ns";
-import { Strategy } from "./namespace/Strategy.ns";
-import { $ } from "./namespace/Utility.ns";
+import { Condition } from "./../namespace/Condition.ns";
+import { Strategy } from "./../namespace/Strategy.ns";
+import { $ } from "./../namespace/Utility.ns";
 
 // prettier-ignore
 export type FieldStrategy<

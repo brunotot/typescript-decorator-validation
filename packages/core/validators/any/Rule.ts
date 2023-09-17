@@ -1,6 +1,6 @@
 import { makeValidator } from "../../src/decorators/decorator.facade";
 import { ValidationGroupProp } from "../../src/decorators/decorator.types";
-import { ValidationEvaluator } from "../../src/types/ValidationEvaluator.type";
+import { ValidationEvaluator } from "../../src/types/validation/ValidationEvaluator.type";
 
 export type RuleProps<T> =
   | ValidationEvaluator<T>

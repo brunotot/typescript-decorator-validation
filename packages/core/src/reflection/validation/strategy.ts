@@ -1,21 +1,21 @@
-import { ValidationGroup } from "../decorators/decorator.types";
-import { Descriptor } from "../model/descriptor/class.descriptor";
-import FieldDescriptor from "../model/descriptor/field.descriptor";
-import { EntityProcessorConfig } from "../model/processor/entity.processor";
-import MetadataProcessor from "../model/processor/metadata.processor";
-
-//! TODO: Add function strategy and getter strategy
+import { ValidationGroup } from "../../decorators/decorator.types";
+import { EntityProcessorConfig } from "../models/entity.processor";
+import ReflectionDescriptor from "../models/reflection.descriptor";
+import ValidationMetaService from "../service/impl/reflection.service.validation";
 
 export default abstract class ValidationStrategy<
   TFieldType = any,
   TDetailedResult = any,
   TSimpleResult = any
 > {
-  #descriptor: Descriptor<TFieldType>;
+  #descriptor: ReflectionDescriptor<any, any>;
   #defaultParent: TFieldType;
-  #fieldDescriptor?: FieldDescriptor<TFieldType>;
+  #fieldDescriptor?: ReflectionDescriptor<TFieldType, any>;
 
-  constructor(descriptor: Descriptor<TFieldType>, defaultValue: TFieldType) {
+  constructor(
+    descriptor: ReflectionDescriptor<TFieldType, any>,
+    defaultValue: TFieldType
+  ) {
     this.#descriptor = descriptor;
     this.#defaultParent = defaultValue;
   }
@@ -31,13 +31,14 @@ export default abstract class ValidationStrategy<
 
   protected get fieldDescriptor() {
     if (this.#fieldDescriptor) return this.#fieldDescriptor;
-    this.#fieldDescriptor = this.descriptor as FieldDescriptor<TFieldType>;
-    const metadata = MetadataProcessor.inferFrom(this.#fieldDescriptor.host!);
-    return metadata.field(this.fieldName);
+    this.#fieldDescriptor = ValidationMetaService.inject(
+      this.descriptor.hostClass!
+    ).descriptor(this.fieldName) as any;
+    return this.#fieldDescriptor;
   }
 
   protected get fieldName() {
-    return this.descriptor.name;
+    return this.descriptor.thisName!;
   }
 
   protected get defaultValue() {
@@ -45,7 +46,7 @@ export default abstract class ValidationStrategy<
   }
 
   protected get class() {
-    return this.descriptor.class!;
+    return this.descriptor.hostClass!;
   }
 
   protected get defaultParent() {

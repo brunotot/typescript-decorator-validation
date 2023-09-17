@@ -1,4 +1,4 @@
-import { EvaluatedStrategy } from "../EvaluatedStrategy";
+import { EvaluatedStrategy } from "../validation/EvaluatedStrategy";
 import { Condition } from "./Condition.ns";
 import { $ } from "./Utility.ns";
 

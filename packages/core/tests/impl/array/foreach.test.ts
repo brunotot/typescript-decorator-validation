@@ -13,7 +13,7 @@ const errorData: Type[] = [["", "2", "3"]];
 /*** Model ***/
 class Model implements IMock<Type> {
   @foreach(Required())
-  value!: Type;
+  value: Type = [];
 }
 
 /*** Test ***/

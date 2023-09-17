@@ -1,16 +1,17 @@
-import { Payload } from "tdv-core";
 import { ValidationGroup } from "../../decorators/decorator.types";
 import { deepEquals, hasErrors } from "../../shared";
-import { Class } from "../../types/Class.type";
-import { DetailedErrors } from "../../types/DetailedErrors.type";
+import { Class } from "../../types/validation/Class.type";
+import { DetailedErrors } from "../../types/validation/DetailedErrors.type";
 import {
   CacheKey,
   EntityProcessorCache,
   EntityProcessorResult,
-} from "../../types/EntityProcessor.type";
-import { Errors } from "../../types/Errors.type";
-import StrategyRegister from "../constants/strategy.constants";
-import ClassDescriptor, { Descriptor } from "../descriptor/class.descriptor";
+} from "../../types/validation/EntityProcessor.type";
+import { Errors } from "../../types/validation/Errors.type";
+import { Payload } from "../../types/validation/Payload.type";
+import ValidationMetaService from "../service/impl/reflection.service.validation";
+import { getClassFieldNames } from "../service/reflection.service";
+import { ReflectionStrategyImpl } from "./reflection.strategy";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
@@ -20,28 +21,10 @@ export type EntityProcessorConfig<TBody> = {
 };
 
 export default class EntityProcessor<TClass, TBody = TClass> {
-  #descriptor: ClassDescriptor<TClass>;
+  #meta: ValidationMetaService;
+  #groups: ValidationGroup[];
+  #hostDefault: TBody;
   #cache: EntityProcessorCache<TClass>;
-
-  get cache() {
-    return this.#cache;
-  }
-
-  get schema() {
-    return this.#descriptor.schema;
-  }
-
-  get groups() {
-    return this.#descriptor.groups;
-  }
-
-  get class() {
-    return this.#descriptor.class;
-  }
-
-  get default() {
-    return this.#descriptor.default as any;
-  }
 
   public static buildEmptyInstance<TClass, TBody = TClass>(
     clazz: Class<TClass>,
@@ -56,12 +39,10 @@ export default class EntityProcessor<TClass, TBody = TClass> {
       clazz,
       config?.defaultValue
     );
+    this.#groups = groups;
+    this.#hostDefault = defaultValue;
     this.#cache = {} as EntityProcessorCache<TClass>;
-    this.#descriptor = new ClassDescriptor(
-      clazz,
-      defaultValue as unknown as TClass,
-      groups
-    );
+    this.#meta = ValidationMetaService.inject(clazz);
   }
 
   public isValid(state: Payload<TBody>): boolean {
@@ -77,15 +58,22 @@ export default class EntityProcessor<TClass, TBody = TClass> {
   }
 
   public validate(payload?: Payload<TBody>): EntityProcessorResult<TClass> {
-    const state = payload ?? this.default;
+    const state = payload ?? new this.#meta.class();
     const errors: Errors<TClass> = {};
     const detailedErrors: DetailedErrors<TClass> = {};
 
-    this.#fieldDescriptors.forEach((descriptor) => {
-      const key = descriptor.name;
-      const strategyImplClass = StrategyRegister[descriptor.strategy];
-      const stratImpl = new strategyImplClass(descriptor, this.default?.[key]);
-      const result = stratImpl.test(state[key], state, this.groups);
+    getClassFieldNames(this.#meta.class).forEach((key) => {
+      const descriptor = this.#meta.descriptor<any, any>(key);
+      console.log(descriptor.strategy);
+      if (!(descriptor.strategy in ReflectionStrategyImpl)) {
+        throw new Error(
+          `Validation strategy not implemented for field type '${descriptor.strategy}'`
+        );
+      }
+      debugger;
+      const strategyImplClass = ReflectionStrategyImpl[descriptor.strategy];
+      const stratImpl = new strategyImplClass(descriptor, this.#hostDefault);
+      const result = stratImpl.test(state[key], state, this.#groups);
       (detailedErrors as any)[key] = result[0];
       (errors as any)[key] = result[1];
     });
@@ -96,10 +84,6 @@ export default class EntityProcessor<TClass, TBody = TClass> {
       errors,
       state,
     });
-  }
-
-  get #fieldDescriptors() {
-    return Object.values<Descriptor<unknown>>(this.schema);
   }
 
   #saveCache(cache: Partial<EntityProcessorCache<TClass, TBody>>) {

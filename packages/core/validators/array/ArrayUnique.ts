@@ -7,7 +7,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/model/errors";
+import ErrorMessage from "../../src/messages/models/errors";
 import { hash } from "../../src/shared";
 import { $ } from "../../src/types/namespace/Utility.ns";
 

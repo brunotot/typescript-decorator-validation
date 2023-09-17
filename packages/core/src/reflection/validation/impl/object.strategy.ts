@@ -1,12 +1,12 @@
-import { ValidationGroup } from "../../decorators/decorator.types";
-import { Descriptor } from "../../model/descriptor/class.descriptor";
-import EntityProcessor from "../../model/processor/entity.processor";
-import { DetailedErrors } from "../../types/DetailedErrors.type";
-import { Errors } from "../../types/Errors.type";
+import { ValidationGroup } from "../../../decorators/decorator.types";
+import { DetailedErrors } from "../../../types/validation/DetailedErrors.type";
+import { Errors } from "../../../types/validation/Errors.type";
 import {
   ValidationResult,
   buildSimpleErrors,
-} from "../../types/ValidationResult.type";
+} from "../../../types/validation/ValidationResult.type";
+import EntityProcessor from "../../models/entity.processor";
+import ReflectionDescriptor from "../../models/reflection.descriptor";
 import ValidationStrategy from "../strategy";
 
 type ObjectSimpleErrors<F> = {
@@ -24,7 +24,7 @@ export default class ObjectStrat<F> extends ValidationStrategy<
   ObjectDetailedErrors<F>,
   ObjectSimpleErrors<F>
 > {
-  constructor(descriptor: Descriptor<F>, defaultValue: F) {
+  constructor(descriptor: ReflectionDescriptor<F, any>, defaultValue: F) {
     super(descriptor, defaultValue);
   }
 
@@ -34,11 +34,11 @@ export default class ObjectStrat<F> extends ValidationStrategy<
     groups: ValidationGroup[] = []
   ): [ObjectDetailedErrors<F>, ObjectSimpleErrors<F>] {
     const { detailedErrors, errors } = new EntityProcessor<F>(
-      super.class,
+      super.descriptor.thisClass!,
       super.getEntityProcessorConfig(groups)
     ).validate(value);
 
-    const rootResult = super.fieldDescriptor.rules.root.validate(
+    const rootResult = super.fieldDescriptor!.rules.root.validate(
       value,
       context,
       groups

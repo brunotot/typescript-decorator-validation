@@ -1,5 +1,5 @@
-import EntityProcessor from "../../src/model/processor/entity.processor";
-import { Class } from "../../src/types/Class.type";
+import EntityProcessor from "../../src/reflection/models/entity.processor";
+import { Class } from "../../src/types/validation/Class.type";
 import ValidationHandlerMock, {
   IMock,
   buildIOName,

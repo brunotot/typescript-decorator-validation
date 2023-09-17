@@ -3,8 +3,8 @@ import {
   extractGroups,
   extractMessage,
 } from "../../../../src/decorators/decorator.utils";
-import ErrorMessage from "../../../../src/messages/model/errors";
-import RegexConst from "../../../../src/model/constants/regex.constants";
+import ErrorMessage from "../../../../src/messages/models/errors";
+import RegexConst from "../../../../src/models/regex.constants";
 import { $ } from "../../../../src/types/namespace/Utility.ns";
 import Pattern from "./../../regex/Pattern";
 

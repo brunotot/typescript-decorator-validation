@@ -1,5 +1,5 @@
-import { getLocale } from "./model/locale";
-import localeMessages from "./model/messages";
+import { getLocale } from "./models/locale";
+import localeMessages from "./models/messages";
 
 function sprintf(str: string, ...args: any[]) {
   return str.replace(/{(\d+)}/g, function (match, number) {

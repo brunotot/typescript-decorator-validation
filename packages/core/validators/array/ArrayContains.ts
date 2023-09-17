@@ -4,7 +4,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/model/errors";
+import ErrorMessage from "../../src/messages/models/errors";
 
 export type ArrayContainsType<T> = {
   value: T;

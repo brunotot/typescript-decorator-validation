@@ -1,4 +1,4 @@
-import MetadataProcessor from "../model/processor/metadata.processor";
+import ValidationMetaService from "../reflection/service/impl/reflection.service.validation";
 import {
   Decorator,
   DecoratorContext,
@@ -16,7 +16,7 @@ function makeDecoratorUsingStage2Strategy<T>(
 ) {
   const name = context as unknown as string;
   const clazz = target.constructor;
-  const processor = MetadataProcessor.inferFrom(clazz);
+  const processor = ValidationMetaService.inject(clazz);
   decoratorSupplier(name, processor, {
     name: name,
     metadata: {},
@@ -39,9 +39,9 @@ export function makeDecorator<T>(
     // Regular stage 3 syntax
     const name = context.name;
     if (!context.metadata) {
-      console.log(JSON.stringify(context));
+      (context as any).metadata = {};
     }
-    const metadataProcessor = MetadataProcessor.inferFrom(context.metadata);
-    decoratorSupplier(name, metadataProcessor, context);
+    const meta = ValidationMetaService.inject(context);
+    decoratorSupplier(name, meta, context);
   };
 }

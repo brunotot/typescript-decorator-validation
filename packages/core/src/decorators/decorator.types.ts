@@ -1,4 +1,4 @@
-import MetadataProcessor from "../model/processor/metadata.processor";
+import ValidationMetaService from "../reflection/service/impl/reflection.service.validation";
 import { $ } from "../types/namespace/Utility.ns";
 
 export type Decorator<T = unknown> = (
@@ -55,6 +55,6 @@ type DecoratorMessageProps = {
 
 export type DecoratorSupplier<T = unknown> = (
   name: string,
-  processor: MetadataProcessor,
+  meta: ValidationMetaService,
   context: DecoratorContext<T>
 ) => void;

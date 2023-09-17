@@ -1,4 +1,4 @@
-import RegexConst from "../../../../src/model/constants/regex.constants";
+import RegexConst from "../../../../src/models/regex.constants";
 import { $ } from "../../../../src/types/namespace/Utility.ns";
 import Pattern from "../../../../validators/string/regex/Pattern";
 import { standardTest } from "../../../common/TestFactory";

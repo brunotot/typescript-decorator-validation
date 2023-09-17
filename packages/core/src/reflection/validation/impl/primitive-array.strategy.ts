@@ -1,9 +1,9 @@
-import { ValidationGroup } from "../../decorators/decorator.types";
-import { Descriptor } from "../../model/descriptor/class.descriptor";
+import { ValidationGroup } from "../../../decorators/decorator.types";
 import {
   ValidationResult,
   buildSimpleErrors,
-} from "../../types/ValidationResult.type";
+} from "../../../types/validation/ValidationResult.type";
+import ReflectionDescriptor from "../../models/reflection.descriptor";
 import ValidationStrategy from "../strategy";
 
 type PrimitiveArraySimpleErrors = {
@@ -21,7 +21,7 @@ export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
   PrimitiveArrayDetailedErrors,
   PrimitiveArraySimpleErrors
 > {
-  constructor(descriptor: Descriptor<F>, defaultValue: F) {
+  constructor(descriptor: ReflectionDescriptor<F, any>, defaultValue: F) {
     super(descriptor, defaultValue);
   }
 
@@ -31,8 +31,8 @@ export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
     groups: ValidationGroup[] = []
   ): [PrimitiveArrayDetailedErrors, PrimitiveArraySimpleErrors] {
     const valueArray = value ?? [];
-    const rootRules = super.fieldDescriptor.rules.root;
-    const foreachRules = super.fieldDescriptor.rules.foreach;
+    const rootRules = super.fieldDescriptor!.rules.root;
+    const foreachRules = super.fieldDescriptor!.rules.foreach;
     const rootResult = rootRules.validate(valueArray as any, context, groups);
 
     const primitiveArrayDetailedErrors = {

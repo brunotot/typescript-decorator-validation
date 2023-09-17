@@ -1,8 +1,8 @@
+import { $ } from "../namespace/Utility.ns";
 import { DetailedErrors } from "./DetailedErrors.type";
 import { Errors } from "./Errors.type";
 import { Payload } from "./Payload.type";
 import { ValidationResult } from "./ValidationResult.type";
-import { $ } from "./namespace/Utility.ns";
 
 export type EntityProcessorResult<T> = {
   valid: boolean;

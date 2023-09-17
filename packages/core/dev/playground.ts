@@ -1,5 +1,5 @@
-import EntityProcessor from "../src/model/processor/entity.processor";
-import MetadataProcessor from "../src/model/processor/MetadataProcessor";
+import EntityProcessor from "../src/reflection/models/entity.processor";
+import ValidationMetaService from "../src/reflection/service/impl/reflection.service.validation";
 import Required from "../validators/any/Required";
 import foreach from "../validators/array/foreach";
 
@@ -9,14 +9,12 @@ class TestClass {
 }
 
 const processor = new EntityProcessor(TestClass);
-const res = processor.validate({
-  array: ["", "2", "3"],
-});
+const res = processor.validate({});
 //console.log(res);
 
 //console.log(res.valid);
 
-const meta = MetadataProcessor.inferFrom(TestClass);
-//console.log(meta.data);
-console.log(processor.schema);
+const meta = ValidationMetaService.inject(TestClass);
+console.log(meta);
+//console.log();
 debugger;

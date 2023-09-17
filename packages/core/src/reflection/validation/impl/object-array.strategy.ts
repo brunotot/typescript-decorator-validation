@@ -1,13 +1,13 @@
-import { ValidationGroup } from "../../decorators/decorator.types";
-import { Descriptor } from "../../model/descriptor/class.descriptor";
-import EntityProcessor from "../../model/processor/entity.processor";
-import MetadataProcessor from "../../model/processor/metadata.processor";
-import { DetailedErrors } from "../../types/DetailedErrors.type";
-import { Errors } from "../../types/Errors.type";
+import { ValidationGroup } from "../../../decorators/decorator.types";
+import { DetailedErrors } from "../../../types/validation/DetailedErrors.type";
+import { Errors } from "../../../types/validation/Errors.type";
 import {
   ValidationResult,
   buildSimpleErrors,
-} from "../../types/ValidationResult.type";
+} from "../../../types/validation/ValidationResult.type";
+import EntityProcessor from "../../models/entity.processor";
+import ReflectionDescriptor from "../../models/reflection.descriptor";
+import ValidationMetaService from "../../service/impl/reflection.service.validation";
 import ValidationStrategy from "../strategy";
 
 type ObjectArraySimpleErrors<F> = {
@@ -25,7 +25,7 @@ export default class ObjectArrayStrat<F> extends ValidationStrategy<
   ObjectArrayDetailedErrors<F>,
   ObjectArraySimpleErrors<F>
 > {
-  constructor(descriptor: Descriptor<F>, defaultValue: F) {
+  constructor(descriptor: ReflectionDescriptor<F, any>, defaultValue: F) {
     super(descriptor, defaultValue);
   }
 
@@ -35,9 +35,9 @@ export default class ObjectArrayStrat<F> extends ValidationStrategy<
     groups: ValidationGroup[] = []
   ): [ObjectArrayDetailedErrors<F>, ObjectArraySimpleErrors<F>] {
     const _value = value ?? [];
-    const fieldClass = super.descriptor.class!;
-    const metadata = MetadataProcessor.inferFrom(fieldClass);
-    const field = metadata.field(super.descriptor.name);
+    const fieldClass = super.descriptor.thisClass!;
+    const metadata = ValidationMetaService.inject(fieldClass);
+    const field = metadata.descriptor<any, any>(super.fieldName);
     const rootResult = field.rules.root.validate(_value, context, groups);
 
     const objectArrayDetailedErrors = {
