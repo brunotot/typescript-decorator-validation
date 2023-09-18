@@ -1,6 +1,6 @@
 import { makeValidator } from "../../src/decorators/decorator.facade";
+import Decorator from "../../src/types/namespace/decorator.namespace";
 
-import { DecoratorPartialProps } from "../../src/decorators/decorator.types";
 import {
   extractGroups,
   extractMessage,
@@ -9,7 +9,7 @@ import ErrorMessage from "../../src/messages/models/errors";
 import $ from "../../src/types";
 
 export default function Decimal<T extends $.Objects.Optional<number>>(
-  props?: DecoratorPartialProps<number>
+  props?: Decorator.PartialProps<number>
 ) {
   return makeValidator<T>({
     groups: extractGroups(props),

@@ -1,5 +1,4 @@
 import { makeValidator } from "../../src/decorators/decorator.facade";
-import { DecoratorPartialProps } from "../../src/decorators/decorator.types";
 import {
   evaluateNullableValidity,
   extractGroups,
@@ -7,6 +6,7 @@ import {
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
 import $ from "../../src/types";
+import Decorator from "../../src/types/namespace/decorator.namespace";
 
 function isTodayDate(date: $.Objects.Optional<Date>): boolean {
   return evaluateNullableValidity(date, (d) => {
@@ -20,7 +20,7 @@ function isTodayDate(date: $.Objects.Optional<Date>): boolean {
 }
 
 export default function TodayDate<T extends $.Objects.Optional<Date>>(
-  props?: DecoratorPartialProps
+  props?: Decorator.PartialProps
 ) {
   return makeValidator<T>({
     groups: extractGroups(props),

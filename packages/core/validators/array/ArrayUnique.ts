@@ -1,21 +1,17 @@
 import { makeValidator } from "../../src/decorators/decorator.facade";
 import {
-  DecoratorImpartialProps,
-  DecoratorPartialProps,
-} from "../../src/decorators/decorator.types";
-import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
-import { hash } from "../../src/shared";
 import $ from "../../src/types";
+import Decorator from "../../src/types/namespace/decorator.namespace";
 import Objects from "../../src/types/namespace/objects.namespace";
 
-const DEFAULTS: DecoratorImpartialProps<{
+const DEFAULTS: Decorator.ImpartialProps<{
   hash?: $.Objects.Hash<any>;
 }> = {
-  hash,
+  hash: $.Objects.hash,
   groups: [],
   message: ErrorMessage.ArrayUnique(),
 };
@@ -34,14 +30,15 @@ function isArrayUnique<T>(arr: T[], equals: Objects.Equals<T>): boolean {
 }
 
 export default function ArrayUnique<K, T extends K[]>(
-  props: DecoratorPartialProps<
+  props: Decorator.PartialProps<
     string,
     {
       hash?: $.Objects.Hash<K>;
     }
   > = DEFAULTS
 ) {
-  const hashFn = typeof props === "string" ? hash : props.hash ?? hash;
+  const hashFn =
+    typeof props === "string" ? $.Objects.hash : props.hash ?? $.Objects.hash;
 
   return makeValidator<T>({
     groups: extractGroups(props),

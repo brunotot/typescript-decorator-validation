@@ -1,12 +1,4 @@
 import { makeValidator } from "./src/decorators/decorator.facade";
-import {
-  Decorator,
-  DecoratorContext,
-  DecoratorContextMetadata,
-  DecoratorImpartialProps,
-  DecoratorPartialProps,
-  DecoratorValueProps,
-} from "./src/decorators/decorator.types";
 import { Locale, Locales } from "./src/messages/message.types";
 import { getLocale, setLocale } from "./src/messages/models/locale";
 import EntityProcessor from "./src/reflection/models/entity.processor";
@@ -27,6 +19,7 @@ import {
   getClassFieldNames,
 } from "./src/reflection/service/reflection.service";
 import TdvCore from "./src/types";
+import Decorator from "./src/types/namespace/decorator.namespace";
 import Validation from "./src/types/namespace/validation.namespace";
 import Class from "./src/types/validation/class.type";
 import DetailedErrors from "./src/types/validation/detailed-errors.type";
@@ -45,11 +38,6 @@ export interface PrimitiveSetAppend {}
 export type {
   Class,
   Decorator,
-  DecoratorContext,
-  DecoratorContextMetadata,
-  DecoratorImpartialProps,
-  DecoratorPartialProps,
-  DecoratorValueProps,
   DescriptorProps,
   DetailedErrors,
   Errors,

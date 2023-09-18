@@ -1,5 +1,4 @@
 import EntityProcessor from "../../src/reflection/models/entity.processor";
-import "./../global";
 
 export interface IMock<T> {
   value: T;

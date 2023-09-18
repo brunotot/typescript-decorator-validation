@@ -1,11 +1,11 @@
 import { makeValidator } from "../../src/decorators/decorator.facade";
-import { DecoratorPartialProps } from "../../src/decorators/decorator.types";
 import { extractMessage } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
 import $ from "../../src/types";
+import Decorator from "../../src/types/namespace/decorator.namespace";
 
 export default function NonPositive<T extends $.Objects.Optional<number>>(
-  props?: DecoratorPartialProps
+  props?: Decorator.PartialProps
 ) {
   return makeValidator<T>({
     isValid: (num) => ({

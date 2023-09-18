@@ -1,6 +1,6 @@
 import { makeValidator } from "../../src/decorators/decorator.facade";
+import Decorator from "../../src/types/namespace/decorator.namespace";
 
-import { DecoratorPartialProps } from "../../src/decorators/decorator.types";
 import {
   extractGroups,
   extractMessage,
@@ -8,7 +8,7 @@ import {
 import ErrorMessage from "../../src/messages/models/errors";
 
 export default function ArraySizeExact<K, T extends K[]>(
-  props: DecoratorPartialProps<
+  props: Decorator.PartialProps<
     number,
     {
       value: number;

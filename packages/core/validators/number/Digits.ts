@@ -1,6 +1,6 @@
 import { makeValidator } from "../../src/decorators/decorator.facade";
+import Decorator from "../../src/types/namespace/decorator.namespace";
 
-import { DecoratorPartialProps } from "../../src/decorators/decorator.types";
 import {
   extractGroups,
   extractMessage,
@@ -31,7 +31,7 @@ function validateDigits(
 }
 
 export default function Digits<T extends $.Objects.Optional<number>>(
-  props: DecoratorPartialProps<
+  props: Decorator.PartialProps<
     {
       maxInteger?: number;
       maxFraction?: number;

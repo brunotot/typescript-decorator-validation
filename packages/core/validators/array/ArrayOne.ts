@@ -1,10 +1,10 @@
 import { makeValidator } from "../../src/decorators/decorator.facade";
-import { DecoratorImpartialProps } from "../../src/decorators/decorator.types";
 import { extractGroups } from "../../src/decorators/decorator.utils";
 import $ from "../../src/types";
+import Decorator from "../../src/types/namespace/decorator.namespace";
 
 export default function ArrayOne<K, T extends K[]>(
-  props: DecoratorImpartialProps<{
+  props: Decorator.ImpartialProps<{
     test: $.Objects.ArrayPredicate<K>;
   }>
 ) {

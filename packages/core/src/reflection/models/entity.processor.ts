@@ -1,4 +1,4 @@
-import { deepEquals, hasErrors } from "../../shared";
+import $ from "../../types/index";
 import ns from "../../types/namespace/entity-processor.namespace";
 import Validation from "../../types/namespace/validation.namespace";
 import Class from "../../types/validation/class.type";
@@ -107,12 +107,13 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     cacheValue: K,
     valueGetter: () => K
   ): K {
-    return cacheValue === undefined || !deepEquals(this.#cache.state, state)
+    return cacheValue === undefined ||
+      !$.Objects.deepEquals(this.#cache.state, state)
       ? valueGetter()
       : cacheValue;
   }
 
   #isValid(errors: Errors<TClass>) {
-    return !hasErrors(errors);
+    return !$.Objects.hasErrors(errors);
   }
 }

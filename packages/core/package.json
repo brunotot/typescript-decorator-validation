@@ -11,8 +11,8 @@
   "private": false,
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run test && npm run clean && tsc && cp polyfill.d.ts ./dist && cp polyfill.d.ts ./dist/types",
-    "build:noTest": "npm run clean && tsc && cp polyfill.d.ts ./dist && cp polyfill.d.ts ./dist/types",
+    "build": "npm run test && npm run clean && tsc",
+    "build:noTest": "npm run clean && tsc",
     "deploy:minor": "bash ../../scripts/deploy.sh core minor",
     "deploy:major": "bash ../../scripts/deploy.sh core major",
     "deploy:patch": "bash ../../scripts/deploy.sh core patch",

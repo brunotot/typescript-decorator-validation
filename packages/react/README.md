@@ -48,13 +48,7 @@
 npm install typescript@latest --save-dev && npm install tdv-core tdv-react --force
 ```
 
-2. Apply polyfill inside `src/main.tsx`
-
-```typescript
-import "tdv-core/dist/polyfill.d.ts";
-```
-
-3. :rocket: Done. You are ready to go
+2. :rocket: Done. You are ready to go
 
 ## Contribute
 

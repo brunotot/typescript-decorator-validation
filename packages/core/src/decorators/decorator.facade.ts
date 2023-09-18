@@ -1,12 +1,12 @@
 import ValidationMetaService from "../reflection/service/impl/reflection.service.validation";
+import Decorator from "../types/namespace/decorator.namespace";
 import Validation from "../types/namespace/validation.namespace";
 import { makeDecorator } from "./decorator.factory";
-import { Decorator } from "./decorator.types";
 
 export function makeValidator<T>({
   groups,
   isValid,
-}: Validation.Builder<T>): Decorator<T> {
+}: Validation.Builder<T>): Decorator.Type<T> {
   return makeDecorator<T>((key, processor) => {
     saveMetadata(processor, key, isValid, groups);
   });

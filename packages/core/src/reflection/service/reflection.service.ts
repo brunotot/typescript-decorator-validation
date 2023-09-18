@@ -1,4 +1,4 @@
-import { DecoratorContext } from "../../decorators/decorator.types";
+import Decorator from "../../types/namespace/decorator.namespace";
 import Class from "../../types/validation/class.type";
 
 export function getClassFieldDescriptor<TClass>(
@@ -27,7 +27,7 @@ export function getClassFieldNames<TClass>(
   return uniquePropsArray as (keyof TClass)[];
 }
 
-export type MetaStrategy = DecoratorContext | Class<any>;
+export type MetaStrategy = Decorator.Context | Class<any>;
 
 export function metadata(strategy: MetaStrategy): DecoratorMetadataObject {
   if (isClass(strategy)) {
@@ -47,7 +47,7 @@ export default abstract class MetaService<Entry> {
   #injectionKey: string;
   #initial: () => Entry;
   #class?: Class<any>;
-  protected context?: DecoratorContext;
+  protected context?: Decorator.Context;
 
   constructor(
     injectionKey: string,

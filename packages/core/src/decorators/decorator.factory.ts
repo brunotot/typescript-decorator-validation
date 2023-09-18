@@ -1,18 +1,14 @@
 import ValidationMetaService from "../reflection/service/impl/reflection.service.validation";
-import {
-  Decorator,
-  DecoratorContext,
-  DecoratorSupplier,
-} from "./decorator.types";
+import Decorator from "../types/namespace/decorator.namespace";
 
-function isDecoratorsStage2(context: DecoratorContext) {
+function isDecoratorsStage2(context: Decorator.Context) {
   return typeof context === "string";
 }
 
 function makeDecoratorUsingStage2Strategy<T>(
   target: any,
-  context: DecoratorContext,
-  decoratorSupplier: DecoratorSupplier<T>
+  context: Decorator.Context,
+  decoratorSupplier: Decorator.Supplier<T>
 ) {
   const name = context as unknown as string;
   const clazz = target.constructor;
@@ -24,8 +20,8 @@ function makeDecoratorUsingStage2Strategy<T>(
 }
 
 export function makeDecorator<T>(
-  decoratorSupplier: DecoratorSupplier<T>
-): Decorator<T> {
+  decoratorSupplier: Decorator.Supplier<T>
+): Decorator.Type<T> {
   return function (target, context) {
     // Hardcoded check for old TS decorators (stage 2 proposal)
     if (isDecoratorsStage2(context)) {

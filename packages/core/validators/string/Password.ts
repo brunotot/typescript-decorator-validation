@@ -1,9 +1,9 @@
 import { makeValidator } from "../../src/decorators/decorator.facade";
-import { DecoratorPartialProps } from "../../src/decorators/decorator.types";
 import { extractGroups } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
 import RegexConst from "../../src/models/regex.constants";
 import $ from "../../src/types";
+import Decorator from "../../src/types/namespace/decorator.namespace";
 
 const PASSWORD_REGEXES = {
   uppercase: RegexConst.UPPERCASE_ANYWHERE,
@@ -18,7 +18,7 @@ function isInvalid(text: string, rule: keyof typeof PASSWORD_REGEXES) {
 }
 
 export default function Password<T extends $.Objects.Optional<string>>(
-  cfg?: DecoratorPartialProps<
+  cfg?: Decorator.PartialProps<
     string,
     Partial<{
       uppercase: boolean;

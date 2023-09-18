@@ -6,8 +6,7 @@
     "src",
     "src/messages/translations/*.json",
     "translations",
-    "validators",
-    "polyfills/polyfill.d.ts"
+    "validators"
   ],
   "compilerOptions": {
     "module": "ESNext",
