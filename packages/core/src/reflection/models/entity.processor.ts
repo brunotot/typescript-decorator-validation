@@ -52,12 +52,14 @@ export default class EntityProcessor<TClass, TBody = TClass> {
       (errors as any)[field] = validation[1];
     });
 
-    // prettier-ignore
-    return this.#cacheMap.patch({
-      valid: !$.Objects.hasErrors(errors),
-      detailedErrors,
-      errors,
-    }, state);
+    return this.#cacheMap.patch(
+      {
+        valid: !$.Objects.hasErrors(errors),
+        detailedErrors,
+        errors,
+      },
+      state
+    );
   }
 
   // prettier-ignore
