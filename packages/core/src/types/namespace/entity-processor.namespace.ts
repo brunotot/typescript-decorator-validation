@@ -1,3 +1,4 @@
+import BaseCacheMap from "../../models/cache.map";
 import DetailedErrors from "../validation/detailed-errors.type";
 import Errors from "../validation/errors.type";
 import Payload from "../validation/payload.type";
@@ -26,6 +27,11 @@ namespace EntityProcessorNs {
   };
 
   export type CacheKey<T> = Exclude<keyof Cache<T>, "state">;
+
+  export type CacheMap<TClass, TBody = TClass> = BaseCacheMap<
+    Result<TClass>,
+    Payload<TBody>
+  >;
 }
 
 export default EntityProcessorNs;

@@ -4,6 +4,7 @@ import { getClassFieldDescriptor } from "../service/reflection.service";
 import ReflectionRule from "./reflection.rule";
 import {
   ReflectionStrategy,
+  ReflectionStrategyImpl,
   ReflectionStrategyType,
 } from "./reflection.strategy";
 
@@ -61,6 +62,15 @@ export default class ReflectionDescriptor<
       root: new ReflectionRule(),
       foreach: new ReflectionRule(),
     };
+  }
+
+  public get StrategyImpl() {
+    const strategy = this.strategy;
+    if (!(strategy in ReflectionStrategyImpl)) {
+      const error = `Validation strategy not implemented for field type '${strategy}'`;
+      throw new Error(error);
+    }
+    return ReflectionStrategyImpl[strategy];
   }
 
   public get strategy(): ReflectionStrategyType {

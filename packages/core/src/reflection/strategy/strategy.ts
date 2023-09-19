@@ -57,7 +57,7 @@ export default abstract class ValidationStrategy<
     return this.#descriptor;
   }
 
-  abstract test(
+  public abstract test(
     value: any,
     context: any,
     groups?: Validation.Group[]

@@ -12,12 +12,17 @@ export default class ValidationMetaService extends MetaService<
     return new ValidationMetaService(strategy);
   }
 
+  #fields: string[] = [];
+
+  get fields() {
+    return this.#fields;
+  }
+
   private constructor(strategy: MetaStrategy) {
     super(ValidationMetaService.name, strategy, () => new Map());
     if (isClass(strategy)) {
-      getClassFieldNames(strategy).forEach((name) =>
-        this.descriptor<any, any>(name)
-      );
+      this.#fields = getClassFieldNames(strategy) as string[];
+      this.#fields.forEach((name) => this.descriptor<any, any>(name));
     }
   }
 

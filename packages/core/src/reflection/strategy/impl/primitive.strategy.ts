@@ -21,6 +21,7 @@ export default class PrimitiveStrat<F> extends ValidationStrategy<
       context,
       groups
     );
+
     return [rootResult, Validation.buildSimpleErrors(rootResult)];
   }
 }

@@ -1,3 +1,4 @@
+import Helper from "./helper.namespace";
 import Types from "./types.namespace";
 
 // prettier-ignore
@@ -24,6 +25,14 @@ namespace Condition {
   
   export type isPrimitive<T> = 
     isAnyOf<T, Types.Primitive>;
+
+  export type isPrimitiveArray<T> = Helper.ExtractArrayType<T> extends never 
+    ? false
+    : isPrimitive<Helper.ExtractArrayType<T>>;
+
+  export type isObjectArray<T> = Helper.ExtractArrayType<T> extends never 
+    ? false
+    : isObject<Helper.ExtractArrayType<T>>;
 
   export type isUndefined<T> = 
     T extends undefined 
