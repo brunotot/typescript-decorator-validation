@@ -1,4 +1,4 @@
-import { makeValidator } from "./src/decorators/decorator.facade";
+import makeValidator from "./src/decorators/decorator.facade";
 import { Locale, Locales } from "./src/messages/message.types";
 import { getLocale, setLocale } from "./src/messages/models/locale";
 import EntityProcessor from "./src/reflection/models/entity.processor";

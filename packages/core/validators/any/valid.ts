@@ -1,4 +1,4 @@
-import { makeDecorator } from "../../src/decorators/decorator.factory";
+import makeDecorator from "../../src/decorators/decorator.factory";
 import $ from "../../src/types";
 import Class from "../../src/types/validation/class.type";
 

@@ -1,4 +1,4 @@
-import { makeValidator } from "../../../src/decorators/decorator.facade";
+import makeValidator from "../../../src/decorators/decorator.facade";
 import { extractGroups } from "../../../src/decorators/decorator.utils";
 import $ from "../../../src/types";
 import Decorator from "../../../src/types/namespace/decorator.namespace";

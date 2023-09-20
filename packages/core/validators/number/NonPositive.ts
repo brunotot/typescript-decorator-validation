@@ -1,4 +1,4 @@
-import { makeValidator } from "../../src/decorators/decorator.facade";
+import makeValidator from "../../src/decorators/decorator.facade";
 import { extractMessage } from "../../src/decorators/decorator.utils";
 import ErrorMessage from "../../src/messages/models/errors";
 import $ from "../../src/types";

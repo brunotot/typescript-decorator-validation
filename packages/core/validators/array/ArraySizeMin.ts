@@ -1,4 +1,4 @@
-import { makeValidator } from "../../src/decorators/decorator.facade";
+import makeValidator from "../../src/decorators/decorator.facade";
 import {
   extractGroups,
   extractMessage,

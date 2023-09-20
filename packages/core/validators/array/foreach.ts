@@ -1,5 +1,5 @@
 import { TdvCore } from "tdv-core";
-import { makeDecorator } from "../../src/decorators/decorator.factory";
+import makeDecorator from "../../src/decorators/decorator.factory";
 import Decorator from "../../src/types/namespace/decorator.namespace";
 
 export default function foreach<T extends NonNullable<any[] | (() => any[])>>(

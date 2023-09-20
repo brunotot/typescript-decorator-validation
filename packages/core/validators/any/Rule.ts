@@ -1,4 +1,4 @@
-import { makeValidator } from "../../src/decorators/decorator.facade";
+import makeValidator from "../../src/decorators/decorator.facade";
 import Validation from "../../src/types/namespace/validation.namespace";
 
 export default function Rule<T>(

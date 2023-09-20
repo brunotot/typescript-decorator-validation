@@ -1,4 +1,6 @@
 import Decorator from "../../../types/namespace/decorator.namespace";
+import Objects from "../../../types/namespace/objects.namespace";
+import Validation from "../../../types/namespace/validation.namespace";
 import Class from "../../../types/validation/class.type";
 import ReflectionDescriptor from "../../models/reflection.descriptor";
 import MetaService, {
@@ -21,6 +23,17 @@ export default class ValidationMetaService extends MetaService<
     isClass(strategy)
       ? this.#handleClassInit(strategy)
       : this.#handleContextInit(strategy);
+  }
+
+  addValidator(
+    field: string,
+    isValid: Validation.Evaluator<any>,
+    groups?: Validation.GroupsParam
+  ) {
+    this.getUntypedDescriptor(field).rules.root.add({
+      groups: this.#sanitizeGroups(groups),
+      validate: isValid,
+    });
   }
 
   getFields() {
@@ -57,5 +70,13 @@ export default class ValidationMetaService extends MetaService<
 
   #handleContextInit(_context: Decorator.Context) {
     this.#fields = [];
+  }
+
+  #sanitizeGroups(param?: Validation.GroupsParam): Validation.Groups {
+    return Array.isArray(param)
+      ? Objects.unique(param)
+      : param !== undefined
+      ? [param]
+      : [];
   }
 }

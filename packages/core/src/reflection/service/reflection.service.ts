@@ -35,6 +35,9 @@ export function metadata(strategy: MetaStrategy): DecoratorMetadataObject {
     strategy[Symbol.metadata] ??= {};
     return strategy[Symbol.metadata]!;
   }
+  if (!strategy.metadata) {
+    (strategy as any).metadata = {};
+  }
   return strategy?.metadata;
 }
 
