@@ -23,7 +23,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">ValidationMetaService</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L8">src/reflection/service/impl/reflection.service.validation.ts:8</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L10">src/reflection/service/impl/reflection.service.validation.ts:10</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -46,14 +46,18 @@
 <h3 class="tsd-index-heading">Accessors</h3>
 <div class="tsd-index-list"><a href="tdv_core.ValidationMetaService.html#class" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-262144"></use></svg><span>class</span></a>
 <a href="tdv_core.ValidationMetaService.html#data" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-262144"></use></svg><span>data</span></a>
-<a href="tdv_core.ValidationMetaService.html#fields" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-262144"></use></svg><span>fields</span></a>
 <a href="tdv_core.ValidationMetaService.html#metadata" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-262144"></use></svg><span>metadata</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Methods</h3>
-<div class="tsd-index-list"><a href="tdv_core.ValidationMetaService.html#attr" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>attr</span></a>
-<a href="tdv_core.ValidationMetaService.html#descriptor" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>descriptor</span></a>
+<div class="tsd-index-list"><a href="tdv_core.ValidationMetaService.html#_handleClassInit" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>#handle<wbr/>Class<wbr/>Init</span></a>
+<a href="tdv_core.ValidationMetaService.html#_handleContextInit" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>#handle<wbr/>Context<wbr/>Init</span></a>
+<a href="tdv_core.ValidationMetaService.html#attr" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>attr</span></a>
+<a href="tdv_core.ValidationMetaService.html#getFields" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Fields</span></a>
+<a href="tdv_core.ValidationMetaService.html#getTypedDescriptor" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Typed<wbr/>Descriptor</span></a>
+<a href="tdv_core.ValidationMetaService.html#getUntypedDescriptor" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Untyped<wbr/>Descriptor</span></a>
 <a href="tdv_core.ValidationMetaService.html#hasAttr" class="tsd-index-link tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>has<wbr/>Attr</span></a>
+<a href="tdv_core.ValidationMetaService.html#hasDescriptor" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>has<wbr/>Descriptor</span></a>
 <a href="tdv_core.ValidationMetaService.html#inject" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>inject</span></a>
 </div></section></div></details></section></section>
 <section class="tsd-panel-group tsd-member-group">
@@ -73,7 +77,7 @@
   Map&lt;string, ReflectionDescriptor&lt;any, any, any&gt;&gt;
 &gt;.constructor</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L21">src/reflection/service/impl/reflection.service.validation.ts:21</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L19">src/reflection/service/impl/reflection.service.validation.ts:19</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-is-private tsd-is-inherited"><a id="_class" class="tsd-anchor"></a>
@@ -81,12 +85,12 @@
 <div class="tsd-signature"><span class="tsd-kind-property">#class</span><span class="tsd-signature-symbol">?:</span> <a href="../types/tdv_core.Class.html" class="tsd-signature-type tsd-kind-type-alias">Class</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div><aside class="tsd-sources">
 <p>Inherited from MetaService.#class</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/reflection.service.ts#L49">src/reflection/service/reflection.service.ts:49</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/reflection.service.ts#L49">src/reflection/service/reflection.service.ts:49</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="_fields" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#fields</span><a href="#_fields" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">#fields</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">#fields</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L15">src/reflection/service/impl/reflection.service.validation.ts:15</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L17">src/reflection/service/impl/reflection.service.validation.ts:17</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-private tsd-is-inherited"><a id="_initial" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#initial</span><a href="#_initial" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">#initial</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type ">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="tdv_core.ReflectionDescriptor.html" class="tsd-signature-type tsd-kind-class">ReflectionDescriptor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span></div>
@@ -100,19 +104,19 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="tdv_core.ReflectionDescriptor.html" class="tsd-signature-type tsd-kind-class">ReflectionDescriptor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <p>Inherited from MetaService.#initial</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/reflection.service.ts#L48">src/reflection/service/reflection.service.ts:48</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/reflection.service.ts#L48">src/reflection/service/reflection.service.ts:48</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-private tsd-is-inherited"><a id="_injectionKey" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#injection<wbr/>Key</span><a href="#_injectionKey" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">#injection<wbr/>Key</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
 <p>Inherited from MetaService.#injectionKey</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/reflection.service.ts#L47">src/reflection/service/reflection.service.ts:47</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/reflection.service.ts#L47">src/reflection/service/reflection.service.ts:47</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-private tsd-is-inherited"><a id="_metadata" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#metadata</span><a href="#_metadata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">#metadata</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">DecoratorMetadataObject</span></div><aside class="tsd-sources">
 <p>Inherited from MetaService.#metadata</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/reflection.service.ts#L46">src/reflection/service/reflection.service.ts:46</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/reflection.service.ts#L46">src/reflection/service/reflection.service.ts:46</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited"><a id="context" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <code class="tsd-tag ts-flagOptional">Optional</code> <span>context</span><a href="#context" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">context</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type ">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">access</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span><br/><span>        </span><span class="tsd-kind-call-signature">get</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;field&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;method&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;getter&quot;</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">metadata</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">DecoratorMetadataObject</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">private</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">static</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">&gt;</span></div>
@@ -134,7 +138,7 @@
 <h5><span class="tsd-kind-parameter">object</span>: <span class="tsd-signature-type">any</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">unknown</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/types/namespace/decorator.namespace.ts#L17">src/types/namespace/decorator.namespace.ts:17</a></li></ul></aside></li></ul></li></ul></li>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/types/namespace/decorator.namespace.ts#L17">src/types/namespace/decorator.namespace.ts:17</a></li></ul></aside></li></ul></li></ul></li>
 <li class="tsd-parameter">
 <h5><span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;field&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;method&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;getter&quot;</span></h5></li>
 <li class="tsd-parameter">
@@ -147,7 +151,7 @@
 <h5><span class="tsd-kind-property">static</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5></li></ul></div><aside class="tsd-sources">
 <p>Inherited from MetaService.context</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/reflection.service.ts#L50">src/reflection/service/reflection.service.ts:50</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/reflection.service.ts#L50">src/reflection/service/reflection.service.ts:50</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Accessors</h2>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="class" class="tsd-anchor"></a>
@@ -158,7 +162,7 @@
 <h4 class="tsd-returns-title">Returns <a href="../types/tdv_core.Class.html" class="tsd-signature-type tsd-kind-type-alias">Class</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Inherited from MetaService.class</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/reflection.service.ts#L67">src/reflection/service/reflection.service.ts:67</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/reflection.service.ts#L67">src/reflection/service/reflection.service.ts:67</a></li></ul></aside></li>
 <li class="tsd-signature" id="class.class-2"><span class="tsd-signature-symbol">set</span> class<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">clazz</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 <li class="tsd-description">
 <div class="tsd-parameters">
@@ -169,7 +173,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from MetaService.class</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/reflection.service.ts#L71">src/reflection/service/reflection.service.ts:71</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/reflection.service.ts#L71">src/reflection/service/reflection.service.ts:71</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited"><a id="data" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>data</span><a href="#data" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -178,15 +182,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">Entry</span></h4><aside class="tsd-sources">
 <p>Inherited from MetaService.data</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/reflection.service.ts#L79">src/reflection/service/reflection.service.ts:79</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member"><a id="fields" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>fields</span><a href="#fields" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<ul class="tsd-signatures">
-<li class="tsd-signature" id="fields.fields-1"><span class="tsd-signature-symbol">get</span> fields<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
-<li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L17">src/reflection/service/impl/reflection.service.validation.ts:17</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/reflection.service.ts#L79">src/reflection/service/reflection.service.ts:79</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited"><a id="metadata" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>metadata</span><a href="#metadata" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
@@ -195,9 +191,35 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">DecoratorMetadataObject</span></h4><aside class="tsd-sources">
 <p>Inherited from MetaService.metadata</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/reflection.service.ts#L75">src/reflection/service/reflection.service.ts:75</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/reflection.service.ts#L75">src/reflection/service/reflection.service.ts:75</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-is-private"><a id="_handleClassInit" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#handle<wbr/>Class<wbr/>Init</span><a href="#_handleClassInit" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-private">
+<li class="tsd-signature tsd-anchor-link" id="_handleClassInit._handleClassInit-1"><span class="tsd-kind-call-signature">#handle<wbr/>Class<wbr/>Init</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">clazz</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#_handleClassInit._handleClassInit-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">clazz</span>: <a href="../types/tdv_core.Class.html" class="tsd-signature-type tsd-kind-type-alias">Class</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L53">src/reflection/service/impl/reflection.service.validation.ts:53</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-private"><a id="_handleContextInit" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#handle<wbr/>Context<wbr/>Init</span><a href="#_handleContextInit" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-private">
+<li class="tsd-signature tsd-anchor-link" id="_handleContextInit._handleContextInit-1"><span class="tsd-kind-call-signature">#handle<wbr/>Context<wbr/>Init</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">_context</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#_handleContextInit._handleContextInit-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">_context</span>: <span class="tsd-signature-type ">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">access</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span><br/><span>        </span><span class="tsd-kind-call-signature">get</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;field&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;method&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;getter&quot;</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">metadata</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">DecoratorMetadataObject</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">private</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">static</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L58">src/reflection/service/impl/reflection.service.validation.ts:58</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited"><a id="attr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>attr</span><a href="#attr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -224,11 +246,19 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">T</span></h4><aside class="tsd-sources">
 <p>Inherited from MetaService.attr</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/reflection.service.ts#L87">src/reflection/service/reflection.service.ts:87</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member"><a id="descriptor" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>descriptor</span><a href="#descriptor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/reflection.service.ts#L87">src/reflection/service/reflection.service.ts:87</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="getFields" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>get<wbr/>Fields</span><a href="#getFields" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="descriptor.descriptor-1"><span class="tsd-kind-call-signature">descriptor</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">thisName</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="tdv_core.ReflectionDescriptor.html" class="tsd-signature-type tsd-kind-class">ReflectionDescriptor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TName</span><span class="tsd-signature-symbol">&gt;</span><a href="#descriptor.descriptor-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="getFields.getFields-1"><span class="tsd-kind-call-signature">get<wbr/>Fields</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><a href="#getFields.getFields-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L26">src/reflection/service/impl/reflection.service.validation.ts:26</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="getTypedDescriptor" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>get<wbr/>Typed<wbr/>Descriptor</span><a href="#getTypedDescriptor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="getTypedDescriptor.getTypedDescriptor-1"><span class="tsd-kind-call-signature">get<wbr/>Typed<wbr/>Descriptor</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">thisName</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="tdv_core.ReflectionDescriptor.html" class="tsd-signature-type tsd-kind-class">ReflectionDescriptor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TName</span><span class="tsd-signature-symbol">&gt;</span><a href="#getTypedDescriptor.getTypedDescriptor-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
@@ -244,7 +274,20 @@
 <h5><span class="tsd-kind-parameter">thisName</span>: <span class="tsd-signature-type tsd-kind-type-parameter">TName</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="tdv_core.ReflectionDescriptor.html" class="tsd-signature-type tsd-kind-class">ReflectionDescriptor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TName</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L29">src/reflection/service/impl/reflection.service.validation.ts:29</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L34">src/reflection/service/impl/reflection.service.validation.ts:34</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="getUntypedDescriptor" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>get<wbr/>Untyped<wbr/>Descriptor</span><a href="#getUntypedDescriptor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="getUntypedDescriptor.getUntypedDescriptor-1"><span class="tsd-kind-call-signature">get<wbr/>Untyped<wbr/>Descriptor</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">fieldKey</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="tdv_core.ReflectionDescriptor.html" class="tsd-signature-type tsd-kind-class">ReflectionDescriptor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><a href="#getUntypedDescriptor.getUntypedDescriptor-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">fieldKey</span>: <span class="tsd-signature-type">any</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="tdv_core.ReflectionDescriptor.html" class="tsd-signature-type tsd-kind-class">ReflectionDescriptor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L42">src/reflection/service/impl/reflection.service.validation.ts:42</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected tsd-is-inherited"><a id="hasAttr" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>has<wbr/>Attr</span><a href="#hasAttr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected tsd-is-inherited">
@@ -258,7 +301,20 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <p>Inherited from MetaService.hasAttr</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/reflection.service.ts#L83">src/reflection/service/reflection.service.ts:83</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/reflection.service.ts#L83">src/reflection/service/reflection.service.ts:83</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member"><a id="hasDescriptor" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>has<wbr/>Descriptor</span><a href="#hasDescriptor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="hasDescriptor.hasDescriptor-1"><span class="tsd-kind-call-signature">has<wbr/>Descriptor</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">descriptorName</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#hasDescriptor.hasDescriptor-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">descriptorName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L30">src/reflection/service/impl/reflection.service.validation.ts:30</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="inject" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>inject</span><a href="#inject" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -271,7 +327,7 @@
 <h5><span class="tsd-kind-parameter">strategy</span>: <a href="../types/tdv_core.MetaStrategy.html" class="tsd-signature-type tsd-kind-type-alias">MetaStrategy</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="tdv_core.ValidationMetaService.html" class="tsd-signature-type tsd-kind-class">ValidationMetaService</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/325cd12/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L11">src/reflection/service/impl/reflection.service.validation.ts:11</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/3829f1c/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L13">src/reflection/service/impl/reflection.service.validation.ts:13</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -300,11 +356,15 @@
 <li><a href="#context" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>context</span></a></li>
 <li><a href="#class" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-262144"></use></svg><span>class</span></a></li>
 <li><a href="#data" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-262144"></use></svg><span>data</span></a></li>
-<li><a href="#fields" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-262144"></use></svg><span>fields</span></a></li>
 <li><a href="#metadata" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-262144"></use></svg><span>metadata</span></a></li>
+<li><a href="#_handleClassInit" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>#handle<wbr/>Class<wbr/>Init</span></a></li>
+<li><a href="#_handleContextInit" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>#handle<wbr/>Context<wbr/>Init</span></a></li>
 <li><a href="#attr" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>attr</span></a></li>
-<li><a href="#descriptor" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>descriptor</span></a></li>
+<li><a href="#getFields" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Fields</span></a></li>
+<li><a href="#getTypedDescriptor" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Typed<wbr/>Descriptor</span></a></li>
+<li><a href="#getUntypedDescriptor" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Untyped<wbr/>Descriptor</span></a></li>
 <li><a href="#hasAttr" class="tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>has<wbr/>Attr</span></a></li>
+<li><a href="#hasDescriptor" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>has<wbr/>Descriptor</span></a></li>
 <li><a href="#inject" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>inject</span></a></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../index.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>Typescript Decorator Validation - v1.0.0</span></a>
