@@ -6,7 +6,6 @@ export default function valid<T extends $.Objects.Optional<object>>(
   clazz: Class<T>
 ) {
   return makeDecorator<$.Objects.Optional<T>>((name, meta) => {
-    const descriptor = meta.descriptor<any, string>(name);
-    descriptor.thisClass = clazz;
+    meta.getUntypedDescriptor(name).thisClass = clazz;
   });
 }

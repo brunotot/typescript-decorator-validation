@@ -85,7 +85,7 @@ export default class ReflectionDescriptor<
 
     const getNativeStrategy = (value: unknown) => {
       const meta = ValidationMetaService.inject(this.hostClass!);
-      const descriptor = meta.descriptor<HostClass, keyof HostClass>(
+      const descriptor = meta.getTypedDescriptor<HostClass, keyof HostClass>(
         this.thisName!
       );
 

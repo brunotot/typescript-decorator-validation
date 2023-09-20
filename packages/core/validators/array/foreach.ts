@@ -6,12 +6,10 @@ export default function foreach<T extends NonNullable<any[] | (() => any[])>>(
   ...validators: Decorator.Type<TdvCore.Helper.ExtractArrayType<T>>[]
 ): Decorator.Type<T> {
   return makeDecorator<T>((property, processor, context) => {
-    processor.descriptor<any, any>(property).thisDefault = [];
+    processor.getUntypedDescriptor(property).thisDefault = [];
     validators.forEach((validator) => {
       validator(undefined, context as any);
-      const validationProcessor = processor.descriptor<any, any>(
-        property as keyof T
-      );
+      const validationProcessor = processor.getUntypedDescriptor(property);
       const rules = validationProcessor.rules;
       const rootRules = rules.root;
       const foreachRules = rules.foreach;

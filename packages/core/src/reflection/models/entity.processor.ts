@@ -46,7 +46,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     const errors: Errors<TClass> = {};
     const detailedErrors: DetailedErrors<TClass> = {};
 
-    this.#meta.fields.forEach((field) => {
+    this.#meta.getFields().forEach((field) => {
       const validation = this.validateField(payload, field as keyof TClass);
       (detailedErrors as any)[field] = validation[0];
       (errors as any)[field] = validation[1];
@@ -64,7 +64,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
 
   // prettier-ignore
   validateField<K extends keyof TClass>(payload: any, fieldName: K): Validation.getStrategyResult<TClass[K]> {
-    const descriptor = this.#meta.descriptor<any, any>(fieldName);
+    const descriptor = this.#meta.getUntypedDescriptor(fieldName);
     const StrategyImpl: Validation.getStrategyClass<TClass[K]> = descriptor.StrategyImpl as any;
     const stratImpl = new (StrategyImpl as any)(descriptor, this.#hostDefault);
     const result = stratImpl.test(payload?.[fieldName], payload, this.#groups);

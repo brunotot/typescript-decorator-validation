@@ -33,7 +33,7 @@ export default abstract class ValidationStrategy<
     if (this.#fieldDescriptor) return this.#fieldDescriptor;
     this.#fieldDescriptor = ValidationMetaService.inject(
       this.descriptor.hostClass!
-    ).descriptor(this.fieldName) as any;
+    ).getUntypedDescriptor(this.fieldName);
     return this.#fieldDescriptor;
   }
 

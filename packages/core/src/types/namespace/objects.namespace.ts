@@ -24,6 +24,10 @@ namespace Objects {
     >;
   }[keyof T];
 
+  export function unique<T>(data: T[]): T[] {
+    return [...new Set(data)];
+  }
+
   export function hasErrors<T>(data: Errors<T>): boolean {
     const data0: any = data;
     if (Array.isArray(data0)) {

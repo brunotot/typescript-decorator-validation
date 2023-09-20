@@ -1,5 +1,6 @@
 import ValidationMetaService from "../reflection/service/impl/reflection.service.validation";
 import Decorator from "../types/namespace/decorator.namespace";
+import Objects from "../types/namespace/objects.namespace";
 import Validation from "../types/namespace/validation.namespace";
 import { makeDecorator } from "./decorator.factory";
 
@@ -12,24 +13,24 @@ export function makeValidator<T>({
   });
 }
 
-function getSanitizedGroups(unsanitizedGroups?: Validation.SpreadableGroup) {
-  return Array.isArray(unsanitizedGroups)
-    ? unsanitizedGroups
-    : unsanitizedGroups !== undefined
-    ? [unsanitizedGroups]
-    : ([] as Validation.Group[]);
+function sanitizeGroups(param?: Validation.GroupsParam): Validation.Groups {
+  return Array.isArray(param)
+    ? Objects.unique(param)
+    : param !== undefined
+    ? [param]
+    : [];
 }
 
 function saveMetadata(
   meta: ValidationMetaService,
   key: string,
   isValid: Validation.Evaluator<any>,
-  groups?: Validation.SpreadableGroup
+  groups?: Validation.GroupsParam
 ) {
-  const fieldDescriptor = meta.descriptor<any, string>(key);
+  const fieldDescriptor = meta.getUntypedDescriptor(key);
   const rootRules = fieldDescriptor.rules.root;
   rootRules.add({
-    groups: getSanitizedGroups(groups),
+    groups: sanitizeGroups(groups),
     validate: isValid,
   });
 }

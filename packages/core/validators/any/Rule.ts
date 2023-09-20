@@ -6,7 +6,7 @@ export default function Rule<T>(
     | Validation.Evaluator<T>
     | {
         isValid: Validation.Evaluator<T>;
-        groups?: Validation.SpreadableGroup;
+        groups?: Validation.GroupsParam;
       }
 ) {
   return makeValidator<T>({

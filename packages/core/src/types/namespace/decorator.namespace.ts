@@ -25,14 +25,14 @@ namespace Decorator {
   ) => void;
 
   export type ImpartialProps<T extends object = {}> = T & {
-    groups?: Validation.SpreadableGroup;
+    groups?: Validation.GroupsParam;
     message: string;
   };
 
   export type PartialProps<V = string, T extends object = ValueProps<V>> =
     | V
     | (T & {
-        groups?: Validation.SpreadableGroup;
+        groups?: Validation.GroupsParam;
         message?: string;
       });
 

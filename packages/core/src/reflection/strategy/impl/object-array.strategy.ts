@@ -33,7 +33,7 @@ export default class ObjectArrayStrat<F> extends ValidationStrategy<
     const _value = value ?? [];
     const fieldClass = super.descriptor.thisClass!;
     const metadata = ValidationMetaService.inject(fieldClass);
-    const field = metadata.descriptor<any, any>(super.fieldName);
+    const field = metadata.getUntypedDescriptor(super.fieldName);
     const rootResult = field.rules.root.validate(_value, context, groups);
 
     const objectArrayDetailedErrors = {

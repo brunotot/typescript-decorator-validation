@@ -7,7 +7,9 @@ import $ from "../../types/index";
 namespace Validation {
   export type Group = string | number | symbol;
 
-  export type SpreadableGroup = Validation.Group | Validation.Group[];
+  export type Groups = Validation.Group[];
+
+  export type GroupsParam = Validation.Group | Validation.Groups;
 
   export type Evaluator<T> = (value: T, context?: any) => Validation.Result;
 
@@ -44,7 +46,7 @@ namespace Validation {
 
   export type Builder<T> = {
     isValid: Validation.Evaluator<T>;
-    groups?: Validation.SpreadableGroup;
+    groups?: Validation.GroupsParam;
   };
 
   export function isValid(validations: Result | Result[]): boolean {
