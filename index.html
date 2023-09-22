@@ -51,6 +51,7 @@
 <li><a href="#supported-frameworks">Supported frameworks</a></li>
 <li><a href="#examples">Examples</a></li>
 <li><a href="#documentation">Documentation</a></li>
+<li><a href="#repository-architecture">Repository architecture</a></li>
 </ul>
 <a id="md:install" class="tsd-anchor"></a><h2><a href="#md:install">Install</a></h2><ol>
 <li>Install core (server-side)</li>
@@ -104,6 +105,30 @@
 <li><a href="https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html">Core</a></li>
 <li><a href="https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html">React</a></li>
 </ul>
+<a id="md:repository-architecture" class="tsd-anchor"></a><h2><a href="#md:repository-architecture">Repository architecture</a></h2><p>This monorepo contains two main packages that work together to provide a robust, type-safe form validation system for TypeScript applications. Below is a detailed explanation of each package and how they interact.</p>
+<a id="md:tdv-core" class="tsd-anchor"></a><h2><a href="#md:tdv-core"><code>tdv-core</code></a></h2><a id="md:overview" class="tsd-anchor"></a><h3><a href="#md:overview">Overview</a></h3><p>The <code>tdv-core</code> package serves as the foundation for form validation. It provides the core logic that is reusable across frontend frameworks.</p>
+<a id="md:features" class="tsd-anchor"></a><h3><a href="#md:features">Features</a></h3><ol>
+<li><p><strong>Decorator Factory</strong>: The core of the validation logic. A function called <code>makeDecorator</code> takes a supplier function and returns a decorator, allowing seamless integration with TypeScript&#39;s decorator system.</p>
+</li>
+<li><p><strong>Validation MetaService</strong>: Manages metadata for your validation logic. It provides methods to add validators, get fields, and more. It uses reflection to enable dynamic behavior.</p>
+</li>
+<li><p><strong>Message Factory</strong>: Provides localization support. The <code>t</code> function takes a key and returns a localized message, making it easy to internationalize your application.</p>
+</li>
+<li><p><strong>Validators</strong>: A collection of pre-defined validators like <code>Email</code>, <code>Required</code>, etc., that users can directly apply to their form fields.</p>
+</li>
+</ol>
+<a id="md:tdv-react" class="tsd-anchor"></a><h2><a href="#md:tdv-react"><code>tdv-react</code></a></h2><a id="md:overview-1" class="tsd-anchor"></a><h3><a href="#md:overview-1">Overview</a></h3><p>The <code>tdv-react</code> package builds upon <code>tdv-core</code> to provide React-specific hooks and context for easier integration into React applications.</p>
+<a id="md:features-1" class="tsd-anchor"></a><h3><a href="#md:features-1">Features</a></h3><ol>
+<li><p><strong><code>useValidation</code> Hook</strong>: Manages form state and validation errors using React&#39;s <code>useState</code> and <code>useEffect</code>.</p>
+</li>
+<li><p><strong><code>useForm</code> Hook</strong>: A comprehensive hook that includes <code>useValidation</code> and provides additional features like form submission handling and context management.</p>
+</li>
+<li><p><strong>FormContext</strong>: Utilizes React context to manage form state across nested components, making it ideal for complex forms.</p>
+</li>
+<li><p><strong>Examples</strong>: Sample applications to demonstrate real-world usage of these hooks and context.</p>
+</li>
+</ol>
+<a id="md:overall" class="tsd-anchor"></a><h2><a href="#md:overall">Overall</a></h2><p>The <code>tdv-core</code> package provides the base validation logic and decorators, while <code>tdv-react</code> builds on top of it to offer React-specific features. This separation of concerns ensures that the core logic remains framework-agnostic, allowing for future extensions to other frontend frameworks.</p>
 </div></div>
 <div class="col-sidebar">
 <div class="page-menu">
@@ -134,7 +159,19 @@
 <li><a href="#md:future-goals"><span>Future goals</span></a></li>
 <li><a href="#md:supported-frameworks"><span>Supported <wbr/>Frameworks</span></a></li>
 <li><a href="#md:examples"><span>Examples</span></a></li>
-<li><a href="#md:documentation"><span>Documentation</span></a></li></ul></li></ul></li></ul></div></details></div>
+<li><a href="#md:documentation"><span>Documentation</span></a></li>
+<li><a href="#md:repository-architecture"><span>Repository architecture</span></a></li>
+<li><a href="#md:tdv-core"><span>tdv-<wbr/>core</span></a></li>
+<li>
+<ul>
+<li><a href="#md:overview"><span>Overview</span></a></li>
+<li><a href="#md:features"><span>Features</span></a></li></ul></li>
+<li><a href="#md:tdv-react"><span>tdv-<wbr/>react</span></a></li>
+<li>
+<ul>
+<li><a href="#md:overview-1"><span>Overview</span></a></li>
+<li><a href="#md:features-1"><span>Features</span></a></li></ul></li>
+<li><a href="#md:overall"><span>Overall</span></a></li></ul></li></ul></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="index.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>Typescript Decorator Validation - v1.0.0</span></a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base=".">
