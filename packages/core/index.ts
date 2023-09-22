@@ -1,6 +1,7 @@
 import makeValidator from "./src/decorators/decorator.facade";
 import { Locale, Locales } from "./src/messages/message.types";
 import { getLocale, setLocale } from "./src/messages/models/locale";
+import CacheMap from "./src/models/cache.map";
 import EntityProcessor from "./src/reflection/models/entity.processor";
 import ReflectionDescriptor, {
   DescriptorProps,
@@ -18,6 +19,20 @@ import {
   MetaStrategy,
   getClassFieldNames,
 } from "./src/reflection/service/reflection.service";
+import ObjectArrayStrat, {
+  ObjectArrayDetailedErrors,
+  ObjectArraySimpleErrors,
+} from "./src/reflection/strategy/impl/object-array.strategy";
+import ObjectStrat, {
+  ObjectDetailedErrors,
+  ObjectSimpleErrors,
+} from "./src/reflection/strategy/impl/object.strategy";
+import PrimitiveArrayStrat, {
+  PrimitiveArrayDetailedErrors,
+  PrimitiveArraySimpleErrors,
+} from "./src/reflection/strategy/impl/primitive-array.strategy";
+import PrimitiveStrat from "./src/reflection/strategy/impl/primitive.strategy";
+import ValidationStrategy from "./src/reflection/strategy/strategy";
 import TdvCore from "./src/types";
 import Decorator from "./src/types/namespace/decorator.namespace";
 import Validation from "./src/types/namespace/validation.namespace";
@@ -36,6 +51,7 @@ import Rule from "./validators/any/Rule";
 export interface PrimitiveSetAppend {}
 
 export type {
+  CacheMap,
   Class,
   Decorator,
   DescriptorProps,
@@ -46,7 +62,13 @@ export type {
   FieldStrategy,
   Locale,
   MetaStrategy,
+  ObjectArrayDetailedErrors,
+  ObjectArraySimpleErrors,
+  ObjectDetailedErrors,
+  ObjectSimpleErrors,
   Payload,
+  PrimitiveArrayDetailedErrors,
+  PrimitiveArraySimpleErrors,
   ReflectionDescriptor,
   ReflectionDescriptorName,
   ReflectionDescriptorThis,
@@ -60,10 +82,15 @@ export type {
 export {
   EntityProcessor,
   Locales,
+  ObjectArrayStrat,
+  ObjectStrat,
+  PrimitiveArrayStrat,
+  PrimitiveStrat,
   ReflectionRule,
   ReflectionStrategy,
   Rule,
   ValidationMetaService,
+  ValidationStrategy,
   getClassFieldNames,
   getLocale,
   makeValidator,

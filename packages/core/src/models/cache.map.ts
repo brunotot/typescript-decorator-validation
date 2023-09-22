@@ -1,10 +1,25 @@
 import $ from "../types/index";
 
+/**
+ * A generic caching utility class.
+ *
+ * @typeParam CacheValue - The type of the cache object.
+ * @typeParam Payload - The type of the payload object.
+ *
+ * @remarks
+ * This class provides methods to get and patch cached values based on a payload.
+ */
 export default class CacheMap<CacheValue extends object & {}, Payload = any> {
   #cache: CacheValue;
   #payload: Payload;
   #changeFn: (state: Payload) => CacheValue;
 
+  /**
+   * Constructs a new `CacheMap` instance.
+   *
+   * @param changeFn - A function that takes a payload and returns a new cache value.
+   * @param initialValue - An optional initial value for the cache.
+   */
   constructor(
     changeFn: (state: Payload) => CacheValue,
     initialValue?: CacheValue
@@ -14,10 +29,16 @@ export default class CacheMap<CacheValue extends object & {}, Payload = any> {
     this.#changeFn = changeFn;
   }
 
-  // prettier-ignore
-  get<CacheKey extends keyof CacheValue>(cacheKey: CacheKey, payload: Payload): CacheValue[CacheKey];
-  // prettier-ignore
-  get<CacheKey extends keyof CacheValue>(cacheKey: CacheKey): CacheValue[CacheKey];
+  /**
+   * Retrieves a value from the cache.
+   *
+   * @typeParam CacheKey - The key type of the cache value.
+   *
+   * @param cacheKey - The key to retrieve the value for.
+   * @param payload - An optional payload to use for cache retrieval.
+   *
+   * @returns The cached value for the given key.
+   */
   // prettier-ignore
   get<CacheKey extends keyof CacheValue>(cacheKey: CacheKey, payload?: Payload): CacheValue[CacheKey] {
     return payload
@@ -25,6 +46,14 @@ export default class CacheMap<CacheValue extends object & {}, Payload = any> {
       : this.#cache[cacheKey];
   }
 
+  /**
+   * Patches the cache with new values.
+   *
+   * @param partialCache - An object containing the new cache values.
+   * @param payload - The payload to use for this patch operation.
+   *
+   * @returns The updated cache object.
+   */
   patch(partialCache: Partial<CacheValue>, payload: Payload): CacheValue {
     this.#payload = payload;
     Object.entries(partialCache).forEach(
@@ -33,6 +62,18 @@ export default class CacheMap<CacheValue extends object & {}, Payload = any> {
     return this.#cache;
   }
 
+  /**
+   * Internal method to retrieve a value from the cache based on a payload.
+   *
+   * @typeParam CacheKey - The key type of the cache value.
+   *
+   * @param payload - The payload to use for cache retrieval.
+   * @param cacheKey - The key to retrieve the value for.
+   *
+   * @returns The cached value for the given key.
+   *
+   * @private
+   */
   #fromCache<CacheKey extends keyof CacheValue>(
     payload: Payload,
     cacheKey: CacheKey

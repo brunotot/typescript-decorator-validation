@@ -17,6 +17,39 @@ function isInvalid(text: string, rule: keyof typeof PASSWORD_REGEXES) {
   return matchers === null || matchers.length === 0;
 }
 
+/**
+ * Creates a validator decorator for password validation.
+ *
+ * @typeparam T - The type of the decorated property (optional string).
+ * @param cfg - (Optional) An object with properties for customizing password validation.
+ * @param cfg.uppercase - (Optional) Indicates whether uppercase letters are required. Defaults to `false`.
+ * @param cfg.lowercase - (Optional) Indicates whether lowercase letters are required. Defaults to `true`.
+ * @param cfg.numbers - (Optional) Indicates whether numbers are required. Defaults to `false`.
+ * @param cfg.specials - (Optional) Indicates whether special characters are required. Defaults to `false`.
+ * @param cfg.length - (Optional) The minimum length of the password. Defaults to `8`.
+ * @param cfg.message - (Optional) A custom error message to display when validation fails. If not provided, default error messages are used.
+ * @returns A decorator function to use with class properties.
+ *
+ * @example
+ * // Example 1: Basic usage with default options
+ * class User {
+ *   //@Password()
+ *   password: string;
+ * }
+ *
+ * @example
+ * // Example 2: Customizing password requirements
+ * class SecureUser {
+ *   //@Password({
+ *   //   uppercase: true,
+ *   //   numbers: true,
+ *   //   specials: true,
+ *   //   length: 12,
+ *   //   message: "Invalid password format",
+ *   // })
+ *   password: string;
+ * }
+ */
 export default function Password<T extends $.Objects.Optional<string>>(
   cfg?: Decorator.PartialProps<
     string,

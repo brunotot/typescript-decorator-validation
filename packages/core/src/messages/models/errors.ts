@@ -1,5 +1,17 @@
 import t from "../message.factory";
 
+/**
+ * Collection of error messages for various validation scenarios.
+ *
+ * @remarks
+ * Each key corresponds to a specific validation rule, and the value is a function that returns a localized error message.
+ * The functions may take parameters to include dynamic values in the messages.
+ *
+ * @example
+ * ```typescript
+ * const message = errorMessages.Email();  // Might return: "Invalid email address."
+ * ```
+ */
 // prettier-ignore
 const errorMessages = {
               Alpha: () => t("Alpha"),

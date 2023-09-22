@@ -19,6 +19,22 @@ function isTodayDate(date: $.Objects.Optional<Date>): boolean {
   });
 }
 
+/**
+ * Decorator for validating if a date is today's date.
+ *
+ * @typeParam T - The type of the date property.
+ * @param props - Optional properties for the decorator.
+ * @returns A validation decorator function.
+ *
+ * Example usage:
+ * ```typescript
+ * class Task {
+ *   @TodayDate()
+ *   dueDate: Date;
+ * }
+ * ```
+ * This example applies the `TodayDate` validator to the `dueDate` property to ensure it is set to today's date.
+ */
 export default function TodayDate<T extends $.Objects.Optional<Date>>(
   props?: Decorator.PartialProps
 ) {

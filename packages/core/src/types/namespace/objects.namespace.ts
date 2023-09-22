@@ -1,21 +1,57 @@
 import Errors from "../validation/errors.type";
 import HelperNamespace from "./helper.namespace";
 
+/**
+ * @namespace Objects
+ *
+ * @description
+ * A collection of utility functions and types related to objects and data.
+ */
 namespace Objects {
+  /**
+   * @typeParam T - The type to compare.
+   *
+   * @description
+   * Function that checks if two values of type `T` are equal.
+   */
   export type Equals<T> = (a: T, b: T) => boolean;
 
+  /**
+   * @typeParam T - The type of the optional value.
+   *
+   * @description
+   * A type that represents an optional value.
+   */
   export type Optional<T = undefined> = T extends undefined
     ? any
     : T | undefined | null;
 
+  /**
+   * @typeParam T - The type to hash.
+   *
+   * @description
+   * A function that hashes a value of type `T` and returns a number.
+   */
   export type Hash<T> = (value: T) => number;
 
+  /**
+   * @typeParam T - The type of the array elements.
+   *
+   * @description
+   * A predicate function for filtering arrays.
+   */
   export type ArrayPredicate<T> = (
     value: T,
     index: number,
     array: T[]
   ) => boolean;
 
+  /**
+   * @typeParam T - The object type.
+   *
+   * @description
+   * A type that extracts input properties from an object type `T`.
+   */
   export type Inputs<T> = {
     [P in keyof T]-?: HelperNamespace.IfEquals<
       { [Q in P]: T[P] },
@@ -24,10 +60,22 @@ namespace Objects {
     >;
   }[keyof T];
 
+  /**
+   * @typeParam T - The type of the elements in the array.
+   *
+   * @description
+   * Removes duplicate elements from an array while preserving order.
+   */
   export function unique<T>(data: T[]): T[] {
     return [...new Set(data)];
   }
 
+  /**
+   * @typeParam T - The type of the errors.
+   *
+   * @description
+   * Checks if an error object has errors.
+   */
   export function hasErrors<T>(data: Errors<T>): boolean {
     const data0: any = data;
     if (Array.isArray(data0)) {
@@ -37,10 +85,16 @@ namespace Objects {
     } else if (typeof data0 === "string") {
       return true;
     }
-
     return false;
   }
 
+  /**
+   * @typeParam T - The type of the value.
+   *
+   * @description
+   * Checks if a value is not `null`, `undefined`, `false`, an empty array,
+   * an empty string, or an invalid Date.
+   */
   export function hasValue<T>(
     obj: T | undefined
   ): obj is NonNullable<typeof obj> {
@@ -54,6 +108,10 @@ namespace Objects {
     );
   }
 
+  /**
+   * @description
+   * Recursively checks if two values are deep equal.
+   */
   export function deepEquals(val1: any, val2: any): boolean {
     if (val1 === val2) {
       return true;
@@ -86,6 +144,10 @@ namespace Objects {
     }
   }
 
+  /**
+   * @description
+   * Hashes a value of any type and returns a number.
+   */
   export function hash(val: any): number {
     function stringHash(str: string): number {
       let hash = 0;
@@ -164,4 +226,8 @@ namespace Objects {
   }
 }
 
+/**
+ * @description
+ * The default export for the `Objects` namespace.
+ */
 export default Objects;

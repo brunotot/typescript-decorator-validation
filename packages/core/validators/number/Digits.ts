@@ -30,6 +30,22 @@ function validateDigits(
   return integerPart.length <= maxInteger && fractionPart.length <= maxFraction;
 }
 
+/**
+ * Decorator for validating the number of digits in a numeric value.
+ *
+ * @typeParam T - The type of the value property.
+ * @param props - Optional properties for the decorator.
+ * @returns A validation decorator function.
+ *
+ * Example usage:
+ * ```typescript
+ * class Product {
+ *   //@Digits({ maxInteger: 4, maxFraction: 2 })
+ *   price: number;
+ * }
+ * ```
+ * This example applies the `Digits` validator to the `price` property to ensure it has at most 4 digits in the integer part and 2 digits in the fractional part.
+ */
 export default function Digits<T extends $.Objects.Optional<number>>(
   props: Decorator.PartialProps<
     {

@@ -19,6 +19,14 @@ const compositeFunction = `() => ${composite}` as const;
 const primitiveArrayFunction = `() => ${primitiveArray}` as const;
 const compositeArrayFunction = `() => ${compositeArray}` as const;
 
+/**
+ * A mapping of reflection strategy types to their string representations.
+ *
+ * @remarks
+ * This object defines the various strategies that can be used for reflection.
+ * It includes strategies for primitives, composites, and their arrays, as well as
+ * strategies for getters and functions that return these types.
+ */
 const ReflectionStrategy = {
   unknown,
 
@@ -43,15 +51,28 @@ const ReflectionStrategy = {
   compositeArrayGetter,
 } as const;
 
+/**
+ * The type of a reflection strategy.
+ *
+ * @remarks
+ * This type is derived from the keys of the `ReflectionStrategy` object.
+ */
 export type ReflectionStrategyType =
   (typeof ReflectionStrategy)[keyof typeof ReflectionStrategy];
 
+/**
+ * A mapping of reflection strategy types to their corresponding `ValidationStrategy` classes.
+ *
+ * @remarks
+ * This object provides a way to look up the `ValidationStrategy` class that should be used for a given
+ * reflection strategy type.
+ */
 // prettier-ignore
 const ReflectionStrategyImpl: Record<ReflectionStrategyType, Class<ValidationStrategy>> = {
-    [ReflectionStrategy.primitive]: PrimitiveStrat,
-    [ReflectionStrategy.composite]: ObjectStrat,
-    [ReflectionStrategy.primitiveArray]: PrimitiveArrayStrat,
-    [ReflectionStrategy.compositeArray]: ObjectArrayStrat
-  } as any;
+  [ReflectionStrategy.primitive]: PrimitiveStrat,
+  [ReflectionStrategy.composite]: ObjectStrat,
+  [ReflectionStrategy.primitiveArray]: PrimitiveArrayStrat,
+  [ReflectionStrategy.compositeArray]: ObjectArrayStrat
+} as any;
 
 export { ReflectionStrategy, ReflectionStrategyImpl };
