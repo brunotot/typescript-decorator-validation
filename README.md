@@ -38,6 +38,7 @@
 - [Supported frameworks](#supported-frameworks)
 - [Examples](#examples)
 - [Documentation](#documentation)
+- [Repository architecture](#repository-architecture)
 
 ## Install
 
@@ -172,4 +173,44 @@ And the result is
 ## Documentation
 - [Core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
 - [React](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html)
+
+## Repository architecture
+
+This monorepo contains two main packages that work together to provide a robust, type-safe form validation system for TypeScript applications. Below is a detailed explanation of each package and how they interact.
+
+## `tdv-core`
+
+### Overview
+
+The `tdv-core` package serves as the foundation for form validation. It provides the core logic that is reusable across frontend frameworks.
+
+### Features
+
+1. **Decorator Factory**: The core of the validation logic. A function called `makeDecorator` takes a supplier function and returns a decorator, allowing seamless integration with TypeScript's decorator system.
+
+2. **Validation MetaService**: Manages metadata for your validation logic. It provides methods to add validators, get fields, and more. It uses reflection to enable dynamic behavior.
+
+3. **Message Factory**: Provides localization support. The `t` function takes a key and returns a localized message, making it easy to internationalize your application.
+
+4. **Validators**: A collection of pre-defined validators like `Email`, `Required`, etc., that users can directly apply to their form fields.
+
+## `tdv-react`
+
+### Overview
+
+The `tdv-react` package builds upon `tdv-core` to provide React-specific hooks and context for easier integration into React applications.
+
+### Features
+
+1. **`useValidation` Hook**: Manages form state and validation errors using React's `useState` and `useEffect`.
+
+2. **`useForm` Hook**: A comprehensive hook that includes `useValidation` and provides additional features like form submission handling and context management.
+
+3. **FormContext**: Utilizes React context to manage form state across nested components, making it ideal for complex forms.
+
+4. **Examples**: Sample applications to demonstrate real-world usage of these hooks and context.
+
+## Overall
+
+The `tdv-core` package provides the base validation logic and decorators, while `tdv-react` builds on top of it to offer React-specific features. This separation of concerns ensures that the core logic remains framework-agnostic, allowing for future extensions to other frontend frameworks.
 
