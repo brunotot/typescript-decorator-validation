@@ -15,20 +15,33 @@
 <li><a href="../index.html">Typescript Decorator Validation</a></li>
 <li><a href="../modules/tdv_core.html">tdv-core</a></li>
 <li><a href="tdv_core.EntityProcessor.html">EntityProcessor</a></li></ul>
-<h1>Class EntityProcessor&lt;TClass, TBody&gt;</h1></div> 
+<h1>Class EntityProcessor&lt;TClass, TBody&gt;</h1></div>
+<section class="tsd-panel tsd-comment">
+<div class="tsd-comment tsd-typography"><p>A class responsible for processing and validating entities.</p>
+</div>
+<div class="tsd-comment tsd-typography">
+<h4>Remarks</h4><p>This class uses a <code>CacheMap</code> to store validation results for better performance.
+It also leverages <code>ValidationMetaService</code> to retrieve metadata about the class being processed.</p>
+</div></section> 
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">TClass</span></h4></li>
+<h4><span class="tsd-kind-type-parameter">TClass</span></h4>
+<div class="tsd-comment tsd-typography"><p>The type of the class being processed.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h4><span class="tsd-kind-type-parameter">TBody</span> = <span class="tsd-signature-type tsd-kind-type-parameter">TClass</span></h4></li></ul></section> 
+<h4><span class="tsd-kind-type-parameter">TBody</span> = <span class="tsd-signature-type tsd-kind-type-parameter">TClass</span></h4>
+<div class="tsd-comment tsd-typography"><p>The type of the payload body. Defaults to <code>TClass</code>.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></section> 
 <section class="tsd-panel tsd-hierarchy">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
 <li><span class="target">EntityProcessor</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/reflection/models/entity.processor.ts#L13">src/reflection/models/entity.processor.ts:13</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/reflection/models/entity.processor.ts#L23">src/reflection/models/entity.processor.ts:23</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -64,6 +77,8 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="constructor.new_EntityProcessor"><span class="tsd-kind-constructor-signature">new <wbr/>Entity<wbr/>Processor</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">clazz</span>, <span class="tsd-kind-parameter">config</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="tdv_core.EntityProcessor.html" class="tsd-signature-type tsd-kind-class">EntityProcessor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">&gt;</span><a href="#constructor.new_EntityProcessor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Constructs a new <code>EntityProcessor</code> instance.</p>
+</div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
@@ -75,34 +90,41 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">clazz</span>: <a href="../types/tdv_core.Class.html" class="tsd-signature-type tsd-kind-type-alias">Class</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">&gt;</span></h5></li>
+<h5><span class="tsd-kind-parameter">clazz</span>: <a href="../types/tdv_core.Class.html" class="tsd-signature-type tsd-kind-type-alias">Class</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The class type to be processed.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">config</span>: <a href="../types/tdv_core.TdvCore.EntityProcessor.Config.html" class="tsd-signature-type tsd-kind-type-alias">Config</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="tdv_core.EntityProcessor.html" class="tsd-signature-type tsd-kind-class">EntityProcessor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">config</span>: <a href="../types/tdv_core.TdvCore.EntityProcessor.Config.html" class="tsd-signature-type tsd-kind-type-alias">Config</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography"><p>Optional configuration settings.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="tdv_core.EntityProcessor.html" class="tsd-signature-type tsd-kind-class">EntityProcessor</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/reflection/models/entity.processor.ts#L19">src/reflection/models/entity.processor.ts:19</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/reflection/models/entity.processor.ts#L35">src/reflection/models/entity.processor.ts:35</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="_cacheMap" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#cache<wbr/>Map</span><a href="#_cacheMap" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">#cache<wbr/>Map</span><span class="tsd-signature-symbol">:</span> <a href="../types/tdv_core.TdvCore.EntityProcessor.CacheMap.html" class="tsd-signature-type tsd-kind-type-alias">CacheMap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">&gt;</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-property">#cache<wbr/>Map</span><span class="tsd-signature-symbol">:</span> <a href="../modules/tdv_core.TdvCore.html" class="tsd-signature-type tsd-kind-namespace">TdvCore</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.TdvCore.EntityProcessor.html" class="tsd-signature-type tsd-kind-namespace">EntityProcessor</a><span class="tsd-signature-symbol">.</span><a href="../types/tdv_core.TdvCore.EntityProcessor.CacheMap.html" class="tsd-signature-type tsd-kind-type-alias">CacheMap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">&gt;</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/reflection/models/entity.processor.ts#L17">src/reflection/models/entity.processor.ts:17</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/reflection/models/entity.processor.ts#L27">src/reflection/models/entity.processor.ts:27</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="_groups" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#groups</span><a href="#_groups" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">#groups</span><span class="tsd-signature-symbol">:</span> <a href="../types/tdv_core.TdvCore.Validation.Group.html" class="tsd-signature-type tsd-kind-type-alias">Group</a><span class="tsd-signature-symbol">[]</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/reflection/models/entity.processor.ts#L15">src/reflection/models/entity.processor.ts:15</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/reflection/models/entity.processor.ts#L25">src/reflection/models/entity.processor.ts:25</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="_hostDefault" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#host<wbr/>Default</span><a href="#_hostDefault" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">#host<wbr/>Default</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/reflection/models/entity.processor.ts#L16">src/reflection/models/entity.processor.ts:16</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/reflection/models/entity.processor.ts#L26">src/reflection/models/entity.processor.ts:26</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="_meta" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#meta</span><a href="#_meta" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">#meta</span><span class="tsd-signature-symbol">:</span> <a href="tdv_core.ValidationMetaService.html" class="tsd-signature-type tsd-kind-class">ValidationMetaService</a></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/reflection/models/entity.processor.ts#L14">src/reflection/models/entity.processor.ts:14</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/reflection/models/entity.processor.ts#L24">src/reflection/models/entity.processor.ts:24</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Accessors</h2>
 <section class="tsd-panel tsd-member"><a id="hostDefault" class="tsd-anchor"></a>
@@ -110,9 +132,12 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature" id="hostDefault.hostDefault-1"><span class="tsd-signature-symbol">get</span> hostDefault<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography"><p>Gets the default host value.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/reflection/models/entity.processor.ts#L28">src/reflection/models/entity.processor.ts:28</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/reflection/models/entity.processor.ts#L47">src/reflection/models/entity.processor.ts:47</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member"><a id="getDetailedErrors" class="tsd-anchor"></a>
@@ -120,73 +145,133 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="getDetailedErrors.getDetailedErrors-1"><span class="tsd-kind-call-signature">get<wbr/>Detailed<wbr/>Errors</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">payload</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyMandatory.html" class="tsd-signature-type tsd-kind-type-alias">StrategyMandatory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><a href="../modules/tdv_core.TdvCore.html" class="tsd-signature-type tsd-kind-namespace">TdvCore</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.TdvCore.Validation.html" class="tsd-signature-type tsd-kind-namespace">Validation</a><span class="tsd-signature-symbol">.</span><a href="../types/tdv_core.TdvCore.Validation.Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><a href="#getDetailedErrors.getDetailedErrors-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Retrieves detailed error messages for the given payload.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">payload</span>: <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyOptional.html" class="tsd-signature-type tsd-kind-type-alias">StrategyOptional</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyMandatory.html" class="tsd-signature-type tsd-kind-type-alias">StrategyMandatory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><a href="../modules/tdv_core.TdvCore.html" class="tsd-signature-type tsd-kind-namespace">TdvCore</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.TdvCore.Validation.html" class="tsd-signature-type tsd-kind-namespace">Validation</a><span class="tsd-signature-symbol">.</span><a href="../types/tdv_core.TdvCore.Validation.Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">payload</span>: <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyOptional.html" class="tsd-signature-type tsd-kind-type-alias">StrategyOptional</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The payload to validate.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyMandatory.html" class="tsd-signature-type tsd-kind-type-alias">StrategyMandatory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><a href="../modules/tdv_core.TdvCore.html" class="tsd-signature-type tsd-kind-namespace">TdvCore</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.TdvCore.Validation.html" class="tsd-signature-type tsd-kind-namespace">Validation</a><span class="tsd-signature-symbol">.</span><a href="../types/tdv_core.TdvCore.Validation.Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4><p>An object containing detailed error messages.</p>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/reflection/models/entity.processor.ts#L36">src/reflection/models/entity.processor.ts:36</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/reflection/models/entity.processor.ts#L69">src/reflection/models/entity.processor.ts:69</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="getErrors" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Errors</span><a href="#getErrors" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="getErrors.getErrors-1"><span class="tsd-kind-call-signature">get<wbr/>Errors</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">payload</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyMandatory.html" class="tsd-signature-type tsd-kind-type-alias">StrategyMandatory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><a href="#getErrors.getErrors-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Retrieves error messages for the given payload.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">payload</span>: <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyOptional.html" class="tsd-signature-type tsd-kind-type-alias">StrategyOptional</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyMandatory.html" class="tsd-signature-type tsd-kind-type-alias">StrategyMandatory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">payload</span>: <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyOptional.html" class="tsd-signature-type tsd-kind-type-alias">StrategyOptional</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The payload to validate.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyMandatory.html" class="tsd-signature-type tsd-kind-type-alias">StrategyMandatory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4><p>An object containing error messages.</p>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/reflection/models/entity.processor.ts#L40">src/reflection/models/entity.processor.ts:40</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/reflection/models/entity.processor.ts#L80">src/reflection/models/entity.processor.ts:80</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="isValid" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Valid</span><a href="#isValid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="isValid.isValid-1"><span class="tsd-kind-call-signature">is<wbr/>Valid</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">payload</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#isValid.isValid-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Checks if the given payload is valid.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">payload</span>: <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyOptional.html" class="tsd-signature-type tsd-kind-type-alias">StrategyOptional</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">payload</span>: <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyOptional.html" class="tsd-signature-type tsd-kind-type-alias">StrategyOptional</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The payload to validate.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><p><code>true</code> if valid, <code>false</code> otherwise.</p>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/reflection/models/entity.processor.ts#L32">src/reflection/models/entity.processor.ts:32</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/reflection/models/entity.processor.ts#L58">src/reflection/models/entity.processor.ts:58</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="validate" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>validate</span><a href="#validate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="validate.validate-1"><span class="tsd-kind-call-signature">validate</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">payload</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/tdv_core.TdvCore.html" class="tsd-signature-type tsd-kind-namespace">TdvCore</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.TdvCore.EntityProcessor.html" class="tsd-signature-type tsd-kind-namespace">EntityProcessor</a><span class="tsd-signature-symbol">.</span><a href="../types/tdv_core.TdvCore.EntityProcessor.Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">&gt;</span><a href="#validate.validate-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Validates the given payload and updates the cache.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">payload</span>: <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyOptional.html" class="tsd-signature-type tsd-kind-type-alias">StrategyOptional</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="../modules/tdv_core.TdvCore.html" class="tsd-signature-type tsd-kind-namespace">TdvCore</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.TdvCore.EntityProcessor.html" class="tsd-signature-type tsd-kind-namespace">EntityProcessor</a><span class="tsd-signature-symbol">.</span><a href="../types/tdv_core.TdvCore.EntityProcessor.Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">payload</span>: <span class="tsd-signature-type ">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Helper.Purify.html" class="tsd-signature-type tsd-kind-type-alias">Purify</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.StrategyOptional.html" class="tsd-signature-type tsd-kind-type-alias">StrategyOptional</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TBody</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;enabled&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The payload to validate. If not provided, a new instance of the class will be used.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../modules/tdv_core.TdvCore.html" class="tsd-signature-type tsd-kind-namespace">TdvCore</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.TdvCore.EntityProcessor.html" class="tsd-signature-type tsd-kind-namespace">EntityProcessor</a><span class="tsd-signature-symbol">.</span><a href="../types/tdv_core.TdvCore.EntityProcessor.Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">&gt;</span></h4><p>An object containing the validation result, which includes:</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/reflection/models/entity.processor.ts#L44">src/reflection/models/entity.processor.ts:44</a></li></ul></aside></li></ul></section>
+<li><code>valid</code>: A boolean indicating the overall validity of the payload.</li>
+<li><code>detailedErrors</code>: An object containing detailed error messages for each field.</li>
+<li><code>errors</code>: An object containing simplified error messages for each field.</li>
+</ul>
+
+<div class="tsd-comment tsd-typography">
+<h4>Remarks</h4><p>This function performs the following steps:</p>
+<ol>
+<li>Initializes an empty <code>Errors</code> and <code>DetailedErrors</code> object.</li>
+<li>Iterates through each field defined in the metadata of the class.</li>
+<li>Calls <code>validateField</code> for each field to get the validation result.</li>
+<li>Updates the <code>Errors</code> and <code>DetailedErrors</code> objects with the validation result.</li>
+<li>Determines the overall validity of the payload.</li>
+<li>Updates the cache with the new validation result.</li>
+</ol>
+<p>The actual field validation is delegated to the <code>ValidationStrategy</code> implementations, which are determined by the metadata service.</p>
+
+<h4>Example</h4><pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-9">processor</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-2">EntityProcessor</span><span class="hl-1">(</span><span class="hl-0">MyClass</span><span class="hl-1">);</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-9">result</span><span class="hl-1"> = </span><span class="hl-0">processor</span><span class="hl-1">.</span><span class="hl-2">validate</span><span class="hl-1">(</span><span class="hl-0">myPayload</span><span class="hl-1">);</span><br/><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">log</span><span class="hl-1">(</span><span class="hl-0">result</span><span class="hl-1">.</span><span class="hl-0">valid</span><span class="hl-1">);  </span><span class="hl-6">// Output: true or false</span>
+</code><button>Copy</button></pre>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/reflection/models/entity.processor.ts#L112">src/reflection/models/entity.processor.ts:112</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="validateField" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>validate<wbr/>Field</span><a href="#validateField" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="validateField.validateField-1"><span class="tsd-kind-call-signature">validate<wbr/>Field</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">K</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">payload</span>, <span class="tsd-kind-parameter">fieldName</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">ReturnType</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Validation.getStrategyClass.html" class="tsd-signature-type tsd-kind-type-alias">getStrategyClass</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type tsd-kind-type-parameter">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">&quot;test&quot;</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><a href="#validateField.validateField-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Validates a single field within the entity.</p>
+</div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">K</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h4></li></ul></section>
+<h4><span class="tsd-kind-type-parameter">K</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h4>
+<div class="tsd-comment tsd-typography"><p>The key type of the field.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">payload</span>: <span class="tsd-signature-type">any</span></h5></li>
+<h5><span class="tsd-kind-parameter">payload</span>: <span class="tsd-signature-type">any</span></h5>
+<div class="tsd-comment tsd-typography"><p>The payload containing the field value.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">fieldName</span>: <span class="tsd-signature-type tsd-kind-type-parameter">K</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">ReturnType</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Validation.getStrategyClass.html" class="tsd-signature-type tsd-kind-type-alias">getStrategyClass</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type tsd-kind-type-parameter">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">&quot;test&quot;</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">fieldName</span>: <span class="tsd-signature-type tsd-kind-type-parameter">K</span></h5>
+<div class="tsd-comment tsd-typography"><p>The name of the field to validate.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">ReturnType</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/tdv_core.TdvCore.Validation.getStrategyClass.html" class="tsd-signature-type tsd-kind-type-alias">getStrategyClass</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type tsd-kind-type-parameter">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">&quot;test&quot;</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></h4><p>An array containing the detailed error message and the error message.</p>
+
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/reflection/models/entity.processor.ts#L66">src/reflection/models/entity.processor.ts:66</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/reflection/models/entity.processor.ts#L144">src/reflection/models/entity.processor.ts:144</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

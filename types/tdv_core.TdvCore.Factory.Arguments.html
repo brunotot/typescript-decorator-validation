@@ -23,9 +23,20 @@
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h4></li></ul></section><aside class="tsd-sources">
+<h4><span class="tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h4>
+<div class="tsd-comment tsd-typography"><p>An array of any types.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></section>
+<div class="tsd-comment tsd-typography">
+<h4>Description</h4><p>A type that extracts the argument types from a given array type <code>T</code>.</p>
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/types/namespace/factory.namespace.ts#L2">src/types/namespace/factory.namespace.ts:2</a></li></ul></aside></div>
+<li>If <code>T</code> is an empty array, it returns an empty array.</li>
+<li>If <code>T</code> has one element, it returns an array with that element.</li>
+<li>If <code>T</code> has more than one element, it recursively extracts the types.</li>
+</ul>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/types/namespace/factory.namespace.ts#L18">src/types/namespace/factory.namespace.ts:18</a></li></ul></aside></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

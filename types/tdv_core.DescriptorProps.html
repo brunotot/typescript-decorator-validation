@@ -17,15 +17,26 @@
 <li><a href="tdv_core.DescriptorProps.html">DescriptorProps</a></li></ul>
 <h1>Type alias DescriptorProps&lt;This, HostClass, Name&gt;</h1></div>
 <div class="tsd-signature"><span class="tsd-kind-type-alias">Descriptor<wbr/>Props</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">This</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">HostClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">Name</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">hostClass</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.Class.html" class="tsd-signature-type tsd-kind-type-alias">Class</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">HostClass</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">hostDefault</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type tsd-kind-type-parameter">HostClass</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">rules</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.FieldDescriptorRules.html" class="tsd-signature-type tsd-kind-type-alias">FieldDescriptorRules</a><span class="tsd-signature-symbol">&lt;</span><a href="tdv_core.ReflectionDescriptorThis.html" class="tsd-signature-type tsd-kind-type-alias">ReflectionDescriptorThis</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">HostClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">Name</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">thisClass</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.Class.html" class="tsd-signature-type tsd-kind-type-alias">Class</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">This</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">thisDefault</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.ReflectionDescriptorThis.html" class="tsd-signature-type tsd-kind-type-alias">ReflectionDescriptorThis</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">HostClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">Name</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">thisName</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type tsd-kind-type-parameter">Name</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-comment tsd-typography"><p>Properties for constructing a <code>ReflectionDescriptor</code>.</p>
+</div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">This</span></h4></li>
+<h4><span class="tsd-kind-type-parameter">This</span></h4>
+<div class="tsd-comment tsd-typography"><p>The type of the current class.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h4><span class="tsd-kind-type-parameter">HostClass</span></h4></li>
+<h4><span class="tsd-kind-type-parameter">HostClass</span></h4>
+<div class="tsd-comment tsd-typography"><p>The type of the host class.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h4><span class="tsd-kind-type-parameter">Name</span><span class="tsd-signature-symbol"> extends </span><a href="tdv_core.ReflectionDescriptorName.html" class="tsd-signature-type tsd-kind-type-alias">ReflectionDescriptorName</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">HostClass</span><span class="tsd-signature-symbol">&gt;</span> = <span class="tsd-signature-type">undefined</span></h4></li></ul></section>
+<h4><span class="tsd-kind-type-parameter">Name</span><span class="tsd-signature-symbol"> extends </span><a href="tdv_core.ReflectionDescriptorName.html" class="tsd-signature-type tsd-kind-type-alias">ReflectionDescriptorName</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">HostClass</span><span class="tsd-signature-symbol">&gt;</span> = <span class="tsd-signature-type">undefined</span></h4>
+<div class="tsd-comment tsd-typography"><p>The name of the descriptor within the host class.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></section>
 <div class="tsd-type-declaration">
 <h4>Type declaration</h4>
 <ul class="tsd-parameters">
@@ -40,9 +51,10 @@
 <li class="tsd-parameter">
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">this<wbr/>Default</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.ReflectionDescriptorThis.html" class="tsd-signature-type tsd-kind-type-alias">ReflectionDescriptorThis</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">HostClass</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">Name</span><span class="tsd-signature-symbol">&gt;</span></h5></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">this<wbr/>Name</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type tsd-kind-type-parameter">Name</span></h5></li></ul></div><aside class="tsd-sources">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">this<wbr/>Name</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type tsd-kind-type-parameter">Name</span></h5></li></ul></div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/aab477d/packages/core/src/reflection/models/reflection.descriptor.ts#L18">src/reflection/models/reflection.descriptor.ts:18</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/953155f/packages/core/src/reflection/models/reflection.descriptor.ts#L35">src/reflection/models/reflection.descriptor.ts:35</a></li></ul></aside></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
