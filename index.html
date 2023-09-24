@@ -14,14 +14,6 @@
 <h2>Typescript Decorator Validation - v1.0.0</h2></div>
 <div class="tsd-panel tsd-typography"><h1 align="center">:rocket: TypeScript Decorator Validation :rocket:</h1>
 
-<p align="center">:star: validates forms with TypeScript's native 
- <a href="https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators">decorators</a>
-</p>
-<p align="center">:star: adapts well with existing TypeScript applications</p>
-<p align="center">:star: client-side and server-side supported</p>
-<p align="center">:star: enforces strict type checking</p>
-<p align="center">:star: uses <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html">TypeScript v5</a> syntax</p>
-
 <p align="center">
  <a href="https://npmcharts.com/compare/typescript-decorator-validation?minimal=true">
   <img alt="Downloads per month" src="https://img.shields.io/npm/dm/typescript-decorator-validation" height="20"/>
@@ -44,37 +36,45 @@
  </a>
 </p>
 
+
+<p align="center">:star: validates forms with TypeScript's native 
+ <a href="https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators">decorators</a>
+</p>
+<p align="center">:star: adapts well with existing TypeScript applications</p>
+<p align="center">:star: supports client-side and server-side</p>
+<p align="center">:star: enforces strict type checking</p>
+<p align="center">:star: uses <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html">TypeScript v5</a> syntax</p>
+<p align="center">:star: supports i18n localization</p>
+
 <a id="md:table-of-contents" class="tsd-anchor"></a><h2><a href="#md:table-of-contents">Table of Contents</a></h2><ul>
-<li><a href="#install">Install</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#documentation">Documentation</a></li>
 <li><a href="#contribute">Contribute</a></li>
 <li><a href="#future-goals">Future goals</a></li>
 <li><a href="#supported-frameworks">Supported frameworks</a></li>
 <li><a href="#examples">Examples</a></li>
-<li><a href="#documentation">Documentation</a></li>
 <li><a href="#repository-architecture">Repository architecture</a></li>
-<li><a href="#comparison-table">Comparison table</a></li>
+<li><a href="#comparison-against-existing-validation-libraries">Comparison against existing validation libraries</a></li>
 </ul>
-<a id="md:install" class="tsd-anchor"></a><h2><a href="#md:install">Install</a></h2><ol>
-<li>Install core (server-side)</li>
+<a id="md:installation" class="tsd-anchor"></a><h2><a href="#md:installation">Installation</a></h2><ol>
+<li>Install TypeScript dependency package (core module)</li>
 </ol>
-<pre><code><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-0">install</span><span class="hl-1"> </span><span class="hl-0">tdv</span><span class="hl-1">-</span><span class="hl-0">core</span>
+<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">tdv-core</span>
 </code><button>Copy</button></pre>
-<a id="md:contribute" class="tsd-anchor"></a><h2><a href="#md:contribute">Contribute</a></h2><ol>
-<li>Open bash terminal</li>
-<li>Change directory to your desired position</li>
-<li>Clone the repository main branch</li>
+<ol start="2">
+<li>Install framework-specific dependency package if necessary</li>
 </ol>
-<pre><code class="language-bash"><span class="hl-2">git</span><span class="hl-1"> </span><span class="hl-3">clone</span><span class="hl-1"> </span><span class="hl-3">https://github.com/brunotot/typescript-decorator-validation.git</span>
+<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">tdv-react</span><br/><span class="hl-3">#           tdv-angular</span><br/><span class="hl-3">#           tdv-vue</span><br/><span class="hl-3">#           tdv-svelte</span>
 </code><button>Copy</button></pre>
-<ol start="4">
-<li>Checkout a new branch</li>
+<ol start="3">
+<li>That&#39;s it! You&#39;re ready to rock. 🎸:</li>
 </ol>
-<pre><code class="language-bash"><span class="hl-2">git</span><span class="hl-1"> </span><span class="hl-3">checkout</span><span class="hl-1"> </span><span class="hl-4">-b</span><span class="hl-1"> </span><span class="hl-3">&quot;[package-name]-[issue-number]-issue-lorem-ipsum&quot;</span>
-</code><button>Copy</button></pre>
-<ol start="5">
-<li>Commit and push changes</li>
-<li>Open pull request</li>
-</ol>
+<a id="md:documentation" class="tsd-anchor"></a><h2><a href="#md:documentation">Documentation</a></h2><ul>
+<li><a href="https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html">tdv-core</a></li>
+<li><a href="https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html">tdv-react</a></li>
+</ul>
+<a id="md:contribute" class="tsd-anchor"></a><h2><a href="#md:contribute">Contribute</a></h2><p>To contribute, simply clone the main branch, commit changes to a local branch and open pull request.
+Branch will be ready for merge after all CI tests pass and a review has been made.</p>
 <a id="md:future-goals" class="tsd-anchor"></a><h2><a href="#md:future-goals">Future goals</a></h2><ul>
 <li><input checked="" disabled="" type="checkbox"> Implement strict type checking</li>
 <li><input checked="" disabled="" type="checkbox"> Implement predefined decorator validators</li>
@@ -91,46 +91,26 @@
 <li><input disabled="" type="checkbox"> Solid</li>
 </ul>
 <a id="md:examples" class="tsd-anchor"></a><h2><a href="#md:examples">Examples</a></h2><p>A basic TypeScript form can look something like</p>
-<pre><code class="language-typescript"><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-0">validators</span><span class="hl-1">, </span><span class="hl-0">EntityProcessor</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-3">&#39;tdv-core&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-6">/** </span><br/><span class="hl-6"> *  This is an optional layer of abstraction if the class contains complex</span><br/><span class="hl-6"> *  validation evaluations which shouldn&#39;t be registered as properties.</span><br/><span class="hl-6"> *  In this example the &quot;passwordsMatch&quot; field isn&#39;t a settable property.</span><br/><span class="hl-6"> */</span><br/><span class="hl-1"> </span><span class="hl-5">export</span><span class="hl-1"> </span><span class="hl-4">type</span><span class="hl-1"> </span><span class="hl-7">UserFormFields</span><span class="hl-1"> = {</span><br/><span class="hl-1">  </span><span class="hl-0">confirmPassword</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-0">firstName</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-0">lastName</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-0">password</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-0">url</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-0">age</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">};</span><br/><br/><span class="hl-5">export</span><span class="hl-1"> </span><span class="hl-5">default</span><span class="hl-1"> </span><span class="hl-4">class</span><span class="hl-1"> </span><span class="hl-7">UserForm</span><span class="hl-1"> </span><span class="hl-4">implements</span><span class="hl-1"> </span><span class="hl-7">UserFormFields</span><span class="hl-1"> {</span><br/><span class="hl-1">  @</span><span class="hl-0">validators</span><span class="hl-1">.</span><span class="hl-0">string</span><span class="hl-1">.</span><span class="hl-2">MinLength</span><span class="hl-1">(</span><span class="hl-8">5</span><span class="hl-1">)</span><br/><span class="hl-1">  @</span><span class="hl-0">validators</span><span class="hl-1">.</span><span class="hl-0">string</span><span class="hl-1">.</span><span class="hl-2">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-0">firstName</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-0">validators</span><span class="hl-1">.</span><span class="hl-0">string</span><span class="hl-1">.</span><span class="hl-2">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-0">lastName</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-0">validators</span><span class="hl-1">.</span><span class="hl-0">string</span><span class="hl-1">.</span><span class="hl-2">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  @</span><span class="hl-0">validators</span><span class="hl-1">.</span><span class="hl-0">string</span><span class="hl-1">.</span><span class="hl-2">Password</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-0">password</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  </span><span class="hl-0">confirmPassword</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-0">validators</span><span class="hl-1">.</span><span class="hl-0">string</span><span class="hl-1">.</span><span class="hl-2">URL</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-0">url</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-0">validators</span><span class="hl-1">.</span><span class="hl-0">number</span><span class="hl-1">.</span><span class="hl-2">ValueRange</span><span class="hl-1">({ </span><span class="hl-0">min:</span><span class="hl-1"> </span><span class="hl-8">18</span><span class="hl-1">, </span><span class="hl-0">max:</span><span class="hl-1"> </span><span class="hl-8">100</span><span class="hl-1"> })</span><br/><span class="hl-1">  </span><span class="hl-0">age</span><span class="hl-1">!: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-0">validators</span><span class="hl-1">.</span><span class="hl-0">boolean</span><span class="hl-1">.</span><span class="hl-2">Truthy</span><span class="hl-1">(</span><span class="hl-3">&quot;Passwords must match&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">  </span><span class="hl-4">get</span><span class="hl-1"> </span><span class="hl-2">passwordsMatch</span><span class="hl-1">(): </span><span class="hl-7">boolean</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-5">return</span><span class="hl-1"> </span><span class="hl-4">this</span><span class="hl-1">.</span><span class="hl-0">password</span><span class="hl-1"> === </span><span class="hl-4">this</span><span class="hl-1">.</span><span class="hl-0">confirmPassword</span><span class="hl-1">;</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
+<pre><code class="language-typescript"><span class="hl-4">import</span><span class="hl-1"> { </span><span class="hl-5">validators</span><span class="hl-1">, </span><span class="hl-5">EntityProcessor</span><span class="hl-1"> } </span><span class="hl-4">from</span><span class="hl-1"> </span><span class="hl-2">&#39;tdv-core&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">/** </span><br/><span class="hl-3"> *  This is an optional layer of abstraction if the class contains complex</span><br/><span class="hl-3"> *  validation evaluations which shouldn&#39;t be registered as properties.</span><br/><span class="hl-3"> *  In this example the &quot;passwordsMatch&quot; field isn&#39;t a settable property.</span><br/><span class="hl-3"> */</span><br/><span class="hl-1"> </span><span class="hl-4">export</span><span class="hl-1"> </span><span class="hl-6">type</span><span class="hl-1"> </span><span class="hl-7">UserFormFields</span><span class="hl-1"> = {</span><br/><span class="hl-1">  </span><span class="hl-5">confirmPassword</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-5">firstName</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-5">lastName</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-5">password</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-5">url</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-5">age</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">};</span><br/><br/><span class="hl-4">export</span><span class="hl-1"> </span><span class="hl-4">default</span><span class="hl-1"> </span><span class="hl-6">class</span><span class="hl-1"> </span><span class="hl-7">UserForm</span><span class="hl-1"> </span><span class="hl-6">implements</span><span class="hl-1"> </span><span class="hl-7">UserFormFields</span><span class="hl-1"> {</span><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">string</span><span class="hl-1">.</span><span class="hl-0">MinLength</span><span class="hl-1">(</span><span class="hl-8">5</span><span class="hl-1">)</span><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">string</span><span class="hl-1">.</span><span class="hl-0">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-5">firstName</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">string</span><span class="hl-1">.</span><span class="hl-0">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-5">lastName</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">string</span><span class="hl-1">.</span><span class="hl-0">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">string</span><span class="hl-1">.</span><span class="hl-0">Password</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-5">password</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  </span><span class="hl-5">confirmPassword</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">string</span><span class="hl-1">.</span><span class="hl-0">URL</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-5">url</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">number</span><span class="hl-1">.</span><span class="hl-0">ValueRange</span><span class="hl-1">({ </span><span class="hl-5">min:</span><span class="hl-1"> </span><span class="hl-8">18</span><span class="hl-1">, </span><span class="hl-5">max:</span><span class="hl-1"> </span><span class="hl-8">100</span><span class="hl-1"> })</span><br/><span class="hl-1">  </span><span class="hl-5">age</span><span class="hl-1">!: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">boolean</span><span class="hl-1">.</span><span class="hl-0">Truthy</span><span class="hl-1">(</span><span class="hl-2">&quot;Passwords must match&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">  </span><span class="hl-6">get</span><span class="hl-1"> </span><span class="hl-0">passwordsMatch</span><span class="hl-1">(): </span><span class="hl-7">boolean</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-4">return</span><span class="hl-1"> </span><span class="hl-6">this</span><span class="hl-1">.</span><span class="hl-5">password</span><span class="hl-1"> === </span><span class="hl-6">this</span><span class="hl-1">.</span><span class="hl-5">confirmPassword</span><span class="hl-1">;</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>
 <p>And a sample value of type UserForm may look something like</p>
-<pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-9">dummy</span><span class="hl-1">: </span><span class="hl-7">Partial</span><span class="hl-1">&lt;</span><span class="hl-7">UserFormFields</span><span class="hl-1">&gt; = {</span><br/><span class="hl-1">  </span><span class="hl-0">firstName:</span><span class="hl-1"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-0">lastName:</span><span class="hl-1"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-0">password:</span><span class="hl-1"> </span><span class="hl-3">&quot;12345&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-0">confirmPassword:</span><span class="hl-1"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-0">url:</span><span class="hl-1"> </span><span class="hl-3">&#39;&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-0">age:</span><span class="hl-1"> </span><span class="hl-8">10</span><span class="hl-1">,</span><br/><span class="hl-1">};</span>
+<pre><code class="language-typescript"><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-9">dummy</span><span class="hl-1">: </span><span class="hl-7">Partial</span><span class="hl-1">&lt;</span><span class="hl-7">UserFormFields</span><span class="hl-1">&gt; = {</span><br/><span class="hl-1">  </span><span class="hl-5">firstName:</span><span class="hl-1"> </span><span class="hl-2">&#39;&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-5">lastName:</span><span class="hl-1"> </span><span class="hl-2">&#39;&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-5">password:</span><span class="hl-1"> </span><span class="hl-2">&quot;12345&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-5">confirmPassword:</span><span class="hl-1"> </span><span class="hl-2">&#39;&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-5">url:</span><span class="hl-1"> </span><span class="hl-2">&#39;&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-5">age:</span><span class="hl-1"> </span><span class="hl-8">10</span><span class="hl-1">,</span><br/><span class="hl-1">};</span>
 </code><button>Copy</button></pre>
 <p>Now we can inspect the errors of the given sample value</p>
-<pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-9">processor</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-2">EntityProcessor</span><span class="hl-1">(</span><span class="hl-0">UserForm</span><span class="hl-1">);</span><br/><span class="hl-4">const</span><span class="hl-1"> { </span><span class="hl-9">errors</span><span class="hl-1"> } = </span><span class="hl-0">processor</span><span class="hl-1">.</span><span class="hl-2">validate</span><span class="hl-1">(</span><span class="hl-0">dummy</span><span class="hl-1">);</span><br/><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">log</span><span class="hl-1">(</span><span class="hl-9">JSON</span><span class="hl-1">.</span><span class="hl-2">stringify</span><span class="hl-1">(</span><span class="hl-0">errors</span><span class="hl-1">, </span><span class="hl-4">null</span><span class="hl-1">, </span><span class="hl-8">2</span><span class="hl-1">));</span>
+<pre><code class="language-typescript"><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-9">processor</span><span class="hl-1"> = </span><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">EntityProcessor</span><span class="hl-1">(</span><span class="hl-5">UserForm</span><span class="hl-1">);</span><br/><span class="hl-6">const</span><span class="hl-1"> { </span><span class="hl-9">errors</span><span class="hl-1"> } = </span><span class="hl-5">processor</span><span class="hl-1">.</span><span class="hl-0">validate</span><span class="hl-1">(</span><span class="hl-5">dummy</span><span class="hl-1">);</span><br/><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-9">JSON</span><span class="hl-1">.</span><span class="hl-0">stringify</span><span class="hl-1">(</span><span class="hl-5">errors</span><span class="hl-1">, </span><span class="hl-6">null</span><span class="hl-1">, </span><span class="hl-8">2</span><span class="hl-1">));</span>
 </code><button>Copy</button></pre>
 <p>And the result is</p>
-<pre><code class="language-json"><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;firstName&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-3">&quot;Field is mandatory&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-3">&quot;Field must contain at least 5 characters&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;lastName&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-3">&quot;Field is mandatory&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;password&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-3">&quot;Password must be at least 8 characters long&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;url&quot;</span><span class="hl-1">: [],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;age&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-3">&quot;Value must be greater than or equal to 18 and less than or equal to 100 but is 10&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;passwordsMatch&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-3">&quot;Passwords must match&quot;</span><br/><span class="hl-1">  ]</span><br/><span class="hl-1">}</span>
+<pre><code class="language-json"><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;firstName&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Field is mandatory&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Field must contain at least 5 characters&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;lastName&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Field is mandatory&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;password&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Password must be at least 8 characters long&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;url&quot;</span><span class="hl-1">: [],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;age&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Value must be greater than or equal to 18 and less than or equal to 100 but is 10&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;passwordsMatch&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Passwords must match&quot;</span><br/><span class="hl-1">  ]</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>
-<a id="md:documentation" class="tsd-anchor"></a><h2><a href="#md:documentation">Documentation</a></h2><ul>
-<li><a href="https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html">Core</a></li>
-<li><a href="https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html">React</a></li>
+<a id="md:repository-architecture" class="tsd-anchor"></a><h2><a href="#md:repository-architecture">Repository architecture</a></h2><p>The <code>tdv-core</code> package is the backbone, providing core validation logic that&#39;s framework-agnostic. Features include:</p>
+<ul>
+<li>A decorator factory for easy integration with TypeScript</li>
+<li>Metadata management for dynamic behavior</li>
+<li>Localization support</li>
+<li>Built-in validators like <code>Email</code>, <code>Required</code>, etc.</li>
 </ul>
-<a id="md:repository-architecture" class="tsd-anchor"></a><h2><a href="#md:repository-architecture">Repository architecture</a></h2><p>This monorepo contains two main packages that work together to provide a robust, type-safe form validation system for TypeScript applications. Below is a detailed explanation of each package and how they interact.</p>
-<a id="md:tdv-core" class="tsd-anchor"></a><h2><a href="#md:tdv-core"><code>tdv-core</code></a></h2><a id="md:overview" class="tsd-anchor"></a><h3><a href="#md:overview">Overview</a></h3><p>The <code>tdv-core</code> package serves as the foundation for form validation. It provides the core logic that is reusable across frontend frameworks.</p>
-<a id="md:features" class="tsd-anchor"></a><h3><a href="#md:features">Features</a></h3><ol>
-<li><p><strong>Decorator Factory</strong>: The core of the validation logic. A function called <code>makeDecorator</code> takes a supplier function and returns a decorator, allowing seamless integration with TypeScript&#39;s decorator system.</p>
-</li>
-<li><p><strong>Validation MetaService</strong>: Manages metadata for your validation logic. It provides methods to add validators, get fields, and more. It uses reflection to enable dynamic behavior.</p>
-</li>
-<li><p><strong>Message Factory</strong>: Provides localization support. The <code>t</code> function takes a key and returns a localized message, making it easy to internationalize your application.</p>
-</li>
-<li><p><strong>Validators</strong>: A collection of pre-defined validators like <code>Email</code>, <code>Required</code>, etc., that users can directly apply to their form fields.</p>
-</li>
-</ol>
-<a id="md:tdv-react" class="tsd-anchor"></a><h2><a href="#md:tdv-react"><code>tdv-react</code></a></h2><a id="md:overview-1" class="tsd-anchor"></a><h3><a href="#md:overview-1">Overview</a></h3><p>The <code>tdv-react</code> package builds upon <code>tdv-core</code> to provide React-specific hooks and context for easier integration into React applications.</p>
-<a id="md:features-1" class="tsd-anchor"></a><h3><a href="#md:features-1">Features</a></h3><ol>
-<li><p><strong><code>useValidation</code> Hook</strong>: Manages form state and validation errors using React&#39;s <code>useState</code> and <code>useEffect</code>.</p>
-</li>
-<li><p><strong><code>useForm</code> Hook</strong>: A comprehensive hook that includes <code>useValidation</code> and provides additional features like form submission handling and context management.</p>
-</li>
-<li><p><strong>FormContext</strong>: Utilizes React context to manage form state across nested components, making it ideal for complex forms.</p>
-</li>
-<li><p><strong>Examples</strong>: Sample applications to demonstrate real-world usage of these hooks and context.</p>
-</li>
-</ol>
-<a id="md:overall" class="tsd-anchor"></a><h2><a href="#md:overall">Overall</a></h2><p>The <code>tdv-core</code> package provides the base validation logic and decorators, while <code>tdv-react</code> builds on top of it to offer React-specific features. This separation of concerns ensures that the core logic remains framework-agnostic, allowing for future extensions to other frontend frameworks.</p>
-<a id="md:comparison-table" class="tsd-anchor"></a><h3><a href="#md:comparison-table">Comparison table</a></h3><table>
+<p>The core package serves as the foundation for implementation libraries like <code>tdv-react</code>, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.</p>
+<a id="md:comparison-against-existing-validation-libraries" class="tsd-anchor"></a><h2><a href="#md:comparison-against-existing-validation-libraries">Comparison against existing validation libraries</a></h2><table>
 <thead>
 <tr>
 <th>Criteria</th>
@@ -174,12 +154,12 @@
 <td>🟡[^9]</td>
 </tr>
 </tbody></table>
-<a id="md:legend" class="tsd-anchor"></a><h3><a href="#md:legend">Legend</a></h3><ul>
+<ul>
 <li>✅: Fully supported and easy-to-use</li>
 <li>❌: Not supported</li>
 <li>🟡: Partial support</li>
 </ul>
-<a id="md:remarks" class="tsd-anchor"></a><h3><a href="#md:remarks">Remarks</a></h3><p>[^1]: React Hook Form has good TypeScript support but doesn&#39;t integrate as seamlessly as <code>tdv-monorepo</code>.
+<p>[^1]: React Hook Form has good TypeScript support but doesn&#39;t integrate as seamlessly as <code>tdv-monorepo</code>.
 [^2]: React Hook Form uses hooks, which are easy to use but different from native TypeScript decorators.
 [^3]: Yup requires learning its custom object schema, adding to the learning curve.
 [^4]: React Hook Form requires understanding of hooks, adding a slight learning curve.
@@ -213,29 +193,14 @@
 <li><a href="#md:table-of-contents"><span>Table of <wbr/>Contents</span></a></li>
 <li>
 <ul>
-<li><a href="#md:install"><span>Install</span></a></li>
+<li><a href="#md:installation"><span>Installation</span></a></li>
+<li><a href="#md:documentation"><span>Documentation</span></a></li>
 <li><a href="#md:contribute"><span>Contribute</span></a></li>
 <li><a href="#md:future-goals"><span>Future goals</span></a></li>
 <li><a href="#md:supported-frameworks"><span>Supported <wbr/>Frameworks</span></a></li>
 <li><a href="#md:examples"><span>Examples</span></a></li>
-<li><a href="#md:documentation"><span>Documentation</span></a></li>
 <li><a href="#md:repository-architecture"><span>Repository architecture</span></a></li>
-<li><a href="#md:tdv-core"><span>tdv-<wbr/>core</span></a></li>
-<li>
-<ul>
-<li><a href="#md:overview"><span>Overview</span></a></li>
-<li><a href="#md:features"><span>Features</span></a></li></ul></li>
-<li><a href="#md:tdv-react"><span>tdv-<wbr/>react</span></a></li>
-<li>
-<ul>
-<li><a href="#md:overview-1"><span>Overview</span></a></li>
-<li><a href="#md:features-1"><span>Features</span></a></li></ul></li>
-<li><a href="#md:overall"><span>Overall</span></a></li>
-<li>
-<ul>
-<li><a href="#md:comparison-table"><span>Comparison table</span></a></li>
-<li><a href="#md:legend"><span>Legend</span></a></li>
-<li><a href="#md:remarks"><span>Remarks</span></a></li></ul></li></ul></li></ul></li></ul></div></details></div>
+<li><a href="#md:comparison-against-existing-validation-libraries"><span>Comparison against existing validation libraries</span></a></li></ul></li></ul></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="index.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>Typescript Decorator Validation - v1.0.0</span></a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base=".">
