@@ -1,13 +1,5 @@
 <h1 align="center">:rocket: TypeScript Decorator Validation :rocket:</h1>
 
-<p align="center">:star: validates forms with TypeScript's native 
- <a href="https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators">decorators</a>
-</p>
-<p align="center">:star: adapts well with existing TypeScript applications</p>
-<p align="center">:star: client-side and server-side supported</p>
-<p align="center">:star: enforces strict type checking</p>
-<p align="center">:star: uses <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html">TypeScript v5</a> syntax</p>
-
 <p align="center">
  <a href="https://npmcharts.com/compare/typescript-decorator-validation?minimal=true">
   <img alt="Downloads per month" src="https://img.shields.io/npm/dm/typescript-decorator-validation" height="20"/>
@@ -30,38 +22,53 @@
  </a>
 </p>
 
+
+<p align="center">:star: validates forms with TypeScript's native 
+ <a href="https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators">decorators</a>
+</p>
+<p align="center">:star: adapts well with existing TypeScript applications</p>
+<p align="center">:star: supports client-side and server-side</p>
+<p align="center">:star: enforces strict type checking</p>
+<p align="center">:star: uses <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html">TypeScript v5</a> syntax</p>
+<p align="center">:star: supports i18n localization</p>
+
 ## Table of Contents
 
-- [Install](#install)
+- [Installation](#installation)
+- [Documentation](#documentation)
 - [Contribute](#contribute)
 - [Future goals](#future-goals)
 - [Supported frameworks](#supported-frameworks)
 - [Examples](#examples)
-- [Documentation](#documentation)
 - [Repository architecture](#repository-architecture)
-- [Comparison table](#comparison-table)
+- [Comparison against existing validation libraries](#comparison-against-existing-validation-libraries)
 
-## Install
 
-1. Install core (server-side)
-```
+## Installation
+
+1. Install TypeScript dependency package (core module)
+```bash
 npm install tdv-core
 ```
+2. Install framework-specific dependency package if necessary
+```bash
+npm install tdv-react
+#           tdv-angular
+#           tdv-vue
+#           tdv-svelte
+```
+3. That's it! You're ready to rock. 🎸:
+
+
+## Documentation
+- [tdv-core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
+- [tdv-react](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html)
+
 
 ## Contribute
 
-1. Open bash terminal
-2. Change directory to your desired position
-3. Clone the repository main branch
-```bash
-git clone https://github.com/brunotot/typescript-decorator-validation.git
-```
-4. Checkout a new branch
-```bash
-git checkout -b "[package-name]-[issue-number]-issue-lorem-ipsum"
-```
-5. Commit and push changes
-6. Open pull request
+To contribute, simply clone the main branch, commit changes to a local branch and open pull request.
+Branch will be ready for merge after all CI tests pass and a review has been made.
 
 ## Future goals
 
@@ -170,51 +177,20 @@ And the result is
 }
 ```
 
-## Documentation
-- [Core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
-- [React](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html)
 
 ## Repository architecture
 
-This monorepo contains two main packages that work together to provide a robust, type-safe form validation system for TypeScript applications. Below is a detailed explanation of each package and how they interact.
+The `tdv-core` package is the backbone, providing core validation logic that's framework-agnostic. Features include:
+- A decorator factory for easy integration with TypeScript
+- Metadata management for dynamic behavior
+- Localization support
+- Built-in validators like `Email`, `Required`, etc.
 
-## `tdv-core`
 
-### Overview
+The core package serves as the foundation for implementation libraries like `tdv-react`, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.
 
-The `tdv-core` package serves as the foundation for form validation. It provides the core logic that is reusable across frontend frameworks.
 
-### Features
-
-1. **Decorator Factory**: The core of the validation logic. A function called `makeDecorator` takes a supplier function and returns a decorator, allowing seamless integration with TypeScript's decorator system.
-
-2. **Validation MetaService**: Manages metadata for your validation logic. It provides methods to add validators, get fields, and more. It uses reflection to enable dynamic behavior.
-
-3. **Message Factory**: Provides localization support. The `t` function takes a key and returns a localized message, making it easy to internationalize your application.
-
-4. **Validators**: A collection of pre-defined validators like `Email`, `Required`, etc., that users can directly apply to their form fields.
-
-## `tdv-react`
-
-### Overview
-
-The `tdv-react` package builds upon `tdv-core` to provide React-specific hooks and context for easier integration into React applications.
-
-### Features
-
-1. **`useValidation` Hook**: Manages form state and validation errors using React's `useState` and `useEffect`.
-
-2. **`useForm` Hook**: A comprehensive hook that includes `useValidation` and provides additional features like form submission handling and context management.
-
-3. **FormContext**: Utilizes React context to manage form state across nested components, making it ideal for complex forms.
-
-4. **Examples**: Sample applications to demonstrate real-world usage of these hooks and context.
-
-## Overall
-
-The `tdv-core` package provides the base validation logic and decorators, while `tdv-react` builds on top of it to offer React-specific features. This separation of concerns ensures that the core logic remains framework-agnostic, allowing for future extensions to other frontend frameworks.
-
-### Comparison table
+## Comparison against existing validation libraries
 
 | Criteria         | tdv-monorepo | Yup  | React Hook Form | Validator.js | Formik |
 |------------------|-------------|-------|-----------------|--------------|--------|
@@ -223,13 +199,9 @@ The `tdv-core` package provides the base validation logic and decorators, while 
 | Learning Curve   | ✅          | 🟡[^3]| 🟡[^4]          | 🟡[^5]       | 🟡[^6]|
 | Custom Validators| ✅          | 🟡[^7]| ✅              | 🟡[^8]       | 🟡[^9]|
 
-### Legend
-
 - ✅: Fully supported and easy-to-use
 - ❌: Not supported
 - 🟡: Partial support
-
-### Remarks
 
 [^1]: React Hook Form has good TypeScript support but doesn't integrate as seamlessly as `tdv-monorepo`.
 [^2]: React Hook Form uses hooks, which are easy to use but different from native TypeScript decorators.
