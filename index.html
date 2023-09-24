@@ -52,6 +52,7 @@
 <li><a href="#examples">Examples</a></li>
 <li><a href="#documentation">Documentation</a></li>
 <li><a href="#repository-architecture">Repository architecture</a></li>
+<li><a href="#comparison-table">Comparison table</a></li>
 </ul>
 <a id="md:install" class="tsd-anchor"></a><h2><a href="#md:install">Install</a></h2><ol>
 <li>Install core (server-side)</li>
@@ -129,6 +130,64 @@
 </li>
 </ol>
 <a id="md:overall" class="tsd-anchor"></a><h2><a href="#md:overall">Overall</a></h2><p>The <code>tdv-core</code> package provides the base validation logic and decorators, while <code>tdv-react</code> builds on top of it to offer React-specific features. This separation of concerns ensures that the core logic remains framework-agnostic, allowing for future extensions to other frontend frameworks.</p>
+<a id="md:comparison-table" class="tsd-anchor"></a><h3><a href="#md:comparison-table">Comparison table</a></h3><table>
+<thead>
+<tr>
+<th>Criteria</th>
+<th>tdv-monorepo</th>
+<th>Yup</th>
+<th>React Hook Form</th>
+<th>Validator.js</th>
+<th>Formik</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Type Safety</td>
+<td>✅</td>
+<td>❌</td>
+<td>🟡[^1]</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅[^2]</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Learning Curve</td>
+<td>✅</td>
+<td>🟡[^3]</td>
+<td>🟡[^4]</td>
+<td>🟡[^5]</td>
+<td>🟡[^6]</td>
+</tr>
+<tr>
+<td>Custom Validators</td>
+<td>✅</td>
+<td>🟡[^7]</td>
+<td>✅</td>
+<td>🟡[^8]</td>
+<td>🟡[^9]</td>
+</tr>
+</tbody></table>
+<a id="md:legend" class="tsd-anchor"></a><h3><a href="#md:legend">Legend</a></h3><ul>
+<li>✅: Fully supported and easy-to-use</li>
+<li>❌: Not supported</li>
+<li>🟡: Partial support</li>
+</ul>
+<a id="md:remarks" class="tsd-anchor"></a><h3><a href="#md:remarks">Remarks</a></h3><p>[^1]: React Hook Form has good TypeScript support but doesn&#39;t integrate as seamlessly as <code>tdv-monorepo</code>.
+[^2]: React Hook Form uses hooks, which are easy to use but different from native TypeScript decorators.
+[^3]: Yup requires learning its custom object schema, adding to the learning curve.
+[^4]: React Hook Form requires understanding of hooks, adding a slight learning curve.
+[^5]: Validator.js requires learning their API, which can be cumbersome.
+[^6]: Formik has its own ecosystem, making the learning curve steeper.
+[^7]: Yup allows for custom validation but within the confines of its own schema.
+[^8]: Validator.js allows for some customization but it&#39;s not straightforward.
+[^9]: Formik allows for custom validation but within its own framework.</p>
 </div></div>
 <div class="col-sidebar">
 <div class="page-menu">
@@ -171,7 +230,12 @@
 <ul>
 <li><a href="#md:overview-1"><span>Overview</span></a></li>
 <li><a href="#md:features-1"><span>Features</span></a></li></ul></li>
-<li><a href="#md:overall"><span>Overall</span></a></li></ul></li></ul></li></ul></div></details></div>
+<li><a href="#md:overall"><span>Overall</span></a></li>
+<li>
+<ul>
+<li><a href="#md:comparison-table"><span>Comparison table</span></a></li>
+<li><a href="#md:legend"><span>Legend</span></a></li>
+<li><a href="#md:remarks"><span>Remarks</span></a></li></ul></li></ul></li></ul></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="index.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>Typescript Decorator Validation - v1.0.0</span></a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base=".">
