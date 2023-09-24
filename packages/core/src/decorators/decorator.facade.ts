@@ -24,7 +24,7 @@ import makeDecorator from "./decorator.factory";
  * });
  *
  * class MyClass {
- *   @IsPositive
+ *   //@IsPositive
  *   public myValue: number;
  * }
  * ```

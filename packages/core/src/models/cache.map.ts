@@ -80,8 +80,8 @@ export default class CacheMap<CacheValue extends object & {}, Payload = any> {
   ): CacheValue[CacheKey] {
     const cacheValue: CacheValue[CacheKey] = this.#cache[cacheKey];
     return cacheValue === undefined ||
-      !$.Objects.deepEquals(this.#payload, payload)
-      ? this.#changeFn(payload)[cacheKey]
-      : cacheValue;
+      $.Objects.deepEquals(this.#payload, payload)
+      ? cacheValue
+      : this.#changeFn(payload)[cacheKey];
   }
 }

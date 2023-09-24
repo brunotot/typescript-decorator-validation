@@ -24,7 +24,7 @@ function show_available_groups() {
 
 # Function to display usage instructions
 function show_help() {
-  echo "Usage: bash git-commit.sh [--ticket=<ticket-id>] --group=<group-name> --message=<commit-message>"
+  echo "Usage: bash commit.sh [--ticket=<ticket-id>] --group=<group-name> --message=<commit-message>"
   echo ""
   echo "Options:"
   echo "  --ticket=<ticket-id>        Specify the ticket or issue ID."
@@ -33,8 +33,8 @@ function show_help() {
   echo "  --help                      Display this help message."
   echo ""
   echo "Examples:"
-  echo "  bash git-commit.sh --ticket=123 --group=fix --message=\"Fix a critical bug\""
-  echo "  bash git-commit.sh --group=feat --message=\"Add new feature\""
+  echo "  bash commit.sh --ticket=123 --group=fix --message=\"Fix a critical bug\""
+  echo "  bash commit.sh --group=feat --message=\"Add new feature\""
   echo ""
   show_available_groups
 }

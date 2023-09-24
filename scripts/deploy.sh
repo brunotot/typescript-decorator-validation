@@ -3,8 +3,8 @@
 PWD_THIS="$(dirname $0)"
 PWD_MODULE=$PWD_THIS/../packages/$1
 
-source "${PWD_THIS}/spinner.sh"
-source "${PWD_THIS}/colors.sh"
+source "${PWD_THIS}/shared/spinner.sh"
+source "${PWD_THIS}/shared/colors.sh"
 
 APP="$1"
 VERSION="$2"
@@ -26,6 +26,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+# moves the cursor up by one line on the terminal
 printf "\033[1A"
 
 start "$(color $CYAN)4 $(color)" " $(color $GREY)7$(color) Running build script..."
@@ -44,7 +45,7 @@ stop "/"
 
 start "$(color $GREEN)7 $(color)" " $(color $GREEN)7 $(color)Pushing changes..."
 git add .
-bash $PWD_THIS/git-commit.sh --group=release --message="publish tdv-$APP v$VERSION"
+bash $PWD_THIS/commit.sh --group=release --message="publish tdv-$APP v$VERSION"
 git push --quiet -u --no-progress >/dev/null 2>&1
 stop "/"
 

@@ -24,7 +24,7 @@ import Decorator from "../types/namespace/decorator.namespace";
  * });
  *
  * class MyClass {
- *   @MyDecorator
+ *   //@MyDecorator
  *   public myValue: number;
  * }
  * ```

@@ -21,7 +21,7 @@
     "react/deploy:patch": "npm run deploy:patch --prefix=packages/react",
     "react/test": "npm run test --prefix=packages/react",
     "react/build": "npm run build --prefix=packages/react",
-    "pushAll": "git add . && bash scripts/git-commit.sh --group=chore --message=\"Automated commit\" && git push"
+    "pushAll": "git add . && bash scripts/commit.sh --group=chore --message=\"Automated commit\" && git push"
   },
   "devDependencies": {
     "@types/jest": "^29.5.2",

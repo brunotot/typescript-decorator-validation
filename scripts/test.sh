@@ -5,8 +5,8 @@ PWD_MODULE=$PWD_THIS/../packages/$1
 
 rm -rf $PWD_THIS/../packages/core/dist $PWD_THIS/../packages/react/dist
 
-source "${PWD_THIS}/spinner.sh"
-source "${PWD_THIS}/colors.sh"
+source "${PWD_THIS}/shared/spinner.sh"
+source "${PWD_THIS}/shared/colors.sh"
 
 # Remove Jest assertion for invalid versions
 export TS_JEST_DISABLE_VER_CHECKER=true >/dev/null 2>&1
