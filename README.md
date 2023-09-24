@@ -39,6 +39,7 @@
 - [Examples](#examples)
 - [Documentation](#documentation)
 - [Repository architecture](#repository-architecture)
+- [Comparison table](#comparison-table)
 
 ## Install
 
@@ -77,7 +78,6 @@ git checkout -b "[package-name]-[issue-number]-issue-lorem-ipsum"
 - [ ] Svelte
 - [ ] Vue
 - [ ] Solid
-
 
 ## Examples
 
@@ -213,4 +213,31 @@ The `tdv-react` package builds upon `tdv-core` to provide React-specific hooks a
 ## Overall
 
 The `tdv-core` package provides the base validation logic and decorators, while `tdv-react` builds on top of it to offer React-specific features. This separation of concerns ensures that the core logic remains framework-agnostic, allowing for future extensions to other frontend frameworks.
+
+### Comparison table
+
+| Criteria         | tdv-monorepo | Yup  | React Hook Form | Validator.js | Formik |
+|------------------|-------------|-------|-----------------|--------------|--------|
+| Type Safety      | ✅          | ❌    | 🟡[^1]          | ❌           | ❌    |
+| Syntax           | ✅          | ❌    | ✅[^2]          | ❌           | ❌    |
+| Learning Curve   | ✅          | 🟡[^3]| 🟡[^4]          | 🟡[^5]       | 🟡[^6]|
+| Custom Validators| ✅          | 🟡[^7]| ✅              | 🟡[^8]       | 🟡[^9]|
+
+### Legend
+
+- ✅: Fully supported and easy-to-use
+- ❌: Not supported
+- 🟡: Partial support
+
+### Remarks
+
+[^1]: React Hook Form has good TypeScript support but doesn't integrate as seamlessly as `tdv-monorepo`.
+[^2]: React Hook Form uses hooks, which are easy to use but different from native TypeScript decorators.
+[^3]: Yup requires learning its custom object schema, adding to the learning curve.
+[^4]: React Hook Form requires understanding of hooks, adding a slight learning curve.
+[^5]: Validator.js requires learning their API, which can be cumbersome.
+[^6]: Formik has its own ecosystem, making the learning curve steeper.
+[^7]: Yup allows for custom validation but within the confines of its own schema.
+[^8]: Validator.js allows for some customization but it's not straightforward.
+[^9]: Formik allows for custom validation but within its own framework.
 
