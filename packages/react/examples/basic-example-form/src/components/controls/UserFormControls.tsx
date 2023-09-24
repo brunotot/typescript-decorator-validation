@@ -76,7 +76,7 @@ export default function UserFormInput() {
      * accordingly and probably set a new state of its container with included new data that came
      * from the child component.
      */
-    whenChanged: () => setNumberOfStateChanges((p) => ++p),
+    onChange: () => setNumberOfStateChanges((p) => ++p),
 
     /**
      * "defaultValue" is an optional parameter and it allows for defining custom empty constructor
@@ -127,7 +127,7 @@ export default function UserFormInput() {
     providerProps,
 
     /** Object made of class properties mapped to setter functions accepting class property value.*/
-    cachedHandlers,
+    mutations,
 
     /** Object with structure of model class but its values are mapped to lists of error messages. */
     errors,
@@ -142,7 +142,7 @@ export default function UserFormInput() {
     onSubmit,
 
     /** Resets the form to its initial value and sets 'isSubmitted' to false */
-    resetForm,
+    reset,
   } = data;
 
   const dateOfBirthValue = form!.dateOfBirth
@@ -162,35 +162,33 @@ export default function UserFormInput() {
         >
           <Input
             value={form.testEmail}
-            onChange={cachedHandlers.testEmail}
+            onChange={mutations.testEmail}
             errors={errors.testEmail}
             label="Test email"
           />
           <Input
             value={form.age}
-            onChange={cachedHandlers.age}
+            onChange={mutations.age}
             errors={errors.age}
             label="Age"
           />
           <Input
             value={form.password}
-            onChange={cachedHandlers.password}
+            onChange={mutations.password}
             errors={errors.password}
             type="password"
             label="Password"
           />
           <Input
             value={form.confirmPassword}
-            onChange={cachedHandlers.confirmPassword}
+            onChange={mutations.confirmPassword}
             errors={errors.confirmPassword}
             type="password"
             label="Confirm password"
           />
           <Input
             value={dateOfBirthValue}
-            onChange={(v) =>
-              cachedHandlers.dateOfBirth!(v ? new Date(v) : null!)
-            }
+            onChange={(v) => mutations.dateOfBirth!(v ? new Date(v) : null!)}
             errors={errors.dateOfBirth}
             type="date"
             label="Date of birth"
@@ -207,7 +205,7 @@ export default function UserFormInput() {
           <p>Form changed state count: {numberOfStateChanges}</p>
           <button
             style={{ padding: "0.5rem", fontSize: 18, marginTop: 8 }}
-            onClick={resetForm}
+            onClick={() => reset()}
           >
             <strong>Reset form</strong>
           </button>

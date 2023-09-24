@@ -1,28 +1,20 @@
-import { LocaleMessages, Locales } from "../message.types";
+import { LocaleMessages } from "../message.types";
+import * as de from "../translations/de.json";
+import * as en from "../translations/en.json";
+import * as es from "../translations/es.json";
+import * as fr from "../translations/fr.json";
+import * as hr from "../translations/hr.json";
+import * as it from "../translations/it.json";
+import * as nl from "../translations/nl.json";
 
-/**
- * Builds a collection of locale-specific messages.
- *
- * @remarks
- * This function dynamically imports translation files based on the supported `Locales`.
- * It constructs a `LocaleMessages` object where each key is a locale and the value is the corresponding set of messages.
- *
- * @returns A `LocaleMessages` object containing messages for each supported locale.
- *
- * @example
- * ```typescript
- * const messages = buildLocaleMessages();
- * // Output might be: { "en": { "hello": "Hello" }, "de": { "hello": "Hallo" }, ... }
- * ```
- */
-function buildLocaleMessages(): LocaleMessages {
-  return Locales.reduce(
-    (result, locale) => ({
-      ...result,
-      [locale]: require(`../translations/${locale}.json`),
-    }),
-    {}
-  ) as LocaleMessages;
-}
+const Messages: LocaleMessages = {
+  hr,
+  de,
+  en,
+  es,
+  fr,
+  it,
+  nl,
+};
 
-export default buildLocaleMessages();
+export default Messages;
