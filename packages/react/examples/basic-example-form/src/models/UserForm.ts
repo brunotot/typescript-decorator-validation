@@ -31,11 +31,11 @@ export default class UserForm implements User {
   @validators.date.Required({ groups: "native" })
   dateOfBirth?: Date;
 
-  @validators.boolean.Truthy({
+  /*@validators.boolean.Truthy({
     message: "Passwords must match!",
     groups: "native",
   })
   get arePasswordsEqual() {
     return this.password === this.confirmPassword;
-  }
+  }*/
 }
