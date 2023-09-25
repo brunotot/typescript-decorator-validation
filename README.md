@@ -1,4 +1,11 @@
-<h1 align="center">:rocket: TypeScript Decorator Validation :rocket:</h1>
+<h1 align="center">🚀 TypeScript Decorator Validation 🚀</h1>
+
+
+<p align="center">🎩 <strong>TypeScript v5:</strong> Harness the power of TypeScript v5 decorators for type-safe validation.</p>
+<p align="center">🛠️ <strong>Extensible:</strong> Customize our library to fit your unique needs with ease.</p>
+<p align="center">🌍 <strong>i18n Support:</strong> Speak your users' language with built-in localization.</p>
+<p align="center">🔧 <strong>Adaptability:</strong> Seamless integration with existing TypeScript apps.</p>
+<p align="center">💻 <strong>Versatility:</strong> Works on both client and server-side.</p>
 
 <p align="center">
  <a href="https://npmcharts.com/compare/typescript-decorator-validation?minimal=true">
@@ -23,41 +30,31 @@
 </p>
 
 
-<p align="center">:star: validates forms with TypeScript's native 
- <a href="https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators">decorators</a>
-</p>
-<p align="center">:star: adapts well with existing TypeScript applications</p>
-<p align="center">:star: supports client-side and server-side</p>
-<p align="center">:star: enforces strict type checking</p>
-<p align="center">:star: uses <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html">TypeScript v5</a> syntax</p>
-<p align="center">:star: supports i18n localization</p>
-
-## Table of Contents
+## TOC
 
 - [Installation](#installation)
 - [Documentation](#documentation)
-- [Contribute](#contribute)
+- [Contribution](#contribution)
 - [Future goals](#future-goals)
 - [Supported frameworks](#supported-frameworks)
 - [Examples](#examples)
 - [Repository architecture](#repository-architecture)
-- [Comparison against existing validation libraries](#comparison-against-existing-validation-libraries)
+- [Comparison against similar solutions](#comparison-against-similar-solutions)
 
 
 ## Installation
 
-1. Install TypeScript dependency package (core module)
 ```bash
-npm install tdv-core
+npm i tdv-core
+npm i tdv-react # when using in framework-specific environment
 ```
-2. Install framework-specific dependency package if necessary
-```bash
-npm install tdv-react
-#           tdv-angular
-#           tdv-vue
-#           tdv-svelte
-```
-3. That's it! You're ready to rock. 🎸:
+
+
+## Supported Frameworks
+- [x] [view React implementation](https://github.com/brunotot/typescript-decorator-validation/tree/main/packages/react#readme)
+- [ ] Angular
+- [ ] Svelte
+- [ ] Vue
 
 
 ## Documentation
@@ -65,26 +62,18 @@ npm install tdv-react
 - [tdv-react](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html)
 
 
-## Contribute
+## Contribution
 
-To contribute, simply clone the main branch, commit changes to a local branch and open pull request.
+To contribute, simply clone the main branch, commit changes to a local branch and open pull request.</br>
 Branch will be ready for merge after all CI tests pass and a review has been made.
 
 ## Future goals
 
 - [x] Implement strict type checking
 - [x] Implement predefined decorator validators
-- [ ] Provide fully-fledged documentation  
-- [ ] Implement concise API for CI tests
-- [ ] Implement tests for predefined decorator validators
-- [ ] Write implementation libs for popular front-end frameworks
-
-## Supported Frameworks
-- [x] [view React implementation](https://github.com/brunotot/typescript-decorator-validation/tree/main/packages/react#readme)
-- [ ] Angular
-- [ ] Svelte
-- [ ] Vue
-- [ ] Solid
+- [x] Provide source code documentation  
+- [x] Implement concise tests for various scenarios
+- [ ] Build implementation packages for popular front-end frameworks
 
 ## Examples
 
@@ -190,7 +179,7 @@ The `tdv-core` package is the backbone, providing core validation logic that's f
 The core package serves as the foundation for implementation libraries like `tdv-react`, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.
 
 
-## Comparison against existing validation libraries
+## Comparison against similar solutions
 
 | Criteria         | tdv-monorepo | Yup  | React Hook Form | Validator.js | Formik |
 |------------------|-------------|-------|-----------------|--------------|--------|
