@@ -3,7 +3,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
 import Decorator from "../../src/types/namespace/decorator.namespace";
 
@@ -37,9 +37,13 @@ export default function NonNegative<T extends $.Objects.Optional<number>>(
 ) {
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (num) => ({
+    isValid: (num, _, locale) => ({
       key: "NonNegative",
-      message: extractMessage(props, ErrorMessage.NonNegative(num!)),
+      message: extractMessage(
+        props,
+        TranslationService.translate(locale, "NonNegative", num!),
+        locale
+      ),
       valid: num !== undefined && num !== null && num >= 0,
     }),
   });

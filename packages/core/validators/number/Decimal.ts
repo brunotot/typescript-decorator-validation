@@ -5,7 +5,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
 
 /**
@@ -29,9 +29,13 @@ export default function Decimal<T extends $.Objects.Optional<number>>(
 ) {
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (value) => ({
+    isValid: (value, _, locale) => ({
       key: "Decimal",
-      message: extractMessage(props, ErrorMessage.Decimal(value!)),
+      message: extractMessage(
+        props,
+        TranslationService.translate(locale, "Decimal", value!),
+        locale
+      ),
       valid: value !== undefined && value !== null && !Number.isInteger(value),
     }),
   });

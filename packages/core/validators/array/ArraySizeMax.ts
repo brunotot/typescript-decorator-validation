@@ -3,7 +3,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import TranslationService from "../../src/localization/service/translation.service";
 import Decorator from "../../src/types/namespace/decorator.namespace";
 
 /**
@@ -36,11 +36,17 @@ export default function ArraySizeMax<K, T extends K[]>(
   const max = typeof props === "number" ? props : props.value;
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (array) => ({
+    isValid: (array, _, locale) => ({
       key: "ArraySizeMax",
       message: extractMessage(
         props,
-        ErrorMessage.ArraySizeMax(max, (array ?? []).length)
+        TranslationService.translate(
+          locale,
+          "ArraySizeMax",
+          max,
+          (array ?? []).length
+        ),
+        locale
       ),
       valid: (array ?? []).length <= max,
     }),

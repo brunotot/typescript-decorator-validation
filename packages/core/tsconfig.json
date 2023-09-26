@@ -4,7 +4,7 @@
   "include": [
     "index.ts",
     "src",
-    "src/messages/translations/*.json",
+    "src/localization/translations/*.json",
     "translations",
     "validators"
   ],

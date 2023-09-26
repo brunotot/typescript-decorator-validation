@@ -3,7 +3,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
 import Decorator from "../../src/types/namespace/decorator.namespace";
 import Objects from "../../src/types/namespace/objects.namespace";
@@ -13,8 +13,7 @@ const DEFAULTS: Decorator.ImpartialProps<{
 }> = {
   hash: $.Objects.hash,
   groups: [],
-  message: ErrorMessage.ArrayUnique(),
-};
+} as any;
 
 function isArrayUnique<T>(arr: T[], equals: Objects.Equals<T>): boolean {
   const set = new Set<T>();
@@ -61,9 +60,13 @@ export default function ArrayUnique<K, T extends K[]>(
 
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (array) => ({
+    isValid: (array, _, locale) => ({
       key: "ArrayUnique",
-      message: extractMessage(props, ErrorMessage.ArrayUnique()),
+      message: extractMessage(
+        props,
+        TranslationService.translate(locale, "ArrayUnique"),
+        locale
+      ),
       valid: isArrayUnique(
         array ?? [],
         (obj1, obj2) => hashFn(obj1) === hashFn(obj2)

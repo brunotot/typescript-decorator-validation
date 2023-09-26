@@ -1,5 +1,8 @@
 import makeValidator from "../../src/decorators/decorator.facade";
-import { extractGroups } from "../../src/decorators/decorator.utils";
+import {
+  extractGroups,
+  extractMessage,
+} from "../../src/decorators/decorator.utils";
 import $ from "../../src/types";
 import Decorator from "../../src/types/namespace/decorator.namespace";
 
@@ -29,9 +32,9 @@ export default function ArrayOne<K, T extends K[]>(
 ) {
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (array) => ({
+    isValid: (array, _, locale) => ({
       key: "ArrayOne",
-      message: props.message,
+      message: extractMessage(props, "", locale),
       valid: (array ?? []).filter(props.test).length === 1,
     }),
   });

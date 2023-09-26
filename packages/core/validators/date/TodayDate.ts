@@ -4,7 +4,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
 import Decorator from "../../src/types/namespace/decorator.namespace";
 
@@ -40,9 +40,13 @@ export default function TodayDate<T extends $.Objects.Optional<Date>>(
 ) {
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (date) => ({
+    isValid: (date, _, locale) => ({
       key: "TodayDate",
-      message: extractMessage(props, ErrorMessage.TodayDate(date!)),
+      message: extractMessage(
+        props,
+        TranslationService.translate(locale, "TodayDate", date!),
+        locale
+      ),
       valid: isTodayDate(date),
     }),
   });

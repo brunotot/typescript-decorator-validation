@@ -3,7 +3,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
 import Decorator from "../../src/types/namespace/decorator.namespace";
 
@@ -49,9 +49,13 @@ export default function ValueRange<T extends $.Objects.Optional<number>>(
   const { min, max } = props;
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (value) => ({
+    isValid: (value, _, locale) => ({
       key: "ValueRange",
-      message: extractMessage(props, ErrorMessage.ValueRange(min, max, value!)),
+      message: extractMessage(
+        props,
+        TranslationService.translate(locale, "ValueRange", min, max, value!),
+        locale
+      ),
       valid: value == null ? true : value >= min && value <= max,
     }),
   });

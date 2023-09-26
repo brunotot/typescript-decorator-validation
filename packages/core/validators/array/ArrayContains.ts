@@ -3,7 +3,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import TranslationService from "../../src/localization/service/translation.service";
 import Decorator from "../../src/types/namespace/decorator.namespace";
 
 /**
@@ -37,9 +37,13 @@ export default function ArrayContains<K, T extends K[]>(
 ) {
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (array) => ({
+    isValid: (array, _, locale) => ({
       key: "ArrayContains",
-      message: extractMessage(props, ErrorMessage.ArrayContains(props.value)),
+      message: extractMessage(
+        props,
+        TranslationService.translate(locale, "ArrayContains", props.value),
+        locale
+      ),
       valid: ((array ?? []) as any[]).includes(props.value),
     }),
   });

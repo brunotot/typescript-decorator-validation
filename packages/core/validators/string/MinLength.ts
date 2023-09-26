@@ -3,7 +3,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
 import Decorator from "../../src/types/namespace/decorator.namespace";
 
@@ -39,9 +39,13 @@ export default function MinLength<T extends $.Objects.Optional<string>>(
   const min = typeof props === "number" ? props : props.value;
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (value) => ({
+    isValid: (value, _, locale) => ({
       key: "MinLength",
-      message: extractMessage(props, ErrorMessage.MinLength(min)),
+      message: extractMessage(
+        props,
+        TranslationService.translate(locale, "MinLength", min),
+        locale
+      ),
       valid: (value ?? "").length >= min,
     }),
   });

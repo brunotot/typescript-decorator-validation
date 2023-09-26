@@ -1,3 +1,4 @@
+import Localization from "../../../localization";
 import Validation from "../../../types/namespace/validation.namespace";
 import ReflectionDescriptor from "../../models/reflection.descriptor";
 import ValidationStrategy from "../strategy";
@@ -71,17 +72,23 @@ export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
   test(
     value: any[],
     context: any,
-    groups: Validation.Group[] = []
+    groups: Validation.Group[] = [],
+    locale: Localization.Locale
   ): [PrimitiveArrayDetailedErrors, PrimitiveArraySimpleErrors] {
     const valueArray = value ?? [];
     const rootRules = super.fieldDescriptor!.rules.root;
     const foreachRules = super.fieldDescriptor!.rules.foreach;
-    const rootResult = rootRules.validate(valueArray as any, context, groups);
+    const rootResult = rootRules.validate(
+      valueArray as any,
+      context,
+      groups,
+      locale
+    );
 
     const primitiveArrayDetailedErrors = {
       node: rootResult,
       children: valueArray.map((v) =>
-        foreachRules.validate(v, context, groups)
+        foreachRules.validate(v, context, groups, locale)
       ),
     };
 

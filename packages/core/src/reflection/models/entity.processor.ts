@@ -1,3 +1,4 @@
+import Localization from "../../localization";
 import CacheMap from "../../models/cache.map";
 import $ from "../../types/index";
 import ns from "../../types/namespace/entity-processor.namespace";
@@ -25,6 +26,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
   #groups: Validation.Group[];
   #hostDefault: any;
   #cacheMap: ns.CacheMap<TClass, TBody>;
+  locale: Localization.Locale;
 
   /**
    * Constructs a new `EntityProcessor` instance.
@@ -33,6 +35,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
    * @param config - Optional configuration settings.
    */
   constructor(clazz: Class<TClass>, config?: ns.Config<TBody>) {
+    this.locale = config?.locale ?? Localization.getLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
     this.#hostDefault = (config?.defaultValue ?? new clazz()) as TBody;
     this.#meta = ValidationMetaService.inject(clazz);
@@ -145,7 +148,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     const descriptor = this.#meta.getUntypedDescriptor(fieldName);
     const StrategyImpl: Validation.getStrategyClass<TClass[K]> = descriptor.StrategyImpl as any;
     const stratImpl = new (StrategyImpl as any)(descriptor, this.#hostDefault);
-    const result = stratImpl.test(payload?.[fieldName], payload, this.#groups);
+    const result = stratImpl.test(payload?.[fieldName], payload, this.#groups, this.locale);
     return result;
   }
 }

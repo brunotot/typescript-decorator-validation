@@ -1,3 +1,4 @@
+import Localization from "../../localization";
 import Validation from "../../types/namespace/validation.namespace";
 import Payload from "../../types/validation/payload.type";
 
@@ -59,11 +60,12 @@ export default class ReflectionRule<TFieldType> {
   validate<TBody>(
     value: TFieldType,
     payload: Payload<TBody>,
-    groups: Validation.Group[]
+    groups: Validation.Group[],
+    locale: Localization.Locale
   ): Validation.Result[] {
     return this.#contents
       .filter(validationGroupPredicate(groups))
-      .map(({ validate }) => validate(value, payload))
+      .map(({ validate }) => validate(value, payload, locale))
       .filter(({ valid }) => !valid);
   }
 

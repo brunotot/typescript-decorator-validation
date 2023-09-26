@@ -1,6 +1,5 @@
 import makeValidator from "./src/decorators/decorator.facade";
-import { Locale, Locales } from "./src/messages/message.types";
-import { getLocale, setLocale } from "./src/messages/models/locale";
+import Localization from "./src/localization";
 import CacheMap from "./src/models/cache.map";
 import EntityProcessor from "./src/reflection/models/entity.processor";
 import ReflectionDescriptor, {
@@ -60,7 +59,7 @@ export type {
   EvaluatedStrategy,
   FieldDescriptorRules,
   FieldStrategy,
-  Locale,
+  Localization,
   MetaStrategy,
   ObjectArrayDetailedErrors,
   ObjectArraySimpleErrors,
@@ -81,7 +80,6 @@ export type {
 
 export {
   EntityProcessor,
-  Locales,
   ObjectArrayStrat,
   ObjectStrat,
   PrimitiveArrayStrat,
@@ -92,8 +90,6 @@ export {
   ValidationMetaService,
   ValidationStrategy,
   getClassFieldNames,
-  getLocale,
   makeValidator,
-  setLocale,
   validators,
 };

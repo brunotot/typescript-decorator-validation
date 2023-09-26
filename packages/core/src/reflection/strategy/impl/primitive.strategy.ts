@@ -1,3 +1,4 @@
+import Localization from "../../../localization";
 import Validation from "../../../types/namespace/validation.namespace";
 import ReflectionDescriptor from "../../models/reflection.descriptor";
 import ValidationStrategy from "../strategy";
@@ -44,12 +45,14 @@ export default class PrimitiveStrat<F> extends ValidationStrategy<
   test(
     value: any,
     context: any,
-    groups: Validation.Group[] = []
+    groups: Validation.Group[] = [],
+    locale: Localization.Locale
   ): [Validation.Result[], string[]] {
     const rootResult = this.fieldDescriptor!.rules.root.validate(
       value,
       context,
-      groups
+      groups,
+      locale
     );
 
     return [rootResult, Validation.buildSimpleErrors(rootResult)];

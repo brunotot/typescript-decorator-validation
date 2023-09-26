@@ -1,3 +1,4 @@
+import Localization from "../../localization";
 import EntityProcessorNs from "../../types/namespace/entity-processor.namespace";
 import Validation from "../../types/namespace/validation.namespace";
 import ReflectionDescriptor from "../models/reflection.descriptor";
@@ -129,6 +130,7 @@ export default abstract class ValidationStrategy<
   public abstract test(
     value: any,
     context: any,
-    groups?: Validation.Group[]
+    groups: Validation.Group[],
+    locale: Localization.Locale
   ): [TDetailedResult, TSimpleResult];
 }

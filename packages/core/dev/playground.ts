@@ -1,20 +1,26 @@
+import Localization from "../src/localization";
 import EntityProcessor from "../src/reflection/models/entity.processor";
-import ValidationMetaService from "../src/reflection/service/impl/reflection.service.validation";
 import Required from "../validators/any/Required";
-import foreach from "../validators/array/foreach";
+
+Localization.Resolver.configure((locale, msg) => translations[locale][msg]);
+
+const translations: any = {
+  hr: { translation1: `[hr]: Unos je obavezan` },
+  en: { translation1: `[en]: Field is mandatory` },
+  it: { translation1: `[it]: Field is mandatory` },
+};
 
 class TestClass {
-  @foreach(Required())
-  array: string[] = [];
+  @Required("translation1")
+  str: string = "";
 }
 
-const processor = new EntityProcessor(TestClass);
-const res = processor.validate({});
-//console.log(res);
-
-//console.log(res.valid);
-
-const meta = ValidationMetaService.inject(TestClass);
-console.log(meta);
-//console.log();
+//const meta = ValidationMetaService.inject(TestClass);
+const processor = new EntityProcessor(TestClass, {
+  locale: "it",
+  groups: ["group1"],
+});
+console.log(processor.validate({}));
+processor.locale = "hr";
+console.log(processor.validate({}));
 debugger;

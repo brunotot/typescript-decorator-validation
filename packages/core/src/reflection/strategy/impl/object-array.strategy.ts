@@ -1,3 +1,4 @@
+import Localization from "../../../localization";
 import Validation from "../../../types/namespace/validation.namespace";
 import DetailedErrors from "../../../types/validation/detailed-errors.type";
 import Errors from "../../../types/validation/errors.type";
@@ -79,13 +80,19 @@ export default class ObjectArrayStrat<F> extends ValidationStrategy<
   test(
     value: any[],
     context: any,
-    groups: Validation.Group[] = []
+    groups: Validation.Group[] = [],
+    locale: Localization.Locale
   ): [ObjectArrayDetailedErrors<F>, ObjectArraySimpleErrors<F>] {
     const _value = value ?? [];
     const fieldClass = super.descriptor.thisClass!;
     const metadata = ValidationMetaService.inject(fieldClass);
     const field = metadata.getUntypedDescriptor(super.fieldName);
-    const rootResult = field.rules.root.validate(_value, context, groups);
+    const rootResult = field.rules.root.validate(
+      _value,
+      context,
+      groups,
+      locale
+    );
 
     const objectArrayDetailedErrors = {
       node: rootResult,

@@ -1,3 +1,4 @@
+import Localization from "../../localization";
 import BaseCacheMap from "../../models/cache.map";
 import DetailedErrors from "../validation/detailed-errors.type";
 import Errors from "../validation/errors.type";
@@ -20,6 +21,7 @@ namespace EntityProcessorNs {
   export type Config<TBody> = {
     defaultValue?: TBody;
     groups?: Validation.Group[];
+    locale?: Localization.Locale;
   };
 
   /**

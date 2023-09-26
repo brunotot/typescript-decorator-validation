@@ -3,7 +3,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import TranslationService from "../../src/localization/service/translation.service";
 import Decorator from "../../src/types/namespace/decorator.namespace";
 
 /**
@@ -36,11 +36,17 @@ export default function ArraySizeMin<K, T extends K[]>(
   const min = typeof props === "number" ? props : props.value;
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (array) => ({
+    isValid: (array, _, locale) => ({
       key: "ArraySizeMin",
       message: extractMessage(
         props,
-        ErrorMessage.ArraySizeMin(min, (array ?? []).length)
+        TranslationService.translate(
+          locale,
+          "ArraySizeMin",
+          min,
+          (array ?? []).length
+        ),
+        locale
       ),
       valid: (array ?? []).length >= min,
     }),

@@ -30,7 +30,7 @@ namespace Decorator {
     static: boolean;
     private: boolean;
     name: string;
-    metadata: DecoratorMetadata;
+    metadata: globalThis.DecoratorMetadata;
     access: {
       get(object: any): Accept;
     };

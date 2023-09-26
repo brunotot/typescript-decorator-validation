@@ -4,7 +4,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
 import Decorator from "../../src/types/namespace/decorator.namespace";
 
@@ -37,9 +37,13 @@ export default function FutureDate<T extends $.Objects.Optional<Date>>(
 ) {
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (date) => ({
+    isValid: (date, _, locale) => ({
       key: "FutureDate",
-      message: extractMessage(props, ErrorMessage.FutureDate(date!)),
+      message: extractMessage(
+        props,
+        TranslationService.translate(locale, "FutureDate", date!),
+        locale
+      ),
       valid: isFutureDate(date),
     }),
   });

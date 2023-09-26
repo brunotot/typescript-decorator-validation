@@ -3,7 +3,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import TranslationService from "../../src/localization/service/translation.service";
 import Decorator from "../../src/types/namespace/decorator.namespace";
 
 /**
@@ -29,9 +29,13 @@ export default function ArrayEmpty<K, T extends K[]>(
 ) {
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (array) => ({
+    isValid: (array, _, locale) => ({
       key: "ArrayEmpty",
-      message: extractMessage(props, ErrorMessage.ArrayEmpty()),
+      message: extractMessage(
+        props,
+        TranslationService.translate(locale, "ArrayEmpty"),
+        locale
+      ),
       valid: (array ?? []).length === 0,
     }),
   });

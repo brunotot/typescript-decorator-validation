@@ -5,13 +5,15 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import Localization from "../../src/localization";
+import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
 
 function validateDigits(
   number: number,
   maxInteger: number,
-  maxFraction: number
+  maxFraction: number,
+  locale: Localization.Locale
 ): boolean {
   if (number == null) {
     return true;
@@ -20,7 +22,14 @@ function validateDigits(
     (maxInteger !== Infinity && maxInteger % 1 !== 0) ||
     (maxFraction !== Infinity && maxFraction % 1 !== 0)
   ) {
-    throw new Error(ErrorMessage.InvalidDigits(maxInteger, maxFraction));
+    throw new Error(
+      TranslationService.translate(
+        locale,
+        "InvalidDigits",
+        maxInteger,
+        maxFraction
+      )
+    );
   }
 
   const parts = number.toString().split(".");
@@ -61,13 +70,14 @@ export default function Digits<T extends $.Objects.Optional<number>>(
   const { maxInteger = Infinity, maxFraction = Infinity } = props;
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (value) => ({
+    isValid: (value, _, locale) => ({
       key: "Digits",
       message: extractMessage(
         props,
-        ErrorMessage.Digits(maxInteger, maxFraction)
+        TranslationService.translate(locale, "Digits", maxInteger, maxFraction),
+        locale
       ),
-      valid: validateDigits(value!, maxInteger, maxFraction),
+      valid: validateDigits(value!, maxInteger, maxFraction, locale),
     }),
   });
 }

@@ -1,3 +1,4 @@
+import Localization from "../../localization";
 import ObjectArrayStrat from "../../reflection/strategy/impl/object-array.strategy";
 import ObjectStrat from "../../reflection/strategy/impl/object.strategy";
 import PrimitiveArrayStrat from "../../reflection/strategy/impl/primitive-array.strategy";
@@ -45,7 +46,11 @@ namespace Validation {
    * Represents a function that evaluates a value and returns a validation
    * result.
    */
-  export type Evaluator<T> = (value: T, context?: any) => Validation.Result;
+  export type Evaluator<T> = (
+    value: T,
+    context: any,
+    locale: Localization.Locale
+  ) => Validation.Result;
 
   /**
    * @typeParam T - The type of the value being evaluated.

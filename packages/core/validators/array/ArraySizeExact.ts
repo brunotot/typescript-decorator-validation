@@ -5,7 +5,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import TranslationService from "../../src/localization/service/translation.service";
 
 /**
  * Decorator for validating that an array has an exact number of elements.
@@ -37,11 +37,17 @@ export default function ArraySizeExact<K, T extends K[]>(
   const exact = typeof props === "number" ? props : props.value;
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (array) => ({
+    isValid: (array, _, locale) => ({
       key: "ArraySizeExact",
       message: extractMessage(
         props,
-        ErrorMessage.ArraySizeExact(exact, (array ?? []).length)
+        TranslationService.translate(
+          locale,
+          "ArraySizeExact",
+          exact,
+          (array ?? []).length
+        ),
+        locale
       ),
       valid: (array ?? []).length === exact,
     }),

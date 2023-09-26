@@ -1,3 +1,4 @@
+import Localization from "../localization";
 import $ from "../types";
 import Decorator from "../types/namespace/decorator.namespace";
 import Objects from "../types/namespace/objects.namespace";
@@ -15,13 +16,16 @@ import Validation from "../types/namespace/validation.namespace";
  */
 export function extractMessage<T extends object>(
   provider: Decorator.PartialProps<any, T> | undefined,
-  defaultMessage: string
+  defaultMessage: string,
+  locale: Localization.Locale
 ): string {
   if (!provider) return defaultMessage;
   const providerType = typeof provider;
   const msgNullable = providerType ? provider : provider.message;
   const msgNonNull = msgNullable ?? "";
-  return msgNonNull.length ? msgNonNull : defaultMessage;
+  return msgNonNull.length
+    ? Localization.Resolver.resolve(locale, msgNonNull)
+    : defaultMessage;
 }
 
 /**

@@ -1,3 +1,4 @@
+import Localization from "../../../localization";
 import Validation from "../../../types/namespace/validation.namespace";
 import DetailedErrors from "../../../types/validation/detailed-errors.type";
 import Errors from "../../../types/validation/errors.type";
@@ -78,7 +79,8 @@ export default class ObjectStrat<F> extends ValidationStrategy<
   test(
     value: any,
     context: any,
-    groups: Validation.Group[] = []
+    groups: Validation.Group[] = [],
+    locale: Localization.Locale
   ): [ObjectDetailedErrors<F>, ObjectSimpleErrors<F>] {
     const { detailedErrors, errors } = new EntityProcessor<F>(
       super.descriptor.thisClass!,
@@ -88,7 +90,8 @@ export default class ObjectStrat<F> extends ValidationStrategy<
     const rootResult = super.fieldDescriptor!.rules.root.validate(
       value,
       context,
-      groups
+      groups,
+      locale
     );
 
     const detailedErrorsResult: ObjectDetailedErrors<F> = {

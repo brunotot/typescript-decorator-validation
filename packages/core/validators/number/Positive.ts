@@ -3,7 +3,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
 import Decorator from "../../src/types/namespace/decorator.namespace";
 
@@ -37,9 +37,13 @@ export default function Positive<T extends $.Objects.Optional<number>>(
 ) {
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (num) => ({
+    isValid: (num, _, locale) => ({
       key: "Positive",
-      message: extractMessage(props, ErrorMessage.Positive(num!)),
+      message: extractMessage(
+        props,
+        TranslationService.translate(locale, "Positive", num!),
+        locale
+      ),
       valid: num !== undefined && num !== null && num > 0,
     }),
   });

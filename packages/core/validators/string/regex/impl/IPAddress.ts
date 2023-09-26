@@ -1,12 +1,13 @@
+import makeValidator from "../../../../src/decorators/decorator.facade";
 import {
   extractGroups,
   extractMessage,
 } from "../../../../src/decorators/decorator.utils";
-import ErrorMessage from "../../../../src/messages/models/error-messages";
+import TranslationService from "../../../../src/localization/service/translation.service";
 import RegexConst from "../../../../src/models/regex.constants";
 import $ from "../../../../src/types";
 import Decorator from "../../../../src/types/namespace/decorator.namespace";
-import Pattern from "./../../regex/Pattern";
+import { testRegex } from "./../../regex/Pattern";
 
 /**
  * Creates a validator decorator that checks if a string value is a valid IP address using a regular expression pattern.
@@ -38,10 +39,16 @@ import Pattern from "./../../regex/Pattern";
 export default function IPAddress<T extends $.Objects.Optional<string>>(
   props?: Decorator.PartialProps
 ) {
-  return Pattern<T>({
-    key: "IPAddress",
+  return makeValidator<T>({
     groups: extractGroups(props),
-    regex: RegexConst.IP_ADDRESS,
-    message: extractMessage(props, ErrorMessage.IPAddress()),
+    isValid: (value, _, locale) => ({
+      key: "IPAddress",
+      message: extractMessage(
+        props,
+        TranslationService.translate(locale, "IPAddress"),
+        locale
+      ),
+      valid: testRegex(RegexConst.IP_ADDRESS, value),
+    }),
   });
 }

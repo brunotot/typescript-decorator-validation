@@ -1,9 +1,10 @@
 import makeValidator from "../../src/decorators/decorator.facade";
 import { extractGroups } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/error-messages";
+import Localization from "../../src/localization";
+import TranslationService from "../../src/localization/service/translation.service";
 import RegexConst from "../../src/models/regex.constants";
 import $ from "../../src/types";
-import Decorator from "../../src/types/namespace/decorator.namespace";
+import Validation from "../../src/types/namespace/validation.namespace";
 
 const PASSWORD_REGEXES = {
   uppercase: RegexConst.UPPERCASE_ANYWHERE,
@@ -45,70 +46,68 @@ function isInvalid(text: string, rule: keyof typeof PASSWORD_REGEXES) {
  *   //   numbers: true,
  *   //   specials: true,
  *   //   length: 12,
- *   //   message: "Invalid password format",
  *   // })
  *   password: string;
  * }
  */
-export default function Password<T extends $.Objects.Optional<string>>(
-  cfg?: Decorator.PartialProps<
-    string,
-    Partial<{
-      uppercase: boolean;
-      lowercase: boolean;
-      numbers: boolean;
-      specials: boolean;
-      length: number;
-    }>
-  >
-) {
-  const props =
-    typeof cfg === "string"
-      ? {
-          uppercase: false,
-          lowercase: true,
-          numbers: false,
-          specials: false,
-          length: 8,
-          message: cfg,
-        }
-      : cfg;
-  const uppercase = props?.uppercase ?? false;
+export default function Password<T extends $.Objects.Optional<string>>(props?: {
+  uppercase: boolean;
+  lowercase: boolean;
+  numbers: boolean;
+  specials: boolean;
+  length: number;
+  groups?: Validation.GroupsParam;
+}) {
   const lowercase = props?.lowercase ?? true;
+  const uppercase = props?.uppercase ?? false;
   const numbers = props?.numbers ?? false;
   const specials = props?.specials ?? false;
   const length = props?.length ?? 8;
-  const definedMessage: string | undefined = props?.message;
 
-  function buildConstraintViolation(message: string, valid: boolean = false) {
+  function buildConstraintViolation(message: string, valid: boolean) {
     return {
       key: "Password",
-      message: !!definedMessage ? definedMessage : message,
+      message,
       valid,
     };
   }
 
-  function isValid(str: string) {
+  function isValid(str: string, locale: Localization.Locale) {
     if (str.length < length)
-      return buildConstraintViolation(ErrorMessage.PasswordLength(length));
+      return buildConstraintViolation(
+        TranslationService.translate(locale, "PasswordLength", length),
+        false
+      );
 
     if (uppercase && isInvalid(str, "uppercase"))
-      return buildConstraintViolation(ErrorMessage.PasswordUppercase());
+      return buildConstraintViolation(
+        TranslationService.translate(locale, "PasswordUppercase"),
+        false
+      );
 
     if (lowercase && isInvalid(str, "lowercase"))
-      return buildConstraintViolation(ErrorMessage.PasswordLowercase());
+      return buildConstraintViolation(
+        TranslationService.translate(locale, "PasswordLowercase"),
+        false
+      );
 
     if (numbers && isInvalid(str, "numbers"))
-      return buildConstraintViolation(ErrorMessage.PasswordNumbers());
+      return buildConstraintViolation(
+        TranslationService.translate(locale, "PasswordNumbers"),
+        false
+      );
 
     if (specials && isInvalid(str, "specials"))
-      return buildConstraintViolation(ErrorMessage.PasswordSpecials());
+      return buildConstraintViolation(
+        TranslationService.translate(locale, "PasswordSpecials"),
+        false
+      );
 
     return buildConstraintViolation("", true);
   }
 
   return makeValidator<T>({
     groups: extractGroups(props),
-    isValid: (str) => isValid(str ?? ""),
+    isValid: (str, _, locale) => isValid(str ?? "", locale),
   });
 }

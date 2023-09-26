@@ -1,12 +1,13 @@
+import makeValidator from "../../../../src/decorators/decorator.facade";
 import {
   extractGroups,
   extractMessage,
 } from "../../../../src/decorators/decorator.utils";
-import ErrorMessage from "../../../../src/messages/models/error-messages";
+import TranslationService from "../../../../src/localization/service/translation.service";
 import RegexConst from "../../../../src/models/regex.constants";
 import $ from "../../../../src/types";
 import Decorator from "../../../../src/types/namespace/decorator.namespace";
-import Pattern from "../Pattern";
+import { testRegex } from "../Pattern";
 
 /**
  * Creates a validator decorator that checks if a string value contains only alphanumeric characters (letters and digits).
@@ -38,10 +39,16 @@ import Pattern from "../Pattern";
 export default function Alphanumeric<T extends $.Objects.Optional<string>>(
   props?: Decorator.PartialProps
 ) {
-  return Pattern<T>({
-    key: "Alphanumeric",
-    regex: RegexConst.ALPHANUMERIC,
+  return makeValidator<T>({
     groups: extractGroups(props),
-    message: extractMessage(props, ErrorMessage.Alphanumeric()),
+    isValid: (value, _, locale) => ({
+      key: "Alphanumeric",
+      message: extractMessage(
+        props,
+        TranslationService.translate(locale, "Alphanumeric"),
+        locale
+      ),
+      valid: testRegex(RegexConst.ALPHANUMERIC, value),
+    }),
   });
 }
