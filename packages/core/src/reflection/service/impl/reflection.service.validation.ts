@@ -57,7 +57,8 @@ export default class ValidationMetaService extends MetaService<
   }
 
   /**
-   * Gets the names of all fields.
+   * Gets the names of all fields present within given
+   * reflection strategy (`Class<T>` or `Decorator.Context`).
    *
    * @returns An array of field names.
    */
@@ -68,11 +69,11 @@ export default class ValidationMetaService extends MetaService<
   /**
    * Checks if a descriptor exists for a given name.
    *
-   * @param descriptorName - The name of the descriptor.
-   * @returns True if the descriptor exists, false otherwise.
+   * @param name - The name of a field descriptor.
+   * @returns `true` if the descriptor exists, `false` otherwise.
    */
-  hasDescriptor(descriptorName: string) {
-    return this.data.has(descriptorName);
+  hasDescriptor(name: string): boolean {
+    return this.data.has(name);
   }
 
   /**

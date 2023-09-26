@@ -5,7 +5,7 @@ import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/errors";
+import ErrorMessage from "../../src/messages/models/error-messages";
 
 /**
  * Decorator for validating that an array has an exact number of elements.

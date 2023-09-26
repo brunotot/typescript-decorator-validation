@@ -1,6 +1,6 @@
 import makeValidator from "../../src/decorators/decorator.facade";
 import { extractGroups } from "../../src/decorators/decorator.utils";
-import ErrorMessage from "../../src/messages/models/errors";
+import ErrorMessage from "../../src/messages/models/error-messages";
 import RegexConst from "../../src/models/regex.constants";
 import $ from "../../src/types";
 import Decorator from "../../src/types/namespace/decorator.namespace";

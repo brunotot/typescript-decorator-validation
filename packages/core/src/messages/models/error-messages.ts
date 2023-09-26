@@ -9,7 +9,7 @@ import t from "../message.factory";
  *
  * @example
  * ```typescript
- * const message = errorMessages.Email();  // Might return: "Invalid email address."
+ * const message = errorMessages.Email();  // Might return: "Value is not a valid email"
  * ```
  */
 // prettier-ignore
