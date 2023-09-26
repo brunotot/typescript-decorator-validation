@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>StrategyOptional | Typescript Decorator Validation - v1.0.0</title><meta name="description" content="Documentation for Typescript Decorator Validation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>setLocale | Typescript Decorator Validation - v1.0.0</title><meta name="description" content="Documentation for Typescript Decorator Validation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -14,28 +14,21 @@
 <ul class="tsd-breadcrumb">
 <li><a href="../index.html">Typescript Decorator Validation</a></li>
 <li><a href="../modules/tdv_core.html">tdv-core</a></li>
-<li><a href="tdv_core.StrategyOptional.html">StrategyOptional</a></li></ul>
-<h1>Type alias StrategyOptional&lt;TActual, TPartial&gt;</h1></div>
-<div class="tsd-signature"><span class="tsd-kind-type-alias">Strategy<wbr/>Optional</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TActual</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TPartial</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/><span>    </span><span class="tsd-signature-symbol">[</span><span class="tsd-kind-type-parameter">TKey</span><span class="tsd-signature-symbol"> in </span><a href="tdv_core.TdvCore.Objects.Inputs.html" class="tsd-signature-type tsd-kind-type-alias">Inputs</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TActual</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.FieldStrategy.html" class="tsd-signature-type tsd-kind-type-alias">FieldStrategy</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TActual</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TKey</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TPartial</span><span class="tsd-signature-symbol">&gt;</span><br/><span class="tsd-signature-symbol">}</span></div>
+<li><a href="../modules/tdv_core.Localization.html">Localization</a></li>
+<li><a href="tdv_core.Localization.setLocale.html">setLocale</a></li></ul>
+<h1>Function setLocale</h1></div>
 <section class="tsd-panel">
-<h4>Type Parameters</h4>
-<ul class="tsd-type-parameter-list">
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="setLocale"><span class="tsd-kind-call-signature">set<wbr/>Locale</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">localeValue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#setLocale" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">TActual</span></h4>
-<div class="tsd-comment tsd-typography"><p>The type to be evaluated.</p>
-</div>
-<div class="tsd-comment tsd-typography"></div></li>
-<li>
-<h4><span class="tsd-kind-type-parameter">TPartial</span><span class="tsd-signature-symbol"> extends </span><a href="tdv_core.TdvCore.Params.valuePartial.html" class="tsd-signature-type tsd-kind-type-alias">valuePartial</a> = <a href="tdv_core.TdvCore.Params.partial.html" class="tsd-signature-type tsd-kind-type-alias">partial</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">&quot;disabled&quot;</span><span class="tsd-signature-symbol">]</span></h4>
-<div class="tsd-comment tsd-typography"><p>The type representing partial values for optional fields.</p>
-</div>
-<div class="tsd-comment tsd-typography"></div></li></ul></section>
-<div class="tsd-comment tsd-typography">
-<h4>Description</h4><p>Represents a strategy for handling optional fields in a type <code>TActual</code>.
-This type is used to define how validation or processing should be applied to optional fields in a type <code>TActual</code>.</p>
-</div><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">localeValue</span>: <a href="../types/tdv_core.Localization.Locale.html" class="tsd-signature-type tsd-kind-type-alias">Locale</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/93dc516/packages/core/src/types/validation/evaluated-strategy.type.ts#L71">src/types/validation/evaluated-strategy.type.ts:71</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/93dc516/packages/core/src/localization/index.ts#L20">src/localization/index.ts:20</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
