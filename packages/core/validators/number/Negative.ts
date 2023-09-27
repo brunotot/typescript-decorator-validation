@@ -1,11 +1,11 @@
-import makeValidator from "../../src/decorators/decorator.facade";
+import Decorator from "../../src/decorators";
 import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
+import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
-import Decorator from "../../src/types/namespace/decorator.namespace";
 
 /**
  * Decorator for validating that a value is a negative number.
@@ -26,7 +26,7 @@ import Decorator from "../../src/types/namespace/decorator.namespace";
 export default function Negative<T extends $.Objects.Optional<number>>(
   props?: Decorator.PartialProps
 ) {
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     groups: extractGroups(props),
     isValid: (num, _, locale) => ({
       key: "Negative",

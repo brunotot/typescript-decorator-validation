@@ -1,6 +1,6 @@
-import makeDecorator from "../../src/decorators/decorator.factory";
+import Decorator from "../../src/decorators";
+import DecoratorService from "../../src/decorators/service/decorator.service";
 import $ from "../../src/types/index";
-import Decorator from "../../src/types/namespace/decorator.namespace";
 
 /**
  * Decorator for applying multiple validators to each element in an array property.
@@ -19,9 +19,9 @@ import Decorator from "../../src/types/namespace/decorator.namespace";
  * This example applies the `MinLength` and `MaxLength` validators to each element in the `names` array property.
  */
 export default function foreach<T extends NonNullable<any[] | (() => any[])>>(
-  ...validators: Decorator.Type<$.Helper.ExtractArrayType<T>>[]
-): Decorator.Type<T> {
-  return makeDecorator<T>((property, processor, context) => {
+  ...validators: Decorator.Instance<$.Helper.ExtractArrayType<T>>[]
+): Decorator.Instance<T> {
+  return DecoratorService.create<T>((property, processor, context) => {
     const validationProcessor = processor.getUntypedDescriptor(property);
     validationProcessor.thisDefault = [];
     validators.forEach((validator) => {

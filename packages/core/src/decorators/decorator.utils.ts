@@ -1,6 +1,6 @@
+import Decorator from ".";
 import Localization from "../localization";
 import $ from "../types";
-import Decorator from "../types/namespace/decorator.namespace";
 import Objects from "../types/namespace/objects.namespace";
 import Validation from "../types/namespace/validation.namespace";
 
@@ -61,9 +61,12 @@ export function extractGroups<T extends object>(
  *
  * @returns `true` if the value is null or undefined, or the result of `isValid` otherwise.
  */
-export function evaluateNullableValidity<T>(
-  object: $.Objects.Optional<T>,
-  isValid: (value: T) => boolean
+export function isValidNullable<T>(
+  nullableValue: T,
+  isValid: (nonNullableValue: NonNullable<T>) => boolean
 ) {
-  return !$.Objects.hasValue(object) ? true : isValid(object);
+  return (
+    !$.Objects.hasValue(nullableValue) ||
+    isValid(nullableValue as NonNullable<T>)
+  );
 }

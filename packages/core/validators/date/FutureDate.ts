@@ -1,12 +1,12 @@
-import makeValidator from "../../src/decorators/decorator.facade";
+import Decorator from "../../src/decorators";
 import {
-  evaluateNullableValidity,
   extractGroups,
   extractMessage,
+  isValidNullable,
 } from "../../src/decorators/decorator.utils";
+import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
-import Decorator from "../../src/types/namespace/decorator.namespace";
 
 /**
  * Decorator for validating if a date is in the future.
@@ -24,27 +24,19 @@ import Decorator from "../../src/types/namespace/decorator.namespace";
  * ```
  * This example applies the `FutureDate` validator to the `eventDate` property to ensure it is a date in the future.
  */
-function isFutureDate(date: $.Objects.Optional<Date>): boolean {
-  // TODO: Maybe bump nullable validity to higher hierarchy
-  return evaluateNullableValidity(date, (d) => {
-    const currentDate = new Date();
-    return d.getTime() > currentDate.getTime();
-  });
-}
-
 export default function FutureDate<T extends $.Objects.Optional<Date>>(
   props?: Decorator.PartialProps
 ) {
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     groups: extractGroups(props),
-    isValid: (date, _, locale) => ({
+    isValid: (date, _context, locale) => ({
       key: "FutureDate",
       message: extractMessage(
         props,
         TranslationService.translate(locale, "FutureDate", date!),
         locale
       ),
-      valid: isFutureDate(date),
+      valid: isValidNullable(date, (d) => d.getTime() > new Date().getTime()),
     }),
   });
 }

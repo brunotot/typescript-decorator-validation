@@ -1,10 +1,10 @@
-import makeValidator from "../../../src/decorators/decorator.facade";
+import Decorator from "../../../src/decorators";
 import {
   extractGroups,
   extractMessage,
 } from "../../../src/decorators/decorator.utils";
+import ValidatorService from "../../../src/decorators/service/validator.service";
 import $ from "../../../src/types";
-import Decorator from "../../../src/types/namespace/decorator.namespace";
 
 /**
  * Creates a validator decorator that checks if a string value matches a regular expression pattern.
@@ -43,7 +43,7 @@ export default function Pattern<T extends $.Objects.Optional<string>>(
     groups?: $.Validation.GroupsParam;
   }>
 ) {
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     groups: extractGroups(props.groups),
     isValid: (value, _, locale) => ({
       key: props.key ?? "Pattern",

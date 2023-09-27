@@ -1,19 +1,12 @@
-import makeValidator from "../../src/decorators/decorator.facade";
+import Decorator from "../../src/decorators";
 import {
-  evaluateNullableValidity,
   extractGroups,
   extractMessage,
+  isValidNullable,
 } from "../../src/decorators/decorator.utils";
+import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
-import Decorator from "../../src/types/namespace/decorator.namespace";
-
-function isPastDate(date: $.Objects.Optional<Date>): boolean {
-  return evaluateNullableValidity(date, (d) => {
-    const currentDate = new Date();
-    return d.getTime() < currentDate.getTime();
-  });
-}
 
 /**
  * Decorator for validating if a date is in the past.
@@ -34,16 +27,16 @@ function isPastDate(date: $.Objects.Optional<Date>): boolean {
 export default function PastDate<T extends $.Objects.Optional<Date>>(
   props?: Decorator.PartialProps
 ) {
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     groups: extractGroups(props),
-    isValid: (date, _, locale) => ({
+    isValid: (date, _context, locale) => ({
       key: "PastDate",
       message: extractMessage(
         props,
         TranslationService.translate(locale, "PastDate", date!),
         locale
       ),
-      valid: isPastDate(date),
+      valid: isValidNullable(date, (d) => d.getTime() < new Date().getTime()),
     }),
   });
 }

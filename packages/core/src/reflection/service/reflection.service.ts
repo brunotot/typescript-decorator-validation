@@ -1,4 +1,4 @@
-import Decorator from "../../types/namespace/decorator.namespace";
+import Decorator from "../../decorators";
 import Class from "../../types/validation/class.type";
 
 /**

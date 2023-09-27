@@ -1,10 +1,10 @@
-import makeValidator from "../../src/decorators/decorator.facade";
+import Decorator from "../../src/decorators";
 import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
+import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
-import Decorator from "../../src/types/namespace/decorator.namespace";
 
 /**
  * Decorator for validating that an array falls within a specified size range.
@@ -40,7 +40,7 @@ export default function ArraySizeRange<K, T extends K[]>(
 ) {
   const min = typeof props === "number" ? props : props.min;
   const max = typeof props === "number" ? props : props.max;
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     groups: extractGroups(props),
     isValid: (array, _, locale) => ({
       key: "ArraySizeRange",

@@ -1,5 +1,5 @@
+import Decorator from "../../../decorators";
 import { extractGroups } from "../../../decorators/decorator.utils";
-import Decorator from "../../../types/namespace/decorator.namespace";
 import Validation from "../../../types/namespace/validation.namespace";
 import Class from "../../../types/validation/class.type";
 import ReflectionDescriptor from "../../models/reflection.descriptor";

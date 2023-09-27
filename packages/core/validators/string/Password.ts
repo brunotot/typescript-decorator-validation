@@ -1,5 +1,5 @@
-import makeValidator from "../../src/decorators/decorator.facade";
 import { extractGroups } from "../../src/decorators/decorator.utils";
+import ValidatorService from "../../src/decorators/service/validator.service";
 import Localization from "../../src/localization";
 import TranslationService from "../../src/localization/service/translation.service";
 import RegexConst from "../../src/models/regex.constants";
@@ -106,7 +106,7 @@ export default function Password<T extends $.Objects.Optional<string>>(props?: {
     return buildConstraintViolation("", true);
   }
 
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     groups: extractGroups(props),
     isValid: (str, _, locale) => isValid(str ?? "", locale),
   });

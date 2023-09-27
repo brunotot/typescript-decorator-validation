@@ -1,8 +1,8 @@
-import makeValidator from "../../src/decorators/decorator.facade";
+import Decorator from "../../src/decorators";
 import { extractMessage } from "../../src/decorators/decorator.utils";
+import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
-import Decorator from "../../src/types/namespace/decorator.namespace";
 
 /**
  * NonPositive decorator for validating that a numeric value is non-positive.
@@ -32,7 +32,7 @@ import Decorator from "../../src/types/namespace/decorator.namespace";
 export default function NonPositive<T extends $.Objects.Optional<number>>(
   props?: Decorator.PartialProps
 ) {
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     isValid: (num, _, locale) => ({
       key: "NonPositive",
       message: extractMessage(

@@ -1,10 +1,9 @@
-import makeValidator from "../../src/decorators/decorator.facade";
-import Decorator from "../../src/types/namespace/decorator.namespace";
-
+import Decorator from "../../src/decorators";
 import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
+import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
 
 /**
@@ -35,7 +34,7 @@ export default function ArraySizeExact<K, T extends K[]>(
   >
 ) {
   const exact = typeof props === "number" ? props : props.value;
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     groups: extractGroups(props),
     isValid: (array, _, locale) => ({
       key: "ArraySizeExact",

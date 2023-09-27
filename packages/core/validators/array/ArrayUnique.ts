@@ -1,11 +1,11 @@
-import makeValidator from "../../src/decorators/decorator.facade";
+import Decorator from "../../src/decorators";
 import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
+import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
-import Decorator from "../../src/types/namespace/decorator.namespace";
 import Objects from "../../src/types/namespace/objects.namespace";
 
 const DEFAULTS: Decorator.ImpartialProps<{
@@ -58,7 +58,7 @@ export default function ArrayUnique<K, T extends K[]>(
   const hashFn =
     typeof props === "string" ? $.Objects.hash : props.hash ?? $.Objects.hash;
 
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     groups: extractGroups(props),
     isValid: (array, _, locale) => ({
       key: "ArrayUnique",

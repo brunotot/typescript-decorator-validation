@@ -1,5 +1,5 @@
-import ValidationMetaService from "../../reflection/service/impl/reflection.service.validation";
-import Validation from "./validation.namespace";
+import ValidationMetaService from "../reflection/service/impl/reflection.service.validation";
+import Validation from "../types/namespace/validation.namespace";
 
 /**
  * @namespace Decorator
@@ -14,7 +14,7 @@ namespace Decorator {
    * @description
    * Type definition for a decorator function.
    */
-  export type Type<T = unknown> = (
+  export type Instance<T = unknown> = (
     target: any,
     context: Decorator.Context<T>
   ) => void;
@@ -86,8 +86,4 @@ namespace Decorator {
       };
 }
 
-/**
- * @description
- * The default export for the `Decorator` namespace.
- */
 export default Decorator;

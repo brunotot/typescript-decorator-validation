@@ -1,10 +1,10 @@
-import makeValidator from "../../src/decorators/decorator.facade";
+import Decorator from "../../src/decorators";
 import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
+import ValidatorService from "../../src/decorators/service/validator.service";
 import $ from "../../src/types";
-import Decorator from "../../src/types/namespace/decorator.namespace";
 
 /**
  * Decorator for validating that exactly one element in an array passes a specified test.
@@ -30,7 +30,7 @@ export default function ArrayOne<K, T extends K[]>(
     test: $.Objects.ArrayPredicate<K>;
   }>
 ) {
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     groups: extractGroups(props),
     isValid: (array, _, locale) => ({
       key: "ArrayOne",

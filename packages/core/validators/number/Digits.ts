@@ -1,10 +1,9 @@
-import makeValidator from "../../src/decorators/decorator.facade";
-import Decorator from "../../src/types/namespace/decorator.namespace";
-
+import Decorator from "../../src/decorators";
 import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
+import ValidatorService from "../../src/decorators/service/validator.service";
 import Localization from "../../src/localization";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
@@ -68,7 +67,7 @@ export default function Digits<T extends $.Objects.Optional<number>>(
   >
 ) {
   const { maxInteger = Infinity, maxFraction = Infinity } = props;
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     groups: extractGroups(props),
     isValid: (value, _, locale) => ({
       key: "Digits",

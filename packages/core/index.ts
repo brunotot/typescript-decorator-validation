@@ -1,4 +1,6 @@
-import makeValidator from "./src/decorators/decorator.facade";
+import Decorator from "./src/decorators";
+import DecoratorService from "./src/decorators/service/decorator.service";
+import ValidatorService from "./src/decorators/service/validator.service";
 import Localization from "./src/localization";
 import CacheMap from "./src/models/cache.map";
 import EntityProcessor from "./src/reflection/models/entity.processor";
@@ -33,7 +35,6 @@ import PrimitiveArrayStrat, {
 import PrimitiveStrat from "./src/reflection/strategy/impl/primitive.strategy";
 import ValidationStrategy from "./src/reflection/strategy/strategy";
 import TdvCore from "./src/types";
-import Decorator from "./src/types/namespace/decorator.namespace";
 import Validation from "./src/types/namespace/validation.namespace";
 import Class from "./src/types/validation/class.type";
 import DetailedErrors from "./src/types/validation/detailed-errors.type";
@@ -53,6 +54,7 @@ export type {
   CacheMap,
   Class,
   Decorator,
+  DecoratorService,
   DescriptorProps,
   DetailedErrors,
   Errors,
@@ -76,6 +78,7 @@ export type {
   StrategyOptional,
   TdvCore,
   Validation,
+  ValidatorService,
 };
 
 export {
@@ -90,6 +93,5 @@ export {
   ValidationMetaService,
   ValidationStrategy,
   getClassFieldNames,
-  makeValidator,
   validators,
 };

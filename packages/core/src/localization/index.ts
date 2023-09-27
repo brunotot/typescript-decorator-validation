@@ -11,28 +11,27 @@ namespace Localization {
    */
   export type Messages = Record<Locale, Record<string, string>>;
 
-  let locale: Localization.Locale = "en";
+  let locale: Locale = "en";
 
-  export function getLocale(): Localization.Locale {
+  export function getLocale(): Locale {
     return locale;
   }
 
-  export function setLocale(localeValue: Localization.Locale) {
+  export function setLocale(localeValue: Locale) {
     locale = localeValue;
   }
 
   export namespace Resolver {
-    const DEFAULT_CONFIGURER: (
-      locale: Localization.Locale,
+    export type ResolverConfigurer = (
+      locale: Locale,
       message: string
-    ) => string = (_locale, message) => message;
+    ) => string;
 
-    let configurer: (locale: Localization.Locale, message: string) => string =
-      DEFAULT_CONFIGURER;
+    const DEFAULT_CONFIGURER: ResolverConfigurer = (_, message) => message;
 
-    export function configure(
-      handler?: (locale: Localization.Locale, message: string) => string
-    ) {
+    let configurer: ResolverConfigurer = DEFAULT_CONFIGURER;
+
+    export function configure(handler?: ResolverConfigurer) {
       configurer = handler ?? DEFAULT_CONFIGURER;
     }
 
@@ -40,9 +39,10 @@ namespace Localization {
       try {
         return configurer(locale, message);
       } catch (error) {
-        throw new Error(
-          `An error occurred while resolving \"${message}\" for locale \"${locale}\". To fix, check your Localization.Resolver.configure() implementation.\n\n${error}`
-        );
+        const title = `An error occurred while resolving \"${message}\" for locale \"${locale}\".`;
+        const descr = `To fix, check your Localization.Resolver.configure() implementation.`;
+        const stacktrace = `\n\n${error}`;
+        throw new Error(`${title} ${descr} ${stacktrace}`);
       }
     }
   }

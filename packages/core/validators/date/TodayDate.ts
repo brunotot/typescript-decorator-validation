@@ -1,23 +1,12 @@
-import makeValidator from "../../src/decorators/decorator.facade";
+import Decorator from "../../src/decorators";
 import {
-  evaluateNullableValidity,
   extractGroups,
   extractMessage,
+  isValidNullable,
 } from "../../src/decorators/decorator.utils";
+import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
-import Decorator from "../../src/types/namespace/decorator.namespace";
-
-function isTodayDate(date: $.Objects.Optional<Date>): boolean {
-  return evaluateNullableValidity(date, (d) => {
-    const currentDate = new Date();
-    return (
-      d.getDate() === currentDate.getDate() &&
-      d.getMonth() === currentDate.getMonth() &&
-      d.getFullYear() === currentDate.getFullYear()
-    );
-  });
-}
 
 /**
  * Decorator for validating if a date is today's date.
@@ -38,16 +27,23 @@ function isTodayDate(date: $.Objects.Optional<Date>): boolean {
 export default function TodayDate<T extends $.Objects.Optional<Date>>(
   props?: Decorator.PartialProps
 ) {
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     groups: extractGroups(props),
-    isValid: (date, _, locale) => ({
+    isValid: (date, _context, locale) => ({
       key: "TodayDate",
       message: extractMessage(
         props,
         TranslationService.translate(locale, "TodayDate", date!),
         locale
       ),
-      valid: isTodayDate(date),
+      valid: isValidNullable(date, (d) => {
+        const currentDate = new Date();
+        return (
+          d.getDate() === currentDate.getDate() &&
+          d.getMonth() === currentDate.getMonth() &&
+          d.getFullYear() === currentDate.getFullYear()
+        );
+      }),
     }),
   });
 }

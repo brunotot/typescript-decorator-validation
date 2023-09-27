@@ -1,12 +1,12 @@
-import makeValidator from "../../../../src/decorators/decorator.facade";
+import Decorator from "../../../../src/decorators";
 import {
   extractGroups,
   extractMessage,
 } from "../../../../src/decorators/decorator.utils";
+import ValidatorService from "../../../../src/decorators/service/validator.service";
 import TranslationService from "../../../../src/localization/service/translation.service";
 import RegexConst from "../../../../src/models/regex.constants";
 import $ from "../../../../src/types";
-import Decorator from "../../../../src/types/namespace/decorator.namespace";
 import { testRegex } from "./../../regex/Pattern";
 
 /**
@@ -39,7 +39,7 @@ import { testRegex } from "./../../regex/Pattern";
 export default function Email<T extends $.Objects.Optional<string>>(
   props?: Decorator.PartialProps
 ) {
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     groups: extractGroups(props),
     isValid: (value, _, locale) => ({
       key: "Email",

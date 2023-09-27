@@ -1,11 +1,11 @@
-import makeValidator from "../../src/decorators/decorator.facade";
+import Decorator from "../../src/decorators";
 import {
   extractGroups,
   extractMessage,
 } from "../../src/decorators/decorator.utils";
+import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
-import Decorator from "../../src/types/namespace/decorator.namespace";
 
 /**
  * Creates a validator decorator for minimum length validation.
@@ -37,7 +37,7 @@ export default function MinLength<T extends $.Objects.Optional<string>>(
   props: Decorator.PartialProps<number>
 ) {
   const min = typeof props === "number" ? props : props.value;
-  return makeValidator<T>({
+  return ValidatorService.create<T>({
     groups: extractGroups(props),
     isValid: (value, _, locale) => ({
       key: "MinLength",
