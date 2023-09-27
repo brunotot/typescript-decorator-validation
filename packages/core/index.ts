@@ -1,6 +1,4 @@
 import Decorator from "./src/decorators";
-import DecoratorService from "./src/decorators/service/decorator.service";
-import ValidatorService from "./src/decorators/service/validator.service";
 import Localization from "./src/localization";
 import CacheMap from "./src/models/cache.map";
 import EntityProcessor from "./src/reflection/models/entity.processor";
@@ -54,7 +52,6 @@ export type {
   CacheMap,
   Class,
   Decorator,
-  DecoratorService,
   DescriptorProps,
   DetailedErrors,
   Errors,
@@ -78,7 +75,6 @@ export type {
   StrategyOptional,
   TdvCore,
   Validation,
-  ValidatorService,
 };
 
 export {

@@ -1,8 +1,5 @@
 import Decorator from "../../src/decorators";
-import {
-  extractGroups,
-  extractMessage,
-} from "../../src/decorators/decorator.utils";
+import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
 import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
 
@@ -36,10 +33,10 @@ export default function ArrayContains<K, T extends K[]>(
   >
 ) {
   return ValidatorService.create<T>({
-    groups: extractGroups(props),
+    groups: ParamsExtractorService.groups(props),
     isValid: (array, _, locale) => ({
       key: "ArrayContains",
-      message: extractMessage(
+      message: ParamsExtractorService.message(
         props,
         TranslationService.translate(locale, "ArrayContains", props.value),
         locale

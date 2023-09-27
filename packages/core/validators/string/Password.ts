@@ -1,4 +1,4 @@
-import { extractGroups } from "../../src/decorators/decorator.utils";
+import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
 import ValidatorService from "../../src/decorators/service/validator.service";
 import Localization from "../../src/localization";
 import TranslationService from "../../src/localization/service/translation.service";
@@ -107,7 +107,7 @@ export default function Password<T extends $.Objects.Optional<string>>(props?: {
   }
 
   return ValidatorService.create<T>({
-    groups: extractGroups(props),
+    groups: ParamsExtractorService.groups(props),
     isValid: (str, _, locale) => isValid(str ?? "", locale),
   });
 }

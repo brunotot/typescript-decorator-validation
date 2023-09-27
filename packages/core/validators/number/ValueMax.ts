@@ -1,8 +1,5 @@
 import Decorator from "../../src/decorators";
-import {
-  extractGroups,
-  extractMessage,
-} from "../../src/decorators/decorator.utils";
+import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
 import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
@@ -43,10 +40,10 @@ export default function ValueMax<T extends $.Objects.Optional<number>>(
 ) {
   const max = typeof props === "number" ? props : props.value;
   return ValidatorService.create<T>({
-    groups: extractGroups(props),
+    groups: ParamsExtractorService.groups(props),
     isValid: (value, _, locale) => ({
       key: "ValueMax",
-      message: extractMessage(
+      message: ParamsExtractorService.message(
         props,
         TranslationService.translate(locale, "ValueMax", max, value!),
         locale

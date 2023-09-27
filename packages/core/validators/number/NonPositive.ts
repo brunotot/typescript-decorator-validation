@@ -1,5 +1,5 @@
 import Decorator from "../../src/decorators";
-import { extractMessage } from "../../src/decorators/decorator.utils";
+import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
 import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
@@ -35,7 +35,7 @@ export default function NonPositive<T extends $.Objects.Optional<number>>(
   return ValidatorService.create<T>({
     isValid: (num, _, locale) => ({
       key: "NonPositive",
-      message: extractMessage(
+      message: ParamsExtractorService.message(
         props,
         TranslationService.translate(locale, "NonPositive", num!),
         locale

@@ -1,8 +1,5 @@
 import Decorator from "../../src/decorators";
-import {
-  extractGroups,
-  extractMessage,
-} from "../../src/decorators/decorator.utils";
+import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
 import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
 
@@ -35,10 +32,10 @@ export default function ArraySizeMax<K, T extends K[]>(
 ) {
   const max = typeof props === "number" ? props : props.value;
   return ValidatorService.create<T>({
-    groups: extractGroups(props),
+    groups: ParamsExtractorService.groups(props),
     isValid: (array, _, locale) => ({
       key: "ArraySizeMax",
-      message: extractMessage(
+      message: ParamsExtractorService.message(
         props,
         TranslationService.translate(
           locale,

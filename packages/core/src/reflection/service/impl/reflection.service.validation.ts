@@ -1,5 +1,5 @@
 import Decorator from "../../../decorators";
-import { extractGroups } from "../../../decorators/decorator.utils";
+import ParamsExtractorService from "../../../decorators/service/params-extractor.service";
 import Validation from "../../../types/namespace/validation.namespace";
 import Class from "../../../types/validation/class.type";
 import ReflectionDescriptor from "../../models/reflection.descriptor";
@@ -138,6 +138,6 @@ export default class ValidationMetaService extends MetaService<
    * @returns The sanitized validation groups.
    */
   #sanitizeGroups(param?: Validation.GroupsParam): Validation.Groups {
-    return extractGroups(param);
+    return ParamsExtractorService.groups(param);
   }
 }

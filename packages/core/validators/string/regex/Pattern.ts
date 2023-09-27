@@ -1,8 +1,5 @@
 import Decorator from "../../../src/decorators";
-import {
-  extractGroups,
-  extractMessage,
-} from "../../../src/decorators/decorator.utils";
+import ParamsExtractorService from "../../../src/decorators/service/params-extractor.service";
 import ValidatorService from "../../../src/decorators/service/validator.service";
 import $ from "../../../src/types";
 
@@ -44,10 +41,10 @@ export default function Pattern<T extends $.Objects.Optional<string>>(
   }>
 ) {
   return ValidatorService.create<T>({
-    groups: extractGroups(props.groups),
+    groups: ParamsExtractorService.groups(props.groups),
     isValid: (value, _, locale) => ({
       key: props.key ?? "Pattern",
-      message: extractMessage(props, "", locale),
+      message: ParamsExtractorService.message(props, "", locale),
       valid: testRegex(props.regex, value),
     }),
   });

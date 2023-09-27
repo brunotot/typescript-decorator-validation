@@ -1,12 +1,9 @@
 import Decorator from "../../src/decorators";
-import {
-  extractGroups,
-  extractMessage,
-  isValidNullable,
-} from "../../src/decorators/decorator.utils";
+import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
 import ValidatorService from "../../src/decorators/service/validator.service";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
+import Validation from "../../src/types/namespace/validation.namespace";
 
 /**
  * Decorator for validating if a date is today's date.
@@ -28,15 +25,15 @@ export default function TodayDate<T extends $.Objects.Optional<Date>>(
   props?: Decorator.PartialProps
 ) {
   return ValidatorService.create<T>({
-    groups: extractGroups(props),
+    groups: ParamsExtractorService.groups(props),
     isValid: (date, _context, locale) => ({
       key: "TodayDate",
-      message: extractMessage(
+      message: ParamsExtractorService.message(
         props,
         TranslationService.translate(locale, "TodayDate", date!),
         locale
       ),
-      valid: isValidNullable(date, (d) => {
+      valid: Validation.isValidNullable(date, (d) => {
         const currentDate = new Date();
         return (
           d.getDate() === currentDate.getDate() &&

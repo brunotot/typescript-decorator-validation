@@ -151,10 +151,26 @@ namespace Validation {
       ? nonNullableValidations.map((e) => e.message)
       : [];
   }
+
+  /**
+   * Evaluates the validity of a nullable value.
+   *
+   * @typeParam T - The type of the value being validated.
+   *
+   * @param object - The value to validate.
+   * @param isValid - A function that performs the actual validation logic.
+   *
+   * @returns `true` if the value is null or undefined, or the result of `isValid` otherwise.
+   */
+  export function isValidNullable<T>(
+    nullableValue: T,
+    isValid: (nonNullableValue: NonNullable<T>) => boolean
+  ) {
+    return (
+      !$.Objects.hasValue(nullableValue) ||
+      isValid(nullableValue as NonNullable<T>)
+    );
+  }
 }
 
-/**
- * @description
- * The default export for the `Validation` namespace.
- */
 export default Validation;

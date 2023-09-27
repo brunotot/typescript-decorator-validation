@@ -1,5 +1,8 @@
 import ValidationMetaService from "../reflection/service/impl/reflection.service.validation";
 import Validation from "../types/namespace/validation.namespace";
+import DecoratorServiceNs from "./service/decorator.service";
+import ParamsExtractorServiceNs from "./service/params-extractor.service";
+import ValidatorServiceNs from "./service/validator.service";
 
 /**
  * @namespace Decorator
@@ -84,6 +87,10 @@ namespace Decorator {
     : {
         value: T;
       };
+
+  export import DecoratorService = DecoratorServiceNs;
+  export import ValidatorService = ValidatorServiceNs;
+  export import ParamsExtractorService = ParamsExtractorServiceNs;
 }
 
 export default Decorator;

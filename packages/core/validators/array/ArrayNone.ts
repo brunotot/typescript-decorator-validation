@@ -1,8 +1,5 @@
 import Decorator from "../../src/decorators";
-import {
-  extractGroups,
-  extractMessage,
-} from "../../src/decorators/decorator.utils";
+import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
 import ValidatorService from "../../src/decorators/service/validator.service";
 import $ from "../../src/types";
 
@@ -31,10 +28,10 @@ export default function ArrayNone<K, T extends K[]>(
   }>
 ) {
   return ValidatorService.create<T>({
-    groups: extractGroups(props),
+    groups: ParamsExtractorService.groups(props),
     isValid: (array, _, locale) => ({
       key: "ArrayNone",
-      message: extractMessage(props, "", locale),
+      message: ParamsExtractorService.message(props, "", locale),
       valid: !(array ?? []).some(props.test),
     }),
   });
