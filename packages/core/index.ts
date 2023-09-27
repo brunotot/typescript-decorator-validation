@@ -1,6 +1,6 @@
 import Decorator from "./src/decorators";
 import Localization from "./src/localization";
-import CacheMap from "./src/models/cache.map";
+import CacheMap from "./src/reflection/models/cache.map";
 import EntityProcessor from "./src/reflection/models/entity.processor";
 import ReflectionDescriptor, {
   DescriptorProps,

@@ -1,5 +1,4 @@
 import Localization from "../../localization";
-import CacheMap from "../../models/cache.map";
 import $ from "../../types/index";
 import ns from "../../types/namespace/entity-processor.namespace";
 import Validation from "../../types/namespace/validation.namespace";
@@ -8,6 +7,7 @@ import DetailedErrors from "../../types/validation/detailed-errors.type";
 import Errors from "../../types/validation/errors.type";
 import Payload from "../../types/validation/payload.type";
 import ValidationMetaService from "../service/impl/reflection.service.validation";
+import CacheMap from "./cache.map";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 

@@ -1,4 +1,4 @@
-import $ from "../types/index";
+import $ from "../../types/index";
 
 /**
  * A generic caching utility class.
