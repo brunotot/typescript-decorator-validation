@@ -1,5 +1,5 @@
 import Localization from "../../localization";
-import BaseCacheMap from "../../reflection/models/cache.map";
+import BaseCacheMap from "../../processor/models/cache.map";
 import DetailedErrors from "../validation/detailed-errors.type";
 import Errors from "../validation/errors.type";
 import Payload from "../validation/payload.type";

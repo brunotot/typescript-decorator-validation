@@ -1,8 +1,8 @@
 import Localization from "../../localization";
+import ReflectionDescriptor from "../../reflection/models/reflection.descriptor";
+import ValidationMetaService from "../../reflection/service/impl/reflection.service.validation";
 import EntityProcessorNs from "../../types/namespace/entity-processor.namespace";
 import Validation from "../../types/namespace/validation.namespace";
-import ReflectionDescriptor from "../models/reflection.descriptor";
-import ValidationMetaService from "../service/impl/reflection.service.validation";
 
 /**
  * @typeParam TFieldType The type of the field being validated.

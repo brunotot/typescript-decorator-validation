@@ -1,9 +1,9 @@
 import Localization from "../../../localization";
+import EntityProcessor from "../../../processor";
+import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
 import Validation from "../../../types/namespace/validation.namespace";
 import DetailedErrors from "../../../types/validation/detailed-errors.type";
 import Errors from "../../../types/validation/errors.type";
-import EntityProcessor from "../../models/entity.processor";
-import ReflectionDescriptor from "../../models/reflection.descriptor";
 import ValidationStrategy from "../strategy";
 
 /**

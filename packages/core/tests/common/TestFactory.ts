@@ -1,4 +1,4 @@
-import EntityProcessor from "../../src/reflection/models/entity.processor";
+import EntityProcessor from "../../src/processor";
 import Class from "../../src/types/validation/class.type";
 import ValidationHandlerMock, {
   IMock,

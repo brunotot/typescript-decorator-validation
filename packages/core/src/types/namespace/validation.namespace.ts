@@ -1,8 +1,8 @@
 import Localization from "../../localization";
-import ObjectArrayStrat from "../../reflection/strategy/impl/object-array.strategy";
-import ObjectStrat from "../../reflection/strategy/impl/object.strategy";
-import PrimitiveArrayStrat from "../../reflection/strategy/impl/primitive-array.strategy";
-import PrimitiveStrat from "../../reflection/strategy/impl/primitive.strategy";
+import ObjectArrayStrat from "../../processor/strategy/impl/object-array.strategy";
+import ObjectStrat from "../../processor/strategy/impl/object.strategy";
+import PrimitiveArrayStrat from "../../processor/strategy/impl/primitive-array.strategy";
+import PrimitiveStrat from "../../processor/strategy/impl/primitive.strategy";
 import $ from "../../types/index";
 
 /**

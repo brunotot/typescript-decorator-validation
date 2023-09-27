@@ -1,6 +1,6 @@
 import Localization from "../../../localization";
+import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
 import Validation from "../../../types/namespace/validation.namespace";
-import ReflectionDescriptor from "../../models/reflection.descriptor";
 import ValidationStrategy from "../strategy";
 
 /**

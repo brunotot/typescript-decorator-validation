@@ -1,7 +1,21 @@
 import Decorator from "./src/decorators";
 import Localization from "./src/localization";
-import CacheMap from "./src/reflection/models/cache.map";
-import EntityProcessor from "./src/reflection/models/entity.processor";
+import EntityProcessor from "./src/processor";
+import CacheMap from "./src/processor/models/cache.map";
+import ObjectArrayStrat, {
+  ObjectArrayDetailedErrors,
+  ObjectArraySimpleErrors,
+} from "./src/processor/strategy/impl/object-array.strategy";
+import ObjectStrat, {
+  ObjectDetailedErrors,
+  ObjectSimpleErrors,
+} from "./src/processor/strategy/impl/object.strategy";
+import PrimitiveArrayStrat, {
+  PrimitiveArrayDetailedErrors,
+  PrimitiveArraySimpleErrors,
+} from "./src/processor/strategy/impl/primitive-array.strategy";
+import PrimitiveStrat from "./src/processor/strategy/impl/primitive.strategy";
+import ValidationStrategy from "./src/processor/strategy/strategy";
 import ReflectionDescriptor, {
   DescriptorProps,
   FieldDescriptorRules,
@@ -18,20 +32,6 @@ import {
   MetaStrategy,
   getClassFieldNames,
 } from "./src/reflection/service/reflection.service";
-import ObjectArrayStrat, {
-  ObjectArrayDetailedErrors,
-  ObjectArraySimpleErrors,
-} from "./src/reflection/strategy/impl/object-array.strategy";
-import ObjectStrat, {
-  ObjectDetailedErrors,
-  ObjectSimpleErrors,
-} from "./src/reflection/strategy/impl/object.strategy";
-import PrimitiveArrayStrat, {
-  PrimitiveArrayDetailedErrors,
-  PrimitiveArraySimpleErrors,
-} from "./src/reflection/strategy/impl/primitive-array.strategy";
-import PrimitiveStrat from "./src/reflection/strategy/impl/primitive.strategy";
-import ValidationStrategy from "./src/reflection/strategy/strategy";
 import TdvCore from "./src/types";
 import Validation from "./src/types/namespace/validation.namespace";
 import Class from "./src/types/validation/class.type";
