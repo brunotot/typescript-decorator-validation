@@ -3,6 +3,13 @@ import ParamsExtractorService from "../../../src/decorators/service/params-extra
 import ValidatorService from "../../../src/decorators/service/validator.service";
 import $ from "../../../src/types";
 
+export function testRegex<T extends $.Objects.Optional<string>>(
+  regex: RegExp,
+  value: T
+): boolean {
+  return (value ?? "").length === 0 || regex.test(value!);
+}
+
 /**
  * Creates a validator decorator that checks if a string value matches a regular expression pattern.
  *
@@ -48,11 +55,4 @@ export default function Pattern<T extends $.Objects.Optional<string>>(
       valid: testRegex(props.regex, value),
     }),
   });
-}
-
-export function testRegex<T extends $.Objects.Optional<string>>(
-  regex: RegExp,
-  value: T
-): boolean {
-  return (value ?? "").length === 0 || regex.test(value!);
 }

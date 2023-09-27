@@ -2,9 +2,9 @@ import ParamsExtractorService from "../../src/decorators/service/params-extracto
 import ValidatorService from "../../src/decorators/service/validator.service";
 import Localization from "../../src/localization";
 import TranslationService from "../../src/localization/service/translation.service";
-import RegexConst from "../../src/models/regex.constants";
 import $ from "../../src/types";
 import Validation from "../../src/types/namespace/validation.namespace";
+import RegexConst from "../shared/regex.constants";
 
 const PASSWORD_REGEXES = {
   uppercase: RegexConst.UPPERCASE_ANYWHERE,

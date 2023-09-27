@@ -2,8 +2,8 @@ import Decorator from "../../../../src/decorators";
 import ParamsExtractorService from "../../../../src/decorators/service/params-extractor.service";
 import ValidatorService from "../../../../src/decorators/service/validator.service";
 import TranslationService from "../../../../src/localization/service/translation.service";
-import RegexConst from "../../../../src/models/regex.constants";
 import $ from "../../../../src/types";
+import RegexConst from "../../../shared/regex.constants";
 import { testRegex } from "./../../regex/Pattern";
 
 /**
