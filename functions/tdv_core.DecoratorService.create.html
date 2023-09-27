@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>makeValidator | Typescript Decorator Validation - v1.0.0</title><meta name="description" content="Documentation for Typescript Decorator Validation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>create | Typescript Decorator Validation - v1.0.0</title><meta name="description" content="Documentation for Typescript Decorator Validation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -14,13 +14,14 @@
 <ul class="tsd-breadcrumb">
 <li><a href="../index.html">Typescript Decorator Validation</a></li>
 <li><a href="../modules/tdv_core.html">tdv-core</a></li>
-<li><a href="tdv_core.makeValidator.html">makeValidator</a></li></ul>
-<h1>Function makeValidator</h1></div>
+<li><a href="../modules/tdv_core.DecoratorService.html">DecoratorService</a></li>
+<li><a href="tdv_core.DecoratorService.create.html">create</a></li></ul>
+<h1>Function create</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="makeValidator"><span class="tsd-kind-call-signature">make<wbr/>Validator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">__namedParameters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/tdv_core.Decorator.Type.html" class="tsd-signature-type tsd-kind-type-alias">Type</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#makeValidator" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="create"><span class="tsd-kind-call-signature">create</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">supplier</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/tdv_core.Decorator.Instance.html" class="tsd-signature-type tsd-kind-type-alias">Instance</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#create" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Creates a new validator function using the provided validation builder options.</p>
+<div class="tsd-comment tsd-typography"><p>Creates a new decorator using the provided supplier function.</p>
 </div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
@@ -34,18 +35,22 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">__namedParameters</span>: <a href="../types/tdv_core.TdvCore.Validation.Builder.html" class="tsd-signature-type tsd-kind-type-alias">Builder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="../types/tdv_core.Decorator.Type.html" class="tsd-signature-type tsd-kind-type-alias">Type</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A decorator function that can be applied to class properties to add the validation logic.</p>
+<h5><span class="tsd-kind-parameter">supplier</span>: <a href="../types/tdv_core.Decorator.Supplier.html" class="tsd-signature-type tsd-kind-type-alias">Supplier</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography"><p>A function that defines the behavior of the decorator. It takes the property name, an instance of <code>ValidationMetaService</code>, and the decorator context.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../types/tdv_core.Decorator.Instance.html" class="tsd-signature-type tsd-kind-type-alias">Instance</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A decorator function that can be applied to class properties.</p>
 
 <div class="tsd-comment tsd-typography">
-<h4>Remarks</h4><p>This function leverages the <code>makeDecorator</code> function to create a new decorator.
-It uses the <code>validationMetaService</code> to add the new validator to the metadata for the property it decorates.</p>
+<h4>Remarks</h4><p>This function serves as a factory for creating new decorators. It uses dependency injection to get an instance of <code>ValidationMetaService</code>.</p>
+<p>The function handles both TypeScript&#39;s Stage 2 decorators and the current decorators. It determines the stage based on the type of the <code>context</code> parameter.</p>
+<p>The <code>supplier</code> function is responsible for adding any necessary metadata or validation logic via the <code>ValidationMetaService</code>.</p>
 
-<h4>Example</h4><pre><code class="language-typescript"><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-9">IsPositive</span><span class="hl-1"> = </span><span class="hl-0">makeValidator</span><span class="hl-1">&lt;</span><span class="hl-7">number</span><span class="hl-1">&gt;({</span><br/><span class="hl-1">  </span><span class="hl-5">groups:</span><span class="hl-1"> [</span><span class="hl-2">&#39;group1&#39;</span><span class="hl-1">],</span><br/><span class="hl-1">  </span><span class="hl-0">isValid</span><span class="hl-5">:</span><span class="hl-1"> (</span><span class="hl-5">value</span><span class="hl-1">) </span><span class="hl-6">=&gt;</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1"> &gt; </span><span class="hl-8">0</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-6">class</span><span class="hl-1"> </span><span class="hl-7">MyClass</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-3">//@IsPositive</span><br/><span class="hl-1">  </span><span class="hl-6">public</span><span class="hl-1"> </span><span class="hl-5">myValue</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
+<h4>Example</h4><pre><code class="language-typescript"><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-9">MyDecorator</span><span class="hl-1"> = </span><span class="hl-0">makeDecorator</span><span class="hl-1">&lt;</span><span class="hl-7">number</span><span class="hl-1">&gt;((</span><span class="hl-5">key</span><span class="hl-1">, </span><span class="hl-5">metaService</span><span class="hl-1">, </span><span class="hl-5">context</span><span class="hl-1">) </span><span class="hl-6">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-5">metaService</span><span class="hl-1">.</span><span class="hl-0">addValidator</span><span class="hl-1">(</span><span class="hl-5">key</span><span class="hl-1">, (</span><span class="hl-5">value</span><span class="hl-1">) </span><span class="hl-6">=&gt;</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1"> &gt; </span><span class="hl-8">0</span><span class="hl-1">);</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-6">class</span><span class="hl-1"> </span><span class="hl-7">MyClass</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-3">//@MyDecorator</span><br/><span class="hl-1">  </span><span class="hl-6">public</span><span class="hl-1"> </span><span class="hl-5">myValue</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/93dc516/packages/core/src/decorators/decorator.facade.ts#L32">src/decorators/decorator.facade.ts:32</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/ba6431a/packages/core/src/decorators/service/decorator.service.ts#L33">src/decorators/service/decorator.service.ts:33</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
