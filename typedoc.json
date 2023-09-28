@@ -3,5 +3,7 @@
   "name": "Typescript Decorator Validation",
   "entryPointStrategy": "packages",
   "includeVersion": true,
-  "excludeInternal": true
+  "excludeInternal": true,
+  "plugin": ["@mxssfd/typedoc-theme"],
+  "theme": "my-theme"
 }
