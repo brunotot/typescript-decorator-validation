@@ -1,6 +1,6 @@
 import Types from "../../types/namespace/types.namespace";
 import Reflection from "../index";
-import ValidationMetaService from "../service/impl/reflection.service.validation";
+import ValidationConfigurer from "../service/impl/reflection.service.validation";
 
 namespace ReflectionDescriptor {
   /**
@@ -135,7 +135,7 @@ namespace ReflectionDescriptor {
       const fieldName = this.thisName!;
 
       const getNativeStrategy = (value: unknown) => {
-        const meta = ValidationMetaService.inject(this.hostClass!);
+        const meta = ValidationConfigurer.inject(this.hostClass!);
         const descriptor = meta.getTypedDescriptor<HostClass, keyof HostClass>(
           this.thisName!
         );

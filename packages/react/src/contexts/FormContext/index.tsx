@@ -6,7 +6,7 @@ type FormContextType = Omit<ns.FormProviderProps, "children"> | undefined;
 export const FormContext = createContext<FormContextType>(undefined);
 
 /**
- * Provides form-related context to its children.
+ * Provides form-related context to its children
  *
  * You should always invoke FormProvider at the top of your returned JSX chain
  * because it allows form context state to propagate to your child components.

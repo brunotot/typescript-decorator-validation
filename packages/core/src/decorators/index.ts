@@ -1,11 +1,11 @@
-import ValidationMetaService from "../reflection/service/impl/reflection.service.validation";
+import ValidationConfigurer from "../reflection/service/impl/reflection.service.validation";
 import Validation from "../types/namespace/validation.namespace";
 import DecoratorServiceNs from "./service/decorator.service";
 import ParamsExtractorServiceNs from "./service/params-extractor.service";
 import ValidatorServiceNs from "./service/validator.service";
 
 /**
- * @namespace Decorator
+ * A namespace which holds decorator-related methods and types
  *
  * @description
  * A collection of types and interfaces for creating and handling decorators.
@@ -47,7 +47,7 @@ namespace Decorator {
    */
   export type Supplier<T = unknown> = (
     name: string,
-    meta: ValidationMetaService,
+    meta: ValidationConfigurer,
     context: Decorator.Context<T>
   ) => void;
 

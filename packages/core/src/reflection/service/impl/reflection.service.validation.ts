@@ -7,31 +7,31 @@ import ReflectionDescriptor from "../../models/reflection.descriptor";
 import MetaService from "../reflection.service";
 
 /**
- * ValidationMetaService class extending MetaService.
+ * A configurer class which allows for easier manipulation of decorated fields and corresponding metadata
  *
  * @remarks
  * This class is responsible for managing metadata related to validation.
  * It provides methods to add validators, get field names, and manage descriptors.
  */
-export default class ValidationMetaService extends MetaService<
+export default class ValidationConfigurer extends MetaService<
   Map<string, ReflectionDescriptor.ReflectionDescriptor<any, any, any>>
 > {
   /**
-   * Static method to create a new instance of ValidationMetaService.
+   * Static method to create a new instance of ValidationConfigurer.
    *
    * @param strategy - The strategy to inject.
-   * @returns A new instance of ValidationMetaService.
+   * @returns A new instance of ValidationConfigurer.
    */
   public static inject(
     strategy: Reflection.MetaStrategy
-  ): ValidationMetaService {
-    return new ValidationMetaService(strategy);
+  ): ValidationConfigurer {
+    return new ValidationConfigurer(strategy);
   }
 
   #fields!: string[];
 
   private constructor(strategy: Reflection.MetaStrategy) {
-    super(ValidationMetaService.name, strategy, () => new Map());
+    super(ValidationConfigurer.name, strategy, () => new Map());
     Reflection.isClass(strategy)
       ? this.#handleClassInit(strategy)
       : this.#handleContextInit(strategy);

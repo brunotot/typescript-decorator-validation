@@ -1,5 +1,5 @@
 import Localization from "../localization";
-import ValidationMetaService from "../reflection/service/impl/reflection.service.validation";
+import ValidationConfigurer from "../reflection/service/impl/reflection.service.validation";
 import $ from "../types/index";
 import ns from "../types/namespace/entity-processor.namespace";
 import EvaluatedStrategyFactory from "../types/namespace/evaluated-strategy-factory.namespace";
@@ -10,17 +10,17 @@ import CacheMap from "./models/cache.map";
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
 /**
- * A class responsible for processing and validating entities.
+ * A class responsible for processing and validating class instances through its decorated validators.
  *
  * @typeParam TClass - The type of the class being processed.
  * @typeParam TBody - The type of the payload body. Defaults to `TClass`.
  *
  * @remarks
  * This class uses a `CacheMap` to store validation results for better performance.
- * It also leverages `ValidationMetaService` to retrieve metadata about the class being processed.
+ * It also leverages `ValidationConfigurer` to retrieve metadata about the class being processed.
  */
 export default class EntityProcessor<TClass, TBody = TClass> {
-  #meta: ValidationMetaService;
+  #meta: ValidationConfigurer;
   #groups: Validation.Group[];
   #hostDefault: any;
   #cacheMap: ns.CacheMap<TClass, TBody>;
@@ -36,7 +36,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
     this.locale = config?.locale ?? Localization.getLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
     this.#hostDefault = (config?.defaultValue ?? new clazz()) as TBody;
-    this.#meta = ValidationMetaService.inject(clazz);
+    this.#meta = ValidationConfigurer.inject(clazz);
     this.#cacheMap = new CacheMap.CacheMap(
       (state) => this.validate.bind(this)(state) as ns.Result<TClass>
     );

@@ -3,6 +3,9 @@ import Types from "../types/namespace/types.namespace";
 import ReflectionRuleNamespace from "./models/reflection.rule";
 import ReflectionStrategyNamespace from "./models/reflection.strategy";
 
+/**
+ * A namespace which holds data related to reading and manipulating metadata through reflection
+ */
 namespace Reflection {
   /**
    * Retrieves the names of all fields in a class.
@@ -79,6 +82,7 @@ namespace Reflection {
   export type MetaStrategy = Decorator.Context | Types.Class<any>;
 
   export import Rule = ReflectionRuleNamespace.ReflectionRule;
+
   export import Strategy = ReflectionStrategyNamespace;
 }
 

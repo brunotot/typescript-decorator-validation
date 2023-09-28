@@ -113,6 +113,9 @@ const nested = {
   valid,
 };
 
+/**
+ * A collection of predefined decorated validators grouped and sorted by variable types
+ */
 const validators = {
   any,
   array,

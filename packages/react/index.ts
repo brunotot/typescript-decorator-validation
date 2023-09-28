@@ -7,10 +7,16 @@ import UseValidationNamespace from "./src/hooks/useValidation/types";
 
 //* Documented exports
 
+/**
+ * A namespace which holds shared context-related components
+ */
 export namespace Contexts {
   export import FormProvider = FormContextNamespace;
 }
 
+/**
+ * A namespace which holds shared hook-related components
+ */
 export namespace Hooks {
   export import UseForm = UseFormNamespace;
   export import UseValidation = UseValidationNamespace;

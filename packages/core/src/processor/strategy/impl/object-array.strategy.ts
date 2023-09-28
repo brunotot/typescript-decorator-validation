@@ -1,7 +1,7 @@
 import Localization from "../../../localization";
 import EntityProcessor from "../../../processor";
 import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
-import ValidationMetaService from "../../../reflection/service/impl/reflection.service.validation";
+import ValidationConfigurer from "../../../reflection/service/impl/reflection.service.validation";
 import EvaluatedStrategyFactory from "../../../types/namespace/evaluated-strategy-factory.namespace";
 import Validation from "../../../types/namespace/validation.namespace";
 import ValidationStrategy from "../strategy";
@@ -87,7 +87,7 @@ export default class ObjectArrayStrat<F> extends ValidationStrategy<
   ): [ObjectArrayDetailedErrors<F>, ObjectArraySimpleErrors<F>] {
     const _value = value ?? [];
     const fieldClass = super.descriptor.thisClass!;
-    const metadata = ValidationMetaService.inject(fieldClass);
+    const metadata = ValidationConfigurer.inject(fieldClass);
     const field = metadata.getUntypedDescriptor(super.fieldName);
     const rootResult = field.rules.root.validate(
       _value,

@@ -13,7 +13,7 @@ class TestClass {
   str: string = "";
 }
 
-//const meta = ValidationMetaService.inject(TestClass);
+//const meta = ValidationConfigurer.inject(TestClass);
 const processor = new ValidationEngine(TestClass, {
   locale: "it",
 });

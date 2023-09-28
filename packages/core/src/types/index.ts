@@ -16,6 +16,9 @@ import StrategyNamespace from "./namespace/strategy.namespace";
 import TypesNamespace from "./namespace/types.namespace";
 import ValidationNamespace from "./namespace/validation.namespace";
 
+/**
+ * An entry-point namespace which serves as a gateway to all data of this library exports
+ */
 namespace Core {
   /**
    * The `Factory` namespace provides utilities for working with factories and factory functions.

@@ -4,9 +4,7 @@ import useEntityProcessor from "../useEntityProcessor";
 import ns from "./types";
 
 /**
- * `useValidation` hook is responsible for providing form-related
- * (getter, setter) and validation-related (data) props
- * to the consumer component.
+ * React hook which exposes validation-related props to a form component
  *
  * It provides the same destructuring pattern as you may have when
  * assigning the result of `useState` to a variable. The only key

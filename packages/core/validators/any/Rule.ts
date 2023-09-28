@@ -2,7 +2,7 @@ import ValidatorService from "../../src/decorators/service/validator.service";
 import Validation from "../../src/types/namespace/validation.namespace";
 
 /**
- * Creates a custom rule validator decorator.
+ * A function which returns a decorated validator function built from a custom handler
  *
  * @typeparam T - The type of the decorated property.
  * @param props - An object with a custom validation function or a validation function directly.
@@ -25,16 +25,18 @@ import Validation from "../../src/types/namespace/validation.namespace";
  *   price: number;
  * }
  */
-export default function Rule<T>(
+const validate = <T>(
   props:
     | Validation.Evaluator<T>
     | {
         isValid: Validation.Evaluator<T>;
         groups?: Validation.GroupsParam;
       }
-) {
+) => {
   return ValidatorService.create<T>({
     isValid: "isValid" in props ? props.isValid : props,
     groups: "isValid" in props ? props.groups : [],
   });
-}
+};
+
+export default validate;

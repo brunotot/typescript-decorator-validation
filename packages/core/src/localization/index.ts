@@ -1,5 +1,8 @@
 import TranslationServiceNs from "./service/translation.service";
 
+/**
+ * A namespace which holds everything related to the localized output messages (like default error messages)
+ */
 namespace Localization {
   export import TranslationService = TranslationServiceNs;
 

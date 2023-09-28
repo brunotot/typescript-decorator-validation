@@ -1,6 +1,6 @@
 import Localization from "../../localization";
 import ReflectionDescriptor from "../../reflection/models/reflection.descriptor";
-import ValidationMetaService from "../../reflection/service/impl/reflection.service.validation";
+import ValidationConfigurer from "../../reflection/service/impl/reflection.service.validation";
 import EntityProcessorNs from "../../types/namespace/entity-processor.namespace";
 import Validation from "../../types/namespace/validation.namespace";
 
@@ -66,7 +66,7 @@ export default abstract class ValidationStrategy<
    */
   protected get fieldDescriptor() {
     if (this.#fieldDescriptor) return this.#fieldDescriptor;
-    this.#fieldDescriptor = ValidationMetaService.inject(
+    this.#fieldDescriptor = ValidationConfigurer.inject(
       this.descriptor.hostClass!
     ).getUntypedDescriptor(this.fieldName);
     return this.#fieldDescriptor;

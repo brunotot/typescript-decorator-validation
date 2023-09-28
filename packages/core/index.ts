@@ -8,10 +8,16 @@ import TdvCore from "./src/types";
 import decorate from "./validators";
 import validate from "./validators/any/Rule";
 
+/**
+ * A namespace which holds all interfaces which are extensible - meaning the developer can feed the library with custom types
+ */
 export namespace Overrides {
   export interface PrimitiveSet {}
 }
 
+/**
+ * A namespace which wraps all miscellaneous reusable models of the library into a single group
+ */
 export namespace Models {
   export import CacheMap = CacheMapLocal.CacheMap;
 }

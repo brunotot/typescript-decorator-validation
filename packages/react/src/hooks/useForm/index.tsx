@@ -8,9 +8,7 @@ import useValidation from "../useValidation";
 import ns from "./types";
 
 /**
- * `useForm` hook is responsible for providing form-related
- * (getter, setter, memoized change handlers, isValid, isSubmitted, etc...)
- * and validation-related (data) props to the consumer component.
+ * React hook which exposes useful form and validation-related props to a form component
  *
  * Hook internally invokes {@link useValidation}
  *
