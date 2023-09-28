@@ -1,12 +1,11 @@
-<h1 align="center">:rocket: TypeScript Decorator Validation - Core :rocket:</h1>
+<h1 align="center">🚀 tdv-core 🚀</h1>
 
-<p align="center">:star: validates forms with TypeScript's native 
- <a href="https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators">decorators</a>
-</p>
-<p align="center">:star: adapts well with existing TypeScript applications</p>
-<p align="center">:star: client-side and server-side supported</p>
-<p align="center">:star: enforces strict type checking</p>
-<p align="center">:star: uses <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html">TypeScript v5</a> syntax</p>
+
+<p align="center">🎩 <strong>TypeScript v5:</strong> Harness the power of TypeScript v5 decorators for type-safe validation.</p>
+<p align="center">🛠️ <strong>Extensible:</strong> Customize our library to fit your unique needs with ease.</p>
+<p align="center">🌍 <strong>i18n Support:</strong> Speak your users' language with built-in localization.</p>
+<p align="center">🔧 <strong>Adaptability:</strong> Seamless integration with existing TypeScript apps.</p>
+<p align="center">💻 <strong>Versatility:</strong> Works on both client and server-side.</p>
 
 <p align="center">
  <a href="https://npmcharts.com/compare/typescript-decorator-validation?minimal=true">
@@ -30,52 +29,49 @@
  </a>
 </p>
 
-## Table of Contents
 
-- [Install](#install)
-- [Contribute](#contribute)
+## TOC
+
+- [Installation](#installation)
+- [Documentation](#documentation)
+- [Contribution](#contribution)
 - [Future goals](#future-goals)
 - [Supported frameworks](#supported-frameworks)
 - [Examples](#examples)
+- [Repository architecture](#repository-architecture)
+- [Comparison against similar solutions](#comparison-against-similar-solutions)
 
-## Install
 
-1. Install core (server-side)
-```
-npm install tdv-core
-```
+## Installation
 
-## Contribute
-
-1. Open bash terminal
-2. Change directory to your desired position
-3. Clone the repository main branch
 ```bash
-git clone https://github.com/brunotot/typescript-decorator-validation.git
+npm i tdv-core
 ```
-4. Checkout a new branch
-```bash
-git checkout -b "[package-name]-[issue-number]-issue-lorem-ipsum"
-```
-5. Commit and push changes
-6. Open pull request
 
-## Future goals
-
-- [x] Implement strict type checking
-- [x] Implement predefined decorator validators
-- [ ] Provide fully-fledged documentation  
-- [ ] Implement concise API for CI tests
-- [ ] Implement tests for predefined decorator validators
-- [ ] Write implementation libs for popular front-end frameworks
 
 ## Supported Frameworks
 - [x] [view React implementation](https://github.com/brunotot/typescript-decorator-validation/tree/main/packages/react#readme)
 - [ ] Angular
 - [ ] Svelte
 - [ ] Vue
-- [ ] Solid
 
+
+## Documentation
+- [tdv-core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
+
+
+## Contribution
+
+To contribute, simply clone the main branch, commit changes to a local branch and open pull request.</br>
+Branch will be ready for merge after all CI tests pass and a review has been made.
+
+## Future goals
+
+- [x] Implement strict type checking
+- [x] Implement predefined decorator validators
+- [x] Provide source code documentation  
+- [x] Implement concise tests for various scenarios
+- [ ] Build implementation packages for popular front-end frameworks
 
 ## Examples
 
@@ -167,3 +163,40 @@ And the result is
   ]
 }
 ```
+
+
+## Repository architecture
+
+The `tdv-core` package is the backbone, providing core validation logic that's framework-agnostic. Features include:
+- A decorator factory for easy integration with TypeScript
+- Metadata management for dynamic behavior
+- Localization support
+- Built-in validators like `Email`, `Required`, etc.
+
+
+The core package serves as the foundation for implementation libraries like `tdv-react`, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.
+
+
+## Comparison against similar solutions
+
+| Criteria         | tdv-monorepo | Yup  | React Hook Form | Validator.js | Formik |
+|------------------|-------------|-------|-----------------|--------------|--------|
+| Type Safety      | ✅          | ❌    | 🟡[^1]          | ❌           | ❌    |
+| Syntax           | ✅          | ❌    | ✅[^2]          | ❌           | ❌    |
+| Learning Curve   | ✅          | 🟡[^3]| 🟡[^4]          | 🟡[^5]       | 🟡[^6]|
+| Custom Validators| ✅          | 🟡[^7]| ✅              | 🟡[^8]       | 🟡[^9]|
+
+- ✅: Fully supported and easy-to-use
+- ❌: Not supported
+- 🟡: Partial support
+
+[^1]: React Hook Form has good TypeScript support but doesn't integrate as seamlessly as `tdv-monorepo`.
+[^2]: React Hook Form uses hooks, which are easy to use but different from native TypeScript decorators.
+[^3]: Yup requires learning its custom object schema, adding to the learning curve.
+[^4]: React Hook Form requires understanding of hooks, adding a slight learning curve.
+[^5]: Validator.js requires learning their API, which can be cumbersome.
+[^6]: Formik has its own ecosystem, making the learning curve steeper.
+[^7]: Yup allows for custom validation but within the confines of its own schema.
+[^8]: Validator.js allows for some customization but it's not straightforward.
+[^9]: Formik allows for custom validation but within its own framework.
+
