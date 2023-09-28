@@ -3,7 +3,7 @@ import ObjectStrat from "../../processor/strategy/impl/object.strategy";
 import PrimitiveArrayStrat from "../../processor/strategy/impl/primitive-array.strategy";
 import PrimitiveStrat from "../../processor/strategy/impl/primitive.strategy";
 import ValidationStrategy from "../../processor/strategy/strategy";
-import Class from "../../types/validation/class.type";
+import Types from "../../types/namespace/types.namespace";
 
 const unknown = "unknown" as const;
 const primitive = "primitive" as const;
@@ -19,60 +19,62 @@ const compositeFunction = `() => ${composite}` as const;
 const primitiveArrayFunction = `() => ${primitiveArray}` as const;
 const compositeArrayFunction = `() => ${compositeArray}` as const;
 
-/**
- * A mapping of reflection strategy types to their string representations.
- *
- * @remarks
- * This object defines the various strategies that can be used for reflection.
- * It includes strategies for primitives, composites, and their arrays, as well as
- * strategies for getters and functions that return these types.
- */
-const ReflectionStrategy = {
-  unknown,
+namespace ReflectionStrategy {
+  /**
+   * A mapping of reflection strategy types to their string representations.
+   *
+   * @remarks
+   * This object defines the various strategies that can be used for reflection.
+   * It includes strategies for primitives, composites, and their arrays, as well as
+   * strategies for getters and functions that return these types.
+   */
+  export const ReflectionStrategy = {
+    unknown,
 
-  // Primitive
-  primitive,
-  primitiveGetter,
-  primitiveFunction,
+    // Primitive
+    primitive,
+    primitiveGetter,
+    primitiveFunction,
 
-  // Composite
-  composite,
-  compositeGetter,
-  compositeFunction,
+    // Composite
+    composite,
+    compositeGetter,
+    compositeFunction,
 
-  // Primitive array
-  primitiveArray,
-  primitiveArrayFunction,
-  primitiveArrayGetter,
+    // Primitive array
+    primitiveArray,
+    primitiveArrayFunction,
+    primitiveArrayGetter,
 
-  // Composite array
-  compositeArray,
-  compositeArrayFunction,
-  compositeArrayGetter,
-} as const;
+    // Composite array
+    compositeArray,
+    compositeArrayFunction,
+    compositeArrayGetter,
+  } as const;
 
-/**
- * The type of a reflection strategy.
- *
- * @remarks
- * This type is derived from the keys of the `ReflectionStrategy` object.
- */
-export type ReflectionStrategyType =
-  (typeof ReflectionStrategy)[keyof typeof ReflectionStrategy];
+  /**
+   * The type of a reflection strategy.
+   *
+   * @remarks
+   * This type is derived from the keys of the `ReflectionStrategy` object.
+   */
+  export type ReflectionStrategyType =
+    (typeof ReflectionStrategy)[keyof typeof ReflectionStrategy];
 
-/**
- * A mapping of reflection strategy types to their corresponding `ValidationStrategy` classes.
- *
- * @remarks
- * This object provides a way to look up the `ValidationStrategy` class that should be used for a given
- * reflection strategy type.
- */
-// prettier-ignore
-const ReflectionStrategyImpl: Record<ReflectionStrategyType, Class<ValidationStrategy>> = {
-  [ReflectionStrategy.primitive]: PrimitiveStrat,
-  [ReflectionStrategy.composite]: ObjectStrat,
-  [ReflectionStrategy.primitiveArray]: PrimitiveArrayStrat,
-  [ReflectionStrategy.compositeArray]: ObjectArrayStrat
-} as any;
+  /**
+   * A mapping of reflection strategy types to their corresponding `ValidationStrategy` classes.
+   *
+   * @remarks
+   * This object provides a way to look up the `ValidationStrategy` class that should be used for a given
+   * reflection strategy type.
+   */
+  // prettier-ignore
+  export const ReflectionStrategyImpl: Record<ReflectionStrategyType, Types.Class<ValidationStrategy>> = {
+    [ReflectionStrategy.primitive]: PrimitiveStrat,
+    [ReflectionStrategy.composite]: ObjectStrat,
+    [ReflectionStrategy.primitiveArray]: PrimitiveArrayStrat,
+    [ReflectionStrategy.compositeArray]: ObjectArrayStrat
+  } as any;
+}
 
-export { ReflectionStrategy, ReflectionStrategyImpl };
+export default ReflectionStrategy;

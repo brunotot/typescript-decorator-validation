@@ -1,6 +1,6 @@
 import $ from "..";
-import EvaluatedStrategy from "../validation/evaluated-strategy.type";
 import Condition from "./condition.namespace";
+import EvaluatedStrategyFactory from "./evaluated-strategy-factory.namespace";
 
 /**
  * @namespace Strategy
@@ -69,8 +69,11 @@ namespace Strategy {
         ? T
         : Strategy.DeducedArray<R>
       : true extends Condition.isUndefined<R>
-      ? EvaluatedStrategy<U, R, TPartial>[]
-      : Strategy.DeducedArray<EvaluatedStrategy<U, R, TPartial>, R>
+      ? EvaluatedStrategyFactory.Base.EvaluatedStrategy<U, R, TPartial>[]
+      : Strategy.DeducedArray<
+          EvaluatedStrategyFactory.Base.EvaluatedStrategy<U, R, TPartial>,
+          R
+        >
     : never;
 
   /**
@@ -89,7 +92,11 @@ namespace Strategy {
     T,
     R,
     TPartial extends $.Params.valuePartial = $.Params.partial["disabled"]
-  > = EvaluatedStrategy<NonNullable<T>, R, TPartial>;
+  > = EvaluatedStrategyFactory.Base.EvaluatedStrategy<
+    NonNullable<T>,
+    R,
+    TPartial
+  >;
 }
 
 /**

@@ -1,8 +1,8 @@
-import { EntityProcessor } from "tdv-core";
+import { ValidationEngine } from "tdv-core";
 
 namespace UseResetHook {
   export type UseResetConfig<TClass, TBody = TClass> = {
-    processor: EntityProcessor<TClass, TBody>;
+    processor: ValidationEngine<TClass, TBody>;
     form: TBody;
     setForm: (v: TBody) => void;
     submitted: boolean;

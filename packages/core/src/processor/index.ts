@@ -2,11 +2,9 @@ import Localization from "../localization";
 import ValidationMetaService from "../reflection/service/impl/reflection.service.validation";
 import $ from "../types/index";
 import ns from "../types/namespace/entity-processor.namespace";
+import EvaluatedStrategyFactory from "../types/namespace/evaluated-strategy-factory.namespace";
+import Types from "../types/namespace/types.namespace";
 import Validation from "../types/namespace/validation.namespace";
-import Class from "../types/validation/class.type";
-import DetailedErrors from "../types/validation/detailed-errors.type";
-import Errors from "../types/validation/errors.type";
-import Payload from "../types/validation/payload.type";
 import CacheMap from "./models/cache.map";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
@@ -34,12 +32,12 @@ export default class EntityProcessor<TClass, TBody = TClass> {
    * @param clazz - The class type to be processed.
    * @param config - Optional configuration settings.
    */
-  constructor(clazz: Class<TClass>, config?: ns.Config<TBody>) {
+  constructor(clazz: Types.Class<TClass>, config?: ns.Config<TBody>) {
     this.locale = config?.locale ?? Localization.getLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
     this.#hostDefault = (config?.defaultValue ?? new clazz()) as TBody;
     this.#meta = ValidationMetaService.inject(clazz);
-    this.#cacheMap = new CacheMap(
+    this.#cacheMap = new CacheMap.CacheMap(
       (state) => this.validate.bind(this)(state) as ns.Result<TClass>
     );
   }
@@ -58,7 +56,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
    *
    * @returns `true` if valid, `false` otherwise.
    */
-  public isValid(payload: Payload<TBody>): boolean {
+  public isValid(payload: EvaluatedStrategyFactory.Payload<TBody>): boolean {
     return this.#cacheMap.get("valid", payload);
   }
 
@@ -69,7 +67,9 @@ export default class EntityProcessor<TClass, TBody = TClass> {
    *
    * @returns An object containing detailed error messages.
    */
-  public getDetailedErrors(payload: Payload<TBody>): DetailedErrors<TClass> {
+  public getDetailedErrors(
+    payload: EvaluatedStrategyFactory.Payload<TBody>
+  ): EvaluatedStrategyFactory.DetailedErrors<TClass> {
     return this.#cacheMap.get("detailedErrors", payload);
   }
 
@@ -80,7 +80,9 @@ export default class EntityProcessor<TClass, TBody = TClass> {
    *
    * @returns An object containing error messages.
    */
-  public getErrors(payload: Payload<TBody>): Errors<TClass> {
+  public getErrors(
+    payload: EvaluatedStrategyFactory.Payload<TBody>
+  ): EvaluatedStrategyFactory.Errors<TClass> {
     return this.#cacheMap.get("errors", payload);
   }
 
@@ -112,10 +114,12 @@ export default class EntityProcessor<TClass, TBody = TClass> {
    * console.log(result.valid);  // Output: true or false
    * ```
    */
-  public validate(payload?: Payload<TBody>): ns.Result<TClass> {
+  public validate(
+    payload?: EvaluatedStrategyFactory.Payload<TBody>
+  ): ns.Result<TClass> {
     const state = payload ?? new this.#meta.class();
-    const errors: Errors<TClass> = {};
-    const detailedErrors: DetailedErrors<TClass> = {};
+    const errors: EvaluatedStrategyFactory.Errors<TClass> = {};
+    const detailedErrors: EvaluatedStrategyFactory.DetailedErrors<TClass> = {};
 
     this.#meta.getFields().forEach((field) => {
       const validation = this.validateField(payload, field as keyof TClass);
@@ -146,7 +150,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
   // prettier-ignore
   validateField<K extends keyof TClass>(payload: any, fieldName: K): Validation.getStrategyResult<TClass[K]> {
     const descriptor = this.#meta.getUntypedDescriptor(fieldName);
-    const StrategyImpl: Validation.getStrategyClass<TClass[K]> = descriptor.StrategyImpl as any;
+    const StrategyImpl: Validation.getStrategyResult<TClass[K]> = descriptor.StrategyImpl as any;
     const stratImpl = new (StrategyImpl as any)(descriptor, this.#hostDefault);
     const result = stratImpl.test(payload?.[fieldName], payload, this.#groups, this.locale);
     return result;

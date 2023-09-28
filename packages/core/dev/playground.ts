@@ -1,24 +1,21 @@
-import Localization from "../src/localization";
-import EntityProcessor from "../src/reflection/models/entity.processor";
-import Required from "../validators/any/Required";
+import { Localization, ValidationEngine, decorate } from "./../index";
 
-Localization.Resolver.configure((locale, msg) => translations[locale][msg]);
-
-const translations: any = {
+const translations: Record<string, Record<string, string>> = {
   hr: { translation1: `[hr]: Unos je obavezan` },
   en: { translation1: `[en]: Field is mandatory` },
   it: { translation1: `[it]: Field is mandatory` },
 };
 
+Localization.MessageResolver.configure((l, m) => translations[l][m]);
+
 class TestClass {
-  @Required("translation1")
+  @decorate.string.Required("translation1")
   str: string = "";
 }
 
 //const meta = ValidationMetaService.inject(TestClass);
-const processor = new EntityProcessor(TestClass, {
+const processor = new ValidationEngine(TestClass, {
   locale: "it",
-  groups: ["group1"],
 });
 console.log(processor.validate({}));
 processor.locale = "hr";

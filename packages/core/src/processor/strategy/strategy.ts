@@ -22,7 +22,7 @@ export default abstract class ValidationStrategy<
   /**
    * @description The reflection descriptor for the field.
    */
-  #descriptor: ReflectionDescriptor<any, any>;
+  #descriptor: ReflectionDescriptor.ReflectionDescriptor<any, any>;
 
   /**
    * @description The default value for the parent object.
@@ -32,7 +32,7 @@ export default abstract class ValidationStrategy<
   /**
    * @description A specific descriptor for the field, lazy-loaded.
    */
-  #fieldDescriptor?: ReflectionDescriptor<TFieldType, any>;
+  #fieldDescriptor?: ReflectionDescriptor.ReflectionDescriptor<TFieldType, any>;
 
   /**
    * @param descriptor The reflection descriptor for the field.
@@ -41,7 +41,7 @@ export default abstract class ValidationStrategy<
    * @description Initializes the `#descriptor` and `#defaultParent` fields.
    */
   constructor(
-    descriptor: ReflectionDescriptor<TFieldType, any>,
+    descriptor: ReflectionDescriptor.ReflectionDescriptor<TFieldType, any>,
     defaultValue: TFieldType
   ) {
     this.#descriptor = descriptor;

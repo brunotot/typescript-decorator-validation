@@ -1,77 +1,6 @@
+import Reflection from "..";
 import Decorator from "../../decorators";
-import Class from "../../types/validation/class.type";
-
-/**
- * Retrieves the property descriptor for a specific field in a class.
- *
- * @param constructor - The class constructor.
- * @param name - The name of the field.
- * @returns The property descriptor for the field.
- */
-export function getClassFieldDescriptor<TClass>(
-  constructor: Class<TClass>,
-  name: keyof TClass
-) {
-  const instance: any = new constructor();
-  const prototype = instance.__proto__;
-  return Object.getOwnPropertyDescriptor(prototype, name);
-}
-
-/**
- * Retrieves the names of all fields in a class.
- *
- * @param constructor - The class constructor.
- * @returns An array of field names.
- */
-export function getClassFieldNames<TClass>(
-  constructor: Class<TClass>
-): (keyof TClass)[] {
-  const getPropertyNames = (classInstance: any) => {
-    return Object.getOwnPropertyNames(classInstance ?? {}).filter(
-      (property) => property !== "constructor"
-    );
-  };
-  const instance: any = new constructor();
-  const prototype = instance.__proto__;
-  const instanceProps = getPropertyNames(instance);
-  const prototypeProps = getPropertyNames(prototype);
-  const uniquePropsSet = new Set([...instanceProps, ...prototypeProps]);
-  const uniquePropsArray = [...uniquePropsSet];
-  return uniquePropsArray as (keyof TClass)[];
-}
-
-/**
- * Type alias for strategies that can either be a decorator context or a class.
- */
-export type MetaStrategy = Decorator.Context | Class<any>;
-
-/**
- * Retrieves or initializes metadata for a given strategy.
- *
- * @param strategy - The strategy to get metadata for.
- * @returns The metadata object.
- */
-export function metadata(strategy: MetaStrategy): DecoratorMetadataObject {
-  if (isClass(strategy)) {
-    (Symbol as any).metadata ??= Symbol("Symbol.metadata");
-    strategy[Symbol.metadata] ??= {};
-    return strategy[Symbol.metadata]!;
-  }
-  if (!strategy.metadata) {
-    (strategy as any).metadata = {};
-  }
-  return strategy?.metadata;
-}
-
-/**
- * Checks if a given strategy is a class.
- *
- * @param strategy - The strategy to check.
- * @returns True if the strategy is a class, false otherwise.
- */
-export function isClass(strategy: MetaStrategy): strategy is Class<any> {
-  return typeof strategy === "function";
-}
+import Types from "../../types/namespace/types.namespace";
 
 /**
  * Abstract class for managing metadata.
@@ -84,7 +13,7 @@ export default abstract class MetaService<Entry> {
   #metadata: DecoratorMetadataObject;
   #injectionKey: string;
   #initial: () => Entry;
-  #class?: Class<any>;
+  #class?: Types.Class<any>;
   protected context?: Decorator.Context;
 
   /**
@@ -96,13 +25,13 @@ export default abstract class MetaService<Entry> {
    */
   constructor(
     injectionKey: string,
-    strategy: MetaStrategy,
+    strategy: Reflection.MetaStrategy,
     initial: () => Entry
   ) {
-    this.#metadata = metadata(strategy);
+    this.#metadata = Reflection.getMetadata(strategy);
     this.#injectionKey = injectionKey;
     this.#initial = initial;
-    if (isClass(strategy)) {
+    if (Reflection.isClass(strategy)) {
       this.class = strategy;
     } else {
       this.context = strategy;
@@ -119,7 +48,7 @@ export default abstract class MetaService<Entry> {
   /**
    * Sets the class associated with this MetaService.
    */
-  set class(clazz: Class<any>) {
+  set class(clazz: Types.Class<any>) {
     this.#class = clazz;
   }
 

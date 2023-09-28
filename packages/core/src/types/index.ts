@@ -3,8 +3,11 @@
  * These modules and namespaces are essential for the functionality of the application.
  * @namespace
  */
+import DecoratorNs from "./../decorators";
+import ReflectionDescriptorNs from "./../reflection/models/reflection.descriptor";
 import ConditionNamespace from "./namespace/condition.namespace";
 import EntityProcessorNamespace from "./namespace/entity-processor.namespace";
+import EvaluatedStrategyFactoryNs from "./namespace/evaluated-strategy-factory.namespace";
 import FactoryNamespace from "./namespace/factory.namespace";
 import HelperNamespace from "./namespace/helper.namespace";
 import ObjectsNamespace from "./namespace/objects.namespace";
@@ -67,6 +70,12 @@ namespace Core {
    * @namespace
    */
   export import EntityProcessor = EntityProcessorNamespace;
+
+  export import Decorator = DecoratorNs;
+
+  export import EvaluatedStrategyFactory = EvaluatedStrategyFactoryNs;
+
+  export import ReflectionDescriptor = ReflectionDescriptorNs;
 }
 
 export default Core;

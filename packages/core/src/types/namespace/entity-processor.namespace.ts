@@ -1,8 +1,6 @@
 import Localization from "../../localization";
-import BaseCacheMap from "../../processor/models/cache.map";
-import DetailedErrors from "../validation/detailed-errors.type";
-import Errors from "../validation/errors.type";
-import Payload from "../validation/payload.type";
+import CacheMap from "../../processor/models/cache.map";
+import EvaluatedStrategyFactory from "./evaluated-strategy-factory.namespace";
 import Validation from "./validation.namespace";
 
 /**
@@ -32,8 +30,8 @@ namespace EntityProcessorNs {
    */
   export type Result<T> = {
     valid: boolean;
-    detailedErrors: DetailedErrors<T>;
-    errors: Errors<T>;
+    detailedErrors: EvaluatedStrategyFactory.DetailedErrors<T>;
+    errors: EvaluatedStrategyFactory.Errors<T>;
   };
 
   /**
@@ -54,7 +52,7 @@ namespace EntityProcessorNs {
    * Cache object for storing entity validation results.
    */
   export type Cache<TClass, TBody = TClass> = Result<TClass> & {
-    state: Payload<TBody>;
+    state: EvaluatedStrategyFactory.Payload<TBody>;
   };
 
   /**
@@ -72,9 +70,9 @@ namespace EntityProcessorNs {
    * @description
    * A map for storing entity validation results.
    */
-  export type CacheMap<TClass, TBody = TClass> = BaseCacheMap<
+  export type CacheMap<TClass, TBody = TClass> = CacheMap.CacheMap<
     Result<TClass>,
-    Payload<TBody>
+    EvaluatedStrategyFactory.Payload<TBody>
   >;
 }
 

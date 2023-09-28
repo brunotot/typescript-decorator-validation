@@ -1,4 +1,4 @@
-import Errors from "../validation/errors.type";
+import EvaluatedStrategyFactory from "./evaluated-strategy-factory.namespace";
 import HelperNamespace from "./helper.namespace";
 
 /**
@@ -76,7 +76,9 @@ namespace Objects {
    * @description
    * Checks if an error object has errors.
    */
-  export function hasErrors<T>(data: Errors<T>): boolean {
+  export function hasErrors<T>(
+    data: EvaluatedStrategyFactory.Errors<T>
+  ): boolean {
     const data0: any = data;
     if (Array.isArray(data0)) {
       return data0.some((item) => hasErrors(item));

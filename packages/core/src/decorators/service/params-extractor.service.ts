@@ -24,7 +24,7 @@ namespace ParamsExtractorService {
     const msgNullable = providerType ? provider : provider.message;
     const msgNonNull = msgNullable ?? "";
     return msgNonNull.length
-      ? Localization.Resolver.resolve(locale, msgNonNull)
+      ? Localization.MessageResolver.resolve(locale, msgNonNull)
       : defaultMessage;
   }
 

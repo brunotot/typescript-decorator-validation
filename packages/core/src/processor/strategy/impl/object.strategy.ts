@@ -1,9 +1,8 @@
 import Localization from "../../../localization";
 import EntityProcessor from "../../../processor";
 import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
+import EvaluatedStrategyFactory from "../../../types/namespace/evaluated-strategy-factory.namespace";
 import Validation from "../../../types/namespace/validation.namespace";
-import DetailedErrors from "../../../types/validation/detailed-errors.type";
-import Errors from "../../../types/validation/errors.type";
 import ValidationStrategy from "../strategy";
 
 /**
@@ -18,7 +17,7 @@ import ValidationStrategy from "../strategy";
  */
 export type ObjectSimpleErrors<F> = {
   node: string[];
-  children: Errors<F>;
+  children: EvaluatedStrategyFactory.Errors<F>;
 };
 
 /**
@@ -33,7 +32,7 @@ export type ObjectSimpleErrors<F> = {
  */
 export type ObjectDetailedErrors<F> = {
   node: Validation.Result[];
-  children: DetailedErrors<F>;
+  children: EvaluatedStrategyFactory.DetailedErrors<F>;
 };
 
 /**
@@ -58,7 +57,10 @@ export default class ObjectStrat<F> extends ValidationStrategy<
    * Initializes the `ObjectStrat` class by calling the superclass constructor with the
    * provided descriptor and default value.
    */
-  constructor(descriptor: ReflectionDescriptor<F, any>, defaultValue: F) {
+  constructor(
+    descriptor: ReflectionDescriptor.ReflectionDescriptor<F, any>,
+    defaultValue: F
+  ) {
     super(descriptor, defaultValue);
   }
 

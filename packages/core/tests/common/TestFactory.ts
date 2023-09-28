@@ -1,12 +1,12 @@
 import EntityProcessor from "../../src/processor";
-import Class from "../../src/types/validation/class.type";
+import Types from "../../src/types/namespace/types.namespace";
 import ValidationHandlerMock, {
   IMock,
   buildIOName,
 } from "./ValidationHandlerMock";
 
 export type StandardTestProps<T> = {
-  Model: Class<IMock<T>>;
+  Model: Types.Class<IMock<T>>;
   type: string;
   identifier: string;
   successData: T[];

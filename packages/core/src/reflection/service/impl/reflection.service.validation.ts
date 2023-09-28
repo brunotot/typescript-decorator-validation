@@ -1,13 +1,10 @@
+import Reflection from "../../";
 import Decorator from "../../../decorators";
 import ParamsExtractorService from "../../../decorators/service/params-extractor.service";
+import Types from "../../../types/namespace/types.namespace";
 import Validation from "../../../types/namespace/validation.namespace";
-import Class from "../../../types/validation/class.type";
 import ReflectionDescriptor from "../../models/reflection.descriptor";
-import MetaService, {
-  MetaStrategy,
-  getClassFieldNames,
-  isClass,
-} from "../reflection.service";
+import MetaService from "../reflection.service";
 
 /**
  * ValidationMetaService class extending MetaService.
@@ -17,7 +14,7 @@ import MetaService, {
  * It provides methods to add validators, get field names, and manage descriptors.
  */
 export default class ValidationMetaService extends MetaService<
-  Map<string, ReflectionDescriptor<any, any, any>>
+  Map<string, ReflectionDescriptor.ReflectionDescriptor<any, any, any>>
 > {
   /**
    * Static method to create a new instance of ValidationMetaService.
@@ -25,15 +22,17 @@ export default class ValidationMetaService extends MetaService<
    * @param strategy - The strategy to inject.
    * @returns A new instance of ValidationMetaService.
    */
-  public static inject(strategy: MetaStrategy): ValidationMetaService {
+  public static inject(
+    strategy: Reflection.MetaStrategy
+  ): ValidationMetaService {
     return new ValidationMetaService(strategy);
   }
 
   #fields!: string[];
 
-  private constructor(strategy: MetaStrategy) {
+  private constructor(strategy: Reflection.MetaStrategy) {
     super(ValidationMetaService.name, strategy, () => new Map());
-    isClass(strategy)
+    Reflection.isClass(strategy)
       ? this.#handleClassInit(strategy)
       : this.#handleContextInit(strategy);
   }
@@ -58,7 +57,7 @@ export default class ValidationMetaService extends MetaService<
 
   /**
    * Gets the names of all fields present within given
-   * reflection strategy (`Class<T>` or `Decorator.Context`).
+   * reflection strategy (`Types.Class<T>` or `Decorator.Context`).
    *
    * @returns An array of field names.
    */
@@ -84,10 +83,10 @@ export default class ValidationMetaService extends MetaService<
    */
   getTypedDescriptor<TClass, TName extends keyof TClass>(
     thisName: TName
-  ): ReflectionDescriptor<unknown, TClass, TName> {
+  ): ReflectionDescriptor.ReflectionDescriptor<unknown, TClass, TName> {
     return this.getUntypedDescriptor(
       thisName as string
-    ) as ReflectionDescriptor<unknown, TClass, TName>;
+    ) as ReflectionDescriptor.ReflectionDescriptor<unknown, TClass, TName>;
   }
 
   /**
@@ -96,10 +95,16 @@ export default class ValidationMetaService extends MetaService<
    * @param fieldKey - The key of the field.
    * @returns The untyped descriptor.
    */
-  getUntypedDescriptor(fieldKey: any): ReflectionDescriptor<any, any, any> {
+  getUntypedDescriptor(
+    fieldKey: any
+  ): ReflectionDescriptor.ReflectionDescriptor<any, any, any> {
     if (!this.hasDescriptor(fieldKey)) {
       const cfg = { thisName: fieldKey };
-      const fieldValue = new ReflectionDescriptor<unknown, unknown, any>(cfg);
+      const fieldValue = new ReflectionDescriptor.ReflectionDescriptor<
+        unknown,
+        unknown,
+        any
+      >(cfg);
       this.data.set(fieldKey, fieldValue);
     }
     const descriptor = this.data.get(fieldKey)!;
@@ -115,8 +120,8 @@ export default class ValidationMetaService extends MetaService<
    * This method populates the `#fields` array with the names of the class fields.
    * It also ensures that untyped descriptors are created for each field.
    */
-  #handleClassInit(clazz: Class<any>) {
-    this.#fields = getClassFieldNames(clazz) as string[];
+  #handleClassInit(clazz: Types.Class<any>) {
+    this.#fields = Reflection.getClassFieldNames(clazz) as string[];
     this.#fields.forEach((name) => this.getUntypedDescriptor(name));
   }
 

@@ -1,13 +1,13 @@
 import { useMemo } from "react";
-import { Class, getClassFieldNames } from "tdv-core";
+import { Reflection, TdvCore } from "tdv-core";
 import UseFormNamespace from "./../useForm/types";
 import ns from "./types";
 
 export default function useMutations<TClass, TBody = TClass>(
-  clazz: Class<TClass>,
+  clazz: TdvCore.Types.Class<TClass>,
   { setForm }: ns.UseMutationsConfig<TBody>
 ): UseFormNamespace.UseFormChangeHandlerMap<TBody> {
-  const fields = useMemo(() => getClassFieldNames(clazz), []);
+  const fields = useMemo(() => Reflection.getClassFieldNames(clazz), []);
 
   const handleChange: UseFormNamespace.UseFormSetterFn<TBody> = (
     key,

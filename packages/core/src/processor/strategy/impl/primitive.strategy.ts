@@ -25,7 +25,10 @@ export default class PrimitiveStrat<F> extends ValidationStrategy<
    * Initializes the `PrimitiveStrat` class by calling the superclass constructor with the
    * provided descriptor and default value.
    */
-  constructor(descriptor: ReflectionDescriptor<F, any>, defaultValue: F) {
+  constructor(
+    descriptor: ReflectionDescriptor.ReflectionDescriptor<F, any>,
+    defaultValue: F
+  ) {
     super(descriptor, defaultValue);
   }
 

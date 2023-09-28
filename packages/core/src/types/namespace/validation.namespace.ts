@@ -80,6 +80,7 @@ namespace Validation {
   };
 
   /**
+   *
    * @typeParam Field - The type of the field being validated.
    *
    * @type
@@ -87,6 +88,8 @@ namespace Validation {
    * @description
    * A type that maps field types to their respective validation strategy
    * classes.
+   *
+   * @hidden
    */
   export type getStrategyClass<Field> =
     true extends $.Condition.isPrimitiveArray<Field>
@@ -107,6 +110,8 @@ namespace Validation {
    * @description
    * A type that maps field types to their respective validation strategy
    * results.
+   *
+   * @hidden
    */
   export type getStrategyResult<Field> = ReturnType<
     getStrategyClass<Field>["test"]

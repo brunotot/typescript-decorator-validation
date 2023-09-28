@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { Class, EntityProcessor } from "tdv-core";
+import { TdvCore, ValidationEngine } from "tdv-core";
 import ns from "./types";
 
 export default function useEntityProcessor<TClass, TBody = TClass>(
-  model: Class<TClass>,
+  model: TdvCore.Types.Class<TClass>,
   config?: ns.UseEntityProcessorConfig<TBody>
 ) {
-  return useMemo(() => new EntityProcessor<TClass, TBody>(model, config), []);
+  return useMemo(() => new ValidationEngine<TClass, TBody>(model, config), []);
 }

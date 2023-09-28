@@ -2,9 +2,8 @@ import Localization from "../../../localization";
 import EntityProcessor from "../../../processor";
 import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
 import ValidationMetaService from "../../../reflection/service/impl/reflection.service.validation";
+import EvaluatedStrategyFactory from "../../../types/namespace/evaluated-strategy-factory.namespace";
 import Validation from "../../../types/namespace/validation.namespace";
-import DetailedErrors from "../../../types/validation/detailed-errors.type";
-import Errors from "../../../types/validation/errors.type";
 import ValidationStrategy from "../strategy";
 
 /**
@@ -19,7 +18,7 @@ import ValidationStrategy from "../strategy";
  */
 export type ObjectArraySimpleErrors<F> = {
   node: string[];
-  children: Errors<F>[];
+  children: EvaluatedStrategyFactory.Errors<F>[];
 };
 
 /**
@@ -34,7 +33,7 @@ export type ObjectArraySimpleErrors<F> = {
  */
 export type ObjectArrayDetailedErrors<F> = {
   node: Validation.Result[];
-  children: DetailedErrors<F>[];
+  children: EvaluatedStrategyFactory.DetailedErrors<F>[];
 };
 
 /**
@@ -59,7 +58,10 @@ export default class ObjectArrayStrat<F> extends ValidationStrategy<
    * Initializes the `ObjectArrayStrat` class by calling the superclass constructor with the
    * provided descriptor and default value.
    */
-  constructor(descriptor: ReflectionDescriptor<F, any>, defaultValue: F) {
+  constructor(
+    descriptor: ReflectionDescriptor.ReflectionDescriptor<F, any>,
+    defaultValue: F
+  ) {
     super(descriptor, defaultValue);
   }
 

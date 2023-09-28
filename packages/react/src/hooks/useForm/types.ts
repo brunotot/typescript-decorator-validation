@@ -1,15 +1,17 @@
 import { Dispatch, SetStateAction } from "react";
-import { DetailedErrors, Errors, TdvCore, Validation } from "tdv-core";
+import { TdvCore } from "tdv-core";
 import FormContextNamespace from "../../contexts/FormContext/types";
 
 namespace UseFormHook {
   export type UseFormConfig<TClass, TBody = TClass> = {
     defaultValue?: TBody;
-    validationGroups?: Validation.Group[];
+    validationGroups?: TdvCore.Validation.Group[];
     validateImmediately?: boolean;
     standalone?: boolean;
     onSubmit?: () => Promise<void> | void;
-    onSubmitValidationFail?: (errors: Errors<TClass>) => void;
+    onSubmitValidationFail?: (
+      errors: TdvCore.EvaluatedStrategyFactory.Errors<TClass>
+    ) => void;
     onChange?: () => void;
   };
 
@@ -19,8 +21,8 @@ namespace UseFormHook {
     onSubmit: () => Promise<void>;
     mutations: UseFormChangeHandlerMap<TBody>;
     providerProps: Omit<FormContextNamespace.FormProviderProps, "children">;
-    errors: Errors<TClass>;
-    detailedErrors: DetailedErrors<TClass>;
+    errors: TdvCore.EvaluatedStrategyFactory.Errors<TClass>;
+    detailedErrors: TdvCore.EvaluatedStrategyFactory.DetailedErrors<TClass>;
     reset: (...fieldPaths: PayloadFieldPath<TBody>[]) => void;
   };
 

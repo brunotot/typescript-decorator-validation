@@ -1,4 +1,4 @@
-import { PrimitiveSetAppend } from "../../..";
+import { Overrides } from "../../..";
 
 /**
  * @namespace Types
@@ -40,12 +40,32 @@ namespace Types {
    */
   export type Primitive = [
     ...[string, number, boolean, bigint, Date],
-    ...(PrimitiveSetAppend extends {
+    ...(Overrides.PrimitiveSet extends {
       values: infer CustomPrimitives extends readonly unknown[];
     }
       ? CustomPrimitives
       : [])
   ];
+
+  /**
+   * Represents a class constructor that can create instances of type `T`.
+   *
+   * @typeParam T - The type to be instantiated by the class constructor.
+   *
+   * @example
+   * ```typescript
+   * class MyClass {
+   *   constructor(arg1: string, arg2: number) {
+   *     // ...
+   *   }
+   * }
+   *
+   * const myClassConstructor: Class<MyClass> = MyClass;
+   * const instance = new myClassConstructor('hello', 42);
+   * // Creates an instance of MyClass
+   * ```
+   */
+  export type Class<T> = { new (...args: any[]): T };
 }
 
 /**

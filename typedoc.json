@@ -2,5 +2,6 @@
   "entryPoints": ["packages/*"],
   "name": "Typescript Decorator Validation",
   "entryPointStrategy": "packages",
-  "includeVersion": true
+  "includeVersion": true,
+  "excludeInternal": true
 }

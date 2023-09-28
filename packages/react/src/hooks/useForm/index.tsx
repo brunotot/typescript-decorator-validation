@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Class } from "tdv-core";
+import { TdvCore } from "tdv-core";
 import { FormContext } from "../../contexts/FormContext";
 import useEffectWhenMounted from "../useAfterMount";
 import useMutations from "../useMutations";
@@ -36,7 +36,7 @@ import ns from "./types";
  * @typeParam TBody - represents writable scope of `TClass` (it can be TClass itself or a chunk of its fields)
  */
 export default function useForm<TClass, TBody = TClass>(
-  model: Class<TClass>,
+  model: TdvCore.Types.Class<TClass>,
   {
     defaultValue,
     onSubmit: onSubmitParam,

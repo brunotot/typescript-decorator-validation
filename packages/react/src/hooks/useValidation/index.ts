@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Class, DetailedErrors, Errors } from "tdv-core";
+import { TdvCore } from "tdv-core";
 import useEntityProcessor from "../useEntityProcessor";
 import ns from "./types";
 
@@ -28,7 +28,7 @@ import ns from "./types";
  * @typeParam TBody - represents writable scope of `TClass` (it can be TClass itself or a chunk of its fields)
  */
 export default function useValidation<TClass, TBody = TClass>(
-  model: Class<TClass>,
+  model: TdvCore.Types.Class<TClass>,
   { defaultValue, groups }: ns.UseValidationConfig<TBody> = {}
 ): ns.UseValidationReturn<TClass, TBody> {
   const processor = useEntityProcessor<TClass, TBody>(model, {
@@ -36,8 +36,12 @@ export default function useValidation<TClass, TBody = TClass>(
     defaultValue,
   });
   const [form, setForm] = useState<TBody>(processor.hostDefault);
-  const [details, setDetails] = useState({} as DetailedErrors<TClass>);
-  const [simpleErrors, setSimpleErrors] = useState({} as Errors<TClass>);
+  const [details, setDetails] = useState(
+    {} as TdvCore.EvaluatedStrategyFactory.DetailedErrors<TClass>
+  );
+  const [simpleErrors, setSimpleErrors] = useState(
+    {} as TdvCore.EvaluatedStrategyFactory.Errors<TClass>
+  );
 
   useEffect(() => {
     const { errors, detailedErrors } = processor.validate(form!);

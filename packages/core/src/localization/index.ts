@@ -1,4 +1,8 @@
+import TranslationServiceNs from "./service/translation.service";
+
 namespace Localization {
+  export import TranslationService = TranslationServiceNs;
+
   export type Locale = "en" | "hr" | "de" | "es" | "fr" | "it" | "nl";
 
   /**
@@ -21,17 +25,17 @@ namespace Localization {
     locale = localeValue;
   }
 
-  export namespace Resolver {
-    export type ResolverConfigurer = (
+  export namespace MessageResolver {
+    export type MessageResolverData = (
       locale: Locale,
       message: string
     ) => string;
 
-    const DEFAULT_CONFIGURER: ResolverConfigurer = (_, message) => message;
+    const DEFAULT_CONFIGURER: MessageResolverData = (_, message) => message;
 
-    let configurer: ResolverConfigurer = DEFAULT_CONFIGURER;
+    let configurer: MessageResolverData = DEFAULT_CONFIGURER;
 
-    export function configure(handler?: ResolverConfigurer) {
+    export function configure(handler?: MessageResolverData) {
       configurer = handler ?? DEFAULT_CONFIGURER;
     }
 
