@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>StrategyOptional | Typescript Decorator Validation - v1.0.0</title><meta name="description" content="Documentation for Typescript Decorator Validation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/my-theme.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>console.log(`Loaded ${location.href}`)</script><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>validate | Typescript Decorator Validation - v1.0.0</title><meta name="description" content="Documentation for Typescript Decorator Validation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/my-theme.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>console.log(`Loaded ${location.href}`)</script><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -27,31 +27,40 @@
 <ul class="tsd-breadcrumb">
 <li><a href="../index.html">Typescript Decorator Validation</a></li>
 <li><a href="../modules/tdv_core.html">tdv-core</a></li>
-<li><a href="../modules/tdv_core.TdvCore.html">TdvCore</a></li>
-<li><a href="../modules/tdv_core.TdvCore.EvaluatedStrategyFactory.html">EvaluatedStrategyFactory</a></li>
-<li><a href="../modules/tdv_core.TdvCore.EvaluatedStrategyFactory.Base.html">Base</a></li>
-<li><a href="tdv_core.TdvCore.EvaluatedStrategyFactory.Base.StrategyOptional.html">StrategyOptional</a></li></ul>
-<h1>Type alias StrategyOptional&lt;TActual, TPartial&gt;</h1></div>
-<div class="tsd-signature"><span class="tsd-kind-type-alias">Strategy<wbr/>Optional</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TActual</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TPartial</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/><span>    </span><span class="tsd-signature-symbol">[</span><span class="tsd-kind-type-parameter">TKey</span><span class="tsd-signature-symbol"> in </span><a href="tdv_core.TdvCore.Objects.Inputs.html" class="tsd-signature-type tsd-kind-type-alias">Inputs</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TActual</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.TdvCore.EvaluatedStrategyFactory.Base.FieldStrategy.html" class="tsd-signature-type tsd-kind-type-alias">FieldStrategy</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TActual</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TKey</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">TPartial</span><span class="tsd-signature-symbol">&gt;</span><br/><span class="tsd-signature-symbol">}</span></div>
+<li><a href="tdv_core.validate.html">validate</a></li></ul>
+<h1>Function validate</h1></div>
+<section class="tsd-panel">
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="validate"><span class="tsd-kind-call-signature">validate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">props</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/tdv_core.Decorator.Instance.html" class="tsd-signature-type tsd-kind-type-alias">Instance</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#validate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>A function which returns a decorated validator function built from a custom handler</p>
+</div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">TActual</span></h4>
-<div class="tsd-comment tsd-typography"><p>The type to be evaluated.</p>
-</div>
-<div class="tsd-comment tsd-typography"></div></li>
+<h4><span class="tsd-kind-type-parameter">T</span></h4></li></ul></section>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">TPartial</span><span class="tsd-signature-symbol"> extends </span><a href="tdv_core.TdvCore.Params.valuePartial.html" class="tsd-signature-type tsd-kind-type-alias">valuePartial</a> = <a href="tdv_core.TdvCore.Params.partial.html" class="tsd-signature-type tsd-kind-type-alias">partial</a><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">&quot;disabled&quot;</span><span class="tsd-signature-symbol">]</span></h4>
-<div class="tsd-comment tsd-typography"><p>The type representing partial values for optional fields.</p>
+<h5><span class="tsd-kind-parameter">props</span>: <a href="../types/tdv_core.TdvCore.Validation.Evaluator.html" class="tsd-signature-type tsd-kind-type-alias">Evaluator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">groups</span><span class="tsd-signature-symbol">?: </span><a href="../types/tdv_core.TdvCore.Validation.GroupsParam.html" class="tsd-signature-type tsd-kind-type-alias">GroupsParam</a><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">isValid</span><span class="tsd-signature-symbol">: </span><a href="../types/tdv_core.TdvCore.Validation.Evaluator.html" class="tsd-signature-type tsd-kind-type-alias">Evaluator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></h5>
+<div class="tsd-comment tsd-typography"><p>An object with a custom validation function or a validation function directly.</p>
 </div>
-<div class="tsd-comment tsd-typography"></div></li></ul></section>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../types/tdv_core.Decorator.Instance.html" class="tsd-signature-type tsd-kind-type-alias">Instance</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A decorator function to use with class properties.</p>
+
 <div class="tsd-comment tsd-typography">
-<h4>Description</h4><p>Represents a strategy for handling optional fields in a type <code>TActual</code>.
-This type is used to define how validation or processing should be applied to optional fields in a type <code>TActual</code>.</p>
+<h4>Typeparam</h4><p>T - The type of the decorated property.</p>
+
+<h4>Example</h4><pre><code class="language-ts"><span class="hl-3">// Example 1: Basic usage with a custom validation function</span><br/><span class="hl-6">class</span><span class="hl-1"> </span><span class="hl-7">Order</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-3">//@Rule((value) =&gt; value.price &gt; 0)</span><br/><span class="hl-1">  </span><span class="hl-5">totalPrice</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
+</code><button>Copy</button></pre>
+
+<h4>Example</h4><pre><code class="language-ts"><span class="hl-3">// Example 2: Using an object with validation function and groups</span><br/><span class="hl-6">class</span><span class="hl-1"> </span><span class="hl-7">Product</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-3">//@Rule({</span><br/><span class="hl-1">  </span><span class="hl-3">//  isValid: (value) =&gt; value.price &gt; 0,</span><br/><span class="hl-1">  </span><span class="hl-3">//  roups: [&quot;checkout&quot;],</span><br/><span class="hl-1">  </span><span class="hl-3">//)</span><br/><span class="hl-1">  </span><span class="hl-5">price</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
+</code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/4fd2ee6/packages/core/src/types/namespace/evaluated-strategy-factory.namespace.ts#L74">src/types/namespace/evaluated-strategy-factory.namespace.ts:74</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/4fd2ee6/packages/core/validators/any/Rule.ts#L28">validators/any/Rule.ts:28</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -74,7 +83,7 @@ This type is used to define how validation or processing should be applied to op
 <div>Decorator<wbr/>Service</div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="../functions/tdv_core.Decorator.DecoratorService.create.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Decorator.DecoratorService.create.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>create
 <div class="menu-item-desc">Creates a new decorator using the provided supplier function.</div></div></a></li></ul></div></details></li>
 <li>
@@ -82,10 +91,10 @@ This type is used to define how validation or processing should be applied to op
 <div>Params<wbr/>Extractor<wbr/>Service</div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="../functions/tdv_core.Decorator.ParamsExtractorService.groups.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Decorator.ParamsExtractorService.groups.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>groups
 <div class="menu-item-desc">Extracts validation groups from the provided decorator properties.</div></div></a></li>
-<li><a href="../functions/tdv_core.Decorator.ParamsExtractorService.message.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Decorator.ParamsExtractorService.message.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>message
 <div class="menu-item-desc">Extracts a message from the provided decorator properties.</div></div></a></li></ul></div></details></li>
 <li>
@@ -93,20 +102,20 @@ This type is used to define how validation or processing should be applied to op
 <div>Validator<wbr/>Service</div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="../functions/tdv_core.Decorator.ValidatorService.create.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Decorator.ValidatorService.create.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>create
 <div class="menu-item-desc">Creates a new validator function using the provided validation builder options.</div></div></a></li></ul></div></details></li>
-<li><a href="tdv_core.Decorator.Context.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.Decorator.Context.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Context</div></a></li>
-<li><a href="tdv_core.Decorator.ImpartialProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.Decorator.ImpartialProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Impartial<wbr/>Props</div></a></li>
-<li><a href="tdv_core.Decorator.Instance.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.Decorator.Instance.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Instance</div></a></li>
-<li><a href="tdv_core.Decorator.PartialProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.Decorator.PartialProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Partial<wbr/>Props</div></a></li>
-<li><a href="tdv_core.Decorator.Supplier.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.Decorator.Supplier.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Supplier</div></a></li>
-<li><a href="tdv_core.Decorator.ValueProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.Decorator.ValueProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Value<wbr/>Props</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Localization"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
@@ -119,28 +128,28 @@ This type is used to define how validation or processing should be applied to op
 <div>Message<wbr/>Resolver</div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.Localization.MessageResolver.MessageResolverData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.Localization.MessageResolver.MessageResolverData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Message<wbr/>Resolver<wbr/>Data</div></a></li>
-<li><a href="../functions/tdv_core.Localization.MessageResolver.configure.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.MessageResolver.configure.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>configure</div></a></li>
-<li><a href="../functions/tdv_core.Localization.MessageResolver.resolve.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.MessageResolver.resolve.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>resolve</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Localization.TranslationService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.TranslationService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Translation<wbr/>Service</div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="../functions/tdv_core.Localization.TranslationService.translate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.TranslationService.translate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>translate
 <div class="menu-item-desc">Localizes a string based on a key and optional arguments.</div></div></a></li></ul></div></details></li>
-<li><a href="tdv_core.Localization.Locale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.Localization.Locale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Locale</div></a></li>
-<li><a href="tdv_core.Localization.Messages.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.Localization.Messages.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Messages
 <div class="menu-item-desc">Type definition for a collection of locale-specific messages.</div></div></a></li>
-<li><a href="../functions/tdv_core.Localization.getLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.getLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>get<wbr/>Locale</div></a></li>
-<li><a href="../functions/tdv_core.Localization.setLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.setLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>set<wbr/>Locale</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Models"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Models.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
@@ -170,7 +179,7 @@ This type is used to define how validation or processing should be applied to op
 <div>Strategy</div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.Reflection.Strategy.ReflectionStrategyType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.Reflection.Strategy.ReflectionStrategyType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Reflection<wbr/>Strategy<wbr/>Type
 <div class="menu-item-desc">The type of a reflection strategy.</div></div></a></li>
 <li><a href="../variables/tdv_core.Reflection.Strategy.ReflectionStrategy.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
@@ -182,23 +191,23 @@ This type is used to define how validation or processing should be applied to op
 <li><a href="../classes/tdv_core.Reflection.Rule.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>
 <div>Rule
 <div class="menu-item-desc">Manages a collection of validation rules for a specific field.</div></div></a></li>
-<li><a href="tdv_core.Reflection.MetaStrategy.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.Reflection.MetaStrategy.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Meta<wbr/>Strategy
 <div class="menu-item-desc">Type alias for strategies that can either be a decorator context or a class.</div></div></a></li>
-<li><a href="../functions/tdv_core.Reflection.getClassFieldDescriptor.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Reflection.getClassFieldDescriptor.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>get<wbr/>Class<wbr/>Field<wbr/>Descriptor
 <div class="menu-item-desc">Retrieves the property descriptor for a specific field in a class.</div></div></a></li>
-<li><a href="../functions/tdv_core.Reflection.getClassFieldNames.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Reflection.getClassFieldNames.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>get<wbr/>Class<wbr/>Field<wbr/>Names
 <div class="menu-item-desc">Retrieves the names of all fields in a class.</div></div></a></li>
-<li><a href="../functions/tdv_core.Reflection.getMetadata.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Reflection.getMetadata.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>get<wbr/>Metadata
 <div class="menu-item-desc">Retrieves or initializes metadata for a given strategy.</div></div></a></li>
-<li><a href="../functions/tdv_core.Reflection.isClass.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Reflection.isClass.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>is<wbr/>Class
 <div class="menu-item-desc">Checks if a given strategy is a class.</div></div></a></li></ul></div></details></li>
 <li>
-<details class="tsd-index-accordion" open data-key="tdv-core.TdvCore"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" data-key="tdv-core.TdvCore"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Tdv<wbr/>Core
 <div class="menu-item-desc">An entry-point namespace which serves as a gateway to all data of this library exports</div></div></a></summary>
 <div class="tsd-accordion-details">
@@ -211,21 +220,21 @@ This type is used to define how validation or processing should be applied to op
 <div class="menu-item-desc">Condition</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.TdvCore.Condition.isAnyOf.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Condition.isAnyOf.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>is<wbr/>Any<wbr/>Of</div></a></li>
-<li><a href="tdv_core.TdvCore.Condition.isArray.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Condition.isArray.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>is<wbr/>Array</div></a></li>
-<li><a href="tdv_core.TdvCore.Condition.isFunction.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Condition.isFunction.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>is<wbr/>Function</div></a></li>
-<li><a href="tdv_core.TdvCore.Condition.isObject.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Condition.isObject.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>is<wbr/>Object</div></a></li>
-<li><a href="tdv_core.TdvCore.Condition.isObjectArray.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Condition.isObjectArray.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>is<wbr/>Object<wbr/>Array</div></a></li>
-<li><a href="tdv_core.TdvCore.Condition.isPrimitive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Condition.isPrimitive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>is<wbr/>Primitive</div></a></li>
-<li><a href="tdv_core.TdvCore.Condition.isPrimitiveArray.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Condition.isPrimitiveArray.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>is<wbr/>Primitive<wbr/>Array</div></a></li>
-<li><a href="tdv_core.TdvCore.Condition.isUndefined.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Condition.isUndefined.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>is<wbr/>Undefined</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.TdvCore.EntityProcessor"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.EntityProcessor.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
@@ -233,43 +242,43 @@ This type is used to define how validation or processing should be applied to op
 <div class="menu-item-desc">EntityProcessorNs</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.TdvCore.EntityProcessor.Cache.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.EntityProcessor.Cache.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Cache</div></a></li>
-<li><a href="tdv_core.TdvCore.EntityProcessor.CacheKey.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.EntityProcessor.CacheKey.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Cache<wbr/>Key</div></a></li>
-<li><a href="tdv_core.TdvCore.EntityProcessor.CacheMap.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.EntityProcessor.CacheMap.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Cache<wbr/>Map</div></a></li>
-<li><a href="tdv_core.TdvCore.EntityProcessor.Config.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.EntityProcessor.Config.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Config</div></a></li>
-<li><a href="tdv_core.TdvCore.EntityProcessor.Result.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.EntityProcessor.Result.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Result</div></a></li>
-<li><a href="tdv_core.TdvCore.EntityProcessor.ValidityErrorsType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.EntityProcessor.ValidityErrorsType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Validity<wbr/>Errors<wbr/>Type</div></a></li></ul></div></details></li>
 <li>
-<details class="tsd-index-accordion" open data-key="tdv-core.TdvCore.EvaluatedStrategyFactory"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.EvaluatedStrategyFactory.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" data-key="tdv-core.TdvCore.EvaluatedStrategyFactory"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.EvaluatedStrategyFactory.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Evaluated<wbr/>Strategy<wbr/>Factory</div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
 <li>
-<details class="tsd-index-accordion" open data-key="tdv-core.TdvCore.EvaluatedStrategyFactory.Base"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.EvaluatedStrategyFactory.Base.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" data-key="tdv-core.TdvCore.EvaluatedStrategyFactory.Base"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.EvaluatedStrategyFactory.Base.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Base</div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.TdvCore.EvaluatedStrategyFactory.Base.EvaluatedStrategy.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.EvaluatedStrategyFactory.Base.EvaluatedStrategy.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Evaluated<wbr/>Strategy</div></a></li>
-<li><a href="tdv_core.TdvCore.EvaluatedStrategyFactory.Base.FieldStrategy.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.EvaluatedStrategyFactory.Base.FieldStrategy.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Field<wbr/>Strategy</div></a></li>
-<li><a href="tdv_core.TdvCore.EvaluatedStrategyFactory.Base.StrategyMandatory.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.EvaluatedStrategyFactory.Base.StrategyMandatory.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Strategy<wbr/>Mandatory</div></a></li>
-<li><a href="tdv_core.TdvCore.EvaluatedStrategyFactory.Base.StrategyOptional.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.EvaluatedStrategyFactory.Base.StrategyOptional.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Strategy<wbr/>Optional</div></a></li></ul></div></details></li>
-<li><a href="tdv_core.TdvCore.EvaluatedStrategyFactory.DetailedErrors.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.EvaluatedStrategyFactory.DetailedErrors.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Detailed<wbr/>Errors
 <div class="menu-item-desc">Represents detailed errors for validation results when calling `validate` or `validateField` method of `EntityProcessor` instance.</div></div></a></li>
-<li><a href="tdv_core.TdvCore.EvaluatedStrategyFactory.Errors.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.EvaluatedStrategyFactory.Errors.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Errors
 <div class="menu-item-desc">Represents simple errors for validation results when calling `validate` or `validateField` method of `EntityProcessor` instance.</div></div></a></li>
-<li><a href="tdv_core.TdvCore.EvaluatedStrategyFactory.Payload.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.EvaluatedStrategyFactory.Payload.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Payload</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.TdvCore.Factory"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.Factory.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
@@ -277,9 +286,9 @@ This type is used to define how validation or processing should be applied to op
 <div class="menu-item-desc">Factory</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.TdvCore.Factory.Arguments.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Factory.Arguments.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Arguments</div></a></li>
-<li><a href="tdv_core.TdvCore.Factory.Function.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Factory.Function.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Function</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.TdvCore.Helper"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.Helper.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
@@ -287,15 +296,15 @@ This type is used to define how validation or processing should be applied to op
 <div class="menu-item-desc">Helper</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.TdvCore.Helper.Exclude.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Helper.Exclude.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Exclude</div></a></li>
-<li><a href="tdv_core.TdvCore.Helper.ExtractArrayType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Helper.ExtractArrayType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Extract<wbr/>Array<wbr/>Type</div></a></li>
-<li><a href="tdv_core.TdvCore.Helper.IfEquals.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Helper.IfEquals.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>If<wbr/>Equals</div></a></li>
-<li><a href="tdv_core.TdvCore.Helper.Purify.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Helper.Purify.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Purify</div></a></li>
-<li><a href="tdv_core.TdvCore.Helper.Values.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Helper.Values.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Values</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.TdvCore.Objects"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.Objects.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
@@ -303,25 +312,25 @@ This type is used to define how validation or processing should be applied to op
 <div class="menu-item-desc">Objects</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.TdvCore.Objects.ArrayPredicate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Objects.ArrayPredicate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Array<wbr/>Predicate</div></a></li>
-<li><a href="tdv_core.TdvCore.Objects.Equals.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Objects.Equals.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Equals</div></a></li>
-<li><a href="tdv_core.TdvCore.Objects.Hash.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Objects.Hash.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Hash</div></a></li>
-<li><a href="tdv_core.TdvCore.Objects.Inputs.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Objects.Inputs.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Inputs</div></a></li>
-<li><a href="tdv_core.TdvCore.Objects.Optional.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Objects.Optional.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Optional</div></a></li>
-<li><a href="../functions/tdv_core.TdvCore.Objects.deepEquals.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.TdvCore.Objects.deepEquals.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>deep<wbr/>Equals</div></a></li>
-<li><a href="../functions/tdv_core.TdvCore.Objects.hasErrors.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.TdvCore.Objects.hasErrors.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>has<wbr/>Errors</div></a></li>
-<li><a href="../functions/tdv_core.TdvCore.Objects.hasValue.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.TdvCore.Objects.hasValue.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>has<wbr/>Value</div></a></li>
-<li><a href="../functions/tdv_core.TdvCore.Objects.hash-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.TdvCore.Objects.hash-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>hash</div></a></li>
-<li><a href="../functions/tdv_core.TdvCore.Objects.unique.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.TdvCore.Objects.unique.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>unique</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.TdvCore.Params"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.Params.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
@@ -329,9 +338,9 @@ This type is used to define how validation or processing should be applied to op
 <div class="menu-item-desc">Params</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.TdvCore.Params.partial.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Params.partial.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>partial</div></a></li>
-<li><a href="tdv_core.TdvCore.Params.valuePartial.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Params.valuePartial.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>value<wbr/>Partial</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.TdvCore.ReflectionDescriptor"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.ReflectionDescriptor.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
@@ -341,16 +350,16 @@ This type is used to define how validation or processing should be applied to op
 <li><a href="../classes/tdv_core.TdvCore.ReflectionDescriptor.ReflectionDescriptor.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>
 <div>Reflection<wbr/>Descriptor
 <div class="menu-item-desc">A class responsible for describing reflection metadata for a specific field within a class.</div></div></a></li>
-<li><a href="tdv_core.TdvCore.ReflectionDescriptor.DescriptorProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.ReflectionDescriptor.DescriptorProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Descriptor<wbr/>Props
 <div class="menu-item-desc">Properties for constructing a `ReflectionDescriptor`.</div></div></a></li>
-<li><a href="tdv_core.TdvCore.ReflectionDescriptor.FieldDescriptorRules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.ReflectionDescriptor.FieldDescriptorRules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Field<wbr/>Descriptor<wbr/>Rules
 <div class="menu-item-desc">Describes the reflection rules for a specific field within a class.</div></div></a></li>
-<li><a href="tdv_core.TdvCore.ReflectionDescriptor.ReflectionDescriptorName.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.ReflectionDescriptor.ReflectionDescriptorName.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Reflection<wbr/>Descriptor<wbr/>Name
 <div class="menu-item-desc">Type alias for the name of a descriptor within a host class.</div></div></a></li>
-<li><a href="tdv_core.TdvCore.ReflectionDescriptor.ReflectionDescriptorThis.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.ReflectionDescriptor.ReflectionDescriptorThis.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Reflection<wbr/>Descriptor<wbr/>This
 <div class="menu-item-desc">Properties for constructing a `ReflectionDescriptor`.</div></div></a></li></ul></div></details></li>
 <li>
@@ -359,15 +368,15 @@ This type is used to define how validation or processing should be applied to op
 <div class="menu-item-desc">Strategy</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.TdvCore.Strategy.Array.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Strategy.Array.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Array</div></a></li>
-<li><a href="tdv_core.TdvCore.Strategy.DeducedArray.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Strategy.DeducedArray.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Deduced<wbr/>Array</div></a></li>
-<li><a href="tdv_core.TdvCore.Strategy.Function.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Strategy.Function.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Function</div></a></li>
-<li><a href="tdv_core.TdvCore.Strategy.Object.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Strategy.Object.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Object</div></a></li>
-<li><a href="tdv_core.TdvCore.Strategy.Primitive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Strategy.Primitive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Primitive</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.TdvCore.Types"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.Types.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
@@ -375,15 +384,15 @@ This type is used to define how validation or processing should be applied to op
 <div class="menu-item-desc">Types</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.TdvCore.Types.Array.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Types.Array.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Array</div></a></li>
-<li><a href="tdv_core.TdvCore.Types.Class.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Types.Class.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Class</div></a></li>
-<li><a href="tdv_core.TdvCore.Types.Function.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Types.Function.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Function</div></a></li>
-<li><a href="tdv_core.TdvCore.Types.Object.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Types.Object.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Object</div></a></li>
-<li><a href="tdv_core.TdvCore.Types.Primitive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Types.Primitive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Primitive</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.TdvCore.Validation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.Validation.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
@@ -391,25 +400,25 @@ This type is used to define how validation or processing should be applied to op
 <div class="menu-item-desc">Validation</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.TdvCore.Validation.Builder.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Validation.Builder.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Builder</div></a></li>
-<li><a href="tdv_core.TdvCore.Validation.Evaluator.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Validation.Evaluator.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Evaluator</div></a></li>
-<li><a href="tdv_core.TdvCore.Validation.Group.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Validation.Group.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Group</div></a></li>
-<li><a href="tdv_core.TdvCore.Validation.Groups.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Validation.Groups.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Groups</div></a></li>
-<li><a href="tdv_core.TdvCore.Validation.GroupsParam.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Validation.GroupsParam.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Groups<wbr/>Param</div></a></li>
-<li><a href="tdv_core.TdvCore.Validation.Metadata.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Validation.Metadata.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Metadata</div></a></li>
-<li><a href="tdv_core.TdvCore.Validation.Result.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.TdvCore.Validation.Result.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Result</div></a></li>
-<li><a href="../functions/tdv_core.TdvCore.Validation.buildSimpleErrors.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.TdvCore.Validation.buildSimpleErrors.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>build<wbr/>Simple<wbr/>Errors</div></a></li>
-<li><a href="../functions/tdv_core.TdvCore.Validation.isValid.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.TdvCore.Validation.isValid.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>is<wbr/>Valid</div></a></li>
-<li><a href="../functions/tdv_core.TdvCore.Validation.isValidNullable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.TdvCore.Validation.isValidNullable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>is<wbr/>Valid<wbr/>Nullable
 <div class="menu-item-desc">Evaluates the validity of a nullable value.</div></div></a></li></ul></div></details></li></ul></div></details></li>
 <li><a href="../classes/tdv_core.ValidationConfigurer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg>
@@ -421,7 +430,7 @@ This type is used to define how validation or processing should be applied to op
 <li><a href="../variables/tdv_core.decorate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>decorate
 <div class="menu-item-desc">A collection of predefined decorated validators grouped and sorted by variable types</div></div></a></li>
-<li><a href="../functions/tdv_core.validate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.validate.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>validate
 <div class="menu-item-desc">A function which returns a decorated validator function built from a custom handler</div></div></a></li></ul></div></details></li>
 <li>
@@ -440,7 +449,7 @@ This type is used to define how validation or processing should be applied to op
 <div>Form<wbr/>Provider</div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_react.Contexts.FormProvider.FormProviderProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_react.Contexts.FormProvider.FormProviderProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Form<wbr/>Provider<wbr/>Props</div></a></li></ul></div></details></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-react.Hooks"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_react.Hooks.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
@@ -453,42 +462,42 @@ This type is used to define how validation or processing should be applied to op
 <div>Use<wbr/>Form</div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_react.Hooks.UseForm.ObjectPathEvaluator.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_react.Hooks.UseForm.ObjectPathEvaluator.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Object<wbr/>Path<wbr/>Evaluator</div></a></li>
-<li><a href="tdv_react.Hooks.UseForm.PayloadFieldPath.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_react.Hooks.UseForm.PayloadFieldPath.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Payload<wbr/>Field<wbr/>Path</div></a></li>
-<li><a href="tdv_react.Hooks.UseForm.PayloadFieldPathEvaluator.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_react.Hooks.UseForm.PayloadFieldPathEvaluator.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Payload<wbr/>Field<wbr/>Path<wbr/>Evaluator</div></a></li>
-<li><a href="tdv_react.Hooks.UseForm.UseFormChangeHandlerMap.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_react.Hooks.UseForm.UseFormChangeHandlerMap.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Use<wbr/>Form<wbr/>Change<wbr/>Handler<wbr/>Map</div></a></li>
-<li><a href="tdv_react.Hooks.UseForm.UseFormConfig.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_react.Hooks.UseForm.UseFormConfig.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Use<wbr/>Form<wbr/>Config</div></a></li>
-<li><a href="tdv_react.Hooks.UseForm.UseFormData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_react.Hooks.UseForm.UseFormData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Use<wbr/>Form<wbr/>Data</div></a></li>
-<li><a href="tdv_react.Hooks.UseForm.UseFormReturn.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_react.Hooks.UseForm.UseFormReturn.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Use<wbr/>Form<wbr/>Return</div></a></li>
-<li><a href="tdv_react.Hooks.UseForm.UseFormSetterFn.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_react.Hooks.UseForm.UseFormSetterFn.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Use<wbr/>Form<wbr/>Setter<wbr/>Fn</div></a></li>
-<li><a href="tdv_react.Hooks.UseForm.UseFormSetterFnArg.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_react.Hooks.UseForm.UseFormSetterFnArg.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Use<wbr/>Form<wbr/>Setter<wbr/>Fn<wbr/>Arg</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-react.Hooks.UseValidation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_react.Hooks.UseValidation.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Use<wbr/>Validation</div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_react.Hooks.UseValidation.UseValidationConfig.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_react.Hooks.UseValidation.UseValidationConfig.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Use<wbr/>Validation<wbr/>Config</div></a></li>
-<li><a href="tdv_react.Hooks.UseValidation.UseValidationData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_react.Hooks.UseValidation.UseValidationData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Use<wbr/>Validation<wbr/>Data</div></a></li>
-<li><a href="tdv_react.Hooks.UseValidation.UseValidationReturn.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_react.Hooks.UseValidation.UseValidationReturn.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Use<wbr/>Validation<wbr/>Return</div></a></li></ul></div></details></li></ul></div></details></li>
-<li><a href="../functions/tdv_react.FormProvider.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_react.FormProvider.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Form<wbr/>Provider
 <div class="menu-item-desc">Provides form-related context to its children</div></div></a></li>
-<li><a href="../functions/tdv_react.useForm.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_react.useForm.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>use<wbr/>Form
 <div class="menu-item-desc">React hook which exposes useful form and validation-related props to a form component</div></div></a></li>
-<li><a href="../functions/tdv_react.useValidation.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_react.useValidation.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>use<wbr/>Validation
 <div class="menu-item-desc">React hook which exposes validation-related props to a form component</div></div></a></li></ul></div></details></li></ul></nav></div></div></div>
 <div class="tsd-generator">
