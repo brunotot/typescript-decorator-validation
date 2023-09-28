@@ -90,7 +90,7 @@ namespace EvaluatedStrategyFactory {
   }
 
   /**
-   * Represents detailed errors for validation results when calling `validate` or `validateField` method of `EntityProcessor` instance.
+   * Represents detailed errors for validation results when calling `validate` or `validateField` method of `ValidationEngine` instance.
    *
    * @typeParam T - The type of the value being evaluated.
    *
@@ -105,7 +105,7 @@ namespace EvaluatedStrategyFactory {
 
   /**
    * Represents simple errors for validation results when calling `validate`
-   * or `validateField` method of `EntityProcessor` instance.
+   * or `validateField` method of `ValidationEngine` instance.
    *
    * @typeParam T - The type of the value being evaluated.
    *

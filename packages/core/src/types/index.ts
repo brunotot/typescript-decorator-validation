@@ -5,7 +5,7 @@
 import DecoratorNs from "./../decorators";
 import ReflectionDescriptorNs from "./../reflection/models/reflection.descriptor";
 import ConditionNamespace from "./namespace/condition.namespace";
-import EntityProcessorNamespace from "./namespace/entity-processor.namespace";
+import ValidationEngineNamespace from "./namespace/entity-processor.namespace";
 import EvaluatedStrategyFactoryNs from "./namespace/evaluated-strategy-factory.namespace";
 import FactoryNamespace from "./namespace/factory.namespace";
 import HelperNamespace from "./namespace/helper.namespace";
@@ -60,9 +60,9 @@ namespace Core {
   export import Validation = ValidationNamespace;
 
   /**
-   * The `EntityProcessor` namespace provides functionality for processing entities.
+   * The `ValidationEngine` namespace provides functionality for processing entities.
    */
-  export import ValidationEngine = EntityProcessorNamespace;
+  export import ValidationEngine = ValidationEngineNamespace;
 
   export import Decorator = DecoratorNs;
 

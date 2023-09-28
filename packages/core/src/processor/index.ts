@@ -19,7 +19,7 @@ import CacheMap from "./models/cache.map";
  * This class uses a `CacheMap` to store validation results for better performance.
  * It also leverages `ValidationConfigurer` to retrieve metadata about the class being processed.
  */
-export default class EntityProcessor<TClass, TBody = TClass> {
+export default class ValidationEngine<TClass, TBody = TClass> {
   #meta: ValidationConfigurer;
   #groups: Validation.Group[];
   #hostDefault: any;
@@ -27,7 +27,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
   locale: Localization.Locale;
 
   /**
-   * Constructs a new `EntityProcessor` instance.
+   * Constructs a new `ValidationEngine` instance.
    *
    * @param clazz - The class type to be processed.
    * @param config - Optional configuration settings.
@@ -109,7 +109,7 @@ export default class EntityProcessor<TClass, TBody = TClass> {
    *
    * @example
    * ```typescript
-   * const processor = new EntityProcessor(MyClass);
+   * const processor = new ValidationEngine(MyClass);
    * const result = processor.validate(myPayload);
    * console.log(result.valid);  // Output: true or false
    * ```

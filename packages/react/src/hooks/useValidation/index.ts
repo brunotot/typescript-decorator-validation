@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { TdvCore } from "tdv-core";
-import useEntityProcessor from "../useEntityProcessor";
+import useValidationEngine from "../useValidationEngine";
 import ns from "./types";
 
 /**
@@ -29,7 +29,7 @@ export default function useValidation<TClass, TBody = TClass>(
   model: TdvCore.Types.Class<TClass>,
   { defaultValue, groups }: ns.UseValidationConfig<TBody> = {}
 ): ns.UseValidationReturn<TClass, TBody> {
-  const processor = useEntityProcessor<TClass, TBody>(model, {
+  const processor = useValidationEngine<TClass, TBody>(model, {
     groups,
     defaultValue,
   });

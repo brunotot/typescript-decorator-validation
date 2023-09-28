@@ -1,6 +1,5 @@
 <h1 align="center">🚀 tdv-core 🚀</h1>
 
-
 <p align="center">🎩 <strong>TypeScript v5:</strong> Harness the power of TypeScript v5 decorators for type-safe validation.</p>
 <p align="center">🛠️ <strong>Extensible:</strong> Customize our library to fit your unique needs with ease.</p>
 <p align="center">🌍 <strong>i18n Support:</strong> Speak your users' language with built-in localization.</p>
@@ -29,7 +28,6 @@
  </a>
 </p>
 
-
 ## TOC
 
 - [Installation](#installation)
@@ -41,24 +39,22 @@
 - [Repository architecture](#repository-architecture)
 - [Comparison against similar solutions](#comparison-against-similar-solutions)
 
-
 ## Installation
 
 ```bash
 npm i tdv-core
 ```
 
-
 ## Supported Frameworks
+
 - [x] [view React implementation](https://github.com/brunotot/typescript-decorator-validation/tree/main/packages/react#readme)
 - [ ] Angular
 - [ ] Svelte
 - [ ] Vue
 
-
 ## Documentation
-- [tdv-core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
 
+- [tdv-core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
 
 ## Contribution
 
@@ -69,22 +65,23 @@ Branch will be ready for merge after all CI tests pass and a review has been mad
 
 - [x] Implement strict type checking
 - [x] Implement predefined decorator validators
-- [x] Provide source code documentation  
+- [x] Provide source code documentation
 - [x] Implement concise tests for various scenarios
 - [ ] Build implementation packages for popular front-end frameworks
 
 ## Examples
 
 A basic TypeScript form can look something like
-```typescript
-import { validators, EntityProcessor } from 'tdv-core';
 
-/** 
+```typescript
+import { validators, ValidationEngine } from "tdv-core";
+
+/**
  *  This is an optional layer of abstraction if the class contains complex
  *  validation evaluations which shouldn't be registered as properties.
  *  In this example the "passwordsMatch" field isn't a settable property.
  */
- export type UserFormFields = {
+export type UserFormFields = {
   confirmPassword: string;
   firstName: string;
   lastName: string;
@@ -124,11 +121,11 @@ And a sample value of type UserForm may look something like
 
 ```typescript
 const dummy: Partial<UserFormFields> = {
-  firstName: '',
-  lastName: '',
+  firstName: "",
+  lastName: "",
   password: "12345",
-  confirmPassword: '',
-  url: '',
+  confirmPassword: "",
+  url: "",
   age: 10,
 };
 ```
@@ -136,55 +133,48 @@ const dummy: Partial<UserFormFields> = {
 Now we can inspect the errors of the given sample value
 
 ```typescript
-const processor = new EntityProcessor(UserForm);
+const processor = new ValidationEngine(UserForm);
 const { errors } = processor.validate(dummy);
 console.log(JSON.stringify(errors, null, 2));
 ```
 
 And the result is
+
 ```json
 {
   "firstName": [
     "Field is mandatory",
     "Field must contain at least 5 characters"
   ],
-  "lastName": [
-    "Field is mandatory"
-  ],
-  "password": [
-    "Password must be at least 8 characters long"
-  ],
+  "lastName": ["Field is mandatory"],
+  "password": ["Password must be at least 8 characters long"],
   "url": [],
   "age": [
     "Value must be greater than or equal to 18 and less than or equal to 100 but is 10"
   ],
-  "passwordsMatch": [
-    "Passwords must match"
-  ]
+  "passwordsMatch": ["Passwords must match"]
 }
 ```
-
 
 ## Repository architecture
 
 The `tdv-core` package is the backbone, providing core validation logic that's framework-agnostic. Features include:
+
 - A decorator factory for easy integration with TypeScript
 - Metadata management for dynamic behavior
 - Localization support
 - Built-in validators like `Email`, `Required`, etc.
 
-
 The core package serves as the foundation for implementation libraries like `tdv-react`, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.
-
 
 ## Comparison against similar solutions
 
-| Criteria         | tdv-monorepo | Yup  | React Hook Form | Validator.js | Formik |
-|------------------|-------------|-------|-----------------|--------------|--------|
-| Type Safety      | ✅          | ❌    | 🟡[^1]          | ❌           | ❌    |
-| Syntax           | ✅          | ❌    | ✅[^2]          | ❌           | ❌    |
-| Learning Curve   | ✅          | 🟡[^3]| 🟡[^4]          | 🟡[^5]       | 🟡[^6]|
-| Custom Validators| ✅          | 🟡[^7]| ✅              | 🟡[^8]       | 🟡[^9]|
+| Criteria          | tdv-monorepo | Yup    | React Hook Form | Validator.js | Formik |
+| ----------------- | ------------ | ------ | --------------- | ------------ | ------ |
+| Type Safety       | ✅           | ❌     | 🟡[^1]          | ❌           | ❌     |
+| Syntax            | ✅           | ❌     | ✅[^2]          | ❌           | ❌     |
+| Learning Curve    | ✅           | 🟡[^3] | 🟡[^4]          | 🟡[^5]       | 🟡[^6] |
+| Custom Validators | ✅           | 🟡[^7] | ✅              | 🟡[^8]       | 🟡[^9] |
 
 - ✅: Fully supported and easy-to-use
 - ❌: Not supported
@@ -199,4 +189,3 @@ The core package serves as the foundation for implementation libraries like `tdv
 [^7]: Yup allows for custom validation but within the confines of its own schema.
 [^8]: Validator.js allows for some customization but it's not straightforward.
 [^9]: Formik allows for custom validation but within its own framework.
-

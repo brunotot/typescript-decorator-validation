@@ -1,5 +1,5 @@
 import Localization from "../../../localization";
-import EntityProcessor from "../../../processor";
+import ValidationEngine from "../../../processor";
 import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
 import ValidationConfigurer from "../../../reflection/service/impl/reflection.service.validation";
 import EvaluatedStrategyFactory from "../../../types/namespace/evaluated-strategy-factory.namespace";
@@ -90,9 +90,9 @@ export default class ObjectArrayStrat<F> extends ValidationStrategy<
     const objectArrayDetailedErrors = {
       node: rootResult,
       children: _value.map((v) =>
-        new EntityProcessor<F>(
+        new ValidationEngine<F>(
           fieldClass,
-          super.getEntityProcessorConfig(groups)
+          super.getValidationEngineConfig(groups)
         ).getDetailedErrors(v)
       ),
     };
@@ -100,9 +100,9 @@ export default class ObjectArrayStrat<F> extends ValidationStrategy<
     const objectArraySimpleErrors = {
       node: Validation.buildSimpleErrors(rootResult),
       children: _value.map((v) =>
-        new EntityProcessor<F>(
+        new ValidationEngine<F>(
           fieldClass,
-          super.getEntityProcessorConfig(groups)
+          super.getValidationEngineConfig(groups)
         ).getErrors(v)
       ),
     };

@@ -80,7 +80,7 @@ git checkout -b "[react]-[issue-number]-issue-lorem-ipsum"
 A basic TypeScript form can look something like
 
 ```typescript
-import { validators, EntityProcessor } from "tdv-core";
+import { validators, ValidationEngine } from "tdv-core";
 
 /**
  *  This is an optional layer of abstraction if the class contains complex

@@ -1,5 +1,5 @@
 import Localization from "../../../localization";
-import EntityProcessor from "../../../processor";
+import ValidationEngine from "../../../processor";
 import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
 import EvaluatedStrategyFactory from "../../../types/namespace/evaluated-strategy-factory.namespace";
 import Validation from "../../../types/namespace/validation.namespace";
@@ -75,9 +75,9 @@ export default class ObjectStrat<F> extends ValidationStrategy<
     groups: Validation.Group[] = [],
     locale: Localization.Locale
   ): [ObjectDetailedErrors<F>, ObjectSimpleErrors<F>] {
-    const { detailedErrors, errors } = new EntityProcessor<F>(
+    const { detailedErrors, errors } = new ValidationEngine<F>(
       super.descriptor.thisClass!,
-      super.getEntityProcessorConfig(groups)
+      super.getValidationEngineConfig(groups)
     ).validate(value);
 
     const rootResult = super.fieldDescriptor!.rules.root.validate(

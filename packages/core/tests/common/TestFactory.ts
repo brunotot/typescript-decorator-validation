@@ -1,4 +1,4 @@
-import EntityProcessor from "../../src/processor";
+import ValidationEngine from "../../src/processor";
 import Types from "../../src/types/namespace/types.namespace";
 import ValidationHandlerMock, {
   IMock,
@@ -20,7 +20,7 @@ export function standardTest<T>({
   errorData,
   type,
 }: StandardTestProps<T>) {
-  const handler = new EntityProcessor(Model);
+  const handler = new ValidationEngine(Model);
   const expectService = new ValidationHandlerMock(handler);
 
   describe(buildIOName(identifier, true, type), () => {

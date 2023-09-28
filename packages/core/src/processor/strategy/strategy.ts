@@ -1,7 +1,7 @@
 import Localization from "../../localization";
 import ReflectionDescriptor from "../../reflection/models/reflection.descriptor";
 import ValidationConfigurer from "../../reflection/service/impl/reflection.service.validation";
-import EntityProcessorNs from "../../types/namespace/entity-processor.namespace";
+import ValidationEngineNs from "../../types/namespace/entity-processor.namespace";
 import Validation from "../../types/namespace/validation.namespace";
 
 /**
@@ -45,9 +45,9 @@ export default abstract class ValidationStrategy<
     this.#defaultParent = defaultValue;
   }
 
-  protected getEntityProcessorConfig(
+  protected getValidationEngineConfig(
     groups: Validation.Group[]
-  ): EntityProcessorNs.Config<TFieldType> {
+  ): ValidationEngineNs.Config<TFieldType> {
     return {
       defaultValue: this.defaultValue,
       groups,
@@ -59,7 +59,7 @@ export default abstract class ValidationStrategy<
    *
    * @param groups Validation groups to consider during validation.
    *
-   * @returns An `EntityProcessorNs.Config` object configured for the field type.
+   * @returns An `ValidationEngineNs.Config` object configured for the field type.
    */
   protected get fieldDescriptor() {
     if (this.#fieldDescriptor) return this.#fieldDescriptor;

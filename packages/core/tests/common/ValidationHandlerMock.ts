@@ -1,4 +1,4 @@
-import EntityProcessor from "../../src/processor";
+import ValidationEngine from "../../src/processor";
 
 export interface IMock<T> {
   value: T;
@@ -13,7 +13,7 @@ function buildItMessage(valid: boolean, value: any) {
 }
 
 export default class ValidationHandlerMock<T> {
-  constructor(private handler: EntityProcessor<IMock<T>>) {}
+  constructor(private handler: ValidationEngine<IMock<T>>) {}
 
   expect(data: T[], valid: boolean) {
     data.forEach((value) => {
