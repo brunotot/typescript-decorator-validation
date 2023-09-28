@@ -2,7 +2,7 @@ import $ from "../../types/index";
 
 namespace CacheMap {
   /**
-   * A generic caching utility class.
+   * A generic caching utility class used by `ValidationEngine`.
    *
    * @typeParam CacheValue - The type of the cache object.
    * @typeParam Payload - The type of the payload object.

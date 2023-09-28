@@ -7,12 +7,10 @@ import Validation from "../../../types/namespace/validation.namespace";
 import ValidationStrategy from "../strategy";
 
 /**
- * @typeParam F - The type of the field being validated.
- *
- * @description
  * Represents the simplified error structure for validating arrays of object types.
  *
- * @type
+ * @typeParam F - The type of the field being validated.
+ *
  * - `node`: An array of string messages that represent validation errors at the array level.
  * - `children`: An array of `Errors<F>` objects that represent validation errors for each object in the array.
  */
@@ -22,12 +20,10 @@ export type ObjectArraySimpleErrors<F> = {
 };
 
 /**
- * @typeParam F - The type of the field being validated.
- *
- * @description
  * Represents the detailed error structure for validating arrays of object types.
  *
- * @type
+ * @typeParam F - The type of the field being validated.
+ *
  * - `node`: An array of `Validation.Result` objects that represent detailed validation errors at the array level.
  * - `children`: An array of `DetailedErrors<F>` objects that represent detailed validation errors for each object in the array.
  */
@@ -37,11 +33,9 @@ export type ObjectArrayDetailedErrors<F> = {
 };
 
 /**
- * @typeParam F - The type of the field being validated, which is expected to be an array of objects.
+ * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating arrays of object types.
  *
- * @description
- * Extends the abstract `ValidationStrategy` class to provide a concrete implementation
- * for validating arrays of object types.
+ * @typeParam F - The type of the field being validated, which is expected to be an array of objects.
  *
  * @extends ValidationStrategy<F, ObjectArrayDetailedErrors<F>, ObjectArraySimpleErrors<F>>
  */
@@ -51,12 +45,10 @@ export default class ObjectArrayStrat<F> extends ValidationStrategy<
   ObjectArraySimpleErrors<F>
 > {
   /**
+   * Initializes the `ObjectArrayStrat` class by calling the superclass constructor with the provided descriptor and default value.
+   *
    * @param descriptor - The reflection descriptor for the field.
    * @param defaultValue - The default value for the parent object.
-   *
-   * @description
-   * Initializes the `ObjectArrayStrat` class by calling the superclass constructor with the
-   * provided descriptor and default value.
    */
   constructor(
     descriptor: ReflectionDescriptor.ReflectionDescriptor<F, any>,
@@ -66,16 +58,15 @@ export default class ObjectArrayStrat<F> extends ValidationStrategy<
   }
 
   /**
+   * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for arrays of object types.
+   *
    * @param value - The array of object values to be validated.
    * @param context - The context in which the validation is taking place.
    * @param groups - Optional validation groups to consider during validation.
    *
    * @returns A tuple containing `ObjectArrayDetailedErrors<F>` and `ObjectArraySimpleErrors<F>`.
    *
-   * @description
-   * Implements the `test` method from the `ValidationStrategy` abstract class.
-   * It performs the actual validation logic for arrays of object types.
-   *
+   * @remarks
    * The method validates both the array as a whole (`node`) and each individual object (`children`)
    * using the appropriate validation rules.
    */

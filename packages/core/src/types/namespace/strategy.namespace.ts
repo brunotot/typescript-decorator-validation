@@ -3,20 +3,14 @@ import Condition from "./condition.namespace";
 import EvaluatedStrategyFactory from "./evaluated-strategy-factory.namespace";
 
 /**
- * @namespace Strategy
- *
- * @description
- * A collection of types related to validation strategies.
+ * A collection of types related to field type strategy evaluations.
  */
 namespace Strategy {
   /**
+   * Represents a deduced array of child elements with a parent node.
+   *
    * @typeParam TChild - The type of child elements.
    * @typeParam TParent - The type of the parent node.
-   *
-   * @type
-   *
-   * @description
-   * Represents a deduced array of child elements with a parent node.
    */
   export type DeducedArray<TChild, TParent = TChild> = {
     node: TParent;
@@ -24,40 +18,27 @@ namespace Strategy {
   };
 
   /**
-   * @type
-   *
-   * @description
    * Currently, there is no documented type under `Strategy.Function`.
    */
   export type Function = never;
 
   /**
+   * Represents a primitive type in a validation strategy. The type `T` is considered non-nullable unless `R` is marked as undefined in which case `T` becomes non-nullable.
+   *
    * @typeParam T - The type of the input data.
    * @typeParam R - The type of the result.
    * @typeParam TPartial - The type of partial parameters.
-   *
-   * @type
-   *
-   * @description
-   * Represents a primitive type in a validation strategy. The type `T` is
-   * considered non-nullable unless `R` is marked as undefined in which case
-   * `T` becomes non-nullable.
    */
   export type Primitive<T, R> = true extends Condition.isUndefined<R>
     ? NonNullable<T>
     : R;
 
   /**
+   * Represents an array type in a validation strategy. It handles cases where `T` is an array. Depending on the conditions, it can return different types.
+   *
    * @typeParam T - The type of the input data.
    * @typeParam R - The type of the result.
    * @typeParam TPartial - The type of partial parameters.
-   *
-   * @type
-   *
-   * @description
-   * Represents an array type in a validation strategy. It handles cases where
-   * `T` is an array. Depending on the conditions, it can return different
-   * types.
    */
   export type Array<
     T,
@@ -77,16 +58,11 @@ namespace Strategy {
     : never;
 
   /**
+   * Represents an object type in a validation strategy. It uses `EvaluatedStrategy` to define the strategy for validating non-nullable objects.
+   *
    * @typeParam T - The type of the input data.
    * @typeParam R - The type of the result.
    * @typeParam TPartial - The type of partial parameters.
-   *
-   * @type
-   *
-   * @description
-   * Represents an object type in a validation strategy. It uses
-   * `EvaluatedStrategy` to define the strategy for validating non-nullable
-   * objects.
    */
   export type Object<
     T,
@@ -99,8 +75,4 @@ namespace Strategy {
   >;
 }
 
-/**
- * @description
- * The default export for the `Strategy` namespace.
- */
 export default Strategy;

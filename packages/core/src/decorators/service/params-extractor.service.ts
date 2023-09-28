@@ -3,6 +3,9 @@ import Localization from "../../localization";
 import Objects from "../../types/namespace/objects.namespace";
 import Validation from "../../types/namespace/validation.namespace";
 
+/**
+ * A service class which exposes helper functions for building messages and groups params
+ */
 namespace ParamsExtractorService {
   /**
    * Extracts a message from the provided decorator properties.

@@ -19,6 +19,9 @@ const compositeFunction = `() => ${composite}` as const;
 const primitiveArrayFunction = `() => ${primitiveArray}` as const;
 const compositeArrayFunction = `() => ${compositeArray}` as const;
 
+/**
+ * A namespace responsible for exposing reflection-strategy-specific methods and types
+ */
 namespace ReflectionStrategy {
   /**
    * A mapping of reflection strategy types to their string representations.

@@ -6,60 +6,39 @@ import PrimitiveStrat from "../../processor/strategy/impl/primitive.strategy";
 import $ from "../../types/index";
 
 /**
- * @namespace Validation
- *
- * @description
  * A collection of types and functions related to validation.
  */
 namespace Validation {
   /**
-   * @type
-   *
-   * @description
    * Represents a validation group, which can be a string, number, or symbol.
    */
   export type Group = string | number | symbol;
 
   /**
-   * @type
-   *
-   * @description
    * Represents an array of validation groups.
    */
   export type Groups = Validation.Group[];
 
   /**
-   * @type
-   *
-   * @description
-   * Represents a parameter that can accept either a single validation group
-   * or an array of validation groups.
+   * Represents a parameter that can accept either a single validation group or an array of validation groups.
    */
   export type GroupsParam = Validation.Group | Validation.Groups;
 
   /**
+   * Represents a function that evaluates a value and returns a validation result.
+   *
    * @typeParam T - The type of the value being evaluated.
-   *
-   * @type
-   *
-   * @description
-   * Represents a function that evaluates a value and returns a validation
-   * result.
    */
-  export type Evaluator<T> = (
+  export type Evaluator<T> = ((
     value: T,
     context: any,
     locale: Localization.Locale
-  ) => Validation.Result;
+  ) => Validation.Result) & {};
 
   /**
+   * Represents metadata for a validation rule, including the associated validation groups and the evaluator function.
+   *
    * @typeParam T - The type of the value being evaluated.
-   *
-   * @type
-   *
-   * @description
-   * Represents metadata for a validation rule, including the associated
-   * validation groups and the evaluator function.
    */
   export type Metadata<T> = {
     groups: Validation.Group[];
@@ -67,11 +46,7 @@ namespace Validation {
   };
 
   /**
-   * @type
-   *
-   * @description
-   * Represents the result of a validation, including the key, message, and
-   * whether it's valid.
+   * Represents the result of a validation, including the key, message, and whether it's valid.
    */
   export type Result = {
     key: string;
@@ -80,16 +55,9 @@ namespace Validation {
   };
 
   /**
+   * A type that maps field types to their respective validation strategy classes.
    *
    * @typeParam Field - The type of the field being validated.
-   *
-   * @type
-   *
-   * @description
-   * A type that maps field types to their respective validation strategy
-   * classes.
-   *
-   * @hidden
    */
   export type getStrategyClass<Field> =
     true extends $.Condition.isPrimitiveArray<Field>
@@ -103,28 +71,18 @@ namespace Validation {
       : never;
 
   /**
+   * A type that maps field types to their respective validation strategy results.
+   *
    * @typeParam Field - The type of the field being validated.
-   *
-   * @type
-   *
-   * @description
-   * A type that maps field types to their respective validation strategy
-   * results.
-   *
-   * @hidden
    */
   export type getStrategyResult<Field> = ReturnType<
     getStrategyClass<Field>["test"]
   >;
 
   /**
+   * Represents a builder for creating validation rules with an associated evaluator and optional groups.
+   *
    * @typeParam T - The type of the value being evaluated.
-   *
-   * @type
-   *
-   * @description
-   * Represents a builder for creating validation rules with an associated
-   * evaluator and optional groups.
    */
   export type Builder<T> = {
     isValid: Validation.Evaluator<T>;
@@ -132,11 +90,7 @@ namespace Validation {
   };
 
   /**
-   * @function
-   *
-   * @description
-   * Checks if a single result or an array of results indicates overall
-   * validity. Returns `true` if all results are valid, `false` otherwise.
+   * Checks if a single result or an array of results indicates overall validity. Returns `true` if all results are valid, `false` otherwise.
    */
   export function isValid(validations: Result | Result[]): boolean {
     return Array.isArray(validations)
@@ -145,9 +99,6 @@ namespace Validation {
   }
 
   /**
-   * @function
-   *
-   * @description
    * Extracts simple error messages from an array of validation results.
    */
   export function buildSimpleErrors(validations: Validation.Result[] = []) {

@@ -5,14 +5,11 @@ import EntityProcessorNs from "../../types/namespace/entity-processor.namespace"
 import Validation from "../../types/namespace/validation.namespace";
 
 /**
+ * The `ValidationStrategy` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.
+ *
  * @typeParam TFieldType The type of the field being validated.
  * @typeParam TDetailedResult The detailed result of the validation.
  * @typeParam TSimpleResult A simplified version of the validation result.
- *
- * @description
- * The `ValidationStrategy` class serves as an abstract base class for implementing
- * various validation strategies. It provides essential utility methods and properties
- * to facilitate the validation process.
  */
 export default abstract class ValidationStrategy<
   TFieldType = any,
@@ -20,25 +17,25 @@ export default abstract class ValidationStrategy<
   TSimpleResult = any
 > {
   /**
-   * @description The reflection descriptor for the field.
+   * The reflection descriptor for the field.
    */
   #descriptor: ReflectionDescriptor.ReflectionDescriptor<any, any>;
 
   /**
-   * @description The default value for the parent object.
+   * The default value for the parent object.
    */
   #defaultParent: TFieldType;
 
   /**
-   * @description A specific descriptor for the field, lazy-loaded.
+   * A specific descriptor for the field, lazy-loaded.
    */
   #fieldDescriptor?: ReflectionDescriptor.ReflectionDescriptor<TFieldType, any>;
 
   /**
+   * Initializes the `#descriptor` and `#defaultParent` fields.
+   *
    * @param descriptor The reflection descriptor for the field.
    * @param defaultValue The default value for the parent object.
-   *
-   * @description Initializes the `#descriptor` and `#defaultParent` fields.
    */
   constructor(
     descriptor: ReflectionDescriptor.ReflectionDescriptor<TFieldType, any>,
@@ -58,11 +55,11 @@ export default abstract class ValidationStrategy<
   }
 
   /**
+   * Constructs and returns the configuration object for entity processing.
+   *
    * @param groups Validation groups to consider during validation.
    *
    * @returns An `EntityProcessorNs.Config` object configured for the field type.
-   *
-   * @description Constructs and returns the configuration object for entity processing.
    */
   protected get fieldDescriptor() {
     if (this.#fieldDescriptor) return this.#fieldDescriptor;
@@ -73,7 +70,8 @@ export default abstract class ValidationStrategy<
   }
 
   /**
-   * @description Gets the field name from the descriptor.
+   * Gets the field name from the descriptor.
+   *
    * @returns The name of the field.
    */
   protected get fieldName() {
@@ -81,7 +79,8 @@ export default abstract class ValidationStrategy<
   }
 
   /**
-   * @description Gets the default value for the field.
+   * Gets the default value for the field.
+   *
    * @returns The default value of the field.
    */
   protected get defaultValue() {
@@ -89,7 +88,8 @@ export default abstract class ValidationStrategy<
   }
 
   /**
-   * @description Gets the host class from the descriptor.
+   * Gets the host class from the descriptor.
+   *
    * @returns The host class of the field.
    */
   protected get class() {
@@ -97,7 +97,8 @@ export default abstract class ValidationStrategy<
   }
 
   /**
-   * @description Gets the default parent object.
+   * Gets the default parent object.
+   *
    * @returns The default parent object.
    */
   protected get defaultParent() {
@@ -105,7 +106,8 @@ export default abstract class ValidationStrategy<
   }
 
   /**
-   * @description Gets the reflection descriptor.
+   * Gets the reflection descriptor.
+   *
    * @returns The reflection descriptor for the field.
    */
   protected get descriptor() {
@@ -113,17 +115,15 @@ export default abstract class ValidationStrategy<
   }
 
   /**
+   * The `test` method is an abstract method that must be implemented by subclasses. It performs the actual validation logic for the field. The method takes in the value to be validated, the context, and optionally, the validation groups to consider.
+   *
    * @param value The value to be validated.
    * @param context The context in which the validation is taking place.
    * @param groups Optional validation groups to consider during validation.
    *
    * @returns A tuple containing the detailed result (`TDetailedResult`) and the simplified result (`TSimpleResult`).
    *
-   * @description
-   * The `test` method is an abstract method that must be implemented by subclasses.
-   * It performs the actual validation logic for the field. The method takes in the value to be validated,
-   * the context, and optionally, the validation groups to consider.
-   *
+   * @remarks
    * It returns a tuple where the first element is the detailed validation result and the second element is
    * the simplified validation result.
    */

@@ -2,6 +2,10 @@ import Decorator from "..";
 import Validation from "../../types/namespace/validation.namespace";
 import DecoratorService from "./decorator.service";
 
+/**
+ * A service class which exposes validated-decorator-related actions
+ */
+
 namespace ValidatorService {
   /**
    * Creates a new validator function using the provided validation builder options.

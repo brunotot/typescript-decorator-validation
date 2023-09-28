@@ -30,6 +30,9 @@ function sprintf(str: string, ...args: any[]) {
   });
 }
 
+/**
+ * A service layer which interacts with app's translations
+ */
 namespace TranslationService {
   /**
    * Localizes a string based on a key and optional arguments.

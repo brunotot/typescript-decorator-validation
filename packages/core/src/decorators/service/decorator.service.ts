@@ -1,6 +1,9 @@
 import Decorator from "..";
 import ValidationConfigurer from "../../reflection/service/impl/reflection.service.validation";
 
+/**
+ * A service class which exposes decorator-related actions
+ */
 namespace DecoratorService {
   /**
    * Creates a new decorator using the provided supplier function.

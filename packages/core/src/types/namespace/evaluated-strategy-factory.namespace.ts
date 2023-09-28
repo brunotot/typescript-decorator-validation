@@ -3,18 +3,20 @@ import Condition from "./condition.namespace";
 import Strategy from "./strategy.namespace";
 import Validation from "./validation.namespace";
 
+/**
+ * A namespace which exposes all type implementations of `EvaluatedStrategy`
+ */
 namespace EvaluatedStrategyFactory {
+  /**
+   * A namespace which holds the base abstract data for evaluation strategy
+   */
   export namespace Base {
     /**
+     * Represents an evaluated strategy for handling validation or processing of a value of type `T`. This type is used to define how validation or processing should be applied to a specific type `T`.
+     *
      * @typeParam T - The type to be evaluated.
      * @typeParam V - The type representing values for optional fields.
      * @typeParam TPartial - The type representing partial values for optional fields.
-     *
-     * @type
-     *
-     * @description
-     * Represents an evaluated strategy for handling validation or processing of a value of type `T`.
-     * This type is used to define how validation or processing should be applied to a specific type `T`.
      */
     // prettier-ignore
     export type EvaluatedStrategy<T, V = undefined, TPartial extends $.Params.valuePartial = $.Params.partial['disabled']> = 
@@ -27,16 +29,12 @@ namespace EvaluatedStrategyFactory {
             : $.Helper.Purify<StrategyMandatory<T, V, TPartial>>;
 
     /**
+     * Represents a field strategy for handling validation or processing of a specific field in a type `TActual`. This type is used to define how validation or processing should be applied to a specific field in a type `TActual`.
+     *
      * @typeParam TActual - The type to be evaluated.
      * @typeParam TKey - The key representing the field to be evaluated.
      * @typeParam TStrat - The strategy to be applied to the field.
      * @typeParam TPartial - The type representing partial values for optional fields.
-     *
-     * @type
-     *
-     * @description
-     * Represents a field strategy for handling validation or processing of a specific field in a type `TActual`.
-     * This type is used to define how validation or processing should be applied to a specific field in a type `TActual`.
      */
     // prettier-ignore
     export type FieldStrategy<
@@ -61,14 +59,10 @@ namespace EvaluatedStrategyFactory {
     : never;
 
     /**
+     * Represents a strategy for handling optional fields in a type `TActual`. This type is used to define how validation or processing should be applied to optional fields in a type `TActual`.
+     *
      * @typeParam TActual - The type to be evaluated.
      * @typeParam TPartial - The type representing partial values for optional fields.
-     *
-     * @type
-     *
-     * @description
-     * Represents a strategy for handling optional fields in a type `TActual`.
-     * This type is used to define how validation or processing should be applied to optional fields in a type `TActual`.
      */
     // prettier-ignore
     export type StrategyOptional<
@@ -79,15 +73,11 @@ namespace EvaluatedStrategyFactory {
     };
 
     /**
+     * Represents a strategy for handling mandatory fields in a type `TActual`. This type is used to define how validation or processing should be applied to mandatory fields in a type `TActual`.
+     *
      * @typeParam TActual - The type to be evaluated.
      * @typeParam TStrat - The strategy to be applied to mandatory fields.
      * @typeParam TPartial - The type representing partial values for optional fields.
-     *
-     * @type
-     *
-     * @description
-     * Represents a strategy for handling mandatory fields in a type `TActual`.
-     * This type is used to define how validation or processing should be applied to mandatory fields in a type `TActual`.
      */
     // prettier-ignore
     export type StrategyMandatory<
@@ -100,15 +90,12 @@ namespace EvaluatedStrategyFactory {
   }
 
   /**
-   * Represents detailed errors for validation results when calling `validate`
-   * or `validateField` method of `EntityProcessor` instance.
+   * Represents detailed errors for validation results when calling `validate` or `validateField` method of `EntityProcessor` instance.
    *
    * @typeParam T - The type of the value being evaluated.
    *
    * @remarks
-   * Represents detailed validation errors for a value of type `T`. This type
-   * is used in conjunction with the `EvaluatedStrategy` to provide detailed
-   * validation results.
+   * Represents detailed validation errors for a value of type `T`. This type is used in conjunction with the `EvaluatedStrategy` to provide detailed validation results.
    */
   export type DetailedErrors<T> = Base.EvaluatedStrategy<
     T,
@@ -134,14 +121,11 @@ namespace EvaluatedStrategyFactory {
   >;
 
   /**
+   * Represents a payload of type `T` with an evaluated strategy for handling optional fields. This type is used to define how validation or processing should be applied to a payload of type `T`.
+   *
+   *
    * @typeParam T - The type of payload to be evaluated.
    * @typeParam TPartial - The type representing partial values for optional fields.
-   *
-   * @type
-   *
-   * @description
-   * Represents a payload of type `T` with an evaluated strategy for handling optional fields.
-   * This type is used to define how validation or processing should be applied to a payload of type `T`.
    */
   export type Payload<
     T,

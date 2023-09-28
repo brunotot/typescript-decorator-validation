@@ -4,11 +4,9 @@ import Validation from "../../../types/namespace/validation.namespace";
 import ValidationStrategy from "../strategy";
 
 /**
- * @typeParam F - The type of the field being validated.
+ * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating primitive types like numbers, strings, etc.
  *
- * @description
- * Extends the abstract `ValidationStrategy` class to provide a concrete implementation
- * for validating primitive types like numbers, strings, etc.
+ * @typeParam F - The type of the field being validated.
  *
  * @extends ValidationStrategy<F, Validation.Result[], string[]>
  */
@@ -18,12 +16,10 @@ export default class PrimitiveStrat<F> extends ValidationStrategy<
   string[]
 > {
   /**
+   * Initializes the `PrimitiveStrat` class by calling the superclass constructor with the provided descriptor and default value.
+   *
    * @param descriptor - The reflection descriptor for the field.
    * @param defaultValue - The default value for the parent object.
-   *
-   * @description
-   * Initializes the `PrimitiveStrat` class by calling the superclass constructor with the
-   * provided descriptor and default value.
    */
   constructor(
     descriptor: ReflectionDescriptor.ReflectionDescriptor<F, any>,
@@ -33,17 +29,13 @@ export default class PrimitiveStrat<F> extends ValidationStrategy<
   }
 
   /**
+   * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for primitive types by invoking the root rule's `validate` method and then building simplified error messages.
+   *
    * @param value - The value to be validated.
    * @param context - The context in which the validation is taking place.
    * @param groups - Optional validation groups to consider during validation.
    *
-   * @returns A tuple containing an array of detailed validation results (`Validation.Result[]`)
-   * and an array of simplified error messages (`string[]`).
-   *
-   * @description
-   * Implements the `test` method from the `ValidationStrategy` abstract class.
-   * It performs the actual validation logic for primitive types by invoking the root rule's
-   * `validate` method and then building simplified error messages.
+   * @returns A tuple containing an array of detailed validation results (`Validation.Result[]`) and an array of simplified error messages (`string[]`).
    */
   test(
     value: any,

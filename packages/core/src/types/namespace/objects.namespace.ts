@@ -2,55 +2,47 @@ import EvaluatedStrategyFactory from "./evaluated-strategy-factory.namespace";
 import HelperNamespace from "./helper.namespace";
 
 /**
- * @namespace Objects
- *
- * @description
  * A collection of utility functions and types related to objects and data.
  */
 namespace Objects {
   /**
-   * @typeParam T - The type to compare.
-   *
-   * @description
    * Function that checks if two values of type `T` are equal.
+   *
+   * @typeParam T - The type to compare.
    */
-  export type Equals<T> = (a: T, b: T) => boolean;
+  export type Equals<T> = ((a: T, b: T) => boolean) & {};
 
   /**
-   * @typeParam T - The type of the optional value.
-   *
-   * @description
    * A type that represents an optional value.
+   *
+   * @typeParam T - The type of the optional value.
    */
   export type Optional<T = undefined> = T extends undefined
     ? any
     : T | undefined | null;
 
   /**
-   * @typeParam T - The type to hash.
-   *
-   * @description
    * A function that hashes a value of type `T` and returns a number.
+   *
+   * @typeParam T - The type to hash.
    */
-  export type Hash<T> = (value: T) => number;
+  export type Hash<T> = ((value: T) => number) & {};
 
   /**
-   * @typeParam T - The type of the array elements.
-   *
-   * @description
    * A predicate function for filtering arrays.
+   *
+   * @typeParam T - The type of the array elements.
    */
-  export type ArrayPredicate<T> = (
+  export type ArrayPredicate<T> = ((
     value: T,
     index: number,
     array: T[]
-  ) => boolean;
+  ) => boolean) & {};
 
   /**
-   * @typeParam T - The object type.
-   *
-   * @description
    * A type that extracts input properties from an object type `T`.
+   *
+   * @typeParam T - The object type.
    */
   export type Inputs<T> = {
     [P in keyof T]-?: HelperNamespace.IfEquals<
@@ -61,20 +53,18 @@ namespace Objects {
   }[keyof T];
 
   /**
-   * @typeParam T - The type of the elements in the array.
-   *
-   * @description
    * Removes duplicate elements from an array while preserving order.
+   *
+   * @typeParam T - The type of the elements in the array.
    */
   export function unique<T>(data: T[]): T[] {
     return [...new Set(data)];
   }
 
   /**
-   * @typeParam T - The type of the errors.
-   *
-   * @description
    * Checks if an error object has errors.
+   *
+   * @typeParam T - The type of the errors.
    */
   export function hasErrors<T>(
     data: EvaluatedStrategyFactory.Errors<T>
@@ -91,11 +81,9 @@ namespace Objects {
   }
 
   /**
-   * @typeParam T - The type of the value.
+   * Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.
    *
-   * @description
-   * Checks if a value is not `null`, `undefined`, `false`, an empty array,
-   * an empty string, or an invalid Date.
+   * @typeParam T - The type of the value.
    */
   export function hasValue<T>(
     obj: T | undefined
@@ -111,7 +99,6 @@ namespace Objects {
   }
 
   /**
-   * @description
    * Recursively checks if two values are deep equal.
    */
   export function deepEquals(val1: any, val2: any): boolean {
@@ -147,7 +134,6 @@ namespace Objects {
   }
 
   /**
-   * @description
    * Hashes a value of any type and returns a number.
    */
   export function hash(val: any): number {
@@ -228,8 +214,4 @@ namespace Objects {
   }
 }
 
-/**
- * @description
- * The default export for the `Objects` namespace.
- */
 export default Objects;

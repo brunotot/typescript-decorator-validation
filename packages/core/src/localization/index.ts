@@ -6,6 +6,9 @@ import TranslationServiceNs from "./service/translation.service";
 namespace Localization {
   export import TranslationService = TranslationServiceNs;
 
+  /**
+   * 2-character locale string representation
+   */
   export type Locale = "en" | "hr" | "de" | "es" | "fr" | "it" | "nl";
 
   /**
@@ -20,28 +23,46 @@ namespace Localization {
 
   let locale: Locale = "en";
 
+  /**
+   * Function which returns current global Locale value
+   */
   export function getLocale(): Locale {
     return locale;
   }
 
+  /**
+   * Function which sets new global Locale value
+   */
   export function setLocale(localeValue: Locale) {
     locale = localeValue;
   }
 
+  /**
+   * A configuration class which allows for defining a custom message parser
+   */
   export namespace MessageResolver {
-    export type MessageResolverData = (
+    /**
+     * Message parser definition
+     */
+    export type MessageResolverData = ((
       locale: Locale,
       message: string
-    ) => string;
+    ) => string) & {};
 
     const DEFAULT_CONFIGURER: MessageResolverData = (_, message) => message;
 
     let configurer: MessageResolverData = DEFAULT_CONFIGURER;
 
+    /**
+     * Is used to globally define a custom message parser
+     */
     export function configure(handler?: MessageResolverData) {
       configurer = handler ?? DEFAULT_CONFIGURER;
     }
 
+    /**
+     * Internal handler for the customized message parser
+     */
     export function resolve(locale: Locale, message: string) {
       try {
         return configurer(locale, message);

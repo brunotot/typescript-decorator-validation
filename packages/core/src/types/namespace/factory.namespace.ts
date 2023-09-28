@@ -1,15 +1,11 @@
 /**
- * @namespace Factory
- *
- * @description
  * A collection of types and interfaces related to function factories.
  */
 namespace Factory {
   /**
-   * @typeParam T - An array of any types.
-   *
-   * @description
    * A type that extracts the argument types from a given array type `T`.
+   *
+   * @typeParam T - An array of any types.
    *
    * - If `T` is an empty array, it returns an empty array.
    * - If `T` has one element, it returns an array with that element.
@@ -26,19 +22,14 @@ namespace Factory {
     : never;
 
   /**
+   * A type representing a function that takes arguments of types `T` and returns `R`.
+   *
    * @typeParam T - An array of any types representing the arguments.
    * @typeParam R - The return type of the function.
-   *
-   * @description
-   * A type representing a function that takes arguments of types `T` and returns `R`.
    */
-  export type Function<T extends any[], R> = (
+  export type Function<T extends any[], R> = ((
     ...args: Factory.Arguments<T>
-  ) => R;
+  ) => R) & {};
 }
 
-/**
- * @description
- * The default export for the `Factory` namespace.
- */
 export default Factory;

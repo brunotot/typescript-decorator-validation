@@ -9,9 +9,12 @@ import decorate from "./validators";
 import validate from "./validators/any/Rule";
 
 /**
- * A namespace which holds all interfaces which are extensible - meaning the developer can feed the library with custom types
+ * A namespace which holds all interfaces which are extendable - meaning the developer can feed the library with custom types
  */
 export namespace Overrides {
+  /**
+   * An overridable object type with 'value' key and array of types as its value
+   */
   export interface PrimitiveSet {}
 }
 

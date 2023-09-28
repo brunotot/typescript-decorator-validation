@@ -4,17 +4,13 @@ import EvaluatedStrategyFactory from "./evaluated-strategy-factory.namespace";
 import Validation from "./validation.namespace";
 
 /**
- * @namespace EntityProcessorNs
- *
- * @description
  * A collection of types and interfaces related to entity processing and validation.
  */
-namespace EntityProcessorNs {
+namespace ValidationEngineNs {
   /**
-   * @typeParam TBody - The type of the default value.
-   *
-   * @description
    * Configuration options for entity processing.
+   *
+   * @typeParam TBody - The type of the default value.
    */
   export type Config<TBody> = {
     defaultValue?: TBody;
@@ -23,10 +19,9 @@ namespace EntityProcessorNs {
   };
 
   /**
-   * @typeParam T - The type of the entity being validated.
-   *
-   * @description
    * The result of entity validation.
+   *
+   * @typeParam T - The type of the entity being validated.
    */
   export type Result<T> = {
     valid: boolean;
@@ -35,7 +30,6 @@ namespace EntityProcessorNs {
   };
 
   /**
-   * @description
    * A type representing various forms of validity errors.
    */
   export type ValidityErrorsType =
@@ -45,30 +39,27 @@ namespace EntityProcessorNs {
     | Validation.Result[][];
 
   /**
+   * Cache object for storing entity validation results.
+   *
    * @typeParam TClass - The type of the class being cached.
    * @typeParam TBody - The type of the payload.
-   *
-   * @description
-   * Cache object for storing entity validation results.
    */
   export type Cache<TClass, TBody = TClass> = Result<TClass> & {
     state: EvaluatedStrategyFactory.Payload<TBody>;
   };
 
   /**
-   * @typeParam T - The type of the cache.
-   *
-   * @description
    * The keys that can be used to access the cache.
+   *
+   * @typeParam T - The type of the cache.
    */
   export type CacheKey<T> = Exclude<keyof Cache<T>, "state">;
 
   /**
+   * A map for storing entity validation results.
+   *
    * @typeParam TClass - The type of the class being cached.
    * @typeParam TBody - The type of the payload.
-   *
-   * @description
-   * A map for storing entity validation results.
    */
   export type CacheMap<TClass, TBody = TClass> = CacheMap.CacheMap<
     Result<TClass>,
@@ -76,8 +67,4 @@ namespace EntityProcessorNs {
   >;
 }
 
-/**
- * @description
- * The default export for the `EntityProcessorNs` namespace.
- */
-export default EntityProcessorNs;
+export default ValidationEngineNs;
