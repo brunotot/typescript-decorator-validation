@@ -42,6 +42,7 @@
 ### Content
 
 - [Installation](#installation)
+- [Quick start](#quick-start)
 - [Documentation](#documentation)
 - [Contribution](#contribution)
 - [Future goals](#future-goals)
@@ -53,8 +54,37 @@
 ### Installation
 
 ```bash
-npm i tdv-core
-npm i tdv-react # when using in framework-specific environment
+npm install -d typescript@latest
+npm install tdv-core
+npm install tdv-react # when using in framework-specific environment
+```
+
+### Quick start
+```typescript
+import { TdvCore, validate, ValidationEngine } from "tdv-core";
+import Email from "tdv-core/validators/string/Email";
+
+function MinSize(min: number, groups: TdvCore.Validation.Groups = []) {
+  return validate<string>({
+    groups,
+    isValid: (value, _context, _locale) => ({
+      key: "MinSize",
+      valid: value.length >= min,
+      message: `Input must contain at least ${min} characters`,
+    }),
+  });
+}
+
+class Foo {
+  @Email()        // predefined
+  @MinSize(10)    // custom
+  email!: string
+}
+
+const engine = new ValidationEngine(Foo);
+const result = engine.validate({ email: "invalid" });
+console.log(result.errors.email); 
+// [ 'Input must contain at least 10 characters', 'Value is not a valid email' ]
 ```
 
 ### Supported Frameworks
