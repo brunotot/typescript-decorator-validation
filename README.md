@@ -26,7 +26,7 @@
 
 > 🌟 **Welcome to `tdv-monorepo`, the future of model validation in TypeScript.**
 > 
-> Leveraging TypeScript decorators, `tdv-monorepo` offers a declarative way to manage model validation. Suitable for both client-side and server-side projects, it comes with built-in extensibility and localization support. 🌟
+> Leveraging TypeScript decorators, `tdv-monorepo` offers a declarative way to manage model validation. Suitable for both client-side and server-side projects, it comes with built-in extensibility and localization support.
 
 ### Features
 
