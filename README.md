@@ -30,14 +30,14 @@
 
 ### Features
 
-- powered by TypeScript's stage-3 decorators (type-safety included)
+- powered by TypeScript's [stage-3](https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators) decorators (type-safety included)
 - small in bundle size with no dependencies
-- built-in i18n localization support to supply the messages in the user's native language
+- built-in [i18n localization](https://github.com/brunotot/typescript-decorator-validation/blob/main/packages/core/src/localization/index.ts#L6) support to supply the messages in the user's native language
 - well-documented code and extensive guides for making it easy to get started
-- designed to play nice with popular testing frameworks
+- designed to play nice with popular testing frameworks like [Jest](https://jestjs.io/)
 - integrates seamlessly within any native TypeScript v5+ project
 - provides a clean and declarative way of validating form fields
-- exports useful reflection utility methods and types
+- exports [Reflection](https://github.com/brunotot/typescript-decorator-validation/blob/main/packages/core/src/reflection/index.ts#L9) namespace containing useful reflection-related methods
 
 
 ### Content
