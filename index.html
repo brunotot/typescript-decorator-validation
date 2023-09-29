@@ -27,12 +27,6 @@
 <h2>Typescript Decorator Validation - v1.0.0</h2></div>
 <div class="tsd-panel tsd-typography"><h1 align="center">🚀 TypeScript Decorator Validation 🚀</h1>
 
-<p align="center">🎩 <strong>TypeScript v5:</strong> Harness the power of TypeScript v5 decorators for type-safe validation.</p>
-<p align="center">🛠️ <strong>Extensible:</strong> Customize our library to fit your unique needs with ease.</p>
-<p align="center">🌍 <strong>i18n Support:</strong> Speak your users' language with built-in localization.</p>
-<p align="center">🔧 <strong>Adaptability:</strong> Seamless integration with existing TypeScript apps.</p>
-<p align="center">💻 <strong>Versatility:</strong> Works on both client and server-side.</p>
-
 <p align="center">
  <a href="https://npmcharts.com/compare/typescript-decorator-validation?minimal=true">
   <img alt="Downloads per month" src="https://img.shields.io/npm/dm/typescript-decorator-validation" height="20"/>
@@ -55,7 +49,22 @@
  </a>
 </p>
 
-<a id="md:toc" class="tsd-anchor"></a><h2><a href="#md:toc">TOC</a></h2><ul>
+<br />
+
+<blockquote>
+<p>🌟 <strong>Welcome to <code>tdv-monorepo</code>, the future of model validation in TypeScript.</strong></p>
+<p>Leveraging TypeScript decorators, <code>tdv-monorepo</code> offers a declarative way to manage model validation. Suitable for both client-side and server-side projects, it comes with built-in extensibility and localization support. 🌟</p>
+</blockquote>
+<a id="md:features" class="tsd-anchor"></a><h3><a href="#md:features">Features</a></h3><ul>
+<li>powered by TypeScript&#39;s stage-3 decorators (type-safety included)</li>
+<li>small in bundle size with no dependencies</li>
+<li>built-in i18n localization support to supply the messages in the user&#39;s native language</li>
+<li>well-documented code and extensive guides for making it easy to get started</li>
+<li>designed to play nice with popular testing frameworks</li>
+<li>integrates seamlessly within any native TypeScript v5+ project</li>
+<li>provides a clean and declarative way of validating form fields</li>
+</ul>
+<a id="md:content" class="tsd-anchor"></a><h3><a href="#md:content">Content</a></h3><ul>
 <li><a href="#installation">Installation</a></li>
 <li><a href="#documentation">Documentation</a></li>
 <li><a href="#contribution">Contribution</a></li>
@@ -65,28 +74,28 @@
 <li><a href="#repository-architecture">Repository architecture</a></li>
 <li><a href="#comparison-against-similar-solutions">Comparison against similar solutions</a></li>
 </ul>
-<a id="md:installation" class="tsd-anchor"></a><h2><a href="#md:installation">Installation</a></h2><pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">i</span><span class="hl-1"> </span><span class="hl-2">tdv-core</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">i</span><span class="hl-1"> </span><span class="hl-2">tdv-react</span><span class="hl-1"> </span><span class="hl-3"># when using in framework-specific environment</span>
+<a id="md:installation" class="tsd-anchor"></a><h3><a href="#md:installation">Installation</a></h3><pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">i</span><span class="hl-1"> </span><span class="hl-2">tdv-core</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">i</span><span class="hl-1"> </span><span class="hl-2">tdv-react</span><span class="hl-1"> </span><span class="hl-3"># when using in framework-specific environment</span>
 </code><button>Copy</button></pre>
-<a id="md:supported-frameworks" class="tsd-anchor"></a><h2><a href="#md:supported-frameworks">Supported Frameworks</a></h2><ul>
+<a id="md:supported-frameworks" class="tsd-anchor"></a><h3><a href="#md:supported-frameworks">Supported Frameworks</a></h3><ul>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://github.com/brunotot/typescript-decorator-validation/tree/main/packages/react#readme">view React implementation</a></li>
 <li><input disabled="" type="checkbox"> Angular</li>
 <li><input disabled="" type="checkbox"> Svelte</li>
 <li><input disabled="" type="checkbox"> Vue</li>
 </ul>
-<a id="md:documentation" class="tsd-anchor"></a><h2><a href="#md:documentation">Documentation</a></h2><ul>
+<a id="md:documentation" class="tsd-anchor"></a><h3><a href="#md:documentation">Documentation</a></h3><ul>
 <li><a href="https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html">tdv-core</a></li>
 <li><a href="https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html">tdv-react</a></li>
 </ul>
-<a id="md:contribution" class="tsd-anchor"></a><h2><a href="#md:contribution">Contribution</a></h2><p>To contribute, simply clone the main branch, commit changes to a local branch and open pull request.</br>
+<a id="md:contribution" class="tsd-anchor"></a><h3><a href="#md:contribution">Contribution</a></h3><p>To contribute, simply clone the main branch, commit changes to a local branch and open pull request.</br>
 Branch will be ready for merge after all CI tests pass and a review has been made.</p>
-<a id="md:future-goals" class="tsd-anchor"></a><h2><a href="#md:future-goals">Future goals</a></h2><ul>
+<a id="md:future-goals" class="tsd-anchor"></a><h3><a href="#md:future-goals">Future goals</a></h3><ul>
 <li><input checked="" disabled="" type="checkbox"> Implement strict type checking</li>
 <li><input checked="" disabled="" type="checkbox"> Implement predefined decorator validators</li>
 <li><input checked="" disabled="" type="checkbox"> Provide source code documentation</li>
 <li><input checked="" disabled="" type="checkbox"> Implement concise tests for various scenarios</li>
 <li><input disabled="" type="checkbox"> Build implementation packages for popular front-end frameworks</li>
 </ul>
-<a id="md:examples" class="tsd-anchor"></a><h2><a href="#md:examples">Examples</a></h2><p>A basic TypeScript form can look something like</p>
+<a id="md:examples" class="tsd-anchor"></a><h3><a href="#md:examples">Examples</a></h3><p>A basic TypeScript form can look something like</p>
 <pre><code class="language-typescript"><span class="hl-4">import</span><span class="hl-1"> { </span><span class="hl-5">validators</span><span class="hl-1">, </span><span class="hl-5">ValidationEngine</span><span class="hl-1"> } </span><span class="hl-4">from</span><span class="hl-1"> </span><span class="hl-2">&quot;tdv-core&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">/**</span><br/><span class="hl-3"> *  This is an optional layer of abstraction if the class contains complex</span><br/><span class="hl-3"> *  validation evaluations which shouldn&#39;t be registered as properties.</span><br/><span class="hl-3"> *  In this example the &quot;passwordsMatch&quot; field isn&#39;t a settable property.</span><br/><span class="hl-3"> */</span><br/><span class="hl-4">export</span><span class="hl-1"> </span><span class="hl-6">type</span><span class="hl-1"> </span><span class="hl-7">UserFormFields</span><span class="hl-1"> = {</span><br/><span class="hl-1">  </span><span class="hl-5">confirmPassword</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-5">firstName</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-5">lastName</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-5">password</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-5">url</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-5">age</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">};</span><br/><br/><span class="hl-4">export</span><span class="hl-1"> </span><span class="hl-4">default</span><span class="hl-1"> </span><span class="hl-6">class</span><span class="hl-1"> </span><span class="hl-7">UserForm</span><span class="hl-1"> </span><span class="hl-6">implements</span><span class="hl-1"> </span><span class="hl-7">UserFormFields</span><span class="hl-1"> {</span><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">string</span><span class="hl-1">.</span><span class="hl-0">MinLength</span><span class="hl-1">(</span><span class="hl-8">5</span><span class="hl-1">)</span><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">string</span><span class="hl-1">.</span><span class="hl-0">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-5">firstName</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">string</span><span class="hl-1">.</span><span class="hl-0">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-5">lastName</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">string</span><span class="hl-1">.</span><span class="hl-0">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">string</span><span class="hl-1">.</span><span class="hl-0">Password</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-5">password</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  </span><span class="hl-5">confirmPassword</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">string</span><span class="hl-1">.</span><span class="hl-0">URL</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-5">url</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">number</span><span class="hl-1">.</span><span class="hl-0">ValueRange</span><span class="hl-1">({ </span><span class="hl-5">min:</span><span class="hl-1"> </span><span class="hl-8">18</span><span class="hl-1">, </span><span class="hl-5">max:</span><span class="hl-1"> </span><span class="hl-8">100</span><span class="hl-1"> })</span><br/><span class="hl-1">  </span><span class="hl-5">age</span><span class="hl-1">!: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-5">validators</span><span class="hl-1">.</span><span class="hl-5">boolean</span><span class="hl-1">.</span><span class="hl-0">Truthy</span><span class="hl-1">(</span><span class="hl-2">&quot;Passwords must match&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">  </span><span class="hl-6">get</span><span class="hl-1"> </span><span class="hl-0">passwordsMatch</span><span class="hl-1">(): </span><span class="hl-7">boolean</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-4">return</span><span class="hl-1"> </span><span class="hl-6">this</span><span class="hl-1">.</span><span class="hl-5">password</span><span class="hl-1"> === </span><span class="hl-6">this</span><span class="hl-1">.</span><span class="hl-5">confirmPassword</span><span class="hl-1">;</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>
 <p>And a sample value of type UserForm may look something like</p>
@@ -98,7 +107,7 @@ Branch will be ready for merge after all CI tests pass and a review has been mad
 <p>And the result is</p>
 <pre><code class="language-json"><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;firstName&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Field is mandatory&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Field must contain at least 5 characters&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;lastName&quot;</span><span class="hl-1">: [</span><span class="hl-2">&quot;Field is mandatory&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;password&quot;</span><span class="hl-1">: [</span><span class="hl-2">&quot;Password must be at least 8 characters long&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;url&quot;</span><span class="hl-1">: [],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;age&quot;</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Value must be greater than or equal to 18 and less than or equal to 100 but is 10&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">&quot;passwordsMatch&quot;</span><span class="hl-1">: [</span><span class="hl-2">&quot;Passwords must match&quot;</span><span class="hl-1">]</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>
-<a id="md:repository-architecture" class="tsd-anchor"></a><h2><a href="#md:repository-architecture">Repository architecture</a></h2><p>The <code>tdv-core</code> package is the backbone, providing core validation logic that&#39;s framework-agnostic. Features include:</p>
+<a id="md:repository-architecture" class="tsd-anchor"></a><h3><a href="#md:repository-architecture">Repository architecture</a></h3><p>The <code>tdv-core</code> package is the backbone, providing core validation logic that&#39;s framework-agnostic. Features include:</p>
 <ul>
 <li>A decorator factory for easy integration with TypeScript</li>
 <li>Metadata management for dynamic behavior</li>
@@ -106,7 +115,7 @@ Branch will be ready for merge after all CI tests pass and a review has been mad
 <li>Built-in validators like <code>Email</code>, <code>Required</code>, etc.</li>
 </ul>
 <p>The core package serves as the foundation for implementation libraries like <code>tdv-react</code>, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.</p>
-<a id="md:comparison-against-similar-solutions" class="tsd-anchor"></a><h2><a href="#md:comparison-against-similar-solutions">Comparison against similar solutions</a></h2><table>
+<a id="md:comparison-against-similar-solutions" class="tsd-anchor"></a><h3><a href="#md:comparison-against-similar-solutions">Comparison against similar solutions</a></h3><table>
 <thead>
 <tr>
 <th>Criteria</th>
@@ -173,7 +182,10 @@ Branch will be ready for merge after all CI tests pass and a review has been mad
 <ul>
 <li>
 <ul>
-<li><a href="#md:toc"><span>TOC</span></a></li>
+<li><a href="#md:features"><span>Features</span></a></li>
+<li>
+<ul>
+<li><a href="#md:content"><span>Content</span></a></li>
 <li>
 <ul>
 <li><a href="#md:installation"><span>Installation</span></a></li>
@@ -183,7 +195,7 @@ Branch will be ready for merge after all CI tests pass and a review has been mad
 <li><a href="#md:future-goals"><span>Future goals</span></a></li>
 <li><a href="#md:examples"><span>Examples</span></a></li>
 <li><a href="#md:repository-architecture"><span>Repository architecture</span></a></li>
-<li><a href="#md:comparison-against-similar-solutions"><span>Comparison against similar solutions</span></a></li></ul></li></ul></li></ul></div></details></div>
+<li><a href="#md:comparison-against-similar-solutions"><span>Comparison against similar solutions</span></a></li></ul></li></ul></li></ul></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="index.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg>
 <div>Typescript <wbr/>Decorator <wbr/>Validation -<wbr/> v1.0.0</div></a>
