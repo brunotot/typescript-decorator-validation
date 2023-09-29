@@ -37,6 +37,7 @@
 - designed to play nice with popular testing frameworks
 - integrates seamlessly within any native TypeScript v5+ project
 - provides a clean and declarative way of validating form fields
+- exports useful reflection utility methods and types
 
 
 ### Content
