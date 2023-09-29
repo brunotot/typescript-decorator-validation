@@ -61,13 +61,12 @@ npm install tdv-react # when using in framework-specific environment
 
 ### Quick start
 ```typescript
-import { TdvCore, validate, ValidationEngine } from "tdv-core";
-import Email from "tdv-core/validators/string/Email";
+import { validate, decorate, ValidationEngine, Localization, TdvCore } from "tdv-core";
 
 function MinSize(min: number, groups: TdvCore.Validation.Groups = []) {
   return validate<string>({
     groups,
-    isValid: (value, _context, _locale) => ({
+    isValid: (value: string, _parent: Foo, _locale: Localization.Locale) => ({
       key: "MinSize",
       valid: value.length >= min,
       message: `Input must contain at least ${min} characters`,
@@ -76,8 +75,8 @@ function MinSize(min: number, groups: TdvCore.Validation.Groups = []) {
 }
 
 class Foo {
-  @Email()        // predefined
-  @MinSize(10)    // custom
+  @decorate.string.Email()  // predefined
+  @MinSize(10)  // custom
   email!: string
 }
 
