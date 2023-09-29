@@ -117,7 +117,7 @@ Branch will be ready for merge after all CI tests pass and a review has been mad
 A basic TypeScript form can look something like
 
 ```typescript
-import { validators, ValidationEngine } from "tdv-core";
+import { decorate, ValidationEngine } from "tdv-core";
 
 /**
  *  This is an optional layer of abstraction if the class contains complex
@@ -134,26 +134,26 @@ export type UserFormFields = {
 };
 
 export default class UserForm implements UserFormFields {
-  @validators.string.MinLength(5)
-  @validators.string.Required()
+  @decorate.string.MinLength(5)
+  @decorate.string.Required()
   firstName!: string;
 
-  @validators.string.Required()
+  @decorate.string.Required()
   lastName!: string;
 
-  @validators.string.Required()
-  @validators.string.Password()
+  @decorate.string.Required()
+  @decorate.string.Password()
   password!: string;
 
   confirmPassword!: string;
 
-  @validators.string.URL()
+  @decorate.string.URL()
   url!: string;
 
-  @validators.number.ValueRange({ min: 18, max: 100 })
+  @decorate.number.ValueRange({ min: 18, max: 100 })
   age!: number;
 
-  @validators.boolean.Truthy("Passwords must match")
+  @decorate.boolean.Truthy("Passwords must match")
   get passwordsMatch(): boolean {
     return this.password === this.confirmPassword;
   }
@@ -176,26 +176,34 @@ const dummy: Partial<UserFormFields> = {
 Now we can inspect the errors of the given sample value
 
 ```typescript
-const processor = new ValidationEngine(UserForm);
-const { errors } = processor.validate(dummy);
-console.log(JSON.stringify(errors, null, 2));
+const engine = new ValidationEngine(UserForm);
+const { errors } = engine.validate(dummy);
+console.log(errors);
 ```
 
 And the result is
 
-```json
+```typescript
 {
-  "firstName": [
+  firstName: [
     "Field is mandatory",
     "Field must contain at least 5 characters"
   ],
-  "lastName": ["Field is mandatory"],
-  "password": ["Password must be at least 8 characters long"],
-  "url": [],
-  "age": [
+  lastName: [
+    "Field is mandatory"
+  ],
+  password: [
+    "Password must be at least 8 characters long"
+  ],
+  url: [
+    // EMPTY
+  ],
+  age: [
     "Value must be greater than or equal to 18 and less than or equal to 100 but is 10"
   ],
-  "passwordsMatch": ["Passwords must match"]
+  passwordsMatch: [
+    "Passwords must match"
+  ]
 }
 ```
 
