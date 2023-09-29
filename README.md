@@ -1,11 +1,5 @@
 <h1 align="center">🚀 TypeScript Decorator Validation 🚀</h1>
 
-<p align="center">🎩 <strong>TypeScript v5:</strong> Harness the power of TypeScript v5 decorators for type-safe validation.</p>
-<p align="center">🛠️ <strong>Extensible:</strong> Customize our library to fit your unique needs with ease.</p>
-<p align="center">🌍 <strong>i18n Support:</strong> Speak your users' language with built-in localization.</p>
-<p align="center">🔧 <strong>Adaptability:</strong> Seamless integration with existing TypeScript apps.</p>
-<p align="center">💻 <strong>Versatility:</strong> Works on both client and server-side.</p>
-
 <p align="center">
  <a href="https://npmcharts.com/compare/typescript-decorator-validation?minimal=true">
   <img alt="Downloads per month" src="https://img.shields.io/npm/dm/typescript-decorator-validation" height="20"/>
@@ -28,7 +22,24 @@
  </a>
 </p>
 
-## TOC
+<br />
+
+> 🌟 **Welcome to `tdv-monorepo`, the future of model validation in TypeScript.**
+> 
+> Leveraging TypeScript decorators, `tdv-monorepo` offers a declarative way to manage model validation. Suitable for both client-side and server-side projects, it comes with built-in extensibility and localization support. 🌟
+
+### Features
+
+- powered by TypeScript's stage-3 decorators (type-safety included)
+- small in bundle size with no dependencies
+- built-in i18n localization support to supply the messages in the user's native language
+- well-documented code and extensive guides for making it easy to get started
+- designed to play nice with popular testing frameworks
+- integrates seamlessly within any native TypeScript v5+ project
+- provides a clean and declarative way of validating form fields
+
+
+### Content
 
 - [Installation](#installation)
 - [Documentation](#documentation)
@@ -39,31 +50,31 @@
 - [Repository architecture](#repository-architecture)
 - [Comparison against similar solutions](#comparison-against-similar-solutions)
 
-## Installation
+### Installation
 
 ```bash
 npm i tdv-core
 npm i tdv-react # when using in framework-specific environment
 ```
 
-## Supported Frameworks
+### Supported Frameworks
 
 - [x] [view React implementation](https://github.com/brunotot/typescript-decorator-validation/tree/main/packages/react#readme)
 - [ ] Angular
 - [ ] Svelte
 - [ ] Vue
 
-## Documentation
+### Documentation
 
 - [tdv-core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
 - [tdv-react](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html)
 
-## Contribution
+### Contribution
 
 To contribute, simply clone the main branch, commit changes to a local branch and open pull request.</br>
 Branch will be ready for merge after all CI tests pass and a review has been made.
 
-## Future goals
+### Future goals
 
 - [x] Implement strict type checking
 - [x] Implement predefined decorator validators
@@ -71,7 +82,7 @@ Branch will be ready for merge after all CI tests pass and a review has been mad
 - [x] Implement concise tests for various scenarios
 - [ ] Build implementation packages for popular front-end frameworks
 
-## Examples
+### Examples
 
 A basic TypeScript form can look something like
 
@@ -158,7 +169,7 @@ And the result is
 }
 ```
 
-## Repository architecture
+### Repository architecture
 
 The `tdv-core` package is the backbone, providing core validation logic that's framework-agnostic. Features include:
 
@@ -169,7 +180,7 @@ The `tdv-core` package is the backbone, providing core validation logic that's f
 
 The core package serves as the foundation for implementation libraries like `tdv-react`, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.
 
-## Comparison against similar solutions
+### Comparison against similar solutions
 
 | Criteria          | tdv-monorepo | Yup    | React Hook Form | Validator.js | Formik |
 | ----------------- | ------------ | ------ | --------------- | ------------ | ------ |
