@@ -32,22 +32,20 @@
 
 ###
 
-> <div id="what-does-tdv-core-do">❓ <strong><i>What does `tdv-core` do?</i></strong></div>
-> 💡 `tdv-core` is an independent module responsible for handling all TypeScript-heavy evaluations and exposing useful classes and methods for managing, evaluating and displaying class model validation errors. It is designed to be fully customizable and easy to extend.
+> <div id="what-does-tdv-core-do">❓ <strong><i>What does <code>tdv-core</code> do?</i></strong></div>
+> 💡 <code>tdv-core</code> is an independent module responsible for handling all TypeScript-heavy evaluations and exposing useful classes and methods for managing, evaluating and displaying class model validation errors. It is designed to be fully customizable and easy to extend.
 
 ###
 
 > <div id="which-versions-of-typescript-are-supported">❓ <strong><i>Which versions of TypeScript are supported?</i></strong></div>
-
-> 💡 All TypeScript versions after and including the **v5.0** are supported.
+> 💡 All TypeScript versions after and including the <strong>v5.0</strong> are supported.
 
 ## Installation
 
 ###
 
 > <div id="how-do-i-install-it">❓ <strong><i>How do I install it?</i></strong></div>
-
-> 💡 Very simple. You first have to make sure you have TypeScript **v5** installed. Afterwards, you install `tdv-core` package and optionally `tdv-react` or any of the supported framework-specific packages. You can see the full list of supported framework-packages [here](https://github.com/brunotot/typescript-decorator-validation/tree/main/packages/core#supported-frameworks).
+> 💡 Very simple. You first have to make sure you have TypeScript <strong>v5</strong> installed. Afterwards, you install <code>tdv-core</code> package and optionally <code>tdv-react</code> or any of the supported framework-specific packages. You can see the full list of supported framework-packages <a href="https://github.com/brunotot/typescript-decorator-validation/tree/main/packages/core#supported-frameworks">here</a>.
 
 ```sh
 npm install -d typescript@latest
@@ -60,8 +58,7 @@ npm install tdv-react # optional
 ## Usage
 
 > <div id="how-do-i-create-my-own-custom-decorator">❓ <strong><i>How do I create my own custom decorator?</i></strong></div>
-
-> 💡 `tdv-core` exposes a method [`validate`](https://github.com/brunotot/typescript-decorator-validation/blob/main/packages/core/validators/any/Rule.ts#L28) which returns a decorator factory based on your custom implementation. It accepts validation `groups` param and `isValid` which expects a callback that returns an object containing `key`, error `message` and `valid` boolean evaluation.
+> 💡 <code>tdv-core</code> exposes a method <a href="https://github.com/brunotot/typescript-decorator-validation/blob/main/packages/core/validators/any/Rule.ts#L28">validate</a> which returns a decorator factory based on your custom implementation. It accepts validation <code>groups</code> param and <code>isValid</code> which expects a callback that returns an object containing <code>key</code>, error <code>message</code> and <code>valid</code> boolean evaluation.
 
 ```typescript
 import { validate } from "tdv-core";
@@ -86,8 +83,7 @@ class MyClass {
 ###
 
 > <div id="how-to-specify-custom-error-messages-for-predefined-validators">❓ <strong><i>How to specify custom error messages for predefined validators?</i></strong></div>
-
-> 💡 Each predefined validator in `tdv-core` allows for configurable properties, including custom error messages. To set a custom message, pass the `{ message: "Your custom error message" }` object to the validator. If a validator doesn't accept any arguments related to the validation logic and is able to process custom-defined messages then it may allow the first argument to be an actual string message instead of (union) configurable object.
+> 💡 Each predefined validator in <code>tdv-core</code> allows for configurable properties, including custom error messages. To set a custom message, pass the <code>{ message: "Your custom error message" }</code> object to the validator. If a validator doesn't accept any arguments related to the validation logic and is able to process custom-defined messages then it may allow the first argument to be an actual string message instead of (union) configurable object.
 
 ```typescript
 import { decorate } from "tdv-core";
@@ -106,8 +102,7 @@ class MyClass {
 ###
 
 > <div id="how-to-specify-custom-validation-groups-for-predefined-validators">❓ <strong><i>How to specify custom validation groups for predefined validators?</i></strong></div>
-
-> 💡 Like `message` parameter, we can also provide `groups` parameter to predefined validators. Validation groups are considered unique primitive identifiers - meaning it accepts identifiers like `number`, `string` or `symbol`. If no groups are provided, they default to an empty array.
+> 💡 Like <code>message</code> parameter, we can also provide <code>groups</code> parameter to predefined validators. Validation groups are considered unique primitive identifiers - meaning it accepts identifiers like <code>number</code>, <code>string</code> or <code>symbol</code>. If no groups are provided, they default to an empty array.
 
 ```typescript
 import { decorate } from "tdv-core";
@@ -130,7 +125,6 @@ class MyClass {
 ###
 
 > <div id="which-languages-does-this-library-support">❓ <strong><i>Which languages does this library support?</i></strong></div>
-
 > 💡 English, Croatian, German, Spanish, Frech, Italian and Dutch.
 
 ```typescript
@@ -143,8 +137,7 @@ namespace Localization {
 ###
 
 > <div id="how-to-change-error-messages-default-locale">❓ <strong><i>How to change error messages default locale?</i></strong></div>
-
-> 💡 You can change the globally defined locale using `setLocale` method.
+> 💡 You can change the globally defined locale using <code>setLocale</code> method.
 
 ```typescript
 import { Localization } from "tdv-core";
@@ -155,8 +148,7 @@ Localization.setLocale("es"); // Changes default locale to Spanish.
 ###
 
 > <div id="how-to-specify-different-locale-for-each-validation-engine">❓ <strong><i>How to specify different locale for each validation engine?</i></strong></div>
-
-> 💡 You can specify a locale when supplying configuration props to the engine. `ValidationEngine` constructor can accept configurable options `TdvCore.ValidationEngine.Config` in which we can define a custom value for `locale` key.
+> 💡 You can specify a locale when supplying configuration props to the engine. <code>ValidationEngine</code> constructor can accept configurable options <code>TdvCore.ValidationEngine.Config</code> in which we can define a custom value for <code>locale</code> key.
 
 ```typescript
 import { ValidationEngine, TdvCore } from "tdv-core";
@@ -171,8 +163,7 @@ const engine = new ValidationEngine(SomeClass, options);
 ###
 
 > <div id="can-i-define-a-custom-interceptor-for-evaluating-inline-defined-messages">❓ <strong><i>Can I define a custom interceptor for evaluating inline-defined messages?</i></strong></div>
-
-> 💡 Yes. There is a `MessageResolver` class exposed specifically for this use-case. Check the example.
+> 💡 Yes. There is a <code>MessageResolver</code> class exposed specifically for this use-case. Check the example.
 
 ```typescript
 import { Localization, ValidationEngine, decorate } from "tdv-core";
