@@ -1,17 +1,13 @@
-# tdv-core
+<h2>Table of Contents</h2>
 
-## API Reference
-
-- [tdv-core](#tdv-core)
-  - [API Reference](#api-reference)
-    - [Classes](#classes)
-    - [Namespaces](#namespaces)
-    - [Validators](#validators)
-      - [any](#any)
-      - [Date](#date)
-      - [array](#array)
-      - [number](#number)
-      - [string](#string)
+- [Classes](#classes)
+- [Namespaces](#namespaces)
+- [Validators](#validators)
+  - [any](#any)
+  - [Date](#date)
+  - [array](#array)
+  - [number](#number)
+  - [string](#string)
 
 ---
 
