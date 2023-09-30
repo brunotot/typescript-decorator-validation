@@ -27,6 +27,27 @@
 <h2>Typescript Decorator Validation - v1.0.0</h2></div>
 <div class="tsd-panel tsd-typography"><h1 align="center">🚀 TypeScript Decorator Validation 🚀</h1>
 
+<a id="md:ltltltltltltlt-updated-upstream" class="tsd-anchor"></a><h1><a href="#md:ltltltltltltlt-updated-upstream">&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream</a></h1><p align="center">🎩 <strong>TypeScript v5:</strong> Harness the power of TypeScript v5 decorators for type-safe validation.</p>
+<p align="center">🛠️ <strong>Extensible:</strong> Customize our library to fit your unique needs with ease.</p>
+<p align="center">🌍 <strong>i18n Support:</strong> Speak your users' language with built-in localization.</p>
+<p align="center">🔧 <strong>Adaptability:</strong> Seamless integration with existing TypeScript apps.</p>
+<p align="center">💻 <strong>Versatility:</strong> Works on both client and server-side.</p>
+
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Stashed changes</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 <p align="center">
  <a href="https://npmcharts.com/compare/typescript-decorator-validation?minimal=true">
   <img alt="Downloads per month" src="https://img.shields.io/npm/dm/typescript-decorator-validation" height="20"/>
@@ -49,6 +70,7 @@
  </a>
 </p>
 
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream</p>
 <p align="center">
   <a href="https://github.com/brunotot/typescript-decorator-validation/tree/main/markdown/FAQ.md">
     🔎 Frequently Asked Questions (FAQ)
@@ -75,7 +97,26 @@
 <li><a href="#features">Features</a></li>
 <li><a href="#content">Content</a></li>
 <li><a href="#installation">Installation</a></li>
-<li><a href="#quick-start">Quick start</a></li>
+<li><a id="md:quick-start" class="tsd-anchor"></a><h1><a href="#md:quick-start"><a href="#quick-start">Quick start</a></a></h1></li>
+</ul>
+<a id="md:toc" class="tsd-anchor"></a><h2><a href="#md:toc">TOC</a></h2><ul>
+<li><a href="#toc">TOC</a></li>
+<li><a href="#installation">Installation</a><blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Stashed changes</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
 <li><a href="#supported-frameworks">Supported Frameworks</a></li>
 <li><a href="#documentation">Documentation</a></li>
 <li><a href="#contribution">Contribution</a></li>
@@ -84,21 +125,86 @@
 <li><a href="#repository-architecture">Repository architecture</a></li>
 <li><a href="#comparison-against-similar-solutions">Comparison against similar solutions</a></li>
 </ul>
-<a id="md:installation" class="tsd-anchor"></a><h3><a href="#md:installation">Installation</a></h3><pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-3">-d</span><span class="hl-1"> </span><span class="hl-2">typescript@latest</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">tdv-core</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">tdv-react</span><span class="hl-1"> </span><span class="hl-4"># when using in framework-specific environment</span>
+<a id="md:ltltltltltltlt-updated-upstream--installation" class="tsd-anchor"></a><h1><a href="#md:ltltltltltltlt-updated-upstream--installation">&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream
+### Installation</a></h1><a id="md:installation" class="tsd-anchor"></a><h2><a href="#md:installation">Installation</a></h2><blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Stashed changes</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-3">-d</span><span class="hl-1"> </span><span class="hl-2">typescript@latest</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">tdv-core</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">tdv-react</span><span class="hl-1"> </span><span class="hl-4"># when using in framework-specific environment</span>
 </code><button>Copy</button></pre>
-<a id="md:quick-start" class="tsd-anchor"></a><h3><a href="#md:quick-start">Quick start</a></h3><pre><code class="language-typescript"><span class="hl-5">import</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-6">validate</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">decorate</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">ValidationEngine</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">Localization</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">TdvCore</span><span class="hl-1">,</span><br/><span class="hl-1">} </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;tdv-core&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">function</span><span class="hl-1"> </span><span class="hl-0">MinSize</span><span class="hl-1">(</span><span class="hl-6">min</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">, </span><span class="hl-6">groups</span><span class="hl-1">: </span><span class="hl-7">TdvCore</span><span class="hl-1">.</span><span class="hl-7">Validation</span><span class="hl-1">.</span><span class="hl-7">Groups</span><span class="hl-1"> = []) {</span><br/><span class="hl-1">  </span><span class="hl-5">return</span><span class="hl-1"> </span><span class="hl-0">validate</span><span class="hl-1">&lt;</span><span class="hl-7">string</span><span class="hl-1">&gt;({</span><br/><span class="hl-1">    </span><span class="hl-6">groups</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">isValid</span><span class="hl-6">:</span><span class="hl-1"> (</span><span class="hl-6">value</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">, </span><span class="hl-6">_parent</span><span class="hl-1">: </span><span class="hl-7">Foo</span><span class="hl-1">, </span><span class="hl-6">_locale</span><span class="hl-1">: </span><span class="hl-7">Localization</span><span class="hl-1">.</span><span class="hl-7">Locale</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> ({</span><br/><span class="hl-1">      </span><span class="hl-6">key:</span><span class="hl-1"> </span><span class="hl-2">&quot;MinSize&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">valid:</span><span class="hl-1"> </span><span class="hl-6">value</span><span class="hl-1">.</span><span class="hl-6">length</span><span class="hl-1"> &gt;= </span><span class="hl-6">min</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">message:</span><span class="hl-1"> </span><span class="hl-2">`Input must contain at least </span><span class="hl-3">${</span><span class="hl-6">min</span><span class="hl-3">}</span><span class="hl-2"> characters`</span><span class="hl-1">,</span><br/><span class="hl-1">    }),</span><br/><span class="hl-1">  });</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Foo</span><span class="hl-1"> {</span><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">Email</span><span class="hl-1">() </span><span class="hl-4">// predefined</span><br/><span class="hl-1">  @</span><span class="hl-0">MinSize</span><span class="hl-1">(</span><span class="hl-8">10</span><span class="hl-1">) </span><span class="hl-4">// custom</span><br/><span class="hl-1">  </span><span class="hl-6">email</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">engine</span><span class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-0">ValidationEngine</span><span class="hl-1">(</span><span class="hl-6">Foo</span><span class="hl-1">);</span><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">result</span><span class="hl-1"> = </span><span class="hl-6">engine</span><span class="hl-1">.</span><span class="hl-0">validate</span><span class="hl-1">({ </span><span class="hl-6">email:</span><span class="hl-1"> </span><span class="hl-2">&quot;invalid&quot;</span><span class="hl-1"> });</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-6">result</span><span class="hl-1">.</span><span class="hl-6">errors</span><span class="hl-1">.</span><span class="hl-6">email</span><span class="hl-1">);</span><br/><span class="hl-4">// [ &#39;Input must contain at least 10 characters&#39;, &#39;Value is not a valid email&#39; ]</span>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream</p>
+<a id="md:quick-start-1" class="tsd-anchor"></a><h3><a href="#md:quick-start-1">Quick start</a></h3><pre><code class="language-typescript"><span class="hl-5">import</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-6">validate</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">decorate</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">ValidationEngine</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">Localization</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">TdvCore</span><span class="hl-1">,</span><br/><span class="hl-1">} </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;tdv-core&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">function</span><span class="hl-1"> </span><span class="hl-0">MinSize</span><span class="hl-1">(</span><span class="hl-6">min</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">, </span><span class="hl-6">groups</span><span class="hl-1">: </span><span class="hl-7">TdvCore</span><span class="hl-1">.</span><span class="hl-7">Validation</span><span class="hl-1">.</span><span class="hl-7">Groups</span><span class="hl-1"> = []) {</span><br/><span class="hl-1">  </span><span class="hl-5">return</span><span class="hl-1"> </span><span class="hl-0">validate</span><span class="hl-1">&lt;</span><span class="hl-7">string</span><span class="hl-1">&gt;({</span><br/><span class="hl-1">    </span><span class="hl-6">groups</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">isValid</span><span class="hl-6">:</span><span class="hl-1"> (</span><span class="hl-6">value</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">, </span><span class="hl-6">_parent</span><span class="hl-1">: </span><span class="hl-7">Foo</span><span class="hl-1">, </span><span class="hl-6">_locale</span><span class="hl-1">: </span><span class="hl-7">Localization</span><span class="hl-1">.</span><span class="hl-7">Locale</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> ({</span><br/><span class="hl-1">      </span><span class="hl-6">key:</span><span class="hl-1"> </span><span class="hl-2">&quot;MinSize&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">valid:</span><span class="hl-1"> </span><span class="hl-6">value</span><span class="hl-1">.</span><span class="hl-6">length</span><span class="hl-1"> &gt;= </span><span class="hl-6">min</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">message:</span><span class="hl-1"> </span><span class="hl-2">`Input must contain at least </span><span class="hl-3">${</span><span class="hl-6">min</span><span class="hl-3">}</span><span class="hl-2"> characters`</span><span class="hl-1">,</span><br/><span class="hl-1">    }),</span><br/><span class="hl-1">  });</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Foo</span><span class="hl-1"> {</span><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">Email</span><span class="hl-1">() </span><span class="hl-4">// predefined</span><br/><span class="hl-1">  @</span><span class="hl-0">MinSize</span><span class="hl-1">(</span><span class="hl-8">10</span><span class="hl-1">) </span><span class="hl-4">// custom</span><br/><span class="hl-1">  </span><span class="hl-6">email</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">engine</span><span class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-0">ValidationEngine</span><span class="hl-1">(</span><span class="hl-6">Foo</span><span class="hl-1">);</span><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">result</span><span class="hl-1"> = </span><span class="hl-6">engine</span><span class="hl-1">.</span><span class="hl-0">validate</span><span class="hl-1">({ </span><span class="hl-6">email:</span><span class="hl-1"> </span><span class="hl-2">&quot;invalid&quot;</span><span class="hl-1"> });</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-6">result</span><span class="hl-1">.</span><span class="hl-6">errors</span><span class="hl-1">.</span><span class="hl-6">email</span><span class="hl-1">);</span><br/><span class="hl-4">// [ &#39;Input must contain at least 10 characters&#39;, &#39;Value is not a valid email&#39; ]</span>
 </code><button>Copy</button></pre>
-<a id="md:supported-frameworks" class="tsd-anchor"></a><h3><a href="#md:supported-frameworks">Supported Frameworks</a></h3><ul>
+<a id="md:supported-frameworks" class="tsd-anchor"></a><h3><a href="#md:supported-frameworks">Supported Frameworks</a></h3><p>=======</p>
+<a id="md:supported-frameworks-1" class="tsd-anchor"></a><h2><a href="#md:supported-frameworks-1">Supported Frameworks</a></h2><blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Stashed changes</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<ul>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://github.com/brunotot/typescript-decorator-validation/tree/main/packages/react#readme">view React implementation</a></li>
 <li><input disabled="" type="checkbox"> Angular</li>
 <li><input disabled="" type="checkbox"> Svelte</li>
 <li><input disabled="" type="checkbox"> Vue</li>
 </ul>
-<a id="md:documentation" class="tsd-anchor"></a><h3><a href="#md:documentation">Documentation</a></h3><ul>
+<a id="md:ltltltltltltlt-updated-upstream--documentation" class="tsd-anchor"></a><h1><a href="#md:ltltltltltltlt-updated-upstream--documentation">&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream
+### Documentation</a></h1><a id="md:documentation" class="tsd-anchor"></a><h2><a href="#md:documentation">Documentation</a></h2><blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Stashed changes</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<ul>
 <li><a href="https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html">tdv-core</a></li>
 <li><a href="https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html">tdv-react</a></li>
 </ul>
-<a id="md:contribution" class="tsd-anchor"></a><h3><a href="#md:contribution">Contribution</a></h3><p>To contribute, simply clone the main branch, commit changes to a local branch and open pull request.</br>
+<a id="md:ltltltltltltlt-updated-upstream--contribution" class="tsd-anchor"></a><h1><a href="#md:ltltltltltltlt-updated-upstream--contribution">&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream
+### Contribution</a></h1><a id="md:contribution" class="tsd-anchor"></a><h2><a href="#md:contribution">Contribution</a></h2><blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Stashed changes</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>To contribute, simply clone the main branch, commit changes to a local branch and open pull request.</br>
 Branch will be ready for merge after all CI tests pass and a review has been made.</p>
 <a id="md:future-goals" class="tsd-anchor"></a><h3><a href="#md:future-goals">Future goals</a></h3><ul>
 <li><input checked="" disabled="" type="checkbox"> Implement strict type checking</li>
@@ -108,7 +214,7 @@ Branch will be ready for merge after all CI tests pass and a review has been mad
 <li><input disabled="" type="checkbox"> Build implementation packages for popular front-end frameworks</li>
 </ul>
 <a id="md:examples" class="tsd-anchor"></a><h3><a href="#md:examples">Examples</a></h3><p>A basic TypeScript form can look something like</p>
-<pre><code class="language-typescript"><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-6">decorate</span><span class="hl-1">, </span><span class="hl-6">ValidationEngine</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;tdv-core&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">/**</span><br/><span class="hl-4"> *  This is an optional layer of abstraction if the class contains complex</span><br/><span class="hl-4"> *  validation evaluations which shouldn&#39;t be registered as properties.</span><br/><span class="hl-4"> *  In this example the &quot;passwordsMatch&quot; field isn&#39;t a settable property.</span><br/><span class="hl-4"> */</span><br/><span class="hl-5">export</span><span class="hl-1"> </span><span class="hl-3">type</span><span class="hl-1"> </span><span class="hl-7">UserFormFields</span><span class="hl-1"> = {</span><br/><span class="hl-1">  </span><span class="hl-6">confirmPassword</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-6">firstName</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-6">lastName</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-6">password</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-6">url</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-6">age</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">};</span><br/><br/><span class="hl-5">export</span><span class="hl-1"> </span><span class="hl-5">default</span><span class="hl-1"> </span><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">UserForm</span><span class="hl-1"> </span><span class="hl-3">implements</span><span class="hl-1"> </span><span class="hl-7">UserFormFields</span><span class="hl-1"> {</span><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">MinLength</span><span class="hl-1">(</span><span class="hl-8">5</span><span class="hl-1">)</span><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-6">firstName</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-6">lastName</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">Password</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-6">password</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  </span><span class="hl-6">confirmPassword</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">URL</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-6">url</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">number</span><span class="hl-1">.</span><span class="hl-0">ValueRange</span><span class="hl-1">({ </span><span class="hl-6">min:</span><span class="hl-1"> </span><span class="hl-8">18</span><span class="hl-1">, </span><span class="hl-6">max:</span><span class="hl-1"> </span><span class="hl-8">100</span><span class="hl-1"> })</span><br/><span class="hl-1">  </span><span class="hl-6">age</span><span class="hl-1">!: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">boolean</span><span class="hl-1">.</span><span class="hl-0">Truthy</span><span class="hl-1">(</span><span class="hl-2">&quot;Passwords must match&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">  </span><span class="hl-3">get</span><span class="hl-1"> </span><span class="hl-0">passwordsMatch</span><span class="hl-1">(): </span><span class="hl-7">boolean</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-5">return</span><span class="hl-1"> </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-6">password</span><span class="hl-1"> === </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-6">confirmPassword</span><span class="hl-1">;</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
+<pre><code class="language-typescript"><span class="hl-1">&lt;&lt;&lt;&lt;&lt;&lt;&lt; </span><span class="hl-6">Updated</span><span class="hl-1"> </span><span class="hl-6">upstream</span><br/><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-6">decorate</span><span class="hl-1">, </span><span class="hl-6">ValidationEngine</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;tdv-core&quot;</span><span class="hl-1">;</span><br/><span class="hl-1">=======</span><br/><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-6">validators</span><span class="hl-1">, </span><span class="hl-6">EntityProcessor</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;tdv-core&quot;</span><span class="hl-1">;</span><br/><span class="hl-1">&gt;&gt;&gt;&gt;&gt;&gt;&gt; </span><span class="hl-6">Stashed</span><span class="hl-1"> </span><span class="hl-6">changes</span><br/><br/><span class="hl-4">/**</span><br/><span class="hl-4"> *  This is an optional layer of abstraction if the class contains complex</span><br/><span class="hl-4"> *  validation evaluations which shouldn&#39;t be registered as properties.</span><br/><span class="hl-4"> *  In this example the &quot;passwordsMatch&quot; field isn&#39;t a settable property.</span><br/><span class="hl-4"> */</span><br/><span class="hl-5">export</span><span class="hl-1"> </span><span class="hl-3">type</span><span class="hl-1"> </span><span class="hl-7">UserFormFields</span><span class="hl-1"> = {</span><br/><span class="hl-1">  </span><span class="hl-6">confirmPassword</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-6">firstName</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-6">lastName</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-6">password</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-6">url</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-6">age</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">};</span><br/><br/><span class="hl-5">export</span><span class="hl-1"> </span><span class="hl-5">default</span><span class="hl-1"> </span><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">UserForm</span><span class="hl-1"> </span><span class="hl-3">implements</span><span class="hl-1"> </span><span class="hl-7">UserFormFields</span><span class="hl-1"> {</span><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">MinLength</span><span class="hl-1">(</span><span class="hl-8">5</span><span class="hl-1">)</span><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-6">firstName</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-6">lastName</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">Required</span><span class="hl-1">()</span><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">Password</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-6">password</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  </span><span class="hl-6">confirmPassword</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">string</span><span class="hl-1">.</span><span class="hl-0">URL</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-6">url</span><span class="hl-1">!: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">number</span><span class="hl-1">.</span><span class="hl-0">ValueRange</span><span class="hl-1">({ </span><span class="hl-6">min:</span><span class="hl-1"> </span><span class="hl-8">18</span><span class="hl-1">, </span><span class="hl-6">max:</span><span class="hl-1"> </span><span class="hl-8">100</span><span class="hl-1"> })</span><br/><span class="hl-1">  </span><span class="hl-6">age</span><span class="hl-1">!: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><br/><span class="hl-1">  @</span><span class="hl-6">decorate</span><span class="hl-1">.</span><span class="hl-6">boolean</span><span class="hl-1">.</span><span class="hl-0">Truthy</span><span class="hl-1">(</span><span class="hl-2">&quot;Passwords must match&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">  </span><span class="hl-3">get</span><span class="hl-1"> </span><span class="hl-0">passwordsMatch</span><span class="hl-1">(): </span><span class="hl-7">boolean</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-5">return</span><span class="hl-1"> </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-6">password</span><span class="hl-1"> === </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-6">confirmPassword</span><span class="hl-1">;</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>
 <p>And a sample value of type UserForm may look something like</p>
 <pre><code class="language-typescript"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">dummy</span><span class="hl-1">: </span><span class="hl-7">Partial</span><span class="hl-1">&lt;</span><span class="hl-7">UserFormFields</span><span class="hl-1">&gt; = {</span><br/><span class="hl-1">  </span><span class="hl-6">firstName:</span><span class="hl-1"> </span><span class="hl-2">&quot;&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">lastName:</span><span class="hl-1"> </span><span class="hl-2">&quot;&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">password:</span><span class="hl-1"> </span><span class="hl-2">&quot;12345&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">confirmPassword:</span><span class="hl-1"> </span><span class="hl-2">&quot;&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">url:</span><span class="hl-1"> </span><span class="hl-2">&quot;&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-6">age:</span><span class="hl-1"> </span><span class="hl-8">10</span><span class="hl-1">,</span><br/><span class="hl-1">};</span>
@@ -117,74 +223,20 @@ Branch will be ready for merge after all CI tests pass and a review has been mad
 <pre><code class="language-typescript"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">engine</span><span class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-0">ValidationEngine</span><span class="hl-1">(</span><span class="hl-6">UserForm</span><span class="hl-1">);</span><br/><span class="hl-3">const</span><span class="hl-1"> { </span><span class="hl-9">errors</span><span class="hl-1"> } = </span><span class="hl-6">engine</span><span class="hl-1">.</span><span class="hl-0">validate</span><span class="hl-1">(</span><span class="hl-6">dummy</span><span class="hl-1">);</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-6">errors</span><span class="hl-1">);</span>
 </code><button>Copy</button></pre>
 <p>And the result is</p>
-<pre><code class="language-typescript"><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-10">firstName</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Field is mandatory&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Field must contain at least 5 characters&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">lastName</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Field is mandatory&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">password</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Password must be at least 8 characters long&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">url</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-4">// EMPTY</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">age</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Value must be greater than or equal to 18 and less than or equal to 100 but is 10&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">passwordsMatch</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Passwords must match&quot;</span><br/><span class="hl-1">  ]</span><br/><span class="hl-1">}</span>
+<a id="md:ltltltltltltlt-updated-upstream-typescript" class="tsd-anchor"></a><h1><a href="#md:ltltltltltltlt-updated-upstream-typescript">&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream
+```typescript</a></h1><pre><code class="language-json"><span class="hl-1">&gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</span><br/><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-10">firstName</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Field is mandatory&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Field must contain at least 5 characters&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-10">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span><span class="hl-1"> </span><span class="hl-10">Updated</span><span class="hl-1"> </span><span class="hl-10">upstream</span><br/><span class="hl-1">  </span><span class="hl-10">lastName</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Field is mandatory&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">password</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Password must be at least 8 characters long&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">url</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-4">// EMPTY</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">age</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Value must be greater than or equal to 18 and less than or equal to 100 but is 10&quot;</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-10">passwordsMatch</span><span class="hl-1">: [</span><br/><span class="hl-1">    </span><span class="hl-2">&quot;Passwords must match&quot;</span><br/><span class="hl-1">  ]</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>
-<a id="md:repository-architecture" class="tsd-anchor"></a><h3><a href="#md:repository-architecture">Repository architecture</a></h3><p>The <code>tdv-core</code> package is the backbone, providing core validation logic that&#39;s framework-agnostic. Features include:</p>
-<ul>
-<li>A decorator factory for easy integration with TypeScript</li>
-<li>Metadata management for dynamic behavior</li>
-<li>Localization support</li>
-<li>Built-in validators like <code>Email</code>, <code>Required</code>, etc.</li>
-</ul>
-<p>The core package serves as the foundation for implementation libraries like <code>tdv-react</code>, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.</p>
-<a id="md:comparison-against-similar-solutions" class="tsd-anchor"></a><h3><a href="#md:comparison-against-similar-solutions">Comparison against similar solutions</a></h3><table>
-<thead>
-<tr>
-<th>Criteria</th>
-<th>tdv-monorepo</th>
-<th>Yup</th>
-<th>React Hook Form</th>
-<th>Validator.js</th>
-<th>Formik</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Type Safety</td>
-<td>✅</td>
-<td>❌</td>
-<td>🟡[^1]</td>
-<td>❌</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>Syntax</td>
-<td>✅</td>
-<td>❌</td>
-<td>✅[^2]</td>
-<td>❌</td>
-<td>❌</td>
-</tr>
-<tr>
-<td>Learning Curve</td>
-<td>✅</td>
-<td>🟡[^3]</td>
-<td>🟡[^4]</td>
-<td>🟡[^5]</td>
-<td>🟡[^6]</td>
-</tr>
-<tr>
-<td>Custom Validators</td>
-<td>✅</td>
-<td>🟡[^7]</td>
-<td>✅</td>
-<td>🟡[^8]</td>
-<td>🟡[^9]</td>
-</tr>
-</tbody></table>
-<ul>
-<li>✅: Fully supported and easy-to-use</li>
-<li>❌: Not supported</li>
-<li>🟡: Partial support</li>
-</ul>
-<p>[^1]: React Hook Form has good TypeScript support but doesn&#39;t integrate as seamlessly as <code>tdv-monorepo</code>.
-[^2]: React Hook Form uses hooks, which are easy to use but different from native TypeScript decorators.
-[^3]: Yup requires learning its custom object schema, adding to the learning curve.
-[^4]: React Hook Form requires understanding of hooks, adding a slight learning curve.
-[^5]: Validator.js requires learning their API, which can be cumbersome.
-[^6]: Formik has its own ecosystem, making the learning curve steeper.
-[^7]: Yup allows for custom validation but within the confines of its own schema.
-[^8]: Validator.js allows for some customization but it&#39;s not straightforward.
-[^9]: Formik allows for custom validation but within its own framework.</p>
+<a id="md:repository-architecture" class="tsd-anchor"></a><h3><a href="#md:repository-architecture">Repository architecture</a></h3><p>=======
+  &quot;lastName&quot;: [&quot;Field is mandatory&quot;],
+  &quot;password&quot;: [&quot;Password must be at least 8 characters long&quot;],
+  &quot;url&quot;: [],
+  &quot;age&quot;: [
+    &quot;Value must be greater than or equal to 18 and less than or equal to 100 but is 10&quot;
+  ],
+  &quot;passwordsMatch&quot;: [&quot;Passwords must match&quot;]
+}</p>
+<pre><code><br/><span class="hl-1">## </span><span class="hl-6">Repository</span><span class="hl-1"> </span><span class="hl-6">architecture</span><br/><span class="hl-1">&gt;&gt;&gt;&gt;&gt;&gt;&gt; </span><span class="hl-6">Stashed</span><span class="hl-1"> </span><span class="hl-6">changes</span><br/><br/><span class="hl-6">The</span><span class="hl-1"> </span><span class="hl-2">`tdv-core`</span><span class="hl-1"> </span><span class="hl-5">package</span><span class="hl-1"> </span><span class="hl-6">is</span><span class="hl-1"> </span><span class="hl-6">the</span><span class="hl-1"> </span><span class="hl-6">backbone</span><span class="hl-1">, </span><span class="hl-6">providing</span><span class="hl-1"> </span><span class="hl-6">core</span><span class="hl-1"> </span><span class="hl-6">validation</span><span class="hl-1"> </span><span class="hl-6">logic</span><span class="hl-1"> </span><span class="hl-6">that</span><span class="hl-2">&#39;s framework-agnostic. Features include</span><span class="hl-10">:</span><br/><br/><span class="hl-1">- </span><span class="hl-9">A</span><span class="hl-1"> </span><span class="hl-6">decorator</span><span class="hl-1"> </span><span class="hl-6">factory</span><span class="hl-1"> </span><span class="hl-6">for</span><span class="hl-1"> </span><span class="hl-6">easy</span><span class="hl-1"> </span><span class="hl-6">integration</span><span class="hl-1"> </span><span class="hl-5">with</span><span class="hl-1"> </span><span class="hl-6">TypeScript</span><br/><span class="hl-1">- </span><span class="hl-6">Metadata</span><span class="hl-1"> </span><span class="hl-6">management</span><span class="hl-1"> </span><span class="hl-6">for</span><span class="hl-1"> </span><span class="hl-6">dynamic</span><span class="hl-1"> </span><span class="hl-6">behavior</span><br/><span class="hl-1">- </span><span class="hl-6">Localization</span><span class="hl-1"> </span><span class="hl-6">support</span><br/><span class="hl-1">- </span><span class="hl-6">Built</span><span class="hl-1">-</span><span class="hl-3">in</span><span class="hl-1"> </span><span class="hl-6">validators</span><span class="hl-1"> </span><span class="hl-6">like</span><span class="hl-1"> </span><span class="hl-2">`Email`</span><span class="hl-1">, </span><span class="hl-2">`Required`</span><span class="hl-1">, </span><span class="hl-6">etc</span><span class="hl-1">.</span><br/><br/><span class="hl-6">The</span><span class="hl-1"> </span><span class="hl-6">core</span><span class="hl-1"> </span><span class="hl-5">package</span><span class="hl-1"> </span><span class="hl-6">serves</span><span class="hl-1"> </span><span class="hl-5">as</span><span class="hl-1"> </span><span class="hl-7">the</span><span class="hl-1"> </span><span class="hl-7">foundation</span><span class="hl-1"> </span><span class="hl-7">for</span><span class="hl-1"> </span><span class="hl-7">implementation</span><span class="hl-1"> </span><span class="hl-7">libraries</span><span class="hl-1"> </span><span class="hl-7">like</span><span class="hl-1"> </span><span class="hl-2">`tdv-react`</span><span class="hl-1">, </span><span class="hl-5">with</span><span class="hl-1"> </span><span class="hl-6">future</span><span class="hl-1"> </span><span class="hl-6">extensions</span><span class="hl-1"> </span><span class="hl-6">planned</span><span class="hl-1"> </span><span class="hl-6">for</span><span class="hl-1"> </span><span class="hl-6">Angular</span><span class="hl-1">, </span><span class="hl-6">Vue</span><span class="hl-1">, </span><span class="hl-6">and</span><span class="hl-1"> </span><span class="hl-6">Svelte</span><span class="hl-1">. </span><span class="hl-6">This</span><span class="hl-1"> </span><span class="hl-6">modular</span><span class="hl-1"> </span><span class="hl-6">design</span><span class="hl-1"> </span><span class="hl-6">ensures</span><span class="hl-1"> </span><span class="hl-6">that</span><span class="hl-1"> </span><span class="hl-6">the</span><span class="hl-1"> </span><span class="hl-6">core</span><span class="hl-1"> </span><span class="hl-6">logic</span><span class="hl-1"> </span><span class="hl-6">remains</span><span class="hl-1"> </span><span class="hl-6">framework</span><span class="hl-1">-</span><span class="hl-6">agnostic</span><span class="hl-1">, </span><span class="hl-6">allowing</span><span class="hl-1"> </span><span class="hl-6">for</span><span class="hl-1"> </span><span class="hl-6">easy</span><span class="hl-1"> </span><span class="hl-6">adaptability</span><span class="hl-1">.</span><br/><br/><span class="hl-1">&lt;&lt;&lt;&lt;&lt;&lt;&lt; </span><span class="hl-6">Updated</span><span class="hl-1"> </span><span class="hl-6">upstream</span><br/><span class="hl-1">### </span><span class="hl-6">Comparison</span><span class="hl-1"> </span><span class="hl-6">against</span><span class="hl-1"> </span><span class="hl-6">similar</span><span class="hl-1"> </span><span class="hl-6">solutions</span><br/><span class="hl-1">=======</span><br/><span class="hl-1">## </span><span class="hl-6">Comparison</span><span class="hl-1"> </span><span class="hl-6">against</span><span class="hl-1"> </span><span class="hl-6">similar</span><span class="hl-1"> </span><span class="hl-6">solutions</span><br/><span class="hl-1">&gt;&gt;&gt;&gt;&gt;&gt;&gt; </span><span class="hl-6">Stashed</span><span class="hl-1"> </span><span class="hl-6">changes</span><br/><br/><span class="hl-1">| </span><span class="hl-6">Criteria</span><span class="hl-1">          | </span><span class="hl-6">tdv</span><span class="hl-1">-</span><span class="hl-6">monorepo</span><span class="hl-1"> | </span><span class="hl-6">Yup</span><span class="hl-1">    | </span><span class="hl-6">React</span><span class="hl-1"> </span><span class="hl-6">Hook</span><span class="hl-1"> </span><span class="hl-6">Form</span><span class="hl-1"> | </span><span class="hl-6">Validator</span><span class="hl-1">.</span><span class="hl-6">js</span><span class="hl-1"> | </span><span class="hl-6">Formik</span><span class="hl-1"> |</span><br/><span class="hl-1">| ----------------- | ------------ | ------ | --------------- | ------------ | ------ |</span><br/><span class="hl-1">| </span><span class="hl-6">Type</span><span class="hl-1"> </span><span class="hl-6">Safety</span><span class="hl-1">       | ✅           | ❌     | 🟡[^</span><span class="hl-8">1</span><span class="hl-1">]          | ❌           | ❌     |</span><br/><span class="hl-1">| </span><span class="hl-6">Syntax</span><span class="hl-1">            | ✅           | ❌     | ✅[^</span><span class="hl-8">2</span><span class="hl-1">]          | ❌           | ❌     |</span><br/><span class="hl-1">| </span><span class="hl-6">Learning</span><span class="hl-1"> </span><span class="hl-6">Curve</span><span class="hl-1">    | ✅           | 🟡[^</span><span class="hl-8">3</span><span class="hl-1">] | 🟡[^</span><span class="hl-8">4</span><span class="hl-1">]          | 🟡[^</span><span class="hl-8">5</span><span class="hl-1">]       | 🟡[^</span><span class="hl-8">6</span><span class="hl-1">] |</span><br/><span class="hl-1">| </span><span class="hl-6">Custom</span><span class="hl-1"> </span><span class="hl-6">Validators</span><span class="hl-1"> | ✅           | 🟡[^</span><span class="hl-8">7</span><span class="hl-1">] | ✅              | 🟡[^</span><span class="hl-8">8</span><span class="hl-1">]       | 🟡[^</span><span class="hl-8">9</span><span class="hl-1">] |</span><br/><br/><span class="hl-1">- ✅: </span><span class="hl-6">Fully</span><span class="hl-1"> </span><span class="hl-6">supported</span><span class="hl-1"> </span><span class="hl-6">and</span><span class="hl-1"> </span><span class="hl-6">easy</span><span class="hl-1">-</span><span class="hl-6">to</span><span class="hl-1">-</span><span class="hl-6">use</span><br/><span class="hl-1">- ❌: </span><span class="hl-6">Not</span><span class="hl-1"> </span><span class="hl-6">supported</span><br/><span class="hl-1">- 🟡: </span><span class="hl-6">Partial</span><span class="hl-1"> </span><span class="hl-6">support</span><br/><br/><span class="hl-1">[^</span><span class="hl-8">1</span><span class="hl-1">]: </span><span class="hl-6">React</span><span class="hl-1"> </span><span class="hl-6">Hook</span><span class="hl-1"> </span><span class="hl-6">Form</span><span class="hl-1"> </span><span class="hl-6">has</span><span class="hl-1"> </span><span class="hl-6">good</span><span class="hl-1"> </span><span class="hl-6">TypeScript</span><span class="hl-1"> </span><span class="hl-6">support</span><span class="hl-1"> </span><span class="hl-6">but</span><span class="hl-1"> </span><span class="hl-6">doesn</span><span class="hl-2">&#39;t integrate as seamlessly as `tdv-monorepo`</span><span class="hl-10">.</span><br/><span class="hl-1">[^</span><span class="hl-8">2</span><span class="hl-1">]: </span><span class="hl-6">React</span><span class="hl-1"> </span><span class="hl-6">Hook</span><span class="hl-1"> </span><span class="hl-6">Form</span><span class="hl-1"> </span><span class="hl-6">uses</span><span class="hl-1"> </span><span class="hl-6">hooks</span><span class="hl-1">, </span><span class="hl-6">which</span><span class="hl-1"> </span><span class="hl-6">are</span><span class="hl-1"> </span><span class="hl-6">easy</span><span class="hl-1"> </span><span class="hl-6">to</span><span class="hl-1"> </span><span class="hl-6">use</span><span class="hl-1"> </span><span class="hl-6">but</span><span class="hl-1"> </span><span class="hl-6">different</span><span class="hl-1"> </span><span class="hl-6">from</span><span class="hl-1"> </span><span class="hl-6">native</span><span class="hl-1"> </span><span class="hl-6">TypeScript</span><span class="hl-1"> </span><span class="hl-6">decorators</span><span class="hl-1">.</span><br/><span class="hl-1">[^</span><span class="hl-8">3</span><span class="hl-1">]: </span><span class="hl-6">Yup</span><span class="hl-1"> </span><span class="hl-6">requires</span><span class="hl-1"> </span><span class="hl-6">learning</span><span class="hl-1"> </span><span class="hl-6">its</span><span class="hl-1"> </span><span class="hl-6">custom</span><span class="hl-1"> </span><span class="hl-6">object</span><span class="hl-1"> </span><span class="hl-6">schema</span><span class="hl-1">, </span><span class="hl-6">adding</span><span class="hl-1"> </span><span class="hl-6">to</span><span class="hl-1"> </span><span class="hl-6">the</span><span class="hl-1"> </span><span class="hl-6">learning</span><span class="hl-1"> </span><span class="hl-6">curve</span><span class="hl-1">.</span><br/><span class="hl-1">[^</span><span class="hl-8">4</span><span class="hl-1">]: </span><span class="hl-6">React</span><span class="hl-1"> </span><span class="hl-6">Hook</span><span class="hl-1"> </span><span class="hl-6">Form</span><span class="hl-1"> </span><span class="hl-6">requires</span><span class="hl-1"> </span><span class="hl-6">understanding</span><span class="hl-1"> </span><span class="hl-3">of</span><span class="hl-1"> </span><span class="hl-6">hooks</span><span class="hl-1">, </span><span class="hl-6">adding</span><span class="hl-1"> </span><span class="hl-6">a</span><span class="hl-1"> </span><span class="hl-6">slight</span><span class="hl-1"> </span><span class="hl-6">learning</span><span class="hl-1"> </span><span class="hl-6">curve</span><span class="hl-1">.</span><br/><span class="hl-1">[^</span><span class="hl-8">5</span><span class="hl-1">]: </span><span class="hl-6">Validator</span><span class="hl-1">.</span><span class="hl-6">js</span><span class="hl-1"> </span><span class="hl-6">requires</span><span class="hl-1"> </span><span class="hl-6">learning</span><span class="hl-1"> </span><span class="hl-6">their</span><span class="hl-1"> </span><span class="hl-9">API</span><span class="hl-1">, </span><span class="hl-6">which</span><span class="hl-1"> </span><span class="hl-6">can</span><span class="hl-1"> </span><span class="hl-6">be</span><span class="hl-1"> </span><span class="hl-6">cumbersome</span><span class="hl-1">.</span><br/><span class="hl-1">[^</span><span class="hl-8">6</span><span class="hl-1">]: </span><span class="hl-6">Formik</span><span class="hl-1"> </span><span class="hl-6">has</span><span class="hl-1"> </span><span class="hl-6">its</span><span class="hl-1"> </span><span class="hl-6">own</span><span class="hl-1"> </span><span class="hl-6">ecosystem</span><span class="hl-1">, </span><span class="hl-6">making</span><span class="hl-1"> </span><span class="hl-6">the</span><span class="hl-1"> </span><span class="hl-6">learning</span><span class="hl-1"> </span><span class="hl-6">curve</span><span class="hl-1"> </span><span class="hl-6">steeper</span><span class="hl-1">.</span><br/><span class="hl-1">[^</span><span class="hl-8">7</span><span class="hl-1">]: </span><span class="hl-6">Yup</span><span class="hl-1"> </span><span class="hl-6">allows</span><span class="hl-1"> </span><span class="hl-6">for</span><span class="hl-1"> </span><span class="hl-6">custom</span><span class="hl-1"> </span><span class="hl-6">validation</span><span class="hl-1"> </span><span class="hl-6">but</span><span class="hl-1"> </span><span class="hl-6">within</span><span class="hl-1"> </span><span class="hl-6">the</span><span class="hl-1"> </span><span class="hl-6">confines</span><span class="hl-1"> </span><span class="hl-3">of</span><span class="hl-1"> </span><span class="hl-6">its</span><span class="hl-1"> </span><span class="hl-6">own</span><span class="hl-1"> </span><span class="hl-6">schema</span><span class="hl-1">.</span><br/><span class="hl-1">[^</span><span class="hl-8">8</span><span class="hl-1">]: </span><span class="hl-6">Validator</span><span class="hl-1">.</span><span class="hl-6">js</span><span class="hl-1"> </span><span class="hl-6">allows</span><span class="hl-1"> </span><span class="hl-6">for</span><span class="hl-1"> </span><span class="hl-6">some</span><span class="hl-1"> </span><span class="hl-6">customization</span><span class="hl-1"> </span><span class="hl-6">but</span><span class="hl-1"> </span><span class="hl-6">it</span><span class="hl-2">&#39;s not straightforward</span><span class="hl-10">.</span><br/><span class="hl-1">[^</span><span class="hl-8">9</span><span class="hl-1">]: </span><span class="hl-6">Formik</span><span class="hl-1"> </span><span class="hl-6">allows</span><span class="hl-1"> </span><span class="hl-6">for</span><span class="hl-1"> </span><span class="hl-6">custom</span><span class="hl-1"> </span><span class="hl-6">validation</span><span class="hl-1"> </span><span class="hl-6">but</span><span class="hl-1"> </span><span class="hl-6">within</span><span class="hl-1"> </span><span class="hl-6">its</span><span class="hl-1"> </span><span class="hl-6">own</span><span class="hl-1"> </span><span class="hl-6">framework</span><span class="hl-1">.</span>
+</code><button>Copy</button></pre>
 </div></div>
 <div class="col-sidebar">
 <div class="page-menu">
@@ -194,21 +246,46 @@ Branch will be ready for merge after all CI tests pass and a review has been mad
 <ul>
 <li>
 <ul>
+<li><a href="#md:ltltltltltltlt-updated-upstream"><span>&lt;&lt;&lt;&lt;&lt;&lt;&lt; <wbr/>Updated upstream</span></a></li>
+<li>
+<ul>
 <li><a href="#md:features"><span>Features</span></a></li>
 <li>
 <ul>
-<li><a href="#md:content"><span>Content</span></a></li>
+<li><a href="#md:content"><span>Content</span></a></li></ul></li></ul></li>
+<li><a href="#md:quick-start"><span>Quick start</span></a></li>
+<li>
+<ul>
+<li><a href="#md:toc"><span>TOC</span></a></li></ul></li>
+<li><a href="#md:ltltltltltltlt-updated-upstream--installation"><span>&lt;&lt;&lt;&lt;&lt;&lt;&lt; <wbr/>Updated upstream
+### <wbr/>Installation</span></a></li>
 <li>
 <ul>
 <li><a href="#md:installation"><span>Installation</span></a></li>
-<li><a href="#md:quick-start"><span>Quick start</span></a></li>
-<li><a href="#md:supported-frameworks"><span>Supported <wbr/>Frameworks</span></a></li>
-<li><a href="#md:documentation"><span>Documentation</span></a></li>
+<li>
+<ul>
+<li><a href="#md:quick-start-1"><span>Quick start</span></a></li>
+<li><a href="#md:supported-frameworks"><span>Supported <wbr/>Frameworks</span></a></li></ul></li>
+<li><a href="#md:supported-frameworks-1"><span>Supported <wbr/>Frameworks</span></a></li></ul></li>
+<li><a href="#md:ltltltltltltlt-updated-upstream--documentation"><span>&lt;&lt;&lt;&lt;&lt;&lt;&lt; <wbr/>Updated upstream
+### <wbr/>Documentation</span></a></li>
+<li>
+<ul>
+<li><a href="#md:documentation"><span>Documentation</span></a></li></ul></li>
+<li><a href="#md:ltltltltltltlt-updated-upstream--contribution"><span>&lt;&lt;&lt;&lt;&lt;&lt;&lt; <wbr/>Updated upstream
+### <wbr/>Contribution</span></a></li>
+<li>
+<ul>
 <li><a href="#md:contribution"><span>Contribution</span></a></li>
+<li>
+<ul>
 <li><a href="#md:future-goals"><span>Future goals</span></a></li>
-<li><a href="#md:examples"><span>Examples</span></a></li>
-<li><a href="#md:repository-architecture"><span>Repository architecture</span></a></li>
-<li><a href="#md:comparison-against-similar-solutions"><span>Comparison against similar solutions</span></a></li></ul></li></ul></li></ul></li></ul></div></details></div>
+<li><a href="#md:examples"><span>Examples</span></a></li></ul></li></ul></li>
+<li><a href="#md:ltltltltltltlt-updated-upstream-typescript"><span>&lt;&lt;&lt;&lt;&lt;&lt;&lt; <wbr/>Updated upstream
+```typescript</span></a></li>
+<li>
+<ul>
+<li><a href="#md:repository-architecture"><span>Repository architecture</span></a></li></ul></li></ul></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="index.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg>
 <div>Typescript <wbr/>Decorator <wbr/>Validation -<wbr/> v1.0.0</div></a>
