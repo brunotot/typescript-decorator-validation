@@ -22,10 +22,16 @@
  </a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/brunotot/typescript-decorator-validation/tree/main/markdown/FAQ.md">
+    🔎 Frequently Asked Questions (FAQ)
+  </a>
+</p>
+
 <br />
 
 > 🌟 **Welcome to `tdv-monorepo`, the future of model validation in TypeScript.**
-> 
+>
 > Leveraging TypeScript decorators, `tdv-monorepo` offers a declarative way to manage model validation. Suitable for both client-side and server-side projects, it comes with built-in extensibility and localization support.
 
 ### Features
@@ -39,15 +45,16 @@
 - provides a clean and declarative way of validating form fields
 - exports [Reflection](https://github.com/brunotot/typescript-decorator-validation/blob/main/packages/core/src/reflection/index.ts#L9) namespace containing useful reflection-related methods
 
-
 ### Content
 
+- [Features](#features)
+- [Content](#content)
 - [Installation](#installation)
 - [Quick start](#quick-start)
+- [Supported Frameworks](#supported-frameworks)
 - [Documentation](#documentation)
 - [Contribution](#contribution)
 - [Future goals](#future-goals)
-- [Supported frameworks](#supported-frameworks)
 - [Examples](#examples)
 - [Repository architecture](#repository-architecture)
 - [Comparison against similar solutions](#comparison-against-similar-solutions)
@@ -61,8 +68,15 @@ npm install tdv-react # when using in framework-specific environment
 ```
 
 ### Quick start
+
 ```typescript
-import { validate, decorate, ValidationEngine, Localization, TdvCore } from "tdv-core";
+import {
+  validate,
+  decorate,
+  ValidationEngine,
+  Localization,
+  TdvCore,
+} from "tdv-core";
 
 function MinSize(min: number, groups: TdvCore.Validation.Groups = []) {
   return validate<string>({
@@ -76,14 +90,14 @@ function MinSize(min: number, groups: TdvCore.Validation.Groups = []) {
 }
 
 class Foo {
-  @decorate.string.Email()  // predefined
-  @MinSize(10)  // custom
-  email!: string
+  @decorate.string.Email() // predefined
+  @MinSize(10) // custom
+  email!: string;
 }
 
 const engine = new ValidationEngine(Foo);
 const result = engine.validate({ email: "invalid" });
-console.log(result.errors.email); 
+console.log(result.errors.email);
 // [ 'Input must contain at least 10 characters', 'Value is not a valid email' ]
 ```
 
