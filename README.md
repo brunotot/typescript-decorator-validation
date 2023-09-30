@@ -1,14 +1,5 @@
 <h1 align="center">🚀 TypeScript Decorator Validation 🚀</h1>
 
-<<<<<<< Updated upstream
-=======
-<p align="center">🎩 <strong>TypeScript v5:</strong> Harness the power of TypeScript v5 decorators for type-safe validation.</p>
-<p align="center">🛠️ <strong>Extensible:</strong> Customize our library to fit your unique needs with ease.</p>
-<p align="center">🌍 <strong>i18n Support:</strong> Speak your users' language with built-in localization.</p>
-<p align="center">🔧 <strong>Adaptability:</strong> Seamless integration with existing TypeScript apps.</p>
-<p align="center">💻 <strong>Versatility:</strong> Works on both client and server-side.</p>
-
->>>>>>> Stashed changes
 <p align="center">
  <a href="https://npmcharts.com/compare/typescript-decorator-validation?minimal=true">
   <img alt="Downloads per month" src="https://img.shields.io/npm/dm/typescript-decorator-validation" height="20"/>
@@ -31,7 +22,6 @@
  </a>
 </p>
 
-<<<<<<< Updated upstream
 <p align="center">
   <a href="https://github.com/brunotot/typescript-decorator-validation/tree/main/markdown/FAQ.md">
     🔎 Frequently Asked Questions (FAQ)
@@ -61,12 +51,6 @@
 - [Content](#content)
 - [Installation](#installation)
 - [Quick start](#quick-start)
-=======
-## TOC
-
-- [TOC](#toc)
-- [Installation](#installation)
->>>>>>> Stashed changes
 - [Supported Frameworks](#supported-frameworks)
 - [Documentation](#documentation)
 - [Contribution](#contribution)
@@ -75,11 +59,7 @@
 - [Repository architecture](#repository-architecture)
 - [Comparison against similar solutions](#comparison-against-similar-solutions)
 
-<<<<<<< Updated upstream
 ### Installation
-=======
-## Installation
->>>>>>> Stashed changes
 
 ```bash
 npm install -d typescript@latest
@@ -87,7 +67,6 @@ npm install tdv-core
 npm install tdv-react # when using in framework-specific environment
 ```
 
-<<<<<<< Updated upstream
 ### Quick start
 
 ```typescript
@@ -123,29 +102,18 @@ console.log(result.errors.email);
 ```
 
 ### Supported Frameworks
-=======
-## Supported Frameworks
->>>>>>> Stashed changes
 
 - [x] [view React implementation](https://github.com/brunotot/typescript-decorator-validation/tree/main/packages/react#readme)
 - [ ] Angular
 - [ ] Svelte
 - [ ] Vue
 
-<<<<<<< Updated upstream
 ### Documentation
-=======
-## Documentation
->>>>>>> Stashed changes
 
 - [tdv-core](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_core.html)
 - [tdv-react](https://brunotot.github.io/typescript-decorator-validation/modules/tdv_react.html)
 
-<<<<<<< Updated upstream
 ### Contribution
-=======
-## Contribution
->>>>>>> Stashed changes
 
 To contribute, simply clone the main branch, commit changes to a local branch and open pull request.</br>
 Branch will be ready for merge after all CI tests pass and a review has been made.
@@ -163,11 +131,7 @@ Branch will be ready for merge after all CI tests pass and a review has been mad
 A basic TypeScript form can look something like
 
 ```typescript
-<<<<<<< Updated upstream
 import { decorate, ValidationEngine } from "tdv-core";
-=======
-import { validators, EntityProcessor } from "tdv-core";
->>>>>>> Stashed changes
 
 /**
  *  This is an optional layer of abstraction if the class contains complex
@@ -233,17 +197,12 @@ console.log(errors);
 
 And the result is
 
-<<<<<<< Updated upstream
 ```typescript
-=======
-```json
->>>>>>> Stashed changes
 {
   firstName: [
     "Field is mandatory",
     "Field must contain at least 5 characters"
   ],
-<<<<<<< Updated upstream
   lastName: [
     "Field is mandatory"
   ],
@@ -263,19 +222,6 @@ And the result is
 ```
 
 ### Repository architecture
-=======
-  "lastName": ["Field is mandatory"],
-  "password": ["Password must be at least 8 characters long"],
-  "url": [],
-  "age": [
-    "Value must be greater than or equal to 18 and less than or equal to 100 but is 10"
-  ],
-  "passwordsMatch": ["Passwords must match"]
-}
-```
-
-## Repository architecture
->>>>>>> Stashed changes
 
 The `tdv-core` package is the backbone, providing core validation logic that's framework-agnostic. Features include:
 
@@ -286,11 +232,7 @@ The `tdv-core` package is the backbone, providing core validation logic that's f
 
 The core package serves as the foundation for implementation libraries like `tdv-react`, with future extensions planned for Angular, Vue, and Svelte. This modular design ensures that the core logic remains framework-agnostic, allowing for easy adaptability.
 
-<<<<<<< Updated upstream
 ### Comparison against similar solutions
-=======
-## Comparison against similar solutions
->>>>>>> Stashed changes
 
 | Criteria          | tdv-monorepo | Yup    | React Hook Form | Validator.js | Formik |
 | ----------------- | ------------ | ------ | --------------- | ------------ | ------ |
