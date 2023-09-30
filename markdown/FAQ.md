@@ -17,6 +17,14 @@
   - [How to specify different locale for each validation engine?](#how-to-specify-different-locale-for-each-validation-engine)
   - [Can I define a custom interceptor for evaluating inline-defined messages?](#can-i-define-a-custom-interceptor-for-evaluating-inline-defined-messages)
 - [API Reference](#api-reference)
+  - [Classes](#classes)
+  - [Namespaces](#namespaces)
+  - [Validators](#validators)
+    - [`any`](#any)
+    - [`Date`](#date)
+    - [`array`](#array)
+    - [`number`](#number)
+    - [`string`](#number)
 
 ---
 
@@ -180,66 +188,6 @@ console.log(result.errors.input);
 ```
 
 ## API Reference
-
-- Classes
-  - [ValidationEngine](#validationengine)
-  - [ValidationConfigurer](#validationconfigurer)
-- Namespaces
-  - [Decorator](#decorator)
-  - [Localization](#localization)
-  - [Reflection](#reflection)
-- Validators
-  - `any`
-    - [Required](#required)
-    - [Falsy](#falsy)
-    - [Truthy](#truthy)
-    - [validate](#validate)
-    - [attribute](#attribute)
-  - `Date`
-    - [FutureDate](#futuredate)
-    - [PastDate](#pastdate)
-    - [TodayDate](#todaydate)
-  - `array`
-    - [ArrayContains](#arraycontains)
-    - [ArrayEmpty](#arrayempty)
-    - [ArrayEvery](#arrayevery)
-    - [ArrayNone](#arraynone)
-    - [ArrayOne](#arrayone)
-    - [ArraySizeExact](#arraysizeexact)
-    - [ArraySizeMax](#arraysizemax)
-    - [ArraySizeMin](#arraysizemin)
-    - [ArraySizeRange](#arraysizerange)
-    - [ArraySome](#arraysome)
-    - [ArrayUnique](#arrayunique)
-    - [foreach](#foreach)
-  - `number`
-    - [Decimal](#decimal)
-    - [Digits](#digits)
-    - [Integer](#integer)
-    - [Negative](#negative)
-    - [NonNegative](#nonnegative)
-    - [NonPositive](#nonpositive)
-    - [Positive](#positive)
-    - [ValueMax](#valuemax)
-    - [ValueMin](#valuemin)
-    - [ValueRange](#valuerange)
-  - `string`
-    - [Alpha](#alpha)
-    - [Alphanumeric](#alphanumeric)
-    - [Email](#email)
-    - [IPAddress](#ipaddress)
-    - [Lowercase](#lowercase)
-    - [Numeric](#numeric)
-    - [Uppercase](#uppercase)
-    - [URL](#url)
-    - [Pattern](#pattern)
-    - [ExactLength](#exactlength)
-    - [Length](#length)
-    - [MaxLength](#maxlength)
-    - [MinLength](#minlength)
-    - [Password](#alpha)
-
----
 
 ### Classes
 
