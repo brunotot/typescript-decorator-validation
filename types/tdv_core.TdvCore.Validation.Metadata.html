@@ -51,7 +51,7 @@
 <h5><span class="tsd-kind-property">validate</span><span class="tsd-signature-symbol">: </span><a href="tdv_core.TdvCore.Validation.Evaluator.html" class="tsd-signature-type tsd-kind-type-alias">Evaluator</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/ffc6437/packages/core/src/types/namespace/validation.namespace.ts#L43">src/types/namespace/validation.namespace.ts:43</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/02d97ef/packages/core/src/types/namespace/validation.namespace.ts#L43">src/types/namespace/validation.namespace.ts:43</a></li></ul></aside></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -70,38 +70,19 @@
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
 <li>
-<details class="tsd-index-accordion" data-key="tdv-core.Decorator.DecoratorService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Decorator.DecoratorService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
-<div>Decorator<wbr/>Service
-<div class="menu-item-desc">A service class which exposes decorator-related actions</div></div></a></summary>
-<div class="tsd-accordion-details">
-<ul class="tsd-nested-navigation">
-<li><a href="../functions/tdv_core.Decorator.DecoratorService.create.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>create
-<div class="menu-item-desc">Creates a new decorator using the provided supplier function.</div></div></a></li></ul></div></details></li>
-<li>
-<details class="tsd-index-accordion" data-key="tdv-core.Decorator.ParamsExtractorService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Decorator.ParamsExtractorService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
-<div>Params<wbr/>Extractor<wbr/>Service
-<div class="menu-item-desc">A service class which exposes helper functions for building messages and groups params</div></div></a></summary>
-<div class="tsd-accordion-details">
-<ul class="tsd-nested-navigation">
-<li><a href="../functions/tdv_core.Decorator.ParamsExtractorService.groups.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>groups
-<div class="menu-item-desc">Extracts validation groups from the provided decorator properties.</div></div></a></li>
-<li><a href="../functions/tdv_core.Decorator.ParamsExtractorService.message.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>message
-<div class="menu-item-desc">Extracts a message from the provided decorator properties.</div></div></a></li></ul></div></details></li>
-<li>
 <details class="tsd-index-accordion" data-key="tdv-core.Decorator.ValidatorService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Decorator.ValidatorService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Validator<wbr/>Service
 <div class="menu-item-desc">A service class which exposes validated-decorator-related actions</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="../functions/tdv_core.Decorator.ValidatorService.create.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>create
+<li><a href="../functions/tdv_core.Decorator.ValidatorService.build.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>build
 <div class="menu-item-desc">Creates a new validator function using the provided validation builder options.</div></div></a></li></ul></div></details></li>
 <li><a href="tdv_core.Decorator.Context.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Context
 <div class="menu-item-desc">Context object passed to a decorator function.</div></div></a></li>
+<li><a href="tdv_core.Decorator.ContextKind.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<div>Context<wbr/>Kind</div></a></li>
 <li><a href="tdv_core.Decorator.ImpartialProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Impartial<wbr/>Props
 <div class="menu-item-desc">Properties that can be partially applied to a decorator.</div></div></a></li>
@@ -114,7 +95,13 @@
 <div>Supplier</div></a></li>
 <li><a href="tdv_core.Decorator.ValueProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Value<wbr/>Props
-<div class="menu-item-desc">Properties for specifying the value in a decorator.</div></div></a></li></ul></div></details></li>
+<div class="menu-item-desc">Properties for specifying the value in a decorator.</div></div></a></li>
+<li><a href="../functions/tdv_core.Decorator.groups.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>groups
+<div class="menu-item-desc">Extracts validation groups from the provided decorator properties.</div></div></a></li>
+<li><a href="../functions/tdv_core.Decorator.message.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>message
+<div class="menu-item-desc">Extracts a message from the provided decorator properties.</div></div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Localization"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Localization
@@ -427,7 +414,9 @@
 <div class="menu-item-desc">Represents the generic `object` type.</div></div></a></li>
 <li><a href="tdv_core.TdvCore.Types.Primitive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Primitive
-<div class="menu-item-desc">Represents primitive data types including `string`, `number`, `boolean`, `bigint`, `Date`, and custom primitives defined in `PrimitiveSetAppend`.</div></div></a></li></ul></div></details></li>
+<div class="menu-item-desc">Represents primitive data types including `string`, `number`, `boolean`, `bigint`, `Date`, and custom primitives defined in `PrimitiveSetAppend`.</div></div></a></li>
+<li><a href="tdv_core.TdvCore.Types.UnwrapClass.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<div>Unwrap<wbr/>Class</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" open data-key="tdv-core.TdvCore.Validation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.Validation.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Validation

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>message | Typescript Decorator Validation - v1.0.0</title><meta name="description" content="Documentation for Typescript Decorator Validation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/my-theme.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>console.log(`Loaded ${location.href}`)</script><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>build | Typescript Decorator Validation - v1.0.0</title><meta name="description" content="Documentation for Typescript Decorator Validation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/my-theme.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>console.log(`Loaded ${location.href}`)</script><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -28,43 +28,39 @@
 <li><a href="../index.html">Typescript Decorator Validation</a></li>
 <li><a href="../modules/tdv_core.html">tdv-core</a></li>
 <li><a href="../modules/tdv_core.Decorator.html">Decorator</a></li>
-<li><a href="../modules/tdv_core.Decorator.ParamsExtractorService.html">ParamsExtractorService</a></li>
-<li><a href="tdv_core.Decorator.ParamsExtractorService.message.html">message</a></li></ul>
-<h1>Function message</h1></div>
+<li><a href="../modules/tdv_core.Decorator.ValidatorService.html">ValidatorService</a></li>
+<li><a href="tdv_core.Decorator.ValidatorService.build.html">build</a></li></ul>
+<h1>Function build</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="message"><span class="tsd-kind-call-signature">message</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">provider</span>, <span class="tsd-kind-parameter">defaultMessage</span>, <span class="tsd-kind-parameter">locale</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#message" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="build"><span class="tsd-kind-call-signature">build</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">__namedParameters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">FieldDecorator.Instance</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#build" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Extracts a message from the provided decorator properties.</p>
+<div class="tsd-comment tsd-typography"><p>Creates a new validator function using the provided validation builder options.</p>
 </div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">object</span></h4>
-<div class="tsd-comment tsd-typography"><p>The type of the object being validated.</p>
+<h4><span class="tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">unknown</span></h4>
+<div class="tsd-comment tsd-typography"><p>The type of the value being validated.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">provider</span>: <span class="tsd-signature-type">any</span></h5>
-<div class="tsd-comment tsd-typography"><p>The decorator properties.</p>
-</div>
-<div class="tsd-comment tsd-typography"></div></li>
-<li>
-<h5><span class="tsd-kind-parameter">defaultMessage</span>: <span class="tsd-signature-type">string</span></h5>
-<div class="tsd-comment tsd-typography"><p>The default message to return if no message is found in the provider.</p>
-</div>
-<div class="tsd-comment tsd-typography"></div></li>
-<li>
-<h5><span class="tsd-kind-parameter">locale</span>: <a href="../types/tdv_core.Localization.Locale.html" class="tsd-signature-type tsd-kind-type-alias">Locale</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>The extracted message or the default message if none is found.</p>
+<h5><span class="tsd-kind-parameter">__namedParameters</span>: <a href="../types/tdv_core.TdvCore.Validation.Builder.html" class="tsd-signature-type tsd-kind-type-alias">Builder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">FieldDecorator.Instance</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A decorator function that can be applied to class properties to add the validation logic.</p>
 
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography">
+<h4>Remarks</h4><p>This function leverages the <code>makeDecorator</code> function to create a new decorator.
+It uses the <code>validationMetaService</code> to add the new validator to the metadata for the property it decorates.</p>
+
+<h4>Example</h4><pre><code class="language-typescript"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">IsPositive</span><span class="hl-1"> = </span><span class="hl-6">FieldValidatorDecorator</span><span class="hl-1">.</span><span class="hl-0">create</span><span class="hl-1">&lt;</span><span class="hl-7">number</span><span class="hl-1">&gt;({</span><br/><span class="hl-1">  </span><span class="hl-6">groups:</span><span class="hl-1"> [</span><span class="hl-2">&#39;group1&#39;</span><span class="hl-1">],</span><br/><span class="hl-1">  </span><span class="hl-0">isValid</span><span class="hl-6">:</span><span class="hl-1"> (</span><span class="hl-6">value</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-6">value</span><span class="hl-1"> &gt; </span><span class="hl-8">0</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">MyClass</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-4">//@IsPositive</span><br/><span class="hl-1">  </span><span class="hl-3">public</span><span class="hl-1"> </span><span class="hl-6">myValue</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
+</code><button>Copy</button></pre>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/ffc6437/packages/core/src/decorators/service/params-extractor.service.ts#L20">src/decorators/service/params-extractor.service.ts:20</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/02d97ef/packages/core/src/decorators/kind/derived/FieldValidatorDecorator.ts#L36">src/decorators/kind/derived/FieldValidatorDecorator.ts:36</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -83,38 +79,19 @@
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
 <li>
-<details class="tsd-index-accordion" data-key="tdv-core.Decorator.DecoratorService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Decorator.DecoratorService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
-<div>Decorator<wbr/>Service
-<div class="menu-item-desc">A service class which exposes decorator-related actions</div></div></a></summary>
-<div class="tsd-accordion-details">
-<ul class="tsd-nested-navigation">
-<li><a href="tdv_core.Decorator.DecoratorService.create.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>create
-<div class="menu-item-desc">Creates a new decorator using the provided supplier function.</div></div></a></li></ul></div></details></li>
-<li>
-<details class="tsd-index-accordion" open data-key="tdv-core.Decorator.ParamsExtractorService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Decorator.ParamsExtractorService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
-<div>Params<wbr/>Extractor<wbr/>Service
-<div class="menu-item-desc">A service class which exposes helper functions for building messages and groups params</div></div></a></summary>
-<div class="tsd-accordion-details">
-<ul class="tsd-nested-navigation">
-<li><a href="tdv_core.Decorator.ParamsExtractorService.groups.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>groups
-<div class="menu-item-desc">Extracts validation groups from the provided decorator properties.</div></div></a></li>
-<li><a href="tdv_core.Decorator.ParamsExtractorService.message.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>message
-<div class="menu-item-desc">Extracts a message from the provided decorator properties.</div></div></a></li></ul></div></details></li>
-<li>
-<details class="tsd-index-accordion" data-key="tdv-core.Decorator.ValidatorService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Decorator.ValidatorService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" open data-key="tdv-core.Decorator.ValidatorService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Decorator.ValidatorService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Validator<wbr/>Service
 <div class="menu-item-desc">A service class which exposes validated-decorator-related actions</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.Decorator.ValidatorService.create.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>create
+<li><a href="tdv_core.Decorator.ValidatorService.build.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>build
 <div class="menu-item-desc">Creates a new validator function using the provided validation builder options.</div></div></a></li></ul></div></details></li>
 <li><a href="../types/tdv_core.Decorator.Context.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Context
 <div class="menu-item-desc">Context object passed to a decorator function.</div></div></a></li>
+<li><a href="../types/tdv_core.Decorator.ContextKind.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<div>Context<wbr/>Kind</div></a></li>
 <li><a href="../types/tdv_core.Decorator.ImpartialProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Impartial<wbr/>Props
 <div class="menu-item-desc">Properties that can be partially applied to a decorator.</div></div></a></li>
@@ -127,7 +104,13 @@
 <div>Supplier</div></a></li>
 <li><a href="../types/tdv_core.Decorator.ValueProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Value<wbr/>Props
-<div class="menu-item-desc">Properties for specifying the value in a decorator.</div></div></a></li></ul></div></details></li>
+<div class="menu-item-desc">Properties for specifying the value in a decorator.</div></div></a></li>
+<li><a href="tdv_core.Decorator.groups.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>groups
+<div class="menu-item-desc">Extracts validation groups from the provided decorator properties.</div></div></a></li>
+<li><a href="tdv_core.Decorator.message.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>message
+<div class="menu-item-desc">Extracts a message from the provided decorator properties.</div></div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Localization"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Localization
@@ -440,7 +423,9 @@
 <div class="menu-item-desc">Represents the generic `object` type.</div></div></a></li>
 <li><a href="../types/tdv_core.TdvCore.Types.Primitive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Primitive
-<div class="menu-item-desc">Represents primitive data types including `string`, `number`, `boolean`, `bigint`, `Date`, and custom primitives defined in `PrimitiveSetAppend`.</div></div></a></li></ul></div></details></li>
+<div class="menu-item-desc">Represents primitive data types including `string`, `number`, `boolean`, `bigint`, `Date`, and custom primitives defined in `PrimitiveSetAppend`.</div></div></a></li>
+<li><a href="../types/tdv_core.TdvCore.Types.UnwrapClass.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<div>Unwrap<wbr/>Class</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.TdvCore.Validation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.Validation.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Validation
