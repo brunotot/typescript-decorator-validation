@@ -2,11 +2,11 @@ import Localization from "../localization";
 import ClassValidatorMetaService from "../reflection/service/impl/ClassValidatorMetaService";
 import FieldValidatorMetaService from "../reflection/service/impl/FieldValidatorMetaService";
 import $ from "../types/index";
-import EvaluatedStrategyFactory from "../types/namespace/evaluated-strategy-factory.namespace";
 import Types from "../types/namespace/types.namespace";
 import ns from "../types/namespace/validation-engine.namespace";
 import Validation from "../types/namespace/validation.namespace";
 import CacheMap from "./models/cache.map";
+import StrategyFactory from "./strategy/factory";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
@@ -61,7 +61,7 @@ export default class ValidationEngine<TClass, TBody = TClass> {
    *
    * @returns `true` if valid, `false` otherwise.
    */
-  public isValid(payload: EvaluatedStrategyFactory.Payload<TBody>): boolean {
+  public isValid(payload: StrategyFactory.Impl.Payload<TBody>): boolean {
     return this.#cacheMap.get("valid", payload);
   }
 
@@ -73,8 +73,8 @@ export default class ValidationEngine<TClass, TBody = TClass> {
    * @returns An object containing detailed error messages.
    */
   public getDetailedErrors(
-    payload: EvaluatedStrategyFactory.Payload<TBody>
-  ): EvaluatedStrategyFactory.DetailedErrors<TClass> {
+    payload: StrategyFactory.Impl.Payload<TBody>
+  ): StrategyFactory.Impl.DetailedErrors<TClass> {
     return this.#cacheMap.get("detailedErrors", payload);
   }
 
@@ -86,8 +86,8 @@ export default class ValidationEngine<TClass, TBody = TClass> {
    * @returns An object containing error messages.
    */
   public getErrors(
-    payload: EvaluatedStrategyFactory.Payload<TBody>
-  ): EvaluatedStrategyFactory.Errors<TClass> {
+    payload: StrategyFactory.Impl.Payload<TBody>
+  ): StrategyFactory.Impl.Errors<TClass> {
     return this.#cacheMap.get("errors", payload);
   }
 
@@ -120,16 +120,16 @@ export default class ValidationEngine<TClass, TBody = TClass> {
    * ```
    */
   public validate(
-    payload?: EvaluatedStrategyFactory.Payload<TBody>
+    payload?: StrategyFactory.Impl.Payload<TBody>
   ): ns.Result<TClass> {
     const state = payload ?? new this.#fieldValidatorMetaService.class();
-    const errors: EvaluatedStrategyFactory.Errors<TClass> = {};
-    const detailedErrors: EvaluatedStrategyFactory.DetailedErrors<TClass> = {};
+    const errors: any = {};
+    const detailedErrors: any = {};
 
     this.#fieldValidatorMetaService.getFields().forEach((field) => {
       const validation = this.validateField(payload, field as keyof TClass);
-      (detailedErrors as any)[field] = validation[0];
-      (errors as any)[field] = validation[1];
+      detailedErrors[field] = validation[0];
+      errors[field] = validation[1];
     });
 
     return this.#cacheMap.patch(

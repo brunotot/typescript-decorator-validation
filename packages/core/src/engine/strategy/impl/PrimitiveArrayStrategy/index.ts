@@ -1,29 +1,8 @@
-import Localization from "../../../localization";
-import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
-import Validation from "../../../types/namespace/validation.namespace";
-import ValidationStrategy from "../strategy";
-
-/**
- * Represents the simplified error structure for validating arrays of primitive types.
- *
- * - `node`: An array of string messages that represent validation errors at the array level.
- * - `children`: A two-dimensional array of string messages that represent validation errors for each element in the array.
- */
-export type PrimitiveArraySimpleErrors = {
-  node: string[];
-  children: string[][];
-};
-
-/**
- * Represents the detailed error structure for validating arrays of primitive types.
- *
- * - `node`: An array of `Validation.Result` objects that represent detailed validation errors at the array level.
- * - `children`: A two-dimensional array of `Validation.Result` objects that represent detailed validation errors for each element in the array.
- */
-export type PrimitiveArrayDetailedErrors = {
-  node: Validation.Result[];
-  children: Validation.Result[][];
-};
+import Localization from "../../../../localization";
+import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
+import Validation from "../../../../types/namespace/validation.namespace";
+import ValidationStrategy from "../../strategy";
+import ns from "./types";
 
 /**
  * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating arrays of primitive types like numbers, strings, etc.
@@ -34,8 +13,8 @@ export type PrimitiveArrayDetailedErrors = {
  */
 export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
   F,
-  PrimitiveArrayDetailedErrors,
-  PrimitiveArraySimpleErrors
+  ns.DetailedErrors,
+  ns.SimpleErrors
 > {
   /**
    * Initializes the `PrimitiveArrayStrat` class by calling the superclass constructor with the provided descriptor and default value.
@@ -68,7 +47,7 @@ export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
     context: any,
     groups: Validation.Group[] = [],
     locale: Localization.Locale
-  ): [PrimitiveArrayDetailedErrors, PrimitiveArraySimpleErrors] {
+  ): [ns.DetailedErrors, ns.SimpleErrors] {
     const valueArray = value ?? [];
     const rootRules = super.fieldDescriptor!.rules.root;
     const foreachRules = super.fieldDescriptor!.rules.foreach;

@@ -1,38 +1,10 @@
-import ValidationEngine from "../../../engine";
-import Localization from "../../../localization";
-import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
-import ClassValidatorMetaService from "../../../reflection/service/impl/ClassValidatorMetaService";
-import EvaluatedStrategyFactory from "../../../types/namespace/evaluated-strategy-factory.namespace";
-import Validation from "../../../types/namespace/validation.namespace";
-import ValidationStrategy from "../strategy";
-
-/**
- * Represents the simplified error structure for validating arrays of object types.
- *
- * @typeParam F - The type of the field being validated.
- *
- * - `field`: An array of string messages that represent validation errors at the array level.
- * - `children`: An array of `Errors<F>` objects that represent validation errors for each object in the array.
- */
-export type ObjectArraySimpleErrors<F> = {
-  host: string[][];
-  node: string[];
-  children: EvaluatedStrategyFactory.Errors<F>[];
-};
-
-/**
- * Represents the detailed error structure for validating arrays of object types.
- *
- * @typeParam F - The type of the field being validated.
- *
- * - `field`: An array of `Validation.Result` objects that represent detailed validation errors at the array level.
- * - `children`: An array of `DetailedErrors<F>` objects that represent detailed validation errors for each object in the array.
- */
-export type ObjectArrayDetailedErrors<F> = {
-  host: Validation.Result[][];
-  node: Validation.Result[];
-  children: EvaluatedStrategyFactory.DetailedErrors<F>[];
-};
+import ValidationEngine from "../../..";
+import Localization from "../../../../localization";
+import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
+import ClassValidatorMetaService from "../../../../reflection/service/impl/ClassValidatorMetaService";
+import Validation from "../../../../types/namespace/validation.namespace";
+import ValidationStrategy from "../../strategy";
+import ns from "./types";
 
 /**
  * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating arrays of object types.
@@ -41,13 +13,13 @@ export type ObjectArrayDetailedErrors<F> = {
  *
  * @extends ValidationStrategy<F, ObjectArrayDetailedErrors<F>, ObjectArraySimpleErrors<F>>
  */
-export default class ObjectArrayStrat<F> extends ValidationStrategy<
+export default class ObjectArrayStrategy<F> extends ValidationStrategy<
   F,
-  ObjectArrayDetailedErrors<F>,
-  ObjectArraySimpleErrors<F>
+  ns.DetailedErrors<F>,
+  ns.SimpleErrors<F>
 > {
   /**
-   * Initializes the `ObjectArrayStrat` class by calling the superclass constructor with the provided descriptor and default value.
+   * Initializes the `ObjectArrayStrategy` class by calling the superclass constructor with the provided descriptor and default value.
    *
    * @param descriptor - The reflection descriptor for the field.
    * @param defaultValue - The default value for the parent object.
@@ -77,7 +49,7 @@ export default class ObjectArrayStrat<F> extends ValidationStrategy<
     context: any,
     groups: Validation.Group[] = [],
     locale: Localization.Locale
-  ): [ObjectArrayDetailedErrors<F>, ObjectArraySimpleErrors<F>] {
+  ): [ns.DetailedErrors<F>, ns.SimpleErrors<F>] {
     const _value = value ?? [];
     const fieldClass = super.descriptor.thisClass!;
     const rootResult = super.fieldDescriptor!.rules.root.validate(

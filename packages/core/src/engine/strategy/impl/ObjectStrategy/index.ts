@@ -1,35 +1,9 @@
-import ValidationEngine from "../../../engine";
-import Localization from "../../../localization";
-import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
-import EvaluatedStrategyFactory from "../../../types/namespace/evaluated-strategy-factory.namespace";
-import Validation from "../../../types/namespace/validation.namespace";
-import ValidationStrategy from "../strategy";
-
-/**
- * Represents the simplified error structure for validating object types.
- *
- * @typeParam F - The type of the field being validated.
- *
- * - `node`: An array of string messages that represent validation errors at the object level.
- * - `children`: An `Errors<F>` object that represents validation errors for each property in the object.
- */
-export type ObjectSimpleErrors<F> = {
-  node: string[];
-  children: EvaluatedStrategyFactory.Errors<F>;
-};
-
-/**
- * Represents the detailed error structure for validating object types.
- *
- * @typeParam F - The type of the field being validated.
- *
- * - `node`: An array of `Validation.Result` objects that represent detailed validation errors at the object level.
- * - `children`: A `DetailedErrors<F>` object that represents detailed validation errors for each property in the object.
- */
-export type ObjectDetailedErrors<F> = {
-  node: Validation.Result[];
-  children: EvaluatedStrategyFactory.DetailedErrors<F>;
-};
+import ValidationEngine from "../../..";
+import Localization from "../../../../localization";
+import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
+import Validation from "../../../../types/namespace/validation.namespace";
+import ValidationStrategy from "../../strategy";
+import ns from "./types";
 
 /**
  * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating object types.
@@ -40,8 +14,8 @@ export type ObjectDetailedErrors<F> = {
  */
 export default class ObjectStrat<F> extends ValidationStrategy<
   F,
-  ObjectDetailedErrors<F>,
-  ObjectSimpleErrors<F>
+  ns.DetailedErrors<F>,
+  ns.SimpleErrors<F>
 > {
   /**
    * Initializes the `ObjectStrat` class by calling the superclass constructor with the provided descriptor and default value.
@@ -74,7 +48,7 @@ export default class ObjectStrat<F> extends ValidationStrategy<
     context: any,
     groups: Validation.Group[] = [],
     locale: Localization.Locale
-  ): [ObjectDetailedErrors<F>, ObjectSimpleErrors<F>] {
+  ): [ns.DetailedErrors<F>, ns.SimpleErrors<F>] {
     const { detailedErrors, errors } = new ValidationEngine<F>(
       super.descriptor.thisClass!,
       super.getValidationEngineConfig(groups)
@@ -87,12 +61,12 @@ export default class ObjectStrat<F> extends ValidationStrategy<
       locale
     );
 
-    const detailedErrorsResult: ObjectDetailedErrors<F> = {
+    const detailedErrorsResult: ns.DetailedErrors<F> = {
       node: rootResult,
       children: detailedErrors,
     };
 
-    const errorsResult: ObjectSimpleErrors<F> = {
+    const errorsResult: ns.SimpleErrors<F> = {
       node: Validation.buildSimpleErrors(rootResult),
       children: errors,
     };

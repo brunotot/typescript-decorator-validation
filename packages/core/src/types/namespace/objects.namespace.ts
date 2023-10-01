@@ -1,4 +1,4 @@
-import EvaluatedStrategyFactory from "./evaluated-strategy-factory.namespace";
+import StrategyFactory from "../../engine/strategy/factory";
 import HelperNamespace from "./helper.namespace";
 
 /**
@@ -66,9 +66,7 @@ namespace Objects {
    *
    * @typeParam T - The type of the errors.
    */
-  export function hasErrors<T>(
-    data: EvaluatedStrategyFactory.Errors<T>
-  ): boolean {
+  export function hasErrors<T>(data: StrategyFactory.Impl.Errors<T>): boolean {
     const data0: any = data;
     if (Array.isArray(data0)) {
       return data0.some((item) => hasErrors(item));

@@ -1,7 +1,8 @@
-import Localization from "../../../localization";
-import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
-import Validation from "../../../types/namespace/validation.namespace";
-import ValidationStrategy from "../strategy";
+import Localization from "../../../../localization";
+import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
+import Validation from "../../../../types/namespace/validation.namespace";
+import ValidationStrategy from "../../strategy";
+import ns from "./types";
 
 /**
  * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating primitive types like numbers, strings, etc.
@@ -12,8 +13,8 @@ import ValidationStrategy from "../strategy";
  */
 export default class PrimitiveStrat<F> extends ValidationStrategy<
   F,
-  Validation.Result[],
-  string[]
+  ns.DetailedErrors,
+  ns.SimpleErrors
 > {
   /**
    * Initializes the `PrimitiveStrat` class by calling the superclass constructor with the provided descriptor and default value.
@@ -42,7 +43,7 @@ export default class PrimitiveStrat<F> extends ValidationStrategy<
     context: any,
     groups: Validation.Group[] = [],
     locale: Localization.Locale
-  ): [Validation.Result[], string[]] {
+  ): [ns.DetailedErrors, ns.SimpleErrors] {
     const rootResult = this.fieldDescriptor!.rules.root.validate(
       value,
       context,

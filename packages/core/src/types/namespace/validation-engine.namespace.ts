@@ -1,6 +1,6 @@
 import CacheMap from "../../engine/models/cache.map";
+import StrategyFactory from "../../engine/strategy/factory";
 import Localization from "../../localization";
-import EvaluatedStrategyFactory from "./evaluated-strategy-factory.namespace";
 import Validation from "./validation.namespace";
 
 /**
@@ -25,8 +25,8 @@ namespace ValidationEngineNs {
    */
   export type Result<T> = {
     valid: boolean;
-    detailedErrors: EvaluatedStrategyFactory.DetailedErrors<T>;
-    errors: EvaluatedStrategyFactory.Errors<T>;
+    detailedErrors: StrategyFactory.Impl.DetailedErrors<T>;
+    errors: StrategyFactory.Impl.Errors<T>;
   };
 
   /**
@@ -45,7 +45,7 @@ namespace ValidationEngineNs {
    * @typeParam TBody - The type of the payload.
    */
   export type Cache<TClass, TBody = TClass> = Result<TClass> & {
-    state: EvaluatedStrategyFactory.Payload<TBody>;
+    state: StrategyFactory.Impl.Payload<TBody>;
   };
 
   /**
@@ -63,7 +63,7 @@ namespace ValidationEngineNs {
    */
   export type CacheMap<TClass, TBody = TClass> = CacheMap.CacheMap<
     Result<TClass>,
-    EvaluatedStrategyFactory.Payload<TBody>
+    StrategyFactory.Impl.Payload<TBody>
   >;
 }
 

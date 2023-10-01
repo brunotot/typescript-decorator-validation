@@ -93,9 +93,12 @@ const jobApplicationForm: JobApplicationForm = {
 // also add for nested
 
 const engine = new ValidationEngine(JobApplicationForm);
-const result = engine.validate(jobApplicationForm);
-console.log(JSON.stringify(result, null, 2));
+const result = engine.validate({});
 
+result.errors.address;
+
+console.log(JSON.stringify(result, null, 2));
+//result.errors.address?.
 const classValidatorService = ClassValidatorService.inject(EducationForm);
 //console.log(classValidatorService);
 debugger;
