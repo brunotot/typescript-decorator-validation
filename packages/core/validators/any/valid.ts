@@ -1,5 +1,5 @@
+import { TdvCore } from "../..";
 import FieldDecorator from "../../src/decorators/kind/FieldDecorator";
-import $ from "../../src/types";
 import Types from "../../src/types/namespace/types.namespace";
 
 /**
@@ -16,10 +16,10 @@ import Types from "../../src/types/namespace/types.namespace";
  *   items: Item[];
  * }
  */
-export default function valid<T extends $.Objects.Optional<object>>(
-  clazz: Types.Class<T>
-) {
-  return FieldDecorator.build<$.Objects.Optional<T>>((meta, name) => {
+export default function valid<
+  T extends TdvCore.Objects.Optional<object | object[]>
+>(clazz: Types.Class<any>): FieldDecorator.Instance<T> {
+  return FieldDecorator.build<any>((meta, name) => {
     meta.getUntypedDescriptor(name).thisClass = clazz;
   });
 }

@@ -11,7 +11,7 @@ namespace FieldDecorator {
     context: Context<T>
   ) => ReturnDef;
 
-  export type Context<T extends Type = Type> = Readonly<{
+  export type Context<T> = Readonly<{
     kind: "getter" | "method" | "field";
     static: boolean;
     private: boolean;
@@ -22,7 +22,7 @@ namespace FieldDecorator {
     };
   }>;
 
-  export type Instance<T extends Type = Type> = (
+  export type Instance<T extends Type> = (
     target: any,
     context: Context<T>
   ) => ReturnDef;
@@ -61,7 +61,7 @@ namespace FieldDecorator {
       const strategyEval = isStage2 ? target.constructor : context;
       const contextEval = isStage2 ? { name: context, metadata: {} } : context;
       const metaService = FieldValidatorMetaService.inject(strategyEval);
-      supplier(metaService, nameEval, contextEval as any);
+      supplier(metaService, String(nameEval), contextEval as any);
     };
   }
 }

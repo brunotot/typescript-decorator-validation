@@ -62,10 +62,9 @@ export default abstract class AbstractMetaService<Entry> {
   /**
    * Gets the data entry from the metadata.
    *
-   * @protected
    * @returns The data entry.
    */
-  protected get data(): Entry {
+  public get data(): Entry {
     return this.attr(this.#injectionKey, () => this.#initial());
   }
 

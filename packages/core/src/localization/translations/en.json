@@ -40,7 +40,7 @@
   "Truthy": "Value must be truthy",
   "URL": "The URL you entered is not a valid one",
   "Uppercase": "Given string must contain only uppercase characters",
-  "ValidDateRange": "Starting date must preceed ending date",
+  "ValidDateRange": "{0} must preceed {1}",
   "ValueMax": "Maximum allowed value is {0} but is {1}",
   "ValueMin": "Minimum allowed value is {0} but is {1}",
   "ValueRange": "Value must be greater than or equal to {0} and less than or equal to {1} but is {2}",

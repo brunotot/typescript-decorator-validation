@@ -1,5 +1,6 @@
 import Localization from "../localization";
-import ValidationConfigurer from "../reflection/service/impl/FieldValidatorMetaService";
+import ClassValidatorMetaService from "../reflection/service/impl/ClassValidatorMetaService";
+import FieldValidatorMetaService from "../reflection/service/impl/FieldValidatorMetaService";
 import $ from "../types/index";
 import EvaluatedStrategyFactory from "../types/namespace/evaluated-strategy-factory.namespace";
 import Types from "../types/namespace/types.namespace";
@@ -17,10 +18,11 @@ import CacheMap from "./models/cache.map";
  *
  * @remarks
  * This class uses a `CacheMap` to store validation results for better performance.
- * It also leverages `ValidationConfigurer` to retrieve metadata about the class being processed.
+ * It also leverages `FieldValidatorMetaService` to retrieve metadata about the class being processed.
  */
 export default class ValidationEngine<TClass, TBody = TClass> {
-  #meta: ValidationConfigurer;
+  #fieldValidatorMetaService: FieldValidatorMetaService;
+  #classValidatorMetaService: ClassValidatorMetaService<Types.Class<TClass>>;
   #groups: Validation.Group[];
   #hostDefault: any;
   #cacheMap: ns.CacheMap<TClass, TBody>;
@@ -36,7 +38,10 @@ export default class ValidationEngine<TClass, TBody = TClass> {
     this.locale = config?.locale ?? Localization.getLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
     this.#hostDefault = (config?.defaultValue ?? new clazz()) as TBody;
-    this.#meta = ValidationConfigurer.inject(clazz);
+    this.#fieldValidatorMetaService = FieldValidatorMetaService.inject(clazz);
+    this.#classValidatorMetaService = ClassValidatorMetaService.inject(
+      clazz
+    ) as any;
     this.#cacheMap = new CacheMap.CacheMap(
       (state) => this.validate.bind(this)(state) as ns.Result<TClass>
     );
@@ -117,11 +122,11 @@ export default class ValidationEngine<TClass, TBody = TClass> {
   public validate(
     payload?: EvaluatedStrategyFactory.Payload<TBody>
   ): ns.Result<TClass> {
-    const state = payload ?? new this.#meta.class();
+    const state = payload ?? new this.#fieldValidatorMetaService.class();
     const errors: EvaluatedStrategyFactory.Errors<TClass> = {};
     const detailedErrors: EvaluatedStrategyFactory.DetailedErrors<TClass> = {};
 
-    this.#meta.getFields().forEach((field) => {
+    this.#fieldValidatorMetaService.getFields().forEach((field) => {
       const validation = this.validateField(payload, field as keyof TClass);
       (detailedErrors as any)[field] = validation[0];
       (errors as any)[field] = validation[1];
@@ -149,7 +154,7 @@ export default class ValidationEngine<TClass, TBody = TClass> {
    */
   // prettier-ignore
   validateField<K extends keyof TClass>(payload: any, fieldName: K): Validation.getStrategyResult<TClass[K]> {
-    const descriptor = this.#meta.getUntypedDescriptor(fieldName);
+    const descriptor = this.#fieldValidatorMetaService.getUntypedDescriptor(fieldName);
     const StrategyImpl: Validation.getStrategyResult<TClass[K]> = descriptor.StrategyImpl as any;
     const stratImpl = new (StrategyImpl as any)(descriptor, this.#hostDefault);
     const result = stratImpl.test(payload?.[fieldName], payload, this.#groups, this.locale);

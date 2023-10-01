@@ -44,5 +44,5 @@
   "XML": "Die angegebene Zeichenfolge ist kein gültiges XML",
   "Uppercase": "Die angegebene Zeichenfolge darf nur Großbuchstaben enthalten",
   "Lowercase": "Die angegebene Zeichenfolge darf nur Kleinbuchstaben enthalten",
-  "ValidDateRange": "Das Startdatum muss vor dem Enddatum liegen"
+  "ValidDateRange": "{0} muss vor {1} stehen"
 }

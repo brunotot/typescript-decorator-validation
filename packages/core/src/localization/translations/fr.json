@@ -44,5 +44,5 @@
   "XML": "La chaîne donnée n'est pas un XML valide",
   "Uppercase": "La chaîne donnée doit contenir uniquement des caractères majuscules",
   "Lowercase": "La chaîne donnée ne doit contenir que des caractères minuscules",
-  "ValidDateRange": "La date de début doit précéder la date de fin"
+  "ValidDateRange": "{0} doit précéder {1}"
 }

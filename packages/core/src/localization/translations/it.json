@@ -44,5 +44,5 @@
   "XML": "La stringa data non è un XML valido",
   "Uppercase": "La stringa data deve contenere solo caratteri maiuscoli",
   "Lowercase": "La stringa data deve contenere solo caratteri minuscoli",
-  "ValidDateRange": "La data di inizio deve essere anteriore alla data di fine"
+  "ValidDateRange": "{0} deve precedere {1}"
 }

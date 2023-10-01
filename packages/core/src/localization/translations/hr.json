@@ -44,5 +44,5 @@
   "XML": "Unos nije validni XML",
   "Uppercase": "Unos smije sadržavati samo velika slova",
   "Lowercase": "Unos smije sadržavati samo mala slova",
-  "ValidDateRange": "Datum početka mora prethoditi datumu završetka"
+  "ValidDateRange": "{0} mora prethoditi {1}"
 }

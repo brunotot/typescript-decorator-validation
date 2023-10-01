@@ -47,13 +47,12 @@ class JobApplicationForm {
   @decorate.date.PastDate()
   dateOfBirth!: Date;
 
-  @decorate.any.Required()
   @decorate.nested.valid(AddressForm)
   address!: AddressForm;
 
-  @decorate.any.Required()
   @decorate.array.ArraySizeMin(1)
-  educations!: EducationForm[];
+  @decorate.nested.valid(EducationForm)
+  educations: EducationForm[] = [];
 
   @decorate.any.Required()
   @decorate.array.ArraySizeMin(1)
@@ -76,7 +75,15 @@ const jobApplicationForm: JobApplicationForm = {
     state: "HR1", // Alpha validation will fail
     zipCode: "10000",
   },
-  educations: [], // ArraySizeMin validation will fail
+  educations: [
+    {
+      degree: "",
+      fieldOfStudy: "fieldOfStudy",
+      graduationStartDate: new Date(/*"2023-09-01"*/),
+      graduationEndDate: new Date(/*"2023-09-02"*/),
+      university: "university",
+    },
+  ], // ArraySizeMin validation will fail
   skills: ["Java", "React", "TypeScript"],
   portfolioURL: "https://github.com/bruno",
   coverLetter: "I'm passionate about coding...",
@@ -87,8 +94,8 @@ const jobApplicationForm: JobApplicationForm = {
 
 const engine = new ValidationEngine(JobApplicationForm);
 const result = engine.validate(jobApplicationForm);
-//console.log(JSON.stringify(result.errors, null, 2));
+console.log(JSON.stringify(result, null, 2));
 
 const classValidatorService = ClassValidatorService.inject(EducationForm);
-console.log(classValidatorService);
+//console.log(classValidatorService);
 debugger;

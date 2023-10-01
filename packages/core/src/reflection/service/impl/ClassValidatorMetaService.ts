@@ -16,9 +16,7 @@ export type UnwrapMetaStrategy<TStrategy extends Reflection.MetaStrategy> =
  */
 export default class ClassValidatorMetaService<
   TStrategy extends Reflection.MetaStrategy
-> extends AbstractMetaService<
-  Validation.Metadata<Types.UnwrapClass<TStrategy>>[]
-> {
+> extends AbstractMetaService<Reflection.Rule<any>> {
   /**
    * Static method to create a new instance of ClassValidatorMetaService.
    *
@@ -32,7 +30,11 @@ export default class ClassValidatorMetaService<
   }
 
   private constructor(strategy: Reflection.MetaStrategy) {
-    super(ClassValidatorMetaService.name, strategy, () => []);
+    super(
+      ClassValidatorMetaService.name,
+      strategy,
+      () => new Reflection.Rule()
+    );
   }
 
   /**
@@ -45,7 +47,7 @@ export default class ClassValidatorMetaService<
     isValid: Validation.Evaluator<Types.UnwrapClass<TStrategy>>,
     groups?: Validation.GroupsParam
   ) {
-    this.data.push({
+    this.data.add({
       validate: isValid,
       groups: Decorator.groups(groups),
     });

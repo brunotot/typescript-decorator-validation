@@ -44,5 +44,5 @@
   "XML": "Gegeven tekenreeks is geen geldige XML",
   "Uppercase": "De opgegeven tekenreeks mag alleen hoofdletters bevatten",
   "Lowercase": "De opgegeven tekenreeks mag alleen kleine letters bevatten",
-  "ValidDateRange": "De startdatum moet vóór de einddatum liggen"
+  "ValidDateRange": "{0} moet voorafgaan aan {1}"
 }

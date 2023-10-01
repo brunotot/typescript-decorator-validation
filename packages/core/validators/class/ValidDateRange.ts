@@ -4,6 +4,21 @@ import ClassValidatorDecorator from "../../src/decorators/kind/derived/ClassVali
 import TranslationService from "../../src/localization/service/translation.service";
 import Types from "../../src/types/namespace/types.namespace";
 
+function camelCaseToNormalText(
+  camelCase: string,
+  capitalizeFirstLetter: boolean = true
+): string {
+  let result = camelCase
+    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+    .replace(/ (\w)/g, (str) => str.toLowerCase());
+
+  if (capitalizeFirstLetter) {
+    result = result.replace(/^./, (str) => str.toUpperCase());
+  }
+
+  return result;
+}
+
 export default function ValidDateRange<T extends ClassDecorator.Type>(
   startDateFieldName: string,
   endDateFieldName: string,
@@ -15,7 +30,12 @@ export default function ValidDateRange<T extends ClassDecorator.Type>(
       key: "ValidDateRange",
       message: Decorator.message(
         props,
-        TranslationService.translate(locale, "ValidDateRange"),
+        TranslationService.translate(
+          locale,
+          "ValidDateRange",
+          camelCaseToNormalText(startDateFieldName),
+          camelCaseToNormalText(endDateFieldName, false)
+        ),
         locale
       ),
       valid:
