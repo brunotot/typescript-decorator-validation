@@ -43,5 +43,6 @@
   "ValueRange": "Il valore deve essere maggiore o uguale a {0} e minore o uguale a {1} ma è {2}",
   "XML": "La stringa data non è un XML valido",
   "Uppercase": "La stringa data deve contenere solo caratteri maiuscoli",
-  "Lowercase": "La stringa data deve contenere solo caratteri minuscoli"
+  "Lowercase": "La stringa data deve contenere solo caratteri minuscoli",
+  "ValidDateRange": "La data di inizio deve essere anteriore alla data di fine"
 }

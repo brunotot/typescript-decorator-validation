@@ -43,5 +43,6 @@
   "ValueRange": "Waarde moet groter zijn dan of gelijk zijn aan {0} en kleiner dan of gelijk zijn aan {1}, maar is {2}",
   "XML": "Gegeven tekenreeks is geen geldige XML",
   "Uppercase": "De opgegeven tekenreeks mag alleen hoofdletters bevatten",
-  "Lowercase": "De opgegeven tekenreeks mag alleen kleine letters bevatten"
+  "Lowercase": "De opgegeven tekenreeks mag alleen kleine letters bevatten",
+  "ValidDateRange": "De startdatum moet vóór de einddatum liggen"
 }

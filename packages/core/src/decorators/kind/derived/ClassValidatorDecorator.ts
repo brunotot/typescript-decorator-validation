@@ -1,4 +1,4 @@
-import Types from "../../../types/namespace/types.namespace";
+import Localization from "../../../localization";
 import Validation from "../../../types/namespace/validation.namespace";
 import ClassDecorator from "../ClassDecorator";
 
@@ -7,10 +7,16 @@ import ClassDecorator from "../ClassDecorator";
  */
 
 namespace ClassValidatorDecorator {
-  type ClassValidatorDecoratorSupplier<T extends ClassDecorator.Type> = {
+  type Supplier<T extends ClassDecorator.Type> = {
     groups?: Validation.GroupsParam;
-    isValid: Validation.Evaluator<Types.UnwrapClass<T>>;
+    isValid: Evaluator<T>;
   };
+
+  export type Evaluator<T extends ClassDecorator.Type> = ((
+    value: any,
+    context: ClassDecorator.Context<T>,
+    locale: Localization.Locale
+  ) => Validation.Result) & {};
 
   /**
    * Creates a new validator function using the provided validation builder options.
@@ -42,7 +48,7 @@ namespace ClassValidatorDecorator {
   export function build<T extends ClassDecorator.Type>({
     groups,
     isValid,
-  }: ClassValidatorDecoratorSupplier<T>): ClassDecorator.Instance<T> {
+  }: Supplier<T>): ClassDecorator.Instance<T> {
     return ClassDecorator.build((meta) => {
       meta.addValidator(isValid, groups);
     });

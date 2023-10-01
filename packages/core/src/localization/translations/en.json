@@ -19,6 +19,7 @@
   "Integer": "Value must be an integer but is {0}",
   "InvalidDigits": "maxInteger [{0}] and maxFraction [{1}] must be whole numbers",
   "JSON": "Given string is not a valid JSON",
+  "Lowercase": "Given string must contain only lowercase characters",
   "MaxLength": "Field cannot contain more than {0} characters",
   "MinLength": "Field must contain at least {0} characters",
   "Negative": "Value must be a negative number but is {0}",
@@ -38,10 +39,10 @@
   "TodayDate": "Date {0} must be today's date (current)",
   "Truthy": "Value must be truthy",
   "URL": "The URL you entered is not a valid one",
+  "Uppercase": "Given string must contain only uppercase characters",
+  "ValidDateRange": "Starting date must preceed ending date",
   "ValueMax": "Maximum allowed value is {0} but is {1}",
   "ValueMin": "Minimum allowed value is {0} but is {1}",
   "ValueRange": "Value must be greater than or equal to {0} and less than or equal to {1} but is {2}",
-  "XML": "Given string is not a valid XML",
-  "Uppercase": "Given string must contain only uppercase characters",
-  "Lowercase": "Given string must contain only lowercase characters"
+  "XML": "Given string is not a valid XML"
 }

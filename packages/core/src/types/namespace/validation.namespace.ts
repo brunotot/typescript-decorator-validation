@@ -85,8 +85,8 @@ namespace Validation {
    * @typeParam T - The type of the value being evaluated.
    */
   export type Builder<T> = {
-    isValid: Validation.Evaluator<T>;
     groups?: Validation.GroupsParam;
+    isValid: Validation.Evaluator<T>;
   };
 
   /**

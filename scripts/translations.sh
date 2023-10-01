@@ -63,7 +63,7 @@ fi
 for lang in "${languages[@]}"; do
   # Check if the language is valid
   if is_valid_language "$lang"; then
-    i18n-auto-translation -k "$GOOGLE_TRANSLATOR_API_KEY" -d $PWD_MODULE/src/messages/translations -t "$lang" -f "$default_lang"
+    i18n-auto-translation -k "$GOOGLE_TRANSLATOR_API_KEY" -d $PWD_MODULE/src/localization/translations -t "$lang" -f "$default_lang"
   else
     echo "Error: Invalid language code: $lang. Skipping..."
   fi

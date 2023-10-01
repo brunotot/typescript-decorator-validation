@@ -43,5 +43,6 @@
   "ValueRange": "El valor debe ser mayor o igual a {0} y menor o igual a {1} pero es {2}",
   "XML": "La cadena dada no es un XML válido",
   "Uppercase": "La cadena dada debe contener solo caracteres en mayúsculas",
-  "Lowercase": "La cadena dada debe contener solo caracteres en minúscula"
+  "Lowercase": "La cadena dada debe contener solo caracteres en minúscula",
+  "ValidDateRange": "La fecha de inicio debe preceder a la fecha de finalización"
 }

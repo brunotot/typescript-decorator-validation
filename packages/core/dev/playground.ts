@@ -1,6 +1,6 @@
 import { decorate, ValidationEngine } from "tdv-core";
-import ClassDecorator from "../src/decorators/kind/ClassDecorator";
 import ClassValidatorService from "../src/reflection/service/impl/ClassValidatorMetaService";
+import ValidDateRange from "../validators/class/ValidDateRange";
 
 class AddressForm {
   @decorate.any.Required()
@@ -16,6 +16,7 @@ class AddressForm {
   zipCode!: string;
 }
 
+@ValidDateRange("graduationStartDate", "graduationEndDate")
 class EducationForm {
   @decorate.any.Required()
   degree!: string;
@@ -26,22 +27,11 @@ class EducationForm {
   @decorate.any.Required()
   university!: string;
 
-  @decorate.number.NonNegative()
-  graduationYear!: number;
+  graduationStartDate!: Date;
+
+  graduationEndDate!: Date;
 }
 
-const withEmploymentDate = () => {};
-
-@ClassDecorator.build((meta) =>
-  meta.addValidator(
-    (v: JobApplicationForm) => ({
-      key: "test",
-      message: "test",
-      valid: !!v,
-    }),
-    []
-  )
-)
 class JobApplicationForm {
   @decorate.any.Required()
   @decorate.string.Alpha()
@@ -99,6 +89,6 @@ const engine = new ValidationEngine(JobApplicationForm);
 const result = engine.validate(jobApplicationForm);
 //console.log(JSON.stringify(result.errors, null, 2));
 
-const classValidatorService = ClassValidatorService.inject(JobApplicationForm);
-//console.log(classValidatorService);
+const classValidatorService = ClassValidatorService.inject(EducationForm);
+console.log(classValidatorService);
 debugger;

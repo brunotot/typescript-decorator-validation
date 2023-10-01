@@ -71,10 +71,12 @@ namespace Decorator {
    */
   export type PartialProps<V = string, T extends object = ValueProps<V>> =
     | V
-    | (T & {
-        groups?: Validation.GroupsParam;
-        message?: string;
-      });
+    | (T & BaseProps);
+
+  export type BaseProps = {
+    groups?: Validation.GroupsParam;
+    message?: string;
+  };
 
   /**
    * Properties for specifying the value in a decorator.
