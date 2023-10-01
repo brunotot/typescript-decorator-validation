@@ -1,6 +1,5 @@
 import Decorator from "../../src/decorators";
-import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
-import ValidatorService from "../../src/decorators/service/validator.service";
+import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
 
 /**
@@ -24,11 +23,11 @@ import TranslationService from "../../src/localization/service/translation.servi
 export default function ArrayEmpty<K, T extends K[]>(
   props?: Decorator.PartialProps
 ) {
-  return ValidatorService.create<T>({
-    groups: ParamsExtractorService.groups(props),
+  return FieldValidatorDecorator.build<T>({
+    groups: Decorator.groups(props),
     isValid: (array, _, locale) => ({
       key: "ArrayEmpty",
-      message: ParamsExtractorService.message(
+      message: Decorator.message(
         props,
         TranslationService.translate(locale, "ArrayEmpty"),
         locale

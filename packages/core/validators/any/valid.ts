@@ -1,4 +1,4 @@
-import DecoratorService from "../../src/decorators/service/decorator.service";
+import FieldDecorator from "../../src/decorators/kind/FieldDecorator";
 import $ from "../../src/types";
 import Types from "../../src/types/namespace/types.namespace";
 
@@ -19,7 +19,7 @@ import Types from "../../src/types/namespace/types.namespace";
 export default function valid<T extends $.Objects.Optional<object>>(
   clazz: Types.Class<T>
 ) {
-  return DecoratorService.create<$.Objects.Optional<T>>((name, meta) => {
+  return FieldDecorator.build<$.Objects.Optional<T>>((meta, name) => {
     meta.getUntypedDescriptor(name).thisClass = clazz;
   });
 }

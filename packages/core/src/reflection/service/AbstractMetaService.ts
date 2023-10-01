@@ -9,7 +9,7 @@ import Types from "../../types/namespace/types.namespace";
  * This class provides methods for managing metadata associated with a given strategy.
  * It can be used to get, set, and check for the existence of attributes in the metadata.
  */
-export default abstract class MetaService<Entry> {
+export default abstract class AbstractMetaService<Entry> {
   #metadata: DecoratorMetadataObject;
   #injectionKey: string;
   #initial: () => Entry;
@@ -17,7 +17,7 @@ export default abstract class MetaService<Entry> {
   protected context?: Decorator.Context;
 
   /**
-   * Constructor for MetaService.
+   * Constructor for AbstractMetaService.
    *
    * @param injectionKey - The key used for metadata injection.
    * @param strategy - The strategy for which metadata is managed.
@@ -34,19 +34,19 @@ export default abstract class MetaService<Entry> {
     if (Reflection.isClass(strategy)) {
       this.class = strategy;
     } else {
-      this.context = strategy;
+      this.context = strategy as any;
     }
   }
 
   /**
-   * Gets the class associated with this MetaService.
+   * Gets the class associated with this AbstractMetaService.
    */
   get class() {
     return this.#class!;
   }
 
   /**
-   * Sets the class associated with this MetaService.
+   * Sets the class associated with this AbstractMetaService.
    */
   set class(clazz: Types.Class<any>) {
     this.#class = clazz;

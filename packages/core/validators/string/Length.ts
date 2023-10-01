@@ -1,6 +1,5 @@
 import Decorator from "../../src/decorators";
-import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
-import ValidatorService from "../../src/decorators/service/validator.service";
+import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
 
@@ -39,11 +38,11 @@ export default function Length<T extends $.Objects.Optional<string>>(
   }>
 ) {
   const { min, max } = props;
-  return ValidatorService.create<T>({
-    groups: ParamsExtractorService.groups(props),
+  return FieldValidatorDecorator.build<T>({
+    groups: Decorator.groups(props),
     isValid: (value, _, locale) => ({
       key: "Length",
-      message: ParamsExtractorService.message(
+      message: Decorator.message(
         props,
         TranslationService.translate(locale, "RangeLength", min, max),
         locale

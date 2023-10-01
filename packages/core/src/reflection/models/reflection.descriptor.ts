@@ -1,6 +1,6 @@
 import Types from "../../types/namespace/types.namespace";
 import Reflection from "../index";
-import ValidationConfigurer from "../service/impl/reflection.service.validation";
+import ValidationConfigurer from "../service/impl/FieldValidatorMetaService";
 
 /**
  * A namespace which holds relevant data regarding field descriptors acquired from reflection

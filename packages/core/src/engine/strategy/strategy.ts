@@ -1,7 +1,7 @@
 import Localization from "../../localization";
 import ReflectionDescriptor from "../../reflection/models/reflection.descriptor";
-import ValidationConfigurer from "../../reflection/service/impl/reflection.service.validation";
-import ValidationEngineNs from "../../types/namespace/entity-processor.namespace";
+import ValidationConfigurer from "../../reflection/service/impl/FieldValidatorMetaService";
+import ValidationEngineNs from "../../types/namespace/validation-engine.namespace";
 import Validation from "../../types/namespace/validation.namespace";
 
 /**

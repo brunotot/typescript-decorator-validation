@@ -1,4 +1,4 @@
-import ValidatorService from "../../src/decorators/service/validator.service";
+import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import Validation from "../../src/types/namespace/validation.namespace";
 
 /**
@@ -33,7 +33,7 @@ const validate = <T>(
         groups?: Validation.GroupsParam;
       }
 ) => {
-  return ValidatorService.create<T>({
+  return FieldValidatorDecorator.build<T>({
     isValid: "isValid" in props ? props.isValid : props,
     groups: "isValid" in props ? props.groups : [],
   });

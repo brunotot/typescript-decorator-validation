@@ -1,10 +1,9 @@
-import Reflection from "../../";
+import Reflection from "../..";
 import Decorator from "../../../decorators";
-import ParamsExtractorService from "../../../decorators/service/params-extractor.service";
 import Types from "../../../types/namespace/types.namespace";
 import Validation from "../../../types/namespace/validation.namespace";
 import ReflectionDescriptor from "../../models/reflection.descriptor";
-import MetaService from "../reflection.service";
+import AbstractMetaService from "../AbstractMetaService";
 
 /**
  * A configurer class which allows for easier manipulation of decorated fields and corresponding metadata
@@ -13,28 +12,28 @@ import MetaService from "../reflection.service";
  * This class is responsible for managing metadata related to validation.
  * It provides methods to add validators, get field names, and manage descriptors.
  */
-export default class ValidationConfigurer extends MetaService<
+export default class FieldValidatorMetaService extends AbstractMetaService<
   Map<string, ReflectionDescriptor.ReflectionDescriptor<any, any, any>>
 > {
   /**
-   * Static method to create a new instance of ValidationConfigurer.
+   * Static method to create a new instance of FieldValidatorMetaService.
    *
    * @param strategy - The strategy to inject.
-   * @returns A new instance of ValidationConfigurer.
+   * @returns A new instance of FieldValidatorMetaService.
    */
   public static inject(
     strategy: Reflection.MetaStrategy
-  ): ValidationConfigurer {
-    return new ValidationConfigurer(strategy);
+  ): FieldValidatorMetaService {
+    return new FieldValidatorMetaService(strategy);
   }
 
   #fields!: string[];
 
   private constructor(strategy: Reflection.MetaStrategy) {
-    super(ValidationConfigurer.name, strategy, () => new Map());
+    super(FieldValidatorMetaService.name, strategy, () => new Map());
     Reflection.isClass(strategy)
       ? this.#handleClassInit(strategy)
-      : this.#handleContextInit(strategy);
+      : this.#handleContextInit(strategy as any);
   }
 
   /**
@@ -50,7 +49,7 @@ export default class ValidationConfigurer extends MetaService<
     groups?: Validation.GroupsParam
   ) {
     this.getUntypedDescriptor(field).rules.root.add({
-      groups: this.#sanitizeGroups(groups),
+      groups: Decorator.groups(groups),
       validate: isValid,
     });
   }
@@ -134,15 +133,5 @@ export default class ValidationConfigurer extends MetaService<
    */
   #handleContextInit(_context: Decorator.Context) {
     this.#fields = [];
-  }
-
-  /**
-   * Sanitizes and returns the validation groups.
-   *
-   * @param param - The groups parameter.
-   * @returns The sanitized validation groups.
-   */
-  #sanitizeGroups(param?: Validation.GroupsParam): Validation.Groups {
-    return ParamsExtractorService.groups(param);
   }
 }

@@ -1,6 +1,5 @@
 import Decorator from "../../src/decorators";
-import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
-import ValidatorService from "../../src/decorators/service/validator.service";
+import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import Localization from "../../src/localization";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
@@ -64,11 +63,11 @@ export default function Digits<T extends $.Objects.Optional<number>>(
   >
 ) {
   const { maxInteger = Infinity, maxFraction = Infinity } = props;
-  return ValidatorService.create<T>({
-    groups: ParamsExtractorService.groups(props),
+  return FieldValidatorDecorator.build<T>({
+    groups: Decorator.groups(props),
     isValid: (value, _, locale) => ({
       key: "Digits",
-      message: ParamsExtractorService.message(
+      message: Decorator.message(
         props,
         TranslationService.translate(locale, "Digits", maxInteger, maxFraction),
         locale

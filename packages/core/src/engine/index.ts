@@ -1,9 +1,9 @@
 import Localization from "../localization";
-import ValidationConfigurer from "../reflection/service/impl/reflection.service.validation";
+import ValidationConfigurer from "../reflection/service/impl/FieldValidatorMetaService";
 import $ from "../types/index";
-import ns from "../types/namespace/entity-processor.namespace";
 import EvaluatedStrategyFactory from "../types/namespace/evaluated-strategy-factory.namespace";
 import Types from "../types/namespace/types.namespace";
+import ns from "../types/namespace/validation-engine.namespace";
 import Validation from "../types/namespace/validation.namespace";
 import CacheMap from "./models/cache.map";
 
@@ -109,8 +109,8 @@ export default class ValidationEngine<TClass, TBody = TClass> {
    *
    * @example
    * ```typescript
-   * const processor = new ValidationEngine(MyClass);
-   * const result = processor.validate(myPayload);
+   * const engine = new ValidationEngine(MyClass);
+   * const result = engine.validate(myPayload);
    * console.log(result.valid);  // Output: true or false
    * ```
    */

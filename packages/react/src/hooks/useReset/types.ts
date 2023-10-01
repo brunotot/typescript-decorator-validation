@@ -2,7 +2,7 @@ import { ValidationEngine } from "tdv-core";
 
 namespace UseResetHook {
   export type UseResetConfig<TClass, TBody = TClass> = {
-    processor: ValidationEngine<TClass, TBody>;
+    engine: ValidationEngine<TClass, TBody>;
     form: TBody;
     setForm: (v: TBody) => void;
     submitted: boolean;

@@ -1,13 +1,20 @@
-import ValidationConfigurer from "../reflection/service/impl/reflection.service.validation";
+import Localization from "../localization";
+import ValidationConfigurer from "../reflection/service/impl/FieldValidatorMetaService";
+import Objects from "../types/namespace/objects.namespace";
 import Validation from "../types/namespace/validation.namespace";
-import DecoratorServiceNs from "./service/decorator.service";
-import ParamsExtractorServiceNs from "./service/params-extractor.service";
-import ValidatorServiceNs from "./service/validator.service";
-
+import ValidatorServiceNs from "./kind/derived/FieldValidatorDecorator";
 /**
  * A collection of types and interfaces for creating and handling decorators.
  */
 namespace Decorator {
+  export type ContextKind =
+    | "class"
+    | "method"
+    | "getter"
+    | "setter"
+    | "accessor"
+    | "field";
+
   /**
    * Type definition for a decorator function.
    *
@@ -80,11 +87,56 @@ namespace Decorator {
         value: T;
       };
 
-  export import DecoratorService = DecoratorServiceNs;
+  // export import DecoratorService = DecoratorServiceNs;
 
   export import ValidatorService = ValidatorServiceNs;
 
-  export import ParamsExtractorService = ParamsExtractorServiceNs;
+  /**
+   * Extracts a message from the provided decorator properties.
+   *
+   * @typeParam T - The type of the object being validated.
+   *
+   * @param provider - The decorator properties.
+   * @param defaultMessage - The default message to return if no message is found in the provider.
+   *
+   * @returns The extracted message or the default message if none is found.
+   */
+  export function message<T extends object>(
+    provider: Decorator.PartialProps<any, T> | undefined,
+    defaultMessage: string,
+    locale: Localization.Locale
+  ): string {
+    if (!provider) return defaultMessage;
+    const providerType = typeof provider;
+    const msgNullable = providerType ? provider : provider.message;
+    const msgNonNull = msgNullable ?? "";
+    return msgNonNull.length
+      ? Localization.MessageResolver.resolve(locale, msgNonNull)
+      : defaultMessage;
+  }
+
+  /**
+   * Extracts validation groups from the provided decorator properties.
+   *
+   * @typeParam T - The type of the object being validated.
+   *
+   * @param provider - The decorator properties.
+   *
+   * @returns An array of unique validation groups.
+   */
+  export function groups<T extends object>(
+    provider: Decorator.PartialProps<any, T>
+  ): Validation.Group[] {
+    return Array.isArray(provider)
+      ? Objects.unique(provider)
+      : typeof provider === "object"
+      ? Array.isArray(provider.groups)
+        ? Objects.unique(provider.groups)
+        : provider.groups
+        ? [provider.groups]
+        : []
+      : [];
+  }
 }
 
 export default Decorator;

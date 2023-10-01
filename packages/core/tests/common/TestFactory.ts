@@ -1,4 +1,4 @@
-import ValidationEngine from "../../src/processor";
+import ValidationEngine from "../../src/engine";
 import Types from "../../src/types/namespace/types.namespace";
 import ValidationHandlerMock, {
   IMock,

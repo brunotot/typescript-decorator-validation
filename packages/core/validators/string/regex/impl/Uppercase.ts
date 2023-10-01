@@ -1,6 +1,5 @@
 import Decorator from "../../../../src/decorators";
-import ParamsExtractorService from "../../../../src/decorators/service/params-extractor.service";
-import ValidatorService from "../../../../src/decorators/service/validator.service";
+import FieldValidatorDecorator from "../../../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../../../src/localization/service/translation.service";
 import $ from "../../../../src/types";
 import RegexConst from "../../../shared/regex.constants";
@@ -36,11 +35,11 @@ import { testRegex } from "../Pattern";
 export default function Uppercase<T extends $.Objects.Optional<string>>(
   props?: Decorator.PartialProps
 ) {
-  return ValidatorService.create<T>({
-    groups: ParamsExtractorService.groups(props),
+  return FieldValidatorDecorator.build<T>({
+    groups: Decorator.groups(props),
     isValid: (value, _, locale) => ({
       key: "Uppercase",
-      message: ParamsExtractorService.message(
+      message: Decorator.message(
         props,
         TranslationService.translate(locale, "Uppercase"),
         locale

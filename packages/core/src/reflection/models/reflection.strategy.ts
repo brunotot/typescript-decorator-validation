@@ -1,8 +1,8 @@
-import ObjectArrayStrat from "../../processor/strategy/impl/object-array.strategy";
-import ObjectStrat from "../../processor/strategy/impl/object.strategy";
-import PrimitiveArrayStrat from "../../processor/strategy/impl/primitive-array.strategy";
-import PrimitiveStrat from "../../processor/strategy/impl/primitive.strategy";
-import ValidationStrategy from "../../processor/strategy/strategy";
+import ObjectArrayStrat from "../../engine/strategy/impl/object-array.strategy";
+import ObjectStrat from "../../engine/strategy/impl/object.strategy";
+import PrimitiveArrayStrat from "../../engine/strategy/impl/primitive-array.strategy";
+import PrimitiveStrat from "../../engine/strategy/impl/primitive.strategy";
+import ValidationStrategy from "../../engine/strategy/strategy";
 import Types from "../../types/namespace/types.namespace";
 
 const unknown = "unknown" as const;

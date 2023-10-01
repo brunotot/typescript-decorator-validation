@@ -1,6 +1,5 @@
 import Decorator from "../../src/decorators";
-import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
-import ValidatorService from "../../src/decorators/service/validator.service";
+import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
 
@@ -32,10 +31,10 @@ import $ from "../../src/types";
 export default function NonPositive<T extends $.Objects.Optional<number>>(
   props?: Decorator.PartialProps
 ) {
-  return ValidatorService.create<T>({
+  return FieldValidatorDecorator.build<T>({
     isValid: (num, _, locale) => ({
       key: "NonPositive",
-      message: ParamsExtractorService.message(
+      message: Decorator.message(
         props,
         TranslationService.translate(locale, "NonPositive", num!),
         locale

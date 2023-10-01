@@ -1,5 +1,5 @@
+import CacheMap from "../../engine/models/cache.map";
 import Localization from "../../localization";
-import CacheMap from "../../processor/models/cache.map";
 import EvaluatedStrategyFactory from "./evaluated-strategy-factory.namespace";
 import Validation from "./validation.namespace";
 

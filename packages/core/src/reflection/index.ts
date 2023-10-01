@@ -79,7 +79,10 @@ namespace Reflection {
   /**
    * Type alias for strategies that can either be a decorator context or a class.
    */
-  export type MetaStrategy = Decorator.Context | Types.Class<any>;
+  export type MetaStrategy =
+    | Decorator.Context
+    | Types.Class<any>
+    | DecoratorContext;
 
   export import Rule = ReflectionRuleNamespace.ReflectionRule;
 

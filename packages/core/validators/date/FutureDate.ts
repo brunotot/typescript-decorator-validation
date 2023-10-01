@@ -1,6 +1,5 @@
 import Decorator from "../../src/decorators";
-import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
-import ValidatorService from "../../src/decorators/service/validator.service";
+import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
 import Validation from "../../src/types/namespace/validation.namespace";
@@ -24,11 +23,11 @@ import Validation from "../../src/types/namespace/validation.namespace";
 export default function FutureDate<T extends $.Objects.Optional<Date>>(
   props?: Decorator.PartialProps
 ) {
-  return ValidatorService.create<T>({
-    groups: ParamsExtractorService.groups(props),
+  return FieldValidatorDecorator.build<T>({
+    groups: Decorator.groups(props),
     isValid: (date, _context, locale) => ({
       key: "FutureDate",
-      message: ParamsExtractorService.message(
+      message: Decorator.message(
         props,
         TranslationService.translate(locale, "FutureDate", date!),
         locale

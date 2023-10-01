@@ -1,6 +1,5 @@
 import Decorator from "../../src/decorators";
-import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
-import ValidatorService from "../../src/decorators/service/validator.service";
+import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import $ from "../../src/types";
 
 /**
@@ -27,11 +26,11 @@ export default function ArraySome<K, T extends K[]>(
     test: $.Objects.ArrayPredicate<K>;
   }>
 ) {
-  return ValidatorService.create<T>({
-    groups: ParamsExtractorService.groups(props),
+  return FieldValidatorDecorator.build<T>({
+    groups: Decorator.groups(props),
     isValid: (array, _, locale) => ({
       key: "ArraySome",
-      message: ParamsExtractorService.message(props, "", locale),
+      message: Decorator.message(props, "", locale),
       valid: (array ?? []).some(props.test),
     }),
   });

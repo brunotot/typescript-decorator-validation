@@ -58,7 +58,7 @@ export default function useForm<TClass, TBody = TClass>(
   const instantContextValidation = standalone ? validateImmediately! : ctx? ctx.validateImmediately : validateImmediately!;
   const isSubmitted = instantContextValidation || submitted;
 
-  const [form, setForm, { errors, detailedErrors, isValid, processor }] =
+  const [form, setForm, { errors, detailedErrors, isValid, engine }] =
     useValidation<TClass, TBody>(model, {
       defaultValue,
       groups,
@@ -112,7 +112,7 @@ export default function useForm<TClass, TBody = TClass>(
     form,
     handleSetSubmitted,
     setForm,
-    processor,
+    engine,
     submitted,
   });
 

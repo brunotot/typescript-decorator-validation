@@ -51,6 +51,8 @@ namespace Types {
    * ```
    */
   export type Class<T> = { new (...args: any[]): T };
+
+  export type UnwrapClass<T> = T extends Types.Class<infer U> ? U : never;
 }
 
 export default Types;

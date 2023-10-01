@@ -133,8 +133,8 @@ const dummy: Partial<UserFormFields> = {
 Now we can inspect the errors of the given sample value
 
 ```typescript
-const processor = new ValidationEngine(UserForm);
-const { errors } = processor.validate(dummy);
+const engine = new ValidationEngine(UserForm);
+const { errors } = engine.validate(dummy);
 console.log(JSON.stringify(errors, null, 2));
 ```
 

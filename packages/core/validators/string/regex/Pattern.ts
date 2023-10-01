@@ -1,6 +1,5 @@
 import Decorator from "../../../src/decorators";
-import ParamsExtractorService from "../../../src/decorators/service/params-extractor.service";
-import ValidatorService from "../../../src/decorators/service/validator.service";
+import FieldValidatorDecorator from "../../../src/decorators/kind/derived/FieldValidatorDecorator";
 import $ from "../../../src/types";
 
 export function testRegex<T extends $.Objects.Optional<string>>(
@@ -47,11 +46,11 @@ export default function Pattern<T extends $.Objects.Optional<string>>(
     groups?: $.Validation.GroupsParam;
   }>
 ) {
-  return ValidatorService.create<T>({
-    groups: ParamsExtractorService.groups(props.groups),
+  return FieldValidatorDecorator.build<T>({
+    groups: Decorator.groups(props.groups),
     isValid: (value, _, locale) => ({
       key: props.key ?? "Pattern",
-      message: ParamsExtractorService.message(props, "", locale),
+      message: Decorator.message(props, "", locale),
       valid: testRegex(props.regex, value),
     }),
   });

@@ -5,7 +5,6 @@
 import DecoratorNs from "./../decorators";
 import ReflectionDescriptorNs from "./../reflection/models/reflection.descriptor";
 import ConditionNamespace from "./namespace/condition.namespace";
-import ValidationEngineNamespace from "./namespace/entity-processor.namespace";
 import EvaluatedStrategyFactoryNs from "./namespace/evaluated-strategy-factory.namespace";
 import FactoryNamespace from "./namespace/factory.namespace";
 import HelperNamespace from "./namespace/helper.namespace";
@@ -13,6 +12,7 @@ import ObjectsNamespace from "./namespace/objects.namespace";
 import ParamsNamespace from "./namespace/params.namespace";
 import StrategyNamespace from "./namespace/strategy.namespace";
 import TypesNamespace from "./namespace/types.namespace";
+import ValidationEngineNamespace from "./namespace/validation-engine.namespace";
 import ValidationNamespace from "./namespace/validation.namespace";
 
 /**

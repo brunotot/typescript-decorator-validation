@@ -1,5 +1,5 @@
+import ValidationEngine from "../../../engine";
 import Localization from "../../../localization";
-import ValidationEngine from "../../../processor";
 import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
 import EvaluatedStrategyFactory from "../../../types/namespace/evaluated-strategy-factory.namespace";
 import Validation from "../../../types/namespace/validation.namespace";

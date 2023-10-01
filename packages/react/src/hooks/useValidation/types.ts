@@ -12,7 +12,7 @@ namespace UseValidationHook {
     isValid: boolean;
     detailedErrors: TdvCore.EvaluatedStrategyFactory.DetailedErrors<TClass>;
     errors: TdvCore.EvaluatedStrategyFactory.Errors<TClass>;
-    processor: ValidationEngine<TClass, TBody>;
+    engine: ValidationEngine<TClass, TBody>;
   };
 
   /**

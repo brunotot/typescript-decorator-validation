@@ -1,5 +1,5 @@
-import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
-import ValidatorService from "../../src/decorators/service/validator.service";
+import Decorator from "../../src/decorators";
+import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import Localization from "../../src/localization";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
@@ -106,8 +106,8 @@ export default function Password<T extends $.Objects.Optional<string>>(props?: {
     return buildConstraintViolation("", true);
   }
 
-  return ValidatorService.create<T>({
-    groups: ParamsExtractorService.groups(props),
+  return FieldValidatorDecorator.build<T>({
+    groups: Decorator.groups(props),
     isValid: (str, _, locale) => isValid(str ?? "", locale),
   });
 }

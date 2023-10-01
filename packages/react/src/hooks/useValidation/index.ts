@@ -18,7 +18,7 @@ import ns from "./types";
  *   errors,
  *   detailedErrors,
  *   isValid,
- *   processor
+ *   engine
  * }] = useValidation(MyClass)
  * ```
  *
@@ -29,11 +29,11 @@ export default function useValidation<TClass, TBody = TClass>(
   model: TdvCore.Types.Class<TClass>,
   { defaultValue, groups }: ns.UseValidationConfig<TBody> = {}
 ): ns.UseValidationReturn<TClass, TBody> {
-  const processor = useValidationEngine<TClass, TBody>(model, {
+  const engine = useValidationEngine<TClass, TBody>(model, {
     groups,
     defaultValue,
   });
-  const [form, setForm] = useState<TBody>(processor.hostDefault);
+  const [form, setForm] = useState<TBody>(engine.hostDefault);
   const [details, setDetails] = useState(
     {} as TdvCore.EvaluatedStrategyFactory.DetailedErrors<TClass>
   );
@@ -42,7 +42,7 @@ export default function useValidation<TClass, TBody = TClass>(
   );
 
   useEffect(() => {
-    const { errors, detailedErrors } = processor.validate(form!);
+    const { errors, detailedErrors } = engine.validate(form!);
     setDetails(detailedErrors);
     setSimpleErrors(errors);
   }, [form]);
@@ -51,8 +51,8 @@ export default function useValidation<TClass, TBody = TClass>(
     form,
     setForm,
     {
-      isValid: processor.isValid(form!),
-      processor,
+      isValid: engine.isValid(form!),
+      engine,
       errors: simpleErrors,
       detailedErrors: details,
     },

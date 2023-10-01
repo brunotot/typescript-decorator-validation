@@ -1,5 +1,5 @@
 import Decorator from "../../src/decorators";
-import DecoratorService from "../../src/decorators/service/decorator.service";
+import FieldDecorator from "../../src/decorators/kind/FieldDecorator";
 import $ from "../../src/types/index";
 
 /**
@@ -21,8 +21,8 @@ import $ from "../../src/types/index";
 export default function foreach<T extends NonNullable<any[] | (() => any[])>>(
   ...validators: Decorator.Instance<$.Helper.ExtractArrayType<T>>[]
 ): Decorator.Instance<T> {
-  return DecoratorService.create<T>((property, processor, context) => {
-    const validationProcessor = processor.getUntypedDescriptor(property);
+  return FieldDecorator.build<T>((meta, property, context) => {
+    const validationProcessor = meta.getUntypedDescriptor(property);
     validationProcessor.thisDefault = [];
     validators.forEach((validator) => {
       validator(undefined, context as any);

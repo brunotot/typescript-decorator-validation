@@ -1,12 +1,17 @@
-import Decorator from "..";
-import Validation from "../../types/namespace/validation.namespace";
-import DecoratorService from "./decorator.service";
+import Types from "../../../types/namespace/types.namespace";
+import Validation from "../../../types/namespace/validation.namespace";
+import ClassDecorator from "../ClassDecorator";
 
 /**
  * A service class which exposes validated-decorator-related actions
  */
 
-namespace ValidatorService {
+namespace ClassValidatorDecorator {
+  type ClassValidatorDecoratorSupplier<T extends ClassDecorator.Type> = {
+    groups?: Validation.GroupsParam;
+    isValid: Validation.Evaluator<Types.UnwrapClass<T>>;
+  };
+
   /**
    * Creates a new validator function using the provided validation builder options.
    *
@@ -23,7 +28,7 @@ namespace ValidatorService {
    *
    * @example
    * ```typescript
-   * const IsPositive = ValidatorService.create<number>({
+   * const IsPositive = ClassValidatorDecorator.create<number>({
    *   groups: ['group1'],
    *   isValid: (value) => value > 0
    * });
@@ -34,14 +39,14 @@ namespace ValidatorService {
    * }
    * ```
    */
-  export function create<T>({
+  export function build<T extends ClassDecorator.Type>({
     groups,
     isValid,
-  }: Validation.Builder<T>): Decorator.Instance<T> {
-    return DecoratorService.create<T>((key, validationMetaService) =>
-      validationMetaService.addValidator(key, isValid, groups)
-    );
+  }: ClassValidatorDecoratorSupplier<T>): ClassDecorator.Instance<T> {
+    return ClassDecorator.build((meta) => {
+      meta.addValidator(isValid, groups);
+    });
   }
 }
 
-export default ValidatorService;
+export default ClassValidatorDecorator;

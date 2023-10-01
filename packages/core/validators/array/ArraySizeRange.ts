@@ -1,6 +1,5 @@
 import Decorator from "../../src/decorators";
-import ParamsExtractorService from "../../src/decorators/service/params-extractor.service";
-import ValidatorService from "../../src/decorators/service/validator.service";
+import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
 
 /**
@@ -37,11 +36,12 @@ export default function ArraySizeRange<K, T extends K[]>(
 ) {
   const min = typeof props === "number" ? props : props.min;
   const max = typeof props === "number" ? props : props.max;
-  return ValidatorService.create<T>({
-    groups: ParamsExtractorService.groups(props),
+
+  return FieldValidatorDecorator.build<T>({
+    groups: Decorator.groups(props),
     isValid: (array, _, locale) => ({
       key: "ArraySizeRange",
-      message: ParamsExtractorService.message(
+      message: Decorator.message(
         props,
         TranslationService.translate(
           locale,

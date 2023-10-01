@@ -13,7 +13,7 @@
 
 ### Classes
 
-- [`ValidationEngine`](https://github.com/brunotot/typescript-decorator-validation/blob/main/packages/core/src/processor/index.ts#L22) - Main entry point for validating objects at runtime
+- [`ValidationEngine`](https://github.com/brunotot/typescript-decorator-validation/blob/main/packages/core/src/engine/index.ts#L22) - Main entry point for validating objects at runtime
 - [`ValidationConfigurer`](https://github.com/brunotot/typescript-decorator-validation/blob/main/packages/core/src/reflection/service/impl/reflection.service.validation.ts#L16) - Handles the process of attaching validators to the actual class' metadata
 
 ### Namespaces
