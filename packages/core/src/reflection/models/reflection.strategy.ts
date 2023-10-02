@@ -1,7 +1,12 @@
 import ObjectArrayStrat from "../../engine/strategy/impl/ObjectArrayStrategy";
+import ObjectArrayStrategyType from "../../engine/strategy/impl/ObjectArrayStrategy/types";
 import ObjectStrat from "../../engine/strategy/impl/ObjectStrategy";
+import ObjectStrategyType from "../../engine/strategy/impl/ObjectStrategy/types";
 import PrimitiveArrayStrat from "../../engine/strategy/impl/PrimitiveArrayStrategy";
+import PrimitiveArrayStrategyType from "../../engine/strategy/impl/PrimitiveArrayStrategy/types";
+import PrimitiveGetterStrategyType from "../../engine/strategy/impl/PrimitiveGetterStrategy/types";
 import PrimitiveStrat from "../../engine/strategy/impl/PrimitiveStrategy";
+import PrimitiveStrategyType from "../../engine/strategy/impl/PrimitiveStrategy/types";
 import ValidationStrategy from "../../engine/strategy/strategy";
 import Types from "../../types/namespace/types.namespace";
 
@@ -35,22 +40,22 @@ namespace ReflectionStrategy {
     unknown,
 
     // Primitive
-    primitive,
-    primitiveGetter,
+    primitive: PrimitiveStrategyType.Name,
+    primitiveGetter: PrimitiveGetterStrategyType.Name,
     primitiveFunction,
 
     // Composite
-    composite,
+    composite: ObjectStrategyType.Name,
     compositeGetter,
     compositeFunction,
 
     // Primitive array
-    primitiveArray,
+    primitiveArray: PrimitiveArrayStrategyType.Name,
     primitiveArrayFunction,
     primitiveArrayGetter,
 
     // Composite array
-    compositeArray,
+    compositeArray: ObjectArrayStrategyType.Name,
     compositeArrayFunction,
     compositeArrayGetter,
   } as const;

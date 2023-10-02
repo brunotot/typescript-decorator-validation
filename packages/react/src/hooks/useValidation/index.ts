@@ -23,22 +23,23 @@ import ns from "./types";
  * ```
  *
  * @typeParam TClass - represents parent form class model holding context of current compontent
- * @typeParam TBody - represents writable scope of `TClass` (it can be TClass itself or a chunk of its fields)
  */
-export default function useValidation<TClass, TBody = TClass>(
+export default function useValidation<TClass>(
   model: TdvCore.Types.Class<TClass>,
-  { defaultValue, groups }: ns.UseValidationConfig<TBody> = {}
-): ns.UseValidationReturn<TClass, TBody> {
-  const engine = useValidationEngine<TClass, TBody>(model, {
+  { defaultValue, groups }: ns.UseValidationConfig<TClass> = {}
+): ns.UseValidationReturn<TClass> {
+  const engine = useValidationEngine<TClass>(model, {
     groups,
     defaultValue,
   });
-  const [form, setForm] = useState<TBody>(engine.hostDefault);
+  const [form, setForm] = useState<TdvCore.Helper.Payload<TClass>>(
+    engine.hostDefault
+  );
   const [details, setDetails] = useState(
-    {} as TdvCore.EvaluatedStrategyFactory.DetailedErrors<TClass>
+    {} as TdvCore.StrategyFactory.Impl.DetailedErrors<TClass>
   );
   const [simpleErrors, setSimpleErrors] = useState(
-    {} as TdvCore.EvaluatedStrategyFactory.Errors<TClass>
+    {} as TdvCore.StrategyFactory.Impl.Errors<TClass>
   );
 
   useEffect(() => {
@@ -52,9 +53,9 @@ export default function useValidation<TClass, TBody = TClass>(
     setForm,
     {
       isValid: engine.isValid(form!),
-      engine,
       errors: simpleErrors,
       detailedErrors: details,
+      engine,
     },
   ];
 }

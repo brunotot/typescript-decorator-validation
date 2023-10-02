@@ -34,7 +34,6 @@ namespace StrategyFactory {
   export namespace Impl {
     export type DetailedErrors<T> = evaluate<T, Validation.Result[]>;
     export type Errors<T> = evaluate<T, string[]>;
-    export type Payload<T> = evaluate<T>;
   }
 }
 

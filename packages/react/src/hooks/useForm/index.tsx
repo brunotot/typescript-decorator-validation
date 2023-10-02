@@ -31,9 +31,8 @@ import ns from "./types";
  * ```
  *
  * @typeParam TClass - represents parent form class model holding context of current compontent
- * @typeParam TBody - represents writable scope of `TClass` (it can be TClass itself or a chunk of its fields)
  */
-export default function useForm<TClass, TBody = TClass>(
+export default function useForm<TClass>(
   model: TdvCore.Types.Class<TClass>,
   {
     defaultValue,
@@ -43,14 +42,14 @@ export default function useForm<TClass, TBody = TClass>(
     validateImmediately,
     validationGroups: groups,
     onChange,
-  }: ns.UseFormConfig<TClass, TBody> = {
+  }: ns.UseFormConfig<TClass> = {
     onSubmit: async () => {},
     standalone: true,
     validateImmediately: false,
     validationGroups: [],
     onChange: () => {},
   }
-): ns.UseFormReturn<TClass, TBody> {
+): ns.UseFormReturn<TClass> {
   const ctx = useContext(FormContext);
   // prettier-ignore
   const [submitted, setSubmitted] = useState(!standalone && !!ctx && ctx.submitted);
@@ -59,7 +58,7 @@ export default function useForm<TClass, TBody = TClass>(
   const isSubmitted = instantContextValidation || submitted;
 
   const [form, setForm, { errors, detailedErrors, isValid, engine }] =
-    useValidation<TClass, TBody>(model, {
+    useValidation<TClass>(model, {
       defaultValue,
       groups,
     });
@@ -116,14 +115,14 @@ export default function useForm<TClass, TBody = TClass>(
     submitted,
   });
 
-  const data: ns.UseFormData<TClass, TBody> = {
+  const data: ns.UseFormData<TClass> = {
     mutations: useMutations(model, { setForm }),
     isValid,
     isSubmitted,
     onSubmit,
     providerProps,
-    errors: isSubmitted ? errors : {},
-    detailedErrors: isSubmitted ? detailedErrors : {},
+    errors: isSubmitted ? errors : ({} as any),
+    detailedErrors: isSubmitted ? detailedErrors : ({} as any),
     reset,
   };
 

@@ -1,9 +1,11 @@
+import Arrays from "../../../../types/namespace/arrays.namespace";
 import Condition from "../../../../types/namespace/condition.namespace";
-import Helper from "../../../../types/namespace/helper.namespace";
 import Types from "../../../../types/namespace/types.namespace";
 import Validation from "../../../../types/namespace/validation.namespace";
 
 namespace PrimitiveArrayStrategyType {
+  export const Name = "primitive[]" as const;
+
   /**
    * Represents the simplified error structure for validating arrays of primitive types.
    *
@@ -28,9 +30,9 @@ namespace PrimitiveArrayStrategyType {
 
   // prettier-ignore
   export type matches<T, K extends keyof T> = 
-    Helper.ExtractArrayType<T[K]> extends never
+    Arrays.getArrayType<T[K]> extends never
       ? false
-  : Condition.isAnyOf<Helper.ExtractArrayType<T[K]>, Types.Primitive>
+  : Condition.isAnyOf<Arrays.getArrayType<T[K]>, Types.Primitive>
 
   // prettier-ignore
   export type handler<T, K extends keyof T, R> =

@@ -3,21 +3,7 @@ import ClassDecorator from "../../src/decorators/kind/ClassDecorator";
 import ClassValidatorDecorator from "../../src/decorators/kind/derived/ClassValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
 import Types from "../../src/types/namespace/types.namespace";
-
-function camelCaseToNormalText(
-  camelCase: string,
-  capitalizeFirstLetter: boolean = true
-): string {
-  let result = camelCase
-    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-    .replace(/ (\w)/g, (str) => str.toLowerCase());
-
-  if (capitalizeFirstLetter) {
-    result = result.replace(/^./, (str) => str.toUpperCase());
-  }
-
-  return result;
-}
+import StringUtils from "../../src/utils/StringUtils";
 
 export default function ValidDateRange<T extends ClassDecorator.Type>(
   startDateFieldName: string,
@@ -33,8 +19,8 @@ export default function ValidDateRange<T extends ClassDecorator.Type>(
         TranslationService.translate(
           locale,
           "ValidDateRange",
-          camelCaseToNormalText(startDateFieldName),
-          camelCaseToNormalText(endDateFieldName, false)
+          StringUtils.convertCamelCaseToText(startDateFieldName),
+          StringUtils.convertCamelCaseToText(endDateFieldName, false)
         ),
         locale
       ),

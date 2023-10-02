@@ -2,9 +2,11 @@ import Localization from "../localization";
 import ClassValidatorMetaService from "../reflection/service/impl/ClassValidatorMetaService";
 import FieldValidatorMetaService from "../reflection/service/impl/FieldValidatorMetaService";
 import $ from "../types/index";
+import Helper from "../types/namespace/helper.namespace";
 import Types from "../types/namespace/types.namespace";
 import ns from "../types/namespace/validation-engine.namespace";
 import Validation from "../types/namespace/validation.namespace";
+import ObjectConverter from "../utils/ObjectConverter";
 import CacheMap from "./models/cache.map";
 import StrategyFactory from "./strategy/factory";
 
@@ -20,12 +22,12 @@ import StrategyFactory from "./strategy/factory";
  * This class uses a `CacheMap` to store validation results for better performance.
  * It also leverages `FieldValidatorMetaService` to retrieve metadata about the class being processed.
  */
-export default class ValidationEngine<TClass, TBody = TClass> {
+export default class ValidationEngine<TClass> {
   #fieldValidatorMetaService: FieldValidatorMetaService;
   #classValidatorMetaService: ClassValidatorMetaService<Types.Class<TClass>>;
   #groups: Validation.Group[];
-  #hostDefault: any;
-  #cacheMap: ns.CacheMap<TClass, TBody>;
+  #hostDefault: Helper.Payload<TClass>;
+  #cacheMap: ns.CacheMap<TClass>;
   locale: Localization.Locale;
 
   /**
@@ -34,10 +36,12 @@ export default class ValidationEngine<TClass, TBody = TClass> {
    * @param clazz - The class type to be processed.
    * @param config - Optional configuration settings.
    */
-  constructor(clazz: Types.Class<TClass>, config?: ns.Config<TBody>) {
+  constructor(clazz: Types.Class<TClass>, config?: ns.Config<TClass>) {
     this.locale = config?.locale ?? Localization.getLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
-    this.#hostDefault = (config?.defaultValue ?? new clazz()) as TBody;
+    this.#hostDefault =
+      config?.defaultValue ??
+      (ObjectConverter.toClass(clazz) as Helper.Payload<TClass>);
     this.#fieldValidatorMetaService = FieldValidatorMetaService.inject(clazz);
     this.#classValidatorMetaService = ClassValidatorMetaService.inject(
       clazz
@@ -50,7 +54,7 @@ export default class ValidationEngine<TClass, TBody = TClass> {
   /**
    * Gets the default host value.
    */
-  public get hostDefault() {
+  public get hostDefault(): any {
     return this.#hostDefault;
   }
 
@@ -61,7 +65,7 @@ export default class ValidationEngine<TClass, TBody = TClass> {
    *
    * @returns `true` if valid, `false` otherwise.
    */
-  public isValid(payload: StrategyFactory.Impl.Payload<TBody>): boolean {
+  public isValid(payload: Helper.Payload<TClass>): boolean {
     return this.#cacheMap.get("valid", payload);
   }
 
@@ -73,7 +77,7 @@ export default class ValidationEngine<TClass, TBody = TClass> {
    * @returns An object containing detailed error messages.
    */
   public getDetailedErrors(
-    payload: StrategyFactory.Impl.Payload<TBody>
+    payload: Helper.Payload<TClass>
   ): StrategyFactory.Impl.DetailedErrors<TClass> {
     return this.#cacheMap.get("detailedErrors", payload);
   }
@@ -86,7 +90,7 @@ export default class ValidationEngine<TClass, TBody = TClass> {
    * @returns An object containing error messages.
    */
   public getErrors(
-    payload: StrategyFactory.Impl.Payload<TBody>
+    payload: Helper.Payload<TClass>
   ): StrategyFactory.Impl.Errors<TClass> {
     return this.#cacheMap.get("errors", payload);
   }
@@ -119,15 +123,27 @@ export default class ValidationEngine<TClass, TBody = TClass> {
    * console.log(result.valid);  // Output: true or false
    * ```
    */
-  public validate(
-    payload?: StrategyFactory.Impl.Payload<TBody>
-  ): ns.Result<TClass> {
-    const state = payload ?? new this.#fieldValidatorMetaService.class();
+  public validate(payload?: Helper.Payload<TClass>): ns.Result<TClass> {
+    const state = ObjectConverter.toClass(
+      this.#fieldValidatorMetaService.class,
+      payload
+    );
+
     const errors: any = {};
     const detailedErrors: any = {};
 
+    const classValidatorResults = this.#classValidatorMetaService.data.validate(
+      state,
+      state,
+      this.#groups,
+      this.locale
+    );
+
+    console.log(classValidatorResults);
+    debugger;
+
     this.#fieldValidatorMetaService.getFields().forEach((field) => {
-      const validation = this.validateField(payload, field as keyof TClass);
+      const validation = this.validateField(state, field as keyof TClass);
       detailedErrors[field] = validation[0];
       errors[field] = validation[1];
     });

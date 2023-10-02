@@ -1,6 +1,6 @@
 import Decorator from "../../src/decorators";
 import FieldDecorator from "../../src/decorators/kind/FieldDecorator";
-import $ from "../../src/types/index";
+import Arrays from "../../src/types/namespace/arrays.namespace";
 
 /**
  * Decorator for applying multiple validators to each element in an array property.
@@ -19,7 +19,7 @@ import $ from "../../src/types/index";
  * This example applies the `MinLength` and `MaxLength` validators to each element in the `names` array property.
  */
 export default function foreach<T extends NonNullable<any[] | (() => any[])>>(
-  ...validators: Decorator.Instance<$.Helper.ExtractArrayType<T>>[]
+  ...validators: Decorator.Instance<Arrays.getArrayType<T>>[]
 ): Decorator.Instance<T> {
   return FieldDecorator.build<T>((meta, property, context) => {
     const validationProcessor = meta.getUntypedDescriptor(property);

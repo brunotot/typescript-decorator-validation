@@ -1,14 +1,14 @@
 import UseFormNamespace from "./../useForm/types";
 import ns from "./types";
 
-export default function useReset<TClass, TBody = TClass>({
+export default function useReset<TClass>({
   engine,
   form,
   setForm,
   submitted,
   handleSetSubmitted,
-}: ns.UseResetConfig<TClass, TBody>) {
-  const reset: UseFormNamespace.UseFormData<TBody>["reset"] = (...paths) => {
+}: ns.UseResetConfig<TClass>): ns.UseResetReturn<TClass> {
+  const reset: UseFormNamespace.UseFormData<TClass>["reset"] = (...paths) => {
     const noArgsInstance = engine.hostDefault;
 
     if (paths.length === 0) {

@@ -1,4 +1,4 @@
-import Helper from "./helper.namespace";
+import Arrays from "./arrays.namespace";
 import Objects from "./objects.namespace";
 import Types from "./types.namespace";
 
@@ -62,18 +62,18 @@ namespace Condition {
    *
    * @typeParam T - The type to check.
    */
-  export type isPrimitiveArray<T> = Helper.ExtractArrayType<T> extends never
+  export type isPrimitiveArray<T> = Arrays.getArrayType<T> extends never
     ? false
-    : isPrimitive<Helper.ExtractArrayType<T>>;
+    : isPrimitive<Arrays.getArrayType<T>>;
 
   /**
    * Checks if `T` is an array of object types.
    *
    * @typeParam T - The type to check.
    */
-  export type isObjectArray<T> = Helper.ExtractArrayType<T> extends never
+  export type isObjectArray<T> = Arrays.getArrayType<T> extends never
     ? false
-    : isObject<Helper.ExtractArrayType<T>>;
+    : isObject<Arrays.getArrayType<T>>;
 
   /**
    * Checks if `T` is `undefined`.

@@ -1,3 +1,6 @@
+import Arrays from "./arrays.namespace";
+import Condition from "./condition.namespace";
+
 /**
  * A collection of utility types and functions.
  */
@@ -45,12 +48,28 @@ namespace Helper {
    */
   export type Purify<T> = Exclude<T, never>;
 
+  export type Prettify<T> = {
+    [K in keyof T]: T[K];
+  } & {};
+
   /**
-   * A type that extracts the element type of an array type `T`.
-   *
-   * @typeParam T - The type to extract the array type from.
+   * Filters out getters, functions and read-only properties from a type
    */
-  export type ExtractArrayType<T> = T extends (infer U)[] ? U : never;
+  // prettier-ignore
+  export type Payload<T> = Prettify<Purify<{
+    [K in keyof T]: true extends Condition.isAnyOf<true, [
+      Condition.isGetter<T, K>,
+      Condition.isFunction<T[K]>,
+    ]> 
+      ? never     
+      : true extends Condition.isArray<T[K]>
+        ? true extends Condition.isPrimitive<Arrays.getArrayType<T[K]>>
+          ? Arrays.setArrayDepth<Arrays.getArrayType<T[K]>, Arrays.getArrayDepth<T[K]>>
+          : Arrays.setArrayDepth<Payload<Arrays.getArrayType<T[K]>>, Arrays.getArrayDepth<T[K]>>
+        : true extends Condition.isPrimitive<T[K]>
+          ? T[K]
+          : Payload<T[K]>
+  }>>;
 }
 
 export default Helper;

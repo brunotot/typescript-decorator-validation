@@ -3,6 +3,8 @@ import Validation from "../../../../types/namespace/validation.namespace";
 import StrategyFactory from "../../factory";
 
 namespace ObjectStrategyType {
+  export const Name = "composite" as const;
+
   /**
    * Represents the simplified error structure for validating object types.
    *

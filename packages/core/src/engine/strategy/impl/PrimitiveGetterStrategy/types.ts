@@ -1,16 +1,20 @@
 import Condition from "../../../../types/namespace/condition.namespace";
 import Types from "../../../../types/namespace/types.namespace";
 import Validation from "../../../../types/namespace/validation.namespace";
+import PrimitiveStrategyType from "../PrimitiveStrategy/types";
 
-namespace PrimitiveStrategyType {
-  export const Name = "primitive" as const;
+namespace PrimitiveGetterStrategyType {
+  export const Name = `get (): ${PrimitiveStrategyType.Name}` as const;
 
   export type SimpleErrors = string[];
 
   export type DetailedErrors = Validation.Result[];
 
   // prettier-ignore
-  export type matches<T, K extends keyof T> = Condition.isAnyOf<T[K], Types.Primitive>;
+  export type matches<T, K extends keyof T> = 
+    true extends Condition.isGetter<T, K>
+      ? Condition.isAnyOf<T[K], Types.Primitive>
+      : false;
 
   // prettier-ignore
   export type handler<T, K extends keyof T, R> =
@@ -19,4 +23,4 @@ namespace PrimitiveStrategyType {
   : R;
 }
 
-export default PrimitiveStrategyType;
+export default PrimitiveGetterStrategyType;

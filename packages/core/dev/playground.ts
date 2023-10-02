@@ -1,7 +1,7 @@
-import { decorate, ValidationEngine } from "tdv-core";
+import ValidationEngine from "../src/engine";
 import ClassValidatorService from "../src/reflection/service/impl/ClassValidatorMetaService";
 import ValidDateRange from "../validators/class/ValidDateRange";
-
+import decorate from "../validators/index";
 class AddressForm {
   @decorate.any.Required()
   street!: string;
@@ -93,7 +93,7 @@ const jobApplicationForm: JobApplicationForm = {
 // also add for nested
 
 const engine = new ValidationEngine(JobApplicationForm);
-const result = engine.validate({});
+const result = engine.validate(jobApplicationForm);
 
 result.errors.address;
 

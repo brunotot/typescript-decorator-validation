@@ -32,6 +32,8 @@ namespace Types {
       : [])
   ];
 
+  export type Map = Record<string, any>;
+
   /**
    * Represents a class constructor that can create instances of type `T`.
    *

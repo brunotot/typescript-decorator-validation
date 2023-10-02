@@ -9,14 +9,14 @@ namespace UseFormHook {
   /**
    * Configuration options for the `useForm` hook.
    */
-  export type UseFormConfig<TClass, TBody = TClass> = {
-    defaultValue?: TBody;
+  export type UseFormConfig<TClass> = {
+    defaultValue?: TdvCore.Helper.Payload<TClass>;
     validationGroups?: TdvCore.Validation.Group[];
     validateImmediately?: boolean;
     standalone?: boolean;
     onSubmit?: () => Promise<void> | void;
     onSubmitValidationFail?: (
-      errors: TdvCore.EvaluatedStrategyFactory.Errors<TClass>
+      errors: TdvCore.StrategyFactory.Impl.Errors<TClass>
     ) => void;
     onChange?: () => void;
   };
@@ -24,24 +24,26 @@ namespace UseFormHook {
   /**
    * Data returned from the `useForm` hook.
    */
-  export type UseFormData<TClass, TBody = TClass> = {
+  export type UseFormData<TClass> = {
     isValid: boolean;
     isSubmitted: boolean;
     onSubmit: () => Promise<void>;
-    mutations: UseFormChangeHandlerMap<TBody>;
+    mutations: UseFormChangeHandlerMap<TdvCore.Helper.Payload<TClass>>;
     providerProps: Omit<FormContextNamespace.FormProviderProps, "children">;
-    errors: TdvCore.EvaluatedStrategyFactory.Errors<TClass>;
-    detailedErrors: TdvCore.EvaluatedStrategyFactory.DetailedErrors<TClass>;
-    reset: (...fieldPaths: PayloadFieldPath<TBody>[]) => void;
+    errors: TdvCore.StrategyFactory.Impl.Errors<TClass>;
+    detailedErrors: TdvCore.StrategyFactory.Impl.DetailedErrors<TClass>;
+    reset: (
+      ...fieldPaths: PayloadFieldPath<TdvCore.Helper.Payload<TClass>>[]
+    ) => void;
   };
 
   /**
    * Type of the value returned by the `useForm` hook.
    */
-  export type UseFormReturn<TClass, TBody = TClass> = readonly [
-    TBody,
-    Dispatch<SetStateAction<TBody>>,
-    UseFormData<TClass, TBody>
+  export type UseFormReturn<TClass> = readonly [
+    TdvCore.Helper.Payload<TClass>,
+    Dispatch<SetStateAction<TdvCore.Helper.Payload<TClass>>>,
+    UseFormData<TClass>
   ];
 
   /**

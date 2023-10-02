@@ -1,5 +1,5 @@
-import StrategyFactory from "../../engine/strategy/factory";
 import Localization from "../../localization";
+import Helper from "../../types/namespace/helper.namespace";
 import Validation from "../../types/namespace/validation.namespace";
 
 /**
@@ -60,7 +60,7 @@ namespace ReflectionRuleNamespace {
      */
     validate<TBody>(
       value: TFieldType,
-      payload: StrategyFactory.Impl.Payload<TBody>,
+      payload: Helper.Payload<TBody>,
       groups: Validation.Group[],
       locale: Localization.Locale
     ): Validation.Result[] {

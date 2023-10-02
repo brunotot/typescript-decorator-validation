@@ -1,6 +1,7 @@
 import CacheMap from "../../engine/models/cache.map";
 import StrategyFactory from "../../engine/strategy/factory";
 import Localization from "../../localization";
+import Helper from "./helper.namespace";
 import Validation from "./validation.namespace";
 
 /**
@@ -10,10 +11,10 @@ namespace ValidationEngineNs {
   /**
    * Configuration options for entity processing.
    *
-   * @typeParam TBody - The type of the default value.
+   * @typeParam TClass - The type of the default value.
    */
-  export type Config<TBody> = {
-    defaultValue?: TBody;
+  export type Config<TClass> = {
+    defaultValue?: Helper.Payload<TClass>;
     groups?: Validation.Group[];
     locale?: Localization.Locale;
   };
@@ -42,10 +43,10 @@ namespace ValidationEngineNs {
    * Cache object for storing entity validation results.
    *
    * @typeParam TClass - The type of the class being cached.
-   * @typeParam TBody - The type of the payload.
+   * @typeParam TClass - The type of the payload.
    */
-  export type Cache<TClass, TBody = TClass> = Result<TClass> & {
-    state: StrategyFactory.Impl.Payload<TBody>;
+  export type Cache<TClass> = Result<TClass> & {
+    state: Helper.Payload<TClass>;
   };
 
   /**
@@ -59,11 +60,11 @@ namespace ValidationEngineNs {
    * A map for storing entity validation results.
    *
    * @typeParam TClass - The type of the class being cached.
-   * @typeParam TBody - The type of the payload.
+   * @typeParam TClass - The type of the payload.
    */
-  export type CacheMap<TClass, TBody = TClass> = CacheMap.CacheMap<
+  export type CacheMap<TClass> = CacheMap.CacheMap<
     Result<TClass>,
-    StrategyFactory.Impl.Payload<TBody>
+    Helper.Payload<TClass>
   >;
 }
 
