@@ -31,7 +31,7 @@
 <li><a href="../modules/tdv_core.TdvCore.ValidationEngine.html">ValidationEngine</a></li>
 <li><a href="tdv_core.TdvCore.ValidationEngine.Config.html">Config</a></li></ul>
 <h1>Type alias Config&lt;TClass&gt;</h1></div>
-<div class="tsd-signature"><span class="tsd-kind-type-alias">Config</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">defaultValue</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.TdvCore.Helper.Payload.html" class="tsd-signature-type tsd-kind-type-alias">Payload</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">groups</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.TdvCore.Validation.Group.html" class="tsd-signature-type tsd-kind-type-alias">Group</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">locale</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.Localization.Locale.html" class="tsd-signature-type tsd-kind-type-alias">Locale</a><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-signature"><span class="tsd-kind-type-alias">Config</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">asyncDelay</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">defaultValue</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.TdvCore.Helper.Payload.html" class="tsd-signature-type tsd-kind-type-alias">Payload</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">groups</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.TdvCore.Validation.Group.html" class="tsd-signature-type tsd-kind-type-alias">Group</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">locale</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.Localization.Locale.html" class="tsd-signature-type tsd-kind-type-alias">Locale</a><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></div>
 <div class="tsd-comment tsd-typography"><p>Configuration options for entity processing.</p>
 </div>
 <section class="tsd-panel">
@@ -46,6 +46,8 @@
 <h4>Type declaration</h4>
 <ul class="tsd-parameters">
 <li class="tsd-parameter">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">async<wbr/>Delay</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li>
+<li class="tsd-parameter">
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">default<wbr/>Value</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.TdvCore.Helper.Payload.html" class="tsd-signature-type tsd-kind-type-alias">Payload</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">TClass</span><span class="tsd-signature-symbol">&gt;</span></h5></li>
 <li class="tsd-parameter">
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">groups</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.TdvCore.Validation.Group.html" class="tsd-signature-type tsd-kind-type-alias">Group</a><span class="tsd-signature-symbol">[]</span></h5></li>
@@ -53,7 +55,7 @@
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">locale</span><span class="tsd-signature-symbol">?: </span><a href="tdv_core.Localization.Locale.html" class="tsd-signature-type tsd-kind-type-alias">Locale</a></h5></li></ul></div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/30da69e/packages/core/src/types/namespace/validation-engine.namespace.ts#L16">src/types/namespace/validation-engine.namespace.ts:16</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/b5aee10/packages/core/src/types/namespace/validation-engine.namespace.ts#L16">src/types/namespace/validation-engine.namespace.ts:16</a></li></ul></aside></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -301,6 +303,8 @@
 <li><a href="tdv_core.TdvCore.Objects.Optional.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Optional
 <div class="menu-item-desc">A type that represents an optional value.</div></div></a></li>
+<li><a href="../functions/tdv_core.TdvCore.Objects.debounce.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>debounce</div></a></li>
 <li><a href="../functions/tdv_core.TdvCore.Objects.deepEquals.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>deep<wbr/>Equals
 <div class="menu-item-desc">Recursively checks if two values are deep equal.</div></div></a></li>
@@ -383,8 +387,7 @@
 <li><a href="tdv_core.TdvCore.Types.Class.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Class</div></a></li>
 <li><a href="tdv_core.TdvCore.Types.Function.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Function
-<div class="menu-item-desc">Represents the JavaScript `Function` type.</div></div></a></li>
+<div>Function</div></a></li>
 <li><a href="tdv_core.TdvCore.Types.Map.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Map</div></a></li>
 <li><a href="tdv_core.TdvCore.Types.Object.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
@@ -394,7 +397,9 @@
 <div>Primitive
 <div class="menu-item-desc">Represents primitive data types including `string`, `number`, `boolean`, `bigint`, `Date`, and custom primitives defined in `PrimitiveSetAppend`.</div></div></a></li>
 <li><a href="tdv_core.TdvCore.Types.UnwrapClass.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Unwrap<wbr/>Class</div></a></li></ul></div></details></li>
+<div>Unwrap<wbr/>Class</div></a></li>
+<li><a href="tdv_core.TdvCore.Types.UnwrapPromise.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<div>Unwrap<wbr/>Promise</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.TdvCore.Validation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.TdvCore.Validation.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Validation
@@ -428,9 +433,6 @@
 <li><a href="tdv_core.TdvCore.Validation.getStrategyResult.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>get<wbr/>Strategy<wbr/>Result
 <div class="menu-item-desc">A type that maps field types to their respective validation strategy results.</div></div></a></li>
-<li><a href="../functions/tdv_core.TdvCore.Validation.buildSimpleErrors.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>build<wbr/>Simple<wbr/>Errors
-<div class="menu-item-desc">Extracts simple error messages from an array of validation results.</div></div></a></li>
 <li><a href="../functions/tdv_core.TdvCore.Validation.isValid.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>is<wbr/>Valid
 <div class="menu-item-desc">Checks if a single result or an array of results indicates overall validity. Returns `true` if all results are valid, `false` otherwise.</div></div></a></li>
