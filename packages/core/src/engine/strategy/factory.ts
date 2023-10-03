@@ -40,9 +40,9 @@ namespace StrategyFactory {
     ? StrategyTypes.ObjectArrayGetter.handler<T, K, R>
    
     : true extends StrategyTypes.ObjectGetter.matches<T, K> 
-    ? StrategyTypes.Object.handler<T, K, R>
+    ? StrategyTypes.ObjectGetter.handler<T, K, R>
    
-    : true extends StrategyTypes.ObjectGetter.matches<T, K> 
+    : true extends StrategyTypes.Object.matches<T, K> 
     ? StrategyTypes.Object.handler<T, K, R>
   :never;
 
