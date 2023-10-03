@@ -1,6 +1,7 @@
 import Arrays from "./arrays.namespace";
 import Objects from "./objects.namespace";
 import Types from "./types.namespace";
+import Validation from "./validation.namespace";
 
 /**
  * A collection of type-level utility functions for checking various conditions.
@@ -36,7 +37,9 @@ namespace Condition {
    * @typeParam T - The type to check.
    */
   export type isFunction<T> = NonNullable<T> extends Types.Function
-    ? true
+    ? Types.UnwrapPromise<ReturnType<NonNullable<T>>> extends Validation.Result
+      ? true
+      : false
     : false;
 
   export type isGetter<T, K extends keyof T> = K extends Objects.Inputs<T>

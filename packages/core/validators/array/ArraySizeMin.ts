@@ -40,7 +40,7 @@ export default function ArraySizeMin<K, T extends K[]>(
           locale,
           "ArraySizeMin",
           min,
-          (array ?? []).length
+          String((array ?? []).length ?? "0")
         ),
         locale
       ),

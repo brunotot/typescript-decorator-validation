@@ -12,13 +12,13 @@ import ns from "./types";
  *
  * @extends ValidationStrategy<F, ObjectDetailedErrors<F>, ObjectSimpleErrors<F>>
  */
-export default class ObjectStrat<F> extends ValidationStrategy<
+export default class ObjectGetterStrat<F> extends ValidationStrategy<
   F,
   ns.DetailedErrors<F>,
   ns.SimpleErrors<F>
 > {
   /**
-   * Initializes the `ObjectStrat` class by calling the superclass constructor with the provided descriptor and default value.
+   * Initializes the `ObjectGetterStrat` class by calling the superclass constructor with the provided descriptor and default value.
    *
    * @param descriptor - The reflection descriptor for the field.
    * @param defaultValue - The default value for the parent object.

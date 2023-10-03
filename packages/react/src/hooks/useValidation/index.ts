@@ -43,6 +43,17 @@ export default function useValidation<TClass>(
   );
 
   useEffect(() => {
+    engine.registerAsync(({ errors, detailedErrors }) => {
+      setDetails(detailedErrors);
+      setSimpleErrors(errors);
+    });
+
+    return () => {
+      engine.unregisterAsync();
+    };
+  }, []);
+
+  useEffect(() => {
     const { errors, detailedErrors } = engine.validate(form!);
     setDetails(detailedErrors);
     setSimpleErrors(errors);

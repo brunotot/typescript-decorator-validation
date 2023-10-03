@@ -1,3 +1,4 @@
+import EventEmitter from "events";
 import Localization from "../../../../localization";
 import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
 import Validation from "../../../../types/namespace/validation.namespace";
@@ -24,9 +25,13 @@ export default class PrimitiveStrat<F> extends ValidationStrategy<
    */
   constructor(
     descriptor: ReflectionDescriptor.ReflectionDescriptor<F, any>,
-    defaultValue: F
+    defaultValue: F,
+    groups: Validation.Groups,
+    locale: Localization.Locale,
+    eventEmitter: EventEmitter,
+    asyncDelay: number
   ) {
-    super(descriptor, defaultValue);
+    super(descriptor, defaultValue, groups, locale, eventEmitter, asyncDelay);
   }
 
   /**
@@ -38,19 +43,8 @@ export default class PrimitiveStrat<F> extends ValidationStrategy<
    *
    * @returns A tuple containing an array of detailed validation results (`Validation.Result[]`) and an array of simplified error messages (`string[]`).
    */
-  test(
-    value: any,
-    context: any,
-    groups: Validation.Group[] = [],
-    locale: Localization.Locale
-  ): [ns.DetailedErrors, ns.SimpleErrors] {
-    const rootResult = this.fieldDescriptor!.rules.root.validate(
-      value,
-      context,
-      groups,
-      locale
-    );
-
-    return [rootResult, Validation.buildSimpleErrors(rootResult)];
+  test(value: any, context: any): [ns.DetailedErrors, ns.SimpleErrors] {
+    const root = this.getRootErrors(value, context);
+    return [root, this.getErrorMessages(root)];
   }
 }

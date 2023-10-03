@@ -11,15 +11,15 @@ import ns from "./types";
  *
  * @typeParam F - The type of the field being validated, which is expected to be an array of objects.
  *
- * @extends ValidationStrategy<F, ObjectArrayDetailedErrors<F>, ObjectArraySimpleErrors<F>>
+ * @extends ValidationStrategy<F, ObjectArrayGetterDetailedErrors<F>, ObjectArrayGetterSimpleErrors<F>>
  */
-export default class ObjectArrayStrategy<F> extends ValidationStrategy<
+export default class ObjectArrayGetterStrategy<F> extends ValidationStrategy<
   F,
   ns.DetailedErrors<F>,
   ns.SimpleErrors<F>
 > {
   /**
-   * Initializes the `ObjectArrayStrategy` class by calling the superclass constructor with the provided descriptor and default value.
+   * Initializes the `ObjectArrayGetterStrategy` class by calling the superclass constructor with the provided descriptor and default value.
    *
    * @param descriptor - The reflection descriptor for the field.
    * @param defaultValue - The default value for the parent object.
@@ -42,7 +42,7 @@ export default class ObjectArrayStrategy<F> extends ValidationStrategy<
    * @param context - The context in which the validation is taking place.
    * @param groups - Optional validation groups to consider during validation.
    *
-   * @returns A tuple containing `ObjectArrayDetailedErrors<F>` and `ObjectArraySimpleErrors<F>`.
+   * @returns A tuple containing `ObjectArrayGetterDetailedErrors<F>` and `ObjectArrayGetterSimpleErrors<F>`.
    *
    * @remarks
    * The method validates both the array as a whole (`field`) and each individual object (`data`)

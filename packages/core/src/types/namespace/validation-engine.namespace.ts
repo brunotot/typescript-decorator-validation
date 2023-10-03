@@ -17,6 +17,7 @@ namespace ValidationEngineNs {
     defaultValue?: Helper.Payload<TClass>;
     groups?: Validation.Group[];
     locale?: Localization.Locale;
+    asyncDelay?: number;
   };
 
   /**

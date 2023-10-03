@@ -99,16 +99,6 @@ namespace Validation {
   }
 
   /**
-   * Extracts simple error messages from an array of validation results.
-   */
-  export function buildSimpleErrors(validations: Validation.Result[] = []) {
-    const nonNullableValidations = validations ?? [];
-    return Array.isArray(nonNullableValidations)
-      ? nonNullableValidations.map((e) => e.message)
-      : [];
-  }
-
-  /**
    * Evaluates the validity of a nullable value.
    *
    * @typeParam T - The type of the value being validated.

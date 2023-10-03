@@ -7,7 +7,7 @@ namespace Types {
   /**
    * Represents the JavaScript `Function` type.
    */
-  export type Function = globalThis.Function;
+  export type Function = () => any;
 
   /**
    * Represents the generic `object` type.
@@ -53,6 +53,8 @@ namespace Types {
    * ```
    */
   export type Class<T> = { new (...args: any[]): T };
+
+  export type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
 
   export type UnwrapClass<T> = T extends Types.Class<infer U> ? U : never;
 }

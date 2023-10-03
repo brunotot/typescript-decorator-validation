@@ -55,7 +55,8 @@ namespace CacheMap {
      *
      * @returns The updated cache object.
      */
-    patch(partialCache: Partial<CacheValue>, payload: Payload): CacheValue {
+    patch(partialCache: Partial<CacheValue>, _payload?: Payload): CacheValue {
+      const payload = _payload ?? this.#payload;
       this.#payload = payload;
       Object.entries(partialCache).forEach(
         ([key, value]) => ((this.#cache as any)[key] = value)

@@ -10,15 +10,15 @@ import ns from "./types";
  *
  * @typeParam F - The type of the field being validated, which is expected to be an array of primitives.
  *
- * @extends ValidationStrategy<F, PrimitiveArrayDetailedErrors, PrimitiveArraySimpleErrors>
+ * @extends ValidationStrategy<F, PrimitiveArrayGetterDetailedErrors, PrimitiveArrayGetterSimpleErrors>
  */
-export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
+export default class PrimitiveArrayGetterStrat<F> extends ValidationStrategy<
   F,
   ns.DetailedErrors,
   ns.SimpleErrors
 > {
   /**
-   * Initializes the `PrimitiveArrayStrat` class by calling the superclass constructor with the provided descriptor and default value.
+   * Initializes the `PrimitiveArrayGetterStrat` class by calling the superclass constructor with the provided descriptor and default value.
    *
    * @param descriptor - The reflection descriptor for the field.
    * @param defaultValue - The default value for the parent object.
@@ -41,7 +41,7 @@ export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
    * @param context - The context in which the validation is taking place.
    * @param groups - Optional validation groups to consider during validation.
    *
-   * @returns A tuple containing `PrimitiveArrayDetailedErrors` and `PrimitiveArraySimpleErrors`.
+   * @returns A tuple containing `PrimitiveArrayGetterDetailedErrors` and `PrimitiveArrayGetterSimpleErrors`.
    *
    * @remarks
    * The method validates both the array as a whole (`node`) and each individual element (`children`)

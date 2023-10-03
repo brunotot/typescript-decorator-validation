@@ -1,5 +1,6 @@
 import ValidationEngine from "../src/engine";
-import ClassValidatorService from "../src/reflection/service/impl/ClassValidatorMetaService";
+import Helper from "../src/types/namespace/helper.namespace";
+import Validation from "../src/types/namespace/validation.namespace";
 import ValidDateRange from "../validators/class/ValidDateRange";
 import decorate from "../validators/index";
 class AddressForm {
@@ -62,9 +63,23 @@ class JobApplicationForm {
 
   @decorate.any.Required()
   coverLetter!: string;
+
+  async isCompoundValid(): Promise<Validation.Result> {
+    return new Promise((resolve) => {
+      setTimeout(
+        () =>
+          resolve({
+            key: "",
+            message: "Full name must be minimally 8 characters long.",
+            valid: this.fullName.length > 8,
+          }),
+        3000
+      );
+    });
+  }
 }
 
-const jobApplicationForm: JobApplicationForm = {
+const jobApplicationForm: Helper.Payload<JobApplicationForm> = {
   fullName: "Bruno123", // Alpha validation will fail
   email: "bruno-email", // Email validation will fail
   phoneNumber: "+38512345678",
@@ -89,16 +104,10 @@ const jobApplicationForm: JobApplicationForm = {
   coverLetter: "I'm passionate about coding...",
 };
 
-// @valid !!!
-// also add for nested
-
 const engine = new ValidationEngine(JobApplicationForm);
+/*engine.registerAsync(({ detailedErrors, errors }) => {
+  console.log(errors);
+});*/
 const result = engine.validate(jobApplicationForm);
-
-result.errors.address;
-
-console.log(JSON.stringify(result, null, 2));
-//result.errors.address?.
-const classValidatorService = ClassValidatorService.inject(EducationForm);
-//console.log(classValidatorService);
+console.log(result.errors);
 debugger;

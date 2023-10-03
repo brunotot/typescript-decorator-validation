@@ -1,7 +1,7 @@
 import Decorator from "../decorators";
+import ReflectionStrategyNamespace from "../engine/models/reflection.strategy";
 import Types from "../types/namespace/types.namespace";
 import ReflectionRuleNamespace from "./models/reflection.rule";
-import ReflectionStrategyNamespace from "./models/reflection.strategy";
 
 /**
  * A namespace which holds data related to reading and manipulating metadata through reflection
@@ -58,7 +58,7 @@ namespace Reflection {
       strategy[Symbol.metadata] ??= {};
       return strategy[Symbol.metadata]!;
     }
-    if (!strategy.metadata) {
+    if (strategy && !strategy.metadata) {
       (strategy as any).metadata = {};
     }
     return strategy?.metadata;

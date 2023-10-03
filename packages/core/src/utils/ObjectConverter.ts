@@ -3,14 +3,14 @@ import Helper from "../types/namespace/helper.namespace";
 import Types from "../types/namespace/types.namespace";
 
 namespace ObjectConverter {
-  function _toClass<const TClass extends Types.Class<any>>(
-    clazz: TClass,
-    object?: Helper.Payload<Types.UnwrapClass<TClass>> | Types.Array
-  ): Types.UnwrapClass<TClass> {
+  function _toClass<const TConstructor extends Types.Class<any>>(
+    clazz: TConstructor,
+    object?: Helper.Payload<Types.UnwrapClass<TConstructor>> | Types.Array
+  ): Types.UnwrapClass<TConstructor> {
     if (Array.isArray(object)) {
       return object.map((item) =>
         _toClass(clazz, item)
-      ) as Types.UnwrapClass<TClass>;
+      ) as Types.UnwrapClass<TConstructor>;
     }
 
     const entries = Object.entries<any>(object ?? {});
@@ -28,6 +28,10 @@ namespace ObjectConverter {
       } else {
         data[key] = value;
       }
+    }
+
+    if (!clazz) {
+      console.log(clazz, object);
     }
 
     const instance = new clazz();

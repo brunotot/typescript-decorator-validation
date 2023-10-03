@@ -1,9 +1,10 @@
 import Condition from "../../../../types/namespace/condition.namespace";
 import Validation from "../../../../types/namespace/validation.namespace";
 import StrategyFactory from "../../factory";
+import ObjectStrategyType from "../ObjectStrategy/types";
 
-namespace ObjectStrategyType {
-  export const Name = "composite" as const;
+namespace ObjectGetterStrategyType {
+  export const Name = `(): ${ObjectStrategyType.Name}` as const;
 
   /**
    * Represents the simplified error structure for validating object types.
@@ -34,8 +35,8 @@ namespace ObjectStrategyType {
   // prettier-ignore
   export type matches<T, K extends keyof T> = 
     true extends Condition.isGetter<T, K>
-      ? false
-  : Condition.isObject<T[K]>;
+      ? Condition.isObject<T[K]>
+      : false
 
   // prettier-ignore
   export type handler<T, K extends keyof T, R> = 
@@ -44,4 +45,4 @@ namespace ObjectStrategyType {
   : { root: R; data: StrategyFactory.evaluate<T[K], R> };
 }
 
-export default ObjectStrategyType;
+export default ObjectGetterStrategyType;

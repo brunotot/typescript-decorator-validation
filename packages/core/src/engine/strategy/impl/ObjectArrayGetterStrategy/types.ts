@@ -4,8 +4,8 @@ import Validation from "../../../../types/namespace/validation.namespace";
 import StrategyFactory from "../../factory";
 import ObjectStrategyType from "../ObjectStrategy/types";
 
-namespace ObjectArrayStrategyType {
-  export const Name = "composite[]" as const;
+namespace ObjectArrayGetterStrategyType {
+  export const Name = `() => ${ObjectStrategyType.Name}[]` as const;
 
   /**
    * Represents the simplified error structure for validating arrays of object types.
@@ -34,15 +34,15 @@ namespace ObjectArrayStrategyType {
   };
 
   // prettier-ignore
-  export type matches<T, K extends keyof T> = 
-    Arrays.getArrayType<NonNullable<T[K]>> extends never
-      ? false
-    : true extends Condition.isGetter<T, K>
-      ? false
-  : Condition.isObject<Arrays.getArrayType<NonNullable<T[K]>>>;
+  export type matches<T, K extends keyof T> =
+    true extends Condition.isGetter<T, K>
+      ? Arrays.getArrayType<NonNullable<T[K]>> extends never
+        ? false
+        : Condition.isObject<Arrays.getArrayType<NonNullable<T[K]>>>
+      : false;
 
   // prettier-ignore
   export type handler<T, K extends keyof T, R> = ObjectStrategyType.handler<T, K, R>[]
 }
 
-export default ObjectArrayStrategyType;
+export default ObjectArrayGetterStrategyType;

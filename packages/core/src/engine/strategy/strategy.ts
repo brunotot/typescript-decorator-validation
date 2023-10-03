@@ -1,5 +1,9 @@
+import EventEmitter from "events";
+import ValidationEngine from "..";
 import Localization from "../../localization";
+import Reflection from "../../reflection";
 import ReflectionDescriptor from "../../reflection/models/reflection.descriptor";
+import ClassValidatorMetaService from "../../reflection/service/impl/ClassValidatorMetaService";
 import ValidationConfigurer from "../../reflection/service/impl/FieldValidatorMetaService";
 import ValidationEngineNs from "../../types/namespace/validation-engine.namespace";
 import Validation from "../../types/namespace/validation.namespace";
@@ -7,29 +11,23 @@ import Validation from "../../types/namespace/validation.namespace";
 /**
  * The `ValidationStrategy` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.
  *
- * @typeParam TFieldType The type of the field being validated.
+ * @typeParam TClass The type of the field being validated.
  * @typeParam TDetailedResult The detailed result of the validation.
  * @typeParam TSimpleResult A simplified version of the validation result.
  */
 export default abstract class ValidationStrategy<
-  TFieldType = any,
+  TClass = any,
   TDetailedResult = any,
   TSimpleResult = any
 > {
-  /**
-   * The reflection descriptor for the field.
-   */
+  #locale: Localization.Locale;
+  #groups: Validation.Groups;
+  #engineCfg: ValidationEngineNs.Config<any>;
+  #classRules: Reflection.Rule<TClass>;
   #descriptor: ReflectionDescriptor.ReflectionDescriptor<any, any>;
-
-  /**
-   * The default value for the parent object.
-   */
-  #defaultParent: TFieldType;
-
-  /**
-   * A specific descriptor for the field, lazy-loaded.
-   */
-  #fieldDescriptor?: ReflectionDescriptor.ReflectionDescriptor<TFieldType, any>;
+  #defaultParent: TClass;
+  #fieldDescriptor?: ReflectionDescriptor.ReflectionDescriptor<TClass, any>;
+  #eventEmitter: EventEmitter;
 
   /**
    * Initializes the `#descriptor` and `#defaultParent` fields.
@@ -38,20 +36,52 @@ export default abstract class ValidationStrategy<
    * @param defaultValue The default value for the parent object.
    */
   constructor(
-    descriptor: ReflectionDescriptor.ReflectionDescriptor<TFieldType, any>,
-    defaultValue: TFieldType
+    descriptor: ReflectionDescriptor.ReflectionDescriptor<TClass, any>,
+    defaultValue: TClass,
+    groups: Validation.Groups,
+    locale: Localization.Locale,
+    eventEmitter: EventEmitter,
+    asyncDelay: number
   ) {
+    this.#eventEmitter = eventEmitter;
     this.#descriptor = descriptor;
     this.#defaultParent = defaultValue;
+    this.#groups = groups;
+    this.#locale = locale;
+    this.#engineCfg = {
+      defaultValue: this.defaultValue,
+      groups: this.groups,
+      asyncDelay,
+    };
+    const host = descriptor.hostClass!;
+    this.#classRules = ClassValidatorMetaService.inject(host).data;
   }
 
-  protected getValidationEngineConfig(
-    groups: Validation.Group[]
-  ): ValidationEngineNs.Config<TFieldType> {
-    return {
-      defaultValue: this.defaultValue,
-      groups,
-    };
+  protected get eventEmitter(): EventEmitter {
+    return this.#eventEmitter;
+  }
+
+  protected get fieldEngine(): ValidationEngine<TClass> {
+    return new ValidationEngine<TClass>(
+      this.#descriptor.thisClass!,
+      this.engineCfg
+    );
+  }
+
+  protected get engineCfg() {
+    return this.#engineCfg;
+  }
+
+  protected get classRules(): Reflection.Rule<TClass> {
+    return this.#classRules;
+  }
+
+  protected get groups(): Validation.Groups {
+    return this.#groups;
+  }
+
+  protected get locale(): Localization.Locale {
+    return this.#locale;
   }
 
   /**
@@ -64,7 +94,7 @@ export default abstract class ValidationStrategy<
   protected get fieldDescriptor() {
     if (this.#fieldDescriptor) return this.#fieldDescriptor;
     this.#fieldDescriptor = ValidationConfigurer.inject(
-      this.descriptor.hostClass!
+      this.#descriptor.hostClass!
     ).getUntypedDescriptor(this.fieldName);
     return this.#fieldDescriptor;
   }
@@ -75,7 +105,7 @@ export default abstract class ValidationStrategy<
    * @returns The name of the field.
    */
   protected get fieldName() {
-    return this.descriptor.thisName!;
+    return this.#descriptor.thisName!;
   }
 
   /**
@@ -84,34 +114,41 @@ export default abstract class ValidationStrategy<
    * @returns The default value of the field.
    */
   protected get defaultValue() {
-    return this.defaultParent?.[this.fieldName];
+    return (this.#defaultParent as any)?.[this.fieldName];
   }
 
-  /**
-   * Gets the host class from the descriptor.
-   *
-   * @returns The host class of the field.
-   */
-  protected get class() {
-    return this.descriptor.hostClass!;
+  protected getErrorMessages(validations: Validation.Result[] = []) {
+    const nonNullableValidations = validations ?? [];
+    return Array.isArray(nonNullableValidations)
+      ? nonNullableValidations.map((e) => e.message)
+      : [];
   }
 
-  /**
-   * Gets the default parent object.
-   *
-   * @returns The default parent object.
-   */
-  protected get defaultParent() {
-    return this.#defaultParent as any;
+  protected getClassErrors(fieldValue: any, parentValue: any) {
+    return this.classRules.validate(
+      fieldValue,
+      parentValue,
+      this.groups,
+      this.locale
+    );
   }
 
-  /**
-   * Gets the reflection descriptor.
-   *
-   * @returns The reflection descriptor for the field.
-   */
-  protected get descriptor() {
-    return this.#descriptor;
+  protected getRootErrors(fieldValue: any, parentValue: any) {
+    return this.fieldDescriptor.rules.root.validate(
+      fieldValue,
+      parentValue,
+      this.groups,
+      this.locale
+    );
+  }
+
+  protected getArrayItemErrors(arrayItem: any, parentValue: any) {
+    return this.fieldDescriptor!.rules.foreach.validate(
+      arrayItem,
+      parentValue,
+      this.groups,
+      this.locale
+    );
   }
 
   /**
@@ -127,10 +164,5 @@ export default abstract class ValidationStrategy<
    * It returns a tuple where the first element is the detailed validation result and the second element is
    * the simplified validation result.
    */
-  public abstract test(
-    value: any,
-    context: any,
-    groups: Validation.Group[],
-    locale: Localization.Locale
-  ): [TDetailedResult, TSimpleResult];
+  abstract test(value: any, context: any): [TDetailedResult, TSimpleResult];
 }

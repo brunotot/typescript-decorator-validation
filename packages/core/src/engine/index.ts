@@ -1,14 +1,27 @@
+import { EventEmitter } from "events";
 import Localization from "../localization";
-import ClassValidatorMetaService from "../reflection/service/impl/ClassValidatorMetaService";
 import FieldValidatorMetaService from "../reflection/service/impl/FieldValidatorMetaService";
 import $ from "../types/index";
 import Helper from "../types/namespace/helper.namespace";
+import Objects from "../types/namespace/objects.namespace";
 import Types from "../types/namespace/types.namespace";
 import ns from "../types/namespace/validation-engine.namespace";
 import Validation from "../types/namespace/validation.namespace";
 import ObjectConverter from "../utils/ObjectConverter";
 import CacheMap from "./models/cache.map";
 import StrategyFactory from "./strategy/factory";
+
+type AsyncEventResponseProps<TClass> = {
+  errors: StrategyFactory.Impl.Errors<TClass>;
+  detailedErrors: StrategyFactory.Impl.DetailedErrors<TClass>;
+};
+
+type AsyncEventHandlerProps<TClass> = {
+  key: keyof TClass;
+  value: Validation.Result;
+};
+
+type AsyncEventHandler<TClass> = (data: AsyncEventHandlerProps<TClass>) => void;
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
@@ -23,12 +36,17 @@ import StrategyFactory from "./strategy/factory";
  * It also leverages `FieldValidatorMetaService` to retrieve metadata about the class being processed.
  */
 export default class ValidationEngine<TClass> {
+  #eventListener!: AsyncEventHandler<TClass>;
+  #eventEmitter: EventEmitter;
   #fieldValidatorMetaService: FieldValidatorMetaService;
-  #classValidatorMetaService: ClassValidatorMetaService<Types.Class<TClass>>;
   #groups: Validation.Group[];
   #hostDefault: Helper.Payload<TClass>;
   #cacheMap: ns.CacheMap<TClass>;
+  #hostClass: Types.Class<TClass>;
   locale: Localization.Locale;
+  #asyncDelay: number;
+  #debounceMap: { [key in keyof TClass]: ReturnType<typeof Objects.debounce> } =
+    {} as any;
 
   /**
    * Constructs a new `ValidationEngine` instance.
@@ -37,18 +55,55 @@ export default class ValidationEngine<TClass> {
    * @param config - Optional configuration settings.
    */
   constructor(clazz: Types.Class<TClass>, config?: ns.Config<TClass>) {
+    this.#asyncDelay = config?.asyncDelay ?? 300;
+    this.#eventEmitter = new EventEmitter();
+    this.#hostClass = clazz;
     this.locale = config?.locale ?? Localization.getLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
     this.#hostDefault =
       config?.defaultValue ??
       (ObjectConverter.toClass(clazz) as Helper.Payload<TClass>);
     this.#fieldValidatorMetaService = FieldValidatorMetaService.inject(clazz);
-    this.#classValidatorMetaService = ClassValidatorMetaService.inject(
-      clazz
-    ) as any;
     this.#cacheMap = new CacheMap.CacheMap(
       (state) => this.validate.bind(this)(state) as ns.Result<TClass>
     );
+  }
+
+  public registerAsync(
+    handler: (props: AsyncEventResponseProps<TClass>) => void
+  ): void {
+    this.unregisterAsync();
+    this.#eventListener = ({ key, value }: AsyncEventHandlerProps<TClass>) => {
+      const { valid } = value;
+      const currentError: any = this.#cacheMap.get("errors");
+      const currentDetailedError: any = this.#cacheMap.get("detailedErrors");
+
+      if (valid) {
+        currentDetailedError[key] = null;
+        currentError[key] = null;
+      } else {
+        currentDetailedError[key] = value;
+        currentError[key] = value.message;
+      }
+
+      const patched = this.#cacheMap.patch({
+        valid,
+        detailedErrors: currentDetailedError,
+        errors: currentError,
+      });
+
+      handler({
+        errors: patched.errors,
+        detailedErrors: patched.detailedErrors,
+      });
+    };
+    this.#eventEmitter.on("asyncValidationComplete", this.#eventListener);
+  }
+
+  public unregisterAsync(): void {
+    if (!!this.#eventListener) {
+      this.#eventEmitter.off("asyncValidationComplete", this.#eventListener);
+    }
   }
 
   /**
@@ -124,23 +179,13 @@ export default class ValidationEngine<TClass> {
    * ```
    */
   public validate(payload?: Helper.Payload<TClass>): ns.Result<TClass> {
-    const state = ObjectConverter.toClass(
-      this.#fieldValidatorMetaService.class,
+    const state: Helper.Payload<TClass> = ObjectConverter.toClass(
+      this.#hostClass,
       payload
-    );
+    ) as any;
 
     const errors: any = {};
     const detailedErrors: any = {};
-
-    const classValidatorResults = this.#classValidatorMetaService.data.validate(
-      state,
-      state,
-      this.#groups,
-      this.locale
-    );
-
-    console.log(classValidatorResults);
-    debugger;
 
     this.#fieldValidatorMetaService.getFields().forEach((field) => {
       const validation = this.validateField(state, field as keyof TClass);
@@ -171,9 +216,31 @@ export default class ValidationEngine<TClass> {
   // prettier-ignore
   validateField<K extends keyof TClass>(payload: any, fieldName: K): Validation.getStrategyResult<TClass[K]> {
     const descriptor = this.#fieldValidatorMetaService.getUntypedDescriptor(fieldName);
-    const StrategyImpl: Validation.getStrategyResult<TClass[K]> = descriptor.StrategyImpl as any;
-    const stratImpl = new (StrategyImpl as any)(descriptor, this.#hostDefault);
-    const result = stratImpl.test(payload?.[fieldName], payload, this.#groups, this.locale);
-    return result;
+    const stratImpl = new descriptor.StrategyImpl(
+      descriptor, 
+      this.#hostDefault, 
+      this.#groups, 
+      this.locale,
+      this.#eventEmitter
+    );
+
+    if (descriptor.strategy === "function") {
+      if (!this.#debounceMap[fieldName]) {
+        this.#debounceMap[fieldName] = Objects.debounce((value: any, context: any) => {
+          stratImpl.test(value, context);
+        }, this.#asyncDelay);
+      }
+
+      this.#debounceMap[fieldName](payload[fieldName], payload);
+      
+      return [
+        this.#cacheMap.get("detailedErrors")?.[fieldName], 
+        this.#cacheMap.get("errors")?.[fieldName]
+      ] as Validation.getStrategyResult<TClass[K]>;
+    }
+
+
+    // @ts-expect-error
+    return stratImpl.test(payload[fieldName], payload);
   }
 }

@@ -1,6 +1,7 @@
 import EventEmitter from "events";
 import Localization from "../../../../localization";
 import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
+import Types from "../../../../types/namespace/types.namespace";
 import Validation from "../../../../types/namespace/validation.namespace";
 import ValidationStrategy from "../../strategy";
 import ns from "./types";
@@ -12,13 +13,15 @@ import ns from "./types";
  *
  * @extends ValidationStrategy<F, Validation.Result[], string[]>
  */
-export default class PrimitiveGetterStrat<F> extends ValidationStrategy<
+export default class FunctionStrat<F> extends ValidationStrategy<
   F,
   ns.DetailedErrors,
   ns.SimpleErrors
 > {
+  private static EMPTY: [ns.DetailedErrors, ns.SimpleErrors] = [null, null];
+
   /**
-   * Initializes the `PrimitiveGetterStrat` class by calling the superclass constructor with the provided descriptor and default value.
+   * Initializes the `FunctionStrat` class by calling the superclass constructor with the provided descriptor and default value.
    *
    * @param descriptor - The reflection descriptor for the field.
    * @param defaultValue - The default value for the parent object.
@@ -42,8 +45,21 @@ export default class PrimitiveGetterStrat<F> extends ValidationStrategy<
    *
    * @returns A tuple containing an array of detailed validation results (`Validation.Result[]`) and an array of simplified error messages (`string[]`).
    */
-  test(value: any, context: any): [ns.DetailedErrors, ns.SimpleErrors] {
-    const root = this.getRootErrors(value, context);
-    return [root, this.getErrorMessages(root)];
+  test(
+    value: Types.Function,
+    _context: any
+  ): [ns.DetailedErrors, ns.SimpleErrors] {
+    const result: Validation.Result | Promise<Validation.Result> = value();
+    if (result instanceof Promise) {
+      result.then((validationResult) => {
+        this.eventEmitter.emit("asyncValidationComplete", {
+          key: this.fieldName,
+          value: validationResult,
+        });
+      });
+      return FunctionStrat.EMPTY;
+    }
+
+    return !!result.valid ? FunctionStrat.EMPTY : [result, result.message];
   }
 }

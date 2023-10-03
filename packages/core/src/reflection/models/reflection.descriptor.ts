@@ -137,11 +137,18 @@ namespace ReflectionDescriptor {
       const instance = new this.hostClass!();
       const fieldName = this.thisName!;
 
-      const getNativeStrategy = (value: unknown) => {
+      const getNativeStrategy = (value: any) => {
         const meta = ValidationConfigurer.inject(this.hostClass!);
         const descriptor = meta.getTypedDescriptor<HostClass, keyof HostClass>(
           this.thisName!
         );
+
+        if (
+          value instanceof Promise ||
+          (value && "key" in value && "valid" in value && "message" in value)
+        ) {
+          return Reflection.Strategy.ReflectionStrategy.function;
+        }
 
         return Array.isArray(value)
           ? descriptor.thisClass
@@ -160,19 +167,17 @@ namespace ReflectionDescriptor {
 
       if (isGetter) {
         const value = descriptor.get!.call(instance);
-        return typeof value === "function"
-          ? `() => ${getNativeStrategy(value())}`
-          : `get (): ${getNativeStrategy(value)}`;
+        return `get (): ${getNativeStrategy(value)}` as any;
       }
 
       const value = instance[fieldName];
 
       // Check if the field is a function
       if (typeof value === "function") {
-        return `() => ${getNativeStrategy(value())}`;
+        return getNativeStrategy(value());
       }
 
-      return getNativeStrategy(instance[fieldName]);
+      return getNativeStrategy(value);
     }
   }
 }
