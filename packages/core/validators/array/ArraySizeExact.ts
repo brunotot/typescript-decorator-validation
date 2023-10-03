@@ -32,7 +32,7 @@ export default function ArraySizeExact<K, T extends K[]>(
   const exact = typeof props === "number" ? props : props.value;
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (array, _, locale) => ({
+    validate: (array, _, locale) => ({
       key: "ArraySizeExact",
       message: Decorator.message(
         props,

@@ -1,7 +1,6 @@
 import EventEmitter from "events";
 import Localization from "../../../../localization";
 import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
-import Validation from "../../../../types/namespace/validation.namespace";
 import ValidationStrategy from "../../strategy";
 import ObjectStrat from "../ObjectStrategy";
 import ns from "./types";
@@ -27,7 +26,7 @@ export default class ObjectArrayGetterStrategy<F> extends ValidationStrategy<
   constructor(
     descriptor: ReflectionDescriptor.ReflectionDescriptor<F, any>,
     defaultValue: F,
-    groups: Validation.Groups,
+    groups: string[],
     locale: Localization.Locale,
     eventEmitter: EventEmitter,
     asyncDelay: number

@@ -33,7 +33,7 @@ export default function Positive<T extends $.Objects.Optional<number>>(
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (num, _, locale) => ({
+    validate: (num, _, locale) => ({
       key: "Positive",
       message: Decorator.message(
         props,

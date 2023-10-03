@@ -2,7 +2,6 @@ import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
-import Validation from "../../src/types/namespace/validation.namespace";
 
 /**
  * Decorator for validating if a date is in the future.
@@ -25,17 +24,14 @@ export default function FutureDate<T extends $.Objects.Optional<Date>>(
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (date, _context, locale) => ({
+    validate: (date, _context, locale) => ({
       key: "FutureDate",
       message: Decorator.message(
         props,
         TranslationService.translate(locale, "FutureDate", date!),
         locale
       ),
-      valid: Validation.isValidNullable(
-        date,
-        (d) => d.getTime() > new Date().getTime()
-      ),
+      valid: date && date.getTime() > new Date().getTime(),
     }),
   });
 }

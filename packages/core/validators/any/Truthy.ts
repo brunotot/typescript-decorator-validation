@@ -29,7 +29,7 @@ export default function Truthy<T extends $.Objects.Optional>(
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (value, _, locale) => ({
+    validate: (value, _, locale) => ({
       key: "Truthy",
       message: Decorator.message(
         props,

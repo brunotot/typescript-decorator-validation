@@ -11,7 +11,7 @@ namespace UseFormHook {
    */
   export type UseFormConfig<TClass> = {
     defaultValue?: TdvCore.Helper.Payload<TClass>;
-    validationGroups?: TdvCore.Validation.Group[];
+    validationGroups?: string[];
     validateImmediately?: boolean;
     standalone?: boolean;
     onSubmit?: () => Promise<void> | void;

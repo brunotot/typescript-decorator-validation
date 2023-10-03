@@ -33,7 +33,7 @@ export default function ArrayContains<K, T extends K[]>(
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (array, _, locale) => ({
+    validate: (array, _, locale) => ({
       key: "ArrayContains",
       message: Decorator.message(
         props,

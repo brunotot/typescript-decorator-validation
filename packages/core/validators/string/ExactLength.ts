@@ -35,7 +35,7 @@ export default function ExactLength<T extends $.Objects.Optional<string>>(
   const exact = typeof props === "number" ? props : props.value;
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (value, _, locale) => ({
+    validate: (value, _, locale) => ({
       key: "ExactLength",
       message: Decorator.message(
         props,

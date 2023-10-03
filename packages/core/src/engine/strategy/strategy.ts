@@ -21,7 +21,7 @@ export default abstract class ValidationStrategy<
   TSimpleResult = any
 > {
   #locale: Localization.Locale;
-  #groups: Validation.Groups;
+  #groups: string[];
   #engineCfg: ValidationEngineNs.Config<any>;
   #classRules: Reflection.Rule<TClass>;
   #descriptor: ReflectionDescriptor.ReflectionDescriptor<any, any>;
@@ -38,7 +38,7 @@ export default abstract class ValidationStrategy<
   constructor(
     descriptor: ReflectionDescriptor.ReflectionDescriptor<TClass, any>,
     defaultValue: TClass,
-    groups: Validation.Groups,
+    groups: string[],
     locale: Localization.Locale,
     eventEmitter: EventEmitter,
     asyncDelay: number
@@ -76,7 +76,7 @@ export default abstract class ValidationStrategy<
     return this.#classRules;
   }
 
-  protected get groups(): Validation.Groups {
+  protected get groups(): string[] {
     return this.#groups;
   }
 

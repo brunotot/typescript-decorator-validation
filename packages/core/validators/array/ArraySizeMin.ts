@@ -32,7 +32,7 @@ export default function ArraySizeMin<K, T extends K[]>(
   const min = typeof props === "number" ? props : props.value;
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (array, _, locale) => ({
+    validate: (array, _, locale) => ({
       key: "ArraySizeMin",
       message: Decorator.message(
         props,

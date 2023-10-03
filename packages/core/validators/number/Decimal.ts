@@ -24,7 +24,7 @@ export default function Decimal<T extends $.Objects.Optional<number>>(
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (value, _, locale) => ({
+    validate: (value, _, locale) => ({
       key: "Decimal",
       message: Decorator.message(
         props,

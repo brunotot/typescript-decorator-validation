@@ -45,7 +45,7 @@ export default class ClassValidatorMetaService<
    */
   addValidator(
     isValid: Validation.Evaluator<Types.UnwrapClass<TStrategy>>,
-    groups?: Validation.GroupsParam
+    groups?: string | string[]
   ) {
     this.data.add({
       validate: isValid,

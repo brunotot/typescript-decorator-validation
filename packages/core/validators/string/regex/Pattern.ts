@@ -43,12 +43,12 @@ export default function Pattern<T extends $.Objects.Optional<string>>(
     regex: RegExp;
     message: string;
     key?: string;
-    groups?: $.Validation.GroupsParam;
+    groups?: string | string[];
   }>
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props.groups),
-    isValid: (value, _, locale) => ({
+    validate: (value, _, locale) => ({
       key: props.key ?? "Pattern",
       message: Decorator.message(props, "", locale),
       valid: testRegex(props.regex, value),

@@ -26,7 +26,7 @@ export default class PrimitiveStrat<F> extends ValidationStrategy<
   constructor(
     descriptor: ReflectionDescriptor.ReflectionDescriptor<F, any>,
     defaultValue: F,
-    groups: Validation.Groups,
+    groups: string[],
     locale: Localization.Locale,
     eventEmitter: EventEmitter,
     asyncDelay: number

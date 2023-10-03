@@ -56,7 +56,7 @@ export default function ArrayUnique<K, T extends K[]>(
 
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (array, _, locale) => ({
+    validate: (array, _, locale) => ({
       key: "ArrayUnique",
       message: Decorator.message(
         props,

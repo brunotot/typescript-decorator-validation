@@ -40,7 +40,7 @@ export default function ValueMax<T extends $.Objects.Optional<number>>(
   const max = typeof props === "number" ? props : props.value;
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (value, _, locale) => ({
+    validate: (value, _, locale) => ({
       key: "ValueMax",
       message: Decorator.message(
         props,

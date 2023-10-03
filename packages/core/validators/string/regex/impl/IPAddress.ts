@@ -37,7 +37,7 @@ export default function IPAddress<T extends $.Objects.Optional<string>>(
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (value, _, locale) => ({
+    validate: (value, _, locale) => ({
       key: "IPAddress",
       message: Decorator.message(
         props,

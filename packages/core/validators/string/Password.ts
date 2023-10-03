@@ -3,7 +3,6 @@ import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldVali
 import Localization from "../../src/localization";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
-import Validation from "../../src/types/namespace/validation.namespace";
 import RegexConst from "../shared/regex.constants";
 
 const PASSWORD_REGEXES = {
@@ -56,7 +55,7 @@ export default function Password<T extends $.Objects.Optional<string>>(props?: {
   numbers: boolean;
   specials: boolean;
   length: number;
-  groups?: Validation.GroupsParam;
+  groups?: string | string[];
 }) {
   const lowercase = props?.lowercase ?? true;
   const uppercase = props?.uppercase ?? false;
@@ -108,6 +107,6 @@ export default function Password<T extends $.Objects.Optional<string>>(props?: {
 
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (str, _, locale) => isValid(str ?? "", locale),
+    validate: (str, _, locale) => isValid(str ?? "", locale),
   });
 }

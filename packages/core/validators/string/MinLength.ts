@@ -35,7 +35,7 @@ export default function MinLength<T extends $.Objects.Optional<string>>(
   const min = typeof props === "number" ? props : props.value;
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (value, _, locale) => ({
+    validate: (value, _, locale) => ({
       key: "MinLength",
       message: Decorator.message(
         props,

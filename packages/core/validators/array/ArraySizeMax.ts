@@ -32,7 +32,7 @@ export default function ArraySizeMax<K, T extends K[]>(
   const max = typeof props === "number" ? props : props.value;
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (array, _, locale) => ({
+    validate: (array, _, locale) => ({
       key: "ArraySizeMax",
       message: Decorator.message(
         props,

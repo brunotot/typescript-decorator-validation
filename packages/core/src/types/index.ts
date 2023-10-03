@@ -9,7 +9,6 @@ import ConditionNamespace from "./namespace/condition.namespace";
 import FactoryNamespace from "./namespace/factory.namespace";
 import HelperNamespace from "./namespace/helper.namespace";
 import ObjectsNamespace from "./namespace/objects.namespace";
-import ParamsNamespace from "./namespace/params.namespace";
 import TypesNamespace from "./namespace/types.namespace";
 import ValidationEngineNamespace from "./namespace/validation-engine.namespace";
 import ValidationNamespace from "./namespace/validation.namespace";
@@ -42,11 +41,6 @@ namespace Core {
    * The `Types` namespace defines common data types used throughout the application.
    */
   export import Types = TypesNamespace;
-
-  /**
-   * The `Params` namespace provides types related to function parameters.
-   */
-  export import Params = ParamsNamespace;
 
   /**
    * The `Validation` namespace provides utilities for data validation and validation-related types.

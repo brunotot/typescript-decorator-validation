@@ -46,7 +46,7 @@ export default class FieldValidatorMetaService extends AbstractMetaService<
   addValidator(
     field: string,
     isValid: Validation.Evaluator<any>,
-    groups?: Validation.GroupsParam
+    groups?: string | string[]
   ) {
     this.getUntypedDescriptor(field).rules.root.add({
       groups: Decorator.groups(groups),

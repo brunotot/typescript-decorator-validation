@@ -1,7 +1,6 @@
 import Localization from "../localization";
 import ValidationConfigurer from "../reflection/service/impl/FieldValidatorMetaService";
 import Objects from "../types/namespace/objects.namespace";
-import Validation from "../types/namespace/validation.namespace";
 import ValidatorServiceNs from "./kind/derived/FieldValidatorDecorator";
 /**
  * A collection of types and interfaces for creating and handling decorators.
@@ -58,7 +57,7 @@ namespace Decorator {
    * @typeParam T - The type of the object being decorated.
    */
   export type ImpartialProps<T extends object = {}> = T & {
-    groups?: Validation.GroupsParam;
+    groups?: string | string[];
     message: string;
   };
 
@@ -74,7 +73,7 @@ namespace Decorator {
     | (T & BaseProps);
 
   export type BaseProps = {
-    groups?: Validation.GroupsParam;
+    groups?: string | string[];
     message?: string;
   };
 
@@ -128,7 +127,7 @@ namespace Decorator {
    */
   export function groups<T extends object>(
     provider: Decorator.PartialProps<any, T>
-  ): Validation.Group[] {
+  ): string[] {
     return Array.isArray(provider)
       ? Objects.unique(provider)
       : typeof provider === "object"

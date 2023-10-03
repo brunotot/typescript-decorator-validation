@@ -29,13 +29,20 @@ const validate = <T>(
   props:
     | Validation.Evaluator<T>
     | {
-        isValid: Validation.Evaluator<T>;
-        groups?: Validation.GroupsParam;
+        validate: Validation.Evaluator<T>;
+        groups?: string | string[];
       }
 ) => {
   return FieldValidatorDecorator.build<T>({
-    isValid: "isValid" in props ? props.isValid : props,
-    groups: "isValid" in props ? props.groups : [],
+    validate: "validate" in props ? props.validate : props,
+    groups:
+      "groups" in props
+        ? Array.isArray(props.groups)
+          ? props.groups
+          : props.groups
+          ? [props.groups]
+          : []
+        : [],
   });
 };
 

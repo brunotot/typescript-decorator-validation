@@ -40,7 +40,7 @@ export default function Length<T extends $.Objects.Optional<string>>(
   const { min, max } = props;
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (value, _, locale) => ({
+    validate: (value, _, locale) => ({
       key: "Length",
       message: Decorator.message(
         props,

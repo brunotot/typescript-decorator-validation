@@ -15,9 +15,6 @@ namespace Arrays {
         : 1
       : 0;
 
-  // TODO
-  //! TODO: HIGHLIGHT TYPE TRANSFORMATION UTILS AND GENERIC TYPE UTILS - FEATURE!!
-
   export type setArrayDepth<
     T,
     N extends number,

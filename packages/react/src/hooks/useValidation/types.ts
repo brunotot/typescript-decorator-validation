@@ -29,7 +29,7 @@ namespace UseValidationHook {
    */
   export type UseValidationConfig<TClass> = {
     defaultValue?: TdvCore.Helper.Payload<TClass>;
-    groups?: TdvCore.Validation.Group[];
+    groups?: string[];
   };
 }
 

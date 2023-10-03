@@ -10,8 +10,8 @@ const POS_INFINITY = new Date(2099, 11, 31);
 type Type = $.Objects.Optional<Date>;
 const type = "Date";
 const identifier = "PastDate";
-const successData: Type[] = [NEG_INFINITY, undefined, null];
-const errorData: Type[] = [POS_INFINITY];
+const successData: Type[] = [NEG_INFINITY];
+const errorData: Type[] = [POS_INFINITY, undefined, null];
 
 /*** Model ***/
 class Model implements IMock<Type> {

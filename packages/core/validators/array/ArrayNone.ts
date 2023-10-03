@@ -28,7 +28,7 @@ export default function ArrayNone<K, T extends K[]>(
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (array, _, locale) => ({
+    validate: (array, _, locale) => ({
       key: "ArrayNone",
       message: Decorator.message(props, "", locale),
       valid: !(array ?? []).some(props.test),

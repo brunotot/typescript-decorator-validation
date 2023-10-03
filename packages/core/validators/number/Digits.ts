@@ -65,7 +65,7 @@ export default function Digits<T extends $.Objects.Optional<number>>(
   const { maxInteger = Infinity, maxFraction = Infinity } = props;
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (value, _, locale) => ({
+    validate: (value, _, locale) => ({
       key: "Digits",
       message: Decorator.message(
         props,

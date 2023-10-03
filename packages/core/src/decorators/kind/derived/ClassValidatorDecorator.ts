@@ -8,7 +8,7 @@ import ClassDecorator from "../ClassDecorator";
 
 namespace ClassValidatorDecorator {
   type Supplier<T extends ClassDecorator.Type> = {
-    groups?: Validation.GroupsParam;
+    groups?: string | string[];
     isValid: Evaluator<T>;
   };
 

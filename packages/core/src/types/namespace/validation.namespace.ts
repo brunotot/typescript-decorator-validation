@@ -1,29 +1,19 @@
+import FunctionStrat from "../../engine/strategy/impl/FunctionStrategy";
+import ObjectArrayGetterStrategy from "../../engine/strategy/impl/ObjectArrayGetterStrategy";
 import ObjectArrayStrat from "../../engine/strategy/impl/ObjectArrayStrategy";
+import ObjectGetterStrat from "../../engine/strategy/impl/ObjectGetterStrategy";
 import ObjectStrat from "../../engine/strategy/impl/ObjectStrategy";
+import PrimitiveArrayGetterStrat from "../../engine/strategy/impl/PrimitiveArrayGetterStrategy";
 import PrimitiveArrayStrat from "../../engine/strategy/impl/PrimitiveArrayStrategy";
+import PrimitiveGetterStrat from "../../engine/strategy/impl/PrimitiveGetterStrategy";
 import PrimitiveStrat from "../../engine/strategy/impl/PrimitiveStrategy";
+import StrategyTypes from "../../engine/strategy/types";
 import Localization from "../../localization";
-import $ from "../../types/index";
 
 /**
  * A collection of types and functions related to validation.
  */
 namespace Validation {
-  /**
-   * Represents a validation group, which can be a string, number, or symbol.
-   */
-  export type Group = string | number | symbol;
-
-  /**
-   * Represents an array of validation groups.
-   */
-  export type Groups = Validation.Group[];
-
-  /**
-   * Represents a parameter that can accept either a single validation group or an array of validation groups.
-   */
-  export type GroupsParam = Validation.Group | Validation.Groups;
-
   /**
    * Represents a function that evaluates a value and returns a validation result.
    *
@@ -33,7 +23,7 @@ namespace Validation {
     value: T,
     context: any,
     locale: Localization.Locale
-  ) => Validation.Result) & {};
+  ) => Result) & {};
 
   /**
    * Represents metadata for a validation rule, including the associated validation groups and the evaluator function.
@@ -41,8 +31,8 @@ namespace Validation {
    * @typeParam T - The type of the value being evaluated.
    */
   export type Metadata<T> = {
-    groups: Validation.Group[];
-    validate: Validation.Evaluator<T>;
+    groups: string[];
+    validate: Evaluator<T>;
   };
 
   /**
@@ -55,68 +45,48 @@ namespace Validation {
   };
 
   /**
-   * A type that maps field types to their respective validation strategy classes.
-   *
-   * @typeParam Field - The type of the field being validated.
-   */
-  export type getStrategyClass<Field> =
-    true extends $.Condition.isPrimitiveArray<Field>
-      ? PrimitiveArrayStrat<Field>
-      : true extends $.Condition.isObjectArray<Field>
-      ? ObjectArrayStrat<Field>
-      : true extends $.Condition.isPrimitive<Field>
-      ? PrimitiveStrat<Field>
-      : true extends $.Condition.isObject<Field>
-      ? ObjectStrat<Field>
-      : never;
-
-  /**
    * A type that maps field types to their respective validation strategy results.
    *
    * @typeParam Field - The type of the field being validated.
    */
-  export type getStrategyResult<Field> = ReturnType<
-    getStrategyClass<Field>["test"]
+  export type getStrategyResult<T, K extends keyof T> = ReturnType<
+    getStrategyClass<T, K>["test"]
   >;
 
   /**
-   * Represents a builder for creating validation rules with an associated evaluator and optional groups.
+   * A type that maps field types to their respective validation strategy classes.
    *
-   * @typeParam T - The type of the value being evaluated.
+   * @typeParam Field - The type of the field being validated.
    */
-  export type Builder<T> = {
-    groups?: Validation.GroupsParam;
-    isValid: Validation.Evaluator<T>;
-  };
+  // prettier-ignore
+  export type getStrategyClass<T, K extends keyof T> =
+    true extends StrategyTypes.Function.matches<T, K> 
+    ? FunctionStrat<T[K]>
+  
+    : true extends StrategyTypes.PrimitiveArray.matches<T, K> 
+    ? PrimitiveArrayStrat<T[K]>
 
-  /**
-   * Checks if a single result or an array of results indicates overall validity. Returns `true` if all results are valid, `false` otherwise.
-   */
-  export function isValid(validations: Result | Result[]): boolean {
-    return Array.isArray(validations)
-      ? !validations.some(({ valid }) => !valid)
-      : validations.valid;
-  }
+    : true extends StrategyTypes.PrimitiveGetter.matches<T, K> 
+    ? PrimitiveGetterStrat<T[K]>
 
-  /**
-   * Evaluates the validity of a nullable value.
-   *
-   * @typeParam T - The type of the value being validated.
-   *
-   * @param object - The value to validate.
-   * @param isValid - A function that performs the actual validation logic.
-   *
-   * @returns `true` if the value is null or undefined, or the result of `isValid` otherwise.
-   */
-  export function isValidNullable<T>(
-    nullableValue: T,
-    isValid: (nonNullableValue: NonNullable<T>) => boolean
-  ) {
-    return (
-      !$.Objects.hasValue(nullableValue) ||
-      isValid(nullableValue as NonNullable<T>)
-    );
-  }
+    : true extends StrategyTypes.PrimitiveArrayGetter.matches<T, K> 
+    ? PrimitiveArrayGetterStrat<T[K]>
+
+    : true extends StrategyTypes.Primitive.matches<T, K> 
+    ? PrimitiveStrat<T[K]>
+  
+    : true extends StrategyTypes.ObjectArray.matches<T, K> 
+    ? ObjectArrayStrat<T[K]>
+  
+    : true extends StrategyTypes.ObjectArrayGetter.matches<T, K> 
+    ? ObjectArrayGetterStrategy<T[K]>
+  
+    : true extends StrategyTypes.ObjectGetter.matches<T, K> 
+    ? ObjectGetterStrat<T[K]>
+  
+    : true extends StrategyTypes.Object.matches<T, K> 
+    ? ObjectStrat<T[K]>
+  :never;
 }
 
 export default Validation;

@@ -35,7 +35,7 @@ export default function MaxLength<T extends $.Objects.Optional<string>>(
   const max = typeof props === "number" ? props : props.value;
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (value, _, locale) => ({
+    validate: (value, _, locale) => ({
       key: "MaxLength",
       message: Decorator.message(
         props,

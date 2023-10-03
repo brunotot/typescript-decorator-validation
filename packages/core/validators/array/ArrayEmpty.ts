@@ -25,7 +25,7 @@ export default function ArrayEmpty<K, T extends K[]>(
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (array, _, locale) => ({
+    validate: (array, _, locale) => ({
       key: "ArrayEmpty",
       message: Decorator.message(
         props,

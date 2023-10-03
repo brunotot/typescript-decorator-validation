@@ -24,7 +24,7 @@ export default function Integer<T extends $.Objects.Optional<number>>(
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (num, _, locale) => ({
+    validate: (num, _, locale) => ({
       key: "Integer",
       message: Decorator.message(
         props,

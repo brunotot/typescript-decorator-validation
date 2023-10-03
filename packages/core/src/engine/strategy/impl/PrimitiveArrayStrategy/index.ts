@@ -1,7 +1,6 @@
 import EventEmitter from "events";
 import Localization from "../../../../localization";
 import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
-import Validation from "../../../../types/namespace/validation.namespace";
 import ValidationStrategy from "../../strategy";
 import ns from "./types";
 
@@ -26,7 +25,7 @@ export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
   constructor(
     descriptor: ReflectionDescriptor.ReflectionDescriptor<F, any>,
     defaultValue: F,
-    groups: Validation.Groups,
+    groups: string[],
     locale: Localization.Locale,
     eventEmitter: EventEmitter,
     asyncDelay: number
@@ -44,7 +43,7 @@ export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
    * @returns A tuple containing `PrimitiveArrayDetailedErrors` and `PrimitiveArraySimpleErrors`.
    *
    * @remarks
-   * The method validates both the array as a whole (`node`) and each individual element (`children`)
+   * The method validates both the array as a whole (`root`) and each individual element (`data`)
    * using the appropriate validation rules.
    */
   test(value: any[], context: any): [ns.DetailedErrors, ns.SimpleErrors] {
@@ -52,13 +51,13 @@ export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
     const rootResult = this.getRootErrors(valueArray, context);
 
     const details = {
-      node: rootResult,
-      children: valueArray.map((v) => this.getArrayItemErrors(v, context)),
+      root: rootResult,
+      data: valueArray.map((v) => this.getArrayItemErrors(v, context)),
     };
 
     const simple = {
-      node: this.getErrorMessages(rootResult),
-      children: details.children.map((v) => this.getErrorMessages(v)),
+      root: this.getErrorMessages(rootResult),
+      data: details.data.map((v) => this.getErrorMessages(v)),
     };
 
     return [details, simple];

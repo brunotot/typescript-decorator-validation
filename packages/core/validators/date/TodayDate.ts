@@ -2,7 +2,6 @@ import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
 import $ from "../../src/types";
-import Validation from "../../src/types/namespace/validation.namespace";
 
 /**
  * Decorator for validating if a date is today's date.
@@ -25,21 +24,21 @@ export default function TodayDate<T extends $.Objects.Optional<Date>>(
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (date, _context, locale) => ({
-      key: "TodayDate",
-      message: Decorator.message(
-        props,
-        TranslationService.translate(locale, "TodayDate", date!),
-        locale
-      ),
-      valid: Validation.isValidNullable(date, (d) => {
-        const currentDate = new Date();
-        return (
-          d.getDate() === currentDate.getDate() &&
-          d.getMonth() === currentDate.getMonth() &&
-          d.getFullYear() === currentDate.getFullYear()
-        );
-      }),
-    }),
+    validate: (date, _context, locale) => {
+      const currentDate = new Date();
+      return {
+        key: "TodayDate",
+        message: Decorator.message(
+          props,
+          TranslationService.translate(locale, "TodayDate", date!),
+          locale
+        ),
+        valid:
+          date &&
+          date.getDate() === currentDate.getDate() &&
+          date.getMonth() === currentDate.getMonth() &&
+          date.getFullYear() === currentDate.getFullYear(),
+      };
+    },
   });
 }

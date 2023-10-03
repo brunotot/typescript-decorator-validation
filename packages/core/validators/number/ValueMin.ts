@@ -40,7 +40,7 @@ export default function ValueMin<T extends $.Objects.Optional<number>>(
   const min = typeof props === "number" ? props : props.value;
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (value, _, locale) => ({
+    validate: (value, _, locale) => ({
       key: "ValueMin",
       message: Decorator.message(
         props,

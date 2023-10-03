@@ -28,7 +28,7 @@ export default function ArrayOne<K, T extends K[]>(
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (array, _, locale) => ({
+    validate: (array, _, locale) => ({
       key: "ArrayOne",
       message: Decorator.message(props, "", locale),
       valid: (array ?? []).filter(props.test).length === 1,

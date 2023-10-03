@@ -39,7 +39,7 @@ export default class ValidationEngine<TClass> {
   #eventListener!: AsyncEventHandler<TClass>;
   #eventEmitter: EventEmitter;
   #fieldValidatorMetaService: FieldValidatorMetaService;
-  #groups: Validation.Group[];
+  #groups: string[];
   #hostDefault: Helper.Payload<TClass>;
   #cacheMap: ns.CacheMap<TClass>;
   #hostClass: Types.Class<TClass>;
@@ -189,7 +189,9 @@ export default class ValidationEngine<TClass> {
 
     this.#fieldValidatorMetaService.getFields().forEach((field) => {
       const validation = this.validateField(state, field as keyof TClass);
+      // @ts-expect-error
       detailedErrors[field] = validation[0];
+      // @ts-expect-error
       errors[field] = validation[1];
     });
 
@@ -214,7 +216,7 @@ export default class ValidationEngine<TClass> {
    * @returns An array containing the detailed error message and the error message.
    */
   // prettier-ignore
-  validateField<K extends keyof TClass>(payload: any, fieldName: K): Validation.getStrategyResult<TClass[K]> {
+  validateField<K extends keyof TClass>(payload: any, fieldName: K): Validation.getStrategyResult<TClass, K> {
     const descriptor = this.#fieldValidatorMetaService.getUntypedDescriptor(fieldName);
     const stratImpl = new descriptor.StrategyImpl(
       descriptor, 
@@ -234,9 +236,9 @@ export default class ValidationEngine<TClass> {
       this.#debounceMap[fieldName](payload[fieldName], payload);
       
       return [
-        this.#cacheMap.get("detailedErrors")?.[fieldName], 
-        this.#cacheMap.get("errors")?.[fieldName]
-      ] as Validation.getStrategyResult<TClass[K]>;
+        (this.#cacheMap.get("detailedErrors") as any)?.[fieldName], 
+        (this.#cacheMap.get("errors") as any)?.[fieldName]
+      ] as Validation.getStrategyResult<TClass, K>;
     }
 
 

@@ -11,7 +11,7 @@ import Validation from "../../types/namespace/validation.namespace";
  *
  * @returns A predicate function that takes a `Validation.Metadata` and returns a boolean.
  */
-function validationGroupPredicate<TFieldType>(groups: Validation.Group[]) {
+function validationGroupPredicate<TFieldType>(groups: string[]) {
   return (meta: Validation.Metadata<TFieldType>) =>
     groups.length
       ? meta.groups.some((o) => groups.includes(o))
@@ -61,7 +61,7 @@ namespace ReflectionRuleNamespace {
     validate<TBody>(
       value: TFieldType,
       payload: Helper.Payload<TBody>,
-      groups: Validation.Group[],
+      groups: string[],
       locale: Localization.Locale
     ): Validation.Result[] {
       return this.#contents

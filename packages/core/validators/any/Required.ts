@@ -30,7 +30,7 @@ export default function Required<T extends $.Objects.Optional>(
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (value, _, locale) => ({
+    validate: (value, _, locale) => ({
       key: "Required",
       message: Decorator.message(
         props,

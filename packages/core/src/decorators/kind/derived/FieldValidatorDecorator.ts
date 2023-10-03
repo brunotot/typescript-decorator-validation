@@ -35,10 +35,10 @@ namespace FieldValidatorDecorator {
    */
   export function build<T extends FieldDecorator.Type>({
     groups,
-    isValid,
-  }: Validation.Builder<T>): FieldDecorator.Instance<T> {
+    validate,
+  }: Validation.Metadata<T>): FieldDecorator.Instance<T> {
     return FieldDecorator.build<T>((meta, key) =>
-      meta.addValidator(key, isValid, groups)
+      meta.addValidator(key, validate, groups)
     );
   }
 }

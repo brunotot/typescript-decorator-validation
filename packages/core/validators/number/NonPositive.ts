@@ -32,7 +32,8 @@ export default function NonPositive<T extends $.Objects.Optional<number>>(
   props?: Decorator.PartialProps
 ) {
   return FieldValidatorDecorator.build<T>({
-    isValid: (num, _, locale) => ({
+    groups: Decorator.groups(props),
+    validate: (num, _, locale) => ({
       key: "NonPositive",
       message: Decorator.message(
         props,

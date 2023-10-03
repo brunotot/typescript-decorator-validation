@@ -108,6 +108,7 @@ const engine = new ValidationEngine(JobApplicationForm);
 /*engine.registerAsync(({ detailedErrors, errors }) => {
   console.log(errors);
 });*/
+
 const result = engine.validate(jobApplicationForm);
-console.log(result.errors);
+console.log(result.errors.isCompoundValid);
 debugger;

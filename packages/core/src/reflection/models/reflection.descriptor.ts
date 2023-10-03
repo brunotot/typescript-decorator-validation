@@ -145,7 +145,13 @@ namespace ReflectionDescriptor {
 
         if (
           value instanceof Promise ||
-          (value && "key" in value && "valid" in value && "message" in value)
+          (value &&
+            "key" in value &&
+            typeof value["key"] === "string" &&
+            "valid" in value &&
+            typeof value["valid"] === "boolean" &&
+            "message" in value &&
+            typeof value["message"] === "string")
         ) {
           return Reflection.Strategy.ReflectionStrategy.function;
         }

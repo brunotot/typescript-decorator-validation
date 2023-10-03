@@ -45,7 +45,7 @@ export default function ValueRange<T extends $.Objects.Optional<number>>(
   const { min, max } = props;
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
-    isValid: (value, _, locale) => ({
+    validate: (value, _, locale) => ({
       key: "ValueRange",
       message: Decorator.message(
         props,
