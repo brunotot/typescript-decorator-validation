@@ -1,5 +1,4 @@
 import TdvCoreApi from "./src/api";
-import Prettify from "./src/api/prettify";
 import Decorator from "./src/decorators";
 import Validation from "./src/engine";
 import Localization from "./src/localization";
@@ -17,8 +16,6 @@ export namespace Overrides {
    */
   export interface PrimitiveSet {}
 }
-
-export type { Prettify };
 
 export {
   Decorator,

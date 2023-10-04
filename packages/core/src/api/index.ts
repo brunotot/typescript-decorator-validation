@@ -4,11 +4,11 @@
  */
 import DecoratorNamespace from "../decorators";
 import ValidationNamespace from "../engine";
-import CacheMapNamespace from "../engine/models/cache.map";
 import ReflectionNamespace from "../reflection";
 import DescriptorNamespace from "../reflection/models/reflection.descriptor";
 import StrategyNamespace from "../strategy";
 import UtilitiesNamespace from "../utilities";
+import * as PrettifyNamespace from "./prettify";
 
 /**
  * An entry-point namespace which serves as a gateway to all data this library exports
@@ -26,9 +26,7 @@ namespace TdvCoreApi {
 
   export import Descriptor = DescriptorNamespace;
 
-  export namespace Models {
-    export import CacheMap = CacheMapNamespace.CacheMap;
-  }
+  export import Prettify = PrettifyNamespace;
 }
 
 export default TdvCoreApi;

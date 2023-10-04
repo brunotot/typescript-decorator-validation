@@ -4,7 +4,7 @@ import FieldValidatorMetaService from "../reflection/service/impl/FieldValidator
 import Objects from "../utilities/impl/Objects";
 import Types from "../utilities/impl/Types";
 import StrategyFactory from "./../strategy/factory";
-import CacheMap from "./models/cache.map";
+import CacheMap, * as CacheMapNamespace from "./models/cache.map";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
@@ -12,6 +12,8 @@ import CacheMap from "./models/cache.map";
  * A collection of types and functions related to validation.
  */
 namespace Validation {
+  export import CacheMapDef = CacheMapNamespace;
+
   /**
    * Represents a function that evaluates a value and returns a validation result.
    *
@@ -79,17 +81,6 @@ namespace Validation {
   };
 
   /**
-   * A map for storing entity validation results.
-   *
-   * @typeParam TClass - The type of the class being cached.
-   * @typeParam TClass - The type of the payload.
-   */
-  export type CacheMap<TClass> = CacheMap.CacheMap<
-    Response<TClass>,
-    Objects.Payload<TClass>
-  >;
-
-  /**
    * A class responsible for processing and validating class instances through its decorated validators.
    *
    * @typeParam TClass - The type of the class being processed.
@@ -105,7 +96,7 @@ namespace Validation {
     #fieldValidatorMetaService: FieldValidatorMetaService;
     #groups: string[];
     #hostDefault: Objects.Payload<TClass>;
-    #cacheMap: CacheMap<TClass>;
+    #cacheMap: CacheMap<Response<TClass>>;
     #hostClass: Types.Class<TClass>;
     locale: Localization.Locale;
     #asyncDelay: number;
@@ -129,7 +120,7 @@ namespace Validation {
         config?.defaultValue ??
         (Objects.toClass(clazz) as Objects.Payload<TClass>);
       this.#fieldValidatorMetaService = FieldValidatorMetaService.inject(clazz);
-      this.#cacheMap = new CacheMap.CacheMap(
+      this.#cacheMap = new CacheMap(
         (state) => this.validate.bind(this)(state) as Response<TClass>
       );
     }
