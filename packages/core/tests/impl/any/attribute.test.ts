@@ -1,11 +1,11 @@
-import $ from "../../../src/types";
+import $ from "../../../index";
 import validators from "../../../validators";
 import attribute from "../../../validators/any/attribute";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Objects.Optional<NestedModel>;
+type Type = $.Utilities.Objects.Optional<NestedModel>;
 const type = "Nested form";
 const identifier = "valid";
 const successData: Type[] = [

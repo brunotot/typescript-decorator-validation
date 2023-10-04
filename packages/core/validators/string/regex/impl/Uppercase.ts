@@ -1,10 +1,9 @@
 import Decorator from "../../../../src/decorators";
 import FieldValidatorDecorator from "../../../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../../../src/localization/service/translation.service";
-import $ from "../../../../src/types";
+import Objects from "../../../../src/utilities/impl/Objects";
 import RegexConst from "../../../shared/regex.constants";
 import { testRegex } from "../Pattern";
-
 /**
  * Creates a validator decorator that checks if a string value contains only uppercase letters using a regular expression pattern.
  *
@@ -32,7 +31,7 @@ import { testRegex } from "../Pattern";
  *   text: string;
  * }
  */
-export default function Uppercase<T extends $.Objects.Optional<string>>(
+export default function Uppercase<T extends Objects.Optional<string>>(
   props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({

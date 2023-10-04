@@ -1,6 +1,6 @@
+import Validation from "../../engine";
 import Localization from "../../localization";
-import Helper from "../../types/namespace/helper.namespace";
-import Validation from "../../types/namespace/validation.namespace";
+import Objects from "../../utilities/impl/Objects";
 
 /**
  * A predicate function to filter validation metadata based on validation groups.
@@ -60,7 +60,7 @@ namespace ReflectionRuleNamespace {
      */
     validate<TBody>(
       value: TFieldType,
-      payload: Helper.Payload<TBody>,
+      payload: Objects.Payload<TBody>,
       groups: string[],
       locale: Localization.Locale
     ): Validation.Result[] {

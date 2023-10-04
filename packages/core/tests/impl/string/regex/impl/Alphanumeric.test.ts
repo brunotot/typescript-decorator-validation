@@ -1,10 +1,10 @@
-import $ from "../../../../../src/types";
+import Objects from "../../../../../src/utilities/impl/Objects";
 import Alphanumeric from "../../../../../validators/string/regex/impl/Alphanumeric";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Objects.Optional<string>;
+type Type = Objects.Optional<string>;
 const type = "String";
 const identifier = "Alphanumeric";
 const successData: Type[] = ["123abcdef", null, undefined, ""];

@@ -1,10 +1,10 @@
-import $ from "../../../src/types";
+import $ from "../../../index";
 import MaxLength from "../../../validators/string/MaxLength";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Objects.Optional<string>;
+type Type = $.Utilities.Objects.Optional<string>;
 const type = "String";
 const identifier = "MaxLength";
 const successData: Type[] = [undefined, null, "12345", "1234567", "1234567890"];

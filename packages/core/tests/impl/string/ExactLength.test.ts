@@ -1,10 +1,10 @@
-import $ from "../../../src/types";
+import $ from "../../../index";
 import ExactLength from "../../../validators/string/ExactLength";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Objects.Optional<string>;
+type Type = $.Utilities.Objects.Optional<string>;
 const type = "String";
 const identifier = "ExactLength";
 const successData: Type[] = ["123456", "abcdef"];

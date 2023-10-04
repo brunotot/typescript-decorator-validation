@@ -1,0 +1,8 @@
+{
+  "author": "Bruno Tot",
+  "name": "tdv-strategy",
+  "private": true,
+  "version": "1.0.0",
+  "main": "dist/strategy/index.js",
+  "types": "dist/types/strategy/index.d.ts"
+}

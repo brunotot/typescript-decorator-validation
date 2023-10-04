@@ -1,4 +1,4 @@
-import Types from "../../types/namespace/types.namespace";
+import Types from "../../utilities/impl/Types";
 import Reflection from "../index";
 import ValidationConfigurer from "../service/impl/FieldValidatorMetaService";
 

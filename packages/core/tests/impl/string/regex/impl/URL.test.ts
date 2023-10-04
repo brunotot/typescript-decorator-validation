@@ -1,10 +1,10 @@
-import $ from "../../../../../src/types";
+import $ from "../../../../../index";
 import URL from "../../../../../validators/string/regex/impl/URL";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Objects.Optional<string>;
+type Type = $.Utilities.Objects.Optional<string>;
 const type = "String";
 const identifier = "URL";
 const successData: Type[] = [

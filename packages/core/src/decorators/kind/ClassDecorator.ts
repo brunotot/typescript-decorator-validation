@@ -1,5 +1,5 @@
 import ClassValidatorMetaService from "../../reflection/service/impl/ClassValidatorMetaService";
-import Types from "../../types/namespace/types.namespace";
+import Types from "../../utilities/impl/Types";
 
 namespace ClassDecorator {
   export type Type = Types.Class<any>;

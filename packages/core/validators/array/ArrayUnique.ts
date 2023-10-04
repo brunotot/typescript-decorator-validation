@@ -1,8 +1,7 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
-import Objects from "../../src/types/namespace/objects.namespace";
+import Objects from "../../src/utilities/impl/Objects";
 
 function isArrayUnique<T>(arr: T[], equals: Objects.Equals<T>): boolean {
   const set = new Set<T>();
@@ -39,7 +38,7 @@ function isArrayUnique<T>(arr: T[], equals: Objects.Equals<T>): boolean {
 export default function ArrayUnique<K, T extends K[]>(
   props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
-  const hashFn = $.Objects.hash;
+  const hashFn = Objects.hash;
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (array, _, locale) => ({

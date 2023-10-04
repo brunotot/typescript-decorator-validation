@@ -1,10 +1,10 @@
-import $ from "../../../../../src/types";
+import $ from "../../../../../index";
 import IPAddress from "../../../../../validators/string/regex/impl/IPAddress";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Objects.Optional<string>;
+type Type = $.Utilities.Objects.Optional<string>;
 const type = "String";
 const identifier = "IPAddress";
 const successData: Type[] = ["192.168.1.0", "", null, undefined];

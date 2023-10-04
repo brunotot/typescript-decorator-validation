@@ -1,7 +1,10 @@
 import Decorator from "../decorators";
 import ReflectionStrategyNamespace from "../engine/models/reflection.strategy";
-import Types from "../types/namespace/types.namespace";
+import Types from "../utilities/impl/Types";
 import ReflectionRuleNamespace from "./models/reflection.rule";
+import * as _AbstractMetaService from "./service/AbstractMetaService";
+import * as _ClassValidatorMetaService from "./service/impl/ClassValidatorMetaService";
+import * as _FieldValidatorMetaService from "./service/impl/FieldValidatorMetaService";
 
 /**
  * A namespace which holds data related to reading and manipulating metadata through reflection
@@ -87,6 +90,12 @@ namespace Reflection {
   export import Rule = ReflectionRuleNamespace.ReflectionRule;
 
   export import Strategy = ReflectionStrategyNamespace;
+
+  export namespace Services {
+    export import AbstractMetaService = _AbstractMetaService;
+    export import ClassValidatorMetaService = _ClassValidatorMetaService;
+    export import FieldValidatorMetaService = _FieldValidatorMetaService;
+  }
 }
 
 export default Reflection;

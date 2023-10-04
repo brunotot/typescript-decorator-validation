@@ -1,0 +1,36 @@
+import Booleans from "./Booleans";
+
+namespace Arrays {
+  // prettier-ignore
+  export type getArrayDepth<T> = 
+    T extends any[] 
+      ? T[0] extends any[] 
+        ? T[0][0] extends any[]
+          ? T[0][0][0] extends any[] 
+            ? T[0][0][0][0] extends any[]
+              ? 5
+              : 4
+            : 3
+          : 2
+        : 1
+      : 0;
+
+  export type setArrayDepth<
+    T,
+    N extends number,
+    R extends any[] = []
+  > = R["length"] extends N ? T : setArrayDepth<T[], N, [T, ...R]>;
+
+  /**
+   * A type that extracts the element type of an array type `T`.
+   *
+   * @typeParam T - The type to extract the array type from.
+   */
+  export type getArrayType<T> = T extends (infer U)[]
+    ? true extends Booleans.isArray<U>
+      ? getArrayType<U>
+      : U
+    : never;
+}
+
+export default Arrays;

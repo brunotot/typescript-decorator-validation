@@ -1,10 +1,10 @@
-import $ from "../../../src/types";
+import $ from "../../../index";
 import Negative from "../../../validators/number/Negative";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Objects.Optional<number>;
+type Type = $.Utilities.Objects.Optional<number>;
 const type = "Number";
 const identifier = "Negative";
 const successData: Type[] = [-1, -5, -10, -1500];

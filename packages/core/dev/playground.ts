@@ -1,6 +1,5 @@
-import ValidationEngine from "../src/engine";
-import Helper from "../src/types/namespace/helper.namespace";
-import Validation from "../src/types/namespace/validation.namespace";
+import Validation from "../src/engine";
+import Objects from "../src/utilities/impl/Objects";
 import ValidDateRange from "../validators/class/ValidDateRange";
 import decorate from "../validators/index";
 
@@ -46,14 +45,14 @@ class JobApplicationForm {
   @decorate.any.Required()
   phoneNumber!: string;
 
-  @decorate.date.PastDate()
+  @decorate.Date.PastDate()
   dateOfBirth!: Date;
 
-  @decorate.nested.valid(AddressForm)
+  @decorate.attribute(AddressForm)
   address!: AddressForm;
 
   @decorate.array.ArraySizeMin(1)
-  @decorate.nested.valid(EducationForm)
+  @decorate.attribute(EducationForm)
   educations: EducationForm[] = [];
 
   @decorate.any.Required()
@@ -78,7 +77,7 @@ class JobApplicationForm {
   }
 }
 
-const jobApplicationForm: Helper.Payload<JobApplicationForm> = {
+const jobApplicationForm: Objects.Payload<JobApplicationForm> = {
   fullName: "Bruno123", // Alpha validation will fail
   email: "bruno-email", // Email validation will fail
   phoneNumber: "+38512345678",
@@ -103,7 +102,7 @@ const jobApplicationForm: Helper.Payload<JobApplicationForm> = {
   coverLetter: "I'm passionate about coding...",
 };
 
-const engine = new ValidationEngine(JobApplicationForm);
+const engine = new Validation.Engine(JobApplicationForm);
 /*engine.registerAsync(({ detailedErrors, errors }) => {
   console.log(errors);
 });*/

@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { TdvCore } from "tdv-core";
+import TdvCore from "tdv-core";
 import FormContextNamespace from "../../contexts/FormContext/types";
 
 /**
@@ -10,13 +10,13 @@ namespace UseFormHook {
    * Configuration options for the `useForm` hook.
    */
   export type UseFormConfig<TClass> = {
-    defaultValue?: TdvCore.Helper.Payload<TClass>;
+    defaultValue?: TdvCore.Utilities.Objects.Payload<TClass>;
     validationGroups?: string[];
     validateImmediately?: boolean;
     standalone?: boolean;
     onSubmit?: () => Promise<void> | void;
     onSubmitValidationFail?: (
-      errors: TdvCore.StrategyFactory.Impl.Errors<TClass>
+      errors: TdvCore.Strategy.Factory.Impl.Errors<TClass>
     ) => void;
     onChange?: () => void;
   };
@@ -28,12 +28,16 @@ namespace UseFormHook {
     isValid: boolean;
     isSubmitted: boolean;
     onSubmit: () => Promise<void>;
-    mutations: UseFormChangeHandlerMap<TdvCore.Helper.Payload<TClass>>;
+    mutations: UseFormChangeHandlerMap<
+      TdvCore.Utilities.Objects.Payload<TClass>
+    >;
     providerProps: Omit<FormContextNamespace.FormProviderProps, "children">;
-    errors: TdvCore.StrategyFactory.Impl.Errors<TClass>;
-    detailedErrors: TdvCore.StrategyFactory.Impl.DetailedErrors<TClass>;
+    errors: TdvCore.Strategy.Factory.Impl.Errors<TClass>;
+    detailedErrors: TdvCore.Strategy.Factory.Impl.DetailedErrors<TClass>;
     reset: (
-      ...fieldPaths: PayloadFieldPath<TdvCore.Helper.Payload<TClass>>[]
+      ...fieldPaths: PayloadFieldPath<
+        TdvCore.Utilities.Objects.Payload<TClass>
+      >[]
     ) => void;
   };
 
@@ -41,8 +45,8 @@ namespace UseFormHook {
    * Type of the value returned by the `useForm` hook.
    */
   export type UseFormReturn<TClass> = readonly [
-    TdvCore.Helper.Payload<TClass>,
-    Dispatch<SetStateAction<TdvCore.Helper.Payload<TClass>>>,
+    TdvCore.Utilities.Objects.Payload<TClass>,
+    Dispatch<SetStateAction<TdvCore.Utilities.Objects.Payload<TClass>>>,
     UseFormData<TClass>
   ];
 
@@ -72,7 +76,7 @@ namespace UseFormHook {
    * A wrapper type for evaluation object paths as strings
    */
   export type ObjectPathEvaluator<T, K extends string> = K extends keyof T
-    ? K extends TdvCore.Objects.Inputs<T>
+    ? K extends TdvCore.Utilities.Objects.Inputs<T>
       ? K | `${K}.${PayloadFieldPath<T[K]>}`
       : ""
     : never;
@@ -82,13 +86,13 @@ namespace UseFormHook {
    */
   export type PayloadFieldPathEvaluator<T> = {
     [K in keyof T]-?: K extends string
-      ? TdvCore.Condition.isFunction<T[K]> extends true
+      ? TdvCore.Utilities.Booleans.isFunction<T[K]> extends true
         ? never
-        : TdvCore.Condition.isArray<T[K]> extends true
+        : TdvCore.Utilities.Booleans.isArray<T[K]> extends true
         ? K
-        : TdvCore.Condition.isObject<T[K]> extends true
+        : TdvCore.Utilities.Booleans.isObject<T[K]> extends true
         ? ObjectPathEvaluator<T, K>
-        : K extends TdvCore.Objects.Inputs<T>
+        : K extends TdvCore.Utilities.Objects.Inputs<T>
         ? K
         : never
       : never;
@@ -97,11 +101,12 @@ namespace UseFormHook {
   /**
    * A central method for getting a union of all possible payload field paths
    */
-  export type PayloadFieldPath<T> = TdvCore.Condition.isFunction<T> extends true
-    ? ""
-    : TdvCore.Condition.isObject<T> extends true
-    ? PayloadFieldPathEvaluator<T>[keyof T]
-    : "";
+  export type PayloadFieldPath<T> =
+    TdvCore.Utilities.Booleans.isFunction<T> extends true
+      ? ""
+      : TdvCore.Utilities.Booleans.isObject<T> extends true
+      ? PayloadFieldPathEvaluator<T>[keyof T]
+      : "";
 }
 
 export default UseFormHook;

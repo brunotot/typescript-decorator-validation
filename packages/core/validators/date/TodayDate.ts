@@ -1,7 +1,7 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
+import Objects from "../../src/utilities/impl/Objects";
 
 /**
  * Decorator for validating if a date is today's date.
@@ -19,7 +19,7 @@ import $ from "../../src/types";
  * ```
  * This example applies the `TodayDate` validator to the `dueDate` property to ensure it is set to today's date.
  */
-export default function TodayDate<T extends $.Objects.Optional<Date>>(
+export default function TodayDate<T extends Objects.Optional<Date>>(
   props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({

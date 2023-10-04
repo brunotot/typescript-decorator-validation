@@ -1,7 +1,7 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
+import Objects from "../../src/utilities/impl/Objects";
 
 /**
  * ValueMax decorator for validating that a numeric value is less than or equal to a specified maximum value.
@@ -29,7 +29,7 @@ import $ from "../../src/types";
  *   price?: number;
  * }
  */
-export default function ValueMax<T extends $.Objects.Optional<number>>(
+export default function ValueMax<T extends Objects.Optional<number>>(
   props: Decorator.Props.MultiArgsMessageOptional<number>
 ) {
   const max = Decorator.args(props);

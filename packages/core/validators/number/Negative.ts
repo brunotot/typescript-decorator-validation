@@ -1,7 +1,7 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
+import Objects from "../../src/utilities/impl/Objects";
 
 /**
  * Decorator for validating that a value is a negative number.
@@ -19,7 +19,7 @@ import $ from "../../src/types";
  * ```
  * This example applies the `Negative` validator to the `debt` property to ensure it is a negative number.
  */
-export default function Negative<T extends $.Objects.Optional<number>>(
+export default function Negative<T extends Objects.Optional<number>>(
   props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({

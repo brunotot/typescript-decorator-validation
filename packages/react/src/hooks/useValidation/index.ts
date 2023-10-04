@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TdvCore } from "tdv-core";
+import TdvCore from "tdv-core";
 import useValidationEngine from "../useValidationEngine";
 import ns from "./types";
 
@@ -25,21 +25,21 @@ import ns from "./types";
  * @typeParam TClass - represents parent form class model holding context of current compontent
  */
 export default function useValidation<TClass>(
-  model: TdvCore.Types.Class<TClass>,
+  model: TdvCore.Utilities.Types.Class<TClass>,
   { defaultValue, groups }: ns.UseValidationConfig<TClass> = {}
 ): ns.UseValidationReturn<TClass> {
   const engine = useValidationEngine<TClass>(model, {
     groups,
     defaultValue,
   });
-  const [form, setForm] = useState<TdvCore.Helper.Payload<TClass>>(
+  const [form, setForm] = useState<TdvCore.Utilities.Objects.Payload<TClass>>(
     engine.hostDefault
   );
   const [details, setDetails] = useState(
-    {} as TdvCore.StrategyFactory.Impl.DetailedErrors<TClass>
+    {} as TdvCore.Strategy.Factory.Impl.DetailedErrors<TClass>
   );
   const [simpleErrors, setSimpleErrors] = useState(
-    {} as TdvCore.StrategyFactory.Impl.Errors<TClass>
+    {} as TdvCore.Strategy.Factory.Impl.Errors<TClass>
   );
 
   useEffect(() => {

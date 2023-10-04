@@ -1,5 +1,5 @@
-import Validation from "../../../types/namespace/validation.namespace";
 import FieldDecorator from "../FieldDecorator";
+import Validation from "./../../../engine";
 
 /**
  * A service class which exposes validated-decorator-related actions

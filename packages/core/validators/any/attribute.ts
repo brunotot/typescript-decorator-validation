@@ -1,6 +1,6 @@
-import { TdvCore } from "../..";
 import FieldDecorator from "../../src/decorators/kind/FieldDecorator";
-import Types from "../../src/types/namespace/types.namespace";
+import Objects from "../../src/utilities/impl/Objects";
+import Types from "../../src/utilities/impl/Types";
 
 /**
  * Creates a decorator to associate a class with its validation rules.
@@ -17,7 +17,7 @@ import Types from "../../src/types/namespace/types.namespace";
  * }
  */
 export default function attribute<
-  T extends TdvCore.Objects.Optional<object | object[]>
+  T extends Objects.Optional<object | object[]>
 >(clazz: Types.Class<any>): FieldDecorator.Instance<T> {
   return FieldDecorator.build<any>((meta, name) => {
     meta.getUntypedDescriptor(name).thisClass = clazz;

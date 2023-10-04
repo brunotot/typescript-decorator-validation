@@ -1,11 +1,8 @@
 import Reflection from "../..";
 import Decorator from "../../../decorators";
-import Types from "../../../types/namespace/types.namespace";
-import Validation from "../../../types/namespace/validation.namespace";
+import Types from "../../../utilities/impl/Types";
 import AbstractMetaService from "../AbstractMetaService";
-
-export type UnwrapMetaStrategy<TStrategy extends Reflection.MetaStrategy> =
-  TStrategy extends Types.Class<infer TInferredClass> ? TInferredClass : any;
+import Validation from "./../../../engine";
 
 /**
  * A configurer class which allows for easier manipulation of decorated class validators and corresponding metadata
@@ -25,8 +22,8 @@ export default class ClassValidatorMetaService<
    */
   public static inject<T extends Reflection.MetaStrategy>(
     strategy: T
-  ): ClassValidatorMetaService<UnwrapMetaStrategy<T>> {
-    return new ClassValidatorMetaService<UnwrapMetaStrategy<T>>(strategy);
+  ): ClassValidatorMetaService<Types.UnwrapMetaStrategy<T>> {
+    return new ClassValidatorMetaService<Types.UnwrapMetaStrategy<T>>(strategy);
   }
 
   private constructor(strategy: Reflection.MetaStrategy) {

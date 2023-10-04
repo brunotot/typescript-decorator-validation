@@ -1,7 +1,7 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
+import Objects from "../../src/utilities/impl/Objects";
 
 /**
  * Creates a validator decorator for length range validation.
@@ -31,7 +31,7 @@ import $ from "../../src/types";
  *   password: string;
  * }
  */
-export default function Length<T extends $.Objects.Optional<string>>(
+export default function Length<T extends Objects.Optional<string>>(
   props: Decorator.Props.MultiArgsMessageOptional<readonly [number, number]>
 ) {
   const [min, max] = Decorator.args(props);

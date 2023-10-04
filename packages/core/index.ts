@@ -1,11 +1,10 @@
+import TdvCoreApi from "./src/api";
+import Prettify from "./src/api/prettify";
 import Decorator from "./src/decorators";
-import ValidationEngine from "./src/engine";
-import CacheMapLocal from "./src/engine/models/cache.map";
+import Validation from "./src/engine";
 import Localization from "./src/localization";
 import Reflection from "./src/reflection";
-import ValidationConfigurer from "./src/reflection/service/impl/FieldValidatorMetaService";
-import TdvCore from "./src/types";
-import Prettify from "./src/types/prettify";
+import Descriptor from "./src/reflection/models/reflection.descriptor";
 import decorate from "./validators";
 import validate from "./validators/any/validate";
 
@@ -19,22 +18,16 @@ export namespace Overrides {
   export interface PrimitiveSet {}
 }
 
-/**
- * A namespace which wraps all miscellaneous reusable models of the library into a single group
- */
-export namespace Models {
-  export import CacheMap = CacheMapLocal.CacheMap;
-}
-
 export type { Prettify };
 
 export {
   Decorator,
+  Descriptor,
   Localization,
   Reflection,
-  TdvCore,
-  ValidationConfigurer,
-  ValidationEngine,
+  Validation,
   decorate,
   validate,
 };
+
+export default TdvCoreApi;

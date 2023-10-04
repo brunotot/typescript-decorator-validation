@@ -1,6 +1,6 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import $ from "../../src/types";
+import Objects from "../../src/utilities/impl/Objects";
 
 /**
  * Decorator for validating that none of the elements in an array pass a specified test.
@@ -22,7 +22,7 @@ import $ from "../../src/types";
  * This example validates that none of the elements in the `nonNegativeNumbers` array are negative, associates it with a custom validation group, and provides a custom error message if the validation fails.
  */
 export default function ArrayNone<K, T extends K[]>(
-  props: Decorator.Props.MultiArgsMessageRequired<$.Objects.ArrayPredicate<K>>
+  props: Decorator.Props.MultiArgsMessageRequired<Objects.ArrayPredicate<K>>
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),

@@ -2,8 +2,8 @@ import Decorator from "../../src/decorators";
 import ClassDecorator from "../../src/decorators/kind/ClassDecorator";
 import ClassValidatorDecorator from "../../src/decorators/kind/derived/ClassValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import Types from "../../src/types/namespace/types.namespace";
-import StringUtils from "../../src/utils/StringUtils";
+import Strings from "../../src/utilities/impl/Strings";
+import Types from "../../src/utilities/impl/Types";
 
 export default function ValidDateRange<T extends ClassDecorator.Type>(
   startDateFieldName: string,
@@ -19,8 +19,8 @@ export default function ValidDateRange<T extends ClassDecorator.Type>(
         TranslationService.translate(
           locale,
           "ValidDateRange",
-          StringUtils.convertCamelCaseToText(startDateFieldName),
-          StringUtils.convertCamelCaseToText(endDateFieldName, false)
+          Strings.convertCamelCaseToText(startDateFieldName),
+          Strings.convertCamelCaseToText(endDateFieldName, false)
         ),
         locale
       ),

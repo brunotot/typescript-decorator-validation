@@ -1,7 +1,7 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
+import Objects from "../../src/utilities/impl/Objects";
 
 /**
  * Decorator for validating if a date is in the past.
@@ -19,7 +19,7 @@ import $ from "../../src/types";
  * ```
  * This example applies the `PastDate` validator to the `eventDate` property to ensure it is a date in the past.
  */
-export default function PastDate<T extends $.Objects.Optional<Date>>(
+export default function PastDate<T extends Objects.Optional<Date>>(
   props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({

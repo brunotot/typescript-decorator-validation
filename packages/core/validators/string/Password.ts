@@ -2,7 +2,7 @@ import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import Localization from "../../src/localization";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
+import Objects from "../../src/utilities/impl/Objects";
 import RegexConst from "../shared/regex.constants";
 
 const PASSWORD_REGEXES = {
@@ -49,7 +49,7 @@ function isInvalid(text: string, rule: keyof typeof PASSWORD_REGEXES) {
  *   password: string;
  * }
  */
-export default function Password<T extends $.Objects.Optional<string>>(props?: {
+export default function Password<T extends Objects.Optional<string>>(props?: {
   uppercase: boolean;
   lowercase: boolean;
   numbers: boolean;

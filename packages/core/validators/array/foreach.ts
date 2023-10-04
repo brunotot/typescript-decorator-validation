@@ -1,6 +1,6 @@
 import Decorator from "../../src/decorators";
 import FieldDecorator from "../../src/decorators/kind/FieldDecorator";
-import Arrays from "../../src/types/namespace/arrays.namespace";
+import Arrays from "../../src/utilities/impl/Arrays";
 
 /**
  * Decorator for applying multiple validators to each element in an array property.

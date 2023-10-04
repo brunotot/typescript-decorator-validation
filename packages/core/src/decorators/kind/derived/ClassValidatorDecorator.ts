@@ -1,13 +1,13 @@
 import Localization from "../../../localization";
-import Validation from "../../../types/namespace/validation.namespace";
 import ClassDecorator from "../ClassDecorator";
+import Validation from "./../../../engine";
 
 /**
  * A service class which exposes validated-decorator-related actions
  */
 
 namespace ClassValidatorDecorator {
-  type Supplier<T extends ClassDecorator.Type> = {
+  export type Supplier<T extends ClassDecorator.Type> = {
     groups?: string | string[];
     isValid: Evaluator<T>;
   };

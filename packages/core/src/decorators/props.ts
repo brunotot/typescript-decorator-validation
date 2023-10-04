@@ -1,4 +1,4 @@
-import $ from "../types/prettify";
+import $ from "../api/prettify";
 
 namespace DecoratorProps {
   export interface Base {

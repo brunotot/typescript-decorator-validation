@@ -1,7 +1,7 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
+import Objects from "../../src/utilities/impl/Objects";
 
 /**
  * Creates a validator decorator for exact length validation.
@@ -29,7 +29,7 @@ import $ from "../../src/types";
  *   username: string;
  * }
  */
-export default function ExactLength<T extends $.Objects.Optional<string>>(
+export default function ExactLength<T extends Objects.Optional<string>>(
   props: Decorator.Props.MultiArgsMessageOptional<number>
 ) {
   const exact = Decorator.args(props);

@@ -1,6 +1,6 @@
 import Reflection from "..";
 import Decorator from "../../decorators";
-import Types from "../../types/namespace/types.namespace";
+import Types from "../../utilities/impl/Types";
 
 /**
  * Abstract class for managing metadata.

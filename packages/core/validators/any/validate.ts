@@ -1,5 +1,5 @@
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import Validation from "../../src/types/namespace/validation.namespace";
+import Validation from "../../src/engine";
 
 /**
  * A function which returns a decorated validator function built from a custom handler

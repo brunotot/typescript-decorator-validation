@@ -1,7 +1,7 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
+import Objects from "../../src/utilities/impl/Objects";
 
 /**
  * ValueRange decorator for validating that a numeric value falls within a specified range.
@@ -30,7 +30,7 @@ import $ from "../../src/types";
  *   price?: number;
  * }
  */
-export default function ValueRange<T extends $.Objects.Optional<number>>(
+export default function ValueRange<T extends Objects.Optional<number>>(
   props: Decorator.Props.MultiArgsMessageOptional<readonly [number, number]>
 ) {
   const [min, max] = Decorator.args(props);

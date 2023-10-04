@@ -1,8 +1,8 @@
 import Decorator from "../../../src/decorators";
 import FieldValidatorDecorator from "../../../src/decorators/kind/derived/FieldValidatorDecorator";
-import $ from "../../../src/types";
+import Objects from "../../../src/utilities/impl/Objects";
 
-export function testRegex<T extends $.Objects.Optional<string>>(
+export function testRegex<T extends Objects.Optional<string>>(
   regex: RegExp,
   value: T
 ): boolean {
@@ -38,7 +38,7 @@ export function testRegex<T extends $.Objects.Optional<string>>(
  *   anotherProperty: string;
  * }
  */
-export default function Pattern<T extends $.Objects.Optional<string>>(
+export default function Pattern<T extends Objects.Optional<string>>(
   props: Decorator.Props.MultiArgsMessageRequired<{
     regex: RegExp;
     key?: string;

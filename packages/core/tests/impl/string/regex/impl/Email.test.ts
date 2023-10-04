@@ -1,10 +1,10 @@
-import $ from "../../../../../src/types";
+import $ from "../../../../../index";
 import Email from "../../../../../validators/string/regex/impl/Email";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Objects.Optional<string>;
+type Type = $.Utilities.Objects.Optional<string>;
 const type = "String";
 const identifier = "Email";
 const successData: Type[] = ["mail@mail.com", null, undefined];

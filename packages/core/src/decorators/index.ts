@@ -1,6 +1,6 @@
 import Localization from "../localization";
 import ValidationConfigurer from "../reflection/service/impl/FieldValidatorMetaService";
-import Objects from "../types/namespace/objects.namespace";
+import Objects from "../utilities/impl/Objects";
 import ClassDecorator from "./kind/ClassDecorator";
 import FieldDecorator from "./kind/FieldDecorator";
 import ClassValidatorDecorator from "./kind/derived/ClassValidatorDecorator";

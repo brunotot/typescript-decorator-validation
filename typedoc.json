@@ -2,7 +2,7 @@
   "entryPoints": ["packages/*"],
   "name": "Typescript Decorator Validation",
   "entryPointStrategy": "packages",
-  "includeVersion": true,
+  "includeVersion": false,
   "excludeInternal": true,
   "plugin": ["@mxssfd/typedoc-theme"],
   "theme": "my-theme"

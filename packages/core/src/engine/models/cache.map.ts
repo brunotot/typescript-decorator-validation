@@ -1,4 +1,4 @@
-import $ from "../../types/index";
+import Objects from "../../utilities/impl/Objects";
 
 namespace CacheMap {
   /**
@@ -82,7 +82,7 @@ namespace CacheMap {
     ): CacheValue[CacheKey] {
       const cacheValue: CacheValue[CacheKey] = this.#cache[cacheKey];
       return cacheValue !== undefined &&
-        $.Objects.deepEquals(this.#payload, payload)
+        Objects.deepEquals(this.#payload, payload)
         ? cacheValue
         : this.#changeFn(payload)[cacheKey];
     }

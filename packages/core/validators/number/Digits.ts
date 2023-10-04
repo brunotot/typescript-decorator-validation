@@ -2,7 +2,7 @@ import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import Localization from "../../src/localization";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
+import Objects from "../../src/utilities/impl/Objects";
 
 function validateDigits(
   number: number,
@@ -50,7 +50,7 @@ function validateDigits(
  * ```
  * This example applies the `Digits` validator to the `price` property to ensure it has at most 4 digits in the integer part and 2 digits in the fractional part.
  */
-export default function Digits<T extends $.Objects.Optional<number>>(
+export default function Digits<T extends Objects.Optional<number>>(
   props: Decorator.Props.MultiArgsMessageOptional<{
     maxInteger?: number;
     maxFraction?: number;

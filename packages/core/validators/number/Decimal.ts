@@ -1,7 +1,7 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
+import Objects from "../../src/utilities/impl/Objects";
 
 /**
  * Decorator for validating if a value is a decimal number.
@@ -19,7 +19,7 @@ import $ from "../../src/types";
  * ```
  * This example applies the `Decimal` validator to the `price` property to ensure it is a decimal number.
  */
-export default function Decimal<T extends $.Objects.Optional<number>>(
+export default function Decimal<T extends Objects.Optional<number>>(
   props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({

@@ -1,5 +1,5 @@
 import ValidationEngine from "../../src/engine";
-import Types from "../../src/types/namespace/types.namespace";
+import Types from "../../src/utilities/impl/Types";
 import ValidationHandlerMock, {
   IMock,
   buildIOName,
@@ -20,7 +20,7 @@ export function standardTest<T>({
   errorData,
   type,
 }: StandardTestProps<T>) {
-  const handler = new ValidationEngine(Model);
+  const handler = new ValidationEngine.Engine(Model);
   const expectService = new ValidationHandlerMock(handler);
 
   describe(buildIOName(identifier, true, type), () => {

@@ -1,7 +1,7 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
+import Objects from "../../src/utilities/impl/Objects";
 
 /**
  * Positive decorator for validating that a numeric value is positive.
@@ -28,7 +28,7 @@ import $ from "../../src/types";
  *   quantity?: number;
  * }
  */
-export default function Positive<T extends $.Objects.Optional<number>>(
+export default function Positive<T extends Objects.Optional<number>>(
   props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({

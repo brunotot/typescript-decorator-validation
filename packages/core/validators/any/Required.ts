@@ -1,7 +1,7 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
+import Objects from "../../src/utilities/impl/Objects";
 
 /**
  * Creates a validator decorator for required value validation.
@@ -25,7 +25,7 @@ import $ from "../../src/types";
  *   name: string;
  * }
  */
-export default function Required<T extends $.Objects.Optional>(
+export default function Required<T extends Objects.Optional>(
   props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({
@@ -37,7 +37,7 @@ export default function Required<T extends $.Objects.Optional>(
         TranslationService.translate(locale, "Required"),
         locale
       ),
-      valid: $.Objects.hasValue(value),
+      valid: Objects.hasValue(value),
     }),
   });
 }

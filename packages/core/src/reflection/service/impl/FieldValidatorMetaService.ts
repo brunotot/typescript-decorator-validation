@@ -1,9 +1,9 @@
 import Reflection from "../..";
 import Decorator from "../../../decorators";
-import Types from "../../../types/namespace/types.namespace";
-import Validation from "../../../types/namespace/validation.namespace";
+import Types from "../../../utilities/impl/Types";
 import ReflectionDescriptor from "../../models/reflection.descriptor";
 import AbstractMetaService from "../AbstractMetaService";
+import Validation from "./../../../engine";
 
 /**
  * A configurer class which allows for easier manipulation of decorated fields and corresponding metadata

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { TdvCore } from "tdv-core";
+import TdvCore from "tdv-core";
 import { FormContext } from "../../contexts/FormContext";
 import useEffectWhenMounted from "../useAfterMount";
 import useMutations from "../useMutations";
@@ -33,7 +33,7 @@ import ns from "./types";
  * @typeParam TClass - represents parent form class model holding context of current compontent
  */
 export default function useForm<TClass>(
-  model: TdvCore.Types.Class<TClass>,
+  model: TdvCore.Utilities.Types.Class<TClass>,
   {
     defaultValue,
     onSubmit: onSubmitParam,
