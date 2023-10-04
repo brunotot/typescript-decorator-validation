@@ -32,12 +32,9 @@ import $ from "../../src/types";
  * }
  */
 export default function Length<T extends $.Objects.Optional<string>>(
-  props: Decorator.ImpartialProps<{
-    min: number;
-    max: number;
-  }>
+  props: Decorator.Props.MultiArgsMessageOptional<readonly [number, number]>
 ) {
-  const { min, max } = props;
+  const [min, max] = Decorator.args(props);
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (value, _, locale) => ({

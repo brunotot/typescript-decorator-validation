@@ -33,7 +33,7 @@ import { testRegex } from "../Pattern";
  * }
  */
 export default function Alphanumeric<T extends $.Objects.Optional<string>>(
-  props?: Decorator.PartialProps
+  props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),

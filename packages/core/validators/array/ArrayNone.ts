@@ -22,16 +22,14 @@ import $ from "../../src/types";
  * This example validates that none of the elements in the `nonNegativeNumbers` array are negative, associates it with a custom validation group, and provides a custom error message if the validation fails.
  */
 export default function ArrayNone<K, T extends K[]>(
-  props: Decorator.ImpartialProps<{
-    test: $.Objects.ArrayPredicate<K>;
-  }>
+  props: Decorator.Props.MultiArgsMessageRequired<$.Objects.ArrayPredicate<K>>
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArrayNone",
       message: Decorator.message(props, "", locale),
-      valid: !(array ?? []).some(props.test),
+      valid: !(array ?? []).some(props.value),
     }),
   });
 }

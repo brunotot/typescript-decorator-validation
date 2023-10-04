@@ -31,18 +31,9 @@ import $ from "../../src/types";
  * }
  */
 export default function ValueRange<T extends $.Objects.Optional<number>>(
-  props: Decorator.PartialProps<
-    {
-      min: number;
-      max: number;
-    },
-    {
-      min: number;
-      max: number;
-    }
-  >
+  props: Decorator.Props.MultiArgsMessageOptional<readonly [number, number]>
 ) {
-  const { min, max } = props;
+  const [min, max] = Decorator.args(props);
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (value, _, locale) => ({

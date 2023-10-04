@@ -33,7 +33,7 @@ import { testRegex } from "./../../regex/Pattern";
  * }
  */
 export default function Email<T extends $.Objects.Optional<string>>(
-  props?: Decorator.PartialProps
+  props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),

@@ -18,7 +18,7 @@ const errorData: Type[] = [
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @ArraySizeRange({ min: 3, max: 5 })
+  @ArraySizeRange({ value: [3, 5] })
   value!: Type;
 }
 

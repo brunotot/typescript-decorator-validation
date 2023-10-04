@@ -22,16 +22,14 @@ import $ from "../../src/types";
  * This example validates that all elements in the `positiveNumbers` array are greater than 0, associates it with a custom validation group, and provides a custom error message if the validation fails.
  */
 export default function ArrayEvery<K, T extends K[]>(
-  props: Decorator.ImpartialProps<{
-    test: $.Objects.ArrayPredicate<K>;
-  }>
+  props: Decorator.Props.MultiArgsMessageRequired<$.Objects.ArrayPredicate<K>>
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArrayEvery",
       message: Decorator.message(props, "", locale),
-      valid: (array ?? []).every(props.test),
+      valid: (array ?? []).every(props.value),
     }),
   });
 }

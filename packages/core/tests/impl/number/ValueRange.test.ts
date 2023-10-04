@@ -12,7 +12,7 @@ const errorData: Type[] = [4, 11, -10, 100];
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @ValueRange({ min: 5, max: 10 })
+  @ValueRange({ value: [5, 10] })
   value: Type;
 }
 

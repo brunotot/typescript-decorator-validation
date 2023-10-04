@@ -12,7 +12,7 @@ const errorData: Type[] = ["", "12345678901", "1234", undefined, null];
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @Length({ min: 5, max: 10, message: "Error" })
+  @Length({ value: [5, 10], message: "Error" })
   value: Type;
 }
 

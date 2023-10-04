@@ -30,9 +30,9 @@ import $ from "../../src/types";
  * }
  */
 export default function MaxLength<T extends $.Objects.Optional<string>>(
-  props: Decorator.PartialProps<number>
+  props: Decorator.Props.MultiArgsMessageOptional<number>
 ) {
-  const max = typeof props === "number" ? props : props.value;
+  const max = Decorator.args(props);
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (value, _, locale) => ({

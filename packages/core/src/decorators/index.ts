@@ -1,11 +1,26 @@
 import Localization from "../localization";
 import ValidationConfigurer from "../reflection/service/impl/FieldValidatorMetaService";
 import Objects from "../types/namespace/objects.namespace";
-import ValidatorServiceNs from "./kind/derived/FieldValidatorDecorator";
+import ClassDecorator from "./kind/ClassDecorator";
+import FieldDecorator from "./kind/FieldDecorator";
+import ClassValidatorDecorator from "./kind/derived/ClassValidatorDecorator";
+import FieldValidatorDecorator from "./kind/derived/FieldValidatorDecorator";
+import DecoratorProps from "./props";
+
 /**
  * A collection of types and interfaces for creating and handling decorators.
  */
 namespace Decorator {
+  export import Props = DecoratorProps;
+
+  export import FieldBaseService = FieldDecorator;
+
+  export import ClassBaseService = ClassDecorator;
+
+  export import FieldValidatorService = FieldValidatorDecorator;
+
+  export import ClassValidatorService = ClassValidatorDecorator;
+
   export type ContextKind =
     | "class"
     | "method"
@@ -25,7 +40,8 @@ namespace Decorator {
   ) => void;
 
   /**
-   * Context object passed to a decorator function.
+   * Context object passed to a decorator functio
+  const [min, max] = Array.isArray(props) ? props : props.valuen.
    *
    * @typeParam Accept - The type of value the context accepts.
    */
@@ -52,47 +68,6 @@ namespace Decorator {
   ) => void;
 
   /**
-   * Properties that can be partially applied to a decorator.
-   *
-   * @typeParam T - The type of the object being decorated.
-   */
-  export type ImpartialProps<T extends object = {}> = T & {
-    groups?: string | string[];
-    message: string;
-  };
-
-  /**
-   * Properties that can be partially applied to a decorator, including the value.
-
-   *
-   * @typeParam V - The type of the value being decorated.
-   * @typeParam T - The type of the object being decorated.
-   */
-  export type PartialProps<V = string, T extends object = ValueProps<V>> =
-    | V
-    | (T & BaseProps);
-
-  export type BaseProps = {
-    groups?: string | string[];
-    message?: string;
-  };
-
-  /**
-   * Properties for specifying the value in a decorator.
-   *
-   * @typeParam T - The type of the value being decorated.
-   */
-  export type ValueProps<T> = T extends string
-    ? {}
-    : {
-        value: T;
-      };
-
-  // export import DecoratorService = DecoratorServiceNs;
-
-  export import ValidatorService = ValidatorServiceNs;
-
-  /**
    * Extracts a message from the provided decorator properties.
    *
    * @typeParam T - The type of the object being validated.
@@ -102,8 +77,8 @@ namespace Decorator {
    *
    * @returns The extracted message or the default message if none is found.
    */
-  export function message<T extends object>(
-    provider: Decorator.PartialProps<any, T> | undefined,
+  export function message(
+    provider: Props.GenericModel,
     defaultMessage: string,
     locale: Localization.Locale
   ): string {
@@ -125,18 +100,24 @@ namespace Decorator {
    *
    * @returns An array of unique validation groups.
    */
-  export function groups<T extends object>(
-    provider: Decorator.PartialProps<any, T>
-  ): string[] {
-    return Array.isArray(provider)
-      ? Objects.unique(provider)
-      : typeof provider === "object"
+  export function groups(provider: Props.GenericModel): string[] {
+    return isDecoratorProps(provider) && "groups" in provider
       ? Array.isArray(provider.groups)
         ? Objects.unique(provider.groups)
         : provider.groups
         ? [provider.groups]
         : []
       : [];
+  }
+
+  export function args<T>(props: Props.MultiArgs<T>, key: string = "value"): T {
+    return isDecoratorProps(props) && key in (props as any)
+      ? (props as any)[key]
+      : (props as T);
+  }
+
+  function isDecoratorProps(props: Props.GenericModel): boolean {
+    return !!props && !Array.isArray(props) && typeof props === "object";
   }
 }
 

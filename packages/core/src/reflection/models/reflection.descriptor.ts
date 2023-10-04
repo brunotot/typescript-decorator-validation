@@ -180,7 +180,9 @@ namespace ReflectionDescriptor {
 
       // Check if the field is a function
       if (typeof value === "function") {
-        return getNativeStrategy(value());
+        return getNativeStrategy(
+          value.bind(this.hostDefault ?? new this.hostClass!())()
+        );
       }
 
       return getNativeStrategy(value);

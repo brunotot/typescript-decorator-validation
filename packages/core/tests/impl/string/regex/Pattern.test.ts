@@ -13,7 +13,7 @@ const errorData: Type[] = ["abc@", "123", "123a@"];
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @Pattern({ message: "", regex: RegexConst.ALPHA })
+  @Pattern({ message: "", value: { regex: RegexConst.ALPHA } })
   value: Type;
 }
 

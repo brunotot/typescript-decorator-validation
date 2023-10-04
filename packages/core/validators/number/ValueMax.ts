@@ -30,14 +30,9 @@ import $ from "../../src/types";
  * }
  */
 export default function ValueMax<T extends $.Objects.Optional<number>>(
-  props: Decorator.PartialProps<
-    number,
-    {
-      value: number;
-    }
-  >
+  props: Decorator.Props.MultiArgsMessageOptional<number>
 ) {
-  const max = typeof props === "number" ? props : props.value;
+  const max = Decorator.args(props);
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (value, _, locale) => ({

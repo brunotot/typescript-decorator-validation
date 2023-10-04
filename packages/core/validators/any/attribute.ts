@@ -12,11 +12,11 @@ import Types from "../../src/types/namespace/types.namespace";
  * @example
  * // Example 3: Validating an array of objects
  * class ShoppingCart {
- *   //@valid(Item)
+ *   //@attribute(Item)
  *   items: Item[];
  * }
  */
-export default function valid<
+export default function attribute<
   T extends TdvCore.Objects.Optional<object | object[]>
 >(clazz: Types.Class<any>): FieldDecorator.Instance<T> {
   return FieldDecorator.build<any>((meta, name) => {

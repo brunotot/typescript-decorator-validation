@@ -2,7 +2,7 @@ import EventEmitter from "events";
 import Localization from "../../../../localization";
 import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
 import Validation from "../../../../types/namespace/validation.namespace";
-import ValidationStrategy from "../../strategy";
+import AbstractValidationStrat from "../../strategy";
 import ns from "./types";
 
 /**
@@ -10,9 +10,9 @@ import ns from "./types";
  *
  * @typeParam F - The type of the field being validated.
  *
- * @extends ValidationStrategy<F, Validation.Result[], string[]>
+ * @extends AbstractValidationStrat<F, Validation.Result[], string[]>
  */
-export default class PrimitiveStrat<F> extends ValidationStrategy<
+export default class PrimitiveStrat<F> extends AbstractValidationStrat<
   F,
   ns.DetailedErrors,
   ns.SimpleErrors

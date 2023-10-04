@@ -51,18 +51,13 @@ function validateDigits(
  * This example applies the `Digits` validator to the `price` property to ensure it has at most 4 digits in the integer part and 2 digits in the fractional part.
  */
 export default function Digits<T extends $.Objects.Optional<number>>(
-  props: Decorator.PartialProps<
-    {
-      maxInteger?: number;
-      maxFraction?: number;
-    },
-    {
-      maxInteger?: number;
-      maxFraction?: number;
-    }
-  >
+  props: Decorator.Props.MultiArgsMessageOptional<{
+    maxInteger?: number;
+    maxFraction?: number;
+  }>
 ) {
-  const { maxInteger = Infinity, maxFraction = Infinity } = props;
+  const { maxInteger = Infinity, maxFraction = Infinity } =
+    Decorator.args(props);
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (value, _, locale) => ({

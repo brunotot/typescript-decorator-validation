@@ -9,7 +9,8 @@
       "runtimeArgs": ["-r", "ts-node/register"],
       "cwd": "${workspaceRoot}",
       "protocol": "inspector",
-      "internalConsoleOptions": "openOnSessionStart"
+      "internalConsoleOptions": "openOnSessionStart",
+      "runtimeExecutable": "/home/bruno/.nvm/versions/node/v18.16.0/bin/node"
     }
   ]
 }

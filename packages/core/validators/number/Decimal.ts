@@ -20,7 +20,7 @@ import $ from "../../src/types";
  * This example applies the `Decimal` validator to the `price` property to ensure it is a decimal number.
  */
 export default function Decimal<T extends $.Objects.Optional<number>>(
-  props?: Decorator.PartialProps<number>
+  props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),

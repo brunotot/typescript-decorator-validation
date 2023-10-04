@@ -1,7 +1,7 @@
 import EventEmitter from "events";
 import Localization from "../../../../localization";
 import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
-import ValidationStrategy from "../../strategy";
+import AbstractValidationStrat from "../../strategy";
 import ns from "./types";
 
 /**
@@ -9,9 +9,9 @@ import ns from "./types";
  *
  * @typeParam F - The type of the field being validated, which is expected to be an array of primitives.
  *
- * @extends ValidationStrategy<F, PrimitiveArrayDetailedErrors, PrimitiveArraySimpleErrors>
+ * @extends AbstractValidationStrat<F, PrimitiveArrayDetailedErrors, PrimitiveArraySimpleErrors>
  */
-export default class PrimitiveArrayStrat<F> extends ValidationStrategy<
+export default class PrimitiveArrayStrat<F> extends AbstractValidationStrat<
   F,
   ns.DetailedErrors,
   ns.SimpleErrors

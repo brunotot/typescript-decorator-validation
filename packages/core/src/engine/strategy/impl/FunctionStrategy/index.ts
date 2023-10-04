@@ -3,7 +3,7 @@ import Localization from "../../../../localization";
 import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
 import Types from "../../../../types/namespace/types.namespace";
 import Validation from "../../../../types/namespace/validation.namespace";
-import ValidationStrategy from "../../strategy";
+import AbstractValidationStrat from "../../strategy";
 import ns from "./types";
 
 /**
@@ -11,9 +11,9 @@ import ns from "./types";
  *
  * @typeParam F - The type of the field being validated.
  *
- * @extends ValidationStrategy<F, Validation.Result[], string[]>
+ * @extends AbstractValidationStrat<F, Validation.Result[], string[]>
  */
-export default class FunctionStrat<F> extends ValidationStrategy<
+export default class FunctionStrat<F> extends AbstractValidationStrat<
   F,
   ns.DetailedErrors,
   ns.SimpleErrors
@@ -49,7 +49,8 @@ export default class FunctionStrat<F> extends ValidationStrategy<
     value: Types.Function,
     _context: any
   ): [ns.DetailedErrors, ns.SimpleErrors] {
-    const result: Validation.Result | Promise<Validation.Result> = value();
+    const result: Validation.Result | Promise<Validation.Result> =
+      value.bind(_context)();
     if (result instanceof Promise) {
       result.then((validationResult) => {
         this.eventEmitter.emit("asyncValidationComplete", {

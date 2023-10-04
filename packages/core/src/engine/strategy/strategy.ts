@@ -9,13 +9,13 @@ import ValidationEngineNs from "../../types/namespace/validation-engine.namespac
 import Validation from "../../types/namespace/validation.namespace";
 
 /**
- * The `ValidationStrategy` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.
+ * The `AbstractValidationStrat` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.
  *
  * @typeParam TClass The type of the field being validated.
  * @typeParam TDetailedResult The detailed result of the validation.
  * @typeParam TSimpleResult A simplified version of the validation result.
  */
-export default abstract class ValidationStrategy<
+export default abstract class AbstractValidationStrat<
   TClass = any,
   TDetailedResult = any,
   TSimpleResult = any

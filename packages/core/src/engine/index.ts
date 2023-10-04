@@ -11,18 +11,6 @@ import ObjectConverter from "../utils/ObjectConverter";
 import CacheMap from "./models/cache.map";
 import StrategyFactory from "./strategy/factory";
 
-type AsyncEventResponseProps<TClass> = {
-  errors: StrategyFactory.Impl.Errors<TClass>;
-  detailedErrors: StrategyFactory.Impl.DetailedErrors<TClass>;
-};
-
-type AsyncEventHandlerProps<TClass> = {
-  key: keyof TClass;
-  value: Validation.Result;
-};
-
-type AsyncEventHandler<TClass> = (data: AsyncEventHandlerProps<TClass>) => void;
-
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
 
 /**
@@ -36,7 +24,7 @@ type AsyncEventHandler<TClass> = (data: AsyncEventHandlerProps<TClass>) => void;
  * It also leverages `FieldValidatorMetaService` to retrieve metadata about the class being processed.
  */
 export default class ValidationEngine<TClass> {
-  #eventListener!: AsyncEventHandler<TClass>;
+  #eventListener!: ns.AsyncEventHandler<TClass>;
   #eventEmitter: EventEmitter;
   #fieldValidatorMetaService: FieldValidatorMetaService;
   #groups: string[];
@@ -70,10 +58,13 @@ export default class ValidationEngine<TClass> {
   }
 
   public registerAsync(
-    handler: (props: AsyncEventResponseProps<TClass>) => void
+    handler: (props: ns.AsyncEventResponseProps<TClass>) => void
   ): void {
     this.unregisterAsync();
-    this.#eventListener = ({ key, value }: AsyncEventHandlerProps<TClass>) => {
+    this.#eventListener = ({
+      key,
+      value,
+    }: ns.AsyncEventHandlerProps<TClass>) => {
       const { valid } = value;
       const currentError: any = this.#cacheMap.get("errors");
       const currentDetailedError: any = this.#cacheMap.get("detailedErrors");

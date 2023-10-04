@@ -30,9 +30,9 @@ import $ from "../../src/types";
  * }
  */
 export default function ExactLength<T extends $.Objects.Optional<string>>(
-  props: Decorator.PartialProps<number>
+  props: Decorator.Props.MultiArgsMessageOptional<number>
 ) {
-  const exact = typeof props === "number" ? props : props.value;
+  const exact = Decorator.args(props);
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (value, _, locale) => ({

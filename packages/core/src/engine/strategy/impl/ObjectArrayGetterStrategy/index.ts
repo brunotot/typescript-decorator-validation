@@ -1,7 +1,7 @@
 import EventEmitter from "events";
 import Localization from "../../../../localization";
 import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
-import ValidationStrategy from "../../strategy";
+import AbstractValidationStrat from "../../strategy";
 import ObjectStrat from "../ObjectStrategy";
 import ns from "./types";
 
@@ -10,13 +10,11 @@ import ns from "./types";
  *
  * @typeParam F - The type of the field being validated, which is expected to be an array of objects.
  *
- * @extends ValidationStrategy<F, ObjectArrayGetterDetailedErrors<F>, ObjectArrayGetterSimpleErrors<F>>
+ * @extends AbstractValidationStrat<F, ObjectArrayGetterDetailedErrors<F>, ObjectArrayGetterSimpleErrors<F>>
  */
-export default class ObjectArrayGetterStrategy<F> extends ValidationStrategy<
-  F,
-  ns.DetailedErrors<F>,
-  ns.SimpleErrors<F>
-> {
+export default class ObjectArrayGetterStrategy<
+  F
+> extends AbstractValidationStrat<F, ns.DetailedErrors<F>, ns.SimpleErrors<F>> {
   /**
    * Initializes the `ObjectArrayGetterStrategy` class by calling the superclass constructor with the provided descriptor and default value.
    *

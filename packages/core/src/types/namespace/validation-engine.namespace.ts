@@ -2,11 +2,26 @@ import CacheMap from "../../engine/models/cache.map";
 import StrategyFactory from "../../engine/strategy/factory";
 import Localization from "../../localization";
 import Helper from "./helper.namespace";
+import Validation from "./validation.namespace";
 
 /**
  * A collection of types and interfaces related to entity processing and validation.
  */
 namespace ValidationEngineNs {
+  export type AsyncEventResponseProps<TClass> = {
+    errors: StrategyFactory.Impl.Errors<TClass>;
+    detailedErrors: StrategyFactory.Impl.DetailedErrors<TClass>;
+  };
+
+  export type AsyncEventHandlerProps<TClass> = {
+    key: keyof TClass;
+    value: Validation.Result;
+  };
+
+  export type AsyncEventHandler<TClass> = (
+    data: AsyncEventHandlerProps<TClass>
+  ) => void;
+
   /**
    * Configuration options for entity processing.
    *

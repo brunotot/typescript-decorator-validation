@@ -26,7 +26,7 @@ import $ from "../../src/types";
  * }
  */
 export default function Required<T extends $.Objects.Optional>(
-  props?: Decorator.PartialProps
+  props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),

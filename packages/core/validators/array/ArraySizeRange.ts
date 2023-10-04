@@ -23,20 +23,9 @@ import TranslationService from "../../src/localization/service/translation.servi
  * This example validates that the `myArray` property has a size between 2 and 5 elements, associates it with a custom validation group, and provides a custom error message if the validation fails.
  */
 export default function ArraySizeRange<K, T extends K[]>(
-  props: Decorator.PartialProps<
-    {
-      min: number;
-      max: number;
-    },
-    {
-      min: number;
-      max: number;
-    }
-  >
+  props: Decorator.Props.MultiArgsMessageOptional<readonly [number, number]>
 ) {
-  const min = typeof props === "number" ? props : props.min;
-  const max = typeof props === "number" ? props : props.max;
-
+  const [min, max] = Decorator.args(props);
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (array, _, locale) => ({

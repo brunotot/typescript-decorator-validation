@@ -8,7 +8,7 @@ import StringUtils from "../../src/utils/StringUtils";
 export default function ValidDateRange<T extends ClassDecorator.Type>(
   startDateFieldName: string,
   endDateFieldName: string,
-  props?: Decorator.BaseProps
+  props?: Decorator.Props.Base & Decorator.Props.MessageOptional
 ): ClassDecorator.Instance<Types.UnwrapClass<T>> {
   return ClassValidatorDecorator.build({
     groups: Decorator.groups(props),

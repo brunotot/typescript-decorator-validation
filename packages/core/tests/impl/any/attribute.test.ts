@@ -1,6 +1,6 @@
 import $ from "../../../src/types";
 import validators from "../../../validators";
-import valid from "../../../validators/any/valid";
+import attribute from "../../../validators/any/attribute";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
@@ -41,7 +41,7 @@ class NestedModel {
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @valid(NestedModel)
+  @attribute(NestedModel)
   value: Type;
 }
 

@@ -1,8 +1,6 @@
-import Falsy from "./any/Falsy";
 import Required from "./any/Required";
-import Rule from "./any/Rule";
-import Truthy from "./any/Truthy";
-import valid from "./any/valid";
+import attribute from "./any/attribute";
+import validate from "./any/validate";
 import ArrayContains from "./array/ArrayContains";
 import ArrayEmpty from "./array/ArrayEmpty";
 import ArrayEvery from "./array/ArrayEvery";
@@ -15,6 +13,9 @@ import ArraySizeRange from "./array/ArraySizeRange";
 import ArraySome from "./array/ArraySome";
 import ArrayUnique from "./array/ArrayUnique";
 import foreach from "./array/foreach";
+import AssertFalse from "./boolean/AssertFalse";
+import AssertTrue from "./boolean/AssertTrue";
+import ValidDateRange from "./class/ValidDateRange";
 import FutureDate from "./date/FutureDate";
 import PastDate from "./date/PastDate";
 import TodayDate from "./date/TodayDate";
@@ -44,8 +45,6 @@ import URL from "./string/regex/impl/URL";
 import Uppercase from "./string/regex/impl/Uppercase";
 
 const any = {
-  Truthy,
-  Falsy,
   Required,
 };
 
@@ -62,12 +61,12 @@ const array = {
   ArraySizeMax,
   ArraySizeMin,
   ArraySizeRange,
-  foreach,
 };
 
 const boolean = {
-  Truthy,
-  Falsy,
+  ...any,
+  AssertTrue,
+  AssertFalse,
 };
 
 const number = {
@@ -84,7 +83,7 @@ const number = {
   Positive,
 };
 
-const date = {
+const Date = {
   ...any,
   FutureDate,
   PastDate,
@@ -109,10 +108,6 @@ const string = {
   Alphanumeric,
 };
 
-const nested = {
-  valid,
-};
-
 /**
  * A collection of predefined decorated validators grouped and sorted by variable types
  */
@@ -122,9 +117,13 @@ const validators = {
   boolean,
   number,
   string,
-  date,
-  nested,
-  Rule,
+  Date,
+  validate,
+  attribute,
+  foreach,
+  class: {
+    ValidDateRange,
+  },
 };
 
 export default validators;

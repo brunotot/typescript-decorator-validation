@@ -20,7 +20,7 @@ import $ from "../../src/types";
  * This example applies the `Negative` validator to the `debt` property to ensure it is a negative number.
  */
 export default function Negative<T extends $.Objects.Optional<number>>(
-  props?: Decorator.PartialProps
+  props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),

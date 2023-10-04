@@ -1,7 +1,7 @@
 import EventEmitter from "events";
 import Localization from "../../../../localization";
 import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
-import ValidationStrategy from "../../strategy";
+import AbstractValidationStrat from "../../strategy";
 import ns from "./types";
 
 /**
@@ -9,9 +9,9 @@ import ns from "./types";
  *
  * @typeParam F - The type of the field being validated, which is expected to be an object.
  *
- * @extends ValidationStrategy<F, ObjectDetailedErrors<F>, ObjectSimpleErrors<F>>
+ * @extends AbstractValidationStrat<F, ObjectDetailedErrors<F>, ObjectSimpleErrors<F>>
  */
-export default class ObjectStrat<F> extends ValidationStrategy<
+export default class ObjectStrat<F> extends AbstractValidationStrat<
   F,
   ns.DetailedErrors<F>,
   ns.SimpleErrors<F>

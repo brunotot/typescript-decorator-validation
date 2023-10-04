@@ -20,7 +20,7 @@ import $ from "../../src/types";
  * This example applies the `TodayDate` validator to the `dueDate` property to ensure it is set to today's date.
  */
 export default function TodayDate<T extends $.Objects.Optional<Date>>(
-  props?: Decorator.PartialProps
+  props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),

@@ -1,7 +1,6 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
 
 /**
  * Creates a validator decorator for falsy value validation.
@@ -14,30 +13,30 @@ import $ from "../../src/types";
  * @example
  * // Example 1: Basic usage to validate if a value is falsy
  * class User {
- *   //@Falsy()
+ *   //@AssertFalse()
  *   isActive: boolean;
  * }
  *
  * @example
  * // Example 2: Custom error message
  * class AppConfig {
- *   //@Falsy({ message: "App is not disabled" })
+ *   //@AssertFalse({ message: "App is not disabled" })
  *   isDisabled: boolean;
  * }
  */
-export default function Falsy<T extends $.Objects.Optional>(
-  props?: Decorator.PartialProps
+export default function AssertFalse<T extends boolean>(
+  props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (value, _, locale) => ({
-      key: "Falsy",
+      key: "AssertFalse",
+      valid: !value,
       message: Decorator.message(
         props,
-        TranslationService.translate(locale, "Falsy"),
+        TranslationService.translate(locale, "AssertFalse"),
         locale
       ),
-      valid: !value,
     }),
   });
 }

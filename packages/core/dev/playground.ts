@@ -3,6 +3,7 @@ import Helper from "../src/types/namespace/helper.namespace";
 import Validation from "../src/types/namespace/validation.namespace";
 import ValidDateRange from "../validators/class/ValidDateRange";
 import decorate from "../validators/index";
+
 class AddressForm {
   @decorate.any.Required()
   street!: string;
@@ -66,15 +67,13 @@ class JobApplicationForm {
 
   async isCompoundValid(): Promise<Validation.Result> {
     return new Promise((resolve) => {
-      setTimeout(
-        () =>
-          resolve({
-            key: "",
-            message: "Full name must be minimally 8 characters long.",
-            valid: this.fullName.length > 8,
-          }),
-        3000
-      );
+      setTimeout(() => {
+        resolve({
+          key: "",
+          message: "Full name must be minimally 8 characters long.",
+          valid: this.fullName?.length > 8,
+        });
+      }, 3000);
     });
   }
 }
@@ -111,4 +110,4 @@ const engine = new ValidationEngine(JobApplicationForm);
 
 const result = engine.validate(jobApplicationForm);
 console.log(result.errors.isCompoundValid);
-debugger;
+//debugger;

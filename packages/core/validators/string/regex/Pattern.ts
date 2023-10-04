@@ -39,19 +39,18 @@ export function testRegex<T extends $.Objects.Optional<string>>(
  * }
  */
 export default function Pattern<T extends $.Objects.Optional<string>>(
-  props: Decorator.ImpartialProps<{
+  props: Decorator.Props.MultiArgsMessageRequired<{
     regex: RegExp;
-    message: string;
     key?: string;
-    groups?: string | string[];
   }>
 ) {
+  const { regex, key } = Decorator.args(props);
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props.groups),
     validate: (value, _, locale) => ({
-      key: props.key ?? "Pattern",
+      key: key ?? "Pattern",
       message: Decorator.message(props, "", locale),
-      valid: testRegex(props.regex, value),
+      valid: testRegex(regex, value),
     }),
   });
 }

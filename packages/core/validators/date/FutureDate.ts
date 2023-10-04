@@ -20,7 +20,7 @@ import $ from "../../src/types";
  * This example applies the `FutureDate` validator to the `eventDate` property to ensure it is a date in the future.
  */
 export default function FutureDate<T extends $.Objects.Optional<Date>>(
-  props?: Decorator.PartialProps
+  props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),

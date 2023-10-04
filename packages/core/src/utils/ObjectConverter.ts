@@ -30,10 +30,6 @@ namespace ObjectConverter {
       }
     }
 
-    if (!clazz) {
-      console.log(clazz, object);
-    }
-
     const instance = new clazz();
     Object.entries(data).forEach(([k, v]) => (instance[k] = v));
     return instance;

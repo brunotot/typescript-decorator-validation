@@ -1,7 +1,7 @@
 import EventEmitter from "events";
 import Localization from "../../../../localization";
 import ReflectionDescriptor from "../../../../reflection/models/reflection.descriptor";
-import ValidationStrategy from "../../strategy";
+import AbstractValidationStrat from "../../strategy";
 import ObjectStrat from "../ObjectStrategy";
 import ns from "./types";
 
@@ -10,9 +10,9 @@ import ns from "./types";
  *
  * @typeParam F - The type of the field being validated, which is expected to be an array of objects.
  *
- * @extends ValidationStrategy<F, ObjectArrayDetailedErrors<F>, ObjectArraySimpleErrors<F>>
+ * @extends AbstractValidationStrat<F, ObjectArrayDetailedErrors<F>, ObjectArraySimpleErrors<F>>
  */
-export default class ObjectArrayStrategy<F> extends ValidationStrategy<
+export default class ObjectArrayStrategy<F> extends AbstractValidationStrat<
   F,
   ns.DetailedErrors<F>,
   ns.SimpleErrors<F>

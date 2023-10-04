@@ -1,5 +1,5 @@
 import $ from "../../../src/types";
-import Rule from "../../../validators/any/Rule";
+import validate from "../../../validators/any/validate";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
@@ -12,7 +12,7 @@ const errorData: Type[] = ["aaaaaaaaaaa", "test"];
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @Rule((v) => ({
+  @validate((v) => ({
     key: "CustomRule",
     message: "Invalid",
     valid: !v || (v.length > 5 && v.toLowerCase().includes("test")),

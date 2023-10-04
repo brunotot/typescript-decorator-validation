@@ -21,7 +21,7 @@ import TranslationService from "../../src/localization/service/translation.servi
  * This example validates that the `emptyArray` is an empty array and associates it with a custom validation group and a custom error message.
  */
 export default function ArrayEmpty<K, T extends K[]>(
-  props?: Decorator.PartialProps
+  props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),

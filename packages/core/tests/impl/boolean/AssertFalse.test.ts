@@ -1,19 +1,18 @@
-import $ from "../../../src/types";
-import Falsy from "../../../validators/any/Falsy";
+import AssertFalse from "../../../validators/boolean/AssertFalse";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Objects.Optional<any>;
+type Type = boolean;
 const type = "any";
-const identifier = "Falsy";
-const successData: Type[] = [false, "", 0, undefined, null];
-const errorData: Type[] = [true, "X", []];
+const identifier = "AssertFalse";
+const successData: Type[] = [false];
+const errorData: Type[] = [true];
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @Falsy()
-  value: Type;
+  @AssertFalse()
+  value!: Type;
 }
 
 /*** Test ***/

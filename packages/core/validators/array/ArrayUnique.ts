@@ -4,13 +4,6 @@ import TranslationService from "../../src/localization/service/translation.servi
 import $ from "../../src/types";
 import Objects from "../../src/types/namespace/objects.namespace";
 
-const DEFAULTS: Decorator.ImpartialProps<{
-  hash?: $.Objects.Hash<any>;
-}> = {
-  hash: $.Objects.hash,
-  groups: [],
-} as any;
-
 function isArrayUnique<T>(arr: T[], equals: Objects.Equals<T>): boolean {
   const set = new Set<T>();
   for (const val of arr) {
@@ -44,16 +37,9 @@ function isArrayUnique<T>(arr: T[], equals: Objects.Equals<T>): boolean {
  * This example validates that all elements in the `names` array are unique when compared using a case-insensitive hash function and provides a custom error message if the validation fails.
  */
 export default function ArrayUnique<K, T extends K[]>(
-  props: Decorator.PartialProps<
-    string,
-    {
-      hash?: $.Objects.Hash<K>;
-    }
-  > = DEFAULTS
+  props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
-  const hashFn =
-    typeof props === "string" ? $.Objects.hash : props.hash ?? $.Objects.hash;
-
+  const hashFn = $.Objects.hash;
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (array, _, locale) => ({

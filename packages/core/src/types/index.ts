@@ -4,7 +4,9 @@
  */
 import DecoratorNs from "./../decorators";
 import StrategyFactoryNs from "./../engine/strategy/factory";
+import StrategyTypesNamespace from "./../engine/strategy/types";
 import ReflectionDescriptorNs from "./../reflection/models/reflection.descriptor";
+import ArraysNamespace from "./namespace/arrays.namespace";
 import ConditionNamespace from "./namespace/condition.namespace";
 import FactoryNamespace from "./namespace/factory.namespace";
 import HelperNamespace from "./namespace/helper.namespace";
@@ -38,7 +40,7 @@ namespace Core {
   export import Helper = HelperNamespace;
 
   /**
-   * The `Types` namespace defines common data types used throughout the application.
+   * The `arrays` namespace defines common data types used throughout the application.
    */
   export import Types = TypesNamespace;
 
@@ -54,9 +56,13 @@ namespace Core {
 
   export import Decorator = DecoratorNs;
 
+  export import StrategyTypes = StrategyTypesNamespace;
+
   export import StrategyFactory = StrategyFactoryNs;
 
   export import ReflectionDescriptor = ReflectionDescriptorNs;
+
+  export import Arrays = ArraysNamespace;
 }
 
 export default Core;

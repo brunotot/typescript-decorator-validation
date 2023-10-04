@@ -29,7 +29,7 @@ import $ from "../../src/types";
  * }
  */
 export default function NonPositive<T extends $.Objects.Optional<number>>(
-  props?: Decorator.PartialProps
+  props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),

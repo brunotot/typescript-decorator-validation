@@ -1,7 +1,6 @@
 import Decorator from "../../src/decorators";
 import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
 import TranslationService from "../../src/localization/service/translation.service";
-import $ from "../../src/types";
 
 /**
  * Creates a decorator to validate that a value is truthy.
@@ -13,27 +12,27 @@ import $ from "../../src/types";
  * @example
  * // Example 1: Basic usage
  * class User {
- *   //@Truthy()
+ *   //@AssertTrue()
  *   isActive: boolean;
  * }
  *
  * @example
  * // Example 2: Using a custom error message
  * class Product {
- *   //@Truthy({ message: "Product must be available." })
+ *   //@AssertTrue({ message: "Product must be available." })
  *   available: boolean;
  * }
  */
-export default function Truthy<T extends $.Objects.Optional>(
-  props?: Decorator.PartialProps
+export default function AssertTrue<T extends boolean>(
+  props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (value, _, locale) => ({
-      key: "Truthy",
+      key: "AssertTrue",
       message: Decorator.message(
         props,
-        TranslationService.translate(locale, "Truthy"),
+        TranslationService.translate(locale, "AssertTrue"),
         locale
       ),
       valid: !!value,

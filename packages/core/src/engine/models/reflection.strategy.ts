@@ -17,7 +17,7 @@ import PrimitiveGetterStrat from "../strategy/impl/PrimitiveGetterStrategy";
 import PrimitiveGetterStrategyType from "../strategy/impl/PrimitiveGetterStrategy/types";
 import PrimitiveStrat from "../strategy/impl/PrimitiveStrategy";
 import PrimitiveStrategyType from "../strategy/impl/PrimitiveStrategy/types";
-import ValidationStrategy from "../strategy/strategy";
+import AbstractValidationStrat from "../strategy/strategy";
 
 /**
  * A namespace responsible for exposing reflection-strategy-specific methods and types
@@ -61,7 +61,7 @@ namespace ReflectionStrategy {
    * reflection strategy type.
    */
   // prettier-ignore
-  export const ReflectionStrategyImpl: Record<ReflectionStrategyType, Types.Class<ValidationStrategy>> = {
+  export const ReflectionStrategyImpl: Record<ReflectionStrategyType, Types.Class<AbstractValidationStrat>> = {
     [ReflectionStrategy.unknown]: (() => {}) as any,
     [ReflectionStrategy.primitive]: PrimitiveStrat,
     [ReflectionStrategy.composite]: ObjectStrat,

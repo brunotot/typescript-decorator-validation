@@ -22,25 +22,19 @@ import TranslationService from "../../src/localization/service/translation.servi
  * This example validates that the `numbers` array contains the value 42 and associates it with custom validation groups and a custom error message.
  */
 export default function ArrayContains<K, T extends K[]>(
-  props: Decorator.PartialProps<
-    {
-      value: K;
-    },
-    {
-      value: K;
-    }
-  >
+  props: Decorator.Props.MultiArgsMessageOptional<K>
 ) {
+  const value = Decorator.args(props);
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArrayContains",
       message: Decorator.message(
         props,
-        TranslationService.translate(locale, "ArrayContains", props.value),
+        TranslationService.translate(locale, "ArrayContains", value),
         locale
       ),
-      valid: ((array ?? []) as any[]).includes(props.value),
+      valid: ((array ?? []) as any[]).includes(value),
     }),
   });
 }

@@ -20,7 +20,7 @@ import $ from "../../src/types";
  * This example applies the `Integer` validator to the `quantity` property to ensure it is an integer.
  */
 export default function Integer<T extends $.Objects.Optional<number>>(
-  props?: Decorator.PartialProps
+  props?: Decorator.Props.ZeroArgsMessageOptional
 ) {
   return FieldValidatorDecorator.build<T>({
     groups: Decorator.groups(props),
