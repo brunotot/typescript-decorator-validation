@@ -1,7 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * Creates a validator decorator for minimum length validation.
@@ -29,17 +26,17 @@ import Objects from "../../src/utilities/impl/Objects";
  *   username: string;
  * }
  */
-export default function MinLength<T extends Objects.Optional<string>>(
-  props: Decorator.Props.MultiArgsMessageOptional<number>
-) {
-  const min = Decorator.args(props);
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+export default function MinLength<
+  T extends API.Utilities.Objects.Optional<string>
+>(props: API.Decorator.Props.MultiArgsMessageOptional<number>) {
+  const min = API.Decorator.args(props);
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "MinLength",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "MinLength", min),
+        API.Localization.TranslationService.translate(locale, "MinLength", min),
         locale
       ),
       valid: (value ?? "").length >= min,

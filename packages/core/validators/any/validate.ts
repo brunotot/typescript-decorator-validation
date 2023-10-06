@@ -1,5 +1,4 @@
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import Validation from "../../src/engine";
+import API from "api";
 
 /**
  * A function which returns a decorated validator function built from a custom handler
@@ -27,13 +26,13 @@ import Validation from "../../src/engine";
  */
 const validate = <T>(
   props:
-    | Validation.Evaluator<T>
+    | API.Validation.Evaluator<T>
     | {
-        validate: Validation.Evaluator<T>;
+        validate: API.Validation.Evaluator<T>;
         groups?: string | string[];
       }
 ) => {
-  return FieldValidatorDecorator.build<T>({
+  return API.Decorator.FieldValidatorDecorator.build<T>({
     validate: "validate" in props ? props.validate : props,
     groups:
       "groups" in props

@@ -1,4 +1,5 @@
-import { Overrides, Reflection } from "../../..";
+import API, { Overrides } from "api";
+
 /**
  * A collection of types representing various data types.
  */
@@ -50,8 +51,15 @@ namespace Types {
 
   export type UnwrapClass<T> = T extends Types.Class<infer U> ? U : never;
 
-  export type UnwrapMetaStrategy<TStrategy extends Reflection.MetaStrategy> =
-    TStrategy extends Types.Class<infer TInferredClass> ? TInferredClass : any;
+  export type UnwrapMetaStrategy<
+    TStrategy extends API.Reflection.MetaStrategy
+  > = TStrategy extends Types.Class<infer TInferredClass>
+    ? TInferredClass
+    : any;
+
+  export type Prettify<T> = {
+    [K in keyof T]: T[K];
+  } & {};
 }
 
 export default Types;

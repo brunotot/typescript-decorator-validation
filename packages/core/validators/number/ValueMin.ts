@@ -1,7 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * ValueMin decorator for validating that a numeric value is greater than or equal to a specified minimum value.
@@ -29,17 +26,22 @@ import Objects from "../../src/utilities/impl/Objects";
  *   quantity?: number;
  * }
  */
-export default function ValueMin<T extends Objects.Optional<number>>(
-  props: Decorator.Props.MultiArgsMessageOptional<number>
-) {
-  const min = Decorator.args(props);
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+export default function ValueMin<
+  T extends API.Utilities.Objects.Optional<number>
+>(props: API.Decorator.Props.MultiArgsMessageOptional<number>) {
+  const min = API.Decorator.args(props);
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "ValueMin",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "ValueMin", min, value!),
+        API.Localization.TranslationService.translate(
+          locale,
+          "ValueMin",
+          min,
+          value!
+        ),
         locale
       ),
       valid: value == null ? true : value >= min,

@@ -11,6 +11,10 @@
   "compilerOptions": {
     "module": "ESNext",
     "outDir": "dist",
-    "declarationDir": "dist/types"
+    "declarationDir": "dist/types",
+    "baseUrl": "./", // or the base directory where your index.ts is
+    "paths": {
+      "api": ["index"]
+    }
   }
 }

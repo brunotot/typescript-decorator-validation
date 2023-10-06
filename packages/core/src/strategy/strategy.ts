@@ -1,7 +1,6 @@
+import API from "api";
+
 import EventEmitter from "events";
-import { Descriptor, Localization, Reflection, Validation } from "../../";
-import ClassValidatorMetaService from "../reflection/service/impl/ClassValidatorMetaService";
-import FieldValidatorMetaService from "../reflection/service/impl/FieldValidatorMetaService";
 
 /**
  * The `AbstractValidationStrat` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.
@@ -15,13 +14,13 @@ export default abstract class AbstractValidationStrat<
   TDetailedResult = any,
   TSimpleResult = any
 > {
-  #locale: Localization.Locale;
+  #locale: API.Localization.Locale;
   #groups: string[];
-  #engineCfg: Validation.Config<any>;
-  #classRules: Reflection.Rule<TClass>;
-  #descriptor: Descriptor.ReflectionDescriptor<any, any>;
+  #engineCfg: API.Validation.Config<any>;
+  #classRules: API.Reflection.Rule.Instance<TClass>;
+  #descriptor: API.Reflection.Descriptor.Instance<any, any>;
   #defaultParent: TClass;
-  #fieldDescriptor?: Descriptor.ReflectionDescriptor<TClass, any>;
+  #fieldDescriptor?: API.Reflection.Descriptor.Instance<TClass, any>;
   #eventEmitter: EventEmitter;
 
   /**
@@ -31,10 +30,10 @@ export default abstract class AbstractValidationStrat<
    * @param defaultValue The default value for the parent object.
    */
   constructor(
-    descriptor: Descriptor.ReflectionDescriptor<TClass, any>,
+    descriptor: API.Reflection.Descriptor.Instance<TClass, any>,
     defaultValue: TClass,
     groups: string[],
-    locale: Localization.Locale,
+    locale: API.Localization.Locale,
     eventEmitter: EventEmitter,
     asyncDelay: number
   ) {
@@ -49,15 +48,18 @@ export default abstract class AbstractValidationStrat<
       asyncDelay,
     };
     const host = descriptor.hostClass!;
-    this.#classRules = ClassValidatorMetaService.inject(host).data;
+    this.#classRules =
+      API.Reflection.Services.ClassValidatorMetaService.default.inject(
+        host
+      ).data;
   }
 
   protected get eventEmitter(): EventEmitter {
     return this.#eventEmitter;
   }
 
-  protected get fieldEngine(): Validation.Engine<TClass> {
-    return new Validation.Engine<TClass>(
+  protected get fieldEngine(): API.Validation.Engine<TClass> {
+    return new API.Validation.Engine<TClass>(
       this.#descriptor.thisClass!,
       this.engineCfg
     );
@@ -67,7 +69,7 @@ export default abstract class AbstractValidationStrat<
     return this.#engineCfg;
   }
 
-  protected get classRules(): Reflection.Rule<TClass> {
+  protected get classRules(): API.Reflection.Rule.Instance<TClass> {
     return this.#classRules;
   }
 
@@ -75,7 +77,7 @@ export default abstract class AbstractValidationStrat<
     return this.#groups;
   }
 
-  protected get locale(): Localization.Locale {
+  protected get locale(): API.Localization.Locale {
     return this.#locale;
   }
 
@@ -88,9 +90,10 @@ export default abstract class AbstractValidationStrat<
    */
   protected get fieldDescriptor() {
     if (this.#fieldDescriptor) return this.#fieldDescriptor;
-    this.#fieldDescriptor = FieldValidatorMetaService.inject(
-      this.#descriptor.hostClass!
-    ).getUntypedDescriptor(this.fieldName);
+    this.#fieldDescriptor =
+      API.Reflection.Services.FieldValidatorMetaService.default
+        .inject(this.#descriptor.hostClass!)
+        .getUntypedDescriptor(this.fieldName);
     return this.#fieldDescriptor;
   }
 
@@ -112,7 +115,7 @@ export default abstract class AbstractValidationStrat<
     return (this.#defaultParent as any)?.[this.fieldName];
   }
 
-  protected getErrorMessages(validations: Validation.Result[] = []) {
+  protected getErrorMessages(validations: API.Validation.Result[] = []) {
     const nonNullableValidations = validations ?? [];
     return Array.isArray(nonNullableValidations)
       ? nonNullableValidations.map((e) => e.message)

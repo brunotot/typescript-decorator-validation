@@ -1,5 +1,5 @@
-import Validation from "../../../engine";
-import Booleans from "../../../utilities/impl/Booleans";
+import API from "api";
+
 import StrategyFactory from "../../factory";
 
 namespace ObjectStrategyType {
@@ -27,19 +27,19 @@ namespace ObjectStrategyType {
    * - `data`: A `DetailedErrors<F>` object that represents detailed validation errors for each property in the object.
    */
   export type DetailedErrors<F> = {
-    root: Validation.Result[];
+    root: API.Validation.Result[];
     data: StrategyFactory.Impl.DetailedErrors<F>;
   };
 
   // prettier-ignore
   export type matches<T, K extends keyof T> = 
-    true extends Booleans.isGetter<T, K>
+    true extends API.Utilities.Booleans.isGetter<T, K>
       ? false
-  : Booleans.isObject<T[K]>;
+  : API.Utilities.Booleans.isObject<T[K]>;
 
   // prettier-ignore
   export type handler<T, K extends keyof T, R> = 
-    true extends Booleans.isUndefined<R> 
+    true extends API.Utilities.Booleans.isUndefined<R> 
       ? T[K] 
   : { root: R; data: StrategyFactory.evaluate<T[K], R> };
 }

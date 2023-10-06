@@ -1,6 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * Decorator for validating that at least one element in an array passes a specific test.
@@ -22,13 +20,15 @@ import Objects from "../../src/utilities/impl/Objects";
  * This example validates that at least one element in the `numbers` array is greater than 0 and provides a custom error message if the validation fails.
  */
 export default function ArraySome<K, T extends K[]>(
-  props: Decorator.Props.MultiArgsMessageRequired<Objects.ArrayPredicate<K>>
+  props: API.Decorator.Props.MultiArgsMessageRequired<
+    API.Utilities.Objects.ArrayPredicate<K>
+  >
 ) {
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArraySome",
-      message: Decorator.message(props, "", locale),
+      message: API.Decorator.message(props, "", locale),
       valid: (array ?? []).some(props.value),
     }),
   });

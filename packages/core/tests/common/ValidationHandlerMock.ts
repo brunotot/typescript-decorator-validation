@@ -1,4 +1,4 @@
-import ValidationEngine from "../../src/engine";
+import ValidationEngine from "../../src/validation";
 
 export interface IMock<T> {
   value: T;

@@ -1,10 +1,10 @@
-import TranslationServiceNs from "./service/translation.service";
+import TranslationServiceNamespace from "./service/translation.service";
 
 /**
  * A namespace which holds everything related to the localized output messages (like default error messages)
  */
 namespace Localization {
-  export import TranslationService = TranslationServiceNs;
+  export import TranslationService = TranslationServiceNamespace;
 
   /**
    * 2-character locale string representation

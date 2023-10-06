@@ -1,8 +1,5 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import Localization from "../../src/localization";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
+
 import RegexConst from "../shared/regex.constants";
 
 const PASSWORD_REGEXES = {
@@ -49,7 +46,9 @@ function isInvalid(text: string, rule: keyof typeof PASSWORD_REGEXES) {
  *   password: string;
  * }
  */
-export default function Password<T extends Objects.Optional<string>>(props?: {
+export default function Password<
+  T extends API.Utilities.Objects.Optional<string>
+>(props?: {
   uppercase: boolean;
   lowercase: boolean;
   numbers: boolean;
@@ -71,42 +70,58 @@ export default function Password<T extends Objects.Optional<string>>(props?: {
     };
   }
 
-  function isValid(str: string, locale: Localization.Locale) {
+  function isValid(str: string, locale: API.Localization.Locale) {
     if (str.length < length)
       return buildConstraintViolation(
-        TranslationService.translate(locale, "PasswordLength", length),
+        API.Localization.TranslationService.translate(
+          locale,
+          "PasswordLength",
+          length
+        ),
         false
       );
 
     if (uppercase && isInvalid(str, "uppercase"))
       return buildConstraintViolation(
-        TranslationService.translate(locale, "PasswordUppercase"),
+        API.Localization.TranslationService.translate(
+          locale,
+          "PasswordUppercase"
+        ),
         false
       );
 
     if (lowercase && isInvalid(str, "lowercase"))
       return buildConstraintViolation(
-        TranslationService.translate(locale, "PasswordLowercase"),
+        API.Localization.TranslationService.translate(
+          locale,
+          "PasswordLowercase"
+        ),
         false
       );
 
     if (numbers && isInvalid(str, "numbers"))
       return buildConstraintViolation(
-        TranslationService.translate(locale, "PasswordNumbers"),
+        API.Localization.TranslationService.translate(
+          locale,
+          "PasswordNumbers"
+        ),
         false
       );
 
     if (specials && isInvalid(str, "specials"))
       return buildConstraintViolation(
-        TranslationService.translate(locale, "PasswordSpecials"),
+        API.Localization.TranslationService.translate(
+          locale,
+          "PasswordSpecials"
+        ),
         false
       );
 
     return buildConstraintViolation("", true);
   }
 
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (str, _, locale) => isValid(str ?? "", locale),
   });
 }

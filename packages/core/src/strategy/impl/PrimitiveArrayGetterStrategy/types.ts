@@ -1,7 +1,4 @@
-import Validation from "../../../engine";
-import Arrays from "../../../utilities/impl/Arrays";
-import Booleans from "../../../utilities/impl/Booleans";
-import Types from "../../../utilities/impl/Types";
+import API from "api";
 
 namespace PrimitiveArrayGetterStrategyType {
   export const Name = "primitive[]" as const;
@@ -24,21 +21,21 @@ namespace PrimitiveArrayGetterStrategyType {
    * - `children`: A two-dimensional array of `Validation.Result` objects that represent detailed validation errors for each element in the array.
    */
   export type DetailedErrors = {
-    node: Validation.Result[];
-    children: Validation.Result[][];
+    node: API.Validation.Result[];
+    children: API.Validation.Result[][];
   };
 
   // prettier-ignore
   export type matches<T, K extends keyof T> = 
-    true extends Booleans.isGetter<T, K>
-      ? Arrays.getArrayType<T[K]> extends never
+    true extends API.Utilities.Booleans.isGetter<T, K>
+      ? API.Utilities.Arrays.getArrayType<T[K]> extends never
         ? false
-        : Booleans.isAnyOf<Arrays.getArrayType<T[K]>, Types.Primitive>
+        : API.Utilities.Booleans.isAnyOf<API.Utilities.Arrays.getArrayType<T[K]>, API.Utilities.Types.Primitive>
       : false;
 
   // prettier-ignore
   export type handler<T, K extends keyof T, R> =
-    true extends Booleans.isUndefined<R>
+    true extends API.Utilities.Booleans.isUndefined<R>
       ? T[K]
   : { node: R; children: R[]; };
 }

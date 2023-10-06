@@ -108,6 +108,10 @@ const string = {
   Alphanumeric,
 };
 
+const clazz = {
+  ValidDateRange,
+};
+
 /**
  * A collection of predefined decorated validators grouped and sorted by variable types
  */
@@ -121,9 +125,7 @@ const validators = {
   validate,
   attribute,
   foreach,
-  class: {
-    ValidDateRange,
-  },
+  class: clazz,
 };
 
 export default validators;

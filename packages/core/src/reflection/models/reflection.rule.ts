@@ -1,24 +1,6 @@
-import Validation from "../../engine";
-import Localization from "../../localization";
-import Objects from "../../utilities/impl/Objects";
+import API from "api";
 
-/**
- * A predicate function to filter validation metadata based on validation groups.
- *
- * @typeParam TFieldType - The type of the field.
- *
- * @param groups - The validation groups to filter by.
- *
- * @returns A predicate function that takes a `Validation.Metadata` and returns a boolean.
- */
-function validationGroupPredicate<TFieldType>(groups: string[]) {
-  return (meta: Validation.Metadata<TFieldType>) =>
-    groups.length
-      ? meta.groups.some((o) => groups.includes(o))
-      : !meta.groups.length;
-}
-
-namespace ReflectionRuleNamespace {
+namespace ReflectionRule {
   /**
    * Manages a collection of validation rules for a specific field.
    *
@@ -28,8 +10,8 @@ namespace ReflectionRuleNamespace {
    * This class is responsible for storing and applying validation rules to a specific field.
    * It allows you to validate the field against a payload and a set of validation groups.
    */
-  export class ReflectionRule<TFieldType> {
-    #contents: Validation.Metadata<TFieldType>[];
+  export class Instance<TFieldType> {
+    #contents: API.Validation.Metadata<TFieldType>[];
 
     /**
      * Gets the contents of the reflection rule.
@@ -60,12 +42,11 @@ namespace ReflectionRuleNamespace {
      */
     validate<TBody>(
       value: TFieldType,
-      payload: Objects.Payload<TBody>,
+      payload: API.Utilities.Objects.Payload<TBody>,
       groups: string[],
-      locale: Localization.Locale
-    ): Validation.Result[] {
-      return this.#contents
-        .filter(validationGroupPredicate(groups))
+      locale: API.Localization.Locale
+    ): API.Validation.Result[] {
+      return API.Decorator.groupedValidators(this.#contents, groups)
         .map(({ validate }) => validate(value, payload, locale))
         .filter(({ valid }) => !valid);
     }
@@ -84,10 +65,10 @@ namespace ReflectionRuleNamespace {
      *
      * @param rule - The `Validation.Metadata` to add.
      */
-    add(rule: Validation.Metadata<TFieldType>) {
+    add(rule: API.Validation.Metadata<TFieldType>) {
       this.#contents.push(rule);
     }
   }
 }
 
-export default ReflectionRuleNamespace;
+export default ReflectionRule;

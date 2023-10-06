@@ -1,7 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * Creates a validator decorator for required value validation.
@@ -25,19 +22,19 @@ import Objects from "../../src/utilities/impl/Objects";
  *   name: string;
  * }
  */
-export default function Required<T extends Objects.Optional>(
-  props?: Decorator.Props.ZeroArgsMessageOptional
+export default function Required<T extends API.Utilities.Objects.Optional>(
+  props?: API.Decorator.Props.ZeroArgsMessageOptional
 ) {
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Required",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "Required"),
+        API.Localization.TranslationService.translate(locale, "Required"),
         locale
       ),
-      valid: Objects.hasValue(value),
+      valid: API.Utilities.Objects.hasValue(value),
     }),
   });
 }

@@ -1,8 +1,6 @@
+import API from "api";
+
 import EventEmitter from "events";
-import Validation from "../../../engine";
-import Localization from "../../../localization";
-import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
-import Types from "../../../utilities/impl/Types";
 import AbstractValidationStrat from "../../strategy";
 import ns from "./types";
 
@@ -27,10 +25,10 @@ export default class FunctionStrat<F> extends AbstractValidationStrat<
    * @param defaultValue - The default value for the parent object.
    */
   constructor(
-    descriptor: ReflectionDescriptor.ReflectionDescriptor<F, any>,
+    descriptor: API.Reflection.Descriptor.Instance<F, any>,
     defaultValue: F,
     groups: string[],
-    locale: Localization.Locale,
+    locale: API.Localization.Locale,
     eventEmitter: EventEmitter,
     asyncDelay: number
   ) {
@@ -46,10 +44,10 @@ export default class FunctionStrat<F> extends AbstractValidationStrat<
    * @returns A tuple containing an array of detailed validation results (`Validation.Result[]`) and an array of simplified error messages (`string[]`).
    */
   test(
-    value: Types.Function,
+    value: API.Utilities.Types.Function,
     _context: any
   ): [ns.DetailedErrors, ns.SimpleErrors] {
-    const result: Validation.Result | Promise<Validation.Result> =
+    const result: API.Validation.Result | Promise<API.Validation.Result> =
       value.bind(_context)();
     if (result instanceof Promise) {
       result.then((validationResult) => {

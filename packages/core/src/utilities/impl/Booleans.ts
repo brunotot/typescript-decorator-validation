@@ -1,4 +1,5 @@
-import Validation from "../../engine";
+import API from "api";
+
 import Arrays from "./Arrays";
 import Objects from "./Objects";
 import Types from "./Types";
@@ -37,7 +38,9 @@ namespace Booleans {
    * @typeParam T - The type to check.
    */
   export type isFunction<T> = NonNullable<T> extends Types.Function
-    ? Types.UnwrapPromise<ReturnType<NonNullable<T>>> extends Validation.Result
+    ? Types.UnwrapPromise<
+        ReturnType<NonNullable<T>>
+      > extends API.Validation.Result
       ? true
       : false
     : false;

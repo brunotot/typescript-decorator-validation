@@ -1,14 +1,10 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import Localization from "../../src/localization";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 function validateDigits(
   number: number,
   maxInteger: number,
   maxFraction: number,
-  locale: Localization.Locale
+  locale: API.Localization.Locale
 ): boolean {
   if (number == null) {
     return true;
@@ -18,7 +14,7 @@ function validateDigits(
     (maxFraction !== Infinity && maxFraction % 1 !== 0)
   ) {
     throw new Error(
-      TranslationService.translate(
+      API.Localization.TranslationService.translate(
         locale,
         "InvalidDigits",
         maxInteger,
@@ -50,21 +46,28 @@ function validateDigits(
  * ```
  * This example applies the `Digits` validator to the `price` property to ensure it has at most 4 digits in the integer part and 2 digits in the fractional part.
  */
-export default function Digits<T extends Objects.Optional<number>>(
-  props: Decorator.Props.MultiArgsMessageOptional<{
+export default function Digits<
+  T extends API.Utilities.Objects.Optional<number>
+>(
+  props: API.Decorator.Props.MultiArgsMessageOptional<{
     maxInteger?: number;
     maxFraction?: number;
   }>
 ) {
   const { maxInteger = Infinity, maxFraction = Infinity } =
-    Decorator.args(props);
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+    API.Decorator.args(props);
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Digits",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "Digits", maxInteger, maxFraction),
+        API.Localization.TranslationService.translate(
+          locale,
+          "Digits",
+          maxInteger,
+          maxFraction
+        ),
         locale
       ),
       valid: validateDigits(value!, maxInteger, maxFraction, locale),

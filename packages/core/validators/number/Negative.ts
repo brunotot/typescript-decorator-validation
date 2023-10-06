@@ -1,7 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * Decorator for validating that a value is a negative number.
@@ -19,16 +16,16 @@ import Objects from "../../src/utilities/impl/Objects";
  * ```
  * This example applies the `Negative` validator to the `debt` property to ensure it is a negative number.
  */
-export default function Negative<T extends Objects.Optional<number>>(
-  props?: Decorator.Props.ZeroArgsMessageOptional
-) {
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+export default function Negative<
+  T extends API.Utilities.Objects.Optional<number>
+>(props?: API.Decorator.Props.ZeroArgsMessageOptional) {
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (num, _, locale) => ({
       key: "Negative",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "Negative", num!),
+        API.Localization.TranslationService.translate(locale, "Negative", num!),
         locale
       ),
       valid: num !== undefined && num !== null && num < 0,

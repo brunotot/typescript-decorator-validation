@@ -1,6 +1,4 @@
-import Reflection from "..";
-import Decorator from "../../decorators";
-import Types from "../../utilities/impl/Types";
+import API from "api";
 
 /**
  * Abstract class for managing metadata.
@@ -13,8 +11,8 @@ export default abstract class AbstractMetaService<Entry> {
   #metadata: DecoratorMetadataObject;
   #injectionKey: string;
   #initial: () => Entry;
-  #class?: Types.Class<any>;
-  protected context?: Decorator.Context;
+  #class?: API.Utilities.Types.Class<any>;
+  protected context?: API.Decorator.Context;
 
   /**
    * Constructor for AbstractMetaService.
@@ -25,13 +23,13 @@ export default abstract class AbstractMetaService<Entry> {
    */
   constructor(
     injectionKey: string,
-    strategy: Reflection.MetaStrategy,
+    strategy: API.Reflection.MetaStrategy,
     initial: () => Entry
   ) {
-    this.#metadata = Reflection.getMetadata(strategy);
+    this.#metadata = API.Reflection.getMetadata(strategy);
     this.#injectionKey = injectionKey;
     this.#initial = initial;
-    if (Reflection.isClass(strategy)) {
+    if (API.Reflection.isClass(strategy)) {
       this.class = strategy;
     } else {
       this.context = strategy as any;
@@ -48,7 +46,7 @@ export default abstract class AbstractMetaService<Entry> {
   /**
    * Sets the class associated with this AbstractMetaService.
    */
-  set class(clazz: Types.Class<any>) {
+  set class(clazz: API.Utilities.Types.Class<any>) {
     this.#class = clazz;
   }
 

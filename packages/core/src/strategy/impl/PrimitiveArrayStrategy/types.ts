@@ -1,7 +1,4 @@
-import Validation from "../../../engine";
-import Arrays from "../../../utilities/impl/Arrays";
-import Booleans from "../../../utilities/impl/Booleans";
-import Types from "../../../utilities/impl/Types";
+import API from "api";
 
 namespace PrimitiveArrayStrategyType {
   export const Name = "primitive[]" as const;
@@ -24,19 +21,19 @@ namespace PrimitiveArrayStrategyType {
    * - `data`: A two-dimensional array of `Validation.Result` objects that represent detailed validation errors for each element in the array.
    */
   export type DetailedErrors = {
-    root: Validation.Result[];
-    data: Validation.Result[][];
+    root: API.Validation.Result[];
+    data: API.Validation.Result[][];
   };
 
   // prettier-ignore
   export type matches<T, K extends keyof T> = 
-    Arrays.getArrayType<T[K]> extends never
+  API.Utilities.Arrays.getArrayType<T[K]> extends never
       ? false
-  : Booleans.isAnyOf<Arrays.getArrayType<T[K]>, Types.Primitive>
+  : API.Utilities.Booleans.isAnyOf<API.Utilities.Arrays.getArrayType<T[K]>, API.Utilities.Types.Primitive>
 
   // prettier-ignore
   export type handler<T, K extends keyof T, R> =
-    true extends Booleans.isUndefined<R>
+    true extends API.Utilities.Booleans.isUndefined<R>
       ? T[K]
   : { root: R; data: R[]; };
 }

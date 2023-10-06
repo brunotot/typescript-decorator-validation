@@ -1,9 +1,6 @@
-import Reflection from "../..";
-import Decorator from "../../../decorators";
-import Types from "../../../utilities/impl/Types";
-import ReflectionDescriptor from "../../models/reflection.descriptor";
+import API from "api";
+
 import AbstractMetaService from "../AbstractMetaService";
-import Validation from "./../../../engine";
 
 /**
  * A configurer class which allows for easier manipulation of decorated fields and corresponding metadata
@@ -13,7 +10,7 @@ import Validation from "./../../../engine";
  * It provides methods to add validators, get field names, and manage descriptors.
  */
 export default class FieldValidatorMetaService extends AbstractMetaService<
-  Map<string, ReflectionDescriptor.ReflectionDescriptor<any, any, any>>
+  Map<string, API.Reflection.Descriptor.Instance<any, any, any>>
 > {
   /**
    * Static method to create a new instance of FieldValidatorMetaService.
@@ -22,16 +19,16 @@ export default class FieldValidatorMetaService extends AbstractMetaService<
    * @returns A new instance of FieldValidatorMetaService.
    */
   public static inject(
-    strategy: Reflection.MetaStrategy
+    strategy: API.Reflection.MetaStrategy
   ): FieldValidatorMetaService {
     return new FieldValidatorMetaService(strategy);
   }
 
   #fields!: string[];
 
-  private constructor(strategy: Reflection.MetaStrategy) {
+  private constructor(strategy: API.Reflection.MetaStrategy) {
     super(FieldValidatorMetaService.name, strategy, () => new Map());
-    Reflection.isClass(strategy)
+    API.Reflection.isClass(strategy)
       ? this.#handleClassInit(strategy)
       : this.#handleContextInit(strategy as any);
   }
@@ -45,11 +42,11 @@ export default class FieldValidatorMetaService extends AbstractMetaService<
    */
   addValidator(
     field: string,
-    isValid: Validation.Evaluator<any>,
+    isValid: API.Validation.Evaluator<any>,
     groups?: string | string[]
   ) {
     this.getUntypedDescriptor(field).rules.root.add({
-      groups: Decorator.groups(groups),
+      groups: API.Decorator.groups(groups),
       validate: isValid,
     });
   }
@@ -82,10 +79,10 @@ export default class FieldValidatorMetaService extends AbstractMetaService<
    */
   getTypedDescriptor<TClass, TName extends keyof TClass>(
     thisName: TName
-  ): ReflectionDescriptor.ReflectionDescriptor<unknown, TClass, TName> {
+  ): API.Reflection.Descriptor.Instance<unknown, TClass, TName> {
     return this.getUntypedDescriptor(
       thisName as string
-    ) as ReflectionDescriptor.ReflectionDescriptor<unknown, TClass, TName>;
+    ) as API.Reflection.Descriptor.Instance<unknown, TClass, TName>;
   }
 
   /**
@@ -96,10 +93,10 @@ export default class FieldValidatorMetaService extends AbstractMetaService<
    */
   getUntypedDescriptor(
     fieldKey: any
-  ): ReflectionDescriptor.ReflectionDescriptor<any, any, any> {
+  ): API.Reflection.Descriptor.Instance<any, any, any> {
     if (!this.hasDescriptor(fieldKey)) {
       const cfg = { thisName: fieldKey };
-      const fieldValue = new ReflectionDescriptor.ReflectionDescriptor<
+      const fieldValue = new API.Reflection.Descriptor.Instance<
         unknown,
         unknown,
         any
@@ -119,8 +116,8 @@ export default class FieldValidatorMetaService extends AbstractMetaService<
    * This method populates the `#fields` array with the names of the class fields.
    * It also ensures that untyped descriptors are created for each field.
    */
-  #handleClassInit(clazz: Types.Class<any>) {
-    this.#fields = Reflection.getClassFieldNames(clazz) as string[];
+  #handleClassInit(clazz: API.Utilities.Types.Class<any>) {
+    this.#fields = API.Reflection.getClassFieldNames(clazz) as string[];
     this.#fields.forEach((name) => this.getUntypedDescriptor(name));
   }
 
@@ -131,7 +128,7 @@ export default class FieldValidatorMetaService extends AbstractMetaService<
    * @remarks
    * This method sets the `#fields` array to an empty array as no class fields are available.
    */
-  #handleContextInit(_context: Decorator.Context) {
+  #handleContextInit(_context: API.Decorator.Context) {
     this.#fields = [];
   }
 }

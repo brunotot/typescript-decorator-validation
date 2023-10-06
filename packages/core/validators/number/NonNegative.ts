@@ -1,7 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * NonNegative decorator for validating that a numeric value is non-negative.
@@ -28,16 +25,20 @@ import Objects from "../../src/utilities/impl/Objects";
  *   price?: number;
  * }
  */
-export default function NonNegative<T extends Objects.Optional<number>>(
-  props?: Decorator.Props.ZeroArgsMessageOptional
-) {
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+export default function NonNegative<
+  T extends API.Utilities.Objects.Optional<number>
+>(props?: API.Decorator.Props.ZeroArgsMessageOptional) {
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (num, _, locale) => ({
       key: "NonNegative",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "NonNegative", num!),
+        API.Localization.TranslationService.translate(
+          locale,
+          "NonNegative",
+          num!
+        ),
         locale
       ),
       valid: num !== undefined && num !== null && num >= 0,

@@ -1,4 +1,7 @@
 module.exports = {
+  moduleNameMapper: {
+    "^api$": "tdv-core",
+  },
   preset: "ts-jest",
   testEnvironment: "jsdom",
   testMatch: ["**/*.test.ts", "**/*.test.tsx"],

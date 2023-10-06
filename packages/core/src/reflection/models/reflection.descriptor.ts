@@ -1,6 +1,4 @@
-import Types from "../../utilities/impl/Types";
-import Reflection from "../index";
-import ValidationConfigurer from "../service/impl/FieldValidatorMetaService";
+import API from "api";
 
 /**
  * A namespace which holds relevant data regarding field descriptors acquired from reflection
@@ -12,8 +10,8 @@ namespace ReflectionDescriptor {
    * @typeParam FieldType - The type of the field.
    */
   export type FieldDescriptorRules<FieldType> = {
-    root: Reflection.Rule<FieldType>;
-    foreach: Reflection.Rule<FieldType>;
+    root: API.Reflection.Rule.Instance<FieldType>;
+    foreach: API.Reflection.Rule.Instance<FieldType>;
   };
 
   /**
@@ -35,9 +33,9 @@ namespace ReflectionDescriptor {
     HostClass,
     Name extends ReflectionDescriptorName<HostClass> = undefined
   > = {
-    hostClass?: Types.Class<HostClass>;
+    hostClass?: API.Utilities.Types.Class<HostClass>;
     hostDefault?: HostClass;
-    thisClass?: Types.Class<This>;
+    thisClass?: API.Utilities.Types.Class<This>;
     thisName?: Name;
     thisDefault?: ReflectionDescriptorThis<HostClass, Name>;
     rules?: FieldDescriptorRules<ReflectionDescriptorThis<HostClass, Name>>;
@@ -65,14 +63,14 @@ namespace ReflectionDescriptor {
    * @remarks
    * This class is used to store metadata about a specific field, including its validation rules and default values.
    */
-  export class ReflectionDescriptor<
+  export class Instance<
     This,
     HostClass,
     Name extends keyof HostClass | undefined = undefined
   > {
-    hostClass?: Types.Class<HostClass>;
+    hostClass?: API.Utilities.Types.Class<HostClass>;
     hostDefault?: HostClass;
-    thisClass?: Types.Class<This>;
+    thisClass?: API.Utilities.Types.Class<This>;
     thisName?: Name;
     thisDefault?: ReflectionDescriptorThis<HostClass, Name>;
     rules: FieldDescriptorRules<ReflectionDescriptorThis<HostClass, Name>>;
@@ -97,8 +95,8 @@ namespace ReflectionDescriptor {
         hostDefault ?? hostClass ? new hostClass!() : undefined;
       this.thisDefault = thisDefault;
       this.rules = rules ?? {
-        root: new Reflection.Rule(),
-        foreach: new Reflection.Rule(),
+        root: new API.Reflection.Rule.Instance(),
+        foreach: new API.Reflection.Rule.Instance(),
       };
     }
 
@@ -109,11 +107,11 @@ namespace ReflectionDescriptor {
      */
     public get StrategyImpl() {
       const strategy = this.strategy;
-      if (!(strategy in Reflection.Strategy.ReflectionStrategyImpl)) {
+      if (!(strategy in API.Reflection.Strategy.ReflectionStrategyImpl)) {
         const error = `Validation strategy not implemented for field type '${strategy}'`;
         throw new Error(error);
       }
-      return Reflection.Strategy.ReflectionStrategyImpl[strategy];
+      return API.Reflection.Strategy.ReflectionStrategyImpl[strategy];
     }
 
     /**
@@ -127,18 +125,21 @@ namespace ReflectionDescriptor {
      * 2. Checks if the field name is defined.
      * 3. Determines the strategy based on the field type and its metadata.
      */
-    public get strategy(): Reflection.Strategy.ReflectionStrategyType {
+    public get strategy(): API.Reflection.Strategy.ReflectionStrategyType {
       if (!this.hostClass) {
-        return Reflection.Strategy.ReflectionStrategy.unknown;
+        return API.Reflection.Strategy.ReflectionStrategy.unknown;
       }
       if (!this.thisName) {
-        return Reflection.Strategy.ReflectionStrategy.composite;
+        return API.Reflection.Strategy.ReflectionStrategy.composite;
       }
       const instance = new this.hostClass!();
       const fieldName = this.thisName!;
 
       const getNativeStrategy = (value: any) => {
-        const meta = ValidationConfigurer.inject(this.hostClass!);
+        const meta =
+          API.Reflection.Services.FieldValidatorMetaService.default.inject(
+            this.hostClass!
+          );
         const descriptor = meta.getTypedDescriptor<HostClass, keyof HostClass>(
           this.thisName!
         );
@@ -153,19 +154,19 @@ namespace ReflectionDescriptor {
             "message" in value &&
             typeof value["message"] === "string")
         ) {
-          return Reflection.Strategy.ReflectionStrategy.function;
+          return API.Reflection.Strategy.ReflectionStrategy.function;
         }
 
         return Array.isArray(value)
           ? descriptor.thisClass
-            ? Reflection.Strategy.ReflectionStrategy.compositeArray
-            : Reflection.Strategy.ReflectionStrategy.primitiveArray
+            ? API.Reflection.Strategy.ReflectionStrategy.compositeArray
+            : API.Reflection.Strategy.ReflectionStrategy.primitiveArray
           : descriptor.thisClass
-          ? Reflection.Strategy.ReflectionStrategy.composite
-          : Reflection.Strategy.ReflectionStrategy.primitive;
+          ? API.Reflection.Strategy.ReflectionStrategy.composite
+          : API.Reflection.Strategy.ReflectionStrategy.primitive;
       };
 
-      const descriptor = Reflection.getClassFieldDescriptor(
+      const descriptor = API.Reflection.getClassFieldDescriptor(
         this.hostClass!,
         fieldName
       );

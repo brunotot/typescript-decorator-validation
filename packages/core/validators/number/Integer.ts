@@ -1,7 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * Decorator for validating that a value is an integer.
@@ -19,16 +16,16 @@ import Objects from "../../src/utilities/impl/Objects";
  * ```
  * This example applies the `Integer` validator to the `quantity` property to ensure it is an integer.
  */
-export default function Integer<T extends Objects.Optional<number>>(
-  props?: Decorator.Props.ZeroArgsMessageOptional
-) {
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+export default function Integer<
+  T extends API.Utilities.Objects.Optional<number>
+>(props?: API.Decorator.Props.ZeroArgsMessageOptional) {
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (num, _, locale) => ({
       key: "Integer",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "Integer", num!),
+        API.Localization.TranslationService.translate(locale, "Integer", num!),
         locale
       ),
       valid: num !== undefined && num !== null && Number.isInteger(num),

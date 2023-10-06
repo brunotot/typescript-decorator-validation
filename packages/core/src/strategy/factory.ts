@@ -1,10 +1,8 @@
-import $ from "../api/prettify";
-import Validation from "../engine";
-import Booleans from "../utilities/impl/Booleans";
-import Objects from "../utilities/impl/Objects";
+import API from "api";
+
 import FunctionStrat from "./impl/FunctionStrategy";
-import ObjectArrayGetterStrategy from "./impl/ObjectArrayGetterStrategy";
-import ObjectArrayStrategy from "./impl/ObjectArrayStrategy";
+import ObjectArrayGetterStrat from "./impl/ObjectArrayGetterStrategy";
+import ObjectArrayStrat from "./impl/ObjectArrayStrategy";
 import ObjectGetterStrat from "./impl/ObjectGetterStrategy";
 import ObjectStrat from "./impl/ObjectStrategy";
 import PrimitiveArrayGetterStrat from "./impl/PrimitiveArrayGetterStrategy";
@@ -14,9 +12,10 @@ import PrimitiveStrat from "./impl/PrimitiveStrategy";
 import StrategyTypes from "./types";
 
 namespace StrategyFactory {
-  export type evaluate<T, R = undefined> = true extends Booleans.isUndefined<R>
-    ? $<Objects.Purify<evaluateOptional<T, R>>>
-    : $<Objects.Purify<evaluateMandatory<T, R>>>;
+  // prettier-ignore
+  export type evaluate<T, R = undefined> = true extends API.Utilities.Booleans.isUndefined<R>
+    ? API.Utilities.Types.Prettify<API.Utilities.Objects.Purify<evaluateOptional<T, R>>>
+    : API.Utilities.Types.Prettify<API.Utilities.Objects.Purify<evaluateMandatory<T, R>>>;
 
   export type evaluateOptional<T, R> = {
     [K in keyof T]?: fieldEvaluation<T, K, R>;
@@ -88,10 +87,10 @@ namespace StrategyFactory {
     ? PrimitiveStrat<T[K]>
   
     : true extends StrategyTypes.ObjectArray.matches<T, K> 
-    ? ObjectArrayStrategy<T[K]>
+    ? ObjectArrayStrat<T[K]>
   
     : true extends StrategyTypes.ObjectArrayGetter.matches<T, K> 
-    ? ObjectArrayGetterStrategy<T[K]>
+    ? ObjectArrayGetterStrat<T[K]>
   
     : true extends StrategyTypes.ObjectGetter.matches<T, K> 
     ? ObjectGetterStrat<T[K]>
@@ -101,7 +100,7 @@ namespace StrategyFactory {
   :never;
 
   export namespace Impl {
-    export type DetailedErrors<T> = evaluate<T, Validation.Result[]>;
+    export type DetailedErrors<T> = evaluate<T, API.Validation.Result[]>;
 
     export type Errors<T> = evaluate<T, string[]>;
   }

@@ -1,7 +1,8 @@
-import Decorator from "../decorators";
-import ReflectionStrategyNamespace from "../engine/models/reflection.strategy";
-import Types from "../utilities/impl/Types";
-import ReflectionRuleNamespace from "./models/reflection.rule";
+import API from "api";
+
+import ReflectionStrategyNamespace from "../validation/models/reflection.strategy";
+import ReflectionDescriptor from "./models/reflection.descriptor";
+import ReflectionRule from "./models/reflection.rule";
 import * as _AbstractMetaService from "./service/AbstractMetaService";
 import * as _ClassValidatorMetaService from "./service/impl/ClassValidatorMetaService";
 import * as _FieldValidatorMetaService from "./service/impl/FieldValidatorMetaService";
@@ -10,6 +11,8 @@ import * as _FieldValidatorMetaService from "./service/impl/FieldValidatorMetaSe
  * A namespace which holds data related to reading and manipulating metadata through reflection
  */
 namespace Reflection {
+  export import Descriptor = ReflectionDescriptor;
+
   /**
    * Retrieves the names of all fields in a class.
    *
@@ -17,7 +20,7 @@ namespace Reflection {
    * @returns An array of field names.
    */
   export function getClassFieldNames<TClass>(
-    constructor: Types.Class<TClass>
+    constructor: API.Utilities.Types.Class<TClass>
   ): (keyof TClass)[] {
     const getPropertyNames = (classInstance: any) => {
       return Object.getOwnPropertyNames(classInstance ?? {}).filter(
@@ -41,7 +44,7 @@ namespace Reflection {
    * @returns The property descriptor for the field.
    */
   export function getClassFieldDescriptor<TClass>(
-    constructor: Types.Class<TClass>,
+    constructor: API.Utilities.Types.Class<TClass>,
     name: keyof TClass
   ) {
     const instance: any = new constructor();
@@ -75,7 +78,7 @@ namespace Reflection {
    */
   export function isClass(
     strategy: MetaStrategy
-  ): strategy is Types.Class<any> {
+  ): strategy is API.Utilities.Types.Class<any> {
     return typeof strategy === "function";
   }
 
@@ -83,11 +86,11 @@ namespace Reflection {
    * Type alias for strategies that can either be a decorator context or a class.
    */
   export type MetaStrategy =
-    | Decorator.Context
-    | Types.Class<any>
+    | API.Decorator.Context
+    | API.Utilities.Types.Class<any>
     | DecoratorContext;
 
-  export import Rule = ReflectionRuleNamespace.ReflectionRule;
+  export import Rule = ReflectionRule;
 
   export import Strategy = ReflectionStrategyNamespace;
 

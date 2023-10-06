@@ -1,7 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * ValueMax decorator for validating that a numeric value is less than or equal to a specified maximum value.
@@ -29,17 +26,22 @@ import Objects from "../../src/utilities/impl/Objects";
  *   price?: number;
  * }
  */
-export default function ValueMax<T extends Objects.Optional<number>>(
-  props: Decorator.Props.MultiArgsMessageOptional<number>
-) {
-  const max = Decorator.args(props);
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+export default function ValueMax<
+  T extends API.Utilities.Objects.Optional<number>
+>(props: API.Decorator.Props.MultiArgsMessageOptional<number>) {
+  const max = API.Decorator.args(props);
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "ValueMax",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "ValueMax", max, value!),
+        API.Localization.TranslationService.translate(
+          locale,
+          "ValueMax",
+          max,
+          value!
+        ),
         locale
       ),
       valid: value == null ? true : value <= max,

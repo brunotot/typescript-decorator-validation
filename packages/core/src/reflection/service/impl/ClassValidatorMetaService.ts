@@ -1,8 +1,5 @@
-import Reflection from "../..";
-import Decorator from "../../../decorators";
-import Types from "../../../utilities/impl/Types";
+import API from "api";
 import AbstractMetaService from "../AbstractMetaService";
-import Validation from "./../../../engine";
 
 /**
  * A configurer class which allows for easier manipulation of decorated class validators and corresponding metadata
@@ -12,25 +9,27 @@ import Validation from "./../../../engine";
  * It provides methods to add validators and read them.
  */
 export default class ClassValidatorMetaService<
-  TStrategy extends Reflection.MetaStrategy
-> extends AbstractMetaService<Reflection.Rule<any>> {
+  TStrategy extends API.Reflection.MetaStrategy
+> extends AbstractMetaService<API.Reflection.Rule.Instance<any>> {
   /**
    * Static method to create a new instance of ClassValidatorMetaService.
    *
    * @param strategy - The strategy to inject.
    * @returns A new instance of ClassValidatorMetaService.
    */
-  public static inject<T extends Reflection.MetaStrategy>(
+  public static inject<T extends API.Reflection.MetaStrategy>(
     strategy: T
-  ): ClassValidatorMetaService<Types.UnwrapMetaStrategy<T>> {
-    return new ClassValidatorMetaService<Types.UnwrapMetaStrategy<T>>(strategy);
+  ): ClassValidatorMetaService<API.Utilities.Types.UnwrapMetaStrategy<T>> {
+    return new ClassValidatorMetaService<
+      API.Utilities.Types.UnwrapMetaStrategy<T>
+    >(strategy);
   }
 
-  private constructor(strategy: Reflection.MetaStrategy) {
+  private constructor(strategy: API.Reflection.MetaStrategy) {
     super(
       ClassValidatorMetaService.name,
       strategy,
-      () => new Reflection.Rule()
+      () => new API.Reflection.Rule.Instance()
     );
   }
 
@@ -41,12 +40,14 @@ export default class ClassValidatorMetaService<
    * @param groups - Optional validation groups.
    */
   addValidator(
-    isValid: Validation.Evaluator<Types.UnwrapClass<TStrategy>>,
+    isValid: API.Validation.Evaluator<
+      API.Utilities.Types.UnwrapClass<TStrategy>
+    >,
     groups?: string | string[]
   ) {
     this.data.add({
       validate: isValid,
-      groups: Decorator.groups(groups),
+      groups: API.Decorator.groups(groups),
     });
   }
 }

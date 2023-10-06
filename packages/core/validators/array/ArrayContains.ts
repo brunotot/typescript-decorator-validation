@@ -1,6 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
+import API from "api";
 
 /**
  * Decorator for validating that an array contains a specific value.
@@ -22,16 +20,20 @@ import TranslationService from "../../src/localization/service/translation.servi
  * This example validates that the `numbers` array contains the value 42 and associates it with custom validation groups and a custom error message.
  */
 export default function ArrayContains<K, T extends K[]>(
-  props: Decorator.Props.MultiArgsMessageOptional<K>
+  props: API.Decorator.Props.MultiArgsMessageOptional<K>
 ) {
-  const value = Decorator.args(props);
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+  const value = API.Decorator.args(props);
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArrayContains",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "ArrayContains", value),
+        API.Localization.TranslationService.translate(
+          locale,
+          "ArrayContains",
+          value
+        ),
         locale
       ),
       valid: ((array ?? []) as any[]).includes(value),

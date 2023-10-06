@@ -1,6 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
+import API from "api";
 
 /**
  * Decorator for validating that an array is empty.
@@ -21,15 +19,15 @@ import TranslationService from "../../src/localization/service/translation.servi
  * This example validates that the `emptyArray` is an empty array and associates it with a custom validation group and a custom error message.
  */
 export default function ArrayEmpty<K, T extends K[]>(
-  props?: Decorator.Props.ZeroArgsMessageOptional
+  props?: API.Decorator.Props.ZeroArgsMessageOptional
 ) {
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArrayEmpty",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "ArrayEmpty"),
+        API.Localization.TranslationService.translate(locale, "ArrayEmpty"),
         locale
       ),
       valid: (array ?? []).length === 0,

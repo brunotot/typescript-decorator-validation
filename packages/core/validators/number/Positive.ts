@@ -1,7 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * Positive decorator for validating that a numeric value is positive.
@@ -28,16 +25,16 @@ import Objects from "../../src/utilities/impl/Objects";
  *   quantity?: number;
  * }
  */
-export default function Positive<T extends Objects.Optional<number>>(
-  props?: Decorator.Props.ZeroArgsMessageOptional
-) {
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+export default function Positive<
+  T extends API.Utilities.Objects.Optional<number>
+>(props?: API.Decorator.Props.ZeroArgsMessageOptional) {
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (num, _, locale) => ({
       key: "Positive",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "Positive", num!),
+        API.Localization.TranslationService.translate(locale, "Positive", num!),
         locale
       ),
       valid: num !== undefined && num !== null && num > 0,

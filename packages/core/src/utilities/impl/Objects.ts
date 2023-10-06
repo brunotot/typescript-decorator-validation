@@ -1,6 +1,5 @@
-import $ from "../../api/prettify";
-import FieldValidatorMetaService from "../../reflection/service/impl/FieldValidatorMetaService";
-import StrategyFactory from "../../strategy/factory";
+import API from "api";
+
 import Arrays from "./Arrays";
 import Booleans from "./Booleans";
 import Types from "./Types";
@@ -47,7 +46,7 @@ namespace Objects {
    * Filters out getters, functions and read-only properties from a type
    */
   // prettier-ignore
-  export type Payload<T> = Objects.Prettify<Objects.Purify<{
+  export type Payload<T> = Types.Prettify<API.Utilities.Objects.Purify<{
     [K in keyof T]: true extends Booleans.isAnyOf<true, [
       Booleans.isGetter<T, K>,
       Booleans.isFunction<T[K]>,
@@ -91,8 +90,6 @@ namespace Objects {
     }>
   >;
 
-  export type Prettify<T> = $<T>;
-
   /**
    * A type that removes properties with values of type `never` from `T`.
    *
@@ -134,7 +131,9 @@ namespace Objects {
    *
    * @typeParam T - The type of the errors.
    */
-  export function hasErrors<T>(data: StrategyFactory.Impl.Errors<T>): boolean {
+  export function hasErrors<T>(
+    data: API.Strategy.Factory.Impl.Errors<T>
+  ): boolean {
     const data0: any = data;
     if (Array.isArray(data0)) {
       return data0.some((item) => hasErrors(item));
@@ -294,7 +293,8 @@ namespace Objects {
       }
 
       const entries = Object.entries<any>(object ?? {});
-      const meta = FieldValidatorMetaService.inject(clazz);
+      const meta =
+        API.Reflection.Services.FieldValidatorMetaService.default.inject(clazz);
       const data: Record<string, any> = {};
       for (const [key, value] of entries) {
         const descriptor = meta.getUntypedDescriptor(key);

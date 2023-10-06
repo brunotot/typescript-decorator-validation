@@ -1,7 +1,5 @@
-import Decorator from "../../../../src/decorators";
-import FieldValidatorDecorator from "../../../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../../../src/localization/service/translation.service";
-import Objects from "../../../../src/utilities/impl/Objects";
+import API from "api";
+
 import RegexConst from "../../../shared/regex.constants";
 import { testRegex } from "./../../regex/Pattern";
 /**
@@ -31,16 +29,16 @@ import { testRegex } from "./../../regex/Pattern";
  *   value: string;
  * }
  */
-export default function Email<T extends Objects.Optional<string>>(
-  props?: Decorator.Props.ZeroArgsMessageOptional
+export default function Email<T extends API.Utilities.Objects.Optional<string>>(
+  props?: API.Decorator.Props.ZeroArgsMessageOptional
 ) {
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Email",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "Email"),
+        API.Localization.TranslationService.translate(locale, "Email"),
         locale
       ),
       valid: testRegex(RegexConst.EMAIL, value),

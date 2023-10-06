@@ -1,4 +1,4 @@
-import FieldValidatorMetaService from "../../reflection/service/impl/FieldValidatorMetaService";
+import API from "api";
 
 namespace FieldDecorator {
   export type Type = unknown;
@@ -6,7 +6,7 @@ namespace FieldDecorator {
   export type ReturnDef = void;
 
   export type Supplier<T extends Type = Type> = (
-    meta: FieldValidatorMetaService,
+    meta: API.Reflection.Services.FieldValidatorMetaService.default,
     name: string,
     context: Context<T>
   ) => ReturnDef;
@@ -60,7 +60,10 @@ namespace FieldDecorator {
       const nameEval = isStage2 ? context : context.name;
       const strategyEval = isStage2 ? target.constructor : context;
       const contextEval = isStage2 ? { name: context, metadata: {} } : context;
-      const metaService = FieldValidatorMetaService.inject(strategyEval);
+      const metaService =
+        API.Reflection.Services.FieldValidatorMetaService.default.inject(
+          strategyEval
+        );
       supplier(metaService, String(nameEval), contextEval as any);
     };
   }

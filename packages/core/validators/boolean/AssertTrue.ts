@@ -1,6 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
+import API from "api";
 
 /**
  * Creates a decorator to validate that a value is truthy.
@@ -24,15 +22,15 @@ import TranslationService from "../../src/localization/service/translation.servi
  * }
  */
 export default function AssertTrue<T extends boolean>(
-  props?: Decorator.Props.ZeroArgsMessageOptional
+  props?: API.Decorator.Props.ZeroArgsMessageOptional
 ) {
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "AssertTrue",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "AssertTrue"),
+        API.Localization.TranslationService.translate(locale, "AssertTrue"),
         locale
       ),
       valid: !!value,

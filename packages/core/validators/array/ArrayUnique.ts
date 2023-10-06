@@ -1,9 +1,9 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
-function isArrayUnique<T>(arr: T[], equals: Objects.Equals<T>): boolean {
+function isArrayUnique<T>(
+  arr: T[],
+  equals: API.Utilities.Objects.Equals<T>
+): boolean {
   const set = new Set<T>();
   for (const val of arr) {
     for (const el of set) {
@@ -36,16 +36,16 @@ function isArrayUnique<T>(arr: T[], equals: Objects.Equals<T>): boolean {
  * This example validates that all elements in the `names` array are unique when compared using a case-insensitive hash function and provides a custom error message if the validation fails.
  */
 export default function ArrayUnique<K, T extends K[]>(
-  props?: Decorator.Props.ZeroArgsMessageOptional
+  props?: API.Decorator.Props.ZeroArgsMessageOptional
 ) {
-  const hashFn = Objects.hash;
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+  const hashFn = API.Utilities.Objects.hash;
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArrayUnique",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "ArrayUnique"),
+        API.Localization.TranslationService.translate(locale, "ArrayUnique"),
         locale
       ),
       valid: isArrayUnique(

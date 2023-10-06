@@ -6,6 +6,9 @@
     "module": "ESNext",
     "jsx": "react",
     "outDir": "dist",
-    "declarationDir": "dist/types"
+    "declarationDir": "dist/types",
+    "paths": {
+      "api": ["../core/index"]
+    }
   }
 }

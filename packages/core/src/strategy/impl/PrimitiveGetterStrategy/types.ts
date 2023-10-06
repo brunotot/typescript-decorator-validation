@@ -1,6 +1,5 @@
-import Validation from "../../../engine";
-import Booleans from "../../../utilities/impl/Booleans";
-import Types from "../../../utilities/impl/Types";
+import API from "api";
+
 import PrimitiveStrategyType from "../PrimitiveStrategy/types";
 
 namespace PrimitiveGetterStrategyType {
@@ -8,17 +7,17 @@ namespace PrimitiveGetterStrategyType {
 
   export type SimpleErrors = string[];
 
-  export type DetailedErrors = Validation.Result[];
+  export type DetailedErrors = API.Validation.Result[];
 
   // prettier-ignore
   export type matches<T, K extends keyof T> = 
-    true extends Booleans.isGetter<T, K>
-      ? Booleans.isAnyOf<T[K], Types.Primitive>
+    true extends API.Utilities.Booleans.isGetter<T, K>
+      ? API.Utilities.Booleans.isAnyOf<T[K], API.Utilities.Types.Primitive>
       : false;
 
   // prettier-ignore
   export type handler<T, K extends keyof T, R> =
-    true extends Booleans.isUndefined<R> 
+    true extends API.Utilities.Booleans.isUndefined<R> 
       ? T[K] 
   : R;
 }

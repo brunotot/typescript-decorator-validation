@@ -1,10 +1,8 @@
-import FieldDecorator from "../FieldDecorator";
-import Validation from "./../../../engine";
+import API from "api";
 
 /**
  * A service class which exposes validated-decorator-related actions
  */
-
 namespace FieldValidatorDecorator {
   /**
    * Creates a new validator function using the provided validation builder options.
@@ -33,11 +31,11 @@ namespace FieldValidatorDecorator {
    * }
    * ```
    */
-  export function build<T extends FieldDecorator.Type>({
+  export function build<T extends API.Decorator.FieldBaseDecorator.Type>({
     groups,
     validate,
-  }: Validation.Metadata<T>): FieldDecorator.Instance<T> {
-    return FieldDecorator.build<T>((meta, key) =>
+  }: API.Validation.Metadata<T>): API.Decorator.FieldBaseDecorator.Instance<T> {
+    return API.Decorator.FieldBaseDecorator.build<T>((meta, key) =>
       meta.addValidator(key, validate, groups)
     );
   }

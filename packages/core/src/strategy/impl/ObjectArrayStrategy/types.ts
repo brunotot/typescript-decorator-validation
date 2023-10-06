@@ -1,6 +1,5 @@
-import Validation from "../../../engine";
-import Arrays from "../../../utilities/impl/Arrays";
-import Booleans from "../../../utilities/impl/Booleans";
+import API from "api";
+
 import StrategyFactory from "../../factory";
 import ObjectStrategyType from "../ObjectStrategy/types";
 
@@ -29,17 +28,17 @@ namespace ObjectArrayStrategyType {
    * - `data`: An array of `DetailedErrors<F>` objects that represent detailed validation errors for each object in the array.
    */
   export type DetailedErrors<F> = {
-    root: Validation.Result[];
+    root: API.Validation.Result[];
     data: StrategyFactory.Impl.DetailedErrors<F>[];
   };
 
   // prettier-ignore
   export type matches<T, K extends keyof T> = 
-    Arrays.getArrayType<NonNullable<T[K]>> extends never
+  API.Utilities.Arrays.getArrayType<NonNullable<T[K]>> extends never
       ? false
-    : true extends Booleans.isGetter<T, K>
+    : true extends API.Utilities.Booleans.isGetter<T, K>
       ? false
-  : Booleans.isObject<Arrays.getArrayType<NonNullable<T[K]>>>;
+  : API.Utilities.Booleans.isObject<API.Utilities.Arrays.getArrayType<NonNullable<T[K]>>>;
 
   // prettier-ignore
   export type handler<T, K extends keyof T, R> = ObjectStrategyType.handler<T, K, R>[]

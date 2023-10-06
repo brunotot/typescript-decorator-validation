@@ -1,9 +1,6 @@
+import API from "api";
+
 import { EventEmitter } from "events";
-import Localization from "../localization";
-import FieldValidatorMetaService from "../reflection/service/impl/FieldValidatorMetaService";
-import Objects from "../utilities/impl/Objects";
-import Types from "../utilities/impl/Types";
-import StrategyFactory from "./../strategy/factory";
 import CacheMap, * as CacheMapNamespace from "./models/cache.map";
 
 (Symbol as any).metadata ??= Symbol("Symbol.metadata");
@@ -22,7 +19,7 @@ namespace Validation {
   export type Evaluator<T> = ((
     value: T,
     context: any,
-    locale: Localization.Locale
+    locale: API.Localization.Locale
   ) => Result) & {};
 
   /**
@@ -44,8 +41,8 @@ namespace Validation {
     valid: boolean;
   };
   export type AsyncEventResponseProps<TClass> = {
-    errors: StrategyFactory.Impl.Errors<TClass>;
-    detailedErrors: StrategyFactory.Impl.DetailedErrors<TClass>;
+    errors: API.Strategy.Factory.Impl.Errors<TClass>;
+    detailedErrors: API.Strategy.Factory.Impl.DetailedErrors<TClass>;
   };
 
   export type AsyncEventHandlerProps<TClass> = {
@@ -63,9 +60,9 @@ namespace Validation {
    * @typeParam TClass - The type of the default value.
    */
   export type Config<TClass> = {
-    defaultValue?: Objects.Payload<TClass>;
+    defaultValue?: API.Utilities.Objects.Payload<TClass>;
     groups?: string[];
-    locale?: Localization.Locale;
+    locale?: API.Localization.Locale;
     asyncDelay?: number;
   };
 
@@ -76,8 +73,8 @@ namespace Validation {
    */
   export type Response<T> = {
     valid: boolean;
-    detailedErrors: StrategyFactory.Impl.DetailedErrors<T>;
-    errors: StrategyFactory.Impl.Errors<T>;
+    detailedErrors: API.Strategy.Factory.Impl.DetailedErrors<T>;
+    errors: API.Strategy.Factory.Impl.Errors<T>;
   };
 
   /**
@@ -93,15 +90,15 @@ namespace Validation {
   export class Engine<TClass> {
     #eventListener!: AsyncEventHandler<TClass>;
     #eventEmitter: EventEmitter;
-    #fieldValidatorMetaService: FieldValidatorMetaService;
+    #fieldValidatorMetaService: API.Reflection.Services.FieldValidatorMetaService.default;
     #groups: string[];
-    #hostDefault: Objects.Payload<TClass>;
+    #hostDefault: API.Utilities.Objects.Payload<TClass>;
     #cacheMap: CacheMap<Response<TClass>>;
-    #hostClass: Types.Class<TClass>;
-    locale: Localization.Locale;
+    #hostClass: API.Utilities.Types.Class<TClass>;
+    locale: API.Localization.Locale;
     #asyncDelay: number;
     #debounceMap: {
-      [key in keyof TClass]: ReturnType<typeof Objects.debounce>;
+      [key in keyof TClass]: ReturnType<typeof API.Utilities.Objects.debounce>;
     } = {} as any;
 
     /**
@@ -110,16 +107,22 @@ namespace Validation {
      * @param clazz - The class type to be processed.
      * @param config - Optional configuration settings.
      */
-    constructor(clazz: Types.Class<TClass>, config?: Config<TClass>) {
+    constructor(
+      clazz: API.Utilities.Types.Class<TClass>,
+      config?: Config<TClass>
+    ) {
       this.#asyncDelay = config?.asyncDelay ?? 300;
       this.#eventEmitter = new EventEmitter();
       this.#hostClass = clazz;
-      this.locale = config?.locale ?? Localization.getLocale();
+      this.locale = config?.locale ?? API.Localization.getLocale();
       this.#groups = Array.from(new Set(config?.groups ?? []));
       this.#hostDefault =
         config?.defaultValue ??
-        (Objects.toClass(clazz) as Objects.Payload<TClass>);
-      this.#fieldValidatorMetaService = FieldValidatorMetaService.inject(clazz);
+        (API.Utilities.Objects.toClass(
+          clazz
+        ) as API.Utilities.Objects.Payload<TClass>);
+      this.#fieldValidatorMetaService =
+        API.Reflection.Services.FieldValidatorMetaService.default.inject(clazz);
       this.#cacheMap = new CacheMap(
         (state) => this.validate.bind(this)(state) as Response<TClass>
       );
@@ -179,7 +182,7 @@ namespace Validation {
      *
      * @returns `true` if valid, `false` otherwise.
      */
-    public isValid(payload: Objects.Payload<TClass>): boolean {
+    public isValid(payload: API.Utilities.Objects.Payload<TClass>): boolean {
       return this.#cacheMap.get("valid", payload);
     }
 
@@ -191,8 +194,8 @@ namespace Validation {
      * @returns An object containing detailed error messages.
      */
     public getDetailedErrors(
-      payload: Objects.Payload<TClass>
-    ): StrategyFactory.Impl.DetailedErrors<TClass> {
+      payload: API.Utilities.Objects.Payload<TClass>
+    ): API.Strategy.Factory.Impl.DetailedErrors<TClass> {
       return this.#cacheMap.get("detailedErrors", payload);
     }
 
@@ -204,8 +207,8 @@ namespace Validation {
      * @returns An object containing error messages.
      */
     public getErrors(
-      payload: Objects.Payload<TClass>
-    ): StrategyFactory.Impl.Errors<TClass> {
+      payload: API.Utilities.Objects.Payload<TClass>
+    ): API.Strategy.Factory.Impl.Errors<TClass> {
       return this.#cacheMap.get("errors", payload);
     }
 
@@ -237,11 +240,11 @@ namespace Validation {
      * console.log(result.valid);  // Output: true or false
      * ```
      */
-    public validate(payload?: Objects.Payload<TClass>): Response<TClass> {
-      const state: Objects.Payload<TClass> = Objects.toClass(
-        this.#hostClass,
-        payload
-      ) as any;
+    public validate(
+      payload?: API.Utilities.Objects.Payload<TClass>
+    ): Response<TClass> {
+      const state: API.Utilities.Objects.Payload<TClass> =
+        API.Utilities.Objects.toClass(this.#hostClass, payload) as any;
 
       const errors: any = {};
       const detailedErrors: any = {};
@@ -256,7 +259,7 @@ namespace Validation {
 
       return this.#cacheMap.patch(
         {
-          valid: !Objects.hasErrors(errors),
+          valid: !API.Utilities.Objects.hasErrors(errors),
           detailedErrors,
           errors,
         },
@@ -277,7 +280,7 @@ namespace Validation {
     validateField<K extends keyof TClass>(
       payload: any,
       fieldName: K
-    ): StrategyFactory.getStrategyResult<TClass, K> {
+    ): API.Strategy.Factory.getStrategyResult<TClass, K> {
       const descriptor =
         this.#fieldValidatorMetaService.getUntypedDescriptor(fieldName);
       const stratImpl = new descriptor.StrategyImpl(
@@ -290,7 +293,7 @@ namespace Validation {
 
       if (descriptor.strategy === "function") {
         if (!this.#debounceMap[fieldName]) {
-          this.#debounceMap[fieldName] = Objects.debounce(
+          this.#debounceMap[fieldName] = API.Utilities.Objects.debounce(
             (value: any, context: any) => {
               stratImpl.test(value, context);
             },
@@ -303,7 +306,7 @@ namespace Validation {
         return [
           (this.#cacheMap.get("detailedErrors") as any)?.[fieldName],
           (this.#cacheMap.get("errors") as any)?.[fieldName],
-        ] as StrategyFactory.getStrategyResult<TClass, K>;
+        ] as API.Strategy.Factory.getStrategyResult<TClass, K>;
       }
 
       // @ts-expect-error

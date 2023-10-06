@@ -1,9 +1,8 @@
-import Decorator from "../../../../src/decorators";
-import FieldValidatorDecorator from "../../../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../../../src/localization/service/translation.service";
-import Objects from "../../../../src/utilities/impl/Objects";
+import API from "api";
+
 import RegexConst from "../../../shared/regex.constants";
 import { testRegex } from "../Pattern";
+
 /**
  * Creates a validator decorator that checks if a string value contains only lowercase letters using a regular expression pattern.
  *
@@ -31,16 +30,16 @@ import { testRegex } from "../Pattern";
  *   value: string;
  * }
  */
-export default function Lowercase<T extends Objects.Optional<string>>(
-  props?: Decorator.Props.ZeroArgsMessageOptional
-) {
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+export default function Lowercase<
+  T extends API.Utilities.Objects.Optional<string>
+>(props?: API.Decorator.Props.ZeroArgsMessageOptional) {
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Lowercase",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "Lowercase"),
+        API.Localization.TranslationService.translate(locale, "Lowercase"),
         locale
       ),
       valid: testRegex(RegexConst.LOWERCASE, value),

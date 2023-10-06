@@ -1,7 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * Creates a validator decorator for exact length validation.
@@ -29,17 +26,21 @@ import Objects from "../../src/utilities/impl/Objects";
  *   username: string;
  * }
  */
-export default function ExactLength<T extends Objects.Optional<string>>(
-  props: Decorator.Props.MultiArgsMessageOptional<number>
-) {
-  const exact = Decorator.args(props);
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+export default function ExactLength<
+  T extends API.Utilities.Objects.Optional<string>
+>(props: API.Decorator.Props.MultiArgsMessageOptional<number>) {
+  const exact = API.Decorator.args(props);
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "ExactLength",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "ExactLength", exact),
+        API.Localization.TranslationService.translate(
+          locale,
+          "ExactLength",
+          exact
+        ),
         locale
       ),
       valid: (value ?? "").length === exact,

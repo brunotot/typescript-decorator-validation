@@ -1,6 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * Decorator for validating that none of the elements in an array pass a specified test.
@@ -22,13 +20,15 @@ import Objects from "../../src/utilities/impl/Objects";
  * This example validates that none of the elements in the `nonNegativeNumbers` array are negative, associates it with a custom validation group, and provides a custom error message if the validation fails.
  */
 export default function ArrayNone<K, T extends K[]>(
-  props: Decorator.Props.MultiArgsMessageRequired<Objects.ArrayPredicate<K>>
+  props: API.Decorator.Props.MultiArgsMessageRequired<
+    API.Utilities.Objects.ArrayPredicate<K>
+  >
 ) {
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArrayNone",
-      message: Decorator.message(props, "", locale),
+      message: API.Decorator.message(props, "", locale),
       valid: !(array ?? []).some(props.value),
     }),
   });

@@ -1,26 +1,25 @@
-import Decorator from "../../src/decorators";
-import ClassDecorator from "../../src/decorators/kind/ClassDecorator";
-import ClassValidatorDecorator from "../../src/decorators/kind/derived/ClassValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Strings from "../../src/utilities/impl/Strings";
-import Types from "../../src/utilities/impl/Types";
+import API from "api";
 
-export default function ValidDateRange<T extends ClassDecorator.Type>(
+export default function ValidDateRange<
+  T extends API.Decorator.ClassBaseDecorator.Type
+>(
   startDateFieldName: string,
   endDateFieldName: string,
-  props?: Decorator.Props.Base & Decorator.Props.MessageOptional
-): ClassDecorator.Instance<Types.UnwrapClass<T>> {
-  return ClassValidatorDecorator.build({
-    groups: Decorator.groups(props),
+  props?: API.Decorator.Props.Base & API.Decorator.Props.MessageOptional
+): API.Decorator.ClassBaseDecorator.Instance<
+  API.Utilities.Types.UnwrapClass<T>
+> {
+  return API.Decorator.ClassValidatorDecorator.build({
+    groups: API.Decorator.groups(props),
     isValid: (value, _context, locale) => ({
       key: "ValidDateRange",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(
+        API.Localization.TranslationService.translate(
           locale,
           "ValidDateRange",
-          Strings.convertCamelCaseToText(startDateFieldName),
-          Strings.convertCamelCaseToText(endDateFieldName, false)
+          API.Utilities.Strings.convertCamelCaseToText(endDateFieldName, false),
+          API.Utilities.Strings.convertCamelCaseToText(startDateFieldName)
         ),
         locale
       ),

@@ -1,9 +1,10 @@
-import TdvCoreApi from "./src/api";
+import TdvCoreApi from "./src";
 import Decorator from "./src/decorators";
-import Validation from "./src/engine";
 import Localization from "./src/localization";
 import Reflection from "./src/reflection";
-import Descriptor from "./src/reflection/models/reflection.descriptor";
+import Strategy from "./src/strategy";
+import Utilities from "./src/utilities";
+import Validation from "./src/validation";
 import decorate from "./validators";
 import validate from "./validators/any/validate";
 
@@ -19,9 +20,10 @@ export namespace Overrides {
 
 export {
   Decorator,
-  Descriptor,
   Localization,
   Reflection,
+  Strategy,
+  Utilities,
   Validation,
   decorate,
   validate,

@@ -1,7 +1,6 @@
+import API from "api";
+
 import EventEmitter from "events";
-import Validation from "../../../engine";
-import Localization from "../../../localization";
-import ReflectionDescriptor from "../../../reflection/models/reflection.descriptor";
 import AbstractValidationStrat from "../../strategy";
 import ns from "./types";
 
@@ -24,10 +23,10 @@ export default class PrimitiveGetterStrat<F> extends AbstractValidationStrat<
    * @param defaultValue - The default value for the parent object.
    */
   constructor(
-    descriptor: ReflectionDescriptor.ReflectionDescriptor<F, any>,
+    descriptor: API.Reflection.Descriptor.Instance<F, any>,
     defaultValue: F,
     groups: string[],
-    locale: Localization.Locale,
+    locale: API.Localization.Locale,
     eventEmitter: EventEmitter,
     asyncDelay: number
   ) {

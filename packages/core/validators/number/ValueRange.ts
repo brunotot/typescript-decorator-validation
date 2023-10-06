@@ -1,7 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * ValueRange decorator for validating that a numeric value falls within a specified range.
@@ -30,17 +27,25 @@ import Objects from "../../src/utilities/impl/Objects";
  *   price?: number;
  * }
  */
-export default function ValueRange<T extends Objects.Optional<number>>(
-  props: Decorator.Props.MultiArgsMessageOptional<readonly [number, number]>
+export default function ValueRange<
+  T extends API.Utilities.Objects.Optional<number>
+>(
+  props: API.Decorator.Props.MultiArgsMessageOptional<readonly [number, number]>
 ) {
-  const [min, max] = Decorator.args(props);
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+  const [min, max] = API.Decorator.args(props);
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "ValueRange",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "ValueRange", min, max, value!),
+        API.Localization.TranslationService.translate(
+          locale,
+          "ValueRange",
+          min,
+          max,
+          value!
+        ),
         locale
       ),
       valid: value == null ? true : value >= min && value <= max,

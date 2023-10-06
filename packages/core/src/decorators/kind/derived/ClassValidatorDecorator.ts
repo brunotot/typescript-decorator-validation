@@ -1,22 +1,20 @@
-import Localization from "../../../localization";
-import ClassDecorator from "../ClassDecorator";
-import Validation from "./../../../engine";
+import API from "api";
 
 /**
  * A service class which exposes validated-decorator-related actions
  */
 
 namespace ClassValidatorDecorator {
-  export type Supplier<T extends ClassDecorator.Type> = {
+  export type Supplier<T extends API.Decorator.ClassBaseDecorator.Type> = {
     groups?: string | string[];
     isValid: Evaluator<T>;
   };
 
-  export type Evaluator<T extends ClassDecorator.Type> = ((
+  export type Evaluator<T extends API.Decorator.ClassBaseDecorator.Type> = ((
     value: any,
-    context: ClassDecorator.Context<T>,
-    locale: Localization.Locale
-  ) => Validation.Result) & {};
+    context: API.Decorator.ClassBaseDecorator.Context<T>,
+    locale: API.Localization.Locale
+  ) => API.Validation.Result) & {};
 
   /**
    * Creates a new validator function using the provided validation builder options.
@@ -45,11 +43,11 @@ namespace ClassValidatorDecorator {
    * }
    * ```
    */
-  export function build<T extends ClassDecorator.Type>({
+  export function build<T extends API.Decorator.ClassBaseDecorator.Type>({
     groups,
     isValid,
-  }: Supplier<T>): ClassDecorator.Instance<T> {
-    return ClassDecorator.build((meta) => {
+  }: Supplier<T>): API.Decorator.ClassBaseDecorator.Instance<T> {
+    return API.Decorator.ClassBaseDecorator.build((meta) => {
       meta.addValidator(isValid, groups);
     });
   }

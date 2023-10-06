@@ -1,10 +1,9 @@
-import Localization from "../localization";
-import ValidationConfigurer from "../reflection/service/impl/FieldValidatorMetaService";
-import Objects from "../utilities/impl/Objects";
-import ClassDecorator from "./kind/ClassDecorator";
-import FieldDecorator from "./kind/FieldDecorator";
-import ClassValidatorDecorator from "./kind/derived/ClassValidatorDecorator";
-import FieldValidatorDecorator from "./kind/derived/FieldValidatorDecorator";
+import API from "api";
+
+import ClassBaseDecoratorNamespace from "./kind/ClassBaseDecorator";
+import FieldBaseDecoratorNamespace from "./kind/FieldBaseDecorator";
+import ClassValidatorDecoratorNamespace from "./kind/derived/ClassValidatorDecorator";
+import FieldValidatorDecoratorNamespace from "./kind/derived/FieldValidatorDecorator";
 import DecoratorProps from "./props";
 
 /**
@@ -13,21 +12,11 @@ import DecoratorProps from "./props";
 namespace Decorator {
   export import Props = DecoratorProps;
 
-  export import FieldBaseService = FieldDecorator;
-
-  export import ClassBaseService = ClassDecorator;
-
-  export import FieldValidatorService = FieldValidatorDecorator;
-
-  export import ClassValidatorService = ClassValidatorDecorator;
-
-  export type ContextKind =
-    | "class"
-    | "method"
-    | "getter"
-    | "setter"
-    | "accessor"
-    | "field";
+  // Decorator services
+  export import FieldBaseDecorator = FieldBaseDecoratorNamespace;
+  export import ClassBaseDecorator = ClassBaseDecoratorNamespace;
+  export import FieldValidatorDecorator = FieldValidatorDecoratorNamespace;
+  export import ClassValidatorDecorator = ClassValidatorDecoratorNamespace;
 
   /**
    * Type definition for a decorator function.
@@ -36,12 +25,11 @@ namespace Decorator {
    */
   export type Instance<T = unknown> = (
     target: any,
-    context: Decorator.Context<T>
+    context: API.Decorator.Context<T>
   ) => void;
 
   /**
-   * Context object passed to a decorator functio
-  const [min, max] = Array.isArray(props) ? props : props.valuen.
+   * Context object passed to a decorator function
    *
    * @typeParam Accept - The type of value the context accepts.
    */
@@ -63,8 +51,8 @@ namespace Decorator {
    */
   export type Supplier<T = unknown> = (
     name: string,
-    meta: ValidationConfigurer,
-    context: Decorator.Context<T>
+    meta: API.Reflection.Services.FieldValidatorMetaService.default,
+    context: API.Decorator.Context<T>
   ) => void;
 
   /**
@@ -80,14 +68,14 @@ namespace Decorator {
   export function message(
     provider: Props.GenericModel,
     defaultMessage: string,
-    locale: Localization.Locale
+    locale: API.Localization.Locale
   ): string {
     if (!provider) return defaultMessage;
     const providerType = typeof provider;
     const msgNullable = providerType ? provider : provider.message;
     const msgNonNull = msgNullable ?? "";
     return msgNonNull.length
-      ? Localization.MessageResolver.resolve(locale, msgNonNull)
+      ? API.Localization.MessageResolver.resolve(locale, msgNonNull)
       : defaultMessage;
   }
 
@@ -103,7 +91,7 @@ namespace Decorator {
   export function groups(provider: Props.GenericModel): string[] {
     return isDecoratorProps(provider) && "groups" in provider
       ? Array.isArray(provider.groups)
-        ? Objects.unique(provider.groups)
+        ? API.Utilities.Objects.unique(provider.groups)
         : provider.groups
         ? [provider.groups]
         : []
@@ -114,6 +102,17 @@ namespace Decorator {
     return isDecoratorProps(props) && key in (props as any)
       ? (props as any)[key]
       : (props as T);
+  }
+
+  export function groupedValidators<TFieldType>(
+    data: API.Validation.Metadata<TFieldType>[],
+    groups: string[]
+  ) {
+    return data.filter((meta: API.Validation.Metadata<TFieldType>) =>
+      groups.length
+        ? meta.groups.some((o) => groups.includes(o))
+        : !meta.groups.length
+    );
   }
 
   function isDecoratorProps(props: Props.GenericModel): boolean {

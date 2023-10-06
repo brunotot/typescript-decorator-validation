@@ -1,6 +1,4 @@
-import FieldDecorator from "../../src/decorators/kind/FieldDecorator";
-import Objects from "../../src/utilities/impl/Objects";
-import Types from "../../src/utilities/impl/Types";
+import API from "api";
 
 /**
  * Creates a decorator to associate a class with its validation rules.
@@ -17,9 +15,11 @@ import Types from "../../src/utilities/impl/Types";
  * }
  */
 export default function attribute<
-  T extends Objects.Optional<object | object[]>
->(clazz: Types.Class<any>): FieldDecorator.Instance<T> {
-  return FieldDecorator.build<any>((meta, name) => {
+  T extends API.Utilities.Objects.Optional<object | object[]>
+>(
+  clazz: API.Utilities.Types.Class<any>
+): API.Decorator.FieldBaseDecorator.Instance<T> {
+  return API.Decorator.FieldBaseDecorator.build<any>((meta, name) => {
     meta.getUntypedDescriptor(name).thisClass = clazz;
   });
 }

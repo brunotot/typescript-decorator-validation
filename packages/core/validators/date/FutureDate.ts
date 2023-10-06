@@ -1,7 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * Decorator for validating if a date is in the future.
@@ -19,16 +16,20 @@ import Objects from "../../src/utilities/impl/Objects";
  * ```
  * This example applies the `FutureDate` validator to the `eventDate` property to ensure it is a date in the future.
  */
-export default function FutureDate<T extends Objects.Optional<Date>>(
-  props?: Decorator.Props.ZeroArgsMessageOptional
-) {
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+export default function FutureDate<
+  T extends API.Utilities.Objects.Optional<Date>
+>(props?: API.Decorator.Props.ZeroArgsMessageOptional) {
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (date, _context, locale) => ({
       key: "FutureDate",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "FutureDate", date!),
+        API.Localization.TranslationService.translate(
+          locale,
+          "FutureDate",
+          date!
+        ),
         locale
       ),
       valid: date && date.getTime() > new Date().getTime(),

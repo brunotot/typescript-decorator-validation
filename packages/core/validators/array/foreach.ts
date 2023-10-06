@@ -1,6 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldDecorator from "../../src/decorators/kind/FieldDecorator";
-import Arrays from "../../src/utilities/impl/Arrays";
+import API from "api";
 
 /**
  * Decorator for applying multiple validators to each element in an array property.
@@ -19,17 +17,19 @@ import Arrays from "../../src/utilities/impl/Arrays";
  * This example applies the `MinLength` and `MaxLength` validators to each element in the `names` array property.
  */
 export default function foreach<T extends NonNullable<any[] | (() => any[])>>(
-  ...validators: Decorator.Instance<Arrays.getArrayType<T>>[]
-): Decorator.Instance<T> {
-  return FieldDecorator.build<T>((meta, property, context) => {
-    const validationProcessor = meta.getUntypedDescriptor(property);
-    validationProcessor.thisDefault = [];
-    validators.forEach((validator) => {
-      validator(undefined, context as any);
-      const rules = validationProcessor.rules;
-      const rootRules = rules.root;
-      const foreachRules = rules.foreach;
-      foreachRules.add(rootRules.pop());
-    });
-  });
+  ...validators: API.Decorator.Instance<API.Utilities.Arrays.getArrayType<T>>[]
+): API.Decorator.Instance<T> {
+  return API.Decorator.FieldBaseDecorator.build<T>(
+    (meta, property, context) => {
+      const validationProcessor = meta.getUntypedDescriptor(property);
+      validationProcessor.thisDefault = [];
+      validators.forEach((validator) => {
+        validator(undefined, context as any);
+        const rules = validationProcessor.rules;
+        const rootRules = rules.root;
+        const foreachRules = rules.foreach;
+        foreachRules.add(rootRules.pop());
+      });
+    }
+  );
 }

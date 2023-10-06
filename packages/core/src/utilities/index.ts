@@ -7,10 +7,15 @@ import TypesNamespace from "./impl/Types";
 
 namespace Utilities {
   export import Numbers = NumbersNamespace;
+
   export import Booleans = BooleansNamespace;
+
   export import Arrays = ArraysNamespace;
+
   export import Objects = ObjectsNamespace;
+
   export import Strings = StringsNamespace;
+
   export import Types = TypesNamespace;
 }
 

@@ -1,5 +1,5 @@
-import Validation from "../src/engine";
 import Objects from "../src/utilities/impl/Objects";
+import Validation from "../src/validation";
 import ValidDateRange from "../validators/class/ValidDateRange";
 import decorate from "../validators/index";
 

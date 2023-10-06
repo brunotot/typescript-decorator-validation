@@ -1,7 +1,4 @@
-import Decorator from "../../src/decorators";
-import FieldValidatorDecorator from "../../src/decorators/kind/derived/FieldValidatorDecorator";
-import TranslationService from "../../src/localization/service/translation.service";
-import Objects from "../../src/utilities/impl/Objects";
+import API from "api";
 
 /**
  * Creates a validator decorator for length range validation.
@@ -31,17 +28,24 @@ import Objects from "../../src/utilities/impl/Objects";
  *   password: string;
  * }
  */
-export default function Length<T extends Objects.Optional<string>>(
-  props: Decorator.Props.MultiArgsMessageOptional<readonly [number, number]>
+export default function Length<
+  T extends API.Utilities.Objects.Optional<string>
+>(
+  props: API.Decorator.Props.MultiArgsMessageOptional<readonly [number, number]>
 ) {
-  const [min, max] = Decorator.args(props);
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props),
+  const [min, max] = API.Decorator.args(props);
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Length",
-      message: Decorator.message(
+      message: API.Decorator.message(
         props,
-        TranslationService.translate(locale, "RangeLength", min, max),
+        API.Localization.TranslationService.translate(
+          locale,
+          "RangeLength",
+          min,
+          max
+        ),
         locale
       ),
       valid: (value ?? "").length >= min && (value ?? "").length <= max,

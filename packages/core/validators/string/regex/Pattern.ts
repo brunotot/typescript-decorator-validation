@@ -1,8 +1,6 @@
-import Decorator from "../../../src/decorators";
-import FieldValidatorDecorator from "../../../src/decorators/kind/derived/FieldValidatorDecorator";
-import Objects from "../../../src/utilities/impl/Objects";
+import API from "api";
 
-export function testRegex<T extends Objects.Optional<string>>(
+export function testRegex<T extends API.Utilities.Objects.Optional<string>>(
   regex: RegExp,
   value: T
 ): boolean {
@@ -38,18 +36,20 @@ export function testRegex<T extends Objects.Optional<string>>(
  *   anotherProperty: string;
  * }
  */
-export default function Pattern<T extends Objects.Optional<string>>(
-  props: Decorator.Props.MultiArgsMessageRequired<{
+export default function Pattern<
+  T extends API.Utilities.Objects.Optional<string>
+>(
+  props: API.Decorator.Props.MultiArgsMessageRequired<{
     regex: RegExp;
     key?: string;
   }>
 ) {
-  const { regex, key } = Decorator.args(props);
-  return FieldValidatorDecorator.build<T>({
-    groups: Decorator.groups(props.groups),
+  const { regex, key } = API.Decorator.args(props);
+  return API.Decorator.FieldValidatorDecorator.build<T>({
+    groups: API.Decorator.groups(props.groups),
     validate: (value, _, locale) => ({
       key: key ?? "Pattern",
-      message: Decorator.message(props, "", locale),
+      message: API.Decorator.message(props, "", locale),
       valid: testRegex(regex, value),
     }),
   });
