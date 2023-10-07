@@ -5,8 +5,8 @@ import Reflection from "./src/reflection";
 import Strategy from "./src/strategy";
 import Utilities from "./src/utilities";
 import Validation from "./src/validation";
-import validators from "./validators";
-import { validate } from "./validators/any/validate";
+import Collection from "./validators";
+import { create } from "./validators/any/create";
 
 /**
  * A namespace which holds all interfaces which are extendable - meaning the developer can feed the library with custom types
@@ -19,14 +19,14 @@ export namespace Overrides {
 }
 
 export {
+  Collection,
   Decorator,
   Localization,
   Reflection,
   Strategy,
   Utilities,
   Validation,
-  validate,
-  validators,
+  create,
 };
 
 export default TdvCoreApi;

@@ -13,7 +13,7 @@ function buildItMessage(valid: boolean, value: any) {
 }
 
 export default class ValidationHandlerMock<T> {
-  constructor(private handler: ValidationEngine.Engine<IMock<T>>) {}
+  constructor(private handler: ValidationEngine.ValidationEngine<IMock<T>>) {}
 
   expect(data: T[], valid: boolean) {
     data.forEach((value) => {

@@ -6,5 +6,8 @@ export default function useValidationEngine<TClass>(
   model: TdvCore.Utilities.Types.Class<TClass>,
   config?: ns.UseValidationEngineConfig<TClass>
 ) {
-  return useMemo(() => new Validation.Engine<TClass>(model, config), []);
+  return useMemo(
+    () => new Validation.ValidationEngine<TClass>(model, config),
+    []
+  );
 }

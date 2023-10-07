@@ -1,8 +1,8 @@
 import API from "api";
 
-import ReflectionStrategyNamespace from "../validation/models/reflection.strategy";
-import ReflectionDescriptor from "./models/reflection.descriptor";
-import ReflectionRule from "./models/reflection.rule";
+import ReflectionStrategyNamespace from "../strategy/models/StrategyMapper";
+import ReflectionDescriptor from "./models/ReflectionDescriptor";
+import ReflectionRule from "./models/ReflectionRule";
 import * as _AbstractMetaService from "./service/AbstractMetaService";
 import * as _ClassValidatorMetaService from "./service/impl/ClassValidatorMetaService";
 import * as _FieldValidatorMetaService from "./service/impl/FieldValidatorMetaService";

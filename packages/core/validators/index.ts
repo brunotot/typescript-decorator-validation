@@ -1,6 +1,6 @@
 import * as NsRequired from "./any/Required";
 import * as NsAttribute from "./any/attribute";
-import * as NsValidate from "./any/validate";
+import * as NsValidate from "./any/create";
 import * as NsArrayContains from "./array/ArrayContains";
 import * as NsArrayEmpty from "./array/ArrayEmpty";
 import * as NsArrayEvery from "./array/ArrayEvery";
@@ -46,7 +46,7 @@ import * as NsUppercase from "./string/regex/impl/Uppercase";
 
 namespace ValidatorAnyGroup {
   export import Required = NsRequired.Required;
-  export import validate = NsValidate.validate;
+  export import validate = NsValidate.create;
   export import attribute = NsAttribute.attribute;
 }
 
