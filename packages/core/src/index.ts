@@ -2,6 +2,7 @@
  * The `Core` namespace provides access to various core modules and namespaces.
  * These modules and namespaces are essential for the functionality of the application.
  */
+import validators from "validators";
 import DecoratorNamespace from "./decorators";
 import LocalizationNamespace from "./localization";
 import ReflectionNamespace from "./reflection";
@@ -24,6 +25,8 @@ namespace API {
   export import Utilities = UtilitiesNamespace;
 
   export import Reflection = ReflectionNamespace;
+
+  export import Collection = validators;
 }
 
 export default API;
