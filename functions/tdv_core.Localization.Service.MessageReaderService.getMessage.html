@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>setLocale | Typescript Decorator Validation</title><meta name="description" content="Documentation for Typescript Decorator Validation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/my-theme.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>console.log(`Loaded ${location.href}`)</script><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>getMessage | Typescript Decorator Validation</title><meta name="description" content="Documentation for Typescript Decorator Validation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/my-theme.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>console.log(`Loaded ${location.href}`)</script><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -28,23 +28,24 @@
 <li><a href="../index.html">Typescript Decorator Validation</a></li>
 <li><a href="../modules/tdv_core.html">tdv-core</a></li>
 <li><a href="../modules/tdv_core.Localization.html">Localization</a></li>
-<li><a href="tdv_core.Localization.setLocale.html">setLocale</a></li></ul>
-<h1>Function setLocale</h1></div>
+<li><a href="../modules/tdv_core.Localization.Service.html">Service</a></li>
+<li><a href="../modules/tdv_core.Localization.Service.MessageReaderService.html">MessageReaderService</a></li>
+<li><a href="tdv_core.Localization.Service.MessageReaderService.getMessage.html">getMessage</a></li></ul>
+<h1>Function getMessage</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="setLocale"><span class="tsd-kind-call-signature">set<wbr/>Locale</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">localeValue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#setLocale" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="getMessage"><span class="tsd-kind-call-signature">get<wbr/>Message</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">key</span>, <span class="tsd-kind-parameter">locale</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#getMessage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Function which sets new global Locale value</p>
-</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">localeValue</span>: <a href="../types/tdv_core.Localization.Locale.html" class="tsd-signature-type tsd-kind-type-alias">Locale</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">key</span>: <span class="tsd-signature-type">&quot;Alpha&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Alphanumeric&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArrayContains&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArrayEmpty&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArraySizeExact&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArraySizeMax&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArraySizeMin&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArraySizeRange&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArrayUnique&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Date&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Decimal&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Digits&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Email&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ExactLength&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;AssertFalse&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;FutureDate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;IPAddress&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Integer&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;InvalidDigits&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;JSON&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Lowercase&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;MaxLength&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;MinLength&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Negative&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;NonNegative&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;NonPositive&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Numeric&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;PasswordLength&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;PasswordLowercase&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;PasswordNumbers&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;PasswordSpecials&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;PasswordUppercase&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;PastDate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Positive&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;RangeLength&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Required&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Time&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;TodayDate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;AssertTrue&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;URL&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Uppercase&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ValidDateRange&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ValueMax&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ValueMin&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ValueRange&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;XML&quot;</span></h5></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">locale</span>: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/tdv_core.Localization.Resolver.LocaleResolver.Locale.html" class="tsd-signature-type tsd-kind-type-alias">Locale</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/8c3ef12/packages/core/src/localization/index.ts#L36">src/localization/index.ts:36</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/ce60fc3/packages/core/src/localization/service/MessageReaderService.ts#L34">src/localization/service/MessageReaderService.ts:34</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -168,41 +169,67 @@
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
 <li>
-<details class="tsd-index-accordion" data-key="tdv-core.Localization.MessageResolver"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.MessageResolver.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" data-key="tdv-core.Localization.Resolver"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.Resolver.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<div>Resolver</div></a></summary>
+<div class="tsd-accordion-details">
+<ul class="tsd-nested-navigation">
+<li>
+<details class="tsd-index-accordion" data-key="tdv-core.Localization.Resolver.LocaleResolver"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.Resolver.LocaleResolver.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<div>Locale<wbr/>Resolver</div></a></summary>
+<div class="tsd-accordion-details">
+<ul class="tsd-nested-navigation">
+<li><a href="../types/tdv_core.Localization.Resolver.LocaleResolver.Locale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<div>Locale
+<div class="menu-item-desc">2-character locale string representation</div></div></a></li>
+<li><a href="tdv_core.Localization.Resolver.LocaleResolver.getLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>get<wbr/>Locale
+<div class="menu-item-desc">Function which returns current global Locale value</div></div></a></li>
+<li><a href="tdv_core.Localization.Resolver.LocaleResolver.setLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>set<wbr/>Locale
+<div class="menu-item-desc">Function which sets new global Locale value</div></div></a></li></ul></div></details></li>
+<li>
+<details class="tsd-index-accordion" data-key="tdv-core.Localization.Resolver.MessageResolver"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.Resolver.MessageResolver.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Message<wbr/>Resolver
 <div class="menu-item-desc">A configuration class which allows for defining a custom message parser</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="../types/tdv_core.Localization.MessageResolver.MessageResolverData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<li><a href="../types/tdv_core.Localization.Resolver.MessageResolver.MessageResolverData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Message<wbr/>Resolver<wbr/>Data
 <div class="menu-item-desc">Message parser definition</div></div></a></li>
-<li><a href="tdv_core.Localization.MessageResolver.configure.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.Resolver.MessageResolver.configure.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>configure
 <div class="menu-item-desc">Is used to globally define a custom message parser</div></div></a></li>
-<li><a href="tdv_core.Localization.MessageResolver.resolve.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.Resolver.MessageResolver.resolve.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>resolve
-<div class="menu-item-desc">Internal handler for the customized message parser</div></div></a></li></ul></div></details></li>
+<div class="menu-item-desc">Internal handler for the customized message parser</div></div></a></li></ul></div></details></li></ul></div></details></li>
 <li>
-<details class="tsd-index-accordion" data-key="tdv-core.Localization.TranslationService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.TranslationService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" open data-key="tdv-core.Localization.Service"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.Service.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<div>Service</div></a></summary>
+<div class="tsd-accordion-details">
+<ul class="tsd-nested-navigation">
+<li>
+<details class="tsd-index-accordion" open data-key="tdv-core.Localization.Service.MessageReaderService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.Service.MessageReaderService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<div>Message<wbr/>Reader<wbr/>Service</div></a></summary>
+<div class="tsd-accordion-details">
+<ul class="tsd-nested-navigation">
+<li><a href="../types/tdv_core.Localization.Service.MessageReaderService.LocalizedMessages.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<div>Localized<wbr/>Messages</div></a></li>
+<li><a href="../types/tdv_core.Localization.Service.MessageReaderService.Messages.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<div>Messages
+<div class="menu-item-desc">Type definition for a collection of locale-specific messages.</div></div></a></li>
+<li><a href="../variables/tdv_core.Localization.Service.MessageReaderService.messages-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<div>messages</div></a></li>
+<li><a href="tdv_core.Localization.Service.MessageReaderService.getMessage.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>get<wbr/>Message</div></a></li></ul></div></details></li>
+<li>
+<details class="tsd-index-accordion" data-key="tdv-core.Localization.Service.TranslationService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.Service.TranslationService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Translation<wbr/>Service
 <div class="menu-item-desc">A service layer which interacts with app&#39;s translations</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.Localization.TranslationService.translate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.Service.TranslationService.translate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>translate
-<div class="menu-item-desc">Localizes a string based on a key and optional arguments.</div></div></a></li></ul></div></details></li>
-<li><a href="../types/tdv_core.Localization.Locale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Locale
-<div class="menu-item-desc">2-character locale string representation</div></div></a></li>
-<li><a href="../types/tdv_core.Localization.Messages.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Messages
-<div class="menu-item-desc">Type definition for a collection of locale-specific messages.</div></div></a></li>
-<li><a href="tdv_core.Localization.getLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>get<wbr/>Locale
-<div class="menu-item-desc">Function which returns current global Locale value</div></div></a></li>
-<li><a href="tdv_core.Localization.setLocale.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>set<wbr/>Locale
-<div class="menu-item-desc">Function which sets new global Locale value</div></div></a></li></ul></div></details></li>
+<div class="menu-item-desc">Localizes a string based on a key and optional arguments.</div></div></a></li></ul></div></details></li></ul></div></details></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Overrides"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Overrides.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Overrides
