@@ -90,6 +90,9 @@ if [ -n "$ticket" ]; then
   commit_message="$emoji [$group]: $message (#$ticket)"
 fi
 
+# Add all changed files to staging
+git add .
+
 # Perform the commit
 git commit -m "$commit_message" --quiet -u
 
