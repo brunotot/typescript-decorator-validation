@@ -1,22 +1,6 @@
 import API from "api";
 
-import * as de from "../translations/de.json";
-import * as en from "../translations/en.json";
-import * as es from "../translations/es.json";
-import * as fr from "../translations/fr.json";
-import * as hr from "../translations/hr.json";
-import * as it from "../translations/it.json";
-import * as nl from "../translations/nl.json";
-
-const localeMessages: API.Localization.Messages = {
-  hr,
-  de,
-  en,
-  es,
-  fr,
-  it,
-  nl,
-};
+import MessageReaderService from "./MessageReaderService";
 
 /**
  * A service layer which interacts with app's translations
@@ -39,12 +23,14 @@ namespace TranslationService {
    * It then uses `sprintf` to replace any placeholders in the message with the provided `args`.
    */
   export function translate(
-    locale: API.Localization.Locale | null,
-    key: string,
+    locale: API.Localization.Resolver.LocaleResolver.Locale | null,
+    key: keyof MessageReaderService.LocalizedMessages,
     ...args: any[]
   ) {
-    const service = localeMessages[locale ?? API.Localization.getLocale()];
-    return API.Utilities.Strings.sprintf(service[key], ...args);
+    return API.Utilities.Strings.sprintf(
+      MessageReaderService.getMessage(key, locale),
+      ...args
+    );
   }
 }
 
