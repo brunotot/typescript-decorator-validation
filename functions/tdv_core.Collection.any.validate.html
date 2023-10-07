@@ -35,13 +35,16 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="validate"><span class="tsd-kind-call-signature">validate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">props</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">target</span>, <span class="tsd-kind-parameter">context</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><a href="#validate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>A function which returns a decorated validator function built from a custom handler</p>
+<div class="tsd-comment tsd-typography"><p>Creates a custom validator decorator which is later used by <a href="../classes/tdv_core.Validation.ValidationEngine.html" class="tsd-kind-class">ValidationEngine</a> to register validation rules.</p>
 </div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">T</span></h4></li></ul></section>
+<h4><span class="tsd-kind-type-parameter">T</span></h4>
+<div class="tsd-comment tsd-typography"><p>The type of the decorated property. May be any type of field except a class.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -50,7 +53,7 @@
 <div class="tsd-comment tsd-typography"><p>An object with a custom validation function or a validation function directly.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">target</span>, <span class="tsd-kind-parameter">context</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></h4><p>A decorator function to use with class properties.</p>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">target</span>, <span class="tsd-kind-parameter">context</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></h4><p>A validator decorator function to use with class fields.</p>
 
 <ul class="tsd-parameters">
 <li class="tsd-parameter-signature">
@@ -66,16 +69,16 @@
 <h5><span class="tsd-kind-parameter">context</span>: <span class="tsd-signature-type ">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">access</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span><br/><span>        </span><span class="tsd-kind-call-signature">get</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;getter&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;method&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;field&quot;</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">metadata</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">DecoratorMetadataObject</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">private</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">static</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></li></ul>
 <div class="tsd-comment tsd-typography">
-<h4>Typeparam</h4><p>T - The type of the decorated property.</p>
-
-<h4>Example</h4><pre><code class="language-ts"><span class="hl-4">// Example 1: Basic usage with a custom validation function</span><br/><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Order</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-4">//@Rule((value) =&gt; value.price &gt; 0)</span><br/><span class="hl-1">  </span><span class="hl-6">totalPrice</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
+<h4>Example</h4><p>Example 1: Basic usage with a custom validation function</p>
+<pre><code class="language-ts"><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Order</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-6">_</span><span class="hl-1">@</span><span class="hl-0">create</span><span class="hl-1">(</span><span class="hl-6">value</span><span class="hl-1"> =&gt; ({ </span><span class="hl-6">valid:</span><span class="hl-1"> </span><span class="hl-6">value</span><span class="hl-1"> &gt; </span><span class="hl-8">5</span><span class="hl-1">, </span><span class="hl-6">key:</span><span class="hl-1"> </span><span class="hl-2">&quot;totalPrice&quot;</span><span class="hl-1">, </span><span class="hl-6">message:</span><span class="hl-1"> </span><span class="hl-2">&quot;Total price is invalid&quot;</span><span class="hl-1"> }))</span><br/><span class="hl-1">  </span><span class="hl-6">totalPrice</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>
 
-<h4>Example</h4><pre><code class="language-ts"><span class="hl-4">// Example 2: Using an object with validation function and groups</span><br/><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Product</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-4">//@create({</span><br/><span class="hl-1">  </span><span class="hl-4">//  validate: (value) =&gt; value.price &gt; 0,</span><br/><span class="hl-1">  </span><span class="hl-4">//  groups: [&quot;checkout&quot;],</span><br/><span class="hl-1">  </span><span class="hl-4">//)</span><br/><span class="hl-1">  </span><span class="hl-6">price</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
+<h4>Example</h4><p>Example 2: Using an object with validation function and groups</p>
+<pre><code class="language-ts"><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Product</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-6">_</span><span class="hl-1">@</span><span class="hl-0">create</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-6">groups</span><span class="hl-1">: [</span><span class="hl-2">&quot;checkout&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">validate</span><span class="hl-1">: (</span><span class="hl-6">value</span><span class="hl-1">) =&gt; ({</span><br/><span class="hl-1">      </span><span class="hl-6">valid:</span><span class="hl-1"> </span><span class="hl-6">value</span><span class="hl-1"> &gt; </span><span class="hl-8">5</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">key:</span><span class="hl-1"> </span><span class="hl-2">&quot;totalPrice&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">message:</span><span class="hl-1"> </span><span class="hl-2">&quot;Total price is invalid&quot;</span><br/><span class="hl-1">    })</span><br/><span class="hl-1">  )</span><br/><span class="hl-1">  </span><span class="hl-6">price</span><span class="hl-1">: </span><span class="hl-6">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/64793b5/packages/core/validators/any/create.ts#L27">validators/any/create.ts:27</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/9c507eb/packages/core/validators/any/create.ts#L35">validators/any/create.ts:35</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -103,13 +106,13 @@
 <ul class="tsd-nested-navigation">
 <li><a href="tdv_core.Collection.any.Required.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Required
-<div class="menu-item-desc">Creates a validator decorator for required value validation.</div></div></a></li>
+<div class="menu-item-desc">Creates a validator decorator which requires that a value must be present.</div></div></a></li>
 <li><a href="tdv_core.Collection.any.attribute.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>attribute
-<div class="menu-item-desc">Creates a decorator to associate a class with its validation rules.</div></div></a></li>
+<div class="menu-item-desc">Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T` ).</div></div></a></li>
 <li><a href="tdv_core.Collection.any.validate.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>validate
-<div class="menu-item-desc">A function which returns a decorated validator function built from a custom handler</div></div></a></li></ul></div></details></li>
+<div class="menu-item-desc">Creates a custom validator decorator which is later used by ValidationEngine to register validation rules.</div></div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Collection.array"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Collection.array.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>array
@@ -466,10 +469,10 @@
 <div class="menu-item-desc">2-character locale string representation</div></div></a></li>
 <li><a href="tdv_core.Localization.Resolver.LocaleResolver.getLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>get<wbr/>Locale
-<div class="menu-item-desc">Function which returns current global Locale value</div></div></a></li>
+<div class="menu-item-desc">Function which returns current global `Locale` value.</div></div></a></li>
 <li><a href="tdv_core.Localization.Resolver.LocaleResolver.setLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>set<wbr/>Locale
-<div class="menu-item-desc">Function which sets new global Locale value</div></div></a></li></ul></div></details></li>
+<div class="menu-item-desc">Function which sets new global `Locale` value.</div></div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Localization.Resolver.MessageResolver"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.Resolver.MessageResolver.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Message<wbr/>Resolver
@@ -478,10 +481,10 @@
 <ul class="tsd-nested-navigation">
 <li><a href="../types/tdv_core.Localization.Resolver.MessageResolver.MessageResolverData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Message<wbr/>Resolver<wbr/>Data
-<div class="menu-item-desc">Message parser definition</div></div></a></li>
+<div class="menu-item-desc">Message parser definition.</div></div></a></li>
 <li><a href="tdv_core.Localization.Resolver.MessageResolver.configure.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>configure
-<div class="menu-item-desc">Is used to globally define a custom message parser</div></div></a></li>
+<div class="menu-item-desc">Is used to globally define a custom message parser.</div></div></a></li>
 <li><a href="tdv_core.Localization.Resolver.MessageResolver.resolve.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>resolve
 <div class="menu-item-desc">Internal handler for the customized message parser</div></div></a></li></ul></div></details></li></ul></div></details></li>

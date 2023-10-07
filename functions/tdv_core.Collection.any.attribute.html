@@ -35,19 +35,26 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="attribute"><span class="tsd-kind-call-signature">attribute</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">clazz</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/tdv_core.Decorator.html" class="tsd-signature-type tsd-kind-namespace">Decorator</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.Decorator.Service.html" class="tsd-signature-type tsd-kind-namespace">Service</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.Decorator.Service.FieldDecoratorService.html" class="tsd-signature-type tsd-kind-namespace">FieldDecoratorService</a><span class="tsd-signature-symbol">.</span><a href="../types/tdv_core.Decorator.Service.FieldDecoratorService.Instance.html" class="tsd-signature-type tsd-kind-type-alias">Instance</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#attribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Creates a decorator to associate a class with its validation rules.</p>
+<div class="tsd-comment tsd-typography"><p>Creates a decorator which flags the given field as a non-primitive (will validate inner fields of <code>T</code>).</p>
+<p>If a field which is being decorated is not a <a href="../types/tdv_core.Utilities.Types.Primitive.html" class="tsd-kind-type-alias">primitive</a>
+(<code>string</code>, <code>number</code>, <code>boolean</code>, <code>bigint</code>, <code>Date</code>) and isn&#39;t marked as a primitive in <a href="../interfaces/tdv_core.Overrides.PrimitiveSet.html" class="tsd-kind-interface">overrides</a> interface
+then the framework treats it as a custom, client-defined validable class. That having in mind, you will always want to apply <code>@attribute</code>
+to those types of fields so the runtime evaluation matches the TypeScript compiler type evaluation. For more clarity check examples below.</p>
 </div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">[]</span></h4></li></ul></section>
+<h4><span class="tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">[]</span></h4>
+<div class="tsd-comment tsd-typography"><p>The type of the decorated property, which should be an object or an array of objects (nullables are allowed).</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
 <h5><span class="tsd-kind-parameter">clazz</span>: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">new </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">args</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span></h5>
-<div class="tsd-comment tsd-typography"><p>The class to associate with the validation rules.</p>
+<div class="tsd-comment tsd-typography"><p>The class definition associated with the field.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div>
 <ul class="tsd-parameters">
@@ -61,16 +68,18 @@
 <li>
 <h5><code class="tsd-tag ts-flagRest">Rest</code> <span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">args</span>: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4></li></ul></li></ul></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="../modules/tdv_core.Decorator.html" class="tsd-signature-type tsd-kind-namespace">Decorator</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.Decorator.Service.html" class="tsd-signature-type tsd-kind-namespace">Service</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.Decorator.Service.FieldDecoratorService.html" class="tsd-signature-type tsd-kind-namespace">FieldDecoratorService</a><span class="tsd-signature-symbol">.</span><a href="../types/tdv_core.Decorator.Service.FieldDecoratorService.Instance.html" class="tsd-signature-type tsd-kind-type-alias">Instance</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A decorator function to use with class properties.</p>
+<h4 class="tsd-returns-title">Returns <a href="../modules/tdv_core.Decorator.html" class="tsd-signature-type tsd-kind-namespace">Decorator</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.Decorator.Service.html" class="tsd-signature-type tsd-kind-namespace">Service</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.Decorator.Service.FieldDecoratorService.html" class="tsd-signature-type tsd-kind-namespace">FieldDecoratorService</a><span class="tsd-signature-symbol">.</span><a href="../types/tdv_core.Decorator.Service.FieldDecoratorService.Instance.html" class="tsd-signature-type tsd-kind-type-alias">Instance</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A decorator function to use with non-primitive fields.</p>
 
 <div class="tsd-comment tsd-typography">
-<h4>Typeparam</h4><p>T - The type of the decorated property, which should be an object.</p>
+<h4>Remarks</h4><p>Current implementation doesn&#39;t allow referencing the parent class itself as the associated <code>clazz</code>.
+Also, if _@attribute isn&#39;t supplied then the validation result at runtime defaults to primitive strategy and yet
+the evaluated type at compile-time remains the same. That is why it&#39;s crucial to add _@attribute decorator.</p>
 
-<h4>Example</h4><pre><code class="language-ts"><span class="hl-4">// Example 3: Validating an array of objects</span><br/><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">ShoppingCart</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-4">//@attribute(Item)</span><br/><span class="hl-1">  </span><span class="hl-6">items</span><span class="hl-1">: </span><span class="hl-7">Item</span><span class="hl-1">[];</span><br/><span class="hl-1">}</span>
+<h4>Example</h4><pre><code class="language-ts"><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Item</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-6">_</span><span class="hl-1">@</span><span class="hl-0">ValueMax</span><span class="hl-1">(10)</span><br/><span class="hl-1">  </span><span class="hl-6">quantity</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-6">_</span><span class="hl-1">@</span><span class="hl-0">ValueMin</span><span class="hl-1">(0.1)</span><br/><span class="hl-1">  </span><span class="hl-6">price</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">ShoppingCart</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-6">_</span><span class="hl-1">@</span><span class="hl-0">attribute</span><span class="hl-1">(</span><span class="hl-6">Item</span><span class="hl-1">) </span><span class="hl-4">// &lt;---</span><br/><span class="hl-1">  </span><span class="hl-6">items</span><span class="hl-1">: </span><span class="hl-7">Item</span><span class="hl-1">[];</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-0">ValidationEngine</span><span class="hl-1">(</span><span class="hl-6">ShoppingCart</span><span class="hl-1">).</span><span class="hl-0">validate</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-6">items:</span><span class="hl-1"> [</span><br/><span class="hl-1">    </span><span class="hl-4">// _@ValueMax constraint violation (quantity 15 exceeds maximum amount of 10)</span><br/><span class="hl-1">    {</span><span class="hl-6">quantity:</span><span class="hl-1"> </span><span class="hl-8">15</span><span class="hl-1">, </span><span class="hl-6">price:</span><span class="hl-1"> </span><span class="hl-8">200.00</span><span class="hl-1">},</span><br/><span class="hl-1">    </span><span class="hl-4">// _@ValueMin constraint violation (price 0 doesn&#39;t reach the minimum price amount of 0.1)</span><br/><span class="hl-1">    {</span><span class="hl-6">quantity:</span><span class="hl-1"> </span><span class="hl-8">1</span><span class="hl-1">, </span><span class="hl-6">price:</span><span class="hl-1"> </span><span class="hl-8">0</span><span class="hl-1">}</span><br/><span class="hl-1">  ]</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-4">// And the output is:</span><br/><br/><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-10">valid</span><span class="hl-1">: </span><span class="hl-3">false</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-10">detailedErrors</span><span class="hl-1">: {</span><br/><span class="hl-1">    </span><span class="hl-10">items</span><span class="hl-1">: [</span><br/><span class="hl-1">      [{ </span><span class="hl-6">key:</span><span class="hl-1"> </span><span class="hl-2">&quot;ValueMax&quot;</span><span class="hl-1">, </span><span class="hl-6">valid:</span><span class="hl-1"> </span><span class="hl-3">false</span><span class="hl-1">, </span><span class="hl-6">message:</span><span class="hl-1"> </span><span class="hl-2">&quot;Maximum allowed value is 10 but is 15&quot;</span><span class="hl-1"> }],</span><br/><span class="hl-1">      [{ </span><span class="hl-6">key:</span><span class="hl-1"> </span><span class="hl-2">&quot;ValueMax&quot;</span><span class="hl-1">, </span><span class="hl-6">valid:</span><span class="hl-1"> </span><span class="hl-3">false</span><span class="hl-1">, </span><span class="hl-6">message:</span><span class="hl-1"> </span><span class="hl-2">&quot;Minimum allowed value is 0.1 but is 0&quot;</span><span class="hl-1"> }]</span><br/><span class="hl-1">    ]</span><br/><span class="hl-1">  },</span><br/><span class="hl-1">  </span><span class="hl-10">errors</span><span class="hl-1">: {</span><br/><span class="hl-1">    </span><span class="hl-10">items</span><span class="hl-1">: [</span><br/><span class="hl-1">      [</span><span class="hl-2">&quot;Maximum allowed value is 10 but is 15&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">      [</span><span class="hl-2">&quot;Minimum allowed value is 0.1 but is 0&quot;</span><span class="hl-1">]</span><br/><span class="hl-1">    ]</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/64793b5/packages/core/validators/any/attribute.ts#L17">validators/any/attribute.ts:17</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/9c507eb/packages/core/validators/any/attribute.ts#L60">validators/any/attribute.ts:60</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -98,13 +107,13 @@
 <ul class="tsd-nested-navigation">
 <li><a href="tdv_core.Collection.any.Required.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Required
-<div class="menu-item-desc">Creates a validator decorator for required value validation.</div></div></a></li>
+<div class="menu-item-desc">Creates a validator decorator which requires that a value must be present.</div></div></a></li>
 <li><a href="tdv_core.Collection.any.attribute.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>attribute
-<div class="menu-item-desc">Creates a decorator to associate a class with its validation rules.</div></div></a></li>
+<div class="menu-item-desc">Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T` ).</div></div></a></li>
 <li><a href="tdv_core.Collection.any.validate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>validate
-<div class="menu-item-desc">A function which returns a decorated validator function built from a custom handler</div></div></a></li></ul></div></details></li>
+<div class="menu-item-desc">Creates a custom validator decorator which is later used by ValidationEngine to register validation rules.</div></div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Collection.array"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Collection.array.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>array
@@ -461,10 +470,10 @@
 <div class="menu-item-desc">2-character locale string representation</div></div></a></li>
 <li><a href="tdv_core.Localization.Resolver.LocaleResolver.getLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>get<wbr/>Locale
-<div class="menu-item-desc">Function which returns current global Locale value</div></div></a></li>
+<div class="menu-item-desc">Function which returns current global `Locale` value.</div></div></a></li>
 <li><a href="tdv_core.Localization.Resolver.LocaleResolver.setLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>set<wbr/>Locale
-<div class="menu-item-desc">Function which sets new global Locale value</div></div></a></li></ul></div></details></li>
+<div class="menu-item-desc">Function which sets new global `Locale` value.</div></div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Localization.Resolver.MessageResolver"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.Resolver.MessageResolver.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Message<wbr/>Resolver
@@ -473,10 +482,10 @@
 <ul class="tsd-nested-navigation">
 <li><a href="../types/tdv_core.Localization.Resolver.MessageResolver.MessageResolverData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Message<wbr/>Resolver<wbr/>Data
-<div class="menu-item-desc">Message parser definition</div></div></a></li>
+<div class="menu-item-desc">Message parser definition.</div></div></a></li>
 <li><a href="tdv_core.Localization.Resolver.MessageResolver.configure.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>configure
-<div class="menu-item-desc">Is used to globally define a custom message parser</div></div></a></li>
+<div class="menu-item-desc">Is used to globally define a custom message parser.</div></div></a></li>
 <li><a href="tdv_core.Localization.Resolver.MessageResolver.resolve.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>resolve
 <div class="menu-item-desc">Internal handler for the customized message parser</div></div></a></li></ul></div></details></li></ul></div></details></li>
