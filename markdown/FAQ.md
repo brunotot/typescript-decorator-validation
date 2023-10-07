@@ -58,7 +58,7 @@ npm install tdv-react # optional
 ## Usage
 
 > <div id="how-do-i-create-my-own-custom-decorator">❓ <strong><i>How do I create my own custom decorator?</i></strong></div>
-> 💡 <code>tdv-core</code> exposes a method <a href="https://github.com/brunotot/typescript-decorator-validation/blob/main/packages/core/validators/any/Rule.ts#L28">validate</a> which returns a decorator factory based on your custom implementation. It accepts validation <code>groups</code> param and <code>isValid</code> which expects a callback that returns an object containing <code>key</code>, error <code>message</code> and <code>valid</code> boolean evaluation.
+> 💡 <code>tdv-core</code> exposes a method <a href="https://github.com/brunotot/typescript-decorator-validation/blob/main/packages/core/validators/any/create.ts#L27">create</a> which returns a decorator factory based on your custom implementation. It accepts validation <code>groups</code> param and <code>isValid</code> which expects a callback that returns an object containing <code>key</code>, error <code>message</code> and <code>valid</code> boolean evaluation.
 
 ```typescript
 import { validate } from "tdv-core";
