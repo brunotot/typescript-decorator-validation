@@ -1,5 +1,8 @@
 import API from "api";
 
+/**
+ * A namespace containing all data and types for reflection (validation) rule.
+ */
 namespace ReflectionRule {
   /**
    * Manages a collection of validation rules for a specific field.

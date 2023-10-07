@@ -136,10 +136,9 @@ namespace ReflectionDescriptor {
       const fieldName = this.thisName!;
 
       const getNativeStrategy = (value: any) => {
-        const meta =
-          API.Reflection.Services.FieldValidatorMetaService.default.inject(
-            this.hostClass!
-          );
+        const meta = API.Reflection.Services.FieldValidatorMetaService.inject(
+          this.hostClass!
+        );
         const descriptor = meta.getTypedDescriptor<HostClass, keyof HostClass>(
           this.thisName!
         );

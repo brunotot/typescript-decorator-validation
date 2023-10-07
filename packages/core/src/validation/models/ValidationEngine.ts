@@ -15,7 +15,7 @@ import { CacheMap } from "./CacheMap";
 export class ValidationEngine<TClass> {
   #eventListener!: API.Validation.AsyncEventHandler<TClass>;
   #eventEmitter: EventEmitter;
-  #fieldValidatorMetaService: API.Reflection.Services.FieldValidatorMetaService.default;
+  #fieldValidatorMetaService: API.Reflection.Services.FieldValidatorMetaService;
   #groups: string[];
   #hostDefault: API.Utilities.Objects.Payload<TClass>;
   #cacheMap: CacheMap<API.Validation.Response<TClass>>;
@@ -48,7 +48,7 @@ export class ValidationEngine<TClass> {
         clazz
       ) as API.Utilities.Objects.Payload<TClass>);
     this.#fieldValidatorMetaService =
-      API.Reflection.Services.FieldValidatorMetaService.default.inject(clazz);
+      API.Reflection.Services.FieldValidatorMetaService.inject(clazz);
     this.#cacheMap = new CacheMap(
       (state) =>
         this.validate.bind(this)(state) as API.Validation.Response<TClass>

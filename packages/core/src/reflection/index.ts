@@ -94,10 +94,13 @@ namespace Reflection {
 
   export import Strategy = ReflectionStrategyNamespace;
 
+  /**
+   * Collection of service classes for managing validators on class or field level.
+   */
   export namespace Services {
-    export import AbstractMetaService = _AbstractMetaService;
-    export import ClassValidatorMetaService = _ClassValidatorMetaService;
-    export import FieldValidatorMetaService = _FieldValidatorMetaService;
+    export import AbstractMetaService = _AbstractMetaService.AbstractMetaService;
+    export import ClassValidatorMetaService = _ClassValidatorMetaService.ClassValidatorMetaService;
+    export import FieldValidatorMetaService = _FieldValidatorMetaService.FieldValidatorMetaService;
   }
 }
 

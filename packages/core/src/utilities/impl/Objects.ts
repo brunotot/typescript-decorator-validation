@@ -294,7 +294,7 @@ namespace Objects {
 
       const entries = Object.entries<any>(object ?? {});
       const meta =
-        API.Reflection.Services.FieldValidatorMetaService.default.inject(clazz);
+        API.Reflection.Services.FieldValidatorMetaService.inject(clazz);
       const data: Record<string, any> = {};
       for (const [key, value] of entries) {
         const descriptor = meta.getUntypedDescriptor(key);

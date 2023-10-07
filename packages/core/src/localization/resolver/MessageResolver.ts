@@ -1,7 +1,7 @@
 import LocaleResolver from "./LocaleResolver";
 
 /**
- * A configuration class which allows for defining a custom message parser
+ * A configuration class which allows for defining a custom message parser.
  */
 namespace MessageResolver {
   /**

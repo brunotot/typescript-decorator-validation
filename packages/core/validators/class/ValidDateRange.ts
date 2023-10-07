@@ -1,5 +1,14 @@
 import API from "api";
 
+/**
+ * Creates a class decorator that validates if the date range is valid.
+ *
+ * @typeParam T - Class type that extends from ClassDecoratorService.Type.
+ * @param {string} startDateFieldName - Field name for the start date.
+ * @param {string} endDateFieldName - Field name for the end date.
+ * @param {API.Decorator.Props.Base & API.Decorator.Props.MessageOptional} [props] - Optional properties for the decorator.
+ * @returns {API.Decorator.Service.ClassDecoratorService.Instance<API.Utilities.Types.UnwrapClass<T>>} - Returns an instance of the class decorator.
+ */
 export function ValidDateRange<
   T extends API.Decorator.Service.ClassDecoratorService.Type
 >(

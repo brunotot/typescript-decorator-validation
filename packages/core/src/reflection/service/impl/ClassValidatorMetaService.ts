@@ -1,5 +1,5 @@
 import API from "api";
-import AbstractMetaService from "../AbstractMetaService";
+import { AbstractMetaService } from "../AbstractMetaService";
 
 /**
  * A configurer class which allows for easier manipulation of decorated class validators and corresponding metadata
@@ -8,7 +8,7 @@ import AbstractMetaService from "../AbstractMetaService";
  * This class is responsible for managing metadata related to validation (at class level).
  * It provides methods to add validators and read them.
  */
-export default class ClassValidatorMetaService<
+export class ClassValidatorMetaService<
   TStrategy extends API.Reflection.MetaStrategy
 > extends AbstractMetaService<API.Reflection.Rule.Instance<any>> {
   /**

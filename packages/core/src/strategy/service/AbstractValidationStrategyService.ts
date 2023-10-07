@@ -49,9 +49,7 @@ export abstract class AbstractValidationStrategyService<
     };
     const host = descriptor.hostClass!;
     this.#classRules =
-      API.Reflection.Services.ClassValidatorMetaService.default.inject(
-        host
-      ).data;
+      API.Reflection.Services.ClassValidatorMetaService.inject(host).data;
   }
 
   protected get eventEmitter(): EventEmitter {
@@ -91,9 +89,9 @@ export abstract class AbstractValidationStrategyService<
   protected get fieldDescriptor() {
     if (this.#fieldDescriptor) return this.#fieldDescriptor;
     this.#fieldDescriptor =
-      API.Reflection.Services.FieldValidatorMetaService.default
-        .inject(this.#descriptor.hostClass!)
-        .getUntypedDescriptor(this.fieldName);
+      API.Reflection.Services.FieldValidatorMetaService.inject(
+        this.#descriptor.hostClass!
+      ).getUntypedDescriptor(this.fieldName);
     return this.#fieldDescriptor;
   }
 

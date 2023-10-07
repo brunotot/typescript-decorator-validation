@@ -1,3 +1,6 @@
+/**
+ * A configuration class which allows for setting the global `Locale`.
+ */
 namespace LocaleResolver {
   /**
    * 2-character locale string representation

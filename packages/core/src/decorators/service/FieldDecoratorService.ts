@@ -6,7 +6,7 @@ namespace FieldDecoratorService {
   export type ReturnDef = void;
 
   export type Supplier<T extends Type = Type> = (
-    meta: API.Reflection.Services.FieldValidatorMetaService.default,
+    meta: API.Reflection.Services.FieldValidatorMetaService,
     name: string,
     context: Context<T>
   ) => ReturnDef;
@@ -61,9 +61,7 @@ namespace FieldDecoratorService {
       const strategyEval = isStage2 ? target.constructor : context;
       const contextEval = isStage2 ? { name: context, metadata: {} } : context;
       const metaService =
-        API.Reflection.Services.FieldValidatorMetaService.default.inject(
-          strategyEval
-        );
+        API.Reflection.Services.FieldValidatorMetaService.inject(strategyEval);
       supplier(metaService, String(nameEval), contextEval as any);
     };
   }

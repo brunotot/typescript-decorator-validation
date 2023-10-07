@@ -1,6 +1,6 @@
 import API from "api";
 
-import AbstractMetaService from "../AbstractMetaService";
+import { AbstractMetaService } from "../AbstractMetaService";
 
 /**
  * A configurer class which allows for easier manipulation of decorated fields and corresponding metadata
@@ -9,7 +9,7 @@ import AbstractMetaService from "../AbstractMetaService";
  * This class is responsible for managing metadata related to validation.
  * It provides methods to add validators, get field names, and manage descriptors.
  */
-export default class FieldValidatorMetaService extends AbstractMetaService<
+export class FieldValidatorMetaService extends AbstractMetaService<
   Map<string, API.Reflection.Descriptor.Instance<any, any, any>>
 > {
   /**

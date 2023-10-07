@@ -8,7 +8,13 @@ import * as hr from "../translations/hr.json";
 import * as it from "../translations/it.json";
 import * as nl from "../translations/nl.json";
 
+/**
+ * A namespace which handles reading messages from `translations/*.json` files.
+ */
 namespace MessageReaderService {
+  /**
+   * All translation json files content in map, grouped by `Locale`.
+   */
   export const messages: Messages = {
     hr,
     de,
@@ -19,6 +25,9 @@ namespace MessageReaderService {
     nl,
   };
 
+  /**
+   * Represents translation json file's contents. Is unknown on TypeDocs due to the nature of inferring json contents type.
+   */
   export type LocalizedMessages = typeof en;
 
   /**
@@ -31,6 +40,12 @@ namespace MessageReaderService {
    */
   export type Messages = Record<LocaleResolver.Locale, LocalizedMessages>;
 
+  /**
+   * Returns localized message by key, allowing `locale` to be optional (defaults to global `locale`).
+   * @param key Translation key
+   * @param locale Locale to translate by
+   * @returns Localized message by key.
+   */
   export function getMessage(
     key: keyof LocalizedMessages,
     locale?: LocaleResolver.Locale | null

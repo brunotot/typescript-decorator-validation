@@ -10,6 +10,9 @@ import FieldDecoratorValidatorServiceNamespace from "./service/FieldDecoratorVal
  * A collection of types and interfaces for creating and handling decorators.
  */
 namespace Decorator {
+  /**
+   * A collection of services which allow for easy manipulation of field and class decorators.
+   */
   export namespace Service {
     export import FieldDecoratorService = FieldDecoratorServiceNamespace;
     export import ClassDecoratorService = ClassDecoratorServiceNamespace;
@@ -50,7 +53,7 @@ namespace Decorator {
    */
   export type Supplier<T = unknown> = (
     name: string,
-    meta: API.Reflection.Services.FieldValidatorMetaService.default,
+    meta: API.Reflection.Services.FieldValidatorMetaService,
     context: API.Decorator.Context<T>
   ) => void;
 
