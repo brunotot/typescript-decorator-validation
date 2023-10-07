@@ -45,7 +45,10 @@ export default function ArrayUnique<K, T extends K[]>(
       key: "ArrayUnique",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "ArrayUnique"),
+        API.Localization.Service.TranslationService.translate(
+          locale,
+          "ArrayUnique"
+        ),
         locale
       ),
       valid: isArrayUnique(

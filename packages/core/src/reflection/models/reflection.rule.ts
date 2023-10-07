@@ -44,7 +44,7 @@ namespace ReflectionRule {
       value: TFieldType,
       payload: API.Utilities.Objects.Payload<TBody>,
       groups: string[],
-      locale: API.Localization.Locale
+      locale: API.Localization.Resolver.LocaleResolver.Locale
     ): API.Validation.Result[] {
       return API.Decorator.groupedValidators(this.#contents, groups)
         .map(({ validate }) => validate(value, payload, locale))

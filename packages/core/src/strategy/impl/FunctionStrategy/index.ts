@@ -28,7 +28,7 @@ export default class FunctionStrat<F> extends AbstractValidationStrat<
     descriptor: API.Reflection.Descriptor.Instance<F, any>,
     defaultValue: F,
     groups: string[],
-    locale: API.Localization.Locale,
+    locale: API.Localization.Resolver.LocaleResolver.Locale,
     eventEmitter: EventEmitter,
     asyncDelay: number
   ) {

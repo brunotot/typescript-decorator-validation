@@ -39,7 +39,10 @@ export default function Lowercase<
       key: "Lowercase",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "Lowercase"),
+        API.Localization.Service.TranslationService.translate(
+          locale,
+          "Lowercase"
+        ),
         locale
       ),
       valid: testRegex(RegexConst.LOWERCASE, value),

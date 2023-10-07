@@ -27,7 +27,7 @@ export default function TodayDate<
         key: "TodayDate",
         message: API.Decorator.message(
           props,
-          API.Localization.TranslationService.translate(
+          API.Localization.Service.TranslationService.translate(
             locale,
             "TodayDate",
             date!

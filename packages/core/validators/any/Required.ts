@@ -31,7 +31,10 @@ export default function Required<T extends API.Utilities.Objects.Optional>(
       key: "Required",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "Required"),
+        API.Localization.Service.TranslationService.translate(
+          locale,
+          "Required"
+        ),
         locale
       ),
       valid: API.Utilities.Objects.hasValue(value),

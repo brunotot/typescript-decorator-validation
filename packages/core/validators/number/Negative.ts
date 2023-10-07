@@ -25,7 +25,11 @@ export default function Negative<
       key: "Negative",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "Negative", num!),
+        API.Localization.Service.TranslationService.translate(
+          locale,
+          "Negative",
+          num!
+        ),
         locale
       ),
       valid: num !== undefined && num !== null && num < 0,

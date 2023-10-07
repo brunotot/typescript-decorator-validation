@@ -36,7 +36,7 @@ export default function ValueMin<
       key: "ValueMin",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "ValueMin",
           min,

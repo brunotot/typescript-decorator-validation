@@ -15,7 +15,7 @@ export default function ValidDateRange<
       key: "ValidDateRange",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "ValidDateRange",
           API.Utilities.Strings.convertCamelCaseToText(endDateFieldName, false),

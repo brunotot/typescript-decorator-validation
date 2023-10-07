@@ -14,7 +14,7 @@ export default abstract class AbstractValidationStrat<
   TDetailedResult = any,
   TSimpleResult = any
 > {
-  #locale: API.Localization.Locale;
+  #locale: API.Localization.Resolver.LocaleResolver.Locale;
   #groups: string[];
   #engineCfg: API.Validation.Config<any>;
   #classRules: API.Reflection.Rule.Instance<TClass>;
@@ -33,7 +33,7 @@ export default abstract class AbstractValidationStrat<
     descriptor: API.Reflection.Descriptor.Instance<TClass, any>,
     defaultValue: TClass,
     groups: string[],
-    locale: API.Localization.Locale,
+    locale: API.Localization.Resolver.LocaleResolver.Locale,
     eventEmitter: EventEmitter,
     asyncDelay: number
   ) {
@@ -77,7 +77,7 @@ export default abstract class AbstractValidationStrat<
     return this.#groups;
   }
 
-  protected get locale(): API.Localization.Locale {
+  protected get locale(): API.Localization.Resolver.LocaleResolver.Locale {
     return this.#locale;
   }
 

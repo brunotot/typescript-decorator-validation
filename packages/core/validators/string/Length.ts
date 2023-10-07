@@ -40,7 +40,7 @@ export default function Length<
       key: "Length",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "RangeLength",
           min,

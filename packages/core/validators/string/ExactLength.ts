@@ -36,7 +36,7 @@ export default function ExactLength<
       key: "ExactLength",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "ExactLength",
           exact

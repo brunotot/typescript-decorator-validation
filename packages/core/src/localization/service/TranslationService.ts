@@ -15,7 +15,7 @@ namespace TranslationService {
    *
    * @example
    * ```typescript
-   * const greeting = API.Localization.TranslationService.translate("hello", "Bruno");  // Output might be: "Hello, Bruno!"
+   * const greeting = API.Localization.Service.TranslationService.translate("hello", "Bruno");  // Output might be: "Hello, Bruno!"
    * ```
    *
    * @remarks

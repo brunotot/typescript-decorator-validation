@@ -30,7 +30,7 @@ export default function ArraySizeRange<K, T extends K[]>(
       key: "ArraySizeRange",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "ArraySizeRange",
           min,

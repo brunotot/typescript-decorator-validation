@@ -39,7 +39,7 @@ export default function URL<T extends API.Utilities.Objects.Optional<string>>(
       key: "URL",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "URL"),
+        API.Localization.Service.TranslationService.translate(locale, "URL"),
         locale
       ),
       valid: testRegex(RegexConst.URL, value),

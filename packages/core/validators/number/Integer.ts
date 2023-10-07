@@ -25,7 +25,11 @@ export default function Integer<
       key: "Integer",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "Integer", num!),
+        API.Localization.Service.TranslationService.translate(
+          locale,
+          "Integer",
+          num!
+        ),
         locale
       ),
       valid: num !== undefined && num !== null && Number.isInteger(num),

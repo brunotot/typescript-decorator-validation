@@ -25,7 +25,7 @@ export default function Decimal<
       key: "Decimal",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "Decimal",
           value!

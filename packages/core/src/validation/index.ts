@@ -19,7 +19,7 @@ namespace Validation {
   export type Evaluator<T> = ((
     value: T,
     context: any,
-    locale: API.Localization.Locale
+    locale: API.Localization.Resolver.LocaleResolver.Locale
   ) => Result) & {};
 
   /**
@@ -62,7 +62,7 @@ namespace Validation {
   export type Config<TClass> = {
     defaultValue?: API.Utilities.Objects.Payload<TClass>;
     groups?: string[];
-    locale?: API.Localization.Locale;
+    locale?: API.Localization.Resolver.LocaleResolver.Locale;
     asyncDelay?: number;
   };
 
@@ -95,7 +95,7 @@ namespace Validation {
     #hostDefault: API.Utilities.Objects.Payload<TClass>;
     #cacheMap: CacheMap<Response<TClass>>;
     #hostClass: API.Utilities.Types.Class<TClass>;
-    locale: API.Localization.Locale;
+    locale: API.Localization.Resolver.LocaleResolver.Locale;
     #asyncDelay: number;
     #debounceMap: {
       [key in keyof TClass]: ReturnType<typeof API.Utilities.Objects.debounce>;
@@ -114,7 +114,8 @@ namespace Validation {
       this.#asyncDelay = config?.asyncDelay ?? 300;
       this.#eventEmitter = new EventEmitter();
       this.#hostClass = clazz;
-      this.locale = config?.locale ?? API.Localization.getLocale();
+      this.locale =
+        config?.locale ?? API.Localization.Resolver.LocaleResolver.getLocale();
       this.#groups = Array.from(new Set(config?.groups ?? []));
       this.#hostDefault =
         config?.defaultValue ??

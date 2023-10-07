@@ -39,7 +39,10 @@ export default function Numeric<
       key: "Numeric",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "Numeric"),
+        API.Localization.Service.TranslationService.translate(
+          locale,
+          "Numeric"
+        ),
         locale
       ),
       valid: testRegex(RegexConst.NUMERIC, value),

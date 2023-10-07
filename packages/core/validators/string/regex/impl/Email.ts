@@ -38,7 +38,7 @@ export default function Email<T extends API.Utilities.Objects.Optional<string>>(
       key: "Email",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "Email"),
+        API.Localization.Service.TranslationService.translate(locale, "Email"),
         locale
       ),
       valid: testRegex(RegexConst.EMAIL, value),

@@ -38,7 +38,7 @@ export default function Alpha<T extends API.Utilities.Objects.Optional<string>>(
       key: "Alpha",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "Alpha"),
+        API.Localization.Service.TranslationService.translate(locale, "Alpha"),
         locale
       ),
       valid: testRegex(RegexConst.ALPHA, value),

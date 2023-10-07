@@ -29,7 +29,7 @@ export default function ArraySizeMax<K, T extends K[]>(
       key: "ArraySizeMax",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "ArraySizeMax",
           max,

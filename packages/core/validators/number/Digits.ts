@@ -4,7 +4,7 @@ function validateDigits(
   number: number,
   maxInteger: number,
   maxFraction: number,
-  locale: API.Localization.Locale
+  locale: API.Localization.Resolver.LocaleResolver.Locale
 ): boolean {
   if (number == null) {
     return true;
@@ -14,7 +14,7 @@ function validateDigits(
     (maxFraction !== Infinity && maxFraction % 1 !== 0)
   ) {
     throw new Error(
-      API.Localization.TranslationService.translate(
+      API.Localization.Service.TranslationService.translate(
         locale,
         "InvalidDigits",
         maxInteger,
@@ -62,7 +62,7 @@ export default function Digits<
       key: "Digits",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "Digits",
           maxInteger,

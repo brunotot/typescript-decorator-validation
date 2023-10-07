@@ -36,7 +36,11 @@ export default function MaxLength<
       key: "MaxLength",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "MaxLength", max),
+        API.Localization.Service.TranslationService.translate(
+          locale,
+          "MaxLength",
+          max
+        ),
         locale
       ),
       valid: (value ?? "").length <= max,

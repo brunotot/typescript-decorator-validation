@@ -38,7 +38,10 @@ export default function Alphanumeric<
       key: "Alphanumeric",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "Alphanumeric"),
+        API.Localization.Service.TranslationService.translate(
+          locale,
+          "Alphanumeric"
+        ),
         locale
       ),
       valid: testRegex(RegexConst.ALPHANUMERIC, value),

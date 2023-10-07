@@ -39,7 +39,7 @@ export default function ValueRange<
       key: "ValueRange",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "ValueRange",
           min,

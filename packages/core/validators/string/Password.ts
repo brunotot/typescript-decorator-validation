@@ -70,10 +70,13 @@ export default function Password<
     };
   }
 
-  function isValid(str: string, locale: API.Localization.Locale) {
+  function isValid(
+    str: string,
+    locale: API.Localization.Resolver.LocaleResolver.Locale
+  ) {
     if (str.length < length)
       return buildConstraintViolation(
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "PasswordLength",
           length
@@ -83,7 +86,7 @@ export default function Password<
 
     if (uppercase && isInvalid(str, "uppercase"))
       return buildConstraintViolation(
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "PasswordUppercase"
         ),
@@ -92,7 +95,7 @@ export default function Password<
 
     if (lowercase && isInvalid(str, "lowercase"))
       return buildConstraintViolation(
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "PasswordLowercase"
         ),
@@ -101,7 +104,7 @@ export default function Password<
 
     if (numbers && isInvalid(str, "numbers"))
       return buildConstraintViolation(
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "PasswordNumbers"
         ),
@@ -110,7 +113,7 @@ export default function Password<
 
     if (specials && isInvalid(str, "specials"))
       return buildConstraintViolation(
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "PasswordSpecials"
         ),

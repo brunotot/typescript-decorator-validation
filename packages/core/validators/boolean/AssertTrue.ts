@@ -30,7 +30,10 @@ export default function AssertTrue<T extends boolean>(
       key: "AssertTrue",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "AssertTrue"),
+        API.Localization.Service.TranslationService.translate(
+          locale,
+          "AssertTrue"
+        ),
         locale
       ),
       valid: !!value,

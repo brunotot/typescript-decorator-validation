@@ -68,14 +68,14 @@ namespace Decorator {
   export function message(
     provider: Props.GenericModel,
     defaultMessage: string,
-    locale: API.Localization.Locale
+    locale: API.Localization.Resolver.LocaleResolver.Locale
   ): string {
     if (!provider) return defaultMessage;
     const providerType = typeof provider;
     const msgNullable = providerType ? provider : provider.message;
     const msgNonNull = msgNullable ?? "";
     return msgNonNull.length
-      ? API.Localization.MessageResolver.resolve(locale, msgNonNull)
+      ? API.Localization.Resolver.MessageResolver.resolve(locale, msgNonNull)
       : defaultMessage;
   }
 

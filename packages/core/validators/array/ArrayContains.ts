@@ -29,7 +29,7 @@ export default function ArrayContains<K, T extends K[]>(
       key: "ArrayContains",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "ArrayContains",
           value

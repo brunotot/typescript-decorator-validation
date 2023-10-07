@@ -13,7 +13,7 @@ namespace ClassValidatorDecorator {
   export type Evaluator<T extends API.Decorator.ClassBaseDecorator.Type> = ((
     value: any,
     context: API.Decorator.ClassBaseDecorator.Context<T>,
-    locale: API.Localization.Locale
+    locale: API.Localization.Resolver.LocaleResolver.Locale
   ) => API.Validation.Result) & {};
 
   /**

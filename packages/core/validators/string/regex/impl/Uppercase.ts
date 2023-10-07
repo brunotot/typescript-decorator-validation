@@ -39,7 +39,10 @@ export default function Uppercase<
       key: "Uppercase",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "Uppercase"),
+        API.Localization.Service.TranslationService.translate(
+          locale,
+          "Uppercase"
+        ),
         locale
       ),
       valid: testRegex(RegexConst.UPPERCASE, value),

@@ -38,7 +38,10 @@ export default function IPAddress<
       key: "IPAddress",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "IPAddress"),
+        API.Localization.Service.TranslationService.translate(
+          locale,
+          "IPAddress"
+        ),
         locale
       ),
       valid: testRegex(RegexConst.IP_ADDRESS, value),

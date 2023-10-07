@@ -27,7 +27,10 @@ export default function ArrayEmpty<K, T extends K[]>(
       key: "ArrayEmpty",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "ArrayEmpty"),
+        API.Localization.Service.TranslationService.translate(
+          locale,
+          "ArrayEmpty"
+        ),
         locale
       ),
       valid: (array ?? []).length === 0,

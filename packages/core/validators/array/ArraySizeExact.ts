@@ -29,7 +29,7 @@ export default function ArraySizeExact<K, T extends K[]>(
       key: "ArraySizeExact",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "ArraySizeExact",
           exact,

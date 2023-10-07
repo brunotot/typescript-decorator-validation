@@ -25,7 +25,7 @@ export default function PastDate<
       key: "PastDate",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "PastDate",
           date!

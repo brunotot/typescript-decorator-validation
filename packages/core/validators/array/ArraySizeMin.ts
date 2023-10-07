@@ -29,7 +29,7 @@ export default function ArraySizeMin<K, T extends K[]>(
       key: "ArraySizeMin",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "ArraySizeMin",
           min,

@@ -36,7 +36,11 @@ export default function MinLength<
       key: "MinLength",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(locale, "MinLength", min),
+        API.Localization.Service.TranslationService.translate(
+          locale,
+          "MinLength",
+          min
+        ),
         locale
       ),
       valid: (value ?? "").length >= min,

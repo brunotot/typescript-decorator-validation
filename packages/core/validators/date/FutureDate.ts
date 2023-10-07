@@ -25,7 +25,7 @@ export default function FutureDate<
       key: "FutureDate",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "FutureDate",
           date!

@@ -34,7 +34,7 @@ export default function NonPositive<
       key: "NonPositive",
       message: API.Decorator.message(
         props,
-        API.Localization.TranslationService.translate(
+        API.Localization.Service.TranslationService.translate(
           locale,
           "NonPositive",
           num!
