@@ -5,7 +5,7 @@ import LocaleResolver from "./LocaleResolver";
  */
 namespace MessageResolver {
   /**
-   * Message parser definition
+   * Message parser definition.
    */
   export type MessageResolverData = ((
     locale: LocaleResolver.Locale,
@@ -17,7 +17,7 @@ namespace MessageResolver {
   let configurer: MessageResolverData = DEFAULT_CONFIGURER;
 
   /**
-   * Is used to globally define a custom message parser
+   * Is used to globally define a custom message parser.
    */
   export function configure(handler?: MessageResolverData) {
     configurer = handler ?? DEFAULT_CONFIGURER;
@@ -31,7 +31,7 @@ namespace MessageResolver {
       return configurer(locale, message);
     } catch (error) {
       const title = `An error occurred while resolving \"${message}\" for locale \"${locale}\".`;
-      const descr = `To fix, check your Localization.Resolver.MessageResolver.configure() implementation.`;
+      const descr = `To fix, check your Localization.Resolver.MessageResolver.configure() implementation or review stack-trace.`;
       const stacktrace = `\n\n${error}`;
       throw new Error(`${title} ${descr} ${stacktrace}`);
     }

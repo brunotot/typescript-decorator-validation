@@ -1,26 +1,38 @@
 import API from "api";
 
 /**
- * Creates a validator decorator for required value validation.
+ * Creates a validator decorator which requires that a value must be present.
  *
- * @typeparam T - The type of the decorated property (optional).
- * @param props - (Optional) An object with an optional custom error message.
- * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
- * @returns A decorator function to use with class properties.
- *
- * @example
- * // Example 1: Basic usage to validate if a value is required (not falsy)
- * class UserProfile {
- *   //@Required()
- *   fullName: string;
- * }
+ * @typeParam T - The type of the decorated property (any field type except class).
+ * @param props - (Optional) An object with optional decorator-related props.
+ * @returns A decorator function to use with class fields.
  *
  * @example
- * // Example 2: Custom error message
+ * Example 1: Basic usage
+ * ```ts
  * class Product {
- *   //@Required({ message: "Product name is mandatory" })
+ *   _@Required()
  *   name: string;
  * }
+ * ```
+ *
+ * @example
+ * Example 2: Supplying a custom error message
+ * ```ts
+ * class Product {
+ *   _@Required("Product name is mandatory")
+ *   name: string;
+ * }
+ * ```
+ *
+ * @example
+ * Example 3: Supplying a custom error message and groups
+ * ```ts
+ * class Product {
+ *   _@Required({ message: "Product name is mandatory", groups: ["CREATE"] })
+ *   name: string;
+ * }
+ * ```
  */
 export function Required<T extends API.Utilities.Objects.Optional>(
   props?: API.Decorator.Props.ZeroArgsMessageOptional
@@ -29,6 +41,7 @@ export function Required<T extends API.Utilities.Objects.Optional>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Required",
+      valid: API.Utilities.Objects.hasValue(value),
       message: API.Decorator.message(
         props,
         API.Localization.Service.TranslationService.translate(
@@ -37,7 +50,6 @@ export function Required<T extends API.Utilities.Objects.Optional>(
         ),
         locale
       ),
-      valid: API.Utilities.Objects.hasValue(value),
     }),
   });
 }

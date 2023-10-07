@@ -6,15 +6,14 @@ import API from "api";
  * @typeParam T - The type of the array property.
  * @param validators - An array of validators to apply to each element in the array.
  * @returns A validation decorator function.
- *
  * @example
- * ```typescript
+ * Example 1: Applies the `MinLength` and `MaxLength` validators to each element in the `names` array property.
+ * ```ts
  * class MyClass {
- *   \@foreach(\@MinLength(5), \@MaxLength(10))
+ *   _@foreach(_@MinLength(5), _@MaxLength(10))
  *   names: string[];
  * }
  * ```
- * This example applies the `MinLength` and `MaxLength` validators to each element in the `names` array property.
  */
 export function foreach<
   T extends NonNullable<

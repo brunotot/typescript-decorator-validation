@@ -1,17 +1,60 @@
-import API from "api";
+import API, { Overrides } from "api";
 
 /**
- * Creates a decorator to associate a class with its validation rules.
+ * Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T`).
  *
- * @typeparam T - The type of the decorated property, which should be an object.
- * @param clazz - The class to associate with the validation rules.
- * @returns A decorator function to use with class properties.
+ * If a field which is being decorated is not a {@link API.Utilities.Types.Primitive primitive}
+ * (`string`, `number`, `boolean`, `bigint`, `Date`) and isn't marked as a primitive in {@link Overrides.PrimitiveSet overrides} interface
+ * then the framework treats it as a custom, client-defined validable class. That having in mind, you will always want to apply `@attribute`
+ * to those types of fields so the runtime evaluation matches the TypeScript compiler type evaluation. For more clarity check examples below.
+ *
+ * @remarks
+ * Current implementation doesn't allow referencing the parent class itself as the associated `clazz`.
+ * Also, if _@attribute isn't supplied then the validation result at runtime defaults to primitive strategy and yet
+ * the evaluated type at compile-time remains the same. That is why it's crucial to add _@attribute decorator.
+ *
+ * @typeParam T - The type of the decorated property, which should be an object or an array of objects (nullables are allowed).
+ * @param clazz - The class definition associated with the field.
+ * @returns A decorator function to use with non-primitive fields.
  *
  * @example
- * // Example 3: Validating an array of objects
+ * class Item {
+ *   _@ValueMax(10)
+ *   quantity: number;
+ *   _@ValueMin(0.1)
+ *   price: number;
+ * }
+ *
  * class ShoppingCart {
- *   //@attribute(Item)
+ *   _@attribute(Item) // <---
  *   items: Item[];
+ * }
+ *
+ * new ValidationEngine(ShoppingCart).validate({
+ *   items: [
+ *     // _@ValueMax constraint violation (quantity 15 exceeds maximum amount of 10)
+ *     {quantity: 15, price: 200.00},
+ *     // _@ValueMin constraint violation (price 0 doesn't reach the minimum price amount of 0.1)
+ *     {quantity: 1, price: 0}
+ *   ]
+ * });
+ *
+ * // And the output is:
+ *
+ * {
+ *   valid: false,
+ *   detailedErrors: {
+ *     items: [
+ *       [{ key: "ValueMax", valid: false, message: "Maximum allowed value is 10 but is 15" }],
+ *       [{ key: "ValueMax", valid: false, message: "Minimum allowed value is 0.1 but is 0" }]
+ *     ]
+ *   },
+ *   errors: {
+ *     items: [
+ *       ["Maximum allowed value is 10 but is 15"],
+ *       ["Minimum allowed value is 0.1 but is 0"]
+ *     ]
+ *   }
  * }
  */
 export function attribute<

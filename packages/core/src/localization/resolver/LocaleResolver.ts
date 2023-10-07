@@ -10,14 +10,14 @@ namespace LocaleResolver {
   let locale: Locale = "en";
 
   /**
-   * Function which returns current global Locale value
+   * Function which returns current global `Locale` value.
    */
   export function getLocale(): Locale {
     return locale;
   }
 
   /**
-   * Function which sets new global Locale value
+   * Function which sets new global `Locale` value.
    */
   export function setLocale(localeValue: Locale) {
     locale = localeValue;

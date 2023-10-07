@@ -1,28 +1,36 @@
 import API from "api";
 
 /**
- * A function which returns a decorated validator function built from a custom handler
+ * Creates a custom validator decorator which is later used by {@link API.Validation.ValidationEngine ValidationEngine} to register validation rules.
  *
- * @typeparam T - The type of the decorated property.
+ * @typeParam T - The type of the decorated property. May be any type of field except a class.
  * @param props - An object with a custom validation function or a validation function directly.
- * @returns A decorator function to use with class properties.
+ * @returns A validator decorator function to use with class fields.
  *
  * @example
- * // Example 1: Basic usage with a custom validation function
+ * Example 1: Basic usage with a custom validation function
+ * ```ts
  * class Order {
- *   //@Rule((value) => value.price > 0)
+ *   _@create(value => ({ valid: value > 5, key: "totalPrice", message: "Total price is invalid" }))
  *   totalPrice: number;
  * }
+ * ```
  *
  * @example
- * // Example 2: Using an object with validation function and groups
+ * Example 2: Using an object with validation function and groups
+ * ```ts
  * class Product {
- *   //@create({
- *   //  validate: (value) => value.price > 0,
- *   //  groups: ["checkout"],
- *   //)
+ *   _@create({
+ *     groups: ["checkout"],
+ *     validate: (value) => ({
+ *       valid: value > 5,
+ *       key: "totalPrice",
+ *       message: "Total price is invalid"
+ *     })
+ *   )
  *   price: number;
  * }
+ * ```
  */
 export const create = <T>(
   props:
