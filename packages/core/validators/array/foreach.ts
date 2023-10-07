@@ -16,7 +16,11 @@ import API from "api";
  * ```
  * This example applies the `MinLength` and `MaxLength` validators to each element in the `names` array property.
  */
-export function foreach<T extends NonNullable<any[] | (() => any[])>>(
+export function foreach<
+  T extends NonNullable<
+    API.Utilities.Types.Array | (() => API.Utilities.Types.Array)
+  >
+>(
   ...validators: API.Decorator.Instance<API.Utilities.Arrays.getArrayType<T>>[]
 ): API.Decorator.Instance<T> {
   return API.Decorator.Service.FieldDecoratorService.build<T>(

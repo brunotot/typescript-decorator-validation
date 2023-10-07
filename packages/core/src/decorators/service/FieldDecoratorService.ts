@@ -1,16 +1,48 @@
 import API from "api";
 
+/**
+ * Namespace for FieldDecorator Service Types.
+ */
 namespace FieldDecoratorService {
+  /**
+   * Represents the generic type for the value being decorated.
+   */
   export type Type = unknown;
 
+  /**
+   * Represents the return type for the decorator function.
+   */
   export type ReturnDef = void;
 
-  export type Supplier<T extends Type = Type> = (
+  /**
+   * Type definition for supplying a function that will act as the decorator logic.
+   *
+   * @typeParam T - The type of the value being decorated.
+   *
+   * @param meta - Metadata service that can be used for more advanced validation scenarios.
+   * @param name - The name of the property being decorated.
+   * @param context - The context in which the decorator is being applied.
+   *
+   * @returns The return definition as specified by ReturnDef.
+   */
+  export type Supplier<T extends Type = Type> = ((
     meta: API.Reflection.Services.FieldValidatorMetaService,
     name: string,
     context: Context<T>
-  ) => ReturnDef;
+  ) => ReturnDef) & {};
 
+  /**
+   * Context object passed to a field decorator function.
+   *
+   * @typeParam T - The type of the value being decorated.
+   *
+   * @property kind - The kind of member being decorated (getter, method, field).
+   * @property static - Boolean indicating whether the member is static.
+   * @property private - Boolean indicating whether the member is private.
+   * @property name - The name of the member being decorated.
+   * @property metadata - Additional metadata associated with the decorator.
+   * @property access - An object with a get method for accessing the value.
+   */
   export type Context<T> = Readonly<{
     kind: "getter" | "method" | "field";
     static: boolean;
@@ -22,10 +54,20 @@ namespace FieldDecoratorService {
     };
   }>;
 
-  export type Instance<T extends Type> = (
+  /**
+   * Type definition for a decorator function instance.
+   *
+   * @typeParam T - The type of the value being decorated.
+   *
+   * @param target - The object that owns the decorated property.
+   * @param context - The context in which the decorator is being applied.
+   *
+   * @returns The return definition as specified by ReturnDef.
+   */
+  export type Instance<T extends Type> = ((
     target: any,
     context: Context<T>
-  ) => ReturnDef;
+  ) => ReturnDef) & {};
 
   /**
    * Creates a new validator function using the provided validation builder options.

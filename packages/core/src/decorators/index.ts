@@ -25,10 +25,10 @@ namespace Decorator {
    *
    * @typeParam T - The type of the value being decorated.
    */
-  export type Instance<T = unknown> = (
+  export type Instance<T = unknown> = ((
     target: any,
     context: API.Decorator.Context<T>
-  ) => void;
+  ) => void) & {};
 
   /**
    * Context object passed to a decorator function
@@ -51,11 +51,11 @@ namespace Decorator {
    *
    * @typeParam T - The type of the value being decorated.
    */
-  export type Supplier<T = unknown> = (
+  export type Supplier<T = unknown> = ((
     name: string,
     meta: API.Reflection.Services.FieldValidatorMetaService,
     context: API.Decorator.Context<T>
-  ) => void;
+  ) => void) & {};
 
   export import Props = DecoratorProps;
 
@@ -102,12 +102,32 @@ namespace Decorator {
       : [];
   }
 
+  /**
+   * Extracts argument values from the provided decorator properties.
+   *
+   * @typeParam T - The type of the argument value.
+   *
+   * @param props - The decorator properties.
+   * @param key - The key of the argument.
+   *
+   * @returns The extracted argument value.
+   */
   export function args<T>(props: Props.MultiArgs<T>, key: string = "value"): T {
     return isDecoratorProps(props) && key in (props as any)
       ? (props as any)[key]
       : (props as T);
   }
 
+  /**
+   * Filters validators based on the provided validation groups.
+   *
+   * @typeParam TFieldType - The type of the field being validated.
+   *
+   * @param data - The array of metadata for each validator.
+   * @param groups - The validation groups to filter by.
+   *
+   * @returns An array of filtered validators.
+   */
   export function groupedValidators<TFieldType>(
     data: API.Validation.Metadata<TFieldType>[],
     groups: string[]
@@ -119,6 +139,13 @@ namespace Decorator {
     );
   }
 
+  /**
+   * Checks if a given object is a DecoratorProps object.
+   *
+   * @param props - The object to check.
+   *
+   * @returns A boolean indicating if the object is a DecoratorProps object.
+   */
   function isDecoratorProps(props: Props.GenericModel): boolean {
     return !!props && !Array.isArray(props) && typeof props === "object";
   }

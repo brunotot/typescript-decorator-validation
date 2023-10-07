@@ -45,6 +45,12 @@ namespace Booleans {
       : false
     : false;
 
+  /**
+   * Checks if `T[K]` is a getter type.
+   *
+   * @typeParam T - The parent type to check.
+   * @typeParam T - The key of parent to check.
+   */
   export type isGetter<T, K extends keyof T> = K extends Objects.Inputs<T>
     ? false
     : true;

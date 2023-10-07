@@ -1,4 +1,13 @@
+/**
+ * Collection of string-related types and methods.
+ */
 namespace Strings {
+  /**
+   * Converts a camelCase string to a text string with spaces.
+   * @param camelCase - The camelCase string to convert.
+   * @param capitalizeFirstLetter - Whether to capitalize the first letter. Default is true.
+   * @returns A string where camelCasing is replaced by spaces.
+   */
   export function convertCamelCaseToText(
     camelCase: string,
     capitalizeFirstLetter: boolean = true

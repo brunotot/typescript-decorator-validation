@@ -1,7 +1,13 @@
 import API from "api";
 import PrimitiveStrategyType from "../PrimitiveStrategy/types";
 
+/**
+ * Namespace for PrimitiveArrayGetter Strategy Types.
+ */
 namespace PrimitiveArrayGetterStrategyType {
+  /**
+   * Constant name identifier for this strategy.
+   */
   export const Name = `get (): ${PrimitiveStrategyType.Name}[]` as const;
 
   /**
@@ -26,6 +32,11 @@ namespace PrimitiveArrayGetterStrategyType {
     children: API.Validation.Result[][];
   };
 
+  /**
+   * Type guard to check if a certain field in a type matches this strategy.
+   * @typeParam T - The type containing the field.
+   * @typeParam K - The key of the field.
+   */
   // prettier-ignore
   export type matches<T, K extends keyof T> = 
     true extends API.Utilities.Booleans.isGetter<T, K>
@@ -34,6 +45,12 @@ namespace PrimitiveArrayGetterStrategyType {
         : API.Utilities.Booleans.isAnyOf<API.Utilities.Arrays.getArrayType<T[K]>, API.Utilities.Types.Primitive>
       : false;
 
+  /**
+   * Type for the handler function based on the field and result types.
+   * @typeParam T - The type containing the field.
+   * @typeParam K - The key of the field.
+   * @typeParam R - The result type.
+   */
   // prettier-ignore
   export type handler<T, K extends keyof T, R> =
     true extends API.Utilities.Booleans.isUndefined<R>

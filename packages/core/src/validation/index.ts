@@ -41,19 +41,31 @@ namespace Validation {
     valid: boolean;
   };
 
+  /**
+   * Defines the properties for an async event response.
+   * @typeParam TClass - The type of the class being validated.
+   */
   export type AsyncEventResponseProps<TClass> = {
     errors: API.Strategy.Factory.Impl.Errors<TClass>;
     detailedErrors: API.Strategy.Factory.Impl.DetailedErrors<TClass>;
   };
 
+  /**
+   * Defines the properties for an async event handler.
+   * @typeParam TClass - The type of the class being validated.
+   */
   export type AsyncEventHandlerProps<TClass> = {
     key: keyof TClass;
     value: Validation.Result;
   };
 
-  export type AsyncEventHandler<TClass> = (
+  /**
+   * Type for the async event handler function.
+   * @typeParam TClass - The type of the class being validated.
+   */
+  export type AsyncEventHandler<TClass> = ((
     data: AsyncEventHandlerProps<TClass>
-  ) => void;
+  ) => void) & {};
 
   /**
    * Configuration options for entity processing.

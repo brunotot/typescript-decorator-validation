@@ -1,8 +1,13 @@
 import API from "api";
-
 import StrategyFactory from "../../../models/StrategyFactory";
 
+/**
+ * Namespace for Object Strategy Types.
+ */
 namespace ObjectStrategyType {
+  /**
+   * Constant name identifier for this strategy.
+   */
   export const Name = "composite" as const;
 
   /**
@@ -31,12 +36,23 @@ namespace ObjectStrategyType {
     data: StrategyFactory.Impl.DetailedErrors<F>;
   };
 
+  /**
+   * Type guard to check if a certain field in a type matches this strategy.
+   * @typeParam T - The type containing the field.
+   * @typeParam K - The key of the field.
+   */
   // prettier-ignore
   export type matches<T, K extends keyof T> = 
     true extends API.Utilities.Booleans.isGetter<T, K>
       ? false
   : API.Utilities.Booleans.isObject<T[K]>;
 
+  /**
+   * Type for the handler function based on the field and result types.
+   * @typeParam T - The type containing the field.
+   * @typeParam K - The key of the field.
+   * @typeParam R - The result type.
+   */
   // prettier-ignore
   export type handler<T, K extends keyof T, R> = 
     true extends API.Utilities.Booleans.isUndefined<R> 

@@ -1,6 +1,12 @@
 import API from "api";
 
+/**
+ * Namespace for PrimitiveArray Strategy Types.
+ */
 namespace PrimitiveArrayStrategyType {
+  /**
+   * Constant name identifier for this strategy.
+   */
   export const Name = "primitive[]" as const;
 
   /**
@@ -25,12 +31,23 @@ namespace PrimitiveArrayStrategyType {
     data: API.Validation.Result[][];
   };
 
+  /**
+   * Type guard to check if a certain field in a type matches this strategy.
+   * @typeParam T - The type containing the field.
+   * @typeParam K - The key of the field.
+   */
   // prettier-ignore
   export type matches<T, K extends keyof T> = 
   API.Utilities.Arrays.getArrayType<T[K]> extends never
       ? false
   : API.Utilities.Booleans.isAnyOf<API.Utilities.Arrays.getArrayType<T[K]>, API.Utilities.Types.Primitive>
 
+  /**
+   * Type for the handler function based on the field and result types.
+   * @typeParam T - The type containing the field.
+   * @typeParam K - The key of the field.
+   * @typeParam R - The result type.
+   */
   // prettier-ignore
   export type handler<T, K extends keyof T, R> =
     true extends API.Utilities.Booleans.isUndefined<R>

@@ -12,11 +12,17 @@ import * as PrimitiveArrayStrategyNamespace from "./service/impl/PrimitiveArrayS
 import * as PrimitiveGetterStrategyNamespace from "./service/impl/PrimitiveGetterStrategy";
 import * as PrimitiveStrategyNamespace from "./service/impl/PrimitiveStrategy";
 
+/**
+ * Namespace for grouping different validation strategy-related functionalities.
+ */
 namespace Strategy {
   export import Types = StrategyTypesNamespace;
   export import Factory = StrategyFactoryNamespace;
   export import Mapper = StrategyMapperNamespace;
 
+  /**
+   * Namespace for Strategy Services.
+   */
   export namespace Service {
     export import AbstractStrategy = AbstractStrategyNamespace.AbstractValidationStrategyService;
     export import FunctionStrategy = FunctionStrategyNamespace.FunctionStrat;

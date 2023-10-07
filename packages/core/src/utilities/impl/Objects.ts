@@ -278,6 +278,13 @@ namespace Objects {
     }
   }
 
+  /**
+   * Transforms a plain object into an instance of the given class.
+   * @param clazz - The class to transform the object into.
+   * @param object - The object to transform.
+   * @typeParam TClass - The type of the class.
+   * @returns An instance of TClass.
+   */
   export function toClass<const TClass extends Types.Class<any>>(
     clazz: TClass,
     object?: Payload<Types.UnwrapClass<TClass>>
@@ -317,6 +324,12 @@ namespace Objects {
     return _toClass(clazz, object);
   }
 
+  /**
+   * Debounces a function.
+   * @param fn - The function to debounce.
+   * @param delay - The delay time in milliseconds.
+   * @returns A debounced function.
+   */
   export function debounce(fn: Function, delay: number) {
     let timeoutID: any = null;
     return (...args: any[]) => {

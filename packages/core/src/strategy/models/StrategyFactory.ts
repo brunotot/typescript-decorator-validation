@@ -11,20 +11,44 @@ import { PrimitiveGetterStrat } from "../service/impl/PrimitiveGetterStrategy";
 import { PrimitiveStrat } from "../service/impl/PrimitiveStrategy";
 import StrategyTypes from "./StrategyTypes";
 
+/**
+ * Namespace for Strategy Factory types and utilities.
+ */
 namespace StrategyFactory {
+  /**
+   * Evaluates a type, returning either an optional or mandatory evaluation based on the second type parameter.
+   * @typeParam T - The type to evaluate.
+   * @typeParam R - The result type. Determines if the evaluation is optional or mandatory.
+   */
   // prettier-ignore
   export type evaluate<T, R = undefined> = true extends API.Utilities.Booleans.isUndefined<R>
     ? API.Utilities.Types.Prettify<API.Utilities.Objects.Purify<evaluateOptional<T, R>>>
     : API.Utilities.Types.Prettify<API.Utilities.Objects.Purify<evaluateMandatory<T, R>>>;
 
+  /**
+   * Type for optional evaluation of each field in a type.
+   * @typeParam T - The type to evaluate.
+   * @typeParam R - The result type.
+   */
   export type evaluateOptional<T, R> = {
     [K in keyof T]?: fieldEvaluation<T, K, R>;
   };
 
+  /**
+   * Type for mandatory evaluation of each field in a type.
+   * @typeParam T - The type to evaluate.
+   * @typeParam R - The result type.
+   */
   export type evaluateMandatory<T, R> = {
     [K in keyof T]-?: fieldEvaluation<T, K, R>;
   };
 
+  /**
+   * Determines the evaluation strategy for a field in a type.
+   * @typeParam T - The type containing the field.
+   * @typeParam K - The key of the field.
+   * @typeParam R - The result type.
+   */
   // prettier-ignore
   export type fieldEvaluation<T, K extends keyof T, R> = 
     true extends StrategyTypes.Function.matches<T, K> 
@@ -99,9 +123,20 @@ namespace StrategyFactory {
     ? ObjectStrat<T[K]>
   :never;
 
+  /**
+   * Namespace for Strategy Factory Implementations.
+   */
   export namespace Impl {
+    /**
+     * Type for detailed errors during validation.
+     * @typeParam T - The type being validated.
+     */
     export type DetailedErrors<T> = evaluate<T, API.Validation.Result[]>;
 
+    /**
+     * Type for basic errors during validation.
+     * @typeParam T - The type being validated.
+     */
     export type Errors<T> = evaluate<T, string[]>;
   }
 }

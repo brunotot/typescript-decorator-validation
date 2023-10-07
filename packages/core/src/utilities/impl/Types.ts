@@ -1,13 +1,13 @@
 import API, { Overrides } from "api";
 
 /**
- * A collection of types representing various data types.
+ * A collection of types representing various data types and handling type-level development.
  */
 namespace Types {
   /**
    * Represents the JavaScript `Function` type.
    */
-  export type Function = () => any;
+  export type Function = (() => any) & {};
 
   /**
    * Represents the generic array type.
@@ -45,18 +45,34 @@ namespace Types {
    * // Creates an instance of MyClass
    * ```
    */
-  export type Class<T> = { new (...args: any[]): T };
+  export type Class<T> = { new (...args: any[]): T } & {};
 
+  /**
+   * Unwraps a Promise type to its resolved value type.
+   * @typeParam T - The type to unwrap.
+   */
   export type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
 
+  /**
+   * Unwraps a Class type to its instance type.
+   * @typeParam T - The type to unwrap.
+   */
   export type UnwrapClass<T> = T extends Types.Class<infer U> ? U : never;
 
+  /**
+   * Unwraps a MetaStrategy type to its inferred class.
+   * @typeParam TStrategy - The MetaStrategy type to unwrap.
+   */
   export type UnwrapMetaStrategy<
     TStrategy extends API.Reflection.MetaStrategy
   > = TStrategy extends Types.Class<infer TInferredClass>
     ? TInferredClass
     : any;
 
+  /**
+   * Prettifies a type by retaining the same shape.
+   * @typeParam T - The type to prettify.
+   */
   export type Prettify<T> = {
     [K in keyof T]: T[K];
   } & {};

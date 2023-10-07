@@ -3,8 +3,15 @@ import API from "api";
 /**
  * A service class which exposes validated-decorator-related actions
  */
-
 namespace ClassDecoratorValidatorService {
+  /**
+   * Type definition for supplying validation options to the class decorator.
+   *
+   * @typeParam T - The type that the class decorator is expected to work with.
+   *
+   * @property groups - Optional. An array of group names or a single group name that this validator belongs to. Validators in the same group can be executed together.
+   * @property isValid - The function responsible for validation logic, as defined in the Evaluator type.
+   */
   export type Supplier<
     T extends API.Decorator.Service.ClassDecoratorService.Type
   > = {
@@ -12,6 +19,17 @@ namespace ClassDecoratorValidatorService {
     isValid: Evaluator<T>;
   };
 
+  /**
+   * Type definition for the evaluation function that performs the actual validation logic.
+   *
+   * @typeParam T - The type that the class decorator is expected to work with.
+   *
+   * @param value - The value to be validated.
+   * @param context - The context in which the decorator is used, providing additional metadata.
+   * @param locale - The locale information for localization.
+   *
+   * @returns A result object as defined in API.Validation.Result, indicating validation success or failure along with additional information.
+   */
   export type Evaluator<
     T extends API.Decorator.Service.ClassDecoratorService.Type
   > = ((

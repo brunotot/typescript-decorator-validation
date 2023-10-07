@@ -5,6 +5,9 @@ import ObjectsNamespace from "./impl/Objects";
 import StringsNamespace from "./impl/Strings";
 import TypesNamespace from "./impl/Types";
 
+/**
+ * A namespace which holds utility methods and types regarding native TypeScript types.
+ */
 namespace Utilities {
   export import Numbers = NumbersNamespace;
 

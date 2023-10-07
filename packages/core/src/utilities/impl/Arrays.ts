@@ -1,6 +1,13 @@
 import Booleans from "./Booleans";
 
+/**
+ * Collection of array-related types and methods.
+ */
 namespace Arrays {
+  /**
+   * Returns depth of provided generic array (example: getArrayDepth<string[][]> returns 2).
+   * @remarks Due to TypeScript's compiler - evaluation is limited to the depth of 5.
+   */
   // prettier-ignore
   export type getArrayDepth<T> = 
     T extends any[] 
@@ -15,6 +22,9 @@ namespace Arrays {
         : 1
       : 0;
 
+  /**
+   * Returns an array type constructed of `N` depth.
+   */
   export type setArrayDepth<
     T,
     N extends number,

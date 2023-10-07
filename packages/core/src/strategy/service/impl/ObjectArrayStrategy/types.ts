@@ -1,9 +1,14 @@
 import API from "api";
-
 import StrategyFactory from "../../../models/StrategyFactory";
 import ObjectStrategyType from "../ObjectStrategy/types";
 
+/**
+ * Namespace for ObjectArray Strategy Types.
+ */
 namespace ObjectArrayStrategyType {
+  /**
+   * Constant name identifier for this strategy.
+   */
   export const Name = "composite[]" as const;
 
   /**
@@ -32,6 +37,11 @@ namespace ObjectArrayStrategyType {
     data: StrategyFactory.Impl.DetailedErrors<F>[];
   };
 
+  /**
+   * Type guard to check if a certain field in a type matches this strategy.
+   * @typeParam T - The type containing the field.
+   * @typeParam K - The key of the field.
+   */
   // prettier-ignore
   export type matches<T, K extends keyof T> = 
   API.Utilities.Arrays.getArrayType<NonNullable<T[K]>> extends never
@@ -40,6 +50,12 @@ namespace ObjectArrayStrategyType {
       ? false
   : API.Utilities.Booleans.isObject<API.Utilities.Arrays.getArrayType<NonNullable<T[K]>>>;
 
+  /**
+   * Type for the handler function based on the field and result types.
+   * @typeParam T - The type containing the field.
+   * @typeParam K - The key of the field.
+   * @typeParam R - The result type.
+   */
   // prettier-ignore
   export type handler<T, K extends keyof T, R> = ObjectStrategyType.handler<T, K, R>[]
 }
