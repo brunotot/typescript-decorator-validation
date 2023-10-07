@@ -30,10 +30,10 @@ import { testRegex } from "./../../regex/Pattern";
  *   website: string;
  * }
  */
-export default function URL<T extends API.Utilities.Objects.Optional<string>>(
+export function URL<T extends API.Utilities.Objects.Optional<string>>(
   props?: API.Decorator.Props.ZeroArgsMessageOptional
 ) {
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "URL",

@@ -1,4 +1,4 @@
-import ArraySizeMax from "../../../validators/array/ArraySizeMax";
+import { ArraySizeMax } from "../../../validators/array/ArraySizeMax";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

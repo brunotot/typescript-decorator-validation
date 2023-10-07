@@ -1,5 +1,5 @@
 import $ from "../../../../../index";
-import IPAddress from "../../../../../validators/string/regex/impl/IPAddress";
+import { IPAddress } from "../../../../../validators/string/regex/impl/IPAddress";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 

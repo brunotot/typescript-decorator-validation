@@ -16,10 +16,10 @@ import API from "api";
  * ```
  * This example applies the `Negative` validator to the `debt` property to ensure it is a negative number.
  */
-export default function Negative<
-  T extends API.Utilities.Objects.Optional<number>
->(props?: API.Decorator.Props.ZeroArgsMessageOptional) {
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+export function Negative<T extends API.Utilities.Objects.Optional<number>>(
+  props?: API.Decorator.Props.ZeroArgsMessageOptional
+) {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (num, _, locale) => ({
       key: "Negative",

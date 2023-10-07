@@ -1,4 +1,4 @@
-import ArrayUnique from "../../../validators/array/ArrayUnique";
+import { ArrayUnique } from "../../../validators/array/ArrayUnique";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

@@ -1,6 +1,6 @@
 import API from "api";
 
-namespace FieldDecorator {
+namespace FieldDecoratorService {
   export type Type = unknown;
 
   export type ReturnDef = void;
@@ -69,4 +69,4 @@ namespace FieldDecorator {
   }
 }
 
-export default FieldDecorator;
+export default FieldDecoratorService;

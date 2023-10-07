@@ -16,10 +16,10 @@ import API from "api";
  * ```
  * This example applies the `MinLength` and `MaxLength` validators to each element in the `names` array property.
  */
-export default function foreach<T extends NonNullable<any[] | (() => any[])>>(
+export function foreach<T extends NonNullable<any[] | (() => any[])>>(
   ...validators: API.Decorator.Instance<API.Utilities.Arrays.getArrayType<T>>[]
 ): API.Decorator.Instance<T> {
-  return API.Decorator.FieldBaseDecorator.build<T>(
+  return API.Decorator.Service.FieldDecoratorService.build<T>(
     (meta, property, context) => {
       const validationProcessor = meta.getUntypedDescriptor(property);
       validationProcessor.thisDefault = [];

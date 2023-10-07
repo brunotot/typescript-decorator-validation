@@ -22,10 +22,10 @@ import API from "api";
  *   name: string;
  * }
  */
-export default function Required<T extends API.Utilities.Objects.Optional>(
+export function Required<T extends API.Utilities.Objects.Optional>(
   props?: API.Decorator.Props.ZeroArgsMessageOptional
 ) {
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Required",

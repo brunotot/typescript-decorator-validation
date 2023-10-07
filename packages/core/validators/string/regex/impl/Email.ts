@@ -29,10 +29,10 @@ import { testRegex } from "./../../regex/Pattern";
  *   value: string;
  * }
  */
-export default function Email<T extends API.Utilities.Objects.Optional<string>>(
+export function Email<T extends API.Utilities.Objects.Optional<string>>(
   props?: API.Decorator.Props.ZeroArgsMessageOptional
 ) {
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Email",

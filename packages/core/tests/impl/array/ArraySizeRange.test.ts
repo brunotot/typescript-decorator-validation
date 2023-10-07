@@ -1,4 +1,4 @@
-import ArraySizeRange from "../../../validators/array/ArraySizeRange";
+import { ArraySizeRange } from "../../../validators/array/ArraySizeRange";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

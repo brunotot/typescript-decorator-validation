@@ -1,15 +1,15 @@
 import API from "api";
 
-export default function ValidDateRange<
-  T extends API.Decorator.ClassBaseDecorator.Type
+export function ValidDateRange<
+  T extends API.Decorator.Service.ClassDecoratorService.Type
 >(
   startDateFieldName: string,
   endDateFieldName: string,
   props?: API.Decorator.Props.Base & API.Decorator.Props.MessageOptional
-): API.Decorator.ClassBaseDecorator.Instance<
+): API.Decorator.Service.ClassDecoratorService.Instance<
   API.Utilities.Types.UnwrapClass<T>
 > {
-  return API.Decorator.ClassValidatorDecorator.build({
+  return API.Decorator.Service.ClassDecoratorValidatorService.build({
     groups: API.Decorator.groups(props),
     isValid: (value, _context, locale) => ({
       key: "ValidDateRange",

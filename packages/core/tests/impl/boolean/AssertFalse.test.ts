@@ -1,4 +1,4 @@
-import AssertFalse from "../../../validators/boolean/AssertFalse";
+import { AssertFalse } from "../../../validators/boolean/AssertFalse";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

@@ -1,4 +1,4 @@
-import ArrayNone from "../../../validators/array/ArrayNone";
+import { ArrayNone } from "../../../validators/array/ArrayNone";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

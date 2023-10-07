@@ -1,4 +1,4 @@
-import ArraySizeMin from "../../../validators/array/ArraySizeMin";
+import { ArraySizeMin } from "../../../validators/array/ArraySizeMin";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

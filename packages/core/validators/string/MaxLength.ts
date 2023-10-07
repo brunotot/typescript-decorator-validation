@@ -26,11 +26,11 @@ import API from "api";
  *   username: string;
  * }
  */
-export default function MaxLength<
-  T extends API.Utilities.Objects.Optional<string>
->(props: API.Decorator.Props.MultiArgsMessageOptional<number>) {
+export function MaxLength<T extends API.Utilities.Objects.Optional<string>>(
+  props: API.Decorator.Props.MultiArgsMessageOptional<number>
+) {
   const max = API.Decorator.args(props);
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "MaxLength",

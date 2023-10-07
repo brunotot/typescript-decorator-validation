@@ -16,10 +16,10 @@ import API from "api";
  * ```
  * This example applies the `FutureDate` validator to the `eventDate` property to ensure it is a date in the future.
  */
-export default function FutureDate<
-  T extends API.Utilities.Objects.Optional<Date>
->(props?: API.Decorator.Props.ZeroArgsMessageOptional) {
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+export function FutureDate<T extends API.Utilities.Objects.Optional<Date>>(
+  props?: API.Decorator.Props.ZeroArgsMessageOptional
+) {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (date, _context, locale) => ({
       key: "FutureDate",

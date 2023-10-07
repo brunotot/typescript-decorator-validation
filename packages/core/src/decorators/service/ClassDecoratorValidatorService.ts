@@ -3,7 +3,23 @@ import API from "api";
 /**
  * A service class which exposes validated-decorator-related actions
  */
-namespace FieldValidatorDecorator {
+
+namespace ClassDecoratorValidatorService {
+  export type Supplier<
+    T extends API.Decorator.Service.ClassDecoratorService.Type
+  > = {
+    groups?: string | string[];
+    isValid: Evaluator<T>;
+  };
+
+  export type Evaluator<
+    T extends API.Decorator.Service.ClassDecoratorService.Type
+  > = ((
+    value: any,
+    context: API.Decorator.Service.ClassDecoratorService.Context<T>,
+    locale: API.Localization.Resolver.LocaleResolver.Locale
+  ) => API.Validation.Result) & {};
+
   /**
    * Creates a new validator function using the provided validation builder options.
    *
@@ -15,12 +31,12 @@ namespace FieldValidatorDecorator {
    * @returns A decorator function that can be applied to class properties to add the validation logic.
    *
    * @remarks
-   * This function leverages the `makeDecorator` function to create a new decorator.
+   * This function leverages the `makeDecorator` function to build a new decorator.
    * It uses the `validationMetaService` to add the new validator to the metadata for the property it decorates.
    *
    * @example
    * ```typescript
-   * const IsPositive = FieldValidatorDecorator.create<number>({
+   * const IsPositive = ClassDecoratorValidatorService.build<number>({
    *   groups: ['group1'],
    *   isValid: (value) => value > 0
    * });
@@ -31,14 +47,16 @@ namespace FieldValidatorDecorator {
    * }
    * ```
    */
-  export function build<T extends API.Decorator.FieldBaseDecorator.Type>({
+  export function build<
+    T extends API.Decorator.Service.ClassDecoratorService.Type
+  >({
     groups,
-    validate,
-  }: API.Validation.Metadata<T>): API.Decorator.FieldBaseDecorator.Instance<T> {
-    return API.Decorator.FieldBaseDecorator.build<T>((meta, key) =>
-      meta.addValidator(key, validate, groups)
-    );
+    isValid,
+  }: Supplier<T>): API.Decorator.Service.ClassDecoratorService.Instance<T> {
+    return API.Decorator.Service.ClassDecoratorService.build((meta) => {
+      meta.addValidator(isValid, groups);
+    });
   }
 }
 
-export default FieldValidatorDecorator;
+export default ClassDecoratorValidatorService;

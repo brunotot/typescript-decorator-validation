@@ -14,12 +14,14 @@ import API from "api";
  *   items: Item[];
  * }
  */
-export default function attribute<
+export function attribute<
   T extends API.Utilities.Objects.Optional<object | object[]>
 >(
   clazz: API.Utilities.Types.Class<any>
-): API.Decorator.FieldBaseDecorator.Instance<T> {
-  return API.Decorator.FieldBaseDecorator.build<any>((meta, name) => {
-    meta.getUntypedDescriptor(name).thisClass = clazz;
-  });
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorService.build<any>(
+    (meta, name) => {
+      meta.getUntypedDescriptor(name).thisClass = clazz;
+    }
+  );
 }

@@ -46,9 +46,7 @@ function validateDigits(
  * ```
  * This example applies the `Digits` validator to the `price` property to ensure it has at most 4 digits in the integer part and 2 digits in the fractional part.
  */
-export default function Digits<
-  T extends API.Utilities.Objects.Optional<number>
->(
+export function Digits<T extends API.Utilities.Objects.Optional<number>>(
   props: API.Decorator.Props.MultiArgsMessageOptional<{
     maxInteger?: number;
     maxFraction?: number;
@@ -56,7 +54,7 @@ export default function Digits<
 ) {
   const { maxInteger = Infinity, maxFraction = Infinity } =
     API.Decorator.args(props);
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Digits",

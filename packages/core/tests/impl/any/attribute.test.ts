@@ -1,6 +1,6 @@
 import $ from "../../../index";
 import validators from "../../../validators";
-import attribute from "../../../validators/any/attribute";
+import { attribute } from "../../../validators/any/attribute";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

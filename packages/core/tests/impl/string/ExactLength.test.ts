@@ -1,5 +1,5 @@
 import $ from "../../../index";
-import ExactLength from "../../../validators/string/ExactLength";
+import { ExactLength } from "../../../validators/string/ExactLength";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

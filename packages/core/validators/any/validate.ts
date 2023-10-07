@@ -17,14 +17,14 @@ import API from "api";
  * @example
  * // Example 2: Using an object with validation function and groups
  * class Product {
- *   //@Rule({
- *   //  isValid: (value) => value.price > 0,
- *   //  roups: ["checkout"],
+ *   //@validate({
+ *   //  validate: (value) => value.price > 0,
+ *   //  groups: ["checkout"],
  *   //)
  *   price: number;
  * }
  */
-const validate = <T>(
+export const validate = <T>(
   props:
     | API.Validation.Evaluator<T>
     | {
@@ -32,7 +32,7 @@ const validate = <T>(
         groups?: string | string[];
       }
 ) => {
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     validate: "validate" in props ? props.validate : props,
     groups:
       "groups" in props
@@ -44,5 +44,3 @@ const validate = <T>(
         : [],
   });
 };
-
-export default validate;

@@ -46,7 +46,7 @@ function isInvalid(text: string, rule: keyof typeof PASSWORD_REGEXES) {
  *   password: string;
  * }
  */
-export default function Password<
+export function Password<
   T extends API.Utilities.Objects.Optional<string>
 >(props?: {
   uppercase: boolean;
@@ -123,7 +123,7 @@ export default function Password<
     return buildConstraintViolation("", true);
   }
 
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (str, _, locale) => isValid(str ?? "", locale),
   });

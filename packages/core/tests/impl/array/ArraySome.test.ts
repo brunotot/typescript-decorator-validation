@@ -1,4 +1,4 @@
-import ArraySome from "../../../validators/array/ArraySome";
+import { ArraySome } from "../../../validators/array/ArraySome";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

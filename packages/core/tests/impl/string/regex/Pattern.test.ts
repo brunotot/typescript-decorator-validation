@@ -1,6 +1,6 @@
 import $ from "../../../../index";
 import RegexConst from "../../../../validators/shared/regex.constants";
-import Pattern from "../../../../validators/string/regex/Pattern";
+import { Pattern } from "../../../../validators/string/regex/Pattern";
 import { standardTest } from "../../../common/TestFactory";
 import { IMock } from "../../../common/ValidationHandlerMock";
 

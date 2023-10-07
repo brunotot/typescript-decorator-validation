@@ -19,11 +19,11 @@ import API from "api";
  * ```
  * This example validates that the `numbers` array contains the value 42 and associates it with custom validation groups and a custom error message.
  */
-export default function ArrayContains<K, T extends K[]>(
+export function ArrayContains<K, T extends K[]>(
   props: API.Decorator.Props.MultiArgsMessageOptional<K>
 ) {
   const value = API.Decorator.args(props);
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArrayContains",

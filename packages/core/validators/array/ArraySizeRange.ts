@@ -20,11 +20,11 @@ import API from "api";
  * ```
  * This example validates that the `myArray` property has a size between 2 and 5 elements, associates it with a custom validation group, and provides a custom error message if the validation fails.
  */
-export default function ArraySizeRange<K, T extends K[]>(
+export function ArraySizeRange<K, T extends K[]>(
   props: API.Decorator.Props.MultiArgsMessageOptional<readonly [number, number]>
 ) {
   const [min, max] = API.Decorator.args(props);
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArraySizeRange",

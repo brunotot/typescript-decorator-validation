@@ -16,10 +16,10 @@ import API from "api";
  * ```
  * This example applies the `TodayDate` validator to the `dueDate` property to ensure it is set to today's date.
  */
-export default function TodayDate<
-  T extends API.Utilities.Objects.Optional<Date>
->(props?: API.Decorator.Props.ZeroArgsMessageOptional) {
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+export function TodayDate<T extends API.Utilities.Objects.Optional<Date>>(
+  props?: API.Decorator.Props.ZeroArgsMessageOptional
+) {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (date, _context, locale) => {
       const currentDate = new Date();

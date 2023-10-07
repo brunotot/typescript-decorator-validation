@@ -1,6 +1,6 @@
 import API from "api";
 
-namespace ClassDecorator {
+namespace ClassDecoratorService {
   export type Type = API.Utilities.Types.Class<any>;
 
   export type ReturnDef<T extends Type> =
@@ -38,4 +38,4 @@ namespace ClassDecorator {
   }
 }
 
-export default ClassDecorator;
+export default ClassDecoratorService;

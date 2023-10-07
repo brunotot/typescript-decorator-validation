@@ -1,22 +1,21 @@
 import API from "api";
 
-import ClassBaseDecoratorNamespace from "./kind/ClassBaseDecorator";
-import FieldBaseDecoratorNamespace from "./kind/FieldBaseDecorator";
-import ClassValidatorDecoratorNamespace from "./kind/derived/ClassValidatorDecorator";
-import FieldValidatorDecoratorNamespace from "./kind/derived/FieldValidatorDecorator";
-import DecoratorProps from "./props";
+import DecoratorProps from "./models/DecoratorProps";
+import ClassDecoratorServiceNamespace from "./service/ClassDecoratorService";
+import ClassDecoratorValidatorServiceNamespace from "./service/ClassDecoratorValidatorService";
+import FieldDecoratorServiceNamespace from "./service/FieldDecoratorService";
+import FieldDecoratorValidatorServiceNamespace from "./service/FieldDecoratorValidatorService";
 
 /**
  * A collection of types and interfaces for creating and handling decorators.
  */
 namespace Decorator {
-  export import Props = DecoratorProps;
-
-  // Decorator services
-  export import FieldBaseDecorator = FieldBaseDecoratorNamespace;
-  export import ClassBaseDecorator = ClassBaseDecoratorNamespace;
-  export import FieldValidatorDecorator = FieldValidatorDecoratorNamespace;
-  export import ClassValidatorDecorator = ClassValidatorDecoratorNamespace;
+  export namespace Service {
+    export import FieldDecoratorService = FieldDecoratorServiceNamespace;
+    export import ClassDecoratorService = ClassDecoratorServiceNamespace;
+    export import FieldDecoratorValidatorService = FieldDecoratorValidatorServiceNamespace;
+    export import ClassDecoratorValidatorService = ClassDecoratorValidatorServiceNamespace;
+  }
 
   /**
    * Type definition for a decorator function.
@@ -54,6 +53,8 @@ namespace Decorator {
     meta: API.Reflection.Services.FieldValidatorMetaService.default,
     context: API.Decorator.Context<T>
   ) => void;
+
+  export import Props = DecoratorProps;
 
   /**
    * Extracts a message from the provided decorator properties.

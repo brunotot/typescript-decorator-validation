@@ -16,10 +16,10 @@ import API from "api";
  * ```
  * This example applies the `PastDate` validator to the `eventDate` property to ensure it is a date in the past.
  */
-export default function PastDate<
-  T extends API.Utilities.Objects.Optional<Date>
->(props?: API.Decorator.Props.ZeroArgsMessageOptional) {
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+export function PastDate<T extends API.Utilities.Objects.Optional<Date>>(
+  props?: API.Decorator.Props.ZeroArgsMessageOptional
+) {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (date, _context, locale) => ({
       key: "PastDate",

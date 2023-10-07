@@ -26,11 +26,11 @@ import API from "api";
  *   username: string;
  * }
  */
-export default function MinLength<
-  T extends API.Utilities.Objects.Optional<string>
->(props: API.Decorator.Props.MultiArgsMessageOptional<number>) {
+export function MinLength<T extends API.Utilities.Objects.Optional<string>>(
+  props: API.Decorator.Props.MultiArgsMessageOptional<number>
+) {
   const min = API.Decorator.args(props);
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "MinLength",

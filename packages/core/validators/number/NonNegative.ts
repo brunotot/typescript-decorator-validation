@@ -25,10 +25,10 @@ import API from "api";
  *   price?: number;
  * }
  */
-export default function NonNegative<
-  T extends API.Utilities.Objects.Optional<number>
->(props?: API.Decorator.Props.ZeroArgsMessageOptional) {
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+export function NonNegative<T extends API.Utilities.Objects.Optional<number>>(
+  props?: API.Decorator.Props.ZeroArgsMessageOptional
+) {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (num, _, locale) => ({
       key: "NonNegative",

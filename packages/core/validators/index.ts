@@ -1,131 +1,138 @@
-import Required from "./any/Required";
-import attribute from "./any/attribute";
-import validate from "./any/validate";
-import ArrayContains from "./array/ArrayContains";
-import ArrayEmpty from "./array/ArrayEmpty";
-import ArrayEvery from "./array/ArrayEvery";
-import ArrayNone from "./array/ArrayNone";
-import ArrayOne from "./array/ArrayOne";
-import ArraySizeExact from "./array/ArraySizeExact";
-import ArraySizeMax from "./array/ArraySizeMax";
-import ArraySizeMin from "./array/ArraySizeMin";
-import ArraySizeRange from "./array/ArraySizeRange";
-import ArraySome from "./array/ArraySome";
-import ArrayUnique from "./array/ArrayUnique";
-import foreach from "./array/foreach";
-import AssertFalse from "./boolean/AssertFalse";
-import AssertTrue from "./boolean/AssertTrue";
-import ValidDateRange from "./class/ValidDateRange";
-import FutureDate from "./date/FutureDate";
-import PastDate from "./date/PastDate";
-import TodayDate from "./date/TodayDate";
-import Decimal from "./number/Decimal";
-import Digits from "./number/Digits";
-import Integer from "./number/Integer";
-import Negative from "./number/Negative";
-import NonNegative from "./number/NonNegative";
-import NonPositive from "./number/NonPositive";
-import Positive from "./number/Positive";
-import ValueMax from "./number/ValueMax";
-import ValueMin from "./number/ValueMin";
-import ValueRange from "./number/ValueRange";
-import ExactLength from "./string/ExactLength";
-import Length from "./string/Length";
-import MaxLength from "./string/MaxLength";
-import MinLength from "./string/MinLength";
-import Password from "./string/Password";
-import Pattern from "./string/regex/Pattern";
-import Alpha from "./string/regex/impl/Alpha";
-import Alphanumeric from "./string/regex/impl/Alphanumeric";
-import Email from "./string/regex/impl/Email";
-import IPAddress from "./string/regex/impl/IPAddress";
-import Lowercase from "./string/regex/impl/Lowercase";
-import Numeric from "./string/regex/impl/Numeric";
-import URL from "./string/regex/impl/URL";
-import Uppercase from "./string/regex/impl/Uppercase";
+import * as NsRequired from "./any/Required";
+import * as NsAttribute from "./any/attribute";
+import * as NsValidate from "./any/validate";
+import * as NsArrayContains from "./array/ArrayContains";
+import * as NsArrayEmpty from "./array/ArrayEmpty";
+import * as NsArrayEvery from "./array/ArrayEvery";
+import * as NsArrayNone from "./array/ArrayNone";
+import * as NsArrayOne from "./array/ArrayOne";
+import * as NsArraySizeExact from "./array/ArraySizeExact";
+import * as NsArraySizeMax from "./array/ArraySizeMax";
+import * as NsArraySizeMin from "./array/ArraySizeMin";
+import * as NsArraySizeRange from "./array/ArraySizeRange";
+import * as NsArraySome from "./array/ArraySome";
+import * as NsArrayUnique from "./array/ArrayUnique";
+import * as NsForeach from "./array/foreach";
+import * as NsAssertFalse from "./boolean/AssertFalse";
+import * as NsAssertTrue from "./boolean/AssertTrue";
+import * as NsValidDateRange from "./class/ValidDateRange";
+import * as NsFutureDate from "./date/FutureDate";
+import * as NsPastDate from "./date/PastDate";
+import * as NsTodayDate from "./date/TodayDate";
+import * as NsDecimal from "./number/Decimal";
+import * as NsDigits from "./number/Digits";
+import * as NsInteger from "./number/Integer";
+import * as NsNegative from "./number/Negative";
+import * as NsNonNegative from "./number/NonNegative";
+import * as NsNonPositive from "./number/NonPositive";
+import * as NsPositive from "./number/Positive";
+import * as NsValueMax from "./number/ValueMax";
+import * as NsValueMin from "./number/ValueMin";
+import * as NsValueRange from "./number/ValueRange";
+import * as NsExactLength from "./string/ExactLength";
+import * as NsLength from "./string/Length";
+import * as NsMaxLength from "./string/MaxLength";
+import * as NsMinLength from "./string/MinLength";
+import * as NsPassword from "./string/Password";
+import * as NsPattern from "./string/regex/Pattern";
+import * as NsAlpha from "./string/regex/impl/Alpha";
+import * as NsAlphanumeric from "./string/regex/impl/Alphanumeric";
+import * as NsEmail from "./string/regex/impl/Email";
+import * as NsIPAddress from "./string/regex/impl/IPAddress";
+import * as NsLowercase from "./string/regex/impl/Lowercase";
+import * as NsNumeric from "./string/regex/impl/Numeric";
+import * as NsURL from "./string/regex/impl/URL";
+import * as NsUppercase from "./string/regex/impl/Uppercase";
 
-const any = {
-  Required,
-};
+namespace ValidatorAnyGroup {
+  export import Required = NsRequired.Required;
+  export import validate = NsValidate.validate;
+  export import attribute = NsAttribute.attribute;
+}
 
-const array = {
-  ...any,
-  ArrayContains,
-  ArrayEmpty,
-  ArrayEvery,
-  ArrayNone,
-  ArrayOne,
-  ArraySome,
-  ArrayUnique,
-  ArraySizeExact,
-  ArraySizeMax,
-  ArraySizeMin,
-  ArraySizeRange,
-};
+namespace ValidatorArrayGroup {
+  export import ArrayContains = NsArrayContains.ArrayContains;
+  export import ArrayEmpty = NsArrayEmpty.ArrayEmpty;
+  export import ArrayEvery = NsArrayEvery.ArrayEvery;
+  export import ArrayNone = NsArrayNone.ArrayNone;
+  export import ArrayOne = NsArrayOne.ArrayOne;
+  export import ArraySome = NsArraySome.ArraySome;
+  export import ArrayUnique = NsArrayUnique.ArrayUnique;
+  export import ArraySizeExact = NsArraySizeExact.ArraySizeExact;
+  export import ArraySizeMax = NsArraySizeMax.ArraySizeMax;
+  export import ArraySizeMin = NsArraySizeMin.ArraySizeMin;
+  export import ArraySizeRange = NsArraySizeRange.ArraySizeRange;
+  export import foreach = NsForeach.foreach;
+  export import Required = ValidatorAnyGroup.Required;
+  export import validate = ValidatorAnyGroup.validate;
+  export import attribute = ValidatorAnyGroup.attribute;
+}
 
-const boolean = {
-  ...any,
-  AssertTrue,
-  AssertFalse,
-};
+namespace ValidatorBooleanGroup {
+  export import AssertTrue = NsAssertTrue.AssertTrue;
+  export import AssertFalse = NsAssertFalse.AssertFalse;
+  export import Required = ValidatorAnyGroup.Required;
+  export import validate = ValidatorAnyGroup.validate;
+  export import attribute = ValidatorAnyGroup.attribute;
+}
 
-const number = {
-  ...any,
-  Digits,
-  ValueMax,
-  ValueMin,
-  ValueRange,
-  Decimal,
-  Integer,
-  Negative,
-  NonNegative,
-  NonPositive,
-  Positive,
-};
+namespace ValidatorNumberGroup {
+  export import Digits = NsDigits.Digits;
+  export import ValueMax = NsValueMax.ValueMax;
+  export import ValueMin = NsValueMin.ValueMin;
+  export import ValueRange = NsValueRange.ValueRange;
+  export import Decimal = NsDecimal.Decimal;
+  export import Integer = NsInteger.Integer;
+  export import Negative = NsNegative.Negative;
+  export import NonNegative = NsNonNegative.NonNegative;
+  export import NonPositive = NsNonPositive.NonPositive;
+  export import Positive = NsPositive.Positive;
+  export import Required = ValidatorAnyGroup.Required;
+  export import validate = ValidatorAnyGroup.validate;
+  export import attribute = ValidatorAnyGroup.attribute;
+}
 
-const Date = {
-  ...any,
-  FutureDate,
-  PastDate,
-  TodayDate,
-};
+namespace ValidatorDateGroup {
+  export import FutureDate = NsFutureDate.FutureDate;
+  export import PastDate = NsPastDate.PastDate;
+  export import TodayDate = NsTodayDate.TodayDate;
+  export import Required = ValidatorAnyGroup.Required;
+  export import validate = ValidatorAnyGroup.validate;
+  export import attribute = ValidatorAnyGroup.attribute;
+}
 
-const string = {
-  ...any,
-  Email,
-  Password,
-  Pattern,
-  URL,
-  Alpha,
-  IPAddress,
-  Numeric,
-  ExactLength,
-  Length,
-  MaxLength,
-  MinLength,
-  Uppercase,
-  Lowercase,
-  Alphanumeric,
-};
+namespace ValidatorStringGroup {
+  export import Email = NsEmail.Email;
+  export import Password = NsPassword.Password;
+  export import Pattern = NsPattern.Pattern;
+  export import URL = NsURL.URL;
+  export import Alpha = NsAlpha.Alpha;
+  export import IPAddress = NsIPAddress.IPAddress;
+  export import Numeric = NsNumeric.Numeric;
+  export import ExactLength = NsExactLength.ExactLength;
+  export import Length = NsLength.Length;
+  export import MaxLength = NsMaxLength.MaxLength;
+  export import MinLength = NsMinLength.MinLength;
+  export import Uppercase = NsUppercase.Uppercase;
+  export import Lowercase = NsLowercase.Lowercase;
+  export import Alphanumeric = NsAlphanumeric.Alphanumeric;
+  export import Required = ValidatorAnyGroup.Required;
+  export import validate = ValidatorAnyGroup.validate;
+  export import attribute = ValidatorAnyGroup.attribute;
+}
 
-const clazz = {
-  ValidDateRange,
-};
+namespace ValidatorClassGroup {
+  export import ValidDateRange = NsValidDateRange.ValidDateRange;
+}
 
-/**
- * A collection of predefined decorated validators grouped and sorted by variable types
- */
-const validators = {
-  any,
-  array,
-  boolean,
-  number,
-  string,
-  Date,
-  validate,
-  attribute,
-  foreach,
-  class: clazz,
-};
+namespace validators {
+  export import any = ValidatorAnyGroup;
+  export import date = ValidatorDateGroup;
+  export import string = ValidatorStringGroup;
+  export import number = ValidatorNumberGroup;
+  export import boolean = ValidatorBooleanGroup;
+  export import array = ValidatorArrayGroup;
+  export import clazz = ValidatorClassGroup;
+}
 
 export default validators;

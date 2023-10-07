@@ -36,16 +36,14 @@ export function testRegex<T extends API.Utilities.Objects.Optional<string>>(
  *   anotherProperty: string;
  * }
  */
-export default function Pattern<
-  T extends API.Utilities.Objects.Optional<string>
->(
+export function Pattern<T extends API.Utilities.Objects.Optional<string>>(
   props: API.Decorator.Props.MultiArgsMessageRequired<{
     regex: RegExp;
     key?: string;
   }>
 ) {
   const { regex, key } = API.Decorator.args(props);
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props.groups),
     validate: (value, _, locale) => ({
       key: key ?? "Pattern",

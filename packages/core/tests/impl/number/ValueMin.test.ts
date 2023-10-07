@@ -1,5 +1,5 @@
 import $ from "../../../index";
-import ValueMin from "../../../validators/number/ValueMin";
+import { ValueMin } from "../../../validators/number/ValueMin";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

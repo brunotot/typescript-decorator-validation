@@ -1,5 +1,5 @@
 import Objects from "../../../src/utilities/impl/Objects";
-import Required from "../../../validators/any/Required";
+import { Required } from "../../../validators/any/Required";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

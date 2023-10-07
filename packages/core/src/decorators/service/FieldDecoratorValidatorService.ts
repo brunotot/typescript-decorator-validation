@@ -3,19 +3,7 @@ import API from "api";
 /**
  * A service class which exposes validated-decorator-related actions
  */
-
-namespace ClassValidatorDecorator {
-  export type Supplier<T extends API.Decorator.ClassBaseDecorator.Type> = {
-    groups?: string | string[];
-    isValid: Evaluator<T>;
-  };
-
-  export type Evaluator<T extends API.Decorator.ClassBaseDecorator.Type> = ((
-    value: any,
-    context: API.Decorator.ClassBaseDecorator.Context<T>,
-    locale: API.Localization.Resolver.LocaleResolver.Locale
-  ) => API.Validation.Result) & {};
-
+namespace FieldDecoratorValidatorService {
   /**
    * Creates a new validator function using the provided validation builder options.
    *
@@ -32,7 +20,7 @@ namespace ClassValidatorDecorator {
    *
    * @example
    * ```typescript
-   * const IsPositive = ClassValidatorDecorator.create<number>({
+   * const IsPositive = FieldDecoratorValidatorService.create<number>({
    *   groups: ['group1'],
    *   isValid: (value) => value > 0
    * });
@@ -43,14 +31,16 @@ namespace ClassValidatorDecorator {
    * }
    * ```
    */
-  export function build<T extends API.Decorator.ClassBaseDecorator.Type>({
+  export function build<
+    T extends API.Decorator.Service.FieldDecoratorService.Type
+  >({
     groups,
-    isValid,
-  }: Supplier<T>): API.Decorator.ClassBaseDecorator.Instance<T> {
-    return API.Decorator.ClassBaseDecorator.build((meta) => {
-      meta.addValidator(isValid, groups);
-    });
+    validate,
+  }: API.Validation.Metadata<T>): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+    return API.Decorator.Service.FieldDecoratorService.build<T>((meta, key) =>
+      meta.addValidator(key, validate, groups)
+    );
   }
 }
 
-export default ClassValidatorDecorator;
+export default FieldDecoratorValidatorService;

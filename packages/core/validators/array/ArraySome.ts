@@ -19,12 +19,12 @@ import API from "api";
  * ```
  * This example validates that at least one element in the `numbers` array is greater than 0 and provides a custom error message if the validation fails.
  */
-export default function ArraySome<K, T extends K[]>(
+export function ArraySome<K, T extends K[]>(
   props: API.Decorator.Props.MultiArgsMessageRequired<
     API.Utilities.Objects.ArrayPredicate<K>
   >
 ) {
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArraySome",

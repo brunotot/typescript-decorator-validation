@@ -26,11 +26,11 @@ import API from "api";
  *   quantity?: number;
  * }
  */
-export default function ValueMin<
-  T extends API.Utilities.Objects.Optional<number>
->(props: API.Decorator.Props.MultiArgsMessageOptional<number>) {
+export function ValueMin<T extends API.Utilities.Objects.Optional<number>>(
+  props: API.Decorator.Props.MultiArgsMessageOptional<number>
+) {
   const min = API.Decorator.args(props);
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "ValueMin",

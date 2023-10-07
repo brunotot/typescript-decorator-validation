@@ -27,13 +27,11 @@ import API from "api";
  *   price?: number;
  * }
  */
-export default function ValueRange<
-  T extends API.Utilities.Objects.Optional<number>
->(
+export function ValueRange<T extends API.Utilities.Objects.Optional<number>>(
   props: API.Decorator.Props.MultiArgsMessageOptional<readonly [number, number]>
 ) {
   const [min, max] = API.Decorator.args(props);
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "ValueRange",

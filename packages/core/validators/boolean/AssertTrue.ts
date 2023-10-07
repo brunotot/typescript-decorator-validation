@@ -21,10 +21,10 @@ import API from "api";
  *   available: boolean;
  * }
  */
-export default function AssertTrue<T extends boolean>(
+export function AssertTrue<T extends boolean>(
   props?: API.Decorator.Props.ZeroArgsMessageOptional
 ) {
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "AssertTrue",

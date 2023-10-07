@@ -1,5 +1,5 @@
 import $ from "../../../../../index";
-import URL from "../../../../../validators/string/regex/impl/URL";
+import { URL } from "../../../../../validators/string/regex/impl/URL";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 

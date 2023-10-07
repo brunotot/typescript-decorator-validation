@@ -28,13 +28,11 @@ import API from "api";
  *   password: string;
  * }
  */
-export default function Length<
-  T extends API.Utilities.Objects.Optional<string>
->(
+export function Length<T extends API.Utilities.Objects.Optional<string>>(
   props: API.Decorator.Props.MultiArgsMessageOptional<readonly [number, number]>
 ) {
   const [min, max] = API.Decorator.args(props);
-  return API.Decorator.FieldValidatorDecorator.build<T>({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Length",
