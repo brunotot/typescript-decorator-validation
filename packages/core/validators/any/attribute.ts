@@ -10,8 +10,8 @@ import { Decorator, Overrides, Utilities } from "api";
  *
  * @remarks
  * Current implementation doesn't allow referencing the parent class itself as the associated `clazz`.
- * Also, if _@attribute isn't supplied then the validation result at runtime defaults to primitive strategy and yet
- * the evaluated type at compile-time remains the same. That is why it's crucial to add _@attribute decorator.
+ * Also, if `@attribute` isn't supplied for a non-primitive field, then the validation result at runtime defaults to primitive strategy and yet
+ * the evaluated type at compile-time remains the same. That is why it's crucial to add `@attribute` decorator.
  *
  * @typeParam T - The type of the decorated property, which should be an object or an array of objects (nullables are allowed).
  * @param clazz - The class definition associated with the field.
@@ -33,9 +33,9 @@ import { Decorator, Overrides, Utilities } from "api";
  * new ValidationEngine(ShoppingCart).validate({
  *   items: [
  *     // _@ValueMax constraint violation (quantity 15 exceeds maximum amount of 10)
- *     {quantity: 15, price: 200.00},
+ *     { quantity: 15, price: 200.00 },
  *     // _@ValueMin constraint violation (price 0 doesn't reach the minimum price amount of 0.1)
- *     {quantity: 1, price: 0}
+ *     { quantity: 1, price: 0 }
  *   ]
  * });
  *
