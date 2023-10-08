@@ -1,4 +1,4 @@
-import API, { Overrides } from "api";
+import { Decorator, Overrides, Utilities } from "api";
 
 /**
  * Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T`).
@@ -58,13 +58,11 @@ import API, { Overrides } from "api";
  * }
  */
 export function attribute<
-  T extends API.Utilities.Objects.Optional<object | object[]>
+  T extends Utilities.Objects.Optional<object | object[]>
 >(
-  clazz: API.Utilities.Types.Class<any>
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorService.build<any>(
-    (meta, name) => {
-      meta.getUntypedDescriptor(name).thisClass = clazz;
-    }
-  );
+  clazz: Utilities.Types.Class<any>
+): Decorator.Service.FieldDecoratorService.Instance<T> {
+  return Decorator.Service.FieldDecoratorService.build<any>((meta, name) => {
+    meta.getUntypedDescriptor(name).thisClass = clazz;
+  });
 }

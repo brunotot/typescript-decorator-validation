@@ -1,6 +1,5 @@
 import Objects from "../src/utilities/impl/Objects";
 import Validation from "../src/validation";
-import ValidDateRange from "../validators/class/ValidDateRange";
 import decorate from "../validators/index";
 
 class AddressForm {
@@ -17,7 +16,7 @@ class AddressForm {
   zipCode!: string;
 }
 
-@ValidDateRange("graduationStartDate", "graduationEndDate")
+@decorate.clazz.ValidDateRange("graduationStartDate", "graduationEndDate")
 class EducationForm {
   @decorate.any.Required()
   degree!: string;
@@ -45,14 +44,14 @@ class JobApplicationForm {
   @decorate.any.Required()
   phoneNumber!: string;
 
-  @decorate.Date.PastDate()
+  @decorate.date.PastDate()
   dateOfBirth!: Date;
 
-  @decorate.attribute(AddressForm)
+  @decorate.clazz.attribute(AddressForm)
   address!: AddressForm;
 
   @decorate.array.ArraySizeMin(1)
-  @decorate.attribute(EducationForm)
+  @decorate.clazz.attribute(EducationForm)
   educations: EducationForm[] = [];
 
   @decorate.any.Required()
@@ -102,7 +101,7 @@ const jobApplicationForm: Objects.Payload<JobApplicationForm> = {
   coverLetter: "I'm passionate about coding...",
 };
 
-const engine = new Validation.Engine(JobApplicationForm);
+const engine = new Validation.ValidationEngine(JobApplicationForm);
 /*engine.registerAsync(({ detailedErrors, errors }) => {
   console.log(errors);
 });*/

@@ -1,11 +1,12 @@
 import API from "api";
 
 /**
- * Decorator for applying multiple validators to each element in an array property.
+ * Creates a validator decorator which applies multiple validators to each element in array field.
  *
  * @typeParam T - The type of the array property.
  * @param validators - An array of validators to apply to each element in the array.
- * @returns A validation decorator function.
+ * @returns A decorator function to use with class array fields.
+ *
  * @example
  * Example 1: Applies the `MinLength` and `MaxLength` validators to each element in the `names` array property.
  * ```ts

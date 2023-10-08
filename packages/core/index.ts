@@ -1,5 +1,5 @@
-import TdvCoreApi from "./src";
 import Decorator from "./src/decorators";
+import TdvCoreApi from "./src/index";
 import Localization from "./src/localization";
 import Reflection from "./src/reflection";
 import Strategy from "./src/strategy";

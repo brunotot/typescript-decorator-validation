@@ -3,7 +3,7 @@ import API from "api";
 import MessageReaderService from "./MessageReaderService";
 
 /**
- * A service layer which interacts with app's translations
+ * A service layer which interacts with framework's translations
  */
 namespace TranslationService {
   /**

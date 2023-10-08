@@ -11,7 +11,7 @@
   "private": false,
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run test && npm run clean && tsc",
+    "build": "npm run clean && npm run test && tsc",
     "build:noTest": "npm run clean && tsc",
     "deploy:minor": "bash ../../scripts/deploy.sh core minor",
     "deploy:major": "bash ../../scripts/deploy.sh core major",

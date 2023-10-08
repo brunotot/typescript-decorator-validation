@@ -45,16 +45,15 @@ import * as NsURL from "./string/regex/impl/URL";
 import * as NsUppercase from "./string/regex/impl/Uppercase";
 
 /**
- * A collection of validators and decorators for any field.
+ * A collection of validators and decorators for `any` fields.
  */
 namespace ValidatorAnyGroup {
   export import Required = NsRequired.Required;
   export import validate = NsValidate.create;
-  export import attribute = NsAttribute.attribute;
 }
 
 /**
- * A collection of validators and decorators for array fields.
+ * A collection of validators and decorators for `array` fields.
  */
 namespace ValidatorArrayGroup {
   export import ArrayContains = NsArrayContains.ArrayContains;
@@ -71,7 +70,6 @@ namespace ValidatorArrayGroup {
   export import foreach = NsForeach.foreach;
   export import Required = ValidatorAnyGroup.Required;
   export import validate = ValidatorAnyGroup.validate;
-  export import attribute = ValidatorAnyGroup.attribute;
 }
 
 /**
@@ -82,7 +80,6 @@ namespace ValidatorBooleanGroup {
   export import AssertFalse = NsAssertFalse.AssertFalse;
   export import Required = ValidatorAnyGroup.Required;
   export import validate = ValidatorAnyGroup.validate;
-  export import attribute = ValidatorAnyGroup.attribute;
 }
 
 /**
@@ -101,7 +98,6 @@ namespace ValidatorNumberGroup {
   export import Positive = NsPositive.Positive;
   export import Required = ValidatorAnyGroup.Required;
   export import validate = ValidatorAnyGroup.validate;
-  export import attribute = ValidatorAnyGroup.attribute;
 }
 
 /**
@@ -113,7 +109,6 @@ namespace ValidatorDateGroup {
   export import TodayDate = NsTodayDate.TodayDate;
   export import Required = ValidatorAnyGroup.Required;
   export import validate = ValidatorAnyGroup.validate;
-  export import attribute = ValidatorAnyGroup.attribute;
 }
 
 /**
@@ -136,13 +131,13 @@ namespace ValidatorStringGroup {
   export import Alphanumeric = NsAlphanumeric.Alphanumeric;
   export import Required = ValidatorAnyGroup.Required;
   export import validate = ValidatorAnyGroup.validate;
-  export import attribute = ValidatorAnyGroup.attribute;
 }
 
 /**
  * A collection of validators and decorators for `classes`.
  */
 namespace ValidatorClassGroup {
+  export import attribute = NsAttribute.attribute;
   export import ValidDateRange = NsValidDateRange.ValidDateRange;
 }
 
@@ -160,3 +155,5 @@ namespace validators {
 }
 
 export default validators;
+
+validators.clazz.attribute(null as any);
