@@ -1,5 +1,5 @@
+import { PastDate } from "../../../collection/date/PastDate";
 import $ from "../../../index";
-import { PastDate } from "../../../validators/date/PastDate";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

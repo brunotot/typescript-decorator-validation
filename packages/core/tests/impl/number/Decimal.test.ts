@@ -1,5 +1,5 @@
+import { Decimal } from "../../../collection/number/Decimal";
 import $ from "../../../index";
-import { Decimal } from "../../../validators/number/Decimal";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

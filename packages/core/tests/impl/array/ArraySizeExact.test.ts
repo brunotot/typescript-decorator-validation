@@ -1,4 +1,4 @@
-import { ArraySizeExact } from "../../../validators/array/ArraySizeExact";
+import { ArraySizeExact } from "../../../collection/array/ArraySizeExact";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

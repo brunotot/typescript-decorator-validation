@@ -1,6 +1,6 @@
+import decorate from "../collection/index";
 import Objects from "../src/utilities/impl/Objects";
 import Validation from "../src/validation";
-import decorate from "../validators/index";
 
 class AddressForm {
   @decorate.any.Required()

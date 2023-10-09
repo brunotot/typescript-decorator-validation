@@ -1,7 +1,7 @@
 import API from "api";
 
-import RegexConst from "../../../shared/regex.constants";
 import { testRegex } from "../Pattern";
+import RegexConst from "../shared/regex.constants";
 
 /**
  * Creates a validator decorator that checks if a string value contains only numeric characters using a regular expression pattern.

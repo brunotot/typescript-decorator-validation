@@ -1,4 +1,4 @@
-import { ArrayEvery } from "../../../validators/array/ArrayEvery";
+import { ArrayEvery } from "../../../collection/array/ArrayEvery";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

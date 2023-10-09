@@ -1,5 +1,5 @@
+import { NonPositive } from "../../../collection/number/NonPositive";
 import $ from "../../../index";
-import { NonPositive } from "../../../validators/number/NonPositive";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

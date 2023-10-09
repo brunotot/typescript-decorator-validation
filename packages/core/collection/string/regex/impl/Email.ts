@@ -1,13 +1,13 @@
 import API from "api";
 
-import RegexConst from "../../../shared/regex.constants";
-import { testRegex } from "./../../regex/Pattern";
+import { testRegex } from "../Pattern";
+import RegexConst from "../shared/regex.constants";
 /**
- * Creates a validator decorator that checks if a string value is a valid IP address using a regular expression pattern.
+ * Creates a validator decorator that checks if a string value is a valid email address using a regular expression pattern.
  *
  * @typeparam T - The type of the decorated property (optional string).
  * @param props - (Optional) An object with properties for the validator.
- * @param props.key - (Optional) The key to identify this validation rule in error messages. Defaults to "IPAddress".
+ * @param props.key - (Optional) The key to identify this validation rule in error messages. Defaults to "Email".
  * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
  * @param props.groups - (Optional) An array of validation groups to which this rule belongs.
  * @returns A decorator function to use with class properties.
@@ -15,36 +15,33 @@ import { testRegex } from "./../../regex/Pattern";
  * @example
  * // Example 1: Basic usage with default options
  * class MyClass {
- *   //@IPAddress()
- *   ipAddress: string;
+ *   @Email()
+ *   emailAddress: string;
  * }
  *
  * // Example 2: Custom error message and validation groups
  * class AnotherClass {
- *   //@IPAddress({
- *   //   key: "IPAddressField",
- *   //   message: "Invalid IP address",
- *   //   groups: ["registration", "profile"],
- *   // })
+ *   @Email({
+ *     key: "EmailField",
+ *     message: "Invalid email address",
+ *     groups: ["registration", "profile"],
+ *   })
  *   value: string;
  * }
  */
-export function IPAddress<T extends API.Utilities.Objects.Optional<string>>(
+export function Email<T extends API.Utilities.Objects.Optional<string>>(
   props?: API.Decorator.Props.ZeroArgsMessageOptional
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
-      key: "IPAddress",
+      key: "Email",
       message: API.Decorator.message(
         props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "IPAddress"
-        ),
+        API.Localization.Service.TranslationService.translate(locale, "Email"),
         locale
       ),
-      valid: testRegex(RegexConst.IP_ADDRESS, value),
+      valid: testRegex(RegexConst.EMAIL, value),
     }),
   });
 }

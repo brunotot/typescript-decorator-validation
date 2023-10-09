@@ -6,7 +6,7 @@
     "src",
     "src/localization/translations/*.json",
     "translations",
-    "validators"
+    "collection"
   ],
   "compilerOptions": {
     "module": "ESNext",

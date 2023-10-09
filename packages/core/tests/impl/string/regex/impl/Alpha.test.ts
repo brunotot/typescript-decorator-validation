@@ -1,5 +1,5 @@
+import { Alpha } from "../../../../../collection/string/regex/impl/Alpha";
 import $ from "../../../../../index";
-import { Alpha } from "../../../../../validators/string/regex/impl/Alpha";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 

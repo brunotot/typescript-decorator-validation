@@ -1,6 +1,6 @@
+import decorate from "../../../collection";
+import { attribute } from "../../../collection/class/attribute";
 import $ from "../../../index";
-import validators from "../../../validators";
-import { attribute } from "../../../validators/any/attribute";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
@@ -32,10 +32,10 @@ const errorData: Type[] = [
 ];
 
 class NestedModel {
-  @validators.string.Required()
+  @decorate.string.Required()
   stringValue!: string;
 
-  @validators.number.Integer()
+  @decorate.number.Integer()
   numberValue!: number;
 }
 

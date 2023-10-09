@@ -1,12 +1,9 @@
-import { Rule, Validation } from "tdv-core";
+import { create } from "tdv-core";
 import UserForm from "../../models/UserForm";
 
-const CaseInsensitiveContains = (
-  containText: string,
-  ...groups: Validation.Group[]
-) => {
+const CaseInsensitiveContains = (containText: string, ...groups: string[]) => {
   const containTextLowercase = containText.toLowerCase();
-  return Rule<string>({
+  return create<string>({
     groups,
     isValid: (current, _context: UserForm) => ({
       valid: (current ?? "").toLowerCase().includes(containTextLowercase),

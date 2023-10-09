@@ -1,5 +1,5 @@
+import { MaxLength } from "../../../collection/string/MaxLength";
 import $ from "../../../index";
-import { MaxLength } from "../../../validators/string/MaxLength";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

@@ -1,10 +1,10 @@
-import { Decorator, Overrides, Utilities } from "api";
+import API from "api";
 
 /**
  * Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T`).
  *
- * If a field which is being decorated is not a {@link Utilities.Types.Primitive primitive}
- * (`string`, `number`, `boolean`, `bigint`, `Date`) and isn't marked as a primitive in {@link Overrides.PrimitiveSet overrides} interface
+ * If a field which is being decorated is not a {@link API.Utilities.Types.Primitive primitive}
+ * (`string`, `number`, `boolean`, `bigint`, `Date`) and isn't marked as a primitive in {@link API.Overrides.PrimitiveSet overrides} interface
  * then the framework treats it as a custom, client-defined validable class. That having in mind, you will always want to apply `@attribute`
  * to those types of fields so the runtime evaluation matches the TypeScript compiler type evaluation. For more clarity check examples below.
  *
@@ -58,11 +58,13 @@ import { Decorator, Overrides, Utilities } from "api";
  * }
  */
 export function attribute<
-  T extends Utilities.Objects.Optional<object | object[]>
+  T extends API.Utilities.Objects.Optional<object | object[]>
 >(
-  clazz: Utilities.Types.Class<any>
-): Decorator.Service.FieldDecoratorService.Instance<T> {
-  return Decorator.Service.FieldDecoratorService.build<any>((meta, name) => {
-    meta.getUntypedDescriptor(name).thisClass = clazz;
-  });
+  clazz: API.Utilities.Types.Class<any>
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorService.build<any>(
+    (meta, name) => {
+      meta.getUntypedDescriptor(name).thisClass = clazz;
+    }
+  );
 }

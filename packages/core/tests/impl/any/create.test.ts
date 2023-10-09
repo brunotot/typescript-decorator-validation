@@ -1,5 +1,5 @@
+import { create } from "../../../collection/any/create";
 import $ from "../../../index";
-import { create } from "../../../validators/any/create";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

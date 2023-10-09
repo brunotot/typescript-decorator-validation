@@ -1,8 +1,8 @@
-import { Rule, Validation } from "tdv-core";
+import { create } from "tdv-core";
 import UserForm from "../../models/UserForm";
 
-const PasswordsMustMatch = (...groups: Validation.Group[]) => {
-  return Rule<string>({
+const PasswordsMustMatch = (...groups: string[]) => {
+  return create<string>({
     groups,
     isValid: (v, _this: UserForm) => ({
       valid: v === _this.password,

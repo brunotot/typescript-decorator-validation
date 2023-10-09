@@ -1,5 +1,5 @@
+import { Lowercase } from "../../../../../collection/string/regex/impl/Lowercase";
 import $ from "../../../../../index";
-import { Lowercase } from "../../../../../validators/string/regex/impl/Lowercase";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 

@@ -1,5 +1,4 @@
 import * as NsRequired from "./any/Required";
-import * as NsAttribute from "./any/attribute";
 import * as NsValidate from "./any/create";
 import * as NsArrayContains from "./array/ArrayContains";
 import * as NsArrayEmpty from "./array/ArrayEmpty";
@@ -16,6 +15,7 @@ import * as NsForeach from "./array/foreach";
 import * as NsAssertFalse from "./boolean/AssertFalse";
 import * as NsAssertTrue from "./boolean/AssertTrue";
 import * as NsValidDateRange from "./class/ValidDateRange";
+import * as NsAttribute from "./class/attribute";
 import * as NsFutureDate from "./date/FutureDate";
 import * as NsPastDate from "./date/PastDate";
 import * as NsTodayDate from "./date/TodayDate";
@@ -155,5 +155,3 @@ namespace validators {
 }
 
 export default validators;
-
-validators.clazz.attribute(null as any);

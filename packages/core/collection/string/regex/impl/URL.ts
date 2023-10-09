@@ -1,13 +1,14 @@
 import API from "api";
 
-import RegexConst from "../../../shared/regex.constants";
-import { testRegex } from "./../../regex/Pattern";
+import { testRegex } from "../Pattern";
+import RegexConst from "../shared/regex.constants";
+
 /**
- * Creates a validator decorator that checks if a string value is a valid email address using a regular expression pattern.
+ * Creates a validator decorator that checks if a string value is a valid URL using a regular expression pattern.
  *
  * @typeparam T - The type of the decorated property (optional string).
  * @param props - (Optional) An object with properties for the validator.
- * @param props.key - (Optional) The key to identify this validation rule in error messages. Defaults to "Email".
+ * @param props.key - (Optional) The key to identify this validation rule in error messages. Defaults to "URL".
  * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
  * @param props.groups - (Optional) An array of validation groups to which this rule belongs.
  * @returns A decorator function to use with class properties.
@@ -15,33 +16,33 @@ import { testRegex } from "./../../regex/Pattern";
  * @example
  * // Example 1: Basic usage with default options
  * class MyClass {
- *   @Email()
- *   emailAddress: string;
+ *   //@URL()
+ *   myUrl: string;
  * }
  *
  * // Example 2: Custom error message and validation groups
  * class AnotherClass {
- *   @Email({
- *     key: "EmailField",
- *     message: "Invalid email address",
- *     groups: ["registration", "profile"],
- *   })
- *   value: string;
+ *   //@URL({
+ *   //   key: "WebsiteURL",
+ *   //   message: "Invalid website URL",
+ *   //   groups: ["registration", "profile"],
+ *   // })
+ *   website: string;
  * }
  */
-export function Email<T extends API.Utilities.Objects.Optional<string>>(
+export function URL<T extends API.Utilities.Objects.Optional<string>>(
   props?: API.Decorator.Props.ZeroArgsMessageOptional
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
-      key: "Email",
+      key: "URL",
       message: API.Decorator.message(
         props,
-        API.Localization.Service.TranslationService.translate(locale, "Email"),
+        API.Localization.Service.TranslationService.translate(locale, "URL"),
         locale
       ),
-      valid: testRegex(RegexConst.EMAIL, value),
+      valid: testRegex(RegexConst.URL, value),
     }),
   });
 }

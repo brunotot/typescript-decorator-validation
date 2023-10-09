@@ -1,5 +1,5 @@
+import { MinLength } from "../../../collection/string/MinLength";
 import $ from "../../../index";
-import { MinLength } from "../../../validators/string/MinLength";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

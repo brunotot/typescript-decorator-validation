@@ -1,6 +1,6 @@
 import API from "api";
 
-import RegexConst from "../shared/regex.constants";
+import RegexConst from "./regex/shared/regex.constants";
 
 const PASSWORD_REGEXES = {
   uppercase: RegexConst.UPPERCASE_ANYWHERE,
@@ -49,11 +49,11 @@ function isInvalid(text: string, rule: keyof typeof PASSWORD_REGEXES) {
 export function Password<
   T extends API.Utilities.Objects.Optional<string>
 >(props?: {
-  uppercase: boolean;
-  lowercase: boolean;
-  numbers: boolean;
-  specials: boolean;
-  length: number;
+  uppercase?: boolean;
+  lowercase?: boolean;
+  numbers?: boolean;
+  specials?: boolean;
+  length?: number;
   groups?: string | string[];
 }) {
   const lowercase = props?.lowercase ?? true;

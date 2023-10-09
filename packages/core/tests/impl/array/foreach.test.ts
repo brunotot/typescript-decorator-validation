@@ -1,5 +1,5 @@
-import { Required } from "../../../validators/any/Required";
-import { foreach } from "../../../validators/array/foreach";
+import { Required } from "../../../collection/any/Required";
+import { foreach } from "../../../collection/array/foreach";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

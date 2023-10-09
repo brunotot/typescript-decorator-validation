@@ -1,7 +1,7 @@
-import { Rule, Validation } from "tdv-core";
+import { create } from "tdv-core";
 
-const AdultAgeValid = (...groups: Validation.Group[]) => {
-  return Rule<string>({
+const AdultAgeValid = (...groups: string[]) => {
+  return create<string>({
     groups,
     isValid: (v) => ({
       key: "Adult",
