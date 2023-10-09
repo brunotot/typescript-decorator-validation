@@ -33,7 +33,6 @@
   "PasswordUppercase": "Le mot de passe doit contenir au moins 1 lettre majuscule",
   "PastDate": "La date {0} doit être une date dans le passé",
   "Positive": "La valeur doit être un nombre positif mais est {0}",
-  "RangeLength": "La valeur doit contenir entre {0} et {1} caractères",
   "Required": "Le champ est obligatoire",
   "Time": "La chaîne donnée n'est pas conforme aux paramètres régionaux {0} pendant {1} heure",
   "TodayDate": "La date {0} doit être la date d'aujourd'hui (actuelle)",

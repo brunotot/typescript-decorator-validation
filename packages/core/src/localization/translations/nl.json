@@ -33,7 +33,6 @@
   "PasswordUppercase": "Wachtwoord moet minimaal 1 hoofdletter bevatten",
   "PastDate": "Datum {0} moet een datum in het verleden zijn",
   "Positive": "Waarde moet een positief getal zijn, maar is {0}",
-  "RangeLength": "Waarde moet tussen {0} en {1} tekens bevatten",
   "Required": "Veld is verplicht",
   "Time": "De opgegeven tekenreeks voldoet al {0} tijd niet aan de locale van {1}",
   "TodayDate": "Datum {0} moet de datum van vandaag zijn (huidig)",

@@ -33,7 +33,6 @@
   "PasswordUppercase": "Password must contain at least 1 uppercase letter",
   "PastDate": "Date {0} must be a date in the past",
   "Positive": "Value must be a positive number but is {0}",
-  "RangeLength": "Value must contain between {0} and {1} characters",
   "Required": "Field is mandatory",
   "Time": "Given string does not comply {0} locale for {1} time",
   "TodayDate": "Date {0} must be today's date (current)",

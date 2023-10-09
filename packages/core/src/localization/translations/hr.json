@@ -32,7 +32,6 @@
   "PasswordUppercase": "Lozinka mora sadržavati barem 1 veliko slovo",
   "PastDate": "Datum {0} mora biti datum u prošlosti",
   "Positive": "Vrijednost mora biti pozitivan broj ali je {0}",
-  "RangeLength": "Unos mora sadržavati između {0} i {1} znakova",
   "Required": "Unos je obavezan",
   "Time": "Unos ne zadovoljava {0} lokalitet za {1} vrijeme",
   "TodayDate": "Datum {0} mora biti današnji datum",

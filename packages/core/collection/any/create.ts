@@ -27,7 +27,7 @@ import API from "api";
  *       key: "totalPrice",
  *       message: "Total price is invalid"
  *     })
- *   )
+ *   })
  *   price: number;
  * }
  * ```

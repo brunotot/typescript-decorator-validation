@@ -30,7 +30,6 @@ import * as NsValueMax from "./number/ValueMax";
 import * as NsValueMin from "./number/ValueMin";
 import * as NsValueRange from "./number/ValueRange";
 import * as NsExactLength from "./string/ExactLength";
-import * as NsLength from "./string/Length";
 import * as NsMaxLength from "./string/MaxLength";
 import * as NsMinLength from "./string/MinLength";
 import * as NsPassword from "./string/Password";
@@ -123,7 +122,6 @@ namespace ValidatorStringGroup {
   export import IPAddress = NsIPAddress.IPAddress;
   export import Numeric = NsNumeric.Numeric;
   export import ExactLength = NsExactLength.ExactLength;
-  export import Length = NsLength.Length;
   export import MaxLength = NsMaxLength.MaxLength;
   export import MinLength = NsMinLength.MinLength;
   export import Uppercase = NsUppercase.Uppercase;

@@ -33,7 +33,6 @@
   "PasswordUppercase": "Das Passwort muss mindestens einen Großbuchstaben enthalten",
   "PastDate": "Datum {0} muss ein Datum in der Vergangenheit sein",
   "Positive": "Der Wert muss eine positive Zahl sein, ist aber {0}",
-  "RangeLength": "Der Wert muss zwischen {0} und {1} Zeichen enthalten",
   "Required": "Das Feld ist Pflichtfeld",
   "Time": "Die angegebene Zeichenfolge entspricht {0} Mal lang nicht dem Gebietsschema {1}",
   "TodayDate": "Datum {0} muss das heutige (aktuelle) Datum sein",
