@@ -37,7 +37,7 @@
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Creates a decorator which flags the given field as a non-primitive (will validate inner fields of <code>T</code>).</p>
 <p>If a field which is being decorated is not a <a href="../types/tdv_core.Utilities.Types.Primitive.html" class="tsd-kind-type-alias">primitive</a>
-(<code>string</code>, <code>number</code>, <code>boolean</code>, <code>bigint</code>, <code>Date</code>) and isn&#39;t marked as a primitive in API.Overrides.PrimitiveSet overrides interface
+(<code>string</code>, <code>number</code>, <code>boolean</code>, <code>bigint</code>, <code>Date</code>) and isn&#39;t marked as a primitive in <a href="../interfaces/tdv_core.Overrides.PrimitiveSet.html" class="tsd-kind-interface">overrides</a> interface
 then the framework treats it as a custom, client-defined validable class. That having in mind, you will always want to apply <code>@attribute</code>
 to those types of fields so the runtime evaluation matches the TypeScript compiler type evaluation. For more clarity check examples below.</p>
 </div>
@@ -79,7 +79,7 @@ the evaluated type at compile-time remains the same. That is why it&#39;s crucia
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/e816fe5/packages/core/collection/class/attribute.ts#L60">collection/class/attribute.ts:60</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/826087c/packages/core/collection/class/attribute.ts#L60">collection/class/attribute.ts:60</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -265,13 +265,10 @@ the evaluated type at compile-time remains the same. That is why it&#39;s crucia
 <div class="menu-item-desc">Creates a validator decorator that checks if a string value is a valid email address using a regular expression pattern.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.ExactLength.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Exact<wbr/>Length
-<div class="menu-item-desc">Creates a validator decorator for exact length validation.</div></div></a></li>
+<div class="menu-item-desc">Checks if the decorated string contains an exact number of characters.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.IPAddress.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>IPAddress
 <div class="menu-item-desc">Creates a validator decorator that checks if a string value is a valid IP address using a regular expression pattern.</div></div></a></li>
-<li><a href="tdv_core.Collection.string.Length.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>Length
-<div class="menu-item-desc">Creates a validator decorator for length range validation.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.Lowercase.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Lowercase
 <div class="menu-item-desc">Creates a validator decorator that checks if a string value contains only lowercase letters using a regular expression pattern.</div></div></a></li>

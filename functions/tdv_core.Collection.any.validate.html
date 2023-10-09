@@ -74,11 +74,11 @@
 </code><button>Copy</button></pre>
 
 <h4>Example</h4><p>Example 2: Using an object with validation function and groups</p>
-<pre><code class="language-ts"><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Product</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-6">_</span><span class="hl-1">@</span><span class="hl-0">create</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-6">groups</span><span class="hl-1">: [</span><span class="hl-2">&quot;checkout&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">validate</span><span class="hl-1">: (</span><span class="hl-6">value</span><span class="hl-1">) =&gt; ({</span><br/><span class="hl-1">      </span><span class="hl-6">valid:</span><span class="hl-1"> </span><span class="hl-6">value</span><span class="hl-1"> &gt; </span><span class="hl-8">5</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">key:</span><span class="hl-1"> </span><span class="hl-2">&quot;totalPrice&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">message:</span><span class="hl-1"> </span><span class="hl-2">&quot;Total price is invalid&quot;</span><br/><span class="hl-1">    })</span><br/><span class="hl-1">  )</span><br/><span class="hl-1">  </span><span class="hl-6">price</span><span class="hl-1">: </span><span class="hl-6">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
+<pre><code class="language-ts"><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Product</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-6">_</span><span class="hl-1">@</span><span class="hl-0">create</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-6">groups</span><span class="hl-1">: [</span><span class="hl-2">&quot;checkout&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">    </span><span class="hl-6">validate</span><span class="hl-1">: (</span><span class="hl-6">value</span><span class="hl-1">) =&gt; ({</span><br/><span class="hl-1">      </span><span class="hl-6">valid:</span><span class="hl-1"> </span><span class="hl-6">value</span><span class="hl-1"> &gt; </span><span class="hl-8">5</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">key:</span><span class="hl-1"> </span><span class="hl-2">&quot;totalPrice&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-6">message:</span><span class="hl-1"> </span><span class="hl-2">&quot;Total price is invalid&quot;</span><br/><span class="hl-1">    })</span><br/><span class="hl-1">  })</span><br/><span class="hl-1">  </span><span class="hl-6">price</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/e816fe5/packages/core/collection/any/create.ts#L35">collection/any/create.ts:35</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/826087c/packages/core/collection/any/create.ts#L35">collection/any/create.ts:35</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -264,13 +264,10 @@
 <div class="menu-item-desc">Creates a validator decorator that checks if a string value is a valid email address using a regular expression pattern.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.ExactLength.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Exact<wbr/>Length
-<div class="menu-item-desc">Creates a validator decorator for exact length validation.</div></div></a></li>
+<div class="menu-item-desc">Checks if the decorated string contains an exact number of characters.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.IPAddress.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>IPAddress
 <div class="menu-item-desc">Creates a validator decorator that checks if a string value is a valid IP address using a regular expression pattern.</div></div></a></li>
-<li><a href="tdv_core.Collection.string.Length.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>Length
-<div class="menu-item-desc">Creates a validator decorator for length range validation.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.Lowercase.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Lowercase
 <div class="menu-item-desc">Creates a validator decorator that checks if a string value contains only lowercase letters using a regular expression pattern.</div></div></a></li>
