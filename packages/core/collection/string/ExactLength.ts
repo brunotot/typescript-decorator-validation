@@ -1,9 +1,21 @@
 import API from "api";
 
+/** ExactLength identifier. */
+export const EXACT_LENGTH = "ExactLength";
+
+/** Internal validation function for {@link ExactLength} validator. */
+export function isExactLengthValid(
+  value: API.Utilities.Objects.Optional<string>,
+  exact: number
+): boolean {
+  API.Utilities.Objects.assertType("string", value);
+  return (value ?? API.Utilities.Strings.EMPTY).length === exact;
+}
+
 /**
- * Checks if the decorated string contains an exact number of characters.
+ * Checks if the decorated string contains a specific number of characters.
  *
- * @key ExactLength
+ * @key {@link EXACT_LENGTH ExactLength}
  * @typeParam T - The type of the decorated property (nullable string) - optional if used in decorator context.
  * @param props - The exact length number or an object with the exact length number and optional arguments.
  * @returns A decorator function to use on class fields of type `string`.
@@ -50,18 +62,10 @@ export function ExactLength<T extends API.Utilities.Objects.Optional<string>>(
   const exact = API.Decorator.args(props);
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
-      key: "ExactLength",
-      valid: (value ?? "").length === exact,
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ExactLength",
-          exact
-        ),
-        locale
-      ),
+    validate: (value, _context, locale) => ({
+      key: EXACT_LENGTH,
+      valid: isExactLengthValid(value, exact),
+      message: API.Decorator.message(props, locale, EXACT_LENGTH, exact),
     }),
   });
 }

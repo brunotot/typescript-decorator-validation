@@ -2,6 +2,8 @@
  * Collection of string-related types and methods.
  */
 namespace Strings {
+  export const EMPTY = "";
+
   /**
    * Converts a camelCase string to a text string with spaces.
    * @param camelCase - The camelCase string to convert.

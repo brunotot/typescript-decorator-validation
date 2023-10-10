@@ -65,22 +65,28 @@ namespace Decorator {
    * @typeParam T - The type of the object being validated.
    *
    * @param provider - The decorator properties.
-   * @param defaultMessage - The default message to return if no message is found in the provider.
+   * @param message - The default message to return if no message is found in the provider.
    *
    * @returns The extracted message or the default message if none is found.
    */
   export function message(
     provider: Props.GenericModel,
-    defaultMessage: string,
-    locale: API.Localization.Resolver.LocaleResolver.Locale
+    locale: API.Localization.Resolver.LocaleResolver.Locale,
+    translationKey: keyof API.Localization.Service.MessageReaderService.LocalizedMessages,
+    ...args: any[]
   ): string {
-    if (!provider) return defaultMessage;
+    const message = API.Localization.Service.TranslationService.translate(
+      locale,
+      translationKey,
+      ...args
+    );
+    if (!provider) return message;
     const providerType = typeof provider;
     const msgNullable = providerType ? provider : provider.message;
     const msgNonNull = msgNullable ?? "";
     return msgNonNull.length
       ? API.Localization.Resolver.MessageResolver.resolve(locale, msgNonNull)
-      : defaultMessage;
+      : message;
   }
 
   /**

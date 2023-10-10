@@ -1,8 +1,30 @@
 import API from "api";
 
+/** Required identifier. */
+export const REQUIRED = "Required";
+
+/**
+ * Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.
+ *
+ * @typeParam T - The type of the value.
+ */
+export function isRequiredValid<T>(
+  value: T | undefined
+): value is NonNullable<typeof value> {
+  return !(
+    value === undefined ||
+    value === null ||
+    value === false ||
+    (Array.isArray(value) && value.length === 0) ||
+    (typeof value === "string" && value.trim().length === 0) ||
+    (value instanceof Date && value.toString() === "Invalid Date")
+  );
+}
+
 /**
  * Creates a validator decorator which requires that a value must be present.
  *
+ * @key {@link REQUIRED Required}
  * @typeParam T - The type of the decorated property (any field type except class).
  * @param props - (Optional) An object with optional decorator-related props.
  * @returns A decorator function to use with class fields.
@@ -36,20 +58,13 @@ import API from "api";
  */
 export function Required<T extends API.Utilities.Objects.Optional>(
   props?: API.Decorator.Props.ZeroArgsMessageOptional
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
     groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
-      key: "Required",
-      valid: API.Utilities.Objects.hasValue(value),
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "Required"
-        ),
-        locale
-      ),
+    validate: (value, _context, locale) => ({
+      key: REQUIRED,
+      valid: isRequiredValid(value),
+      message: API.Decorator.message(props, locale, REQUIRED),
     }),
   });
 }
