@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import TdvCore from "tdv-core";
+import type TdvCore from "tdv-core";
 import useValidationEngine from "../useValidationEngine";
-import ns from "./types";
+import type ns from "./types";
 
 /**
  * React hook which exposes validation-related props to a form component
@@ -54,7 +54,7 @@ export default function useValidation<TClass>(
   }, []);
 
   useEffect(() => {
-    const { errors, detailedErrors } = engine.validate(form!);
+    const { errors, detailedErrors } = engine.validate(form);
     setDetails(detailedErrors);
     setSimpleErrors(errors);
   }, [form]);
@@ -63,7 +63,7 @@ export default function useValidation<TClass>(
     form,
     setForm,
     {
-      isValid: engine.isValid(form!),
+      isValid: engine.isValid(form),
       errors: simpleErrors,
       detailedErrors: details,
       engine,

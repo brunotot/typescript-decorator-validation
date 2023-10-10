@@ -9,11 +9,11 @@ namespace Arrays {
    * @remarks Due to TypeScript's compiler - evaluation is limited to the depth of 5.
    */
   // prettier-ignore
-  export type getArrayDepth<T> = 
-    T extends any[] 
-      ? T[0] extends any[] 
+  export type getArrayDepth<T> =
+    T extends any[]
+      ? T[0] extends any[]
         ? T[0][0] extends any[]
-          ? T[0][0][0] extends any[] 
+          ? T[0][0][0] extends any[]
             ? T[0][0][0][0] extends any[]
               ? 5
               : 4

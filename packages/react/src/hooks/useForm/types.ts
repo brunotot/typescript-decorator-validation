@@ -35,9 +35,9 @@ namespace UseFormHook {
     errors: TdvCore.Strategy.Factory.Impl.Errors<TClass>;
     detailedErrors: TdvCore.Strategy.Factory.Impl.DetailedErrors<TClass>;
     reset: (
-      ...fieldPaths: PayloadFieldPath<
-        TdvCore.Utilities.Objects.Payload<TClass>
-      >[]
+      ...fieldPaths: Array<
+        PayloadFieldPath<TdvCore.Utilities.Objects.Payload<TClass>>
+      >
     ) => void;
   };
 

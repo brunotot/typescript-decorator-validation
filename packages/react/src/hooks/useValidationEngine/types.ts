@@ -1,4 +1,4 @@
-import TdvCore from "tdv-core";
+import type TdvCore from "tdv-core";
 
 namespace UseValidationEngineHook {
   export type UseValidationEngineConfig<TClass> =

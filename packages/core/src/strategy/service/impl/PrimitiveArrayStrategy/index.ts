@@ -1,4 +1,4 @@
-import API from "api";
+import type API from "api";
 
 import EventEmitter from "events";
 import { AbstractValidationStrategyService } from "../../../service/AbstractValidationStrategyService";
