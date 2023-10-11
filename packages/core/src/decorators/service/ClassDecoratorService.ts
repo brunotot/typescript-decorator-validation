@@ -5,7 +5,7 @@ import API from "api";
  */
 namespace ClassDecoratorService {
   /**
-   * Type alias for any class - indicates that a class decorator may be only put on class level.
+   * Type alias for any class - indicates that a decorator may be only put on a class (not field).
    */
   export type Type = API.Utilities.Types.Class<any>;
 

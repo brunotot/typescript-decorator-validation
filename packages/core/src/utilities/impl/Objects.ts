@@ -330,13 +330,13 @@ namespace Objects {
     | "boolean"
     | "object";
 
-  function throwTypeMismatchError(type: FieldType, value: any) {
+  function throwTypeMismatchError(type: FieldType, value: any): never {
     throw new Error(
       `Type '${type}' is not assignable to type ${JSON.stringify(value)}`
     );
   }
 
-  export function assertType(type: FieldType, value: any) {
+  export function assertType(type: FieldType, value: any): void | never {
     if (value == null) return;
 
     if (type === "date") {

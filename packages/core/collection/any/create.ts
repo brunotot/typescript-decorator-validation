@@ -61,7 +61,7 @@ export function create<T>(
   }
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    validate: "validate" in props ? props.validate : props,
+    validate: API.Decorator.args(props, "validate") as any,
     groups: API.Decorator.groups(props),
   });
 }

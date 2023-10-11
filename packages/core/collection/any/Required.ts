@@ -25,7 +25,7 @@ export function isRequiredValid<T>(
  * Creates a validator decorator which requires that a value must be present.
  *
  * @key {@link REQUIRED Required}
- * @typeParam T - The type of the decorated property (any field type except class).
+ * @typeParam T - The type of the decorated property (any class field).
  * @param props - (Optional) An object with optional decorator-related props.
  * @returns A decorator function to use with class fields.
  *
