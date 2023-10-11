@@ -1,6 +1,6 @@
-import API from "api";
+import type API from "api";
 
-import StrategyFactory from "../../../models/StrategyFactory";
+import type StrategyFactory from "../../../models/StrategyFactory";
 import ObjectStrategyType from "../ObjectStrategy/types";
 
 namespace ObjectGetterStrategyType {
@@ -38,7 +38,7 @@ namespace ObjectGetterStrategyType {
    * @typeParam K - The key of the field.
    */
   // prettier-ignore
-  export type matches<T, K extends keyof T> = 
+  export type matches<T, K extends keyof T> =
     true extends API.Utilities.Booleans.isGetter<T, K>
       ? API.Utilities.Booleans.isObject<T[K]>
       : false
@@ -50,9 +50,9 @@ namespace ObjectGetterStrategyType {
    * @typeParam R - The result type.
    */
   // prettier-ignore
-  export type handler<T, K extends keyof T, R> = 
-    true extends API.Utilities.Booleans.isUndefined<R> 
-      ? T[K] 
+  export type handler<T, K extends keyof T, R> =
+    true extends API.Utilities.Booleans.isUndefined<R>
+      ? T[K]
   : { root: R; data: StrategyFactory.evaluate<T[K], R> };
 }
 

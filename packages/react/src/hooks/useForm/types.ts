@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
-import TdvCore from "tdv-core";
-import FormContextNamespace from "../../contexts/FormContext/types";
+import { type Dispatch, type SetStateAction } from "react";
+import type TdvCore from "tdv-core";
+import type FormContextNamespace from "../../contexts/FormContext/types";
 
 /**
  * A namespace containing all types related to the `useForm` hook.
@@ -35,9 +35,9 @@ namespace UseFormHook {
     errors: TdvCore.Strategy.Factory.Impl.Errors<TClass>;
     detailedErrors: TdvCore.Strategy.Factory.Impl.DetailedErrors<TClass>;
     reset: (
-      ...fieldPaths: PayloadFieldPath<
-        TdvCore.Utilities.Objects.Payload<TClass>
-      >[]
+      ...fieldPaths: Array<
+        PayloadFieldPath<TdvCore.Utilities.Objects.Payload<TClass>>
+      >
     ) => void;
   };
 

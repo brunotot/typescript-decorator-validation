@@ -44,7 +44,7 @@ export class FieldValidatorMetaService extends AbstractMetaService<
     field: string,
     isValid: API.Validation.Evaluator<any>,
     groups?: string | string[]
-  ) {
+  ): void {
     this.getUntypedDescriptor(field).rules.root.add({
       groups: API.Decorator.groups(groups),
       validate: isValid,
@@ -57,7 +57,7 @@ export class FieldValidatorMetaService extends AbstractMetaService<
    *
    * @returns An array of field names.
    */
-  getFields() {
+  getFields(): string[] {
     return this.#fields;
   }
 
@@ -103,7 +103,10 @@ export class FieldValidatorMetaService extends AbstractMetaService<
       >(cfg);
       this.data.set(fieldKey, fieldValue);
     }
-    const descriptor = this.data.get(fieldKey)!;
+    const descriptor = this.data.get(fieldKey);
+    if (!descriptor) {
+      throw new Error(`Descriptor "${fieldKey}" does not exist`);
+    }
     descriptor.hostClass = this.class ? this.class : descriptor.hostClass;
     return descriptor;
   }
@@ -116,7 +119,7 @@ export class FieldValidatorMetaService extends AbstractMetaService<
    * This method populates the `#fields` array with the names of the class fields.
    * It also ensures that untyped descriptors are created for each field.
    */
-  #handleClassInit(clazz: API.Utilities.Types.Class<any>) {
+  #handleClassInit(clazz: API.Utilities.Types.Class<any>): void {
     this.#fields = API.Reflection.getClassFieldNames(clazz) as string[];
     this.#fields.forEach((name) => this.getUntypedDescriptor(name));
   }
@@ -128,7 +131,7 @@ export class FieldValidatorMetaService extends AbstractMetaService<
    * @remarks
    * This method sets the `#fields` array to an empty array as no class fields are available.
    */
-  #handleContextInit(_context: API.Decorator.Context) {
+  #handleContextInit(_context: API.Decorator.Context): void {
     this.#fields = [];
   }
 }

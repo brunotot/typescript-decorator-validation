@@ -1,4 +1,4 @@
-import API from "api";
+import type API from "api";
 import PrimitiveStrategyType from "../PrimitiveStrategy/types";
 
 /**
@@ -26,7 +26,7 @@ namespace PrimitiveGetterStrategyType {
    * @typeParam K - The key of the field.
    */
   // prettier-ignore
-  export type matches<T, K extends keyof T> = 
+  export type matches<T, K extends keyof T> =
     true extends API.Utilities.Booleans.isGetter<T, K>
       ? API.Utilities.Booleans.isAnyOf<T[K], API.Utilities.Types.Primitive>
       : false;
@@ -39,8 +39,8 @@ namespace PrimitiveGetterStrategyType {
    */
   // prettier-ignore
   export type handler<T, K extends keyof T, R> =
-    true extends API.Utilities.Booleans.isUndefined<R> 
-      ? T[K] 
+    true extends API.Utilities.Booleans.isUndefined<R>
+      ? T[K]
   : R;
 }
 

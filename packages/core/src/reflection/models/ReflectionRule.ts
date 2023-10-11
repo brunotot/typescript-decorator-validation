@@ -14,14 +14,14 @@ namespace ReflectionRule {
    * It allows you to validate the field against a payload and a set of validation groups.
    */
   export class Instance<TFieldType> {
-    #contents: API.Validation.Metadata<TFieldType>[];
+    #contents: Array<API.Validation.Metadata<TFieldType>>;
 
     /**
      * Gets the contents of the reflection rule.
      *
      * @returns An array of `Validation.Metadata` for the field.
      */
-    get contents() {
+    get contents(): Array<API.Validation.Metadata<TFieldType>> {
       return this.#contents;
     }
 
@@ -59,7 +59,7 @@ namespace ReflectionRule {
      *
      * @returns The last `Validation.Metadata` that was removed.
      */
-    pop() {
+    pop(): API.Validation.Metadata<TFieldType> {
       return this.#contents.pop()!;
     }
 
@@ -68,7 +68,7 @@ namespace ReflectionRule {
      *
      * @param rule - The `Validation.Metadata` to add.
      */
-    add(rule: API.Validation.Metadata<TFieldType>) {
+    add(rule: API.Validation.Metadata<TFieldType>): void {
       this.#contents.push(rule);
     }
   }

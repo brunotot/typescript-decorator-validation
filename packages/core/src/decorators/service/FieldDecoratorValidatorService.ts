@@ -37,8 +37,7 @@ namespace FieldDecoratorValidatorService {
     groups,
     validate,
   }: API.Validation.Metadata<T>): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-    return API.Decorator.Service.FieldDecoratorService.build<T>((meta, key) =>
-      meta.addValidator(key, validate, groups)
+    return API.Decorator.Service.FieldDecoratorService.build<T>((meta, key) => { meta.addValidator(key, validate, groups); }
     );
   }
 }

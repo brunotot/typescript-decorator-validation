@@ -1,5 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
-import TdvCore, { Validation } from "tdv-core";
+import type { Dispatch, SetStateAction } from "react";
+import type TdvCore from "tdv-core";
+import type { Validation } from "tdv-core";
 
 /**
  * A namespace which holds all necessary data for `useValidation` hook

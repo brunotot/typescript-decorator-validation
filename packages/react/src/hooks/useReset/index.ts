@@ -1,5 +1,5 @@
-import UseFormNamespace from "./../useForm/types";
-import ns from "./types";
+import type UseFormNamespace from "./../useForm/types";
+import type ns from "./types";
 
 export default function useReset<TClass>({
   engine,

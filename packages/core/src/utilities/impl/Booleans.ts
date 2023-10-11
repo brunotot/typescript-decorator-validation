@@ -1,8 +1,8 @@
-import API from "api";
+import type API from "api";
 
-import Arrays from "./Arrays";
-import Objects from "./Objects";
-import Types from "./Types";
+import type Arrays from "./Arrays";
+import type Objects from "./Objects";
+import type Types from "./Types";
 
 /**
  * A collection of type-level utility functions for checking various conditions.

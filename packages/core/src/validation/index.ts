@@ -1,4 +1,4 @@
-import API from "api";
+import type API from "api";
 
 import * as CacheMapNamespace from "./models/CacheMap";
 import * as ValidationEngineNamespace from "./models/ValidationEngine";

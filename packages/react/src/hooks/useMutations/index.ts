@@ -1,7 +1,8 @@
 import { useMemo } from "react";
-import TdvCore, { Reflection } from "tdv-core";
-import UseFormNamespace from "./../useForm/types";
-import ns from "./types";
+import type TdvCore from "tdv-core";
+import { Reflection } from "tdv-core";
+import type UseFormNamespace from "./../useForm/types";
+import type ns from "./types";
 
 export default function useMutations<TClass, TBody = TClass>(
   clazz: TdvCore.Utilities.Types.Class<TClass>,
@@ -29,8 +30,9 @@ export default function useMutations<TClass, TBody = TClass>(
       fields.reduce(
         (prev, prop) => ({
           ...prev,
-          [prop]: (value: any) =>
-            handleChange(prop as unknown as keyof TBody, value),
+          [prop]: (value: any) => {
+            handleChange(prop as unknown as keyof TBody, value);
+          },
         }),
         {}
       ),

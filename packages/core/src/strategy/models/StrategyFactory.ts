@@ -1,15 +1,15 @@
-import API from "api";
+import type API from "api";
 
-import { FunctionStrat } from "../service/impl/FunctionStrategy";
-import { ObjectArrayGetterStrat } from "../service/impl/ObjectArrayGetterStrategy";
-import { ObjectArrayStrat } from "../service/impl/ObjectArrayStrategy";
-import { ObjectGetterStrat } from "../service/impl/ObjectGetterStrategy";
-import { ObjectStrat } from "../service/impl/ObjectStrategy";
-import { PrimitiveArrayGetterStrat } from "../service/impl/PrimitiveArrayGetterStrategy";
-import { PrimitiveArrayStrat } from "../service/impl/PrimitiveArrayStrategy";
-import { PrimitiveGetterStrat } from "../service/impl/PrimitiveGetterStrategy";
-import { PrimitiveStrat } from "../service/impl/PrimitiveStrategy";
-import StrategyTypes from "./StrategyTypes";
+import { type FunctionStrat } from "../service/impl/FunctionStrategy";
+import { type ObjectArrayGetterStrat } from "../service/impl/ObjectArrayGetterStrategy";
+import { type ObjectArrayStrat } from "../service/impl/ObjectArrayStrategy";
+import { type ObjectGetterStrat } from "../service/impl/ObjectGetterStrategy";
+import { type ObjectStrat } from "../service/impl/ObjectStrategy";
+import { type PrimitiveArrayGetterStrat } from "../service/impl/PrimitiveArrayGetterStrategy";
+import { type PrimitiveArrayStrat } from "../service/impl/PrimitiveArrayStrategy";
+import { type PrimitiveGetterStrat } from "../service/impl/PrimitiveGetterStrategy";
+import { type PrimitiveStrat } from "../service/impl/PrimitiveStrategy";
+import type StrategyTypes from "./StrategyTypes";
 
 /**
  * Namespace for Strategy Factory types and utilities.
@@ -50,34 +50,34 @@ namespace StrategyFactory {
    * @typeParam R - The result type.
    */
   // prettier-ignore
-  export type fieldEvaluation<T, K extends keyof T, R> = 
-    true extends StrategyTypes.Function.matches<T, K> 
+  export type fieldEvaluation<T, K extends keyof T, R> =
+    true extends StrategyTypes.Function.matches<T, K>
     ? StrategyTypes.Function.handler<T, K, R>
-   
-    : true extends StrategyTypes.PrimitiveArray.matches<T, K> 
+
+    : true extends StrategyTypes.PrimitiveArray.matches<T, K>
     ? StrategyTypes.PrimitiveArray.handler<T, K, R>
 
-    : true extends StrategyTypes.PrimitiveGetter.matches<T, K> 
+    : true extends StrategyTypes.PrimitiveGetter.matches<T, K>
     ? StrategyTypes.PrimitiveGetter.handler<T, K, R>
 
-    : true extends StrategyTypes.PrimitiveArrayGetter.matches<T, K> 
+    : true extends StrategyTypes.PrimitiveArrayGetter.matches<T, K>
     ? StrategyTypes.PrimitiveArrayGetter.handler<T, K, R>
 
-    : true extends StrategyTypes.Primitive.matches<T, K> 
+    : true extends StrategyTypes.Primitive.matches<T, K>
     ? StrategyTypes.Primitive.handler<T, K, R>
-   
-    : true extends StrategyTypes.ObjectArray.matches<T, K> 
+
+    : true extends StrategyTypes.ObjectArray.matches<T, K>
     ? StrategyTypes.ObjectArray.handler<T, K, R>
-   
-    : true extends StrategyTypes.ObjectArrayGetter.matches<T, K> 
+
+    : true extends StrategyTypes.ObjectArrayGetter.matches<T, K>
     ? StrategyTypes.ObjectArrayGetter.handler<T, K, R>
-   
-    : true extends StrategyTypes.ObjectGetter.matches<T, K> 
+
+    : true extends StrategyTypes.ObjectGetter.matches<T, K>
     ? StrategyTypes.ObjectGetter.handler<T, K, R>
-   
-    : true extends StrategyTypes.Object.matches<T, K> 
+
+    : true extends StrategyTypes.Object.matches<T, K>
     ? StrategyTypes.Object.handler<T, K, R>
-  :never;
+  : never;
 
   /**
    * A type that maps field types to their respective validation strategy results.
@@ -95,33 +95,33 @@ namespace StrategyFactory {
    */
   // prettier-ignore
   export type getStrategyClass<T, K extends keyof T> =
-    true extends StrategyTypes.Function.matches<T, K> 
+    true extends StrategyTypes.Function.matches<T, K>
     ? FunctionStrat<T[K]>
-  
-    : true extends StrategyTypes.PrimitiveArray.matches<T, K> 
+
+    : true extends StrategyTypes.PrimitiveArray.matches<T, K>
     ? PrimitiveArrayStrat<T[K]>
 
-    : true extends StrategyTypes.PrimitiveGetter.matches<T, K> 
+    : true extends StrategyTypes.PrimitiveGetter.matches<T, K>
     ? PrimitiveGetterStrat<T[K]>
 
-    : true extends StrategyTypes.PrimitiveArrayGetter.matches<T, K> 
+    : true extends StrategyTypes.PrimitiveArrayGetter.matches<T, K>
     ? PrimitiveArrayGetterStrat<T[K]>
 
-    : true extends StrategyTypes.Primitive.matches<T, K> 
+    : true extends StrategyTypes.Primitive.matches<T, K>
     ? PrimitiveStrat<T[K]>
-  
-    : true extends StrategyTypes.ObjectArray.matches<T, K> 
+
+    : true extends StrategyTypes.ObjectArray.matches<T, K>
     ? ObjectArrayStrat<T[K]>
-  
-    : true extends StrategyTypes.ObjectArrayGetter.matches<T, K> 
+
+    : true extends StrategyTypes.ObjectArrayGetter.matches<T, K>
     ? ObjectArrayGetterStrat<T[K]>
-  
-    : true extends StrategyTypes.ObjectGetter.matches<T, K> 
+
+    : true extends StrategyTypes.ObjectGetter.matches<T, K>
     ? ObjectGetterStrat<T[K]>
-  
-    : true extends StrategyTypes.Object.matches<T, K> 
+
+    : true extends StrategyTypes.Object.matches<T, K>
     ? ObjectStrat<T[K]>
-  :never;
+  : never;
 
   /**
    * Namespace for Strategy Factory Implementations.
