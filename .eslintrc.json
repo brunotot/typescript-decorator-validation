@@ -20,6 +20,9 @@
     "@typescript-eslint/consistent-type-assertions": "off",
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/ban-types": "off",
-    "new-cap": "off"
+    "new-cap": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-proto": "off"
   }
 }

@@ -1,4 +1,4 @@
-import Booleans from "./Booleans";
+import type Booleans from "./Booleans";
 
 /**
  * Collection of array-related types and methods.
@@ -36,7 +36,7 @@ namespace Arrays {
    *
    * @typeParam T - The type to extract the array type from.
    */
-  export type getArrayType<T> = T extends (infer U)[]
+  export type getArrayType<T> = T extends Array<infer U>
     ? true extends Booleans.isArray<U>
       ? getArrayType<U>
       : U

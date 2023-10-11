@@ -42,7 +42,7 @@ namespace Decorator {
     name: string;
     metadata: globalThis.DecoratorMetadata;
     access: {
-      get(object: any): Accept;
+      get: (object: any) => Accept;
     };
   }>;
 
@@ -129,13 +129,13 @@ namespace Decorator {
    * @returns An array of filtered validators.
    */
   export function groupedValidators<TFieldType>(
-    data: API.Validation.Metadata<TFieldType>[],
+    data: Array<API.Validation.Metadata<TFieldType>>,
     groups: string[]
-  ) {
+  ): Array<API.Validation.Metadata<TFieldType>> {
     return data.filter((meta: API.Validation.Metadata<TFieldType>) =>
-      groups.length
+      groups.length > 0
         ? meta.groups.some((o) => groups.includes(o))
-        : !meta.groups.length
+        : meta.groups.length === 0
     );
   }
 

@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
-import TdvCore from "tdv-core";
-import FormContextNamespace from "../../contexts/FormContext/types";
+import { type Dispatch, type SetStateAction } from "react";
+import type TdvCore from "tdv-core";
+import type FormContextNamespace from "../../contexts/FormContext/types";
 
 /**
  * A namespace containing all types related to the `useForm` hook.

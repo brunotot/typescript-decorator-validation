@@ -1,4 +1,4 @@
-import API from "api";
+import type API from "api";
 
 import ReflectionStrategyNamespace from "../strategy/models/StrategyMapper";
 import ReflectionDescriptor from "./models/ReflectionDescriptor";
@@ -21,19 +21,19 @@ namespace Reflection {
    */
   export function getClassFieldNames<TClass>(
     constructor: API.Utilities.Types.Class<TClass>
-  ): (keyof TClass)[] {
-    const getPropertyNames = (classInstance: any) => {
+  ): Array<keyof TClass> {
+    function getPropertyNames(classInstance: any): string[] {
       return Object.getOwnPropertyNames(classInstance ?? {}).filter(
         (property) => property !== "constructor"
       );
-    };
+    }
     const instance: any = new constructor();
     const prototype = instance.__proto__;
     const instanceProps = getPropertyNames(instance);
     const prototypeProps = getPropertyNames(prototype);
     const uniquePropsSet = new Set([...instanceProps, ...prototypeProps]);
     const uniquePropsArray = [...uniquePropsSet];
-    return uniquePropsArray as (keyof TClass)[];
+    return uniquePropsArray as Array<keyof TClass>;
   }
 
   /**
@@ -46,7 +46,7 @@ namespace Reflection {
   export function getClassFieldDescriptor<TClass>(
     constructor: API.Utilities.Types.Class<TClass>,
     name: keyof TClass
-  ) {
+  ): PropertyDescriptor | undefined {
     const instance: any = new constructor();
     const prototype = instance.__proto__;
     return Object.getOwnPropertyDescriptor(prototype, name);

@@ -1,4 +1,4 @@
-import API from "api";
+import type API from "api";
 
 /**
  * A namespace which contains data related to the actual parameters the decorator services expect.
@@ -53,23 +53,23 @@ namespace DecoratorProps {
    * Represents a decorator config (including Base props) which has more than zero input params with a mandatory message.
    */
   // prettier-ignore
-  export type MultiArgsMessageRequired<TProp, TKey extends string = "value"> = 
+  export type MultiArgsMessageRequired<TProp, TKey extends string = "value"> =
     API.Utilities.Types.Prettify<Base & MessageRequired & { [K in TKey]: TProp }>;
 
   /**
    * Represents a decorator config (including Base props) which has more than zero input params with an optional message.
    */
   // prettier-ignore
-  export type MultiArgsMessageOptional<TProp, TKey extends string = "value"> = 
-    | TProp 
+  export type MultiArgsMessageOptional<TProp, TKey extends string = "value"> =
+    | TProp
     | (API.Utilities.Types.Prettify<Base & MessageOptional & { [K in TKey]: TProp }>);
 
   /**
    * Represents a generic model of multiple args with a required message or otherwise with an optional message parameter.
    */
   // prettier-ignore
-  export type MultiArgs<TProp, TKey extends string = "value"> = 
-    | TProp 
+  export type MultiArgs<TProp, TKey extends string = "value"> =
+    | TProp
     | (API.Utilities.Types.Prettify<Base & (MessageOptional | MessageRequired) & { [K in TKey]: TProp }>);
 }
 

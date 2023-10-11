@@ -1,8 +1,7 @@
-import API from "api";
+import type API from "api";
 
-import EventEmitter from "events";
 import { AbstractValidationStrategyService } from "../../../service/AbstractValidationStrategyService";
-import ns from "./types";
+import type ns from "./types";
 
 /**
  * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating primitive types like numbers, strings, etc.
@@ -16,24 +15,10 @@ export class FunctionStrat<F> extends AbstractValidationStrategyService<
   ns.DetailedErrors,
   ns.SimpleErrors
 > {
-  private static EMPTY: [ns.DetailedErrors, ns.SimpleErrors] = [null, null];
-
-  /**
-   * Initializes the `FunctionStrat` class by calling the superclass constructor with the provided descriptor and default value.
-   *
-   * @param descriptor - The reflection descriptor for the field.
-   * @param defaultValue - The default value for the parent object.
-   */
-  constructor(
-    descriptor: API.Reflection.Descriptor.Instance<F, any>,
-    defaultValue: F,
-    groups: string[],
-    locale: API.Localization.Resolver.LocaleResolver.Locale,
-    eventEmitter: EventEmitter,
-    asyncDelay: number
-  ) {
-    super(descriptor, defaultValue, groups, locale, eventEmitter, asyncDelay);
-  }
+  private static readonly EMPTY: [ns.DetailedErrors, ns.SimpleErrors] = [
+    null,
+    null,
+  ];
 
   /**
    * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for primitive types by invoking the root rule's `validate` method and then building simplified error messages.
@@ -50,15 +35,20 @@ export class FunctionStrat<F> extends AbstractValidationStrategyService<
     const result: API.Validation.Result | Promise<API.Validation.Result> =
       value.bind(_context)();
     if (result instanceof Promise) {
-      result.then((validationResult) => {
-        this.eventEmitter.emit("asyncValidationComplete", {
-          key: this.fieldName,
-          value: validationResult,
-        });
-      });
+      result.then(
+        (validationResult) => {
+          this.eventEmitter.emit("asyncValidationComplete", {
+            key: this.fieldName,
+            value: validationResult,
+          });
+        },
+        (reason) => {
+          throw new Error(reason);
+        }
+      );
       return FunctionStrat.EMPTY;
     }
 
-    return !!result.valid ? FunctionStrat.EMPTY : [result, result.message];
+    return result.valid ? FunctionStrat.EMPTY : [result, result.message];
   }
 }

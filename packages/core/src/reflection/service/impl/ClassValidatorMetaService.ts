@@ -44,7 +44,7 @@ export class ClassValidatorMetaService<
       API.Utilities.Types.UnwrapClass<TStrategy>
     >,
     groups?: string | string[]
-  ) {
+  ): void {
     this.data.add({
       validate: isValid,
       groups: API.Decorator.groups(groups),

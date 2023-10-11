@@ -1,6 +1,6 @@
-import API from "api";
-import StrategyFactory from "../../../models/StrategyFactory";
-import ObjectStrategyType from "../ObjectStrategy/types";
+import type API from "api";
+import type StrategyFactory from "../../../models/StrategyFactory";
+import type ObjectStrategyType from "../ObjectStrategy/types";
 
 /**
  * Namespace for ObjectArray Strategy Types.
@@ -21,7 +21,7 @@ namespace ObjectArrayStrategyType {
    */
   export type SimpleErrors<F> = {
     root: string[];
-    data: StrategyFactory.Impl.Errors<F>[];
+    data: Array<StrategyFactory.Impl.Errors<F>>;
   };
 
   /**
@@ -34,7 +34,7 @@ namespace ObjectArrayStrategyType {
    */
   export type DetailedErrors<F> = {
     root: API.Validation.Result[];
-    data: StrategyFactory.Impl.DetailedErrors<F>[];
+    data: Array<StrategyFactory.Impl.DetailedErrors<F>>;
   };
 
   /**
@@ -43,7 +43,7 @@ namespace ObjectArrayStrategyType {
    * @typeParam K - The key of the field.
    */
   // prettier-ignore
-  export type matches<T, K extends keyof T> = 
+  export type matches<T, K extends keyof T> =
   API.Utilities.Arrays.getArrayType<NonNullable<T[K]>> extends never
       ? false
     : true extends API.Utilities.Booleans.isGetter<T, K>
@@ -57,7 +57,7 @@ namespace ObjectArrayStrategyType {
    * @typeParam R - The result type.
    */
   // prettier-ignore
-  export type handler<T, K extends keyof T, R> = ObjectStrategyType.handler<T, K, R>[]
+  export type handler<T, K extends keyof T, R> = Array<ObjectStrategyType.handler<T, K, R>>
 }
 
 export default ObjectArrayStrategyType;

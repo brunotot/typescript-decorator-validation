@@ -41,8 +41,8 @@ export class CacheMap<CacheValue extends object & {}, Payload = any> {
    */
   // prettier-ignore
   get<CacheKey extends keyof CacheValue>(cacheKey: CacheKey, payload?: Payload): CacheValue[CacheKey] {
-    return payload
-      ? this.#fromCache(payload!, cacheKey)
+    return payload !== undefined
+      ? this.#fromCache(payload, cacheKey)
       : this.#cache[cacheKey];
   }
 
