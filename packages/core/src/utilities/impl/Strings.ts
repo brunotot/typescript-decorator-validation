@@ -16,7 +16,7 @@ namespace Strings {
       return camelCase;
     }
 
-    let result = camelCase
+    const result = camelCase
       .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
       .replace(/ (\w)/g, (str) => str.toLowerCase());
 
@@ -40,9 +40,9 @@ namespace Strings {
    * @remarks
    * If a placeholder's corresponding value is not provided in `args`, the placeholder will remain unchanged in the output string.
    */
-  export function sprintf(str: string, ...args: any[]) {
+  export function sprintf(str: string, ...args: any[]): string {
     return str.replace(/{(\d+)}/g, function (match, number) {
-      return typeof args[number] != "undefined" ? args[number] : match;
+      return typeof args[number] !== "undefined" ? args[number] : match;
     });
   }
 }

@@ -1,4 +1,5 @@
-import API, { Overrides } from "api";
+import { type Overrides } from "api";
+import type API from "api";
 
 /**
  * A collection of types representing various data types and handling type-level development.
@@ -45,7 +46,7 @@ namespace Types {
    * // Creates an instance of MyClass
    * ```
    */
-  export type Class<T> = { new (...args: any[]): T } & {};
+  export type Class<T> = (new (...args: any[]) => T) & {};
 
   /**
    * Unwraps a Promise type to its resolved value type.

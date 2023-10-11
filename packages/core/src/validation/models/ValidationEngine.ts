@@ -13,7 +13,7 @@ import { CacheMap } from "./CacheMap";
  * It also leverages `FieldValidatorMetaService` to retrieve metadata about the class being processed.
  */
 export class ValidationEngine<TClass> {
-  #eventListener!: API.Validation.AsyncEventHandler<TClass>;
+  #eventListener?: API.Validation.AsyncEventHandler<TClass>;
   #eventEmitter: EventEmitter;
   #fieldValidatorMetaService: API.Reflection.Services.FieldValidatorMetaService;
   #groups: string[];
@@ -49,10 +49,7 @@ export class ValidationEngine<TClass> {
       ) as API.Utilities.Objects.Payload<TClass>);
     this.#fieldValidatorMetaService =
       API.Reflection.Services.FieldValidatorMetaService.inject(clazz);
-    this.#cacheMap = new CacheMap(
-      (state) =>
-        this.validate.bind(this)(state) as API.Validation.Response<TClass>
-    );
+    this.#cacheMap = new CacheMap((state) => this.validate.bind(this)(state));
   }
 
   public registerAsync(
@@ -90,7 +87,7 @@ export class ValidationEngine<TClass> {
   }
 
   public unregisterAsync(): void {
-    if (!!this.#eventListener) {
+    if (this.#eventListener != null) {
       this.#eventEmitter.off("asyncValidationComplete", this.#eventListener);
     }
   }
@@ -177,10 +174,8 @@ export class ValidationEngine<TClass> {
     const detailedErrors: any = {};
 
     this.#fieldValidatorMetaService.getFields().forEach((field) => {
-      const validation = this.validateField(state, field as keyof TClass);
-      // @ts-expect-error
+      const validation: any = this.validateField(state, field as keyof TClass);
       detailedErrors[field] = validation[0];
-      // @ts-expect-error
       errors[field] = validation[1];
     });
 
@@ -236,7 +231,7 @@ export class ValidationEngine<TClass> {
       ] as API.Strategy.Factory.getStrategyResult<TClass, K>;
     }
 
-    // @ts-expect-error
+    // @ts-expect-error We expect error here due to the nature of arbitrary types depending on the different types of fields (primitive, object, primitive array, object array and so on...)
     return stratImpl.test(payload[fieldName], payload);
   }
 }

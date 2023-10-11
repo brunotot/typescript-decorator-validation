@@ -15,6 +15,7 @@ namespace ClassDecoratorService {
   export type ReturnDef<T extends Type> =
     | API.Utilities.Types.Class<T>
     | undefined
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
     | void;
 
   /**

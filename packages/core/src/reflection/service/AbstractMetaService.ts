@@ -39,7 +39,7 @@ export abstract class AbstractMetaService<Entry> {
   /**
    * Gets the class associated with this AbstractMetaService.
    */
-  get class() {
+  get class(): API.Utilities.Types.Class<any> {
     return this.#class!;
   }
 
@@ -73,7 +73,7 @@ export abstract class AbstractMetaService<Entry> {
    * @param key - The key of the attribute.
    * @returns True if the attribute exists, false otherwise.
    */
-  protected hasAttr(key: string) {
+  protected hasAttr(key: string): boolean {
     return key in this.#metadata;
   }
 

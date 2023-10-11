@@ -105,7 +105,7 @@ namespace ReflectionDescriptor {
      *
      * @throws {Error} If the strategy is not implemented.
      */
-    public get StrategyImpl() {
+    public get StrategyImpl(): API.Utilities.Types.Class<API.Strategy.Service.AbstractStrategy> {
       const strategy = this.strategy;
       if (!(strategy in API.Reflection.Strategy.data)) {
         const error = `Validation strategy not implemented for field type '${strategy}'`;
@@ -132,9 +132,10 @@ namespace ReflectionDescriptor {
       if (!this.thisName) {
         return API.Strategy.Types.Object.Name;
       }
-      const instance = new this.hostClass!();
-      const fieldName = this.thisName!;
+      const instance = new this.hostClass();
+      const fieldName = this.thisName;
 
+      // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
       const getNativeStrategy = (value: any) => {
         const meta = API.Reflection.Services.FieldValidatorMetaService.inject(
           this.hostClass!
@@ -147,11 +148,11 @@ namespace ReflectionDescriptor {
           value instanceof Promise ||
           (value &&
             "key" in value &&
-            typeof value["key"] === "string" &&
+            typeof value.key === "string" &&
             "valid" in value &&
-            typeof value["valid"] === "boolean" &&
+            typeof value.valid === "boolean" &&
             "message" in value &&
-            typeof value["message"] === "string")
+            typeof value.message === "string")
         ) {
           return API.Strategy.Types.Function.Name;
         }
@@ -166,10 +167,10 @@ namespace ReflectionDescriptor {
       };
 
       const descriptor = API.Reflection.getClassFieldDescriptor(
-        this.hostClass!,
+        this.hostClass,
         fieldName
       );
-      const isGetter = descriptor && descriptor.get && !descriptor.set;
+      const isGetter = descriptor?.get && !descriptor.set;
 
       if (isGetter) {
         const value = descriptor.get!.call(instance);
@@ -181,7 +182,7 @@ namespace ReflectionDescriptor {
       // Check if the field is a function
       if (typeof value === "function") {
         return getNativeStrategy(
-          value.bind(this.hostDefault ?? new this.hostClass!())()
+          value.bind(this.hostDefault ?? new this.hostClass())()
         );
       }
 

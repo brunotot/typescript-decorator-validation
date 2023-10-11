@@ -1,5 +1,6 @@
-import TdvCore, { Validation } from "tdv-core";
-import UseFormHook from "../useForm/types";
+import type TdvCore from "tdv-core";
+import type { Validation } from "tdv-core";
+import type UseFormHook from "../useForm/types";
 
 namespace UseResetHook {
   export type UseResetConfig<TClass> = {

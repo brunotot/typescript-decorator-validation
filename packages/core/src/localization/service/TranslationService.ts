@@ -26,7 +26,7 @@ namespace TranslationService {
     locale: API.Localization.Resolver.LocaleResolver.Locale | null,
     key: keyof MessageReaderService.LocalizedMessages,
     ...args: any[]
-  ) {
+  ): string {
     return API.Utilities.Strings.sprintf(
       MessageReaderService.getMessage(key, locale),
       ...args

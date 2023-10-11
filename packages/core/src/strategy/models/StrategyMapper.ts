@@ -1,6 +1,6 @@
 import Strategy from "..";
-import Types from "../../utilities/impl/Types";
-import { AbstractValidationStrategyService } from "../service/AbstractValidationStrategyService";
+import type Types from "../../utilities/impl/Types";
+import { type AbstractValidationStrategyService } from "../service/AbstractValidationStrategyService";
 import { FunctionStrat } from "../service/impl/FunctionStrategy";
 import { ObjectArrayGetterStrat } from "../service/impl/ObjectArrayGetterStrategy";
 import { ObjectArrayStrat } from "../service/impl/ObjectArrayStrategy";

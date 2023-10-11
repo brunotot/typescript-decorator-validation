@@ -1,6 +1,6 @@
 import API from "api";
 
-import EventEmitter from "events";
+import type EventEmitter from "events";
 
 /**
  * The `AbstractValidationStrategyService` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.
@@ -63,7 +63,7 @@ export abstract class AbstractValidationStrategyService<
     );
   }
 
-  protected get engineCfg() {
+  protected get engineCfg(): API.Validation.Config<any> {
     return this.#engineCfg;
   }
 
@@ -86,7 +86,11 @@ export abstract class AbstractValidationStrategyService<
    *
    * @returns An `ValidationEngineNs.Config` object configured for the field type.
    */
-  protected get fieldDescriptor() {
+  protected get fieldDescriptor(): API.Reflection.Descriptor.Instance<
+    TClass,
+    any,
+    undefined
+  > {
     if (this.#fieldDescriptor) return this.#fieldDescriptor;
     this.#fieldDescriptor =
       API.Reflection.Services.FieldValidatorMetaService.inject(
@@ -100,7 +104,7 @@ export abstract class AbstractValidationStrategyService<
    *
    * @returns The name of the field.
    */
-  protected get fieldName() {
+  protected get fieldName(): string {
     return this.#descriptor.thisName!;
   }
 
@@ -109,18 +113,23 @@ export abstract class AbstractValidationStrategyService<
    *
    * @returns The default value of the field.
    */
-  protected get defaultValue() {
+  protected get defaultValue(): any {
     return (this.#defaultParent as any)?.[this.fieldName];
   }
 
-  protected getErrorMessages(validations: API.Validation.Result[] = []) {
+  protected getErrorMessages(
+    validations: API.Validation.Result[] = []
+  ): string[] {
     const nonNullableValidations = validations ?? [];
     return Array.isArray(nonNullableValidations)
       ? nonNullableValidations.map((e) => e.message)
       : [];
   }
 
-  protected getClassErrors(fieldValue: any, parentValue: any) {
+  protected getClassErrors(
+    fieldValue: any,
+    parentValue: any
+  ): API.Validation.Result[] {
     return this.classRules.validate(
       fieldValue,
       parentValue,
@@ -129,7 +138,10 @@ export abstract class AbstractValidationStrategyService<
     );
   }
 
-  protected getRootErrors(fieldValue: any, parentValue: any) {
+  protected getRootErrors(
+    fieldValue: any,
+    parentValue: any
+  ): API.Validation.Result[] {
     return this.fieldDescriptor.rules.root.validate(
       fieldValue,
       parentValue,
@@ -138,8 +150,11 @@ export abstract class AbstractValidationStrategyService<
     );
   }
 
-  protected getArrayItemErrors(arrayItem: any, parentValue: any) {
-    return this.fieldDescriptor!.rules.foreach.validate(
+  protected getArrayItemErrors(
+    arrayItem: any,
+    parentValue: any
+  ): API.Validation.Result[] {
+    return this.fieldDescriptor.rules.foreach.validate(
       arrayItem,
       parentValue,
       this.groups,

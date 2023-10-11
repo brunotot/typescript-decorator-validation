@@ -1,4 +1,4 @@
-import API from "api";
+import type API from "api";
 import PrimitiveStrategyType from "../PrimitiveStrategy/types";
 
 /**
@@ -38,7 +38,7 @@ namespace PrimitiveArrayGetterStrategyType {
    * @typeParam K - The key of the field.
    */
   // prettier-ignore
-  export type matches<T, K extends keyof T> = 
+  export type matches<T, K extends keyof T> =
     true extends API.Utilities.Booleans.isGetter<T, K>
       ? API.Utilities.Arrays.getArrayType<T[K]> extends never
         ? false

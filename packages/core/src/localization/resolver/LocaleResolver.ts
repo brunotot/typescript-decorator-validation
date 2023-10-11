@@ -19,7 +19,7 @@ namespace LocaleResolver {
   /**
    * Function which sets new global `Locale` value.
    */
-  export function setLocale(localeValue: Locale) {
+  export function setLocale(localeValue: Locale): void {
     locale = localeValue;
   }
 }

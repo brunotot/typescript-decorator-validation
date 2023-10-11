@@ -1,8 +1,8 @@
 import API from "api";
 
-import Arrays from "./Arrays";
-import Booleans from "./Booleans";
-import Types from "./Types";
+import type Arrays from "./Arrays";
+import type Booleans from "./Booleans";
+import type Types from "./Types";
 
 /**
  * A collection of utility functions and types related to objects and data.
@@ -50,8 +50,8 @@ namespace Objects {
     [K in keyof T]: true extends Booleans.isAnyOf<true, [
       Booleans.isGetter<T, K>,
       Booleans.isFunction<T[K]>,
-    ]> 
-      ? never     
+    ]>
+      ? never
       : true extends Booleans.isArray<T[K]>
         ? true extends Booleans.isPrimitive<Arrays.getArrayType<T[K]>>
           ? Arrays.setArrayDepth<Arrays.getArrayType<T[K]>, Arrays.getArrayDepth<T[K]>>
@@ -330,7 +330,7 @@ namespace Objects {
    * @param delay - The delay time in milliseconds.
    * @returns A debounced function.
    */
-  export function debounce(fn: Function, delay: number) {
+  export function debounce(fn: Function, delay: number): Function {
     let timeoutID: any = null;
     return (...args: any[]) => {
       if (timeoutID) {

@@ -1,9 +1,6 @@
-import API from "api";
-
-import EventEmitter from "events";
 import { AbstractValidationStrategyService } from "../../../service/AbstractValidationStrategyService";
 import { ObjectStrat } from "../ObjectStrategy";
-import ns from "./types";
+import type ns from "./types";
 
 /**
  * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating arrays of object types.
@@ -17,23 +14,6 @@ export class ObjectArrayStrat<F> extends AbstractValidationStrategyService<
   ns.DetailedErrors<F>,
   ns.SimpleErrors<F>
 > {
-  /**
-   * Initializes the `ObjectArrayStrategy` class by calling the superclass constructor with the provided descriptor and default value.
-   *
-   * @param descriptor - The reflection descriptor for the field.
-   * @param defaultValue - The default value for the parent object.
-   */
-  constructor(
-    descriptor: API.Reflection.Descriptor.Instance<F, any>,
-    defaultValue: F,
-    groups: string[],
-    locale: API.Localization.Resolver.LocaleResolver.Locale,
-    eventEmitter: EventEmitter,
-    asyncDelay: number
-  ) {
-    super(descriptor, defaultValue, groups, locale, eventEmitter, asyncDelay);
-  }
-
   /**
    * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for arrays of object types.
    *
@@ -51,6 +31,7 @@ export class ObjectArrayStrat<F> extends AbstractValidationStrategyService<
     const _value = value ?? [];
     const rootResult = this.getRootErrors(value, context);
 
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     const getData = (element: any) => {
       const [errors, detailedErrors] = new ObjectStrat(
         this.fieldDescriptor,
@@ -66,7 +47,9 @@ export class ObjectArrayStrat<F> extends AbstractValidationStrategyService<
       };
     };
 
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     const getErrors = (element: any) => getData(element).errors;
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     const getDetailedErrors = (element: any) => getData(element).detailedErrors;
 
     const details = {

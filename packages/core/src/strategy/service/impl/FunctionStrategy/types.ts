@@ -1,4 +1,4 @@
-import API from "api";
+import type API from "api";
 
 /**
  * Namespace for Function Strategy Types.
@@ -35,8 +35,8 @@ namespace FunctionStrategyType {
    */
   // prettier-ignore
   export type handler<T, K extends keyof T, R> =
-    true extends API.Utilities.Booleans.isUndefined<R> 
-      ? T[K] 
+    true extends API.Utilities.Booleans.isUndefined<R>
+      ? T[K]
   : API.Utilities.Arrays.getArrayType<R> | null;
 }
 

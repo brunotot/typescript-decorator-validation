@@ -10,11 +10,6 @@ namespace FieldDecoratorService {
   export type Type = unknown;
 
   /**
-   * Represents the return type for the decorator function.
-   */
-  export type ReturnDef = void;
-
-  /**
    * Type definition for supplying a function that will act as the decorator logic.
    *
    * @typeParam T - The type of the value being decorated.
@@ -29,7 +24,7 @@ namespace FieldDecoratorService {
     meta: API.Reflection.Services.FieldValidatorMetaService,
     name: string,
     context: Context<T>
-  ) => ReturnDef) & {};
+  ) => void) & {};
 
   /**
    * Context object passed to a field decorator function.
@@ -50,7 +45,7 @@ namespace FieldDecoratorService {
     name: string;
     metadata: globalThis.DecoratorMetadata;
     access: {
-      get(object: any): T;
+      get: (object: any) => T;
     };
   }>;
 
@@ -67,7 +62,7 @@ namespace FieldDecoratorService {
   export type Instance<T extends Type> = ((
     target: any,
     context: Context<T>
-  ) => ReturnDef) & {};
+  ) => void) & {};
 
   /**
    * Creates a new validator function using the provided validation builder options.

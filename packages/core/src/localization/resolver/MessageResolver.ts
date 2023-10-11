@@ -1,4 +1,4 @@
-import LocaleResolver from "./LocaleResolver";
+import type LocaleResolver from "./LocaleResolver";
 
 /**
  * A configuration class which allows for defining a custom message parser.
@@ -19,20 +19,23 @@ namespace MessageResolver {
   /**
    * Is used to globally define a custom message parser.
    */
-  export function configure(handler?: MessageResolverData) {
+  export function configure(handler?: MessageResolverData): void {
     configurer = handler ?? DEFAULT_CONFIGURER;
   }
 
   /**
    * Internal handler for the customized message parser
    */
-  export function resolve(locale: LocaleResolver.Locale, message: string) {
+  export function resolve(
+    locale: LocaleResolver.Locale,
+    message: string
+  ): string {
     try {
       return configurer(locale, message);
     } catch (error) {
-      const title = `An error occurred while resolving \"${message}\" for locale \"${locale}\".`;
+      const title = `An error occurred while resolving "${message}" for locale "${locale}".`;
       const descr = `To fix, check your Localization.Resolver.MessageResolver.configure() implementation or review stack-trace.`;
-      const stacktrace = `\n\n${error}`;
+      const stacktrace = `\n\n${String(error)}`;
       throw new Error(`${title} ${descr} ${stacktrace}`);
     }
   }
