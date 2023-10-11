@@ -95,6 +95,11 @@ git add .
 
 npm run lint
 
+if [ $? -ne 0 ]; then
+  echo -e "Commit prevented due to linter throwing errors"
+  exit 1
+fi
+
 # Perform the commit
 git commit -m "$commit_message" --quiet -u --no-verify
 
