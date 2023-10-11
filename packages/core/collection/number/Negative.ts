@@ -23,16 +23,8 @@ export function Negative<T extends API.Utilities.Objects.Optional<number>>(
     groups: API.Decorator.groups(props),
     validate: (num, _, locale) => ({
       key: "Negative",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "Negative",
-          num!
-        ),
-        locale
-      ),
       valid: num !== undefined && num !== null && num < 0,
+      message: API.Decorator.message(props, locale, "Negative", num),
     }),
   });
 }

@@ -34,17 +34,8 @@ export function ValueMin<T extends API.Utilities.Objects.Optional<number>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "ValueMin",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ValueMin",
-          min,
-          value!
-        ),
-        locale
-      ),
       valid: value == null ? true : value >= min,
+      message: API.Decorator.message(props, locale, "ValueMin", min, value),
     }),
   });
 }

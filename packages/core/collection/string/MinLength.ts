@@ -34,15 +34,7 @@ export function MinLength<T extends API.Utilities.Objects.Optional<string>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "MinLength",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "MinLength",
-          min
-        ),
-        locale
-      ),
+      message: API.Decorator.message(props, locale, "MinLength", min),
       valid: (value ?? "").length >= min,
     }),
   });

@@ -36,14 +36,7 @@ export function Alphanumeric<T extends API.Utilities.Objects.Optional<string>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Alphanumeric",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "Alphanumeric"
-        ),
-        locale
-      ),
+      message: API.Decorator.message(props, locale, "Alphanumeric"),
       valid: testRegex(RegexConst.ALPHANUMERIC, value),
     }),
   });

@@ -23,16 +23,8 @@ export function Decimal<T extends API.Utilities.Objects.Optional<number>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Decimal",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "Decimal",
-          value!
-        ),
-        locale
-      ),
       valid: value !== undefined && value !== null && !Number.isInteger(value),
+      message: API.Decorator.message(props, locale, "Decimal", value!),
     }),
   });
 }

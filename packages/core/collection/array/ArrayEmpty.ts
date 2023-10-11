@@ -25,14 +25,7 @@ export function ArrayEmpty<K, T extends K[]>(
     groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArrayEmpty",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ArrayEmpty"
-        ),
-        locale
-      ),
+      message: API.Decorator.message(props, locale, "ArrayEmpty"),
       valid: (array ?? []).length === 0,
     }),
   });

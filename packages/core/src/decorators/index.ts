@@ -72,14 +72,18 @@ namespace Decorator {
   export function message(
     provider: Props.GenericModel,
     locale: API.Localization.Resolver.LocaleResolver.Locale,
-    translationKey: keyof API.Localization.Service.MessageReaderService.LocalizedMessages,
+    translationKey:
+      | keyof API.Localization.Service.MessageReaderService.LocalizedMessages
+      | null,
     ...args: any[]
   ): string {
-    const message = API.Localization.Service.TranslationService.translate(
-      locale,
-      translationKey,
-      ...args
-    );
+    const message = translationKey
+      ? API.Localization.Service.TranslationService.translate(
+          locale,
+          translationKey,
+          ...args
+        )
+      : "";
     if (!provider) return message;
     const providerType = typeof provider;
     const msgNullable = providerType ? provider : provider.message;

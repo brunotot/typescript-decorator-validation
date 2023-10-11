@@ -27,17 +27,14 @@ export function ArraySizeExact<K, T extends K[]>(
     groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArraySizeExact",
+      valid: (array ?? []).length === exact,
       message: API.Decorator.message(
         props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ArraySizeExact",
-          exact,
-          (array ?? []).length
-        ),
-        locale
+        locale,
+        "ArraySizeExact",
+        exact,
+        (array ?? []).length
       ),
-      valid: (array ?? []).length === exact,
     }),
   });
 }

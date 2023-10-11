@@ -37,11 +37,7 @@ export function URL<T extends API.Utilities.Objects.Optional<string>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "URL",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(locale, "URL"),
-        locale
-      ),
+      message: API.Decorator.message(props, locale, "URL"),
       valid: testRegex(RegexConst.URL, value),
     }),
   });

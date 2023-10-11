@@ -36,11 +36,7 @@ export function Email<T extends API.Utilities.Objects.Optional<string>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Email",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(locale, "Email"),
-        locale
-      ),
+      message: API.Decorator.message(props, locale, "Email"),
       valid: testRegex(RegexConst.EMAIL, value),
     }),
   });

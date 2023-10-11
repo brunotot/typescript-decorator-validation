@@ -37,14 +37,7 @@ export function Numeric<T extends API.Utilities.Objects.Optional<string>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Numeric",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "Numeric"
-        ),
-        locale
-      ),
+      message: API.Decorator.message(props, locale, "Numeric"),
       valid: testRegex(RegexConst.NUMERIC, value),
     }),
   });

@@ -35,18 +35,15 @@ export function ValueRange<T extends API.Utilities.Objects.Optional<number>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "ValueRange",
+      valid: value == null ? true : value >= min && value <= max,
       message: API.Decorator.message(
         props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ValueRange",
-          min,
-          max,
-          value!
-        ),
-        locale
+        locale,
+        "ValueRange",
+        min,
+        max,
+        value
       ),
-      valid: value == null ? true : value >= min && value <= max,
     }),
   });
 }

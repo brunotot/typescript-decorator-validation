@@ -37,14 +37,7 @@ export function Uppercase<T extends API.Utilities.Objects.Optional<string>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Uppercase",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "Uppercase"
-        ),
-        locale
-      ),
+      message: API.Decorator.message(props, locale, "Uppercase"),
       valid: testRegex(RegexConst.UPPERCASE, value),
     }),
   });

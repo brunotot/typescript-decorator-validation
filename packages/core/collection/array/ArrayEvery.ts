@@ -28,7 +28,7 @@ export function ArrayEvery<K, T extends K[]>(
     groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArrayEvery",
-      message: API.Decorator.message(props, "", locale),
+      message: API.Decorator.message(props, locale, null),
       valid: (array ?? []).every(props.value),
     }),
   });

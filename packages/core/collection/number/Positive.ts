@@ -32,16 +32,8 @@ export function Positive<T extends API.Utilities.Objects.Optional<number>>(
     groups: API.Decorator.groups(props),
     validate: (num, _, locale) => ({
       key: "Positive",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "Positive",
-          num!
-        ),
-        locale
-      ),
       valid: num !== undefined && num !== null && num > 0,
+      message: API.Decorator.message(props, locale, "Positive", num),
     }),
   });
 }

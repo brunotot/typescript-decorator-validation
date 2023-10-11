@@ -36,11 +36,7 @@ export function Alpha<T extends API.Utilities.Objects.Optional<string>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Alpha",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(locale, "Alpha"),
-        locale
-      ),
+      message: API.Decorator.message(props, locale, "Alpha"),
       valid: testRegex(RegexConst.ALPHA, value),
     }),
   });

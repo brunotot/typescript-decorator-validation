@@ -28,18 +28,15 @@ export function ArraySizeRange<K, T extends K[]>(
     groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArraySizeRange",
+      valid: (array ?? []).length >= min && (array ?? []).length <= max,
       message: API.Decorator.message(
         props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ArraySizeRange",
-          min,
-          max,
-          (array ?? []).length
-        ),
-        locale
+        locale,
+        "ArraySizeRange",
+        min,
+        max,
+        (array ?? []).length
       ),
-      valid: (array ?? []).length >= min && (array ?? []).length <= max,
     }),
   });
 }

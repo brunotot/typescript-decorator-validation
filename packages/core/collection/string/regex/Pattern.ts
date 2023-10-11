@@ -47,7 +47,7 @@ export function Pattern<T extends API.Utilities.Objects.Optional<string>>(
     groups: API.Decorator.groups(props.groups),
     validate: (value, _, locale) => ({
       key: key ?? "Pattern",
-      message: API.Decorator.message(props, "", locale),
+      message: API.Decorator.message(props, locale, null),
       valid: testRegex(regex, value),
     }),
   });

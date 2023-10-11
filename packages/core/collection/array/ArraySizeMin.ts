@@ -27,17 +27,14 @@ export function ArraySizeMin<K, T extends K[]>(
     groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArraySizeMin",
+      valid: (array ?? []).length >= min,
       message: API.Decorator.message(
         props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ArraySizeMin",
-          min,
-          String((array ?? []).length ?? "0")
-        ),
-        locale
+        locale,
+        "ArraySizeMin",
+        min,
+        String((array ?? []).length ?? "0")
       ),
-      valid: (array ?? []).length >= min,
     }),
   });
 }

@@ -58,17 +58,14 @@ export function Digits<T extends API.Utilities.Objects.Optional<number>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Digits",
+      valid: validateDigits(value!, maxInteger, maxFraction, locale),
       message: API.Decorator.message(
         props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "Digits",
-          maxInteger,
-          maxFraction
-        ),
-        locale
+        locale,
+        "Digits",
+        maxInteger,
+        maxFraction
       ),
-      valid: validateDigits(value!, maxInteger, maxFraction, locale),
     }),
   });
 }

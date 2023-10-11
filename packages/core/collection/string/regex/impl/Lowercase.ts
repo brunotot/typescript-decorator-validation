@@ -37,14 +37,7 @@ export function Lowercase<T extends API.Utilities.Objects.Optional<string>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "Lowercase",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "Lowercase"
-        ),
-        locale
-      ),
+      message: API.Decorator.message(props, locale, "Lowercase"),
       valid: testRegex(RegexConst.LOWERCASE, value),
     }),
   });

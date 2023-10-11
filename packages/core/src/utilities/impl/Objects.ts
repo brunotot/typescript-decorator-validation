@@ -322,7 +322,7 @@ namespace Objects {
     };
   }
 
-  type FieldType =
+  export type FieldType =
     | "date"
     | "array"
     | "string"

@@ -34,17 +34,8 @@ export function ValueMax<T extends API.Utilities.Objects.Optional<number>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "ValueMax",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ValueMax",
-          max,
-          value!
-        ),
-        locale
-      ),
       valid: value == null ? true : value <= max,
+      message: API.Decorator.message(props, locale, "ValueMax", max, value),
     }),
   });
 }

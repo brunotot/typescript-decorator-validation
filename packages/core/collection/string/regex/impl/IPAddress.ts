@@ -36,14 +36,7 @@ export function IPAddress<T extends API.Utilities.Objects.Optional<string>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "IPAddress",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "IPAddress"
-        ),
-        locale
-      ),
+      message: API.Decorator.message(props, locale, "IPAddress"),
       valid: testRegex(RegexConst.IP_ADDRESS, value),
     }),
   });

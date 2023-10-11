@@ -23,16 +23,8 @@ export function Integer<T extends API.Utilities.Objects.Optional<number>>(
     groups: API.Decorator.groups(props),
     validate: (num, _, locale) => ({
       key: "Integer",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "Integer",
-          num!
-        ),
-        locale
-      ),
       valid: num !== undefined && num !== null && Number.isInteger(num),
+      message: API.Decorator.message(props, locale, "Integer", num),
     }),
   });
 }

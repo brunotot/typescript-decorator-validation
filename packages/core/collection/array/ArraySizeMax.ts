@@ -27,17 +27,14 @@ export function ArraySizeMax<K, T extends K[]>(
     groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArraySizeMax",
+      valid: (array ?? []).length <= max,
       message: API.Decorator.message(
         props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ArraySizeMax",
-          max,
-          (array ?? []).length
-        ),
-        locale
+        locale,
+        "ArraySizeMax",
+        max,
+        (array ?? []).length
       ),
-      valid: (array ?? []).length <= max,
     }),
   });
 }

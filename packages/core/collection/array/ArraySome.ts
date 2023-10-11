@@ -28,7 +28,7 @@ export function ArraySome<K, T extends K[]>(
     groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArraySome",
-      message: API.Decorator.message(props, "", locale),
+      message: API.Decorator.message(props, locale, null),
       valid: (array ?? []).some(props.value),
     }),
   });

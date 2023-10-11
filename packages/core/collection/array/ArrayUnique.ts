@@ -43,14 +43,7 @@ export function ArrayUnique<K, T extends K[]>(
     groups: API.Decorator.groups(props),
     validate: (array, _, locale) => ({
       key: "ArrayUnique",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ArrayUnique"
-        ),
-        locale
-      ),
+      message: API.Decorator.message(props, locale, "ArrayUnique"),
       valid: isArrayUnique(
         array ?? [],
         (obj1, obj2) => hashFn(obj1) === hashFn(obj2)

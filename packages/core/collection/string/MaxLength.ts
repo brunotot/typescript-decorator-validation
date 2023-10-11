@@ -34,15 +34,7 @@ export function MaxLength<T extends API.Utilities.Objects.Optional<string>>(
     groups: API.Decorator.groups(props),
     validate: (value, _, locale) => ({
       key: "MaxLength",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "MaxLength",
-          max
-        ),
-        locale
-      ),
+      message: API.Decorator.message(props, locale, "MaxLength", max),
       valid: (value ?? "").length <= max,
     }),
   });
