@@ -93,6 +93,8 @@ fi
 # Add all changed files to staging
 git add .
 
+npm run lint --prefix ../
+
 # Perform the commit
-git commit -m "$commit_message" --quiet -u
+git commit -m "$commit_message" --quiet -u --no-verify
 
