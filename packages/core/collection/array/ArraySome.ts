@@ -20,16 +20,15 @@ import API from "api";
  * This example validates that at least one element in the `numbers` array is greater than 0 and provides a custom error message if the validation fails.
  */
 export function ArraySome<K, T extends K[]>(
-  props: API.Decorator.Props.MultiArgsMessageRequired<
-    API.Utilities.Objects.ArrayPredicate<K>
-  >
+  predicate: API.Utilities.Objects.ArrayPredicate<K>,
+  config: API.Decorator.Props.Base<"message-required">
 ) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (array, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (array, _context, _locale) => ({
       key: "ArraySome",
-      message: API.Decorator.message(props, locale, null),
-      valid: (array ?? []).some(props.value),
+      message: API.Decorator.message(config.message),
+      valid: (array ?? []).some(predicate),
     }),
-  });
+    config
+  );
 }

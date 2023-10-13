@@ -58,15 +58,20 @@ export function isArrayContainsValid<K, T extends K[]>(
  * ```
  */
 export function ArrayContains<K, T extends Array<K>>(
-  props: API.Decorator.Props.MultiArgsMessageOptional<K>
+  contains: K,
+  config: API.Decorator.Props.Base<"message-optional">
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  const contains = API.Decorator.args(props);
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (array, _context, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (array, _context, locale) => ({
       key: ARRAY_CONTAINS,
-      message: API.Decorator.message(props, locale, ARRAY_CONTAINS, contains),
       valid: isArrayContainsValid(array, contains),
+      message: API.Decorator.message(
+        config?.message,
+        locale,
+        ARRAY_CONTAINS,
+        contains
+      ),
     }),
-  });
+    config
+  );
 }

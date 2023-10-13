@@ -70,72 +70,42 @@ namespace Decorator {
    * @returns The extracted message or the default message if none is found.
    */
   export function message(
-    provider: Props.GenericModel,
-    locale: API.Localization.Resolver.LocaleResolver.Locale,
-    translationKey:
-      | keyof API.Localization.Service.MessageReaderService.LocalizedMessages
-      | null,
+    definedMessage?: string,
+    locale?: API.Localization.Resolver.LocaleResolver.Locale,
+    key?: API.Localization.Service.MessageReaderService.MessageKey,
     ...args: any[]
   ): string {
-    const message = translationKey
-      ? API.Localization.Service.TranslationService.translate(
-          locale,
-          translationKey,
-          ...args
-        )
-      : "";
-    if (!provider) return message;
-    const providerType = typeof provider;
-    const msgNullable = providerType ? provider : provider.message;
-    const msgNonNull = msgNullable ?? "";
-    return msgNonNull.length
-      ? API.Localization.Resolver.MessageResolver.resolve(locale, msgNonNull)
-      : message;
+    const msg = definedMessage ?? API.Utilities.Strings.EMPTY;
+    const isTranslationDefined = !locale || !key;
+    const isMessageDefined = msg.length > 0;
+    const translateFn = API.Localization.Service.TranslationService.translate;
+    const resolverFn = API.Localization.Resolver.MessageResolver.resolve;
+    return isTranslationDefined
+      ? msg
+      : isMessageDefined
+      ? translateFn(locale, key, ...args)
+      : resolverFn(locale, msg);
   }
 
   /**
    * Extracts validation groups from the provided decorator properties.
-   *
    * @typeParam T - The type of the object being validated.
-   *
    * @param provider - The decorator properties.
-   *
    * @returns An array of unique validation groups.
    */
-  export function groups(provider: Props.GenericModel): string[] {
-    return isDecoratorProps(provider) && "groups" in provider
-      ? Array.isArray(provider.groups)
-        ? API.Utilities.Objects.unique(provider.groups)
-        : provider.groups
-        ? [provider.groups]
-        : []
-      : [];
-  }
-
-  /**
-   * Extracts argument values from the provided decorator properties.
-   *
-   * @typeParam T - The type of the argument value.
-   *
-   * @param props - The decorator properties.
-   * @param key - The key of the argument.
-   *
-   * @returns The extracted argument value.
-   */
-  export function args<T>(props: Props.MultiArgs<T>, key: string = "value"): T {
-    return isDecoratorProps(props) && key in (props as any)
-      ? (props as any)[key]
-      : (props as T);
+  export function groups(provider?: Props.Any): string[] {
+    return provider?.groups === undefined
+      ? []
+      : Array.isArray(provider.groups)
+      ? API.Utilities.Objects.unique(provider.groups)
+      : [provider.groups];
   }
 
   /**
    * Filters validators based on the provided validation groups.
-   *
    * @typeParam TFieldType - The type of the field being validated.
-   *
    * @param data - The array of metadata for each validator.
    * @param groups - The validation groups to filter by.
-   *
    * @returns An array of filtered validators.
    */
   export function groupedValidators<TFieldType>(
@@ -147,17 +117,6 @@ namespace Decorator {
         ? meta.groups.some((o) => groups.includes(o))
         : meta.groups.length === 0
     );
-  }
-
-  /**
-   * Checks if a given object is a DecoratorProps object.
-   *
-   * @param props - The object to check.
-   *
-   * @returns A boolean indicating if the object is a DecoratorProps object.
-   */
-  function isDecoratorProps(props: Props.GenericModel): boolean {
-    return !!props && !Array.isArray(props) && typeof props === "object";
   }
 }
 

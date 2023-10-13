@@ -20,16 +20,15 @@ import API from "api";
  * This example validates that exactly one element in the `zeroElement` array is zero, associates it with a custom validation group, and provides a custom error message if the validation fails.
  */
 export function ArrayOne<K, T extends K[]>(
-  props: API.Decorator.Props.MultiArgsMessageRequired<
-    API.Utilities.Objects.ArrayPredicate<K>
-  >
+  predicate: API.Utilities.Objects.ArrayPredicate<K>,
+  config: API.Decorator.Props.Base<"message-required">
 ) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (array, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (array, _context, _locale) => ({
       key: "ArrayOne",
-      message: API.Decorator.message(props, locale, null),
-      valid: (array ?? []).filter(props.value).length === 1,
+      message: API.Decorator.message(config.message),
+      valid: (array ?? []).filter(predicate).length === 1,
     }),
-  });
+    config
+  );
 }

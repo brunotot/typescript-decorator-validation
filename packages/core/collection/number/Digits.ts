@@ -1,11 +1,13 @@
 import API from "api";
 
 function validateDigits(
-  number: number,
-  maxInteger: number,
-  maxFraction: number,
+  number: number | undefined | null,
+  _maxInteger: number | undefined,
+  _maxFraction: number | undefined,
   locale: API.Localization.Resolver.LocaleResolver.Locale
 ): boolean {
+  const maxInteger = _maxInteger ?? Infinity;
+  const maxFraction = _maxFraction ?? Infinity;
   if (number == null) {
     return true;
   }
@@ -47,25 +49,22 @@ function validateDigits(
  * This example applies the `Digits` validator to the `price` property to ensure it has at most 4 digits in the integer part and 2 digits in the fractional part.
  */
 export function Digits<T extends API.Utilities.Objects.Optional<number>>(
-  props: API.Decorator.Props.MultiArgsMessageOptional<{
-    maxInteger?: number;
-    maxFraction?: number;
-  }>
+  maxInteger?: number,
+  maxFraction?: number,
+  config?: API.Decorator.Props.Base<"message-optional">
 ) {
-  const { maxInteger = Infinity, maxFraction = Infinity } =
-    API.Decorator.args(props);
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _, locale) => ({
       key: "Digits",
-      valid: validateDigits(value!, maxInteger, maxFraction, locale),
+      valid: validateDigits(value, maxInteger, maxFraction, locale),
       message: API.Decorator.message(
-        props,
+        config?.message,
         locale,
         "Digits",
         maxInteger,
         maxFraction
       ),
     }),
-  });
+    config
+  );
 }

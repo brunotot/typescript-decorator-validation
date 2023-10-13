@@ -57,14 +57,15 @@ export function isRequiredValid<T>(
  * ```
  */
 export function Required<T extends API.Utilities.Objects.Optional>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
+  message?: string,
+  config?: API.Decorator.Props.Base
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _context, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, locale) => ({
       key: REQUIRED,
       valid: isRequiredValid(value),
-      message: API.Decorator.message(props, locale, REQUIRED),
+      message: API.Decorator.message(message, locale, REQUIRED),
     }),
-  });
+    config
+  );
 }

@@ -30,14 +30,15 @@ import RegexConst from "../shared/regex.constants";
  * }
  */
 export function IPAddress<T extends API.Utilities.Objects.Optional<string>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
+  message?: string,
+  config?: API.Decorator.Props.Base
 ) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, locale) => ({
       key: "IPAddress",
-      message: API.Decorator.message(props, locale, "IPAddress"),
+      message: API.Decorator.message(message, locale, "IPAddress"),
       valid: testRegex(RegexConst.IP_ADDRESS, value),
     }),
-  });
+    config
+  );
 }

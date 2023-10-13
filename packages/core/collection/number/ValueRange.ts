@@ -28,16 +28,16 @@ import API from "api";
  * }
  */
 export function ValueRange<T extends API.Utilities.Objects.Optional<number>>(
-  props: API.Decorator.Props.MultiArgsMessageOptional<readonly [number, number]>
+  min: number,
+  max: number,
+  config?: API.Decorator.Props.Base<"message-optional">
 ) {
-  const [min, max] = API.Decorator.args(props);
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _, locale) => ({
       key: "ValueRange",
       valid: value == null ? true : value >= min && value <= max,
       message: API.Decorator.message(
-        props,
+        config?.message,
         locale,
         "ValueRange",
         min,
@@ -45,5 +45,6 @@ export function ValueRange<T extends API.Utilities.Objects.Optional<number>>(
         value
       ),
     }),
-  });
+    config
+  );
 }

@@ -36,18 +36,19 @@ function isArrayUnique<T>(
  * This example validates that all elements in the `names` array are unique when compared using a case-insensitive hash function and provides a custom error message if the validation fails.
  */
 export function ArrayUnique<K, T extends K[]>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
+  message?: string,
+  config?: API.Decorator.Props.Base
 ) {
   const hashFn = API.Utilities.Objects.hash;
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (array, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (array, _context, locale) => ({
       key: "ArrayUnique",
-      message: API.Decorator.message(props, locale, "ArrayUnique"),
+      message: API.Decorator.message(message, locale, "ArrayUnique"),
       valid: isArrayUnique(
         array ?? [],
         (obj1, obj2) => hashFn(obj1) === hashFn(obj2)
       ),
     }),
-  });
+    config
+  );
 }

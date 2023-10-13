@@ -27,15 +27,15 @@ import API from "api";
  * }
  */
 export function MinLength<T extends API.Utilities.Objects.Optional<string>>(
-  props: API.Decorator.Props.MultiArgsMessageOptional<number>
+  min: number,
+  config?: API.Decorator.Props.Base<"message-optional">
 ) {
-  const min = API.Decorator.args(props);
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, locale) => ({
       key: "MinLength",
-      message: API.Decorator.message(props, locale, "MinLength", min),
+      message: API.Decorator.message(config?.message, locale, "MinLength", min),
       valid: (value ?? "").length >= min,
     }),
-  });
+    config
+  );
 }

@@ -26,14 +26,15 @@ import API from "api";
  * }
  */
 export function NonPositive<T extends API.Utilities.Objects.Optional<number>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
+  message?: string,
+  config?: API.Decorator.Props.Base
 ) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (num, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (num, _context, locale) => ({
       key: "NonPositive",
       valid: num !== undefined && num !== null && num <= 0,
-      message: API.Decorator.message(props, locale, "NonPositive", num),
+      message: API.Decorator.message(message, locale, "NonPositive", num),
     }),
-  });
+    config
+  );
 }

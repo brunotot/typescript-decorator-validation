@@ -17,14 +17,15 @@ import API from "api";
  * This example applies the `Integer` validator to the `quantity` property to ensure it is an integer.
  */
 export function Integer<T extends API.Utilities.Objects.Optional<number>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
+  message?: string,
+  config?: API.Decorator.Props.Base
 ) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (num, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (num, _context, locale) => ({
       key: "Integer",
       valid: num !== undefined && num !== null && Number.isInteger(num),
-      message: API.Decorator.message(props, locale, "Integer", num),
+      message: API.Decorator.message(message, locale, "Integer", num),
     }),
-  });
+    config
+  );
 }

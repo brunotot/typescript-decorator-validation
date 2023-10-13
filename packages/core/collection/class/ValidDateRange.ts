@@ -68,22 +68,22 @@ export function ValidDateRange<
 >(
   startDateField: string,
   endDateField: string,
-  props?: API.Decorator.Props.Base & API.Decorator.Props.MessageOptional
+  config?: API.Decorator.Props.Base<"message-optional">
 ): API.Decorator.Service.ClassDecoratorService.Instance<
   API.Utilities.Types.UnwrapClass<T>
 > {
-  return API.Decorator.Service.ClassDecoratorValidatorService.build({
-    groups: API.Decorator.groups(props),
-    isValid: (value, _context, locale) => ({
+  return API.Decorator.Service.ClassDecoratorValidatorService.build(
+    (value, _context, locale) => ({
       key: VALID_DATE_RANGE,
       valid: isValidDateRangeValid(value, startDateField, endDateField),
       message: API.Decorator.message(
-        props,
+        config?.message,
         locale,
         VALID_DATE_RANGE,
         API.Utilities.Strings.convertCamelCaseToText(endDateField, false),
         API.Utilities.Strings.convertCamelCaseToText(startDateField)
       ),
     }),
-  });
+    config
+  );
 }

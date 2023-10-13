@@ -56,14 +56,15 @@ export function isFutureDateValid<
  * ```
  */
 export function FutureDate<T extends API.Utilities.Objects.Optional<Date>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
+  message?: string,
+  config?: API.Decorator.Props.Base
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (date, _context, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (date, _context, locale) => ({
       key: FUTURE_DATE,
-      message: API.Decorator.message(props, locale, FUTURE_DATE, date),
+      message: API.Decorator.message(message, locale, FUTURE_DATE, date),
       valid: isFutureDateValid(date),
     }),
-  });
+    config
+  );
 }

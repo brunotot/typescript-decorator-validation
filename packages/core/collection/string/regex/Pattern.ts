@@ -37,18 +37,17 @@ export function testRegex<T extends API.Utilities.Objects.Optional<string>>(
  * }
  */
 export function Pattern<T extends API.Utilities.Objects.Optional<string>>(
-  props: API.Decorator.Props.MultiArgsMessageRequired<{
-    regex: RegExp;
-    key?: string;
-  }>
+  regex: RegExp,
+  message: string,
+  key?: string,
+  config?: API.Decorator.Props.Base
 ) {
-  const { regex, key } = API.Decorator.args(props);
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props.groups),
-    validate: (value, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, _locale) => ({
       key: key ?? "Pattern",
-      message: API.Decorator.message(props, locale, null),
+      message: API.Decorator.message(message),
       valid: testRegex(regex, value),
     }),
-  });
+    config
+  );
 }

@@ -19,14 +19,15 @@ import API from "api";
  * This example validates that the `emptyArray` is an empty array and associates it with a custom validation group and a custom error message.
  */
 export function ArrayEmpty<K, T extends K[]>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
+  message?: string,
+  config?: API.Decorator.Props.Base
 ) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (array, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (array, _context, locale) => ({
       key: "ArrayEmpty",
-      message: API.Decorator.message(props, locale, "ArrayEmpty"),
+      message: API.Decorator.message(message, locale, "ArrayEmpty"),
       valid: (array ?? []).length === 0,
     }),
-  });
+    config
+  );
 }

@@ -17,14 +17,15 @@ import API from "api";
  * This example applies the `Decimal` validator to the `price` property to ensure it is a decimal number.
  */
 export function Decimal<T extends API.Utilities.Objects.Optional<number>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
+  message?: string,
+  config?: API.Decorator.Props.Base
 ) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, locale) => ({
       key: "Decimal",
       valid: value !== undefined && value !== null && !Number.isInteger(value),
-      message: API.Decorator.message(props, locale, "Decimal", value!),
+      message: API.Decorator.message(message, locale, "Decimal", value!),
     }),
-  });
+    config
+  );
 }

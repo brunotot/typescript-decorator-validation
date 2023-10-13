@@ -27,15 +27,21 @@ import API from "api";
  * }
  */
 export function ValueMax<T extends API.Utilities.Objects.Optional<number>>(
-  props: API.Decorator.Props.MultiArgsMessageOptional<number>
+  max: number,
+  config?: API.Decorator.Props.Base<"message-optional">
 ) {
-  const max = API.Decorator.args(props);
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _, locale) => ({
       key: "ValueMax",
       valid: value == null ? true : value <= max,
-      message: API.Decorator.message(props, locale, "ValueMax", max, value),
+      message: API.Decorator.message(
+        config?.message,
+        locale,
+        "ValueMax",
+        max,
+        value
+      ),
     }),
-  });
+    config
+  );
 }

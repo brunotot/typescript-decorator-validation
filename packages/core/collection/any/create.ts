@@ -53,15 +53,12 @@ import API from "api";
  * }
  * ```
  */
-// prettier-ignore
 export function create<T>(
-  props: API.Validation.Evaluator<T> | {
-    validate: API.Validation.Evaluator<T>;
-    groups?: string | string[];
-  }
+  validate: API.Validation.Evaluator<T>,
+  config?: API.Decorator.Props.Base
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    validate: API.Decorator.args(props, "validate") as any,
-    groups: API.Decorator.groups(props),
-  });
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    validate,
+    config
+  );
 }

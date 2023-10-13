@@ -11,7 +11,7 @@ const errorData: Type[] = [["est", "test", "123test"]];
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @ArrayNone({ message: "Error", value: (v: string) => v.includes("test") })
+  @ArrayNone((v: string) => v.includes("test"), { message: "Error" })
   value!: Type;
 }
 

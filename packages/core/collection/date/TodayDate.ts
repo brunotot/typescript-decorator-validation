@@ -62,16 +62,15 @@ export function isTodayDateValid<
  * ```
  */
 export function TodayDate<T extends API.Utilities.Objects.Optional<Date>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
+  message?: string,
+  config?: API.Decorator.Props.Base
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (date, _context, locale) => {
-      return {
-        key: TODAY_DATE,
-        message: API.Decorator.message(props, locale, TODAY_DATE, date),
-        valid: isTodayDateValid(date),
-      };
-    },
-  });
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (date, _context, locale) => ({
+      key: TODAY_DATE,
+      message: API.Decorator.message(message, locale, TODAY_DATE, date),
+      valid: isTodayDateValid(date),
+    }),
+    config
+  );
 }

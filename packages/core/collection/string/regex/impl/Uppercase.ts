@@ -31,14 +31,15 @@ import RegexConst from "../shared/regex.constants";
  * }
  */
 export function Uppercase<T extends API.Utilities.Objects.Optional<string>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
+  message?: string,
+  config?: API.Decorator.Props.Base
 ) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, locale) => ({
       key: "Uppercase",
-      message: API.Decorator.message(props, locale, "Uppercase"),
+      message: API.Decorator.message(message, locale, "Uppercase"),
       valid: testRegex(RegexConst.UPPERCASE, value),
     }),
-  });
+    config
+  );
 }

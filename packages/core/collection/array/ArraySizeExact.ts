@@ -20,21 +20,21 @@ import API from "api";
  * This example validates that the `myArray` property has exactly 3 elements, associates it with a custom validation group, and provides a custom error message if the validation fails.
  */
 export function ArraySizeExact<K, T extends K[]>(
-  props: API.Decorator.Props.MultiArgsMessageOptional<number>
+  exact: number,
+  config?: API.Decorator.Props.Base<"message-optional">
 ) {
-  const exact = API.Decorator.args(props);
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (array, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (array, _context, locale) => ({
       key: "ArraySizeExact",
       valid: (array ?? []).length === exact,
       message: API.Decorator.message(
-        props,
+        config?.message,
         locale,
         "ArraySizeExact",
         exact,
         (array ?? []).length
       ),
     }),
-  });
+    config
+  );
 }

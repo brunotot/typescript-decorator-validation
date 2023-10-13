@@ -27,15 +27,15 @@ import API from "api";
  * }
  */
 export function MaxLength<T extends API.Utilities.Objects.Optional<string>>(
-  props: API.Decorator.Props.MultiArgsMessageOptional<number>
+  max: number,
+  config?: API.Decorator.Props.Base<"message-optional">
 ) {
-  const max = API.Decorator.args(props);
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, locale) => ({
       key: "MaxLength",
-      message: API.Decorator.message(props, locale, "MaxLength", max),
+      message: API.Decorator.message(config?.message, locale, "MaxLength", max),
       valid: (value ?? "").length <= max,
     }),
-  });
+    config
+  );
 }

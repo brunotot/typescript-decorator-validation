@@ -40,6 +40,8 @@ namespace MessageReaderService {
    */
   export type Messages = Record<LocaleResolver.Locale, LocalizedMessages>;
 
+  export type MessageKey = keyof LocalizedMessages;
+
   /**
    * Returns localized message by key, allowing `locale` to be optional (defaults to global `locale`).
    * @param key Translation key

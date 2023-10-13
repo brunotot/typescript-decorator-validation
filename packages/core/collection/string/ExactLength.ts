@@ -57,15 +57,20 @@ export function isExactLengthValid(
  * ```
  */
 export function ExactLength<T extends API.Utilities.Objects.Optional<string>>(
-  props: API.Decorator.Props.MultiArgsMessageOptional<number>
+  exact: number,
+  config?: API.Decorator.Props.Base<"message-optional">
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  const exact = API.Decorator.args(props);
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _context, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, locale) => ({
       key: EXACT_LENGTH,
       valid: isExactLengthValid(value, exact),
-      message: API.Decorator.message(props, locale, EXACT_LENGTH, exact),
+      message: API.Decorator.message(
+        config?.message,
+        locale,
+        EXACT_LENGTH,
+        exact
+      ),
     }),
-  });
+    config
+  );
 }

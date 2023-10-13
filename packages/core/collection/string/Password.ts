@@ -46,21 +46,21 @@ function isInvalid(text: string, rule: keyof typeof PASSWORD_REGEXES) {
  *   password: string;
  * }
  */
-export function Password<
-  T extends API.Utilities.Objects.Optional<string>
->(props?: {
-  uppercase?: boolean;
-  lowercase?: boolean;
-  numbers?: boolean;
-  specials?: boolean;
-  length?: number;
-  groups?: string | string[];
-}) {
-  const lowercase = props?.lowercase ?? true;
-  const uppercase = props?.uppercase ?? false;
-  const numbers = props?.numbers ?? false;
-  const specials = props?.specials ?? false;
-  const length = props?.length ?? 8;
+export function Password<T extends API.Utilities.Objects.Optional<string>>(
+  rules?: {
+    uppercase?: boolean;
+    lowercase?: boolean;
+    numbers?: boolean;
+    specials?: boolean;
+    length?: number;
+  },
+  config?: API.Decorator.Props.Base
+) {
+  const lowercase = rules?.lowercase ?? true;
+  const uppercase = rules?.uppercase ?? false;
+  const numbers = rules?.numbers ?? false;
+  const specials = rules?.specials ?? false;
+  const length = rules?.length ?? 8;
 
   function buildConstraintViolation(message: string, valid: boolean) {
     return {
@@ -123,8 +123,8 @@ export function Password<
     return buildConstraintViolation("", true);
   }
 
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (str, _, locale) => isValid(str ?? "", locale),
-  });
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (str, _, locale) => isValid(str ?? "", locale),
+    config
+  );
 }

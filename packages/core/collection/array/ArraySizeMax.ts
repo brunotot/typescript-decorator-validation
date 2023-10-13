@@ -20,21 +20,21 @@ import API from "api";
  * This example validates that the `myArray` property has a maximum of 10 elements, associates it with a custom validation group, and provides a custom error message if the validation fails.
  */
 export function ArraySizeMax<K, T extends K[]>(
-  props: API.Decorator.Props.MultiArgsMessageOptional<number>
+  max: number,
+  config?: API.Decorator.Props.Base<"message-optional">
 ) {
-  const max = API.Decorator.args(props);
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (array, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (array, _, locale) => ({
       key: "ArraySizeMax",
       valid: (array ?? []).length <= max,
       message: API.Decorator.message(
-        props,
+        config?.message,
         locale,
         "ArraySizeMax",
         max,
         (array ?? []).length
       ),
     }),
-  });
+    config
+  );
 }

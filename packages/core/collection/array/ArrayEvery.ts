@@ -20,16 +20,15 @@ import API from "api";
  * This example validates that all elements in the `positiveNumbers` array are greater than 0, associates it with a custom validation group, and provides a custom error message if the validation fails.
  */
 export function ArrayEvery<K, T extends K[]>(
-  props: API.Decorator.Props.MultiArgsMessageRequired<
-    API.Utilities.Objects.ArrayPredicate<K>
-  >
+  predicate: API.Utilities.Objects.ArrayPredicate<K>,
+  config: API.Decorator.Props.Base<"message-required">
 ) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (array, _, locale) => ({
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (array, _context, _locale) => ({
       key: "ArrayEvery",
-      message: API.Decorator.message(props, locale, null),
-      valid: (array ?? []).every(props.value),
+      message: API.Decorator.message(config.message),
+      valid: (array ?? []).every(predicate),
     }),
-  });
+    config
+  );
 }
