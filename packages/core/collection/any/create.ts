@@ -20,14 +20,11 @@ import API from "api";
  * 2: Supplying custom groups
  * ```ts
  * class User {
- *   _@create({
- *     groups: ["UPDATE"],
- *     validate: value => ({
- *       key: "AdultAge",
- *       valid: value >= 18,
- *       message: "You must be an adult (18+)"
- *     })
- *   })
+ *   _@create(value => ({
+ *     key: "AdultAge",
+ *     valid: value >= 18,
+ *     message: "You must be an adult (18+)"
+ *   }), { groups: ["UPDATE"] })
  *   age: number;
  * }
  * ```
@@ -37,14 +34,11 @@ import API from "api";
  *
  * ```ts
  * function AdultAge() {
- *   return create<number>({
- *     groups: ["UPDATE"],
- *     validate: value => ({
- *       key: "AdultAge",
- *       valid: value >= 18,
- *       message: "You must be an adult (18+)"
- *     })
- *   });
+ *   return create<number>(value => ({
+ *     key: "AdultAge",
+ *     valid: value >= 18,
+ *     message: "You must be an adult (18+)"
+ *   }), { groups: ["UPDATE"] });
  * }
  *
  * class User {

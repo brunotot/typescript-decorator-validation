@@ -32,7 +32,7 @@ export function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@PastDate({ message: "Date must be in the past" })
+ *   _@PastDate("Date must be in the past")
  *   date: Date;
  * }
  * ```
@@ -41,7 +41,7 @@ export function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@PastDate({ groups: ["UPDATE"] })
+ *   _@PastDate(undefined, { groups: ["UPDATE"] })
  *   date: Date;
  * }
  * ```
@@ -50,7 +50,7 @@ export function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@PastDate({ groups: ["UPDATE"], message: "Date must be in the past" })
+ *   _@PastDate("Date must be in the past", { groups: ["UPDATE"] })
  *   date: Date;
  * }
  * ```

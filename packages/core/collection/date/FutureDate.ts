@@ -32,7 +32,7 @@ export function isFutureDateValid<
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@FutureDate({ message: "Date must be in the future" })
+ *   _@FutureDate("Date must be in the future")
  *   date: Date;
  * }
  * ```
@@ -41,7 +41,7 @@ export function isFutureDateValid<
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@FutureDate({ groups: ["UPDATE"] })
+ *   _@FutureDate(undefined, { groups: ["UPDATE"] })
  *   date: Date;
  * }
  * ```
@@ -50,7 +50,7 @@ export function isFutureDateValid<
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@FutureDate({ groups: ["UPDATE"], message: "Date must be in the future" })
+ *   _@FutureDate("Date must be in the future", { groups: ["UPDATE"] })
  *   date: Date;
  * }
  * ```

@@ -34,7 +34,7 @@ export function isArrayContainsValid<K, T extends K[]>(
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@ArrayContains({ value: "en", message: "English language must be selected" })
+ *   _@ArrayContains("en", { message: "English language must be selected" })
  *   languages: string[];
  * }
  * ```
@@ -43,7 +43,7 @@ export function isArrayContainsValid<K, T extends K[]>(
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@ArrayContains({ value: "en", groups: ["UPDATE"] })
+ *   _@ArrayContains("en", { groups: ["UPDATE"] })
  *   languages: string[];
  * }
  * ```
@@ -52,7 +52,7 @@ export function isArrayContainsValid<K, T extends K[]>(
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@ArrayContains({ value: "en", groups: ["UPDATE"], message: "English language must be selected" })
+ *   _@ArrayContains("en", { groups: ["UPDATE"], message: "English language must be selected" })
  *   languages: string[];
  * }
  * ```

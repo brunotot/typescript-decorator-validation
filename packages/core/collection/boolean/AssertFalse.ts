@@ -39,7 +39,7 @@ export function isAssertFalseValid(value: boolean): boolean {
  * 3: Supplying custom groups
  * ```ts
  * class State {
- *   _@AssertFalse({ groups: ["UPDATE"] })
+ *   _@AssertFalse(undefined, { groups: ["UPDATE"] })
  *   hasErrors: boolean;
  * }
  * ```
@@ -48,7 +48,10 @@ export function isAssertFalseValid(value: boolean): boolean {
  * 4: Supplying both custom error message and groups
  * ```ts
  * class State {
- *   _@AssertFalse({ groups: ["UPDATE"], message: "You must resolve all errors before continuing" })
+ *   _@AssertFalse(
+ *     "You must resolve all errors before continuing",
+ *     { groups: ["UPDATE"] }
+ *   )
  *   hasErrors: boolean;
  * }
  * ```

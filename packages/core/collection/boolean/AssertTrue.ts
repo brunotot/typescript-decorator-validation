@@ -39,7 +39,7 @@ export function isAssertTrueValid(value: boolean): boolean {
  * 3: Supplying custom groups
  * ```ts
  * class Register {
- *   _@AssertTrue({ groups: ["UPDATE"] })
+ *   _@AssertTrue(undefined, { groups: ["UPDATE"] })
  *   acceptsTermsOfService: boolean;
  * }
  * ```
@@ -48,7 +48,10 @@ export function isAssertTrueValid(value: boolean): boolean {
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Register {
- *   _@AssertTrue({ groups: ["UPDATE"], message: "You must accept our terms of services to continue" })
+ *   _@AssertTrue(
+ *     "You must accept our terms of services to continue",
+ *     { groups: ["UPDATE"] }
+ *   )
  *   acceptsTermsOfService: boolean;
  * }
  * ```

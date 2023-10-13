@@ -51,7 +51,7 @@ export function isRequiredValid<T>(
  * Example 3: Supplying a custom error message and groups
  * ```ts
  * class Product {
- *   _@Required({ message: "Product name is mandatory", groups: ["CREATE"] })
+ *   _@Required("Product name is mandatory", { groups: ["CREATE"] })
  *   name: string;
  * }
  * ```
