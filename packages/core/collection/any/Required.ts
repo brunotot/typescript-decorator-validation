@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /** Required identifier. */
 export const REQUIRED = "Required";
@@ -57,15 +58,18 @@ export function isRequiredValid<T>(
  * ```
  */
 export function Required<T extends API.Utilities.Objects.Optional>(
-  message?: string,
-  config?: API.Decorator.Props.Base
+  options?: API.Decorator.Options
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: REQUIRED,
+      key: API.Decorator.key(options, REQUIRED),
       valid: isRequiredValid(value),
-      message: API.Decorator.message(message, locale, REQUIRED),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, REQUIRED)
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

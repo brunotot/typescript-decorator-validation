@@ -11,7 +11,11 @@ import API from "api";
  * 1: Basic usage
  * ```ts
  * class User {
- *   _@create(value => ({ valid: value >= 18, key: "AdultAge", message: "You must be an adult (18+)" }))
+ *   _@create(value => ({
+ *     valid: value >= 18,
+ *     key: "AdultAge",
+ *     message: "You must be an adult (18+)"
+ *   }))
  *   age: number;
  * }
  * ```
@@ -49,10 +53,10 @@ import API from "api";
  */
 export function create<T>(
   validate: API.Validation.Evaluator<T>,
-  config?: API.Decorator.Props.Base
+  groups?: string[]
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     validate,
-    config
+    groups
   );
 }

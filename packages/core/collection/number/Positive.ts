@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /**
  * Positive decorator for validating that a numeric value is positive.
@@ -26,15 +27,18 @@ import API from "api";
  * }
  */
 export function Positive<T extends API.Utilities.Objects.Optional<number>>(
-  message?: string,
-  config?: API.Decorator.Props.Base
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (num, _, locale) => ({
-      key: "Positive",
+      key: API.Decorator.key(options, "Positive"),
       valid: num !== undefined && num !== null && num > 0,
-      message: API.Decorator.message(message, locale, "Positive", num),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, "Positive", num)
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

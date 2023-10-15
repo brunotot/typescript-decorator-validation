@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /** AssertTrue identifier. */
 export const ASSERT_TRUE = "AssertTrue";
@@ -57,15 +58,18 @@ export function isAssertTrueValid(value: boolean): boolean {
  * ```
  */
 export function AssertTrue<T extends boolean>(
-  message?: string,
-  config?: API.Decorator.Props.Base
+  options?: API.Decorator.Options
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: ASSERT_TRUE,
+      key: API.Decorator.key(options, ASSERT_TRUE),
       valid: !!value,
-      message: API.Decorator.message(message, locale, ASSERT_TRUE),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, ASSERT_TRUE)
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

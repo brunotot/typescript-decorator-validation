@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 function validateDigits(
   number: number | undefined | null,
@@ -16,12 +17,7 @@ function validateDigits(
     (maxFraction !== Infinity && maxFraction % 1 !== 0)
   ) {
     throw new Error(
-      API.Localization.Service.TranslationService.translate(
-        locale,
-        "InvalidDigits",
-        maxInteger,
-        maxFraction
-      )
+      translate(locale, "InvalidDigits", maxInteger, maxFraction)
     );
   }
 
@@ -51,20 +47,18 @@ function validateDigits(
 export function Digits<T extends API.Utilities.Objects.Optional<number>>(
   maxInteger?: number,
   maxFraction?: number,
-  config?: API.Decorator.Props.Base<"message-optional">
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _, locale) => ({
-      key: "Digits",
+      key: API.Decorator.key(options, "Digits"),
       valid: validateDigits(value, maxInteger, maxFraction, locale),
       message: API.Decorator.message(
-        config?.message,
+        options,
         locale,
-        "Digits",
-        maxInteger,
-        maxFraction
+        translate(locale, "Digits", maxInteger, maxFraction)
       ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

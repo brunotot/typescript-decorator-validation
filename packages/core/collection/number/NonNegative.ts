@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /**
  * NonNegative decorator for validating that a numeric value is non-negative.
@@ -26,15 +27,18 @@ import API from "api";
  * }
  */
 export function NonNegative<T extends API.Utilities.Objects.Optional<number>>(
-  message?: string,
-  config?: API.Decorator.Props.Base
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (num, _, locale) => ({
-      key: "NonNegative",
+      key: API.Decorator.key(options, "NonNegative"),
       valid: num !== undefined && num !== null && num >= 0,
-      message: API.Decorator.message(message, locale, "NonNegative", num!),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, "NonNegative", num)
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

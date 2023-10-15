@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 function isArrayUnique<T>(
   arr: T[],
@@ -35,20 +36,21 @@ function isArrayUnique<T>(
  * ```
  * This example validates that all elements in the `names` array are unique when compared using a case-insensitive hash function and provides a custom error message if the validation fails.
  */
-export function ArrayUnique<K, T extends K[]>(
-  message?: string,
-  config?: API.Decorator.Props.Base
-) {
+export function ArrayUnique<K, T extends K[]>(options?: API.Decorator.Options) {
   const hashFn = API.Utilities.Objects.hash;
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (array, _context, locale) => ({
-      key: "ArrayUnique",
-      message: API.Decorator.message(message, locale, "ArrayUnique"),
+      key: API.Decorator.key(options, "ArrayUnique"),
       valid: isArrayUnique(
         array ?? [],
         (obj1, obj2) => hashFn(obj1) === hashFn(obj2)
       ),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, "ArrayUnique")
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

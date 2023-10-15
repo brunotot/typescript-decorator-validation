@@ -43,5 +43,10 @@
   "ValueMax": "Maximaal toegestane waarde is {0} maar is {1}",
   "ValueMin": "Minimaal toegestane waarde is {0} maar is {1}",
   "ValueRange": "Waarde moet groter zijn dan of gelijk zijn aan {0} en kleiner dan of gelijk zijn aan {1}, maar is {2}",
-  "XML": "Gegeven tekenreeks is geen geldige XML"
+  "XML": "Gegeven tekenreeks is geen geldige XML",
+  "Pattern": "Waarde voldoet niet aan de volgende reguliere expressie: {0}",
+  "ArrayEvery": "Niet alle inputs voldoen aan een bepaald criterium",
+  "ArrayNone": "Alle invoer mag niet aan een bepaald criterium voldoen",
+  "ArrayOne": "Deze dataset vereist precies één waarde (0 en 2+ zijn niet toegestaan)",
+  "ArraySome": "Ten minste één invoer moet aan een bepaald criterium voldoen"
 }

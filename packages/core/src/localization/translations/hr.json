@@ -43,5 +43,10 @@
   "XML": "Unos nije validni XML",
   "Uppercase": "Unos smije sadržavati samo velika slova",
   "Lowercase": "Unos smije sadržavati samo mala slova",
-  "ValidDateRange": "{0} mora prethoditi {1}"
+  "ValidDateRange": "{0} mora prethoditi {1}",
+  "Pattern": "Vrijednost ne zadovoljava sljedeći regularni izraz: {0}",
+  "ArrayEvery": "Ne zadovoljavaju svi ulazi zadane kriterije",
+  "ArrayNone": "Svi ulazi ne smiju zadovoljiti zadane kriterije",
+  "ArrayOne": "Ovaj skup podataka zahtijeva točno jednu vrijednost (0 i 2+ nisu dopušteni)",
+  "ArraySome": "Najmanje jedan unos mora zadovoljiti zadani kriterij"
 }

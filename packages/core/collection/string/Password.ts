@@ -1,5 +1,5 @@
 import API from "api";
-
+import { translate } from "../../src/localization/service/TranslationService";
 import RegexConst from "./regex/shared/regex.constants";
 
 const PASSWORD_REGEXES = {
@@ -54,7 +54,7 @@ export function Password<T extends API.Utilities.Objects.Optional<string>>(
     specials?: boolean;
     length?: number;
   },
-  config?: API.Decorator.Props.Base
+  options?: API.Decorator.Options
 ) {
   const lowercase = rules?.lowercase ?? true;
   const uppercase = rules?.uppercase ?? false;
@@ -76,47 +76,31 @@ export function Password<T extends API.Utilities.Objects.Optional<string>>(
   ) {
     if (str.length < length)
       return buildConstraintViolation(
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "PasswordLength",
-          length
-        ),
+        translate(locale, "PasswordLength", length),
         false
       );
 
     if (uppercase && isInvalid(str, "uppercase"))
       return buildConstraintViolation(
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "PasswordUppercase"
-        ),
+        translate(locale, "PasswordUppercase"),
         false
       );
 
     if (lowercase && isInvalid(str, "lowercase"))
       return buildConstraintViolation(
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "PasswordLowercase"
-        ),
+        translate(locale, "PasswordLowercase"),
         false
       );
 
     if (numbers && isInvalid(str, "numbers"))
       return buildConstraintViolation(
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "PasswordNumbers"
-        ),
+        translate(locale, "PasswordNumbers"),
         false
       );
 
     if (specials && isInvalid(str, "specials"))
       return buildConstraintViolation(
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "PasswordSpecials"
-        ),
+        translate(locale, "PasswordSpecials"),
         false
       );
 
@@ -124,7 +108,7 @@ export function Password<T extends API.Utilities.Objects.Optional<string>>(
   }
 
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
-    (str, _, locale) => isValid(str ?? "", locale),
-    config
+    (value, _context, locale) => isValid(value ?? "", locale),
+    API.Decorator.groups(options)
   );
 }

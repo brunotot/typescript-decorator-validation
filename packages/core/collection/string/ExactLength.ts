@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /** ExactLength identifier. */
 export const EXACT_LENGTH = "ExactLength";
@@ -58,19 +59,18 @@ export function isExactLengthValid(
  */
 export function ExactLength<T extends API.Utilities.Objects.Optional<string>>(
   exact: number,
-  config?: API.Decorator.Props.Base<"message-optional">
+  options?: API.Decorator.Options
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: EXACT_LENGTH,
+      key: API.Decorator.key(options, EXACT_LENGTH),
       valid: isExactLengthValid(value, exact),
       message: API.Decorator.message(
-        config?.message,
+        options,
         locale,
-        EXACT_LENGTH,
-        exact
+        translate(locale, EXACT_LENGTH, exact)
       ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

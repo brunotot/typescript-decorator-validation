@@ -1,5 +1,6 @@
 import API from "api";
 
+import { translate } from "../../../../src/localization/service/TranslationService";
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
 
@@ -31,15 +32,18 @@ import RegexConst from "../shared/regex.constants";
  * }
  */
 export function Lowercase<T extends API.Utilities.Objects.Optional<string>>(
-  message?: string,
-  config?: API.Decorator.Props.Base
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: "Lowercase",
-      message: API.Decorator.message(message, locale, "Lowercase"),
+      key: API.Decorator.key(options, "Lowercase"),
       valid: testRegex(RegexConst.LOWERCASE, value),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, "Lowercase")
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

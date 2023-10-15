@@ -1,5 +1,6 @@
 import API from "api";
 
+import { translate } from "../../../../src/localization/service/TranslationService";
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
 /**
@@ -30,15 +31,18 @@ import RegexConst from "../shared/regex.constants";
  * }
  */
 export function IPAddress<T extends API.Utilities.Objects.Optional<string>>(
-  message?: string,
-  config?: API.Decorator.Props.Base
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: "IPAddress",
-      message: API.Decorator.message(message, locale, "IPAddress"),
+      key: API.Decorator.key(options, "IPAddress"),
       valid: testRegex(RegexConst.IP_ADDRESS, value),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, "IPAddress")
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

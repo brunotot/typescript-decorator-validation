@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../../src/localization/service/TranslationService";
 
 export function testRegex<T extends API.Utilities.Objects.Optional<string>>(
   regex: RegExp,
@@ -11,11 +12,10 @@ export function testRegex<T extends API.Utilities.Objects.Optional<string>>(
  * Creates a validator decorator that checks if a string value matches a regular expression pattern.
  *
  * @typeparam T - The type of the decorated property (optional string).
- * @param props - An object with properties for the validator.
- * @param props.regex - The regular expression pattern to match against the value.
- * @param props.key - (Optional) The key to identify this validation rule in error messages. Defaults to "Pattern".
- * @param props.message - (Optional) The custom error message to display when validation fails.
- * @param props.groups - (Optional) An array of validation groups to which this rule belongs.
+ * @param regex The regular expression pattern to match against the value.
+ * @param message - (Optional) The custom error message to display when validation fails.
+ * @param key - (Optional) The key to identify this validation rule in error messages. Defaults to "Pattern".
+ * @param config - (Optional) An array of validation groups to which this rule belongs.
  * @returns A decorator function to use with class properties.
  *
  * @example
@@ -38,16 +38,18 @@ export function testRegex<T extends API.Utilities.Objects.Optional<string>>(
  */
 export function Pattern<T extends API.Utilities.Objects.Optional<string>>(
   regex: RegExp,
-  message: string,
-  key?: string,
-  config?: API.Decorator.Props.Base
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
-    (value, _context, _locale) => ({
-      key: key ?? "Pattern",
-      message: API.Decorator.message(message),
+    (value, _context, locale) => ({
+      key: API.Decorator.key(options, "Pattern"),
       valid: testRegex(regex, value),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, "Pattern", regex.toString())
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

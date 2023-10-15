@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /** ValidDateRange identifier. */
 export const VALID_DATE_RANGE = "ValidDateRange";
@@ -68,22 +69,25 @@ export function ValidDateRange<
 >(
   startDateField: string,
   endDateField: string,
-  config?: API.Decorator.Props.Base<"message-optional">
+  options?: API.Decorator.Options
 ): API.Decorator.Service.ClassDecoratorService.Instance<
   API.Utilities.Types.UnwrapClass<T>
 > {
   return API.Decorator.Service.ClassDecoratorValidatorService.build(
     (value, _context, locale) => ({
-      key: VALID_DATE_RANGE,
+      key: API.Decorator.key(options, VALID_DATE_RANGE),
       valid: isValidDateRangeValid(value, startDateField, endDateField),
       message: API.Decorator.message(
-        config?.message,
+        options,
         locale,
-        VALID_DATE_RANGE,
-        API.Utilities.Strings.convertCamelCaseToText(endDateField, false),
-        API.Utilities.Strings.convertCamelCaseToText(startDateField)
+        translate(
+          locale,
+          VALID_DATE_RANGE,
+          API.Utilities.Strings.convertCamelCaseToText(endDateField, false),
+          API.Utilities.Strings.convertCamelCaseToText(startDateField)
+        )
       ),
     }),
-    config
+    options
   );
 }

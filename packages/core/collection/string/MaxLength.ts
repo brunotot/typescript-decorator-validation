@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /**
  * Creates a validator decorator for maximum length validation.
@@ -28,14 +29,18 @@ import API from "api";
  */
 export function MaxLength<T extends API.Utilities.Objects.Optional<string>>(
   max: number,
-  config?: API.Decorator.Props.Base<"message-optional">
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: "MaxLength",
-      message: API.Decorator.message(config?.message, locale, "MaxLength", max),
+      key: API.Decorator.key(options, "MaxLength"),
       valid: (value ?? "").length <= max,
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, "MaxLength", max)
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

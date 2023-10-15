@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /** FutureDate identifier. */
 export const FUTURE_DATE = "FutureDate";
@@ -56,15 +57,18 @@ export function isFutureDateValid<
  * ```
  */
 export function FutureDate<T extends API.Utilities.Objects.Optional<Date>>(
-  message?: string,
-  config?: API.Decorator.Props.Base
+  options?: API.Decorator.Options
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (date, _context, locale) => ({
-      key: FUTURE_DATE,
-      message: API.Decorator.message(message, locale, FUTURE_DATE, date),
+      key: API.Decorator.key(options, FUTURE_DATE),
       valid: isFutureDateValid(date),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, FUTURE_DATE, date)
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

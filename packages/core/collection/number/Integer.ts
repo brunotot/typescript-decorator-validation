@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /**
  * Decorator for validating that a value is an integer.
@@ -17,15 +18,18 @@ import API from "api";
  * This example applies the `Integer` validator to the `quantity` property to ensure it is an integer.
  */
 export function Integer<T extends API.Utilities.Objects.Optional<number>>(
-  message?: string,
-  config?: API.Decorator.Props.Base
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (num, _context, locale) => ({
-      key: "Integer",
+      key: API.Decorator.key(options, "Integer"),
       valid: num !== undefined && num !== null && Number.isInteger(num),
-      message: API.Decorator.message(message, locale, "Integer", num),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, "Integer", num)
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

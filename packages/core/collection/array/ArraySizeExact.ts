@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /**
  * Decorator for validating that an array has an exact number of elements.
@@ -21,20 +22,18 @@ import API from "api";
  */
 export function ArraySizeExact<K, T extends K[]>(
   exact: number,
-  config?: API.Decorator.Props.Base<"message-optional">
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (array, _context, locale) => ({
-      key: "ArraySizeExact",
+      key: API.Decorator.key(options, "ArraySizeExact"),
       valid: (array ?? []).length === exact,
       message: API.Decorator.message(
-        config?.message,
+        options,
         locale,
-        "ArraySizeExact",
-        exact,
-        (array ?? []).length
+        translate(locale, "ArraySizeExact", exact, (array ?? []).length)
       ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

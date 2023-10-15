@@ -1,6 +1,5 @@
 import API from "api";
 
-import DecoratorProps from "./models/DecoratorProps";
 import ClassDecoratorServiceNamespace from "./service/ClassDecoratorService";
 import ClassDecoratorValidatorServiceNamespace from "./service/ClassDecoratorValidatorService";
 import FieldDecoratorServiceNamespace from "./service/FieldDecoratorService";
@@ -10,6 +9,12 @@ import FieldDecoratorValidatorServiceNamespace from "./service/FieldDecoratorVal
  * A collection of types and interfaces for creating and handling decorators.
  */
 namespace Decorator {
+  export type Options = Partial<{
+    key: string;
+    message: string;
+    groups: string[];
+  }>;
+
   /**
    * A collection of services which allow for easy manipulation of field and class decorators.
    */
@@ -57,8 +62,6 @@ namespace Decorator {
     context: API.Decorator.Context<T>
   ) => void) & {};
 
-  export import Props = DecoratorProps;
-
   /**
    * Extracts a message from the provided decorator properties.
    *
@@ -70,21 +73,14 @@ namespace Decorator {
    * @returns The extracted message or the default message if none is found.
    */
   export function message(
-    definedMessage?: string,
-    locale?: API.Localization.Resolver.LocaleResolver.Locale,
-    key?: API.Localization.Service.MessageReaderService.MessageKey,
-    ...args: any[]
+    options: Options | undefined,
+    locale: API.Localization.Resolver.LocaleResolver.Locale,
+    defaultMessage: string
   ): string {
-    const msg = definedMessage ?? API.Utilities.Strings.EMPTY;
-    const isTranslationDefined = !locale || !key;
-    const isMessageDefined = msg.length > 0;
-    const translateFn = API.Localization.Service.TranslationService.translate;
-    const resolverFn = API.Localization.Resolver.MessageResolver.resolve;
-    return isTranslationDefined
-      ? msg
-      : isMessageDefined
-      ? translateFn(locale, key, ...args)
-      : resolverFn(locale, msg);
+    const msg = options?.message ?? API.Utilities.Strings.EMPTY;
+    return message.length > 0
+      ? API.Localization.Resolver.MessageResolver.resolve(locale, msg)
+      : defaultMessage ?? "";
   }
 
   /**
@@ -93,30 +89,20 @@ namespace Decorator {
    * @param provider - The decorator properties.
    * @returns An array of unique validation groups.
    */
-  export function groups(provider?: Props.Any): string[] {
-    return provider?.groups === undefined
-      ? []
-      : Array.isArray(provider.groups)
-      ? API.Utilities.Objects.unique(provider.groups)
-      : [provider.groups];
+  export function groups(
+    options?: Options,
+    defaultGroups: string[] = []
+  ): string[] {
+    return Array.isArray(options?.groups)
+      ? API.Utilities.Objects.unique(options!.groups)
+      : API.Utilities.Objects.unique(defaultGroups);
   }
 
-  /**
-   * Filters validators based on the provided validation groups.
-   * @typeParam TFieldType - The type of the field being validated.
-   * @param data - The array of metadata for each validator.
-   * @param groups - The validation groups to filter by.
-   * @returns An array of filtered validators.
-   */
-  export function groupedValidators<TFieldType>(
-    data: Array<API.Validation.Metadata<TFieldType>>,
-    groups: string[]
-  ): Array<API.Validation.Metadata<TFieldType>> {
-    return data.filter((meta: API.Validation.Metadata<TFieldType>) =>
-      groups.length > 0
-        ? meta.groups.some((o) => groups.includes(o))
-        : meta.groups.length === 0
-    );
+  export function key(
+    options: Options | undefined,
+    defaultKey: string
+  ): string {
+    return options?.key ?? defaultKey;
   }
 }
 

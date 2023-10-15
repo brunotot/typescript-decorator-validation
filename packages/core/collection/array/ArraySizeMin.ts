@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /**
  * Decorator for validating that an array has a maximum number of elements.
@@ -21,20 +22,23 @@ import API from "api";
  */
 export function ArraySizeMin<K, T extends K[]>(
   min: number,
-  config?: API.Decorator.Props.Base<"message-optional">
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (array, _context, locale) => ({
-      key: "ArraySizeMin",
+      key: API.Decorator.key(options, "ArraySizeMin"),
       valid: (array ?? []).length >= min,
       message: API.Decorator.message(
-        config?.message,
+        options,
         locale,
-        "ArraySizeMin",
-        min,
-        String((array ?? []).length ?? "0")
+        translate(
+          locale,
+          "ArraySizeMin",
+          min,
+          String((array ?? []).length ?? "0")
+        )
       ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

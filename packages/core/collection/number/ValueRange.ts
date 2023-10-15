@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /**
  * ValueRange decorator for validating that a numeric value falls within a specified range.
@@ -30,21 +31,18 @@ import API from "api";
 export function ValueRange<T extends API.Utilities.Objects.Optional<number>>(
   min: number,
   max: number,
-  config?: API.Decorator.Props.Base<"message-optional">
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _, locale) => ({
-      key: "ValueRange",
+      key: API.Decorator.key(options, "ValueRange"),
       valid: value == null ? true : value >= min && value <= max,
       message: API.Decorator.message(
-        config?.message,
+        options,
         locale,
-        "ValueRange",
-        min,
-        max,
-        value
+        translate(locale, "ValueRange", min, max, value)
       ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

@@ -49,7 +49,7 @@ namespace ReflectionRule {
       groups: string[],
       locale: API.Localization.Resolver.LocaleResolver.Locale
     ): API.Validation.Result[] {
-      return API.Decorator.groupedValidators(this.#contents, groups)
+      return this.#groupedValidators(this.#contents, groups)
         .map(({ validate }) => validate(value, payload, locale))
         .filter(({ valid }) => !valid);
     }
@@ -70,6 +70,24 @@ namespace ReflectionRule {
      */
     add(rule: API.Validation.Metadata<TFieldType>): void {
       this.#contents.push(rule);
+    }
+
+    /**
+     * Filters validators based on the provided validation groups.
+     * @typeParam TFieldType - The type of the field being validated.
+     * @param data - The array of metadata for each validator.
+     * @param groups - The validation groups to filter by.
+     * @returns An array of filtered validators.
+     */
+    #groupedValidators<TFieldType>(
+      data: Array<API.Validation.Metadata<TFieldType>>,
+      groups: string[]
+    ): Array<API.Validation.Metadata<TFieldType>> {
+      return data.filter((meta: API.Validation.Metadata<TFieldType>) =>
+        groups.length > 0
+          ? meta.groups.some((o) => groups.includes(o))
+          : meta.groups.length === 0
+      );
     }
   }
 }

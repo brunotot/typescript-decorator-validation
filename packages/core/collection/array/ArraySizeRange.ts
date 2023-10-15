@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /**
  * Decorator for validating that an array falls within a specified size range.
@@ -23,21 +24,18 @@ import API from "api";
 export function ArraySizeRange<K, T extends K[]>(
   min: number,
   max: number,
-  config?: API.Decorator.Props.Base<"message-optional">
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (array, _, locale) => ({
-      key: "ArraySizeRange",
+      key: API.Decorator.key(options, "ArraySizeRange"),
       valid: (array ?? []).length >= min && (array ?? []).length <= max,
       message: API.Decorator.message(
-        config?.message,
+        options,
         locale,
-        "ArraySizeRange",
-        min,
-        max,
-        (array ?? []).length
+        translate(locale, "ArraySizeRange", min, max, (array ?? []).length)
       ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

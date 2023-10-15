@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /**
  * ValueMin decorator for validating that a numeric value is greater than or equal to a specified minimum value.
@@ -28,20 +29,18 @@ import API from "api";
  */
 export function ValueMin<T extends API.Utilities.Objects.Optional<number>>(
   min: number,
-  config?: API.Decorator.Props.Base<"message-optional">
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _, locale) => ({
-      key: "ValueMin",
+      key: API.Decorator.key(options, "ValueMin"),
       valid: value == null ? true : value >= min,
       message: API.Decorator.message(
-        config?.message,
+        options,
         locale,
-        "ValueMin",
-        min,
-        value
+        translate(locale, "ValueMin", min, value)
       ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

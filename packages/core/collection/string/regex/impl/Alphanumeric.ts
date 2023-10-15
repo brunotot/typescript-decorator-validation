@@ -1,5 +1,6 @@
 import API from "api";
 
+import { translate } from "../../../../src/localization/service/TranslationService";
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
 /**
@@ -30,15 +31,18 @@ import RegexConst from "../shared/regex.constants";
  * }
  */
 export function Alphanumeric<T extends API.Utilities.Objects.Optional<string>>(
-  message?: string,
-  config?: API.Decorator.Props.Base
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: "Alphanumeric",
-      message: API.Decorator.message(message, locale, "Alphanumeric"),
+      key: API.Decorator.key(options, "Alphanumeric"),
       valid: testRegex(RegexConst.ALPHANUMERIC, value),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, "Alphanumeric")
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

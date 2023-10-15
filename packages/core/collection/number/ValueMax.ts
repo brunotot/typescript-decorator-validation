@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /**
  * ValueMax decorator for validating that a numeric value is less than or equal to a specified maximum value.
@@ -28,20 +29,18 @@ import API from "api";
  */
 export function ValueMax<T extends API.Utilities.Objects.Optional<number>>(
   max: number,
-  config?: API.Decorator.Props.Base<"message-optional">
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _, locale) => ({
-      key: "ValueMax",
+      key: API.Decorator.key(options, "ValueMax"),
       valid: value == null ? true : value <= max,
       message: API.Decorator.message(
-        config?.message,
+        options,
         locale,
-        "ValueMax",
-        max,
-        value
+        translate(locale, "ValueMax", max, value)
       ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

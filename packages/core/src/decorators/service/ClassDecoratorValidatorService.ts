@@ -69,10 +69,10 @@ namespace ClassDecoratorValidatorService {
     T extends API.Decorator.Service.ClassDecoratorService.Type
   >(
     validate: API.Validation.Evaluator<T>,
-    config?: API.Decorator.Props.Any
+    options?: API.Decorator.Options
   ): API.Decorator.Service.ClassDecoratorService.Instance<T> {
     return API.Decorator.Service.ClassDecoratorService.build((meta) => {
-      meta.addValidator(validate, API.Decorator.groups(config));
+      meta.addValidator(validate, API.Decorator.groups(options));
     });
   }
 }

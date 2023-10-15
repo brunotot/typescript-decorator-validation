@@ -35,10 +35,10 @@ namespace FieldDecoratorValidatorService {
     T extends API.Decorator.Service.FieldDecoratorService.Type
   >(
     validate: API.Validation.Evaluator<T>,
-    config?: API.Decorator.Props.Any
+    groups?: string[]
   ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
     return API.Decorator.Service.FieldDecoratorService.build<T>((meta, key) => {
-      meta.addValidator(key, validate, API.Decorator.groups(config));
+      meta.addValidator(key, validate, groups ?? []);
     });
   }
 }

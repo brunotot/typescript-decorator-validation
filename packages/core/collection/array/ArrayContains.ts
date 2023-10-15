@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /** ArrayContains identifier. */
 export const ARRAY_CONTAINS = "ArrayContains";
@@ -34,7 +35,7 @@ export function isArrayContainsValid<K, T extends K[]>(
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@ArrayContains("en", { message: "English language must be selected" })
+ *   _@ArrayContains("en", "English language must be selected")
  *   languages: string[];
  * }
  * ```
@@ -43,7 +44,11 @@ export function isArrayContainsValid<K, T extends K[]>(
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@ArrayContains("en", { groups: ["UPDATE"] })
+ *   _@ArrayContains(
+ *     "en",
+ *     undefined,
+ *     { groups: ["UPDATE"] }
+ *   )
  *   languages: string[];
  * }
  * ```
@@ -52,26 +57,29 @@ export function isArrayContainsValid<K, T extends K[]>(
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@ArrayContains("en", { groups: ["UPDATE"], message: "English language must be selected" })
+ *   _@ArrayContains(
+ *     "en",
+ *     "English language must be selected",
+ *     { groups: "UPDATE" }
+ *   )
  *   languages: string[];
  * }
  * ```
  */
 export function ArrayContains<K, T extends Array<K>>(
   contains: K,
-  config: API.Decorator.Props.Base<"message-optional">
+  options?: API.Decorator.Options
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (array, _context, locale) => ({
-      key: ARRAY_CONTAINS,
+      key: API.Decorator.key(options, ARRAY_CONTAINS),
       valid: isArrayContainsValid(array, contains),
       message: API.Decorator.message(
-        config?.message,
+        options,
         locale,
-        ARRAY_CONTAINS,
-        contains
+        translate(locale, ARRAY_CONTAINS, contains)
       ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /** PastDate identifier. */
 export const PAST_DATE = "PastDate";
@@ -56,15 +57,18 @@ export function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(
  * ```
  */
 export function PastDate<T extends API.Utilities.Objects.Optional<Date>>(
-  message?: string,
-  config?: API.Decorator.Props.Base
+  options?: API.Decorator.Options
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (date, _context, locale) => ({
-      key: PAST_DATE,
-      message: API.Decorator.message(message, locale, PAST_DATE, date),
+      key: API.Decorator.key(options, PAST_DATE),
       valid: isPastDateValid(date),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, PAST_DATE, date)
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

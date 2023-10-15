@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /**
  * Decorator for validating that exactly one element in an array passes a specified test.
@@ -21,14 +22,18 @@ import API from "api";
  */
 export function ArrayOne<K, T extends K[]>(
   predicate: API.Utilities.Objects.ArrayPredicate<K>,
-  config: API.Decorator.Props.Base<"message-required">
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
-    (array, _context, _locale) => ({
-      key: "ArrayOne",
-      message: API.Decorator.message(config.message),
+    (array, _context, locale) => ({
+      key: API.Decorator.key(options, "ArrayOne"),
       valid: (array ?? []).filter(predicate).length === 1,
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, "ArrayOne")
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }

@@ -1,4 +1,5 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
 
 /**
  * Creates a validator decorator for minimum length validation.
@@ -28,14 +29,18 @@ import API from "api";
  */
 export function MinLength<T extends API.Utilities.Objects.Optional<string>>(
   min: number,
-  config?: API.Decorator.Props.Base<"message-optional">
+  options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: "MinLength",
-      message: API.Decorator.message(config?.message, locale, "MinLength", min),
+      key: API.Decorator.key(options, "MinLength"),
       valid: (value ?? "").length >= min,
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, "MinLength", min)
+      ),
     }),
-    config
+    API.Decorator.groups(options)
   );
 }
