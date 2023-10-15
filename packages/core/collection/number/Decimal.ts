@@ -5,7 +5,6 @@ import { translate } from "../../src/localization/service/TranslationService";
  * Decorator for validating if a value is a decimal number.
  *
  * @typeParam T - The type of the value property.
- * @param props - Optional properties for the decorator.
  * @returns A validation decorator function.
  *
  * Example usage:

@@ -77,8 +77,6 @@ namespace ReflectionDescriptor {
 
     /**
      * Constructs a new `ReflectionDescriptor` instance.
-     *
-     * @param props - The properties for constructing the descriptor.
      */
     constructor({
       hostClass,

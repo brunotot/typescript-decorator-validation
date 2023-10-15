@@ -27,7 +27,6 @@ export function isRequiredValid<T>(
  *
  * @key {@link REQUIRED Required}
  * @typeParam T - The type of the decorated property (any class field).
- * @param props - (Optional) An object with optional decorator-related props.
  * @returns A decorator function to use with class fields.
  *
  * @example
@@ -43,7 +42,7 @@ export function isRequiredValid<T>(
  * Example 2: Supplying a custom error message
  * ```ts
  * class Product {
- *   _@Required("Product name is mandatory")
+ *   _@Required({ message: "Product name is mandatory" })
  *   name: string;
  * }
  * ```
@@ -52,7 +51,10 @@ export function isRequiredValid<T>(
  * Example 3: Supplying a custom error message and groups
  * ```ts
  * class Product {
- *   _@Required("Product name is mandatory", { groups: ["CREATE"] })
+ *   _@Required({
+ *     message: "Product name is mandatory",
+ *     groups: ["CREATE"]
+ *   })
  *   name: string;
  * }
  * ```

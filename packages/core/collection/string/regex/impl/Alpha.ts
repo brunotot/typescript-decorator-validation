@@ -7,7 +7,6 @@ import RegexConst from "../shared/regex.constants";
  * Creates a validator decorator that checks if a string value contains only alphabetical characters (letters).
  *
  * @typeparam T - The type of the decorated property (optional string).
- * @param props - (Optional) An object with properties for the validator.
  * @param props.key - (Optional) The key to identify this validation rule in error messages. Defaults to "Alpha".
  * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
  * @param props.groups - (Optional) An array of validation groups to which this rule belongs.

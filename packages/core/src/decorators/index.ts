@@ -9,9 +9,21 @@ import FieldDecoratorValidatorServiceNamespace from "./service/FieldDecoratorVal
  * A collection of types and interfaces for creating and handling decorators.
  */
 namespace Decorator {
+  /**
+   * Options for configuring validator decorators.
+   */
   export type Options = Partial<{
+    /**
+     * Identifier of the validator decorator.
+     */
     key: string;
+    /**
+     * Error message to be evaluated through a preprocessor, which can have a custom or default implementation based on library setup.
+     */
     message: string;
+    /**
+     * Unique list of groups for conditional validation. Validator triggers only if the form is applied on a listed group.
+     */
     groups: string[];
   }>;
 

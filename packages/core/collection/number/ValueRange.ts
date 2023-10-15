@@ -4,8 +4,6 @@ import { translate } from "../../src/localization/service/TranslationService";
 /**
  * ValueRange decorator for validating that a numeric value falls within a specified range.
  *
- * @param props - Properties to configure the decorator, including the minimum and maximum values.
- *
  * @typeParam T - The type of the value to be validated, which should be optional and a number.
  *
  * @returns A decorator function that can be applied to class properties.

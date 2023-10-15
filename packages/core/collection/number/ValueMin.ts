@@ -4,8 +4,6 @@ import { translate } from "../../src/localization/service/TranslationService";
 /**
  * ValueMin decorator for validating that a numeric value is greater than or equal to a specified minimum value.
  *
- * @param props - Properties to configure the decorator, including the minimum value.
- *
  * @typeParam T - The type of the value to be validated, which should be optional and a number.
  *
  * @returns A decorator function that can be applied to class properties.

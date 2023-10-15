@@ -1,42 +1,74 @@
 import API from "api";
 import { translate } from "../../src/localization/service/TranslationService";
 
+/** ArraySizeMin identifier. */
+export const ARRAY_SIZE_MIN = "ArraySizeMin";
+
+/** Internal validation function for {@link ArraySizeMin} validator. */
+export function isArraySizeMinValid(array: any[], min: number): boolean {
+  API.Utilities.Objects.assertType("array", array);
+  return (array ?? []).length >= min;
+}
+
 /**
- * Decorator for validating that an array has a maximum number of elements.
+ * Checks if the decorated array contains at least `min` number of elements.
  *
- * @typeParam K - The type of elements in the array.
- * @param props - The validation properties.
- * @param props.value - The maximum number of elements the array can have.
- * @param [props.groups] - The validation groups to which this validation belongs.
- * @param [props.message] - The custom error message to display if the validation fails.
- * @returns A validation decorator function.
+ * @key {@link ARRAY_SIZE_MIN ArraySizeMin}
+ * @typeParam T - The type of decorated array property.
+ * @typeParam K - The type of elements in the decorated array.
+ * @returns A decorator function to use on class fields of type `Array<any>`.
  *
- * Example usage:
- * ```
- * class MyClass {
- *   //@ArraySizeMax<number>({ value: 10, groups: ["group1"], message: "Array cannot have more than 10 elements" })
- *   myArray: number[];
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   _@ArraySizeMin(3)
+ *   languages: string[];
  * }
  * ```
- * This example validates that the `myArray` property has a maximum of 10 elements, associates it with a custom validation group, and provides a custom error message if the validation fails.
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   _@ArraySizeMin(3, { message: "You must choose at least 3 languages" })
+ *   languages: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   _@ArraySizeMin(3, { groups: ["UPDATE"] })
+ *   languages: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   _@ArraySizeMin(3, {
+ *     message: "You must choose at least 3 languages",
+ *     groups: ["UPDATE"]
+ *   })
+ *   languages: string[];
+ * }
+ * ```
  */
-export function ArraySizeMin<K, T extends K[]>(
+export function ArraySizeMin<K, T extends Array<K>>(
   min: number,
   options?: API.Decorator.Options
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.key(options, "ArraySizeMin"),
-      valid: (array ?? []).length >= min,
+      key: API.Decorator.key(options, ARRAY_SIZE_MIN),
+      valid: isArraySizeMinValid(array, min),
       message: API.Decorator.message(
         options,
         locale,
-        translate(
-          locale,
-          "ArraySizeMin",
-          min,
-          String((array ?? []).length ?? "0")
-        )
+        translate(locale, ARRAY_SIZE_MIN, min, (array ?? []).length)
       ),
     }),
     API.Decorator.groups(options)

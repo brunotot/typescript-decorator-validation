@@ -18,7 +18,6 @@ export function isExactLengthValid(
  *
  * @key {@link EXACT_LENGTH ExactLength}
  * @typeParam T - The type of the decorated property (nullable string) - optional if used in decorator context.
- * @param props - The exact length number or an object with the exact length number and optional arguments.
  * @returns A decorator function to use on class fields of type `string`.
  *
  * @example

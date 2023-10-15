@@ -31,7 +31,7 @@ export function isArrayEmptyValid(array: any[]): boolean {
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@ArrayEmpty("Languages data must be empty")
+ *   _@ArrayEmpty({ message: "Languages data must be empty" })
  *   languages: string[];
  * }
  * ```
@@ -40,7 +40,7 @@ export function isArrayEmptyValid(array: any[]): boolean {
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@ArrayEmpty(undefined, { groups: ["UPDATE"] })
+ *   _@ArrayEmpty({ groups: ["UPDATE"] })
  *   languages: string[];
  * }
  * ```
@@ -49,7 +49,10 @@ export function isArrayEmptyValid(array: any[]): boolean {
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@ArrayEmpty("Languages data must be empty", { groups: "UPDATE" })
+ *   _@ArrayEmpty({
+ *     message: "Languages data must be empty",
+ *     groups: ["UPDATE"]
+ *   })
  *   languages: string[];
  * }
  * ```

@@ -4,7 +4,6 @@ import API from "api";
  * Creates a custom validator decorator from the `validate` supplier function. Is used by {@link API.Validation.ValidationEngine ValidationEngine} and allows custom validation logic.
  *
  * @typeParam T - The type of the decorated property. May be any type of field except a class.
- * @param props - An object with a custom validation function or a validation function directly.
  * @returns A validator decorator function to use with class fields.
  *
  * @example
@@ -28,7 +27,7 @@ import API from "api";
  *     key: "AdultAge",
  *     valid: value >= 18,
  *     message: "You must be an adult (18+)"
- *   }), { groups: ["UPDATE"] })
+ *   }), ["UPDATE"])
  *   age: number;
  * }
  * ```
@@ -42,7 +41,7 @@ import API from "api";
  *     key: "AdultAge",
  *     valid: value >= 18,
  *     message: "You must be an adult (18+)"
- *   }), { groups: ["UPDATE"] });
+ *   }), ["UPDATE"]);
  * }
  *
  * class User {

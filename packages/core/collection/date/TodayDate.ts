@@ -23,7 +23,6 @@ export function isTodayDateValid<
  *
  * @key {@link TODAY_DATE TodayDate}
  * @typeParam T - The type of the date property.
- * @param props - The custom error message or an object with an error message and optional arguments.
  * @returns A decorator function to use on class fields of type `Date`.
  *
  * @example

@@ -1,37 +1,78 @@
 import API from "api";
 import { translate } from "../../src/localization/service/TranslationService";
 
+/** ArrayNone identifier. */
+export const ARRAY_NONE = "ArrayNone";
+
+/** Internal validation function for {@link ArrayNone} validator. */
+export function isArrayNoneValid<K, T extends Array<K>>(
+  array: T,
+  predicate: API.Utilities.Objects.ArrayPredicate<K>
+): boolean {
+  API.Utilities.Objects.assertType("array", array);
+  return !(array ?? []).some(predicate);
+}
+
 /**
- * Decorator for validating that none of the elements in an array pass a specified test.
+ * Checks if no elements of decorated array satisfy the given predicate criteria.
  *
- * @typeParam K - The type of elements in the array.
- * @param props - The validation properties.
- * @param props.test - A predicate function to test each element in the array.
- * @param [props.groups] - The validation groups to which this validation belongs.
- * @param [props.message] - The custom error message to display if the validation fails.
- * @returns A validation decorator function.
+ * @key {@link ARRAY_NONE ArrayNone}
+ * @typeParam T - The type of decorated array property.
+ * @typeParam K - The type of elements in the decorated array.
+ * @param predicate - The predicate for `!Array.every()` call.
+ * @returns A decorator function to use on class fields of type `Array<any>`.
  *
- * Example usage:
- * ```
- * class MyClass {
- *   //@ArrayNone<number>({ test: (val) => val < 0, groups: ["group1"], message: "None of the elements can be negative" })
- *   nonNegativeNumbers: number[];
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   _@ArrayNone(num => num >= 0)
+ *   negativeNumbers: string[];
  * }
  * ```
- * This example validates that none of the elements in the `nonNegativeNumbers` array are negative, associates it with a custom validation group, and provides a custom error message if the validation fails.
- */
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   _@ArrayNone(num => num > 0, { message: "All elements must be less than 0" })
+ *   negativeNumbers: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   _@ArrayNone(num => num > 0, { groups: ["UPDATE"] })
+ *   negativeNumbers: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   _@ArrayNone(num => num > 0, {
+ *     message: "All elements must be less than 0",
+ *     groups: ["UPDATE"]
+ *   })
+ *   negativeNumbers: string[];
+ * }
+ * ```
+ **/
 export function ArrayNone<K, T extends K[]>(
   predicate: API.Utilities.Objects.ArrayPredicate<K>,
   options?: API.Decorator.Options
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.key(options, "ArrayNone"),
-      valid: !(array ?? []).some(predicate),
+      key: API.Decorator.key(options, ARRAY_NONE),
+      valid: isArrayNoneValid(array, predicate),
       message: API.Decorator.message(
         options,
         locale,
-        translate(locale, "ArrayNone")
+        translate(locale, ARRAY_NONE)
       ),
     }),
     API.Decorator.groups(options)

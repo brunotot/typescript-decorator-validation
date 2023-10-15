@@ -4,8 +4,6 @@ import { translate } from "../../src/localization/service/TranslationService";
 /**
  * Positive decorator for validating that a numeric value is positive.
  *
- * @param props - Optional properties to configure the decorator.
- *
  * @typeParam T - The type of the value to be validated, which should be optional and a number.
  *
  * @returns A decorator function that can be applied to class properties.

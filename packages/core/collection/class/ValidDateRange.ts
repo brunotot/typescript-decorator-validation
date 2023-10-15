@@ -21,7 +21,6 @@ export function isValidDateRangeValid(
  * @typeParam T - Class type on which the decorator is put.
  * @param startDateField - Field name for the start {@link Date} property.
  * @param endDateField - Field name for the end {@link Date} property.
- * @param props - Optional properties for the decorator.
  * @returns An instance of the class decorator.
  *
  * @example

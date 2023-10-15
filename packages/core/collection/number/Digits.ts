@@ -32,7 +32,6 @@ function validateDigits(
  * Decorator for validating the number of digits in a numeric value.
  *
  * @typeParam T - The type of the value property.
- * @param props - Optional properties for the decorator.
  * @returns A validation decorator function.
  *
  * Example usage:

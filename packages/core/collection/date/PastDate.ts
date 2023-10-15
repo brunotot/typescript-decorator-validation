@@ -17,7 +17,6 @@ export function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(
  *
  * @key {@link PAST_DATE PastDate}
  * @typeParam T - The type of the date property.
- * @param props - The custom error message or an object with an error message and optional arguments.
  * @returns A decorator function to use on class fields of type `Date`.
  *
  * @example

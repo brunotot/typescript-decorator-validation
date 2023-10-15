@@ -15,7 +15,6 @@ export function isAssertTrueValid(value: boolean): boolean {
  *
  * @key {@link ASSERT_TRUE AssertTrue}
  * @typeParam T - The type of the decorated property (boolean).
- * @param props - The custom error message or an object with the custom error message and optional arguments.
  * @returns A decorator function to use on class fields of type `boolean`.
  *
  * @example

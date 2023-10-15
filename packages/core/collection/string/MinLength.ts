@@ -5,7 +5,6 @@ import { translate } from "../../src/localization/service/TranslationService";
  * Creates a validator decorator for minimum length validation.
  *
  * @typeparam T - The type of the decorated property (optional string).
- * @param props - An object with the minimum length value.
  * @param props.value - The minimum length required.
  * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
  * @returns A decorator function to use with class properties.

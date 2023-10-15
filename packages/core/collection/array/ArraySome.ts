@@ -1,37 +1,78 @@
 import API from "api";
 import { translate } from "../../src/localization/service/TranslationService";
 
+/** ArraySome identifier. */
+export const ARRAY_SOME = "ArraySome";
+
+/** Internal validation function for {@link ArraySome} validator. */
+export function isArraySomeValid<K, T extends Array<K>>(
+  array: T,
+  predicate: API.Utilities.Objects.ArrayPredicate<K>
+): boolean {
+  API.Utilities.Objects.assertType("array", array);
+  return (array ?? []).some(predicate);
+}
+
 /**
- * Decorator for validating that at least one element in an array passes a specific test.
+ * Checks if at least one element of decorated array satisfies the given predicate criteria.
  *
- * @typeParam K - The type of elements in the array.
- * @param props - The validation properties.
- * @param props.value - The predicate function that each element in the array must satisfy.
- * @param [props.message] - The custom error message to display if the validation fails.
- * @param [props.groups] - The validation groups to which this validation belongs.
- * @returns A validation decorator function.
+ * @key {@link ARRAY_SOME ArraySome}
+ * @typeParam T - The type of decorated array property.
+ * @typeParam K - The type of elements in the decorated array.
+ * @param predicate - The predicate for `Array.some()` call.
+ * @returns A decorator function to use on class fields of type `Array<any>`.
  *
- * Example usage:
- * ```
- * class MyClass {
- *   //@ArraySome<number>({ value: (value) => value > 0, message: "At least one positive number is required" })
- *   numbers: number[];
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   _@ArraySome(num => num >= 0)
+ *   negativeNumbers: string[];
  * }
  * ```
- * This example validates that at least one element in the `numbers` array is greater than 0 and provides a custom error message if the validation fails.
- */
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   _@ArraySome(num => num > 0, { message: "At least one element must be greater than 0" })
+ *   negativeNumbers: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   _@ArraySome(num => num > 0, { groups: ["UPDATE"] })
+ *   negativeNumbers: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   _@ArraySome(num => num > 0, {
+ *     message: "At least one element must be greater than 0",
+ *     groups: ["UPDATE"]
+ *   })
+ *   negativeNumbers: string[];
+ * }
+ * ```
+ **/
 export function ArraySome<K, T extends K[]>(
   predicate: API.Utilities.Objects.ArrayPredicate<K>,
   options?: API.Decorator.Options
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.key(options, "ArraySome"),
-      valid: (array ?? []).some(predicate),
+      key: API.Decorator.key(options, ARRAY_SOME),
+      valid: isArraySomeValid(array, predicate),
       message: API.Decorator.message(
         options,
         locale,
-        translate(locale, "ArraySome")
+        translate(locale, ARRAY_SOME)
       ),
     }),
     API.Decorator.groups(options)

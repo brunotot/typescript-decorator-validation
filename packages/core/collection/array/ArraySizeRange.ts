@@ -1,39 +1,79 @@
 import API from "api";
 import { translate } from "../../src/localization/service/TranslationService";
 
+/** ArraySizeRange identifier. */
+export const ARRAY_SIZE_RANGE = "ArraySizeRange";
+
+/** Internal validation function for {@link ArraySizeRange} validator. */
+export function isArraySizeRangeValid(
+  array: any[],
+  min: number,
+  max: number
+): boolean {
+  API.Utilities.Objects.assertType("array", array);
+  return (array ?? []).length >= min && (array ?? []).length <= max;
+}
+
 /**
- * Decorator for validating that an array falls within a specified size range.
+ * Checks if the decorated array contains at least `min` number of elements.
  *
- * @typeParam K - The type of elements in the array.
- * @param props - The validation properties.
- * @param props.min - The minimum number of elements the array must have.
- * @param props.max - The maximum number of elements the array must have.
- * @param [props.groups] - The validation groups to which this validation belongs.
- * @param [props.message] - The custom error message to display if the validation fails.
- * @returns A validation decorator function.
+ * @key {@link ARRAY_SIZE_RANGE ArraySizeRange}
+ * @typeParam T - The type of decorated array property.
+ * @typeParam K - The type of elements in the decorated array.
+ * @returns A decorator function to use on class fields of type `Array<any>`.
  *
- * Example usage:
- * ```
- * class MyClass {
- *   //@ArraySizeRange<number>({ min: 2, max: 5, groups: ["group1"], message: "Array size must be between 2 and 5" })
- *   myArray: number[];
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   _@ArraySizeRange(3, 5)
+ *   languages: string[];
  * }
  * ```
- * This example validates that the `myArray` property has a size between 2 and 5 elements, associates it with a custom validation group, and provides a custom error message if the validation fails.
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   _@ArraySizeRange(3, 5, { message: "You must choose at least 3 and at most 5 languages" })
+ *   languages: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   _@ArraySizeRange(3, 5, { groups: ["UPDATE"] })
+ *   languages: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   _@ArraySizeRange(3, 5, {
+ *     message: "You must choose at least 3 and at most 5 languages",
+ *     groups: ["UPDATE"]
+ *   })
+ *   languages: string[];
+ * }
+ * ```
  */
 export function ArraySizeRange<K, T extends K[]>(
   min: number,
   max: number,
   options?: API.Decorator.Options
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
-    (array, _, locale) => ({
-      key: API.Decorator.key(options, "ArraySizeRange"),
-      valid: (array ?? []).length >= min && (array ?? []).length <= max,
+    (array, _context, locale) => ({
+      key: API.Decorator.key(options, ARRAY_SIZE_RANGE),
+      valid: isArraySizeRangeValid(array, min, max),
       message: API.Decorator.message(
         options,
         locale,
-        translate(locale, "ArraySizeRange", min, max, (array ?? []).length)
+        translate(locale, ARRAY_SIZE_RANGE, min, max, (array ?? []).length)
       ),
     }),
     API.Decorator.groups(options)
