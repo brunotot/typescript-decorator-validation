@@ -20,13 +20,14 @@ export function isArraySomeValid<K, T extends Array<K>>(
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param predicate - The predicate for `Array.some()` call.
+ * @param options - Extra configuration props.
  * @returns A decorator function to use on class fields of type `Array<any>`.
  *
  * @example
  * 1: Basic usage
  * ```ts
  * class Form {
- *   _@ArraySome(num => num >= 0)
+ *   \@ArraySome(num => num >= 0)
  *   negativeNumbers: string[];
  * }
  * ```
@@ -35,7 +36,7 @@ export function isArraySomeValid<K, T extends Array<K>>(
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@ArraySome(num => num > 0, { message: "At least one element must be greater than 0" })
+ *   \@ArraySome(num => num > 0, { message: "At least one element must be greater than 0" })
  *   negativeNumbers: string[];
  * }
  * ```
@@ -44,7 +45,7 @@ export function isArraySomeValid<K, T extends Array<K>>(
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@ArraySome(num => num > 0, { groups: ["UPDATE"] })
+ *   \@ArraySome(num => num > 0, { groups: ["UPDATE"] })
  *   negativeNumbers: string[];
  * }
  * ```
@@ -53,7 +54,7 @@ export function isArraySomeValid<K, T extends Array<K>>(
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@ArraySome(num => num > 0, {
+ *   \@ArraySome(num => num > 0, {
  *     message: "At least one element must be greater than 0",
  *     groups: ["UPDATE"]
  *   })

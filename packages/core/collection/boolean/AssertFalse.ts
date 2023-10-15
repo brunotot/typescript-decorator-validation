@@ -15,13 +15,14 @@ export function isAssertFalseValid(value: boolean): boolean {
  *
  * @key {@link ASSERT_FALSE AssertFalse}
  * @typeParam T - The type of the decorated property (boolean).
+ * @param options - Extra configuration props.
  * @returns A decorator function to use on class fields of type `boolean`.
  *
  * @example
  * 1: Basic usage
  * ```ts
  * class State {
- *   _@AssertFalse()
+ *   \@AssertFalse()
  *   hasErrors: boolean;
  * }
  * ```
@@ -30,7 +31,7 @@ export function isAssertFalseValid(value: boolean): boolean {
  * 2: Supplying a custom error message
  * ```ts
  * class State {
- *   _@AssertFalse("You must resolve all errors before continuing")
+ *   \@AssertFalse({ message: "You must resolve all errors before continuing" })
  *   hasErrors: boolean;
  * }
  * ```
@@ -39,7 +40,7 @@ export function isAssertFalseValid(value: boolean): boolean {
  * 3: Supplying custom groups
  * ```ts
  * class State {
- *   _@AssertFalse(undefined, { groups: ["UPDATE"] })
+ *   \@AssertFalse({ groups: ["UPDATE"] })
  *   hasErrors: boolean;
  * }
  * ```
@@ -48,10 +49,10 @@ export function isAssertFalseValid(value: boolean): boolean {
  * 4: Supplying both custom error message and groups
  * ```ts
  * class State {
- *   _@AssertFalse(
- *     "You must resolve all errors before continuing",
- *     { groups: ["UPDATE"] }
- *   )
+ *   \@AssertFalse({
+ *     message: "You must resolve all errors before continuing",
+ *     groups: ["UPDATE"]
+ *   })
  *   hasErrors: boolean;
  * }
  * ```
@@ -62,7 +63,7 @@ export function AssertFalse<T extends boolean>(
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, ASSERT_FALSE),
-      valid: !value,
+      valid: isAssertFalseValid(value),
       message: API.Decorator.message(
         options,
         locale,

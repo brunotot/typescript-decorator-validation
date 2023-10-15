@@ -7,7 +7,7 @@ export const ASSERT_TRUE = "AssertTrue";
 /** Internal validation function for {@link AssertTrue} validator. */
 export function isAssertTrueValid(value: boolean): boolean {
   API.Utilities.Objects.assertType("boolean", value);
-  return !value;
+  return !!value;
 }
 
 /**
@@ -15,13 +15,14 @@ export function isAssertTrueValid(value: boolean): boolean {
  *
  * @key {@link ASSERT_TRUE AssertTrue}
  * @typeParam T - The type of the decorated property (boolean).
+ * @param options - Extra configuration props.
  * @returns A decorator function to use on class fields of type `boolean`.
  *
  * @example
  * 1: Basic usage
  * ```ts
  * class Register {
- *   _@AssertTrue()
+ *   \@AssertTrue()
  *   acceptsTermsOfService: boolean;
  * }
  * ```
@@ -30,7 +31,7 @@ export function isAssertTrueValid(value: boolean): boolean {
  * 2: Supplying a custom error message
  * ```ts
  * class Register {
- *   _@AssertTrue("You must accept our terms of services to continue")
+ *   \@AssertTrue({ message: "You must accept our terms of services to continue" })
  *   acceptsTermsOfService: boolean;
  * }
  * ```
@@ -39,7 +40,7 @@ export function isAssertTrueValid(value: boolean): boolean {
  * 3: Supplying custom groups
  * ```ts
  * class Register {
- *   _@AssertTrue(undefined, { groups: ["UPDATE"] })
+ *   \@AssertTrue({ groups: ["UPDATE"] })
  *   acceptsTermsOfService: boolean;
  * }
  * ```
@@ -48,10 +49,10 @@ export function isAssertTrueValid(value: boolean): boolean {
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Register {
- *   _@AssertTrue(
- *     "You must accept our terms of services to continue",
- *     { groups: ["UPDATE"] }
- *   )
+ *   \@AssertTrue({
+ *     message: "You must accept our terms of services to continue",
+ *     groups: ["UPDATE"]
+ *   })
  *   acceptsTermsOfService: boolean;
  * }
  * ```
@@ -62,7 +63,7 @@ export function AssertTrue<T extends boolean>(
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, ASSERT_TRUE),
-      valid: !!value,
+      valid: isAssertTrueValid(value),
       message: API.Decorator.message(
         options,
         locale,

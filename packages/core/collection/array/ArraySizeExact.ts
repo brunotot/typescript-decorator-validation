@@ -16,13 +16,15 @@ export function isArraySizeExactValid(array: any[]): boolean {
  * @key {@link ARRAY_SIZE_EXACT ArraySizeExact}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
+ * @param exact - Exact size value.
+ * @param options - Extra configuration props.
  * @returns A decorator function to use on class fields of type `Array<any>`.
  *
  * @example
  * 1: Basic usage
  * ```ts
  * class Form {
- *   _@ArraySizeExact(3)
+ *   \@ArraySizeExact(3)
  *   languages: string[];
  * }
  * ```
@@ -31,7 +33,7 @@ export function isArraySizeExactValid(array: any[]): boolean {
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@ArraySizeExact(3, { message: "You must choose exactly 3 languages" })
+ *   \@ArraySizeExact(3, { message: "You must choose exactly 3 languages" })
  *   languages: string[];
  * }
  * ```
@@ -40,7 +42,7 @@ export function isArraySizeExactValid(array: any[]): boolean {
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@ArraySizeExact(3, { groups: ["UPDATE"] })
+ *   \@ArraySizeExact(3, { groups: ["UPDATE"] })
  *   languages: string[];
  * }
  * ```
@@ -49,7 +51,7 @@ export function isArraySizeExactValid(array: any[]): boolean {
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@ArraySizeExact(3, {
+ *   \@ArraySizeExact(3, {
  *     message: "You must choose exactly 3 languages",
  *     groups: ["UPDATE"]
  *   })

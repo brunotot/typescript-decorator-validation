@@ -17,13 +17,14 @@ export function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(
  *
  * @key {@link PAST_DATE PastDate}
  * @typeParam T - The type of the date property.
+ * @param options - Extra configuration props.
  * @returns A decorator function to use on class fields of type `Date`.
  *
  * @example
  * 1: Basic usage
  * ```ts
  * class Form {
- *   _@PastDate()
+ *   \@PastDate()
  *   date: Date;
  * }
  * ```
@@ -32,7 +33,7 @@ export function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@PastDate("Date must be in the past")
+ *   \@PastDate({ message: "Date must be in the past" })
  *   date: Date;
  * }
  * ```
@@ -41,7 +42,7 @@ export function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@PastDate(undefined, { groups: ["UPDATE"] })
+ *   \@PastDate({ groups: ["UPDATE"] })
  *   date: Date;
  * }
  * ```
@@ -50,7 +51,10 @@ export function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@PastDate("Date must be in the past", { groups: ["UPDATE"] })
+ *   \@PastDate({
+ *     message: "Date must be in the past",
+ *     groups: ["UPDATE"]
+ *   })
  *   date: Date;
  * }
  * ```

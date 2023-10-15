@@ -21,12 +21,13 @@ export function isValidDateRangeValid(
  * @typeParam T - Class type on which the decorator is put.
  * @param startDateField - Field name for the start {@link Date} property.
  * @param endDateField - Field name for the end {@link Date} property.
+ * @param options - Extra configuration props.
  * @returns An instance of the class decorator.
  *
  * @example
  * 1: Basic usage
  * ```ts
- * _@ValidDateRange("start", "end")
+ * \@ValidDateRange("start", "end")
  * class DateForm {
  *   start: Date;
  *   end: Date;
@@ -36,7 +37,7 @@ export function isValidDateRangeValid(
  * @example
  * 2: Supplying a custom error message
  * ```ts
- * _@ValidDateRange("start", "end", { message: "Dates are not in a valid range" })
+ * \@ValidDateRange("start", "end", { message: "Dates are not in a valid range" })
  * class DateForm {
  *   start: Date;
  *   end: Date;
@@ -46,7 +47,7 @@ export function isValidDateRangeValid(
  * @example
  * 3: Supplying custom groups
  * ```ts
- * _@ValidDateRange("start", "end", { groups: ["UPDATE"] })
+ * \@ValidDateRange("start", "end", { groups: ["UPDATE"] })
  * class DateForm {
  *   start: Date;
  *   end: Date;
@@ -56,7 +57,7 @@ export function isValidDateRangeValid(
  * @example
  * 4: Supplying both custom error message and groups
  * ```ts
- * _@ValidDateRange("start", "end", { message: "Dates are not in a valid range", groups: ["UPDATE"] })
+ * \@ValidDateRange("start", "end", { message: "Dates are not in a valid range", groups: ["UPDATE"] })
  * class DateForm {
  *   start: Date;
  *   end: Date;

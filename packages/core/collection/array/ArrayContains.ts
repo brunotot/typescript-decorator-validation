@@ -20,13 +20,14 @@ export function isArrayContainsValid<K, T extends Array<K>>(
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param contains - The value to check.
+ * @param options - Extra configuration props.
  * @returns A decorator function to use on class fields of type `Array<any>`.
  *
  * @example
  * 1: Basic usage
  * ```ts
  * class Form {
- *   _@ArrayContains("en")
+ *   \@ArrayContains("en")
  *   languages: string[];
  * }
  * ```
@@ -35,7 +36,7 @@ export function isArrayContainsValid<K, T extends Array<K>>(
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@ArrayContains("en", { message: "English language must be selected" })
+ *   \@ArrayContains("en", { message: "English language must be selected" })
  *   languages: string[];
  * }
  * ```
@@ -44,7 +45,7 @@ export function isArrayContainsValid<K, T extends Array<K>>(
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@ArrayContains("en", { groups: ["UPDATE"] })
+ *   \@ArrayContains("en", { groups: ["UPDATE"] })
  *   languages: string[];
  * }
  * ```
@@ -53,7 +54,7 @@ export function isArrayContainsValid<K, T extends Array<K>>(
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@ArrayContains("en", {
+ *   \@ArrayContains("en", {
  *     message: "English language must be selected",
  *     groups: ["UPDATE"]
  *   })

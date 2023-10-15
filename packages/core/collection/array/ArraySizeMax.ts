@@ -16,13 +16,15 @@ export function isArraySizeMaxValid(array: any[], max: number): boolean {
  * @key {@link ARRAY_SIZE_MAX ArraySizeMax}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
+ * @param max - Max size value.
+ * @param options - Extra configuration props.
  * @returns A decorator function to use on class fields of type `Array<any>`.
  *
  * @example
  * 1: Basic usage
  * ```ts
  * class Form {
- *   _@ArraySizeMax(3)
+ *   \@ArraySizeMax(3)
  *   languages: string[];
  * }
  * ```
@@ -31,7 +33,7 @@ export function isArraySizeMaxValid(array: any[], max: number): boolean {
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@ArraySizeMax(3, { message: "You must choose no more than 3 languages" })
+ *   \@ArraySizeMax(3, { message: "You must choose no more than 3 languages" })
  *   languages: string[];
  * }
  * ```
@@ -40,7 +42,7 @@ export function isArraySizeMaxValid(array: any[], max: number): boolean {
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@ArraySizeMax(3, { groups: ["UPDATE"] })
+ *   \@ArraySizeMax(3, { groups: ["UPDATE"] })
  *   languages: string[];
  * }
  * ```
@@ -49,7 +51,7 @@ export function isArraySizeMaxValid(array: any[], max: number): boolean {
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@ArraySizeMax(3, {
+ *   \@ArraySizeMax(3, {
  *     message: "You must choose no more than 3 languages",
  *     groups: ["UPDATE"]
  *   })

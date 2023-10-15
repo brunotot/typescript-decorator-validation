@@ -8,10 +8,10 @@ import API from "api";
  * @returns A decorator function to use with class array fields.
  *
  * @example
- * Example 1: Applies the `MinLength` and `MaxLength` validators to each element in the `names` array property.
+ * 1: Applies the `MinLength` and `MaxLength` validators to each element in the `names` array property.
  * ```ts
  * class MyClass {
- *   _@foreach(_@MinLength(5), _@MaxLength(10))
+ *   \@foreach(\@MinLength(5), \@MaxLength(10))
  *   names: string[];
  * }
  * ```

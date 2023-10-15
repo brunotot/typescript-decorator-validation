@@ -24,7 +24,7 @@ export function isExactLengthValid(
  * 1: Basic usage
  * ```ts
  * class Address {
- *   _@ExactLength(2)
+ *   \@ExactLength(2)
  *   countryCode: string;
  * }
  * ```
@@ -33,7 +33,7 @@ export function isExactLengthValid(
  * 2: Supplying a custom error message
  * ```ts
  * class Address {
- *   _@ExactLength({ value: 2, message: "Exactly 2 characters are allowed" })
+ *   \@ExactLength({ value: 2, message: "Exactly 2 characters are allowed" })
  *   countryCode: string;
  * }
  * ```
@@ -42,7 +42,7 @@ export function isExactLengthValid(
  * 3: Supplying custom groups
  * ```ts
  * class Address {
- *   _@ExactLength({ value: 2, groups: ["UPDATE"] })
+ *   \@ExactLength({ value: 2, groups: ["UPDATE"] })
  *   countryCode: string;
  * }
  * ```
@@ -51,7 +51,7 @@ export function isExactLengthValid(
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Address {
- *   _@ExactLength({ value: 2, groups: ["UPDATE"], message: "Exactly 2 characters are allowed" })
+ *   \@ExactLength({ value: 2, groups: ["UPDATE"], message: "Exactly 2 characters are allowed" })
  *   countryCode: string;
  * }
  * ```

@@ -23,13 +23,14 @@ export function isTodayDateValid<
  *
  * @key {@link TODAY_DATE TodayDate}
  * @typeParam T - The type of the date property.
+ * @param options - Extra configuration props.
  * @returns A decorator function to use on class fields of type `Date`.
  *
  * @example
  * 1: Basic usage
  * ```ts
  * class Form {
- *   _@TodayDate()
+ *   \@TodayDate()
  *   date: Date;
  * }
  * ```
@@ -38,7 +39,7 @@ export function isTodayDateValid<
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@TodayDate("The date must be today")
+ *   \@TodayDate({ message: "The date must be today" })
  *   date: Date;
  * }
  * ```
@@ -47,7 +48,7 @@ export function isTodayDateValid<
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@TodayDate(undefined, { groups: ["UPDATE"] })
+ *   \@TodayDate({ groups: ["UPDATE"] })
  *   date: Date;
  * }
  * ```
@@ -56,7 +57,10 @@ export function isTodayDateValid<
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@TodayDate("The date must be today", { groups: ["UPDATE"] })
+ *   \@TodayDate({
+ *     message: "The date must be today",
+ *     groups: ["UPDATE"]
+ *   })
  *   date: Date;
  * }
  * ```

@@ -35,13 +35,14 @@ export function isArrayUniqueValid(array: any[]): boolean {
  * @key {@link ARRAY_UNIQUE ArrayUnique}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
+ * @param options - Extra configuration props.
  * @returns A decorator function to use on class fields of type `Array<any>`.
  *
  * @example
  * 1: Basic usage
  * ```ts
  * class Form {
- *   _@ArrayUnique()
+ *   \@ArrayUnique()
  *   languages: string[];
  * }
  * ```
@@ -50,7 +51,7 @@ export function isArrayUniqueValid(array: any[]): boolean {
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@ArrayUnique({ message: "Languages data must be distinct" })
+ *   \@ArrayUnique({ message: "Languages data must be distinct" })
  *   languages: string[];
  * }
  * ```
@@ -59,7 +60,7 @@ export function isArrayUniqueValid(array: any[]): boolean {
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@ArrayUnique({ groups: ["UPDATE"] })
+ *   \@ArrayUnique({ groups: ["UPDATE"] })
  *   languages: string[];
  * }
  * ```
@@ -68,7 +69,7 @@ export function isArrayUniqueValid(array: any[]): boolean {
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@ArrayUnique({
+ *   \@ArrayUnique({
  *     message: "Languages data must be distinct",
  *     groups: ["UPDATE"]
  *   })

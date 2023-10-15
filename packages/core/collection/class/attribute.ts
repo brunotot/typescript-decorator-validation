@@ -19,22 +19,22 @@ import API, { Overrides } from "api";
  *
  * @example
  * class Item {
- *   _@ValueMax(10)
+ *   \@ValueMax(10)
  *   quantity: number;
- *   _@ValueMin(0.1)
+ *   \@ValueMin(0.1)
  *   price: number;
  * }
  *
  * class ShoppingCart {
- *   _@attribute(Item) // <---
+ *   \@attribute(Item) // <---
  *   items: Item[];
  * }
  *
  * new ValidationEngine(ShoppingCart).validate({
  *   items: [
- *     // _@ValueMax constraint violation (quantity 15 exceeds maximum amount of 10)
+ *     // \@ValueMax constraint violation (quantity 15 exceeds maximum amount of 10)
  *     { quantity: 15, price: 200.00 },
- *     // _@ValueMin constraint violation (price 0 doesn't reach the minimum price amount of 0.1)
+ *     // \@ValueMin constraint violation (price 0 doesn't reach the minimum price amount of 0.1)
  *     { quantity: 1, price: 0 }
  *   ]
  * });

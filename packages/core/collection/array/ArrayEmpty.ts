@@ -16,13 +16,14 @@ export function isArrayEmptyValid(array: any[]): boolean {
  * @key {@link ARRAY_EMPTY ArrayEmpty}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
+ * @param options - Extra configuration props.
  * @returns A decorator function to use on class fields of type `Array<any>`.
  *
  * @example
  * 1: Basic usage
  * ```ts
  * class Form {
- *   _@ArrayEmpty()
+ *   \@ArrayEmpty()
  *   languages: string[];
  * }
  * ```
@@ -31,7 +32,7 @@ export function isArrayEmptyValid(array: any[]): boolean {
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@ArrayEmpty({ message: "Languages data must be empty" })
+ *   \@ArrayEmpty({ message: "Languages data must be empty" })
  *   languages: string[];
  * }
  * ```
@@ -40,7 +41,7 @@ export function isArrayEmptyValid(array: any[]): boolean {
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@ArrayEmpty({ groups: ["UPDATE"] })
+ *   \@ArrayEmpty({ groups: ["UPDATE"] })
  *   languages: string[];
  * }
  * ```
@@ -49,7 +50,7 @@ export function isArrayEmptyValid(array: any[]): boolean {
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@ArrayEmpty({
+ *   \@ArrayEmpty({
  *     message: "Languages data must be empty",
  *     groups: ["UPDATE"]
  *   })

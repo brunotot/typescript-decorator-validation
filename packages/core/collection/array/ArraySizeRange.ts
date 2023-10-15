@@ -20,13 +20,16 @@ export function isArraySizeRangeValid(
  * @key {@link ARRAY_SIZE_RANGE ArraySizeRange}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
+ * @param min - Min size value.
+ * @param max - Max size value.
+ * @param options - Extra configuration props.
  * @returns A decorator function to use on class fields of type `Array<any>`.
  *
  * @example
  * 1: Basic usage
  * ```ts
  * class Form {
- *   _@ArraySizeRange(3, 5)
+ *   \@ArraySizeRange(3, 5)
  *   languages: string[];
  * }
  * ```
@@ -35,7 +38,7 @@ export function isArraySizeRangeValid(
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@ArraySizeRange(3, 5, { message: "You must choose at least 3 and at most 5 languages" })
+ *   \@ArraySizeRange(3, 5, { message: "You must choose at least 3 and at most 5 languages" })
  *   languages: string[];
  * }
  * ```
@@ -44,7 +47,7 @@ export function isArraySizeRangeValid(
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@ArraySizeRange(3, 5, { groups: ["UPDATE"] })
+ *   \@ArraySizeRange(3, 5, { groups: ["UPDATE"] })
  *   languages: string[];
  * }
  * ```
@@ -53,7 +56,7 @@ export function isArraySizeRangeValid(
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@ArraySizeRange(3, 5, {
+ *   \@ArraySizeRange(3, 5, {
  *     message: "You must choose at least 3 and at most 5 languages",
  *     groups: ["UPDATE"]
  *   })

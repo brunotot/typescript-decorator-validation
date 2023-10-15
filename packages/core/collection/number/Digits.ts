@@ -32,6 +32,9 @@ function validateDigits(
  * Decorator for validating the number of digits in a numeric value.
  *
  * @typeParam T - The type of the value property.
+ * @param maxInteger - Max number of left-side (integer part) digits.
+ * @param maxFraction - Max number of right-side (fraction part) digits.
+ * @param options - Extra configuration props.
  * @returns A validation decorator function.
  *
  * Example usage:

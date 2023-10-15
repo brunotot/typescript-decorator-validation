@@ -17,13 +17,14 @@ export function isFutureDateValid<
  *
  * @key {@link FUTURE_DATE FutureDate}
  * @typeParam T - The type of the date property.
+ * @param options - Extra configuration props.
  * @returns A decorator function to use on class fields of type `Date`.
  *
  * @example
  * 1: Basic usage
  * ```ts
  * class Form {
- *   _@FutureDate()
+ *   \@FutureDate()
  *   date: Date;
  * }
  * ```
@@ -32,7 +33,7 @@ export function isFutureDateValid<
  * 2: Supplying a custom error message
  * ```ts
  * class Form {
- *   _@FutureDate("Date must be in the future")
+ *   \@FutureDate({ message: "Date must be in the future" })
  *   date: Date;
  * }
  * ```
@@ -41,7 +42,7 @@ export function isFutureDateValid<
  * 3: Supplying custom groups
  * ```ts
  * class Form {
- *   _@FutureDate(undefined, { groups: ["UPDATE"] })
+ *   \@FutureDate({ groups: ["UPDATE"] })
  *   date: Date;
  * }
  * ```
@@ -50,7 +51,10 @@ export function isFutureDateValid<
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Form {
- *   _@FutureDate("Date must be in the future", { groups: ["UPDATE"] })
+ *   \@FutureDate({
+ *     message: "Date must be in the future",
+ *     groups: ["UPDATE"]
+ *   })
  *   date: Date;
  * }
  * ```
