@@ -1,4 +1,4 @@
-import API from "api";
+import type API from "api";
 
 /**
  * A namespace containing all data and types for reflection (validation) rule.
