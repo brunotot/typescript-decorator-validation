@@ -24,7 +24,7 @@ export function translate(
   ...args: any[]
 ): string {
   return API.Utilities.Strings.sprintf(
-    MessageReaderService.getMessage(key, locale),
+    MessageReaderService.getMessage(key, locale ?? "en"),
     ...args
   );
 }
