@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Name | Typescript Decorator Validation</title><meta name="description" content="Documentation for Typescript Decorator Validation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/my-theme.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>console.log(`Loaded ${location.href}`)</script><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>translate | Typescript Decorator Validation</title><meta name="description" content="Documentation for Typescript Decorator Validation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/my-theme.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>console.log(`Loaded ${location.href}`)</script><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -27,17 +27,51 @@
 <ul class="tsd-breadcrumb">
 <li><a href="../index.html">Typescript Decorator Validation</a></li>
 <li><a href="../modules/tdv_core.html">tdv-core</a></li>
-<li><a href="../modules/tdv_core.Strategy.html">Strategy</a></li>
-<li><a href="../modules/tdv_core.Strategy.Types.html">Types</a></li>
-<li><a href="../modules/tdv_core.Strategy.Types.ObjectArrayGetter.html">ObjectArrayGetter</a></li>
-<li><a href="tdv_core.Strategy.Types.ObjectArrayGetter.Name.html">Name</a></li></ul>
-<h1>Variable Name<code class="tsd-tag ts-flagConst">Const</code> </h1></div>
-<div class="tsd-signature"><span class="tsd-kind-variable">Name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;() =&gt; composite[]&quot;</span><span class="tsd-signature-symbol"> = ...</span></div>
-<div class="tsd-comment tsd-typography"><p>Constant name identifier for this strategy.</p>
+<li><a href="../modules/tdv_core.Localization.html">Localization</a></li>
+<li><a href="../modules/tdv_core.Localization.Service.html">Service</a></li>
+<li><a href="../modules/tdv_core.Localization.Service.TranslationService.html">TranslationService</a></li>
+<li><a href="tdv_core.Localization.Service.TranslationService.translate.html">translate</a></li></ul>
+<h1>Function translate</h1></div>
+<section class="tsd-panel">
+<ul class="tsd-signatures">
+<li class="tsd-signature tsd-anchor-link" id="translate"><span class="tsd-kind-call-signature">translate</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">locale</span>, <span class="tsd-kind-parameter">key</span>, <span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">args</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#translate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Localizes a string based on a corresponding key and optional arguments mapped by indices. (ex: <code>&quot;Hello {0}! How are you?&quot;</code>)</p>
 </div>
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">locale</span>: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../types/tdv_core.Localization.Resolver.LocaleResolver.Locale.html" class="tsd-signature-type tsd-kind-type-alias">Locale</a></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">key</span>: <span class="tsd-signature-type">&quot;Alpha&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Alphanumeric&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArrayContains&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArrayEmpty&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArrayEvery&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArrayNone&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArrayOne&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArraySizeExact&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArraySizeMax&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArraySizeMin&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArraySizeRange&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArraySome&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ArrayUnique&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;AssertFalse&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;AssertTrue&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Date&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Decimal&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Digits&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Email&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ExactLength&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;FutureDate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;IPAddress&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Integer&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;InvalidDigits&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;JSON&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Lowercase&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;MaxLength&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;MinLength&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Negative&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;NonNegative&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;NonPositive&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Numeric&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;PasswordLength&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;PasswordLowercase&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;PasswordNumbers&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;PasswordSpecials&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;PasswordUppercase&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;PastDate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Pattern&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Positive&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Required&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Time&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;TodayDate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;URL&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Uppercase&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ValidDateRange&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ValueMax&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ValueMin&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ValueRange&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;XML&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The key corresponding to the localized string. (ex: <code>&quot;Hello&quot;</code>)</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><code class="tsd-tag ts-flagRest">Rest</code> <span class="tsd-signature-symbol">...</span><span class="tsd-kind-parameter">args</span>: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+<div class="tsd-comment tsd-typography"><p>Optional values to replace template placeholders in the localized string. (ex: <code>[&quot;John Doe&quot;]</code>)</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>The localized and formatted message by <code>key</code> and <code>args</code> params.</p>
+
+<div class="tsd-comment tsd-typography">
+<h4>Remarks</h4><p>This translation mechanism utilizes <a href="tdv_core.Utilities.Strings.sprintf.html" class="tsd-kind-function">sprintf</a> function for replacing template placeholders with the provided <code>args</code>.</p>
+
+<h4>Example</h4><p>1: Basic usage (locale is evaluated by <code>LocaleResolver.getLocale()</code> which defaults to <code>&quot;en&quot;</code>)</p>
+<pre><code class="language-typescript"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">greeting</span><span class="hl-1"> = </span><span class="hl-0">translate</span><span class="hl-1">(</span><span class="hl-3">null</span><span class="hl-1">, </span><span class="hl-2">&quot;Hello&quot;</span><span class="hl-1">);  </span><span class="hl-4">// &quot;Hello {0}! How are you?&quot;</span>
+</code><button>Copy</button></pre>
+
+<h4>Example</h4><p>2: Supplying a custom locale</p>
+<pre><code class="language-typescript"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">greeting</span><span class="hl-1"> = </span><span class="hl-0">translate</span><span class="hl-1">(</span><span class="hl-2">&quot;es&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;Hello&quot;</span><span class="hl-1">);  </span><span class="hl-4">// &quot;¡Hola {0}! ¿Cómo estás?&quot;</span>
+</code><button>Copy</button></pre>
+
+<h4>Example</h4><p>3: Supplying template arguments</p>
+<pre><code class="language-typescript"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">greeting</span><span class="hl-1"> = </span><span class="hl-0">translate</span><span class="hl-1">(</span><span class="hl-2">&quot;en&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;Hello&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;John Doe&quot;</span><span class="hl-1">);  </span><span class="hl-4">// &quot;Hello John Doe! How are you?&quot;</span>
+</code><button>Copy</button></pre>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/ddd8adf/packages/core/src/strategy/service/impl/ObjectArrayGetterStrategy/types.ts#L12">src/strategy/service/impl/ObjectArrayGetterStrategy/types.ts:12</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/ddd8adf/packages/core/src/localization/service/TranslationService.ts#L31">src/localization/service/TranslationService.ts:31</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -63,10 +97,10 @@
 <div class="menu-item-desc">A collection of validators and decorators for `any` fields.</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="../functions/tdv_core.Collection.any.Required.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.any.Required.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Required
 <div class="menu-item-desc">Creates a validator decorator which requires that a value must be present.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.any.create.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.any.create.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>create
 <div class="menu-item-desc">Creates a custom validator decorator from the `validate` supplier function. Is used by ValidationEngine and allows custom validation logic.</div></div></a></li></ul></div></details></li>
 <li>
@@ -79,40 +113,40 @@
 <div>Required</div></a></li>
 <li><a href="../modules/tdv_core.Collection.array.html#create"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>create</div></a></li>
-<li><a href="../functions/tdv_core.Collection.array.ArrayContains.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.array.ArrayContains.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Contains
 <div class="menu-item-desc">Checks if the decorated array contains a specific value.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.array.ArrayEmpty.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.array.ArrayEmpty.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Empty
 <div class="menu-item-desc">Checks if the decorated array is empty.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.array.ArrayEvery.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.array.ArrayEvery.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Every
 <div class="menu-item-desc">Checks if all elements of decorated array satisfy the given predicate criteria.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.array.ArrayNone.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.array.ArrayNone.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>None
 <div class="menu-item-desc">Checks if no elements of decorated array satisfy the given predicate criteria.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.array.ArrayOne.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.array.ArrayOne.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>One
 <div class="menu-item-desc">Checks if exactly one element of decorated array satisfies the given predicate criteria.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.array.ArraySizeExact.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.array.ArraySizeExact.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Size<wbr/>Exact
 <div class="menu-item-desc">Checks if the decorated array contains an exact number of elements.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.array.ArraySizeMax.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.array.ArraySizeMax.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Size<wbr/>Max
 <div class="menu-item-desc">Checks if the decorated array contains up to `max` number of elements.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.array.ArraySizeMin.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.array.ArraySizeMin.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Size<wbr/>Min
 <div class="menu-item-desc">Checks if the decorated array contains at least `min` number of elements.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.array.ArraySizeRange.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.array.ArraySizeRange.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Size<wbr/>Range
 <div class="menu-item-desc">Checks if the decorated array contains at least `min` number of elements.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.array.ArraySome.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.array.ArraySome.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Some
 <div class="menu-item-desc">Checks if at least one element of decorated array satisfies the given predicate criteria.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.array.ArrayUnique.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.array.ArrayUnique.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Unique
 <div class="menu-item-desc">Checks if all elements in decorated array are unique.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.array.foreach.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.array.foreach.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>foreach
 <div class="menu-item-desc">Creates a validator decorator which applies multiple validators to each element in array field.</div></div></a></li></ul></div></details></li>
 <li>
@@ -125,10 +159,10 @@
 <div>Required</div></a></li>
 <li><a href="../modules/tdv_core.Collection.boolean.html#create"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>create</div></a></li>
-<li><a href="../functions/tdv_core.Collection.boolean.AssertFalse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.boolean.AssertFalse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Assert<wbr/>False
 <div class="menu-item-desc">Checks if a boolean value is `false`.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.boolean.AssertTrue.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.boolean.AssertTrue.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Assert<wbr/>True
 <div class="menu-item-desc">Checks if a boolean value is `true`.</div></div></a></li></ul></div></details></li>
 <li>
@@ -137,10 +171,10 @@
 <div class="menu-item-desc">A collection of validators and decorators for `classes`.</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="../functions/tdv_core.Collection.clazz.ValidDateRange.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.clazz.ValidDateRange.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Valid<wbr/>Date<wbr/>Range
 <div class="menu-item-desc">Checks if Date  `startDateField` is before Date  `endDateField` of a class.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.clazz.attribute.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.clazz.attribute.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>attribute
 <div class="menu-item-desc">Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T` ).</div></div></a></li></ul></div></details></li>
 <li>
@@ -153,13 +187,13 @@
 <div>Required</div></a></li>
 <li><a href="../modules/tdv_core.Collection.date.html#create"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>create</div></a></li>
-<li><a href="../functions/tdv_core.Collection.date.FutureDate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.date.FutureDate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Future<wbr/>Date
 <div class="menu-item-desc">Checks if a Date is in the future.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.date.PastDate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.date.PastDate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Past<wbr/>Date
 <div class="menu-item-desc">Checks if a Date is in the past.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.date.TodayDate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.date.TodayDate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Today<wbr/>Date
 <div class="menu-item-desc">Checks if a Date is the today&#39;s date based on year, month and day.</div></div></a></li></ul></div></details></li>
 <li>
@@ -172,34 +206,34 @@
 <div>Required</div></a></li>
 <li><a href="../modules/tdv_core.Collection.number.html#create"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>create</div></a></li>
-<li><a href="../functions/tdv_core.Collection.number.Decimal.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.number.Decimal.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Decimal
 <div class="menu-item-desc">Checks if decorated number is a decimal number.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.number.Digits.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.number.Digits.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Digits
 <div class="menu-item-desc">Checks if decorated number is a decimal number.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.number.Integer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.number.Integer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Integer
 <div class="menu-item-desc">Checks if decorated number is an integer number.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.number.Negative.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.number.Negative.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Negative
 <div class="menu-item-desc">Checks if decorated number is a negative number (number less than 0).</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.number.NonNegative.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.number.NonNegative.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Non<wbr/>Negative
 <div class="menu-item-desc">Checks if decorated number is not a negative number (can be 0).</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.number.NonPositive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.number.NonPositive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Non<wbr/>Positive
 <div class="menu-item-desc">Checks if decorated number is not a positive number (can be 0).</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.number.Positive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.number.Positive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Positive
 <div class="menu-item-desc">Checks if decorated number is a positive number (number greater than 0).</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.number.ValueMax.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.number.ValueMax.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Value<wbr/>Max
 <div class="menu-item-desc">Checks if decorated number is not greater than given `max` parameter.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.number.ValueMin.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.number.ValueMin.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Value<wbr/>Min
 <div class="menu-item-desc">Checks if decorated number is not lesser than given `min` parameter.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.number.ValueRange.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.number.ValueRange.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Value<wbr/>Range
 <div class="menu-item-desc">Checks if decorated number is within a given range of `min` and `max` parameters.</div></div></a></li></ul></div></details></li>
 <li>
@@ -212,43 +246,43 @@
 <div>Required</div></a></li>
 <li><a href="../modules/tdv_core.Collection.string.html#create"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>create</div></a></li>
-<li><a href="../functions/tdv_core.Collection.string.Alpha.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.string.Alpha.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Alpha
 <div class="menu-item-desc">Checks if decorated string contains only alphabetical characters.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.string.Alphanumeric.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.string.Alphanumeric.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Alphanumeric
 <div class="menu-item-desc">Checks if decorated string contains only alphabetical or number characters.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.string.Email.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.string.Email.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Email
 <div class="menu-item-desc">Checks if decorated string is a valid email.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.string.ExactLength.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.string.ExactLength.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Exact<wbr/>Length
 <div class="menu-item-desc">Checks if decorated string contains a specific number of characters.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.string.IPAddress.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.string.IPAddress.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>IPAddress
 <div class="menu-item-desc">Checks if decorated string is a valid IP address.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.string.Lowercase.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.string.Lowercase.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Lowercase
 <div class="menu-item-desc">Checks if decorated string contains only lowercase characters.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.string.MaxLength.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.string.MaxLength.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Max<wbr/>Length
 <div class="menu-item-desc">Checks if decorated string contains a specific number of characters.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.string.MinLength.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.string.MinLength.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Min<wbr/>Length
 <div class="menu-item-desc">Checks if decorated string contains a specific number of characters.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.string.Numeric.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.string.Numeric.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Numeric
 <div class="menu-item-desc">Checks if decorated string contains only numeric characters.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.string.Password.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.string.Password.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Password
 <div class="menu-item-desc">Checks if decorated string contains a specific number of characters.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.string.Pattern.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.string.Pattern.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Pattern
 <div class="menu-item-desc">Creates a validator decorator that checks if a string value matches a regular expression pattern.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.string.URL.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.string.URL.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>URL
 <div class="menu-item-desc">Checks if decorated string is a valid URL.</div></div></a></li>
-<li><a href="../functions/tdv_core.Collection.string.Uppercase.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Collection.string.Uppercase.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Uppercase
 <div class="menu-item-desc">Checks if decorated string contains only uppercase characters.</div></div></a></li></ul></div></details></li></ul></div></details></li>
 <li>
@@ -284,7 +318,7 @@
 <li><a href="../types/tdv_core.Decorator.Service.ClassDecoratorService.Type.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Type
 <div class="menu-item-desc">Type alias for any class - indicates that a decorator may be only put on a class (not field).</div></div></a></li>
-<li><a href="../functions/tdv_core.Decorator.Service.ClassDecoratorService.build.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Decorator.Service.ClassDecoratorService.build.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>build
 <div class="menu-item-desc">Builds an Instance function using the provided Supplier function.</div></div></a></li></ul></div></details></li>
 <li>
@@ -299,7 +333,7 @@
 <li><a href="../types/tdv_core.Decorator.Service.ClassDecoratorValidatorService.Supplier.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Supplier
 <div class="menu-item-desc">Type definition for supplying validation options to the class decorator.</div></div></a></li>
-<li><a href="../functions/tdv_core.Decorator.Service.ClassDecoratorValidatorService.build.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Decorator.Service.ClassDecoratorValidatorService.build.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>build
 <div class="menu-item-desc">Creates a new validator function using the provided validation builder options.</div></div></a></li></ul></div></details></li>
 <li>
@@ -320,7 +354,7 @@
 <li><a href="../types/tdv_core.Decorator.Service.FieldDecoratorService.Type.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Type
 <div class="menu-item-desc">Represents the generic type for the value being decorated.</div></div></a></li>
-<li><a href="../functions/tdv_core.Decorator.Service.FieldDecoratorService.build.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Decorator.Service.FieldDecoratorService.build.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>build
 <div class="menu-item-desc">Creates a new validator function using the provided validation builder options.</div></div></a></li></ul></div></details></li>
 <li>
@@ -329,7 +363,7 @@
 <div class="menu-item-desc">A service class which exposes validated-decorator-related actions</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="../functions/tdv_core.Decorator.Service.FieldDecoratorValidatorService.build.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Decorator.Service.FieldDecoratorValidatorService.build.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>build
 <div class="menu-item-desc">Creates a new validator function using the provided validation builder options.</div></div></a></li></ul></div></details></li></ul></div></details></li>
 <li><a href="../types/tdv_core.Decorator.Context.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
@@ -344,16 +378,16 @@
 <li><a href="../types/tdv_core.Decorator.Supplier.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Supplier
 <div class="menu-item-desc">Supplier function for generating decorators.</div></div></a></li>
-<li><a href="../functions/tdv_core.Decorator.groups.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Decorator.groups.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>groups
 <div class="menu-item-desc">Extracts validation groups from the provided decorator properties.</div></div></a></li>
-<li><a href="../functions/tdv_core.Decorator.key.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Decorator.key.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>key</div></a></li>
-<li><a href="../functions/tdv_core.Decorator.message.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Decorator.message.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>message
 <div class="menu-item-desc">Extracts a message from the provided decorator properties.</div></div></a></li></ul></div></details></li>
 <li>
-<details class="tsd-index-accordion" data-key="tdv-core.Localization"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" open data-key="tdv-core.Localization"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Localization
 <div class="menu-item-desc">A namespace which holds everything related to the localized output messages (like default error messages)</div></div></a></summary>
 <div class="tsd-accordion-details">
@@ -373,10 +407,10 @@
 <li><a href="../types/tdv_core.Localization.Resolver.LocaleResolver.Locale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Locale
 <div class="menu-item-desc">2-character locale string representation</div></div></a></li>
-<li><a href="../functions/tdv_core.Localization.Resolver.LocaleResolver.getLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.Resolver.LocaleResolver.getLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>get<wbr/>Locale
 <div class="menu-item-desc">Function which returns current global `Locale` value.</div></div></a></li>
-<li><a href="../functions/tdv_core.Localization.Resolver.LocaleResolver.setLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.Resolver.LocaleResolver.setLocale.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>set<wbr/>Locale
 <div class="menu-item-desc">Function which sets new global `Locale` value.</div></div></a></li></ul></div></details></li>
 <li>
@@ -388,14 +422,14 @@
 <li><a href="../types/tdv_core.Localization.Resolver.MessageResolver.MessageResolverData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Message<wbr/>Resolver<wbr/>Data
 <div class="menu-item-desc">Message parser definition.</div></div></a></li>
-<li><a href="../functions/tdv_core.Localization.Resolver.MessageResolver.configure.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.Resolver.MessageResolver.configure.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>configure
 <div class="menu-item-desc">Is used to globally define a custom message parser.</div></div></a></li>
-<li><a href="../functions/tdv_core.Localization.Resolver.MessageResolver.resolve.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.Resolver.MessageResolver.resolve.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>resolve
 <div class="menu-item-desc">Internal handler for the customized message parser</div></div></a></li></ul></div></details></li></ul></div></details></li>
 <li>
-<details class="tsd-index-accordion" data-key="tdv-core.Localization.Service"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.Service.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" open data-key="tdv-core.Localization.Service"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.Service.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Service
 <div class="menu-item-desc">A namespace which contains service-related actions (create, read and similar) for `Localization`.</div></div></a></summary>
 <div class="tsd-accordion-details">
@@ -414,18 +448,18 @@
 <li><a href="../types/tdv_core.Localization.Service.MessageReaderService.Messages.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Messages
 <div class="menu-item-desc">Type definition for a collection of locale-specific messages.</div></div></a></li>
-<li><a href="tdv_core.Localization.Service.MessageReaderService.messages-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<li><a href="../variables/tdv_core.Localization.Service.MessageReaderService.messages-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>messages
 <div class="menu-item-desc">All translation json files content in map, grouped by `Locale`.</div></div></a></li>
-<li><a href="../functions/tdv_core.Localization.Service.MessageReaderService.getMessage.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.Service.MessageReaderService.getMessage.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>get<wbr/>Message
 <div class="menu-item-desc">Returns localized message by key, allowing `locale` to be optional (defaults to global `locale` ).</div></div></a></li></ul></div></details></li>
 <li>
-<details class="tsd-index-accordion" data-key="tdv-core.Localization.Service.TranslationService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.Service.TranslationService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" open data-key="tdv-core.Localization.Service.TranslationService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.Service.TranslationService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Translation<wbr/>Service</div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="../functions/tdv_core.Localization.Service.TranslationService.translate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Localization.Service.TranslationService.translate.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>translate
 <div class="menu-item-desc">Localizes a string based on a corresponding key and optional arguments mapped by indices. (ex: `&quot;Hello {0}! How are you?&quot;` )</div></div></a></li></ul></div></details></li></ul></div></details></li></ul></div></details></li>
 <li>
@@ -497,26 +531,26 @@
 <li><a href="../types/tdv_core.Reflection.Strategy.Key.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Key
 <div class="menu-item-desc">The type of a reflection strategy.</div></div></a></li>
-<li><a href="tdv_core.Reflection.Strategy.data.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<li><a href="../variables/tdv_core.Reflection.Strategy.data.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>data
 <div class="menu-item-desc">A mapping of reflection strategy types to their corresponding `ValidationStrategy` classes.</div></div></a></li></ul></div></details></li>
 <li><a href="../types/tdv_core.Reflection.MetaStrategy.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Meta<wbr/>Strategy
 <div class="menu-item-desc">Type alias for strategies that can either be a decorator context or a class.</div></div></a></li>
-<li><a href="../functions/tdv_core.Reflection.getClassFieldDescriptor.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Reflection.getClassFieldDescriptor.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>get<wbr/>Class<wbr/>Field<wbr/>Descriptor
 <div class="menu-item-desc">Retrieves the property descriptor for a specific field in a class.</div></div></a></li>
-<li><a href="../functions/tdv_core.Reflection.getClassFieldNames.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Reflection.getClassFieldNames.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>get<wbr/>Class<wbr/>Field<wbr/>Names
 <div class="menu-item-desc">Retrieves the names of all fields in a class.</div></div></a></li>
-<li><a href="../functions/tdv_core.Reflection.getMetadata.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Reflection.getMetadata.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>get<wbr/>Metadata
 <div class="menu-item-desc">Retrieves or initializes metadata for a given strategy.</div></div></a></li>
-<li><a href="../functions/tdv_core.Reflection.isClass.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Reflection.isClass.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>is<wbr/>Class
 <div class="menu-item-desc">Checks if a given strategy is a class.</div></div></a></li></ul></div></details></li>
 <li>
-<details class="tsd-index-accordion" open data-key="tdv-core.Strategy"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Strategy.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" data-key="tdv-core.Strategy"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Strategy.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Strategy
 <div class="menu-item-desc">Namespace for grouping different validation strategy-related functionalities.</div></div></a></summary>
 <div class="tsd-accordion-details">
@@ -596,7 +630,7 @@
 <div>Primitive<wbr/>Strategy
 <div class="menu-item-desc">Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating primitive types like numbers, strings, etc.</div></div></a></li></ul></div></details></li>
 <li>
-<details class="tsd-index-accordion" open data-key="tdv-core.Strategy.Types"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Strategy.Types.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" data-key="tdv-core.Strategy.Types"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Strategy.Types.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Types
 <div class="menu-item-desc">Namespace for grouping different Strategy Types.</div></div></a></summary>
 <div class="tsd-accordion-details">
@@ -619,7 +653,7 @@
 <li><a href="../types/tdv_core.Strategy.Types.Function.matches.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>matches
 <div class="menu-item-desc">Type guard to check if a certain field in a type matches this strategy.</div></div></a></li>
-<li><a href="tdv_core.Strategy.Types.Function.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<li><a href="../variables/tdv_core.Strategy.Types.Function.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>Name
 <div class="menu-item-desc">Constant name identifier for this strategy.</div></div></a></li></ul></div></details></li>
 <li>
@@ -640,7 +674,7 @@
 <li><a href="../types/tdv_core.Strategy.Types.Object.matches.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>matches
 <div class="menu-item-desc">Type guard to check if a certain field in a type matches this strategy.</div></div></a></li>
-<li><a href="tdv_core.Strategy.Types.Object.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<li><a href="../variables/tdv_core.Strategy.Types.Object.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>Name
 <div class="menu-item-desc">Constant name identifier for this strategy.</div></div></a></li></ul></div></details></li>
 <li>
@@ -661,11 +695,11 @@
 <li><a href="../types/tdv_core.Strategy.Types.ObjectArray.matches.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>matches
 <div class="menu-item-desc">Type guard to check if a certain field in a type matches this strategy.</div></div></a></li>
-<li><a href="tdv_core.Strategy.Types.ObjectArray.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<li><a href="../variables/tdv_core.Strategy.Types.ObjectArray.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>Name
 <div class="menu-item-desc">Constant name identifier for this strategy.</div></div></a></li></ul></div></details></li>
 <li>
-<details class="tsd-index-accordion" open data-key="tdv-core.Strategy.Types.ObjectArrayGetter"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Strategy.Types.ObjectArrayGetter.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
+<details class="tsd-index-accordion" data-key="tdv-core.Strategy.Types.ObjectArrayGetter"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Strategy.Types.ObjectArrayGetter.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Object<wbr/>Array<wbr/>Getter
 <div class="menu-item-desc">Namespace for ObjectArrayGetter Strategy Types.</div></div></a></summary>
 <div class="tsd-accordion-details">
@@ -682,7 +716,7 @@
 <li><a href="../types/tdv_core.Strategy.Types.ObjectArrayGetter.matches.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>matches
 <div class="menu-item-desc">Type guard to check if a certain field in a type matches this strategy.</div></div></a></li>
-<li><a href="tdv_core.Strategy.Types.ObjectArrayGetter.Name.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<li><a href="../variables/tdv_core.Strategy.Types.ObjectArrayGetter.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>Name
 <div class="menu-item-desc">Constant name identifier for this strategy.</div></div></a></li></ul></div></details></li>
 <li>
@@ -702,7 +736,7 @@
 <li><a href="../types/tdv_core.Strategy.Types.ObjectGetter.matches.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>matches
 <div class="menu-item-desc">Type guard to check if a certain field in a type matches this strategy.</div></div></a></li>
-<li><a href="tdv_core.Strategy.Types.ObjectGetter.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<li><a href="../variables/tdv_core.Strategy.Types.ObjectGetter.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>Name</div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Strategy.Types.Primitive"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Strategy.Types.Primitive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
@@ -722,7 +756,7 @@
 <li><a href="../types/tdv_core.Strategy.Types.Primitive.matches.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>matches
 <div class="menu-item-desc">Type guard to check if a certain field in a type matches this strategy.</div></div></a></li>
-<li><a href="tdv_core.Strategy.Types.Primitive.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<li><a href="../variables/tdv_core.Strategy.Types.Primitive.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>Name
 <div class="menu-item-desc">Constant name identifier for this strategy.</div></div></a></li></ul></div></details></li>
 <li>
@@ -743,7 +777,7 @@
 <li><a href="../types/tdv_core.Strategy.Types.PrimitiveArray.matches.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>matches
 <div class="menu-item-desc">Type guard to check if a certain field in a type matches this strategy.</div></div></a></li>
-<li><a href="tdv_core.Strategy.Types.PrimitiveArray.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<li><a href="../variables/tdv_core.Strategy.Types.PrimitiveArray.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>Name
 <div class="menu-item-desc">Constant name identifier for this strategy.</div></div></a></li></ul></div></details></li>
 <li>
@@ -764,7 +798,7 @@
 <li><a href="../types/tdv_core.Strategy.Types.PrimitiveArrayGetter.matches.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>matches
 <div class="menu-item-desc">Type guard to check if a certain field in a type matches this strategy.</div></div></a></li>
-<li><a href="tdv_core.Strategy.Types.PrimitiveArrayGetter.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<li><a href="../variables/tdv_core.Strategy.Types.PrimitiveArrayGetter.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>Name
 <div class="menu-item-desc">Constant name identifier for this strategy.</div></div></a></li></ul></div></details></li>
 <li>
@@ -785,7 +819,7 @@
 <li><a href="../types/tdv_core.Strategy.Types.PrimitiveGetter.matches.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>matches
 <div class="menu-item-desc">Type guard to check if a certain field in a type matches this strategy.</div></div></a></li>
-<li><a href="tdv_core.Strategy.Types.PrimitiveGetter.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<li><a href="../variables/tdv_core.Strategy.Types.PrimitiveGetter.Name.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>Name
 <div class="menu-item-desc">Constant name identifier for this strategy.</div></div></a></li></ul></div></details></li></ul></div></details></li></ul></div></details></li>
 <li>
@@ -898,24 +932,24 @@
 <li><a href="../types/tdv_core.Utilities.Objects.Values.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Values
 <div class="menu-item-desc">A type that extracts the values from the properties of an object type `T`.</div></div></a></li>
-<li><a href="../functions/tdv_core.Utilities.Objects.assertType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Utilities.Objects.assertType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>assert<wbr/>Type</div></a></li>
-<li><a href="../functions/tdv_core.Utilities.Objects.debounce.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Utilities.Objects.debounce.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>debounce
 <div class="menu-item-desc">Debounces a function.</div></div></a></li>
-<li><a href="../functions/tdv_core.Utilities.Objects.deepEquals.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Utilities.Objects.deepEquals.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>deep<wbr/>Equals
 <div class="menu-item-desc">Recursively checks if two values are deep equal.</div></div></a></li>
-<li><a href="../functions/tdv_core.Utilities.Objects.hasErrors.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Utilities.Objects.hasErrors.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>has<wbr/>Errors
 <div class="menu-item-desc">Checks if an error object has errors.</div></div></a></li>
-<li><a href="../functions/tdv_core.Utilities.Objects.hash-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Utilities.Objects.hash-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>hash
 <div class="menu-item-desc">Hashes a value of any type and returns a number.</div></div></a></li>
-<li><a href="../functions/tdv_core.Utilities.Objects.toClass.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Utilities.Objects.toClass.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>to<wbr/>Class
 <div class="menu-item-desc">Transforms a plain object into an instance of the given class.</div></div></a></li>
-<li><a href="../functions/tdv_core.Utilities.Objects.unique.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Utilities.Objects.unique.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>unique
 <div class="menu-item-desc">Removes duplicate elements from an array while preserving order.</div></div></a></li></ul></div></details></li>
 <li>
@@ -924,12 +958,12 @@
 <div class="menu-item-desc">Collection of string-related types and methods.</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li><a href="tdv_core.Utilities.Strings.EMPTY.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<li><a href="../variables/tdv_core.Utilities.Strings.EMPTY.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
 <div>EMPTY</div></a></li>
-<li><a href="../functions/tdv_core.Utilities.Strings.convertCamelCaseToText.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Utilities.Strings.convertCamelCaseToText.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>convert<wbr/>Camel<wbr/>Case<wbr/>To<wbr/>Text
 <div class="menu-item-desc">Converts a camelCase string to a text string with spaces.</div></div></a></li>
-<li><a href="../functions/tdv_core.Utilities.Strings.sprintf.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_core.Utilities.Strings.sprintf.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>sprintf
 <div class="menu-item-desc">Formats a string by replacing placeholders with provided arguments.</div></div></a></li></ul></div></details></li>
 <li>
@@ -1091,13 +1125,13 @@
 <li><a href="../types/tdv_react.Hooks.UseValidation.UseValidationReturn.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Use<wbr/>Validation<wbr/>Return
 <div class="menu-item-desc">A type representing the return value of `useValidation` hook and is consisted of form state getter &amp; setter and other data defined in `UseValidationData` type</div></div></a></li></ul></div></details></li></ul></div></details></li>
-<li><a href="../functions/tdv_react.FormProvider.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_react.FormProvider.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Form<wbr/>Provider
 <div class="menu-item-desc">Provides form-related context to its children</div></div></a></li>
-<li><a href="../functions/tdv_react.useForm.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_react.useForm.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>use<wbr/>Form
 <div class="menu-item-desc">React hook which exposes useful form and validation-related props to a form component</div></div></a></li>
-<li><a href="../functions/tdv_react.useValidation.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<li><a href="tdv_react.useValidation.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>use<wbr/>Validation
 <div class="menu-item-desc">React hook which exposes validation-related props to a form component</div></div></a></li></ul></div></details></li></ul></nav></div></div></div>
 <div class="tsd-generator">
