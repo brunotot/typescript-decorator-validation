@@ -12,20 +12,20 @@ namespace Decorator {
   /**
    * Options for configuring validator decorators.
    */
-  export type Options = Partial<{
+  export type Options = {
     /**
      * Identifier of the validator decorator.
      */
-    key: string;
+    key?: string;
     /**
      * Error message to be evaluated through a preprocessor, which can have a custom or default implementation based on library setup.
      */
-    message: string;
+    message?: string;
     /**
      * Unique list of groups for conditional validation. Validator triggers only if the form is applied on a listed group.
      */
-    groups: string[];
-  }>;
+    groups?: string[];
+  };
 
   /**
    * A collection of services which allow for easy manipulation of field and class decorators.
