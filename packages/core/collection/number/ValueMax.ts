@@ -18,6 +18,7 @@ function isValueMaxValid(
  *
  * @key {@link VALUE_MAX ValueMax}
  * @typeParam T - The type of the number property.
+ * @param max - Maximum allowed value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `number`.
  *

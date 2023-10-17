@@ -1,44 +1,81 @@
 import API from "api";
 import { translate } from "../../src/localization/service/TranslationService";
 
+/** ValueRange identifier. */
+export const VALUE_RANGE = "ValueRange";
+
+/** Internal validation function for {@link ValueRange} validator. */
+function isValueRangeValid(
+  num: API.Utilities.Objects.Optional<number>,
+  min: number,
+  max: number
+): boolean {
+  API.Utilities.Objects.assertType("number", num);
+  return num == null ? true : num >= min && num <= max;
+}
+
 /**
- * ValueRange decorator for validating that a numeric value falls within a specified range.
+ * Checks if decorated number is within a given range of `min` and `max` parameters.
  *
- * @typeParam T - The type of the value to be validated, which should be optional and a number.
- *
- * @returns A decorator function that can be applied to class properties.
- *
- * @example
- * // Usage with a specific value range:
- * class Product {
- *   //@ValueRange({ min: 10, max: 100 })
- *   price?: number;
- * }
+ * @key {@link VALUE_RANGE ValueRange}
+ * @typeParam T - The type of the number property.
+ * @param min - Minimum allowed value.
+ * @param max - Maximum allowed value.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `number`.
  *
  * @example
- * // Usage with custom error message:
- * class Product {
- *   //@ValueRange({
- *   //  min: 5,
- *   //  max: 50,
- *   //  message: "Price must be between $5 and $50.",
- *   //})
- *   price?: number;
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@ValueRange(5, 10)
+ *   num: number;
  * }
+ * ```
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@ValueRange(5, 10, { message: "Number must be greater than 4 and less than 11" })
+ *   num: number;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@ValueRange(5, { groups: ["UPDATE"] })
+ *   num: number;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@ValueRange(5, 10, {
+ *     message: "Number must be greater than 4 and less than 11",
+ *     groups: ["UPDATE"]
+ *   })
+ *   num: number;
+ * }
+ * ```
  */
 export function ValueRange<T extends API.Utilities.Objects.Optional<number>>(
   min: number,
   max: number,
   options?: API.Decorator.Options
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
-    (value, _, locale) => ({
-      key: API.Decorator.key(options, "ValueRange"),
-      valid: value == null ? true : value >= min && value <= max,
+    (num, _context, locale) => ({
+      key: API.Decorator.key(options, VALUE_RANGE),
+      valid: isValueRangeValid(num, min, max),
       message: API.Decorator.message(
         options,
         locale,
-        translate(locale, "ValueRange", min, max, value)
+        translate(locale, VALUE_RANGE, min, max, num)
       ),
     }),
     API.Decorator.groups(options)

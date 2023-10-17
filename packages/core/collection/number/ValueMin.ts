@@ -18,6 +18,7 @@ function isValueMinValid(
  *
  * @key {@link VALUE_MIN ValueMin}
  * @typeParam T - The type of the number property.
+ * @param min - Minimum allowed value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `number`.
  *
