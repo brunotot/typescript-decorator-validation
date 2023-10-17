@@ -1,47 +1,76 @@
 import API from "api";
 
+import { translate } from "../../../../src/localization/service/TranslationService";
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
+
+/** Email identifier. */
+export const EMAIL = "Email";
+
+/** Internal validation function for {@link Email} validator. */
+export function isEmailValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean {
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.EMAIL, value);
+}
+
 /**
- * Creates a validator decorator that checks if a string value is a valid email address using a regular expression pattern.
+ * Checks if decorated string is a valid email.
  *
- * @typeparam T - The type of the decorated property (optional string).
- * @param props - (Optional) An object with properties for the validator.
- * @param props.key - (Optional) The key to identify this validation rule in error messages. Defaults to "Email".
- * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
- * @param props.groups - (Optional) An array of validation groups to which this rule belongs.
- * @returns A decorator function to use with class properties.
+ * @key {@link EMAIL Email}
+ * @typeParam T - The type of the string property.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `string`.
  *
  * @example
- * // Example 1: Basic usage with default options
- * class MyClass {
- *   @Email()
- *   emailAddress: string;
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@Email()
+ *   email: string;
  * }
+ * ```
  *
- * // Example 2: Custom error message and validation groups
- * class AnotherClass {
- *   @Email({
- *     key: "EmailField",
- *     message: "Invalid email address",
- *     groups: ["registration", "profile"],
- *   })
- *   value: string;
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@Email({ message: "Input is not a valid email" })
+ *   email: string;
  * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@Email({ groups: ["UPDATE"] })
+ *   email: string;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@Email({
+ *     message: "Input is not a valid email",
+ *     groups: ["UPDATE"]
+ *   })
+ *   email: string;
+ * }
+ * ```
  */
 export function Email<T extends API.Utilities.Objects.Optional<string>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
-) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
-      key: "Email",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(locale, "Email"),
-        locale
-      ),
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, locale) => ({
+      key: API.Decorator.key(options, EMAIL),
       valid: testRegex(RegexConst.EMAIL, value),
+      message: API.Decorator.message(options, locale, translate(locale, EMAIL)),
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

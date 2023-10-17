@@ -43,11 +43,11 @@ export class FieldValidatorMetaService extends AbstractMetaService<
   addValidator(
     field: string,
     isValid: API.Validation.Evaluator<any>,
-    groups?: string | string[]
+    groups: string[]
   ): void {
     this.getUntypedDescriptor(field).rules.root.add({
-      groups: API.Decorator.groups(groups),
       validate: isValid,
+      groups,
     });
   }
 

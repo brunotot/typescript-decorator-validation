@@ -1,47 +1,77 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
+
+/** NonNegative identifier. */
+export const NON_NEGATIVE = "NonNegative";
+
+/** Internal validation function for {@link NonNegative} validator. */
+function isNonNegativeValid(
+  num: API.Utilities.Objects.Optional<number>
+): boolean {
+  API.Utilities.Objects.assertType("number", num);
+  return num !== undefined && num !== null && num >= 0;
+}
 
 /**
- * NonNegative decorator for validating that a numeric value is non-negative.
+ * Checks if decorated number is not a negative number (can be 0).
  *
- * @param props - Optional properties to configure the decorator.
- *
- * @typeParam T - The type of the value to be validated, which should be optional and a number.
- *
- * @returns A decorator function that can be applied to class properties.
- *
- * @example
- * // Basic usage without args:
- * class Product {
- *   //@NonNegative()
- *   price?: number;
- * }
+ * @key {@link NON_NEGATIVE NonNegative}
+ * @typeParam T - The type of the number property.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `number`.
  *
  * @example
- * // Usage with custom error message:
- * class Product {
- *   //@NonNegative({
- *   //  message: "Price must be a non-negative value.",
- *   //})
- *   price?: number;
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@NonNegative()
+ *   num: number;
  * }
+ * ```
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@NonNegative({ message: "Number value must not be a negative number" })
+ *   num: number;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@NonNegative({ groups: ["UPDATE"] })
+ *   num: number;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@NonNegative({
+ *     message: "Number value must not be a negative number",
+ *     groups: ["UPDATE"]
+ *   })
+ *   num: number;
+ * }
+ * ```
  */
 export function NonNegative<T extends API.Utilities.Objects.Optional<number>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
-) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (num, _, locale) => ({
-      key: "NonNegative",
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (num, _context, locale) => ({
+      key: API.Decorator.key(options, NON_NEGATIVE),
+      valid: isNonNegativeValid(num),
       message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "NonNegative",
-          num!
-        ),
-        locale
+        options,
+        locale,
+        translate(locale, NON_NEGATIVE, num)
       ),
-      valid: num !== undefined && num !== null && num >= 0,
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

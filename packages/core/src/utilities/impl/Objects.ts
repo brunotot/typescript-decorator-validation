@@ -146,24 +146,6 @@ namespace Objects {
   }
 
   /**
-   * Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.
-   *
-   * @typeParam T - The type of the value.
-   */
-  export function hasValue<T>(
-    obj: T | undefined
-  ): obj is NonNullable<typeof obj> {
-    return !(
-      obj === undefined ||
-      obj === null ||
-      obj === false ||
-      (Array.isArray(obj) && obj.length === 0) ||
-      (typeof obj === "string" && obj.trim().length === 0) ||
-      (obj instanceof Date && obj.toString() === "Invalid Date")
-    );
-  }
-
-  /**
    * Recursively checks if two values are deep equal.
    */
   export function deepEquals(val1: any, val2: any): boolean {
@@ -338,6 +320,37 @@ namespace Objects {
       }
       timeoutID = setTimeout(() => fn(...args), delay);
     };
+  }
+
+  export type FieldType =
+    | "date"
+    | "array"
+    | "string"
+    | "number"
+    | "boolean"
+    | "object";
+
+  function throwTypeMismatchError(type: FieldType, value: any): never {
+    throw new Error(
+      `Type '${type}' is not assignable to type ${JSON.stringify(value)}`
+    );
+  }
+
+  export function assertType(type: FieldType, value: any): void | never {
+    if (value == null) return;
+
+    if (type === "date") {
+      if (value instanceof Date) return;
+      throwTypeMismatchError(type, value);
+    }
+
+    if (type === "array") {
+      if (Array.isArray(value)) return;
+      throwTypeMismatchError(type, value);
+    }
+
+    if (typeof value === type) return;
+    throwTypeMismatchError(type, value);
   }
 }
 

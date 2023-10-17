@@ -23,7 +23,7 @@ const errorData: Type[] = [
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @ArrayContains({ value: SEARCH_ITEM })
+  @ArrayContains(SEARCH_ITEM, { message: "Error" })
   value: Type = [];
 }
 

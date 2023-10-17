@@ -1,17 +1,40 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
+
+/** Required identifier. */
+export const REQUIRED = "Required";
+
+/**
+ * Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.
+ *
+ * @typeParam T - The type of the value.
+ */
+export function isRequiredValid<T>(
+  value: T | undefined
+): value is NonNullable<typeof value> {
+  return !(
+    value === undefined ||
+    value === null ||
+    value === false ||
+    (Array.isArray(value) && value.length === 0) ||
+    (typeof value === "string" && value.trim().length === 0) ||
+    (value instanceof Date && value.toString() === "Invalid Date")
+  );
+}
 
 /**
  * Creates a validator decorator which requires that a value must be present.
  *
- * @typeParam T - The type of the decorated property (any field type except class).
- * @param props - (Optional) An object with optional decorator-related props.
+ * @key {@link REQUIRED Required}
+ * @typeParam T - The type of the decorated property (any class field).
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use with class fields.
  *
  * @example
  * Example 1: Basic usage
  * ```ts
  * class Product {
- *   _@Required()
+ *   \@Required()
  *   name: string;
  * }
  * ```
@@ -20,7 +43,7 @@ import API from "api";
  * Example 2: Supplying a custom error message
  * ```ts
  * class Product {
- *   _@Required("Product name is mandatory")
+ *   \@Required({ message: "Product name is mandatory" })
  *   name: string;
  * }
  * ```
@@ -29,27 +52,27 @@ import API from "api";
  * Example 3: Supplying a custom error message and groups
  * ```ts
  * class Product {
- *   _@Required({ message: "Product name is mandatory", groups: ["CREATE"] })
+ *   \@Required({
+ *     message: "Product name is mandatory",
+ *     groups: ["CREATE"]
+ *   })
  *   name: string;
  * }
  * ```
  */
 export function Required<T extends API.Utilities.Objects.Optional>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
-) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
-      key: "Required",
-      valid: API.Utilities.Objects.hasValue(value),
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, locale) => ({
+      key: API.Decorator.key(options, REQUIRED),
+      valid: isRequiredValid(value),
       message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "Required"
-        ),
-        locale
+        options,
+        locale,
+        translate(locale, REQUIRED)
       ),
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

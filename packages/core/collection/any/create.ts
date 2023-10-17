@@ -1,54 +1,63 @@
 import API from "api";
 
 /**
- * Creates a custom validator decorator which is later used by {@link API.Validation.ValidationEngine ValidationEngine} to register validation rules.
+ * Creates a custom validator decorator from the `validate` supplier function. Is used by {@link API.Validation.ValidationEngine ValidationEngine} and allows custom validation logic.
  *
  * @typeParam T - The type of the decorated property. May be any type of field except a class.
- * @param props - An object with a custom validation function or a validation function directly.
+ * @param validate - A validation evaluation callback.
+ * @param groups - The groups under which the decorator validates property.
  * @returns A validator decorator function to use with class fields.
  *
  * @example
- * Example 1: Basic usage with a custom validation function
+ * 1: Basic usage
  * ```ts
- * class Order {
- *   _@create(value => ({ valid: value > 5, key: "totalPrice", message: "Total price is invalid" }))
- *   totalPrice: number;
+ * class User {
+ *   \@create(value => ({
+ *     valid: value >= 18,
+ *     key: "AdultAge",
+ *     message: "You must be an adult (18+)"
+ *   }))
+ *   age: number;
  * }
  * ```
  *
  * @example
- * Example 2: Using an object with validation function and groups
+ * 2: Supplying custom groups
  * ```ts
- * class Product {
- *   _@create({
- *     groups: ["checkout"],
- *     validate: (value) => ({
- *       valid: value > 5,
- *       key: "totalPrice",
- *       message: "Total price is invalid"
- *     })
- *   })
- *   price: number;
+ * class User {
+ *   \@create(value => ({
+ *     key: "AdultAge",
+ *     valid: value >= 18,
+ *     message: "You must be an adult (18+)"
+ *   }), ["UPDATE"])
+ *   age: number;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Creating a factory method to use at multiple places
+ *
+ * ```ts
+ * function AdultAge() {
+ *   return create<number>(value => ({
+ *     key: "AdultAge",
+ *     valid: value >= 18,
+ *     message: "You must be an adult (18+)"
+ *   }), ["UPDATE"]);
+ * }
+ *
+ * class User {
+ *   \@AdultAge()
+ *   age: number;
  * }
  * ```
  */
-export const create = <T>(
-  props:
-    | API.Validation.Evaluator<T>
-    | {
-        validate: API.Validation.Evaluator<T>;
-        groups?: string | string[];
-      }
-) => {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    validate: "validate" in props ? props.validate : props,
-    groups:
-      "groups" in props
-        ? Array.isArray(props.groups)
-          ? props.groups
-          : props.groups
-          ? [props.groups]
-          : []
-        : [],
-  });
-};
+export function create<T>(
+  validate: API.Validation.Evaluator<T>,
+  groups?: string[]
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    validate,
+    groups
+  );
+}

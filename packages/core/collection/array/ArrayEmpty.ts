@@ -1,39 +1,76 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
+
+/** ArrayEmpty identifier. */
+export const ARRAY_EMPTY = "ArrayEmpty";
+
+/** Internal validation function for {@link ArrayEmpty} validator. */
+export function isArrayEmptyValid(array: any[]): boolean {
+  API.Utilities.Objects.assertType("array", array);
+  return (array ?? []).length === 0;
+}
 
 /**
- * Decorator for validating that an array is empty.
+ * Checks if the decorated array is empty.
  *
- * @typeParam K - The type of elements in the array.
- * @param props - The validation properties (optional).
- * @param [props.groups] - The validation groups to which this validation belongs.
- * @param [props.message] - The custom error message to display if the validation fails.
- * @returns A validation decorator function.
+ * @key {@link ARRAY_EMPTY ArrayEmpty}
+ * @typeParam T - The type of decorated array property.
+ * @typeParam K - The type of elements in the decorated array.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `Array<any>`.
  *
- * Example usage:
- * ```
- * class MyClass {
- *   //@ArrayEmpty<number>({ groups: ["group1"], message: "Array must be empty" })
- *   emptyArray: number[];
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@ArrayEmpty()
+ *   languages: string[];
  * }
  * ```
- * This example validates that the `emptyArray` is an empty array and associates it with a custom validation group and a custom error message.
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@ArrayEmpty({ message: "Languages data must be empty" })
+ *   languages: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@ArrayEmpty({ groups: ["UPDATE"] })
+ *   languages: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@ArrayEmpty({
+ *     message: "Languages data must be empty",
+ *     groups: ["UPDATE"]
+ *   })
+ *   languages: string[];
+ * }
+ * ```
  */
-export function ArrayEmpty<K, T extends K[]>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
-) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (array, _, locale) => ({
-      key: "ArrayEmpty",
+export function ArrayEmpty<K, T extends Array<K>>(
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (array, _context, locale) => ({
+      key: API.Decorator.key(options, ARRAY_EMPTY),
+      valid: isArrayEmptyValid(array),
       message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ArrayEmpty"
-        ),
-        locale
+        options,
+        locale,
+        translate(locale, ARRAY_EMPTY)
       ),
-      valid: (array ?? []).length === 0,
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

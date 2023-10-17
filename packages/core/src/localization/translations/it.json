@@ -43,5 +43,10 @@
   "ValueMax": "Il valore massimo consentito è {0} ma è {1}",
   "ValueMin": "Il valore minimo consentito è {0} ma è {1}",
   "ValueRange": "Il valore deve essere maggiore o uguale a {0} e minore o uguale a {1} ma è {2}",
-  "XML": "La stringa data non è un XML valido"
+  "XML": "La stringa data non è un XML valido",
+  "Pattern": "Il valore non soddisfa la seguente espressione regolare: {0}",
+  "ArrayEvery": "Non tutti gli input soddisfano un dato criterio",
+  "ArrayNone": "Tutti gli input non devono soddisfare un determinato criterio",
+  "ArrayOne": "Questo set di dati richiede esattamente un valore (0 e 2+ non sono consentiti)",
+  "ArraySome": "Almeno un input deve soddisfare un determinato criterio"
 }

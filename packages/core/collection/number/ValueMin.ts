@@ -1,50 +1,80 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
+
+/** ValueMin identifier. */
+export const VALUE_MIN = "ValueMin";
+
+/** Internal validation function for {@link ValueMin} validator. */
+function isValueMinValid(
+  num: API.Utilities.Objects.Optional<number>,
+  min: number
+): boolean {
+  API.Utilities.Objects.assertType("number", num);
+  return num == null ? true : num >= min;
+}
 
 /**
- * ValueMin decorator for validating that a numeric value is greater than or equal to a specified minimum value.
+ * Checks if decorated number is not lesser than given `min` parameter.
  *
- * @param props - Properties to configure the decorator, including the minimum value.
- *
- * @typeParam T - The type of the value to be validated, which should be optional and a number.
- *
- * @returns A decorator function that can be applied to class properties.
- *
- * @example
- * // Usage with a specific minimum value:
- * class Product {
- *   //@ValueMin({ value: 10 })
- *   quantity?: number;
- * }
+ * @key {@link VALUE_MIN ValueMin}
+ * @typeParam T - The type of the number property.
+ * @param min - Minimum allowed value.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `number`.
  *
  * @example
- * // Usage with custom error message:
- * class Product {
- *   //@ValueMin({
- *   //  value: 5,
- *   //  message: "Quantity must be at least 5 units.",
- *   //})
- *   quantity?: number;
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@ValueMin(5)
+ *   num: number;
  * }
+ * ```
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@ValueMin(5, { message: "Minimum allowed value is 5" })
+ *   num: number;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@ValueMin(5, { groups: ["UPDATE"] })
+ *   num: number;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@ValueMin(5, {
+ *     message: "Minimum allowed value is 5",
+ *     groups: ["UPDATE"]
+ *   })
+ *   num: number;
+ * }
+ * ```
  */
 export function ValueMin<T extends API.Utilities.Objects.Optional<number>>(
-  props: API.Decorator.Props.MultiArgsMessageOptional<number>
-) {
-  const min = API.Decorator.args(props);
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
-      key: "ValueMin",
+  min: number,
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, locale) => ({
+      key: API.Decorator.key(options, VALUE_MIN),
+      valid: isValueMinValid(value, min),
       message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ValueMin",
-          min,
-          value!
-        ),
-        locale
+        options,
+        locale,
+        translate(locale, VALUE_MIN, min, value)
       ),
-      valid: value == null ? true : value >= min,
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

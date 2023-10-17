@@ -1,38 +1,77 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
+
+/** Decimal identifier. */
+export const DECIMAL = "Decimal";
+
+/** Internal validation function for {@link Decimal} validator. */
+export function isDecimalValid<
+  T extends API.Utilities.Objects.Optional<number>
+>(value: T): boolean {
+  API.Utilities.Objects.assertType("number", value);
+  return value !== undefined && value !== null && !Number.isInteger(value);
+}
 
 /**
- * Decorator for validating if a value is a decimal number.
+ * Checks if decorated number is a decimal number.
  *
- * @typeParam T - The type of the value property.
- * @param props - Optional properties for the decorator.
- * @returns A validation decorator function.
+ * @key {@link DECIMAL Decimal}
+ * @typeParam T - The type of the number property.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `number`.
  *
- * Example usage:
- * ```typescript
- * class Product {
- *   //@Decimal()
- *   price: number;
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@Decimal()
+ *   num: number;
  * }
  * ```
- * This example applies the `Decimal` validator to the `price` property to ensure it is a decimal number.
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@Decimal({ message: "Number must be a decimal" })
+ *   num: number;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@Decimal({ groups: ["UPDATE"] })
+ *   num: number;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@Decimal({
+ *     message: "Number must be a decimal",
+ *     groups: ["UPDATE"]
+ *   })
+ *   num: number;
+ * }
+ * ```
  */
 export function Decimal<T extends API.Utilities.Objects.Optional<number>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
-) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
-      key: "Decimal",
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, locale) => ({
+      key: API.Decorator.key(options, DECIMAL),
+      valid: isDecimalValid(value),
       message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "Decimal",
-          value!
-        ),
-        locale
+        options,
+        locale,
+        translate(locale, DECIMAL, value)
       ),
-      valid: value !== undefined && value !== null && !Number.isInteger(value),
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

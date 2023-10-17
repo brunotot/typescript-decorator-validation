@@ -1,43 +1,75 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
+
+/** AssertFalse identifier. */
+export const ASSERT_FALSE = "AssertFalse";
+
+/** Internal validation function for {@link AssertFalse} validator. */
+export function isAssertFalseValid(value: boolean): boolean {
+  API.Utilities.Objects.assertType("boolean", value);
+  return !value;
+}
 
 /**
- * Creates a validator decorator for falsy value validation.
+ * Checks if a boolean value is `false`.
  *
- * @typeparam T - The type of the decorated property (optional).
- * @param props - (Optional) An object with an optional custom error message.
- * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
- * @returns A decorator function to use with class properties.
- *
- * @example
- * // Example 1: Basic usage to validate if a value is falsy
- * class User {
- *   //@AssertFalse()
- *   isActive: boolean;
- * }
+ * @key {@link ASSERT_FALSE AssertFalse}
+ * @typeParam T - The type of the decorated property (boolean).
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `boolean`.
  *
  * @example
- * // Example 2: Custom error message
- * class AppConfig {
- *   //@AssertFalse({ message: "App is not disabled" })
- *   isDisabled: boolean;
+ * 1: Basic usage
+ * ```ts
+ * class State {
+ *   \@AssertFalse()
+ *   hasErrors: boolean;
  * }
+ * ```
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class State {
+ *   \@AssertFalse({ message: "You must resolve all errors before continuing" })
+ *   hasErrors: boolean;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class State {
+ *   \@AssertFalse({ groups: ["UPDATE"] })
+ *   hasErrors: boolean;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class State {
+ *   \@AssertFalse({
+ *     message: "You must resolve all errors before continuing",
+ *     groups: ["UPDATE"]
+ *   })
+ *   hasErrors: boolean;
+ * }
+ * ```
  */
 export function AssertFalse<T extends boolean>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
-) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
-      key: "AssertFalse",
-      valid: !value,
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, locale) => ({
+      key: API.Decorator.key(options, ASSERT_FALSE),
+      valid: isAssertFalseValid(value),
       message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "AssertFalse"
-        ),
-        locale
+        options,
+        locale,
+        translate(locale, ASSERT_FALSE)
       ),
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

@@ -1,6 +1,5 @@
 import API from "api";
 
-import DecoratorProps from "./models/DecoratorProps";
 import ClassDecoratorServiceNamespace from "./service/ClassDecoratorService";
 import ClassDecoratorValidatorServiceNamespace from "./service/ClassDecoratorValidatorService";
 import FieldDecoratorServiceNamespace from "./service/FieldDecoratorService";
@@ -10,6 +9,24 @@ import FieldDecoratorValidatorServiceNamespace from "./service/FieldDecoratorVal
  * A collection of types and interfaces for creating and handling decorators.
  */
 namespace Decorator {
+  /**
+   * Options for configuring validator decorators.
+   */
+  export type Options = {
+    /**
+     * Identifier of the validator decorator.
+     */
+    key?: string;
+    /**
+     * Error message to be evaluated through a preprocessor, which can have a custom or default implementation based on library setup.
+     */
+    message?: string;
+    /**
+     * Unique list of groups for conditional validation. Validator triggers only if the form is applied on a listed group.
+     */
+    groups?: string[];
+  };
+
   /**
    * A collection of services which allow for easy manipulation of field and class decorators.
    */
@@ -57,97 +74,47 @@ namespace Decorator {
     context: API.Decorator.Context<T>
   ) => void) & {};
 
-  export import Props = DecoratorProps;
-
   /**
    * Extracts a message from the provided decorator properties.
    *
    * @typeParam T - The type of the object being validated.
    *
    * @param provider - The decorator properties.
-   * @param defaultMessage - The default message to return if no message is found in the provider.
+   * @param message - The default message to return if no message is found in the provider.
    *
    * @returns The extracted message or the default message if none is found.
    */
   export function message(
-    provider: Props.GenericModel,
-    defaultMessage: string,
-    locale: API.Localization.Resolver.LocaleResolver.Locale
+    options: Options | undefined,
+    locale: API.Localization.Resolver.LocaleResolver.Locale,
+    defaultMessage: string
   ): string {
-    if (!provider) return defaultMessage;
-    const providerType = typeof provider;
-    const msgNullable = providerType ? provider : provider.message;
-    const msgNonNull = msgNullable ?? "";
-    return msgNonNull.length
-      ? API.Localization.Resolver.MessageResolver.resolve(locale, msgNonNull)
-      : defaultMessage;
+    const msg = options?.message ?? API.Utilities.Strings.EMPTY;
+    return message.length > 0
+      ? API.Localization.Resolver.MessageResolver.resolve(locale, msg)
+      : defaultMessage ?? "";
   }
 
   /**
    * Extracts validation groups from the provided decorator properties.
-   *
    * @typeParam T - The type of the object being validated.
-   *
    * @param provider - The decorator properties.
-   *
    * @returns An array of unique validation groups.
    */
-  export function groups(provider: Props.GenericModel): string[] {
-    return isDecoratorProps(provider) && "groups" in provider
-      ? Array.isArray(provider.groups)
-        ? API.Utilities.Objects.unique(provider.groups)
-        : provider.groups
-        ? [provider.groups]
-        : []
-      : [];
+  export function groups(
+    options?: Options,
+    defaultGroups: string[] = []
+  ): string[] {
+    return Array.isArray(options?.groups)
+      ? API.Utilities.Objects.unique(options!.groups)
+      : API.Utilities.Objects.unique(defaultGroups);
   }
 
-  /**
-   * Extracts argument values from the provided decorator properties.
-   *
-   * @typeParam T - The type of the argument value.
-   *
-   * @param props - The decorator properties.
-   * @param key - The key of the argument.
-   *
-   * @returns The extracted argument value.
-   */
-  export function args<T>(props: Props.MultiArgs<T>, key: string = "value"): T {
-    return isDecoratorProps(props) && key in (props as any)
-      ? (props as any)[key]
-      : (props as T);
-  }
-
-  /**
-   * Filters validators based on the provided validation groups.
-   *
-   * @typeParam TFieldType - The type of the field being validated.
-   *
-   * @param data - The array of metadata for each validator.
-   * @param groups - The validation groups to filter by.
-   *
-   * @returns An array of filtered validators.
-   */
-  export function groupedValidators<TFieldType>(
-    data: Array<API.Validation.Metadata<TFieldType>>,
-    groups: string[]
-  ): Array<API.Validation.Metadata<TFieldType>> {
-    return data.filter((meta: API.Validation.Metadata<TFieldType>) =>
-      groups.length > 0
-        ? meta.groups.some((o) => groups.includes(o))
-        : meta.groups.length === 0
-    );
-  }
-
-  /**
-   * Checks if a given object is a DecoratorProps object.
-   *
-   * @param props - The object to check.
-   *
-   * @returns A boolean indicating if the object is a DecoratorProps object.
-   */
-  function isDecoratorProps(props: Props.GenericModel): boolean {
-    return !!props && !Array.isArray(props) && typeof props === "object";
+  export function key(
+    options: Options | undefined,
+    defaultKey: string
+  ): string {
+    return options?.key ?? defaultKey;
   }
 }
 

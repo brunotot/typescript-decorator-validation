@@ -67,12 +67,12 @@ namespace ClassDecoratorValidatorService {
    */
   export function build<
     T extends API.Decorator.Service.ClassDecoratorService.Type
-  >({
-    groups,
-    isValid,
-  }: Supplier<T>): API.Decorator.Service.ClassDecoratorService.Instance<T> {
+  >(
+    validate: API.Validation.Evaluator<T>,
+    options?: API.Decorator.Options
+  ): API.Decorator.Service.ClassDecoratorService.Instance<T> {
     return API.Decorator.Service.ClassDecoratorService.build((meta) => {
-      meta.addValidator(isValid, groups);
+      meta.addValidator(validate, API.Decorator.groups(options));
     });
   }
 }

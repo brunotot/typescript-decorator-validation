@@ -1,45 +1,83 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
+
+/** TodayDate identifier. */
+export const TODAY_DATE = "TodayDate";
+
+/** Internal validation function for {@link TodayDate} validator. */
+export function isTodayDateValid<
+  T extends API.Utilities.Objects.Optional<Date>
+>(date: T): boolean {
+  API.Utilities.Objects.assertType("date", date);
+  const currentDate = new Date();
+  return (
+    date &&
+    date.getDate() === currentDate.getDate() &&
+    date.getMonth() === currentDate.getMonth() &&
+    date.getFullYear() === currentDate.getFullYear()
+  );
+}
 
 /**
- * Decorator for validating if a date is today's date.
+ * Checks if a {@link Date} is the today's date based on year, month and day.
  *
+ * @key {@link TODAY_DATE TodayDate}
  * @typeParam T - The type of the date property.
- * @param props - Optional properties for the decorator.
- * @returns A validation decorator function.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `Date`.
  *
- * Example usage:
- * ```typescript
- * class Task {
- *   @TodayDate()
- *   dueDate: Date;
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@TodayDate()
+ *   date: Date;
  * }
  * ```
- * This example applies the `TodayDate` validator to the `dueDate` property to ensure it is set to today's date.
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@TodayDate({ message: "The date must be today" })
+ *   date: Date;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@TodayDate({ groups: ["UPDATE"] })
+ *   date: Date;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@TodayDate({
+ *     message: "The date must be today",
+ *     groups: ["UPDATE"]
+ *   })
+ *   date: Date;
+ * }
+ * ```
  */
 export function TodayDate<T extends API.Utilities.Objects.Optional<Date>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
-) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (date, _context, locale) => {
-      const currentDate = new Date();
-      return {
-        key: "TodayDate",
-        message: API.Decorator.message(
-          props,
-          API.Localization.Service.TranslationService.translate(
-            locale,
-            "TodayDate",
-            date!
-          ),
-          locale
-        ),
-        valid:
-          date &&
-          date.getDate() === currentDate.getDate() &&
-          date.getMonth() === currentDate.getMonth() &&
-          date.getFullYear() === currentDate.getFullYear(),
-      };
-    },
-  });
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (date, _context, locale) => ({
+      key: API.Decorator.key(options, TODAY_DATE),
+      valid: isTodayDateValid(date),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, TODAY_DATE, date)
+      ),
+    }),
+    API.Decorator.groups(options)
+  );
 }

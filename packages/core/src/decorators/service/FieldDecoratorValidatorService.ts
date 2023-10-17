@@ -33,12 +33,13 @@ namespace FieldDecoratorValidatorService {
    */
   export function build<
     T extends API.Decorator.Service.FieldDecoratorService.Type
-  >({
-    groups,
-    validate,
-  }: API.Validation.Metadata<T>): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-    return API.Decorator.Service.FieldDecoratorService.build<T>((meta, key) => { meta.addValidator(key, validate, groups); }
-    );
+  >(
+    validate: API.Validation.Evaluator<T>,
+    groups?: string[]
+  ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+    return API.Decorator.Service.FieldDecoratorService.build<T>((meta, key) => {
+      meta.addValidator(key, validate, groups ?? []);
+    });
   }
 }
 

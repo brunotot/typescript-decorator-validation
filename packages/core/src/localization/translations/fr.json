@@ -43,5 +43,10 @@
   "ValueMax": "La valeur maximale autorisée est {0} mais est {1}",
   "ValueMin": "La valeur minimale autorisée est {0} mais est {1}",
   "ValueRange": "La valeur doit être supérieure ou égale à {0} et inférieure ou égale à {1} mais est {2}",
-  "XML": "La chaîne donnée n'est pas un XML valide"
+  "XML": "La chaîne donnée n'est pas un XML valide",
+  "Pattern": "La valeur ne satisfait pas l'expression régulière suivante : {0}",
+  "ArrayEvery": "Toutes les entrées ne satisfont pas à un critère donné",
+  "ArrayNone": "Toutes les entrées ne doivent pas satisfaire un critère donné",
+  "ArrayOne": "Cet ensemble de données nécessite exactement une valeur (0 et 2+ sont interdits)",
+  "ArraySome": "Au moins une entrée doit satisfaire un critère donné"
 }

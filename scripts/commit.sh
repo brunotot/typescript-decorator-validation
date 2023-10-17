@@ -1,5 +1,8 @@
 #!/bin/bash
 
+PWD_THIS="$(dirname $0)"
+PWD_ROOT="$PWD_THIS/.."
+
 function show_available_groups() {
   echo "Available group identifiers:"
   echo "  ✨ feat ---------> for new features or enhancements"
@@ -92,6 +95,10 @@ fi
 
 # Add all changed files to staging
 git add .
+
+if ! git diff --cached --quiet -- "./packages/core/src/localization/translations/en.json"; then
+  (cd $PWD_ROOT && bash scripts/translations.sh de es fr hr it nl && git add .)
+fi
 
 npm run lint
 

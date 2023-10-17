@@ -1,38 +1,77 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
+
+/** FutureDate identifier. */
+export const FUTURE_DATE = "FutureDate";
+
+/** Internal validation function for {@link FutureDate} validator. */
+export function isFutureDateValid<
+  T extends API.Utilities.Objects.Optional<Date>
+>(date: T): boolean {
+  API.Utilities.Objects.assertType("date", date);
+  return date && date.getTime() > new Date().getTime();
+}
 
 /**
- * Decorator for validating if a date is in the future.
+ * Checks if a {@link Date} is in the future.
  *
+ * @key {@link FUTURE_DATE FutureDate}
  * @typeParam T - The type of the date property.
- * @param props - Optional properties for the decorator.
- * @returns A validation decorator function.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `Date`.
  *
- * Example usage:
- * ```typescript
- * class Event {
- *   @FutureDate()
- *   eventDate: Date;
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@FutureDate()
+ *   date: Date;
  * }
  * ```
- * This example applies the `FutureDate` validator to the `eventDate` property to ensure it is a date in the future.
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@FutureDate({ message: "Date must be in the future" })
+ *   date: Date;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@FutureDate({ groups: ["UPDATE"] })
+ *   date: Date;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@FutureDate({
+ *     message: "Date must be in the future",
+ *     groups: ["UPDATE"]
+ *   })
+ *   date: Date;
+ * }
+ * ```
  */
 export function FutureDate<T extends API.Utilities.Objects.Optional<Date>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
-) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (date, _context, locale) => ({
-      key: "FutureDate",
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (date, _context, locale) => ({
+      key: API.Decorator.key(options, FUTURE_DATE),
+      valid: isFutureDateValid(date),
       message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "FutureDate",
-          date!
-        ),
-        locale
+        options,
+        locale,
+        translate(locale, FUTURE_DATE, date)
       ),
-      valid: date && date.getTime() > new Date().getTime(),
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

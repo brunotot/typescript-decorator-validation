@@ -12,10 +12,7 @@ const errorData: Type[] = [123.12345, 12.12345, 123.1234];
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @Digits({
-    maxInteger: 2,
-    maxFraction: 4,
-  })
+  @Digits(2, 4)
   value: Type;
 }
 

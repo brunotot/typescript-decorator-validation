@@ -1,35 +1,81 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
+
+/** ArrayOne identifier. */
+export const ARRAY_ONE = "ArrayOne";
+
+/** Internal validation function for {@link ArrayOne} validator. */
+export function isArrayOneValid<K, T extends Array<K>>(
+  array: T,
+  predicate: API.Utilities.Objects.ArrayPredicate<K>
+): boolean {
+  API.Utilities.Objects.assertType("array", array);
+  return (array ?? []).filter(predicate).length === 1;
+}
 
 /**
- * Decorator for validating that exactly one element in an array passes a specified test.
+ * Checks if exactly one element of decorated array satisfies the given predicate criteria.
  *
- * @typeParam K - The type of elements in the array.
- * @param props - The validation properties.
- * @param props.value - A predicate function to value each element in the array.
- * @param [props.groups] - The validation groups to which this validation belongs.
- * @param [props.message] - The custom error message to display if the validation fails.
- * @returns A validation decorator function.
+ * @key {@link ARRAY_ONE ArrayOne}
+ * @typeParam T - The type of decorated array property.
+ * @typeParam K - The type of elements in the decorated array.
+ * @param predicate - The predicate for `Array.filter()` call.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `Array<any>`.
  *
- * Example usage:
- * ```
- * class MyClass {
- *   //@ArrayOne<number>({ value: (val) => val === 0, groups: ["group1"], message: "Exactly one element must be zero" })
- *   zeroElement: number[];
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@ArrayOne(num => num >= 0)
+ *   onlyOnePositive: string[];
  * }
  * ```
- * This example validates that exactly one element in the `zeroElement` array is zero, associates it with a custom validation group, and provides a custom error message if the validation fails.
- */
-export function ArrayOne<K, T extends K[]>(
-  props: API.Decorator.Props.MultiArgsMessageRequired<
-    API.Utilities.Objects.ArrayPredicate<K>
-  >
-) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (array, _, locale) => ({
-      key: "ArrayOne",
-      message: API.Decorator.message(props, "", locale),
-      valid: (array ?? []).filter(props.value).length === 1,
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@ArrayOne(num => num > 0, { message: "Exactly one positive number is allowed" })
+ *   onlyOnePositive: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@ArrayOne(num => num > 0, { groups: ["UPDATE"] })
+ *   onlyOnePositive: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@ArrayOne(num => num > 0, {
+ *     message: "Exactly one positive number is allowed",
+ *     groups: ["UPDATE"]
+ *   })
+ *   onlyOnePositive: string[];
+ * }
+ * ```
+ **/
+export function ArrayOne<K, T extends Array<K>>(
+  predicate: API.Utilities.Objects.ArrayPredicate<K>,
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (array, _context, locale) => ({
+      key: API.Decorator.key(options, ARRAY_ONE),
+      valid: isArrayOneValid(array, predicate),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, ARRAY_ONE)
+      ),
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

@@ -1,42 +1,81 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
+
+/** ArrayContains identifier. */
+export const ARRAY_CONTAINS = "ArrayContains";
+
+/** Internal validation function for {@link ArrayContains} validator. */
+export function isArrayContainsValid<K, T extends Array<K>>(
+  value: T,
+  contains: K
+): boolean {
+  API.Utilities.Objects.assertType("array", value);
+  return (value ?? []).includes(contains);
+}
 
 /**
- * Decorator for validating that an array contains a specific value.
+ * Checks if the decorated array contains a specific value.
  *
- * @typeParam K - The type of elements in the array.
- * @param props - The validation properties.
- * @param props.value - The value to check for in the array.
- * @param [props.groups] - The validation groups to which this validation belongs.
- * @param [props.message] - The custom error message to display if the validation fails.
- * @returns A validation decorator function.
+ * @key {@link ARRAY_CONTAINS ArrayContains}
+ * @typeParam T - The type of decorated array property.
+ * @typeParam K - The type of elements in the decorated array.
+ * @param contains - The value to check.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `Array<any>`.
  *
- * Example usage:
- * ```
- * class MyClass {
- *   //@ArrayContains<number>({ value: 42, groups: ["group1", "group2"], message: "Invalid value" })
- *   numbers: number[];
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@ArrayContains("en")
+ *   languages: string[];
  * }
  * ```
- * This example validates that the `numbers` array contains the value 42 and associates it with custom validation groups and a custom error message.
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@ArrayContains("en", { message: "English language must be selected" })
+ *   languages: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@ArrayContains("en", { groups: ["UPDATE"] })
+ *   languages: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@ArrayContains("en", {
+ *     message: "English language must be selected",
+ *     groups: ["UPDATE"]
+ *   })
+ *   languages: string[];
+ * }
+ * ```
  */
-export function ArrayContains<K, T extends K[]>(
-  props: API.Decorator.Props.MultiArgsMessageOptional<K>
-) {
-  const value = API.Decorator.args(props);
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (array, _, locale) => ({
-      key: "ArrayContains",
+export function ArrayContains<K, T extends Array<K>>(
+  contains: K,
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (array, _context, locale) => ({
+      key: API.Decorator.key(options, ARRAY_CONTAINS),
+      valid: isArrayContainsValid(array, contains),
       message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ArrayContains",
-          value
-        ),
-        locale
+        options,
+        locale,
+        translate(locale, ARRAY_CONTAINS, contains)
       ),
-      valid: ((array ?? []) as any[]).includes(value),
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

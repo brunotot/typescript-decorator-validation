@@ -43,11 +43,11 @@ export class ClassValidatorMetaService<
     isValid: API.Validation.Evaluator<
       API.Utilities.Types.UnwrapClass<TStrategy>
     >,
-    groups?: string | string[]
+    groups: string[]
   ): void {
     this.data.add({
       validate: isValid,
-      groups: API.Decorator.groups(groups),
+      groups,
     });
   }
 }

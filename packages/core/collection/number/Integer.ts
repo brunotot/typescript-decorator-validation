@@ -1,38 +1,75 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
+
+/** Integer identifier. */
+export const INTEGER = "Integer";
+
+/** Internal validation function for {@link Integer} validator. */
+function isIntegerValid(num: API.Utilities.Objects.Optional<number>): boolean {
+  API.Utilities.Objects.assertType("number", num);
+  return num !== undefined && num !== null && Number.isInteger(num);
+}
 
 /**
- * Decorator for validating that a value is an integer.
+ * Checks if decorated number is an integer number.
  *
- * @typeParam T - The type of the value property.
- * @param props - Optional properties for the decorator.
- * @returns A validation decorator function.
+ * @key {@link INTEGER Integer}
+ * @typeParam T - The type of the number property.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `number`.
  *
- * Example usage:
- * ```typescript
- * class Order {
- *   //@Integer()
- *   quantity: number;
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@Integer()
+ *   age: number;
  * }
  * ```
- * This example applies the `Integer` validator to the `quantity` property to ensure it is an integer.
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@Integer({ message: "Age number input must be an integer" })
+ *   age: number;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@Integer({ groups: ["UPDATE"] })
+ *   age: number;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@Integer({
+ *     message: "Age number input must be an integer",
+ *     groups: ["UPDATE"]
+ *   })
+ *   age: number;
+ * }
+ * ```
  */
 export function Integer<T extends API.Utilities.Objects.Optional<number>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
-) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (num, _, locale) => ({
-      key: "Integer",
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (num, _context, locale) => ({
+      key: API.Decorator.key(options, INTEGER),
+      valid: isIntegerValid(num),
       message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "Integer",
-          num!
-        ),
-        locale
+        options,
+        locale,
+        translate(locale, INTEGER, num)
       ),
-      valid: num !== undefined && num !== null && Number.isInteger(num),
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

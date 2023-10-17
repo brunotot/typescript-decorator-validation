@@ -1,43 +1,78 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
+
+/** ArraySizeExact identifier. */
+export const ARRAY_SIZE_EXACT = "ArraySizeExact";
+
+/** Internal validation function for {@link ArraySizeExact} validator. */
+export function isArraySizeExactValid(array: any[]): boolean {
+  API.Utilities.Objects.assertType("array", array);
+  return (array ?? []).length === 0;
+}
 
 /**
- * Decorator for validating that an array has an exact number of elements.
+ * Checks if the decorated array contains an exact number of elements.
  *
- * @typeParam K - The type of elements in the array.
- * @param props - The validation properties.
- * @param props.value - The exact number of elements the array should have.
- * @param [props.groups] - The validation groups to which this validation belongs.
- * @param [props.message] - The custom error message to display if the validation fails.
- * @returns A validation decorator function.
+ * @key {@link ARRAY_SIZE_EXACT ArraySizeExact}
+ * @typeParam T - The type of decorated array property.
+ * @typeParam K - The type of elements in the decorated array.
+ * @param exact - Exact size value.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `Array<any>`.
  *
- * Example usage:
- * ```
- * class MyClass {
- *   //@ArraySizeExact<number>({ value: 3, groups: ["group1"], message: "Array must have exactly 3 elements" })
- *   myArray: number[];
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@ArraySizeExact(3)
+ *   languages: string[];
  * }
  * ```
- * This example validates that the `myArray` property has exactly 3 elements, associates it with a custom validation group, and provides a custom error message if the validation fails.
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@ArraySizeExact(3, { message: "You must choose exactly 3 languages" })
+ *   languages: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@ArraySizeExact(3, { groups: ["UPDATE"] })
+ *   languages: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@ArraySizeExact(3, {
+ *     message: "You must choose exactly 3 languages",
+ *     groups: ["UPDATE"]
+ *   })
+ *   languages: string[];
+ * }
+ * ```
  */
 export function ArraySizeExact<K, T extends K[]>(
-  props: API.Decorator.Props.MultiArgsMessageOptional<number>
-) {
-  const exact = API.Decorator.args(props);
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (array, _, locale) => ({
-      key: "ArraySizeExact",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "ArraySizeExact",
-          exact,
-          (array ?? []).length
-        ),
-        locale
-      ),
+  exact: number,
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (array, _context, locale) => ({
+      key: API.Decorator.key(options, ARRAY_SIZE_EXACT),
       valid: (array ?? []).length === exact,
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, ARRAY_SIZE_EXACT, exact, (array ?? []).length)
+      ),
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

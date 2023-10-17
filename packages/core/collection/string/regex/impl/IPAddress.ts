@@ -1,50 +1,80 @@
 import API from "api";
 
+import { translate } from "../../../../src/localization/service/TranslationService";
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
+
+/** IPAddress identifier. */
+export const IP_ADDRESS = "IPAddress";
+
+/** Internal validation function for {@link IPAddress} validator. */
+export function isIPAddressValid<
+  T extends API.Utilities.Objects.Optional<string>
+>(value: T): boolean {
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.IP_ADDRESS, value);
+}
+
 /**
- * Creates a validator decorator that checks if a string value is a valid IP address using a regular expression pattern.
+ * Checks if decorated string is a valid IP address.
  *
- * @typeparam T - The type of the decorated property (optional string).
- * @param props - (Optional) An object with properties for the validator.
- * @param props.key - (Optional) The key to identify this validation rule in error messages. Defaults to "IPAddress".
- * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
- * @param props.groups - (Optional) An array of validation groups to which this rule belongs.
- * @returns A decorator function to use with class properties.
+ * @key {@link IP_ADDRESS IPAddress}
+ * @typeParam T - The type of the string property.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `string`.
  *
  * @example
- * // Example 1: Basic usage with default options
- * class MyClass {
- *   //@IPAddress()
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@IPAddress()
  *   ipAddress: string;
  * }
+ * ```
  *
- * // Example 2: Custom error message and validation groups
- * class AnotherClass {
- *   //@IPAddress({
- *   //   key: "IPAddressField",
- *   //   message: "Invalid IP address",
- *   //   groups: ["registration", "profile"],
- *   // })
- *   value: string;
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@IPAddress({ message: "Input is not a valid IP address" })
+ *   ipAddress: string;
  * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@IPAddress({ groups: ["UPDATE"] })
+ *   ipAddress: string;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@IPAddress({
+ *     message: "Input is not a valid IP address",
+ *     groups: ["UPDATE"]
+ *   })
+ *   ipAddress: string;
+ * }
+ * ```
  */
 export function IPAddress<T extends API.Utilities.Objects.Optional<string>>(
-  props?: API.Decorator.Props.ZeroArgsMessageOptional
-) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (value, _, locale) => ({
-      key: "IPAddress",
-      message: API.Decorator.message(
-        props,
-        API.Localization.Service.TranslationService.translate(
-          locale,
-          "IPAddress"
-        ),
-        locale
-      ),
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (value, _context, locale) => ({
+      key: API.Decorator.key(options, IP_ADDRESS),
       valid: testRegex(RegexConst.IP_ADDRESS, value),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, IP_ADDRESS)
+      ),
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

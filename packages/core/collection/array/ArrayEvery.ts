@@ -1,35 +1,81 @@
 import API from "api";
+import { translate } from "../../src/localization/service/TranslationService";
+
+/** ArrayEvery identifier. */
+export const ARRAY_EVERY = "ArrayEvery";
+
+/** Internal validation function for {@link ArrayEvery} validator. */
+export function isArrayEveryValid<K, T extends Array<K>>(
+  array: T,
+  predicate: API.Utilities.Objects.ArrayPredicate<K>
+): boolean {
+  API.Utilities.Objects.assertType("array", array);
+  return (array ?? []).every(predicate);
+}
 
 /**
- * Decorator for validating that every element in an array passes a specified test.
+ * Checks if all elements of decorated array satisfy the given predicate criteria.
  *
- * @typeParam K - The type of elements in the array.
- * @param props - The validation properties.
- * @param props.test - A predicate function to test each element in the array.
- * @param [props.groups] - The validation groups to which this validation belongs.
- * @param [props.message] - The custom error message to display if the validation fails.
- * @returns A validation decorator function.
+ * @key {@link ARRAY_EVERY ArrayEvery}
+ * @typeParam T - The type of decorated array property.
+ * @typeParam K - The type of elements in the decorated array.
+ * @param predicate - The predicate for `Array.every()` call.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `Array<any>`.
  *
- * Example usage:
- * ```
- * class MyClass {
- *   //@ArrayEvery<number>({ test: (val) => val > 0, groups: ["group1"], message: "All elements must be greater than 0" })
- *   positiveNumbers: number[];
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@ArrayEvery(num => num > 0)
+ *   positiveNumbers: string[];
  * }
  * ```
- * This example validates that all elements in the `positiveNumbers` array are greater than 0, associates it with a custom validation group, and provides a custom error message if the validation fails.
- */
-export function ArrayEvery<K, T extends K[]>(
-  props: API.Decorator.Props.MultiArgsMessageRequired<
-    API.Utilities.Objects.ArrayPredicate<K>
-  >
-) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>({
-    groups: API.Decorator.groups(props),
-    validate: (array, _, locale) => ({
-      key: "ArrayEvery",
-      message: API.Decorator.message(props, "", locale),
-      valid: (array ?? []).every(props.value),
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@ArrayEvery(num => num > 0, { message: "All elements must be greater than 0" })
+ *   positiveNumbers: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@ArrayEvery(num => num > 0, { groups: ["UPDATE"] })
+ *   positiveNumbers: string[];
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@ArrayEvery(num => num > 0, {
+ *     message: "All elements must be greater than 0",
+ *     groups: ["UPDATE"]
+ *   })
+ *   positiveNumbers: string[];
+ * }
+ * ```
+ **/
+export function ArrayEvery<K, T extends Array<K>>(
+  predicate: API.Utilities.Objects.ArrayPredicate<K>,
+  options?: API.Decorator.Options
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+    (array, _context, locale) => ({
+      key: API.Decorator.key(options, ARRAY_EVERY),
+      valid: isArrayEveryValid(array, predicate),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, ARRAY_EVERY)
+      ),
     }),
-  });
+    API.Decorator.groups(options)
+  );
 }

@@ -48,7 +48,7 @@ import * as NsUppercase from "./string/regex/impl/Uppercase";
  */
 namespace ValidatorAnyGroup {
   export import Required = NsRequired.Required;
-  export import validate = NsValidate.create;
+  export import create = NsValidate.create;
 }
 
 /**
@@ -68,7 +68,7 @@ namespace ValidatorArrayGroup {
   export import ArraySizeRange = NsArraySizeRange.ArraySizeRange;
   export import foreach = NsForeach.foreach;
   export import Required = ValidatorAnyGroup.Required;
-  export import validate = ValidatorAnyGroup.validate;
+  export import create = ValidatorAnyGroup.create;
 }
 
 /**
@@ -78,7 +78,7 @@ namespace ValidatorBooleanGroup {
   export import AssertTrue = NsAssertTrue.AssertTrue;
   export import AssertFalse = NsAssertFalse.AssertFalse;
   export import Required = ValidatorAnyGroup.Required;
-  export import validate = ValidatorAnyGroup.validate;
+  export import create = ValidatorAnyGroup.create;
 }
 
 /**
@@ -96,7 +96,7 @@ namespace ValidatorNumberGroup {
   export import NonPositive = NsNonPositive.NonPositive;
   export import Positive = NsPositive.Positive;
   export import Required = ValidatorAnyGroup.Required;
-  export import validate = ValidatorAnyGroup.validate;
+  export import create = ValidatorAnyGroup.create;
 }
 
 /**
@@ -107,7 +107,7 @@ namespace ValidatorDateGroup {
   export import PastDate = NsPastDate.PastDate;
   export import TodayDate = NsTodayDate.TodayDate;
   export import Required = ValidatorAnyGroup.Required;
-  export import validate = ValidatorAnyGroup.validate;
+  export import create = ValidatorAnyGroup.create;
 }
 
 /**
@@ -128,7 +128,7 @@ namespace ValidatorStringGroup {
   export import Lowercase = NsLowercase.Lowercase;
   export import Alphanumeric = NsAlphanumeric.Alphanumeric;
   export import Required = ValidatorAnyGroup.Required;
-  export import validate = ValidatorAnyGroup.validate;
+  export import create = ValidatorAnyGroup.create;
 }
 
 /**
