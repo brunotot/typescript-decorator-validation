@@ -1,42 +1,77 @@
 import API from "api";
 import { translate } from "../../src/localization/service/TranslationService";
 
+/** ValueMin identifier. */
+export const VALUE_MIN = "ValueMin";
+
+/** Internal validation function for {@link ValueMin} validator. */
+function isValueMinValid(
+  num: API.Utilities.Objects.Optional<number>,
+  min: number
+): boolean {
+  API.Utilities.Objects.assertType("number", num);
+  return num == null ? true : num >= min;
+}
+
 /**
- * ValueMin decorator for validating that a numeric value is greater than or equal to a specified minimum value.
+ * Checks if decorated number is not lesser than given `min` parameter.
  *
- * @typeParam T - The type of the value to be validated, which should be optional and a number.
- *
- * @returns A decorator function that can be applied to class properties.
- *
- * @example
- * // Usage with a specific minimum value:
- * class Product {
- *   //@ValueMin({ value: 10 })
- *   quantity?: number;
- * }
+ * @key {@link VALUE_MIN ValueMin}
+ * @typeParam T - The type of the number property.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `number`.
  *
  * @example
- * // Usage with custom error message:
- * class Product {
- *   //@ValueMin({
- *   //  value: 5,
- *   //  message: "Quantity must be at least 5 units.",
- *   //})
- *   quantity?: number;
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@ValueMin(5)
+ *   num: number;
  * }
+ * ```
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@ValueMin(5, { message: "Minimum allowed value is 5" })
+ *   num: number;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@ValueMin(5, { groups: ["UPDATE"] })
+ *   num: number;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@ValueMin(5, {
+ *     message: "Minimum allowed value is 5",
+ *     groups: ["UPDATE"]
+ *   })
+ *   num: number;
+ * }
+ * ```
  */
 export function ValueMin<T extends API.Utilities.Objects.Optional<number>>(
   min: number,
   options?: API.Decorator.Options
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
-    (value, _, locale) => ({
-      key: API.Decorator.key(options, "ValueMin"),
-      valid: value == null ? true : value >= min,
+    (value, _context, locale) => ({
+      key: API.Decorator.key(options, VALUE_MIN),
+      valid: isValueMinValid(value, min),
       message: API.Decorator.message(
         options,
         locale,
-        translate(locale, "ValueMin", min, value)
+        translate(locale, VALUE_MIN, min, value)
       ),
     }),
     API.Decorator.groups(options)
