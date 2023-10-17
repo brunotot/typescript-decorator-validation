@@ -1,40 +1,73 @@
 import API from "api";
 import { translate } from "../../src/localization/service/TranslationService";
 
+/** Positive identifier. */
+export const POSITIVE = "Positive";
+
+/** Internal validation function for {@link Positive} validator. */
+function isPositiveValid(num: API.Utilities.Objects.Optional<number>): boolean {
+  API.Utilities.Objects.assertType("number", num);
+  return num !== undefined && num !== null && num > 0;
+}
+
 /**
- * Positive decorator for validating that a numeric value is positive.
+ * Checks if decorated number is a positive number (number greater than 0).
  *
- * @typeParam T - The type of the value to be validated, which should be optional and a number.
- *
- * @returns A decorator function that can be applied to class properties.
+ * @key {@link POSITIVE Positive}
+ * @typeParam T - The type of the number property.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `number`.
  *
  * @example
- * // Basic usage without args:
- * class Product {
- *   @Positive()
- *   quantity?: number;
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@Positive()
+ *   num: number;
  * }
+ * ```
  *
  * @example
- * // Usage with custom error message:
- * class Product {
- *   @Positive({
- *     message: "Quantity must be a positive value.",
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@Positive({ message: "Number value must be greater than 0" })
+ *   num: number;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@Positive({ groups: ["UPDATE"] })
+ *   num: number;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@Positive({
+ *     message: "Number value must be greater than 0",
+ *     groups: ["UPDATE"]
  *   })
- *   quantity?: number;
+ *   num: number;
  * }
+ * ```
  */
 export function Positive<T extends API.Utilities.Objects.Optional<number>>(
   options?: API.Decorator.Options
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
-    (num, _, locale) => ({
-      key: API.Decorator.key(options, "Positive"),
-      valid: num !== undefined && num !== null && num > 0,
+    (num, _context, locale) => ({
+      key: API.Decorator.key(options, POSITIVE),
+      valid: isPositiveValid(num),
       message: API.Decorator.message(
         options,
         locale,
-        translate(locale, "Positive", num)
+        translate(locale, POSITIVE, num)
       ),
     }),
     API.Decorator.groups(options)
