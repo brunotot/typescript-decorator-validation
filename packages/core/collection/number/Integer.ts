@@ -15,7 +15,7 @@ function isIntegerValid(num: API.Utilities.Objects.Optional<number>): boolean {
  *
  * @key {@link INTEGER Integer}
  * @typeParam T - The type of the number property.
- * @param options - Extra configuration props.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `number`.
  *
  * @example

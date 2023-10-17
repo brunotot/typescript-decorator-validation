@@ -15,7 +15,7 @@ export function isAssertFalseValid(value: boolean): boolean {
  *
  * @key {@link ASSERT_FALSE AssertFalse}
  * @typeParam T - The type of the decorated property (boolean).
- * @param options - Extra configuration props.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `boolean`.
  *
  * @example

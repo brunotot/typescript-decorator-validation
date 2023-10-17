@@ -16,7 +16,7 @@ export function isArrayEmptyValid(array: any[]): boolean {
  * @key {@link ARRAY_EMPTY ArrayEmpty}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
- * @param options - Extra configuration props.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `Array<any>`.
  *
  * @example

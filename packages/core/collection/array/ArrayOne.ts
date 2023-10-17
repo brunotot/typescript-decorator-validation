@@ -20,7 +20,7 @@ export function isArrayOneValid<K, T extends Array<K>>(
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param predicate - The predicate for `Array.filter()` call.
- * @param options - Extra configuration props.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `Array<any>`.
  *
  * @example

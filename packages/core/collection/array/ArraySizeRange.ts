@@ -22,7 +22,7 @@ export function isArraySizeRangeValid(
  * @typeParam K - The type of elements in the decorated array.
  * @param min - Min size value.
  * @param max - Max size value.
- * @param options - Extra configuration props.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `Array<any>`.
  *
  * @example

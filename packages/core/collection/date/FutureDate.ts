@@ -17,7 +17,7 @@ export function isFutureDateValid<
  *
  * @key {@link FUTURE_DATE FutureDate}
  * @typeParam T - The type of the date property.
- * @param options - Extra configuration props.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `Date`.
  *
  * @example

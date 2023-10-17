@@ -27,7 +27,7 @@ export function isRequiredValid<T>(
  *
  * @key {@link REQUIRED Required}
  * @typeParam T - The type of the decorated property (any class field).
- * @param options - Extra configuration props.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use with class fields.
  *
  * @example

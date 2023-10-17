@@ -17,7 +17,7 @@ export function isArraySizeMinValid(array: any[], min: number): boolean {
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param min - Min size value.
- * @param options - Extra configuration props.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `Array<any>`.
  *
  * @example
