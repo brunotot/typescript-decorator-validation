@@ -33,46 +33,49 @@
 <h1>Function Alphanumeric</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="Alphanumeric"><span class="tsd-kind-call-signature">Alphanumeric</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">props</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">target</span>, <span class="tsd-kind-parameter">context</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><a href="#Alphanumeric" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="Alphanumeric"><span class="tsd-kind-call-signature">Alphanumeric</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">options</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/tdv_core.Decorator.html" class="tsd-signature-type tsd-kind-namespace">Decorator</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.Decorator.Service.html" class="tsd-signature-type tsd-kind-namespace">Service</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.Decorator.Service.FieldDecoratorService.html" class="tsd-signature-type tsd-kind-namespace">FieldDecoratorService</a><span class="tsd-signature-symbol">.</span><a href="../types/tdv_core.Decorator.Service.FieldDecoratorService.Instance.html" class="tsd-signature-type tsd-kind-type-alias">Instance</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#Alphanumeric" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Creates a validator decorator that checks if a string value contains only alphanumeric characters (letters and digits).</p>
+<div class="tsd-comment tsd-typography"><p>Checks if decorated string contains only alphabetical or number characters.</p>
 </div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4></li></ul></section>
+<h4><span class="tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
+<div class="tsd-comment tsd-typography"><p>The type of the string property.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">props</span>: <a href="../types/tdv_core.Decorator.Props.ZeroArgsMessageOptional.html" class="tsd-signature-type tsd-kind-type-alias">ZeroArgsMessageOptional</a></h5>
-<div class="tsd-comment tsd-typography"><p>(Optional) An object with properties for the validator.</p>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">options</span>: <a href="../types/tdv_core.Decorator.Options.html" class="tsd-signature-type tsd-kind-type-alias">Options</a></h5>
+<div class="tsd-comment tsd-typography"><p>Common decorator options (<code>key</code>, <code>message</code>, <code>groups</code>, etc...)</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">target</span>, <span class="tsd-kind-parameter">context</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></h4><p>A decorator function to use with class properties.</p>
+<h4 class="tsd-returns-title">Returns <a href="../modules/tdv_core.Decorator.html" class="tsd-signature-type tsd-kind-namespace">Decorator</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.Decorator.Service.html" class="tsd-signature-type tsd-kind-namespace">Service</a><span class="tsd-signature-symbol">.</span><a href="../modules/tdv_core.Decorator.Service.FieldDecoratorService.html" class="tsd-signature-type tsd-kind-namespace">FieldDecoratorService</a><span class="tsd-signature-symbol">.</span><a href="../types/tdv_core.Decorator.Service.FieldDecoratorService.Instance.html" class="tsd-signature-type tsd-kind-type-alias">Instance</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A decorator function to use on class fields of type <code>string</code>.</p>
 
-<ul class="tsd-parameters">
-<li class="tsd-parameter-signature">
-<ul class="tsd-signatures">
-<li class="tsd-signature" id="Alphanumeric.__type.__type-1"><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">target</span>, <span class="tsd-kind-parameter">context</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-<li class="tsd-description">
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5><span class="tsd-kind-parameter">target</span>: <span class="tsd-signature-type">any</span></h5></li>
-<li>
-<h5><span class="tsd-kind-parameter">context</span>: <span class="tsd-signature-type ">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">access</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span><br/><span>        </span><span class="tsd-kind-property">get</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;getter&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;method&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;field&quot;</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">metadata</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">DecoratorMetadataObject</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">private</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">static</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></li></ul>
 <div class="tsd-comment tsd-typography">
-<h4>Typeparam</h4><p>T - The type of the decorated property (optional string).</p>
+<h4>Key</h4><p>ALPHANUMERIC Alphanumeric</p>
 
-<h4>Example</h4><pre><code class="language-ts"><span class="hl-4">// Example 1: Basic usage with default options</span><br/><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">MyClass</span><span class="hl-1"> {</span><br/><span class="hl-1">  @</span><span class="hl-0">Alphanumeric</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-6">code</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-4">// Example 2: Custom error message and validation groups</span><br/><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">AnotherClass</span><span class="hl-1"> {</span><br/><span class="hl-1">  @</span><span class="hl-0">Alphanumeric</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-6">key:</span><span class="hl-1"> </span><span class="hl-2">&quot;AlphanumericCode&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">message:</span><span class="hl-1"> </span><span class="hl-2">&quot;Invalid code format&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">groups:</span><span class="hl-1"> [</span><span class="hl-2">&quot;registration&quot;</span><span class="hl-1">, </span><span class="hl-2">&quot;profile&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">  })</span><br/><span class="hl-1">  </span><span class="hl-6">value</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
+<h4>Example</h4><p>1: Basic usage</p>
+<pre><code class="language-ts"><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Form</span><span class="hl-1"> {</span><br/><span class="hl-1">  \@</span><span class="hl-0">Alphanumeric</span><span class="hl-1">()</span><br/><span class="hl-1">  </span><span class="hl-6">input</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
+</code><button>Copy</button></pre>
+
+<h4>Example</h4><p>2: Supplying a custom error message</p>
+<pre><code class="language-ts"><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Form</span><span class="hl-1"> {</span><br/><span class="hl-1">  \@</span><span class="hl-0">Alphanumeric</span><span class="hl-1">({ </span><span class="hl-6">message:</span><span class="hl-1"> </span><span class="hl-2">&quot;Input must contain only alphabetical or number characters (no specials)&quot;</span><span class="hl-1"> })</span><br/><span class="hl-1">  </span><span class="hl-6">input</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
+</code><button>Copy</button></pre>
+
+<h4>Example</h4><p>3: Supplying custom groups</p>
+<pre><code class="language-ts"><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Form</span><span class="hl-1"> {</span><br/><span class="hl-1">  \@</span><span class="hl-0">Alphanumeric</span><span class="hl-1">({ </span><span class="hl-6">groups:</span><span class="hl-1"> [</span><span class="hl-2">&quot;UPDATE&quot;</span><span class="hl-1">] })</span><br/><span class="hl-1">  </span><span class="hl-6">input</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
+</code><button>Copy</button></pre>
+
+<h4>Example</h4><p>4: Supplying both custom error message and groups</p>
+<pre><code class="language-ts"><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Form</span><span class="hl-1"> {</span><br/><span class="hl-1">  \@</span><span class="hl-0">Alphanumeric</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-6">message:</span><span class="hl-1"> </span><span class="hl-2">&quot;Input must contain only alphabetical or number characters (no specials)&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">groups:</span><span class="hl-1"> [</span><span class="hl-2">&quot;UPDATE&quot;</span><span class="hl-1">]</span><br/><span class="hl-1">  })</span><br/><span class="hl-1">  </span><span class="hl-6">input</span><span class="hl-1">: </span><span class="hl-7">string</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/bccf12e/packages/core/collection/string/regex/impl/Alphanumeric.ts#L32">collection/string/regex/impl/Alphanumeric.ts:32</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/5c12fa1/packages/core/collection/string/regex/impl/Alphanumeric.ts#L65">collection/string/regex/impl/Alphanumeric.ts:65</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -101,9 +104,9 @@
 <li><a href="tdv_core.Collection.any.Required.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Required
 <div class="menu-item-desc">Creates a validator decorator which requires that a value must be present.</div></div></a></li>
-<li><a href="tdv_core.Collection.any.validate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>validate
-<div class="menu-item-desc">Creates a custom validator decorator which is later used by ValidationEngine to register validation rules.</div></div></a></li></ul></div></details></li>
+<li><a href="tdv_core.Collection.any.create.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>create
+<div class="menu-item-desc">Creates a custom validator decorator from the `validate` supplier function. Is used by ValidationEngine and allows custom validation logic.</div></div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Collection.array"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Collection.array.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>array
@@ -112,41 +115,41 @@
 <ul class="tsd-nested-navigation">
 <li><a href="../modules/tdv_core.Collection.array.html#Required"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>Required</div></a></li>
-<li><a href="../modules/tdv_core.Collection.array.html#validate"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
-<div>validate</div></a></li>
+<li><a href="../modules/tdv_core.Collection.array.html#create"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
+<div>create</div></a></li>
 <li><a href="tdv_core.Collection.array.ArrayContains.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Contains
-<div class="menu-item-desc">Decorator for validating that an array contains a specific value.</div></div></a></li>
+<div class="menu-item-desc">Checks if the decorated array contains a specific value.</div></div></a></li>
 <li><a href="tdv_core.Collection.array.ArrayEmpty.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Empty
-<div class="menu-item-desc">Decorator for validating that an array is empty.</div></div></a></li>
+<div class="menu-item-desc">Checks if the decorated array is empty.</div></div></a></li>
 <li><a href="tdv_core.Collection.array.ArrayEvery.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Every
-<div class="menu-item-desc">Decorator for validating that every element in an array passes a specified test.</div></div></a></li>
+<div class="menu-item-desc">Checks if all elements of decorated array satisfy the given predicate criteria.</div></div></a></li>
 <li><a href="tdv_core.Collection.array.ArrayNone.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>None
-<div class="menu-item-desc">Decorator for validating that none of the elements in an array pass a specified test.</div></div></a></li>
+<div class="menu-item-desc">Checks if no elements of decorated array satisfy the given predicate criteria.</div></div></a></li>
 <li><a href="tdv_core.Collection.array.ArrayOne.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>One
-<div class="menu-item-desc">Decorator for validating that exactly one element in an array passes a specified test.</div></div></a></li>
+<div class="menu-item-desc">Checks if exactly one element of decorated array satisfies the given predicate criteria.</div></div></a></li>
 <li><a href="tdv_core.Collection.array.ArraySizeExact.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Size<wbr/>Exact
-<div class="menu-item-desc">Decorator for validating that an array has an exact number of elements.</div></div></a></li>
+<div class="menu-item-desc">Checks if the decorated array contains an exact number of elements.</div></div></a></li>
 <li><a href="tdv_core.Collection.array.ArraySizeMax.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Size<wbr/>Max
-<div class="menu-item-desc">Decorator for validating that an array has a maximum number of elements.</div></div></a></li>
+<div class="menu-item-desc">Checks if the decorated array contains up to `max` number of elements.</div></div></a></li>
 <li><a href="tdv_core.Collection.array.ArraySizeMin.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Size<wbr/>Min
-<div class="menu-item-desc">Decorator for validating that an array has a maximum number of elements.</div></div></a></li>
+<div class="menu-item-desc">Checks if the decorated array contains at least `min` number of elements.</div></div></a></li>
 <li><a href="tdv_core.Collection.array.ArraySizeRange.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Size<wbr/>Range
-<div class="menu-item-desc">Decorator for validating that an array falls within a specified size range.</div></div></a></li>
+<div class="menu-item-desc">Checks if the decorated array contains at least `min` number of elements.</div></div></a></li>
 <li><a href="tdv_core.Collection.array.ArraySome.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Some
-<div class="menu-item-desc">Decorator for validating that at least one element in an array passes a specific test.</div></div></a></li>
+<div class="menu-item-desc">Checks if at least one element of decorated array satisfies the given predicate criteria.</div></div></a></li>
 <li><a href="tdv_core.Collection.array.ArrayUnique.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Array<wbr/>Unique
-<div class="menu-item-desc">Decorator for validating that all elements in an array are unique based on a custom comparison function.</div></div></a></li>
+<div class="menu-item-desc">Checks if all elements in decorated array are unique.</div></div></a></li>
 <li><a href="tdv_core.Collection.array.foreach.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>foreach
 <div class="menu-item-desc">Creates a validator decorator which applies multiple validators to each element in array field.</div></div></a></li></ul></div></details></li>
@@ -158,14 +161,14 @@
 <ul class="tsd-nested-navigation">
 <li><a href="../modules/tdv_core.Collection.boolean.html#Required"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>Required</div></a></li>
-<li><a href="../modules/tdv_core.Collection.boolean.html#validate"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
-<div>validate</div></a></li>
+<li><a href="../modules/tdv_core.Collection.boolean.html#create"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
+<div>create</div></a></li>
 <li><a href="tdv_core.Collection.boolean.AssertFalse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Assert<wbr/>False
-<div class="menu-item-desc">Creates a validator decorator for falsy value validation.</div></div></a></li>
+<div class="menu-item-desc">Checks if a boolean value is `false`.</div></div></a></li>
 <li><a href="tdv_core.Collection.boolean.AssertTrue.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Assert<wbr/>True
-<div class="menu-item-desc">Creates a decorator to validate that a value is truthy.</div></div></a></li></ul></div></details></li>
+<div class="menu-item-desc">Checks if a boolean value is `true`.</div></div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Collection.clazz"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Collection.clazz.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>clazz
@@ -174,7 +177,7 @@
 <ul class="tsd-nested-navigation">
 <li><a href="tdv_core.Collection.clazz.ValidDateRange.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Valid<wbr/>Date<wbr/>Range
-<div class="menu-item-desc">Creates a class decorator that validates if the date range is valid.</div></div></a></li>
+<div class="menu-item-desc">Checks if Date  `startDateField` is before Date  `endDateField` of a class.</div></div></a></li>
 <li><a href="tdv_core.Collection.clazz.attribute.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>attribute
 <div class="menu-item-desc">Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T` ).</div></div></a></li></ul></div></details></li>
@@ -186,17 +189,17 @@
 <ul class="tsd-nested-navigation">
 <li><a href="../modules/tdv_core.Collection.date.html#Required"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>Required</div></a></li>
-<li><a href="../modules/tdv_core.Collection.date.html#validate"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
-<div>validate</div></a></li>
+<li><a href="../modules/tdv_core.Collection.date.html#create"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
+<div>create</div></a></li>
 <li><a href="tdv_core.Collection.date.FutureDate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Future<wbr/>Date
-<div class="menu-item-desc">Decorator for validating if a date is in the future.</div></div></a></li>
+<div class="menu-item-desc">Checks if a Date is in the future.</div></div></a></li>
 <li><a href="tdv_core.Collection.date.PastDate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Past<wbr/>Date
-<div class="menu-item-desc">Decorator for validating if a date is in the past.</div></div></a></li>
+<div class="menu-item-desc">Checks if a Date is in the past.</div></div></a></li>
 <li><a href="tdv_core.Collection.date.TodayDate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Today<wbr/>Date
-<div class="menu-item-desc">Decorator for validating if a date is today&#39;s date.</div></div></a></li></ul></div></details></li>
+<div class="menu-item-desc">Checks if a Date is the today&#39;s date based on year, month and day.</div></div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Collection.number"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Collection.number.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>number
@@ -205,38 +208,38 @@
 <ul class="tsd-nested-navigation">
 <li><a href="../modules/tdv_core.Collection.number.html#Required"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>Required</div></a></li>
-<li><a href="../modules/tdv_core.Collection.number.html#validate"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
-<div>validate</div></a></li>
+<li><a href="../modules/tdv_core.Collection.number.html#create"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
+<div>create</div></a></li>
 <li><a href="tdv_core.Collection.number.Decimal.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Decimal
-<div class="menu-item-desc">Decorator for validating if a value is a decimal number.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated number is a decimal number.</div></div></a></li>
 <li><a href="tdv_core.Collection.number.Digits.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Digits
-<div class="menu-item-desc">Decorator for validating the number of digits in a numeric value.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated number is a decimal number.</div></div></a></li>
 <li><a href="tdv_core.Collection.number.Integer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Integer
-<div class="menu-item-desc">Decorator for validating that a value is an integer.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated number is an integer number.</div></div></a></li>
 <li><a href="tdv_core.Collection.number.Negative.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Negative
-<div class="menu-item-desc">Decorator for validating that a value is a negative number.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated number is a negative number (number less than 0).</div></div></a></li>
 <li><a href="tdv_core.Collection.number.NonNegative.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Non<wbr/>Negative
-<div class="menu-item-desc">NonNegative decorator for validating that a numeric value is non-negative.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated number is not a negative number (can be 0).</div></div></a></li>
 <li><a href="tdv_core.Collection.number.NonPositive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Non<wbr/>Positive
-<div class="menu-item-desc">NonPositive decorator for validating that a numeric value is non-positive.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated number is not a positive number (can be 0).</div></div></a></li>
 <li><a href="tdv_core.Collection.number.Positive.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Positive
-<div class="menu-item-desc">Positive decorator for validating that a numeric value is positive.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated number is a positive number (number greater than 0).</div></div></a></li>
 <li><a href="tdv_core.Collection.number.ValueMax.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Value<wbr/>Max
-<div class="menu-item-desc">ValueMax decorator for validating that a numeric value is less than or equal to a specified maximum value.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated number is not greater than given `max` parameter.</div></div></a></li>
 <li><a href="tdv_core.Collection.number.ValueMin.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Value<wbr/>Min
-<div class="menu-item-desc">ValueMin decorator for validating that a numeric value is greater than or equal to a specified minimum value.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated number is not lesser than given `min` parameter.</div></div></a></li>
 <li><a href="tdv_core.Collection.number.ValueRange.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Value<wbr/>Range
-<div class="menu-item-desc">ValueRange decorator for validating that a numeric value falls within a specified range.</div></div></a></li></ul></div></details></li>
+<div class="menu-item-desc">Checks if decorated number is within a given range of `min` and `max` parameters.</div></div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" open data-key="tdv-core.Collection.string"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Collection.string.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>string
@@ -245,89 +248,53 @@
 <ul class="tsd-nested-navigation">
 <li><a href="../modules/tdv_core.Collection.string.html#Required"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>Required</div></a></li>
-<li><a href="../modules/tdv_core.Collection.string.html#validate"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
-<div>validate</div></a></li>
+<li><a href="../modules/tdv_core.Collection.string.html#create"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
+<div>create</div></a></li>
 <li><a href="tdv_core.Collection.string.Alpha.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Alpha
-<div class="menu-item-desc">Creates a validator decorator that checks if a string value contains only alphabetical characters (letters).</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated string contains only alphabetical characters.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.Alphanumeric.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Alphanumeric
-<div class="menu-item-desc">Creates a validator decorator that checks if a string value contains only alphanumeric characters (letters and digits).</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated string contains only alphabetical or number characters.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.Email.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Email
-<div class="menu-item-desc">Creates a validator decorator that checks if a string value is a valid email address using a regular expression pattern.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated string is a valid email.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.ExactLength.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Exact<wbr/>Length
-<div class="menu-item-desc">Checks if the decorated string contains an exact number of characters.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated string contains a specific number of characters.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.IPAddress.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>IPAddress
-<div class="menu-item-desc">Creates a validator decorator that checks if a string value is a valid IP address using a regular expression pattern.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated string is a valid IP address.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.Lowercase.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Lowercase
-<div class="menu-item-desc">Creates a validator decorator that checks if a string value contains only lowercase letters using a regular expression pattern.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated string contains only lowercase characters.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.MaxLength.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Max<wbr/>Length
-<div class="menu-item-desc">Creates a validator decorator for maximum length validation.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated string contains a specific number of characters.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.MinLength.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Min<wbr/>Length
-<div class="menu-item-desc">Creates a validator decorator for minimum length validation.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated string contains a specific number of characters.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.Numeric.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Numeric
-<div class="menu-item-desc">Creates a validator decorator that checks if a string value contains only numeric characters using a regular expression pattern.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated string contains only numeric characters.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.Password.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Password
-<div class="menu-item-desc">Creates a validator decorator for password validation.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated string contains a specific number of characters.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.Pattern.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Pattern
 <div class="menu-item-desc">Creates a validator decorator that checks if a string value matches a regular expression pattern.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.URL.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>URL
-<div class="menu-item-desc">Creates a validator decorator that checks if a string value is a valid URL using a regular expression pattern.</div></div></a></li>
+<div class="menu-item-desc">Checks if decorated string is a valid URL.</div></div></a></li>
 <li><a href="tdv_core.Collection.string.Uppercase.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>Uppercase
-<div class="menu-item-desc">Creates a validator decorator that checks if a string value contains only uppercase letters using a regular expression pattern.</div></div></a></li></ul></div></details></li></ul></div></details></li>
+<div class="menu-item-desc">Checks if decorated string contains only uppercase characters.</div></div></a></li></ul></div></details></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Decorator"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Decorator.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Decorator
 <div class="menu-item-desc">A collection of types and interfaces for creating and handling decorators.</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
-<li>
-<details class="tsd-index-accordion" data-key="tdv-core.Decorator.Props"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Decorator.Props.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
-<div>Props
-<div class="menu-item-desc">A namespace which contains data related to the actual parameters the decorator services expect.</div></div></a></summary>
-<div class="tsd-accordion-details">
-<ul class="tsd-nested-navigation">
-<li><a href="../types/tdv_core.Decorator.Props.Base.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Base
-<div class="menu-item-desc">Basic bare-bones decorator props. It contains configurations which are accessible on any decorator.</div></div></a></li>
-<li><a href="../types/tdv_core.Decorator.Props.GenericModel.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Generic<wbr/>Model
-<div class="menu-item-desc">Represents a most generic decorator config possible. If undefined, it means that decorator doesn&#39;t depend on any outside conditions.</div></div></a></li>
-<li><a href="../types/tdv_core.Decorator.Props.MessageOptional.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Message<wbr/>Optional
-<div class="menu-item-desc">Represents decorator props with a message which may be provided but will default to library&#39;s translation message if not.</div></div></a></li>
-<li><a href="../types/tdv_core.Decorator.Props.MessageRequired.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Message<wbr/>Required
-<div class="menu-item-desc">Represents decorator props with a message which must be provided.</div></div></a></li>
-<li><a href="../types/tdv_core.Decorator.Props.MultiArgs.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Multi<wbr/>Args
-<div class="menu-item-desc">Represents a generic model of multiple args with a required message or otherwise with an optional message parameter.</div></div></a></li>
-<li><a href="../types/tdv_core.Decorator.Props.MultiArgsMessageOptional.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Multi<wbr/>Args<wbr/>Message<wbr/>Optional
-<div class="menu-item-desc">Represents a decorator config (including Base props) which has more than zero input params with an optional message.</div></div></a></li>
-<li><a href="../types/tdv_core.Decorator.Props.MultiArgsMessageRequired.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Multi<wbr/>Args<wbr/>Message<wbr/>Required
-<div class="menu-item-desc">Represents a decorator config (including Base props) which has more than zero input params with a mandatory message.</div></div></a></li>
-<li><a href="../types/tdv_core.Decorator.Props.ZeroArgs.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Zero<wbr/>Args
-<div class="menu-item-desc">Represents a generic model of zero args with a required message or otherwise with an optional message parameter.</div></div></a></li>
-<li><a href="../types/tdv_core.Decorator.Props.ZeroArgsMessageOptional.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Zero<wbr/>Args<wbr/>Message<wbr/>Optional
-<div class="menu-item-desc">Represents a decorator config (including Base props) which accepts no parameters but a custom message must be provided.</div></div></a></li>
-<li><a href="../types/tdv_core.Decorator.Props.ZeroArgsMessageRequired.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
-<div>Zero<wbr/>Args<wbr/>Message<wbr/>Required
-<div class="menu-item-desc">Represents a decorator config (including Base props) which accepts no parameters but may also be a custom message.</div></div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Decorator.Service"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Decorator.Service.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Service
@@ -354,7 +321,7 @@
 <div class="menu-item-desc">Type definition for the Supplier function.</div></div></a></li>
 <li><a href="../types/tdv_core.Decorator.Service.ClassDecoratorService.Type.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Type
-<div class="menu-item-desc">Type alias for any class - indicates that a class decorator may be only put on class level.</div></div></a></li>
+<div class="menu-item-desc">Type alias for any class - indicates that a decorator may be only put on a class (not field).</div></div></a></li>
 <li><a href="tdv_core.Decorator.Service.ClassDecoratorService.build.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>build
 <div class="menu-item-desc">Builds an Instance function using the provided Supplier function.</div></div></a></li></ul></div></details></li>
@@ -409,18 +376,17 @@
 <li><a href="../types/tdv_core.Decorator.Instance.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Instance
 <div class="menu-item-desc">Type definition for a decorator function.</div></div></a></li>
+<li><a href="../types/tdv_core.Decorator.Options.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<div>Options
+<div class="menu-item-desc">Options for configuring validator decorators.</div></div></a></li>
 <li><a href="../types/tdv_core.Decorator.Supplier.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Supplier
 <div class="menu-item-desc">Supplier function for generating decorators.</div></div></a></li>
-<li><a href="tdv_core.Decorator.args.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>args
-<div class="menu-item-desc">Extracts argument values from the provided decorator properties.</div></div></a></li>
-<li><a href="tdv_core.Decorator.groupedValidators.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>grouped<wbr/>Validators
-<div class="menu-item-desc">Filters validators based on the provided validation groups.</div></div></a></li>
 <li><a href="tdv_core.Decorator.groups.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>groups
 <div class="menu-item-desc">Extracts validation groups from the provided decorator properties.</div></div></a></li>
+<li><a href="tdv_core.Decorator.key.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>key</div></a></li>
 <li><a href="tdv_core.Decorator.message.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>message
 <div class="menu-item-desc">Extracts a message from the provided decorator properties.</div></div></a></li></ul></div></details></li>
@@ -481,6 +447,8 @@
 <li><a href="../types/tdv_core.Localization.Service.MessageReaderService.LocalizedMessages.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Localized<wbr/>Messages
 <div class="menu-item-desc">Represents translation json file&#39;s contents. Is unknown on TypeDocs due to the nature of inferring json contents type.</div></div></a></li>
+<li><a href="../types/tdv_core.Localization.Service.MessageReaderService.MessageKey.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<div>Message<wbr/>Key</div></a></li>
 <li><a href="../types/tdv_core.Localization.Service.MessageReaderService.Messages.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Messages
 <div class="menu-item-desc">Type definition for a collection of locale-specific messages.</div></div></a></li>
@@ -489,16 +457,7 @@
 <div class="menu-item-desc">All translation json files content in map, grouped by `Locale`.</div></div></a></li>
 <li><a href="tdv_core.Localization.Service.MessageReaderService.getMessage.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>get<wbr/>Message
-<div class="menu-item-desc">Returns localized message by key, allowing `locale` to be optional (defaults to global `locale` ).</div></div></a></li></ul></div></details></li>
-<li>
-<details class="tsd-index-accordion" data-key="tdv-core.Localization.Service.TranslationService"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Localization.Service.TranslationService.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
-<div>Translation<wbr/>Service
-<div class="menu-item-desc">A service layer which interacts with framework&#39;s translations</div></div></a></summary>
-<div class="tsd-accordion-details">
-<ul class="tsd-nested-navigation">
-<li><a href="tdv_core.Localization.Service.TranslationService.translate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>translate
-<div class="menu-item-desc">Localizes a string based on a key and optional arguments.</div></div></a></li></ul></div></details></li></ul></div></details></li></ul></div></details></li>
+<div class="menu-item-desc">Returns localized message by key, allowing `locale` to be optional (defaults to global `locale` ).</div></div></a></li></ul></div></details></li></ul></div></details></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Overrides"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Overrides.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Overrides
@@ -946,6 +905,8 @@
 <li><a href="../types/tdv_core.Utilities.Objects.Exclude.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Exclude
 <div class="menu-item-desc">A type that excludes properties with values of type `TExclude` from `TParent`.</div></div></a></li>
+<li><a href="../types/tdv_core.Utilities.Objects.FieldType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
+<div>Field<wbr/>Type</div></a></li>
 <li><a href="../types/tdv_core.Utilities.Objects.Hash.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Hash
 <div class="menu-item-desc">A function that hashes a value of type `T` and returns a number.</div></div></a></li>
@@ -967,6 +928,8 @@
 <li><a href="../types/tdv_core.Utilities.Objects.Values.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2097152"></use></svg>
 <div>Values
 <div class="menu-item-desc">A type that extracts the values from the properties of an object type `T`.</div></div></a></li>
+<li><a href="tdv_core.Utilities.Objects.assertType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
+<div>assert<wbr/>Type</div></a></li>
 <li><a href="tdv_core.Utilities.Objects.debounce.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>debounce
 <div class="menu-item-desc">Debounces a function.</div></div></a></li>
@@ -976,9 +939,6 @@
 <li><a href="tdv_core.Utilities.Objects.hasErrors.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>has<wbr/>Errors
 <div class="menu-item-desc">Checks if an error object has errors.</div></div></a></li>
-<li><a href="tdv_core.Utilities.Objects.hasValue.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
-<div>has<wbr/>Value
-<div class="menu-item-desc">Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.</div></div></a></li>
 <li><a href="tdv_core.Utilities.Objects.hash-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>hash
 <div class="menu-item-desc">Hashes a value of any type and returns a number.</div></div></a></li>
@@ -994,6 +954,8 @@
 <div class="menu-item-desc">Collection of string-related types and methods.</div></div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
+<li><a href="../variables/tdv_core.Utilities.Strings.EMPTY.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg>
+<div>EMPTY</div></a></li>
 <li><a href="tdv_core.Utilities.Strings.convertCamelCaseToText.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>convert<wbr/>Camel<wbr/>Case<wbr/>To<wbr/>Text
 <div class="menu-item-desc">Converts a camelCase string to a text string with spaces.</div></div></a></li>
