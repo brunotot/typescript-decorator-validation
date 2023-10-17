@@ -1,43 +1,75 @@
 import API from "api";
 import { translate } from "../../src/localization/service/TranslationService";
 
+/** MaxLength identifier. */
+export const MAX_LENGTH = "MaxLength";
+
+/** Internal validation function for {@link MaxLength} validator. */
+export function isMaxLengthValid(
+  value: API.Utilities.Objects.Optional<string>,
+  max: number
+): boolean {
+  API.Utilities.Objects.assertType("string", value);
+  return (value ?? API.Utilities.Strings.EMPTY).length <= max;
+}
+
 /**
- * Creates a validator decorator for maximum length validation.
+ * Checks if decorated string contains a specific number of characters.
  *
- * @typeparam T - The type of the decorated property (optional string).
- * @param props.value - The maximum length allowed.
- * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
- * @returns A decorator function to use with class properties.
- *
- * @example
- * // Example 1: Basic usage with a maximum length of 10
- * class User {
- *   //@MaxLength({ value: 10 })
- *   username: string;
- * }
+ * @key {@link MAX_LENGTH MaxLength}
+ * @typeParam T - The type of the string property.
+ * @param max - Maximum length value.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `string`.
  *
  * @example
- * // Example 2: Custom error message
- * class SecureUser {
- *   //@MaxLength({
- *   //   value: 15,
- *   //   message: "Username cannot exceed 15 characters",
- *   // })
- *   username: string;
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@MaxLength(5)
+ *   input: string;
  * }
+ * ```
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@MaxLength(5, { message: "Input must contain at-most 5 characters" })
+ *   input: string;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@MaxLength(5, { groups: ["UPDATE"] })
+ *   input: string;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@MaxLength(5, { groups: ["UPDATE"], message: "Input must contain at-most 5 characters" })
+ *   input: string;
+ * }
+ * ```
  */
 export function MaxLength<T extends API.Utilities.Objects.Optional<string>>(
   max: number,
   options?: API.Decorator.Options
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, "MaxLength"),
-      valid: (value ?? "").length <= max,
+      key: API.Decorator.key(options, MAX_LENGTH),
+      valid: isMaxLengthValid(value, max),
       message: API.Decorator.message(
         options,
         locale,
-        translate(locale, "MaxLength", max)
+        translate(locale, MAX_LENGTH, max)
       ),
     }),
     API.Decorator.groups(options)

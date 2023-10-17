@@ -4,43 +4,75 @@ import { translate } from "../../../../src/localization/service/TranslationServi
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
 
+/** Lowercase identifier. */
+export const LOWERCASE = "Lowercase";
+
+/** Internal validation function for {@link Lowercase} validator. */
+export function isLowercaseValid<
+  T extends API.Utilities.Objects.Optional<string>
+>(value: T): boolean {
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.LOWERCASE, value);
+}
+
 /**
- * Creates a validator decorator that checks if a string value contains only lowercase letters using a regular expression pattern.
+ * Checks if decorated string contains only lowercase characters.
  *
- * @typeparam T - The type of the decorated property (optional string).
- * @param props.key - (Optional) The key to identify this validation rule in error messages. Defaults to "Lowercase".
- * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
- * @param props.groups - (Optional) An array of validation groups to which this rule belongs.
- * @returns A decorator function to use with class properties.
+ * @key {@link LOWERCASE Lowercase}
+ * @typeParam T - The type of the string property.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `string`.
  *
  * @example
- * // Example 1: Basic usage with default options
- * class MyClass {
- *   //@Lowercase()
- *   myString: string;
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@Lowercase()
+ *   input: string;
  * }
+ * ```
  *
- * // Example 2: Custom error message and validation groups
- * class AnotherClass {
- *   //@Lowercase({
- *   //   key: "LowercaseField",
- *   //   message: "Invalid lowercase input",
- *   //   groups: ["registration", "profile"],
- *   // })
- *   value: string;
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@Lowercase({ message: "Input must contain only lowercase characters" })
+ *   input: string;
  * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@Lowercase({ groups: ["UPDATE"] })
+ *   input: string;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@Lowercase({
+ *     message: "Input must contain only lowercase characters",
+ *     groups: ["UPDATE"]
+ *   })
+ *   input: string;
+ * }
+ * ```
  */
 export function Lowercase<T extends API.Utilities.Objects.Optional<string>>(
   options?: API.Decorator.Options
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, "Lowercase"),
+      key: API.Decorator.key(options, LOWERCASE),
       valid: testRegex(RegexConst.LOWERCASE, value),
       message: API.Decorator.message(
         options,
         locale,
-        translate(locale, "Lowercase")
+        translate(locale, LOWERCASE)
       ),
     }),
     API.Decorator.groups(options)

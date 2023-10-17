@@ -29,7 +29,7 @@ import MessageReaderService from "./MessageReaderService";
  * ```
  */
 export function translate(
-  locale: API.Localization.Resolver.LocaleResolver.Locale | null,
+  locale: API.Localization.Resolver.LocaleResolver.Locale | null | undefined,
   key: keyof MessageReaderService.LocalizedMessages,
   ...args: any[]
 ): string {

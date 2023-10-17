@@ -1,30 +1,62 @@
 import API from "api";
 import { translate } from "../../src/localization/service/TranslationService";
 
+/** MinLength identifier. */
+export const MIN_LENGTH = "MinLength";
+
+/** Internal validation function for {@link MinLength} validator. */
+export function isMinLengthValid(
+  value: API.Utilities.Objects.Optional<string>,
+  min: number
+): boolean {
+  API.Utilities.Objects.assertType("string", value);
+  return (value ?? API.Utilities.Strings.EMPTY).length >= min;
+}
+
 /**
- * Creates a validator decorator for minimum length validation.
+ * Checks if decorated string contains a specific number of characters.
  *
- * @typeparam T - The type of the decorated property (optional string).
- * @param props.value - The minimum length required.
- * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
- * @returns A decorator function to use with class properties.
- *
- * @example
- * // Example 1: Basic usage with a minimum length of 5
- * class User {
- *   //@MinLength({ value: 5 })
- *   username: string;
- * }
+ * @key {@link MIN_LENGTH MinLength}
+ * @typeParam T - The type of the string property.
+ * @param min - Minimum length value.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `string`.
  *
  * @example
- * // Example 2: Custom error message
- * class SecureUser {
- *   //@MinLength({
- *   //   value: 8,
- *   //   message: "Username must be at least 8 characters long",
- *   // })
- *   username: string;
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@MinLength(5)
+ *   input: string;
  * }
+ * ```
+ *
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@MinLength(5, { message: "Input must contain at least 5 characters" })
+ *   input: string;
+ * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@MinLength(5, { groups: ["UPDATE"] })
+ *   input: string;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@MinLength(5, { groups: ["UPDATE"], message: "Input must contain at least 5 characters" })
+ *   input: string;
+ * }
+ * ```
  */
 export function MinLength<T extends API.Utilities.Objects.Optional<string>>(
   min: number,
@@ -32,12 +64,12 @@ export function MinLength<T extends API.Utilities.Objects.Optional<string>>(
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, "MinLength"),
-      valid: (value ?? "").length >= min,
+      key: API.Decorator.key(options, MIN_LENGTH),
+      valid: isMinLengthValid(value, min),
       message: API.Decorator.message(
         options,
         locale,
-        translate(locale, "MinLength", min)
+        translate(locale, MIN_LENGTH, min)
       ),
     }),
     API.Decorator.groups(options)

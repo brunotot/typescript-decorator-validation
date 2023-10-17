@@ -14,10 +14,12 @@ export function isExactLengthValid(
 }
 
 /**
- * Checks if the decorated string contains a specific number of characters.
+ * Checks if decorated string contains a specific number of characters.
  *
  * @key {@link EXACT_LENGTH ExactLength}
- * @typeParam T - The type of the decorated property (nullable string) - optional if used in decorator context.
+ * @typeParam T - The type of the string property.
+ * @param exact - Exact length value.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.
  *
  * @example
@@ -33,7 +35,7 @@ export function isExactLengthValid(
  * 2: Supplying a custom error message
  * ```ts
  * class Address {
- *   \@ExactLength({ value: 2, message: "Exactly 2 characters are allowed" })
+ *   \@ExactLength(2, { message: "Exactly 2 characters are allowed" })
  *   countryCode: string;
  * }
  * ```
@@ -42,7 +44,7 @@ export function isExactLengthValid(
  * 3: Supplying custom groups
  * ```ts
  * class Address {
- *   \@ExactLength({ value: 2, groups: ["UPDATE"] })
+ *   \@ExactLength(2, { groups: ["UPDATE"] })
  *   countryCode: string;
  * }
  * ```
@@ -51,7 +53,7 @@ export function isExactLengthValid(
  * 4: Supplying both custom error message and groups
  * ```ts
  * class Address {
- *   \@ExactLength({ value: 2, groups: ["UPDATE"], message: "Exactly 2 characters are allowed" })
+ *   \@ExactLength(2, { groups: ["UPDATE"], message: "Exactly 2 characters are allowed" })
  *   countryCode: string;
  * }
  * ```

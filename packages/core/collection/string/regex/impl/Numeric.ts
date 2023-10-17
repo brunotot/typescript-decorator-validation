@@ -4,43 +4,75 @@ import { translate } from "../../../../src/localization/service/TranslationServi
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
 
+/** Numeric identifier. */
+export const NUMERIC = "Numeric";
+
+/** Internal validation function for {@link Numeric} validator. */
+export function isNumericValid<
+  T extends API.Utilities.Objects.Optional<string>
+>(value: T): boolean {
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.NUMERIC, value);
+}
+
 /**
- * Creates a validator decorator that checks if a string value contains only numeric characters using a regular expression pattern.
+ * Checks if decorated string contains only numeric characters.
  *
- * @typeparam T - The type of the decorated property (optional string).
- * @param props.key - (Optional) The key to identify this validation rule in error messages. Defaults to "Numeric".
- * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
- * @param props.groups - (Optional) An array of validation groups to which this rule belongs.
- * @returns A decorator function to use with class properties.
+ * @key {@link NUMERIC Numeric}
+ * @typeParam T - The type of the string property.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `string`.
  *
  * @example
- * // Example 1: Basic usage with default options
- * class MyClass {
- *   //@Numeric()
- *   myNumber: string;
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@Numeric()
+ *   input: string;
  * }
+ * ```
  *
- * // Example 2: Custom error message and validation groups
- * class AnotherClass {
- *   //@Numeric({
- *   //   key: "NumberField",
- *   //   message: "Invalid numeric input",
- *   //   groups: ["registration", "profile"],
- *   // })
- *   value: string;
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@Numeric({ message: "Input must contain only numeric characters (no alphabeticals or specials)" })
+ *   input: string;
  * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@Numeric({ groups: ["UPDATE"] })
+ *   input: string;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@Numeric({
+ *     message: "Input must contain only numeric characters (no alphabeticals or specials)",
+ *     groups: ["UPDATE"]
+ *   })
+ *   input: string;
+ * }
+ * ```
  */
 export function Numeric<T extends API.Utilities.Objects.Optional<string>>(
   options?: API.Decorator.Options
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, "Numeric"),
+      key: API.Decorator.key(options, NUMERIC),
       valid: testRegex(RegexConst.NUMERIC, value),
       message: API.Decorator.message(
         options,
         locale,
-        translate(locale, "Numeric")
+        translate(locale, NUMERIC)
       ),
     }),
     API.Decorator.groups(options)

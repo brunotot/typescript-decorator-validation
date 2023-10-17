@@ -4,40 +4,76 @@ import { translate } from "../../../../src/localization/service/TranslationServi
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
 
+/** URL identifier. */
+export const URL_KEY = "URL";
+
+/** Internal validation function for {@link URL} validator. */
+export function isURLValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean {
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.URL, value);
+}
+
 /**
- * Creates a validator decorator that checks if a string value is a valid URL using a regular expression pattern.
+ * Checks if decorated string is a valid URL.
  *
- * @typeparam T - The type of the decorated property (optional string).
- * @param props.key - (Optional) The key to identify this validation rule in error messages. Defaults to "URL".
- * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
- * @param props.groups - (Optional) An array of validation groups to which this rule belongs.
- * @returns A decorator function to use with class properties.
+ * @key {@link URL_KEY URL}
+ * @typeParam T - The type of the string property.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `string`.
  *
  * @example
- * // Example 1: Basic usage with default options
- * class MyClass {
- *   //@URL()
- *   myUrl: string;
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@URL()
+ *   url: string;
  * }
+ * ```
  *
- * // Example 2: Custom error message and validation groups
- * class AnotherClass {
- *   //@URL({
- *   //   key: "WebsiteURL",
- *   //   message: "Invalid website URL",
- *   //   groups: ["registration", "profile"],
- *   // })
- *   website: string;
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@URL({ message: "Input is not a valid URL" })
+ *   url: string;
  * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@URL({ groups: ["UPDATE"] })
+ *   url: string;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@URL({
+ *     message: "Input is not a valid URL",
+ *     groups: ["UPDATE"]
+ *   })
+ *   url: string;
+ * }
+ * ```
  */
 export function URL<T extends API.Utilities.Objects.Optional<string>>(
   options?: API.Decorator.Options
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, "URL"),
+      key: API.Decorator.key(options, URL_KEY),
       valid: testRegex(RegexConst.URL, value),
-      message: API.Decorator.message(options, locale, translate(locale, "URL")),
+      message: API.Decorator.message(
+        options,
+        locale,
+        translate(locale, URL_KEY)
+      ),
     }),
     API.Decorator.groups(options)
   );

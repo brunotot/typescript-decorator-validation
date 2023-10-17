@@ -3,43 +3,76 @@ import API from "api";
 import { translate } from "../../../../src/localization/service/TranslationService";
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
+
+/** Alphanumeric identifier. */
+export const ALPHANUMERIC = "Alphanumeric";
+
+/** Internal validation function for {@link Alphanumeric} validator. */
+export function isAlphanumericValid<
+  T extends API.Utilities.Objects.Optional<string>
+>(value: T): boolean {
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.ALPHANUMERIC, value);
+}
+
 /**
- * Creates a validator decorator that checks if a string value contains only alphanumeric characters (letters and digits).
+ * Checks if decorated string contains only alphabetical or number characters.
  *
- * @typeparam T - The type of the decorated property (optional string).
- * @param props.key - (Optional) The key to identify this validation rule in error messages. Defaults to "Alphanumeric".
- * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
- * @param props.groups - (Optional) An array of validation groups to which this rule belongs.
- * @returns A decorator function to use with class properties.
+ * @key {@link ALPHANUMERIC Alphanumeric}
+ * @typeParam T - The type of the string property.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `string`.
  *
  * @example
- * // Example 1: Basic usage with default options
- * class MyClass {
- *   @Alphanumeric()
- *   code: string;
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@Alphanumeric()
+ *   input: string;
  * }
+ * ```
  *
- * // Example 2: Custom error message and validation groups
- * class AnotherClass {
- *   @Alphanumeric({
- *     key: "AlphanumericCode",
- *     message: "Invalid code format",
- *     groups: ["registration", "profile"],
- *   })
- *   value: string;
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@Alphanumeric({ message: "Input must contain only alphabetical or number characters (no specials)" })
+ *   input: string;
  * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@Alphanumeric({ groups: ["UPDATE"] })
+ *   input: string;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@Alphanumeric({
+ *     message: "Input must contain only alphabetical or number characters (no specials)",
+ *     groups: ["UPDATE"]
+ *   })
+ *   input: string;
+ * }
+ * ```
  */
 export function Alphanumeric<T extends API.Utilities.Objects.Optional<string>>(
   options?: API.Decorator.Options
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, "Alphanumeric"),
+      key: API.Decorator.key(options, ALPHANUMERIC),
       valid: testRegex(RegexConst.ALPHANUMERIC, value),
       message: API.Decorator.message(
         options,
         locale,
-        translate(locale, "Alphanumeric")
+        translate(locale, ALPHANUMERIC)
       ),
     }),
     API.Decorator.groups(options)

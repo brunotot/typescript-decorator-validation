@@ -3,50 +3,74 @@ import API from "api";
 import { translate } from "../../../../src/localization/service/TranslationService";
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
+
+/** Alpha identifier. */
+export const ALPHA = "Alpha";
+
+/** Internal validation function for {@link Alpha} validator. */
+export function isAlphaValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean {
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.ALPHA, value);
+}
+
 /**
- * Creates a validator decorator that checks if a string value contains only alphabetical characters (letters).
+ * Checks if decorated string contains only alphabetical characters.
  *
- * @typeparam T - The type of the decorated property (optional string).
- * @param props.key - (Optional) The key to identify this validation rule in error messages. Defaults to "Alpha".
- * @param props.message - (Optional) A custom error message to display when validation fails. If not provided, a default error message is used.
- * @param props.groups - (Optional) An array of validation groups to which this rule belongs.
- * @returns A decorator function to use with class properties.
+ * @key {@link ALPHA Alpha}
+ * @typeParam T - The type of the string property.
+ * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
+ * @returns A decorator function to use on class fields of type `string`.
  *
  * @example
- * // Example 1: Basic usage with default options
- * class MyClass {
- *   @Alpha()
- *   name: string;
+ * 1: Basic usage
+ * ```ts
+ * class Form {
+ *   \@Alpha()
+ *   input: string;
  * }
+ * ```
  *
- * // Example 2: Custom error message and validation groups
- * class AnotherClass {
- *   @Alpha({
- *     key: "AlphaName",
- *     message: "Invalid name format",
- *     groups: ["registration", "profile"],
- *   })
- *   fullName: string;
+ * @example
+ * 2: Supplying a custom error message
+ * ```ts
+ * class Form {
+ *   \@Alpha({ message: "Input must contain only alphabetical characters (no numbers or specials)" })
+ *   input: string;
  * }
+ * ```
+ *
+ * @example
+ * 3: Supplying custom groups
+ * ```ts
+ * class Form {
+ *   \@Alpha({ groups: ["UPDATE"] })
+ *   input: string;
+ * }
+ * ```
+ *
+ * @example
+ * 4: Supplying both custom error message and groups
+ * ```ts
+ * class Form {
+ *   \@Alpha({
+ *     message: "Input must contain only alphabetical characters (no numbers or specials)",
+ *     groups: ["UPDATE"]
+ *   })
+ *   input: string;
+ * }
+ * ```
  */
 export function Alpha<T extends API.Utilities.Objects.Optional<string>>(
   options?: API.Decorator.Options
-) {
+): API.Decorator.Service.FieldDecoratorService.Instance<T> {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, "Alpha"),
+      key: API.Decorator.key(options, ALPHA),
       valid: testRegex(RegexConst.ALPHA, value),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, "Alpha")
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, ALPHA)),
     }),
     API.Decorator.groups(options)
   );
 }
-
-// SAMO PONAVLJAJ OVO ZA SVE OSTALE STRING VALIDATORE
-
-// DUGOROCNA IDEJA JE SVAKI VALIDATOR SVEST NA TO
-// znaci bez errorsMessages-a, to uopce ne bi postojalo
