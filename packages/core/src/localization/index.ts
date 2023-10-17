@@ -1,6 +1,7 @@
 import LocaleResolverNamespace from "./resolver/LocaleResolver";
 import MessageResolverNamespace from "./resolver/MessageResolver";
 import MessageReaderServiceNamespace from "./service/MessageReaderService";
+import * as TranslationServiceNamespace from "./service/TranslationService";
 
 /**
  * A namespace which holds everything related to the localized output messages (like default error messages)
@@ -19,6 +20,7 @@ namespace Localization {
    */
   export namespace Service {
     export import MessageReaderService = MessageReaderServiceNamespace;
+    export import TranslationService = TranslationServiceNamespace;
   }
 }
 
