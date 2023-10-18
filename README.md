@@ -13,12 +13,14 @@
   <img alt="Contributors" src="https://img.shields.io/github/contributors/brunotot/typescript-decorator-validation" height="20"/>
  </a>
  
- <a href="https://github.com/brunotot/typescript-decorator-validation/graphs/commit-activity">
-  <img alt="Maintained" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" height="20"/>
- </a>
- 
  <a href="#">
   <img alt="Awesome badge" src="https://awesome.re/badge.svg" height="20"/>
+ </a>
+</p>
+
+<p align="center">
+ <a href="https://github.com/brunotot/typescript-decorator-validation/graphs/commit-activity">
+  <img alt="Maintained" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" height="20"/>
  </a>
 
  <a href="https://github.com/brunotot/typescript-decorator-validation/actions/workflows/tests.yml">
