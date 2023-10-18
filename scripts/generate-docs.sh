@@ -6,8 +6,11 @@ PWD_ROOT="$PWD_THIS/.."
 source "${PWD_THIS}/shared/spinner.sh"
 source "${PWD_THIS}/shared/colors.sh"
 
-# moves the cursor up by one line on the terminal
-printf "\033[1A"
+for arg in "$@"; do
+  if [ "$arg" == "--prod" ]; then
+    export SPINNER_DISABLED=true
+  fi
+done
 
 start "$(color $CYAN)1 $(color)" " $(color $GREY)5$(color) Cleaning cache..."
 npm run clean --force --silent

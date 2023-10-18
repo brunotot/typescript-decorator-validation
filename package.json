@@ -9,7 +9,7 @@
     "lint": "eslint 'packages/*/src/**/*.ts' --fix",
     "clean": "rm -rf docs dist packages/core/dist packages/react/dist",
     "build": "tsc --build",
-    "docs": "bash scripts/generate-docs.sh",
+    "docs": "bash scripts/generate-docs.sh --prod",
     "core/playground": "npm run playground --prefix=packages/core",
     "core/test": "npm run test --prefix=packages/core",
     "core/build": "npm run build --prefix=packages/core",
