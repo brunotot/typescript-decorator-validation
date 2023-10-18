@@ -20,6 +20,14 @@
  <a href="#">
   <img alt="Awesome badge" src="https://awesome.re/badge.svg" height="20"/>
  </a>
+
+ <a href="https://github.com/brunotot/typescript-decorator-validation/actions/workflows/tests.yml">
+  <img alt="Tests" src="https://github.com/brunotot/typescript-decorator-validation/actions/workflows/tests.yml/badge.svg" height="20"/>
+ </a>
+
+ <a href="https://github.com/brunotot/typescript-decorator-validation/actions/workflows/docs.yml">
+  <img alt="TypeDocs" src="https://github.com/brunotot/typescript-decorator-validation/actions/workflows/docs.yml/badge.svg" height="20"/>
+ </a>
 </p>
 
 <p align="center">

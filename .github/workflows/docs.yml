@@ -1,4 +1,4 @@
-name: TypeDocs generator
+name: 📄 TypeDocs
 
 on:
   push:

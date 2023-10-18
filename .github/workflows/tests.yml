@@ -1,4 +1,4 @@
-name: tests
+name: 🧪 Tests
 
 on:
   push:
@@ -10,17 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: 🛒 Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Sync package-lock.json
+      - name: 🔄 Sync package-lock.json
         run: npm install --package-lock-only --force --silent
 
-      - name: Install Dependencies
+      - name: 🏗️ Install Dependencies
         run: npm ci --force --silent
 
-      - name: Run Core Tests
+      - name: 🔥 Run Core Tests
         run: npm run core/test --silent
 
-      - name: Run React Tests
+      - name: 🔥 Run React Tests
         run: npm run react/test --silent
