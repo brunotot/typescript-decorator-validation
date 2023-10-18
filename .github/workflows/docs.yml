@@ -1,4 +1,4 @@
-name: docs
+name: TypeDocs generator
 
 on:
   push:
@@ -10,16 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: 🛒 Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install Dependencies
-        run: npm i --force
+      - name: 🔥 Generate documentation
+        run: npm run docs
 
-      - name: Build Docs
-        run: npm run build-docs
-
-      - name: Deploy Docs
+      - name: 🚢 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
