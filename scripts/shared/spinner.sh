@@ -27,7 +27,7 @@ spinner() {
 start() {
   SPINNER_MSG_LEFT="${1:-$EMPTY}"
   SPINNER_MSG_RIGHT="${2:-$EMPTY}"
-  if [ "$SPINNER_DISABLED" == "true" ]; then
+  if [ "$PROD_ENV" == "true" ]; then
     echo -e "$SPINNER_MSG_LEFT${LOADER_SEQUENCE[0]}$SPINNER_MSG_RIGHT"
   else
     echo ""
@@ -36,7 +36,7 @@ start() {
 }
 
 stop() {
-  if [ "$SPINNER_DISABLED" != "true" ]; then
+  if [ "$PROD_ENV" != "true" ]; then
     FINISH_REPLACER="${1:-$INITIAL_SPINNER_STATE}"
     kill $SPINNER_PID 
     echo -ne "\r$SPINNER_MSG_LEFT$FINISH_REPLACER$SPINNER_MSG_RIGHT"

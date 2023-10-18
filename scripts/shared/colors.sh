@@ -11,6 +11,10 @@ RED="1;31"
 RESET="0"
 
 color() {
-  local colorCode="${1:-$RESET}"
-  echo "$CLR_PREFIX$colorCode$CLR_SUFFIX"
+  if [ "$PROD_ENV" == "true" ]; then
+    echo ""
+  else
+    local colorCode="${1:-$RESET}"
+    echo "$CLR_PREFIX$colorCode$CLR_SUFFIX"
+  fi
 }
