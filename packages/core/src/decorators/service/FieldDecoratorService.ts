@@ -86,7 +86,7 @@ namespace FieldDecoratorService {
    * });
    *
    * class MyClass {
-   *   //@IsPositive
+   *   \@IsPositive
    *   public myValue: number;
    * }
    * ```

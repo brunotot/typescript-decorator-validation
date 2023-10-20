@@ -110,6 +110,12 @@ namespace Decorator {
       : API.Utilities.Objects.unique(defaultGroups);
   }
 
+  /**
+   * A helper function to determine whether to use a custom or a default key for a decorator.
+   * @param options - Decorator args.
+   * @param defaultKey - Key of the decorator if none present in options.
+   * @returns A defined decorator key or the default value.
+   */
   export function key(
     options: Options | undefined,
     defaultKey: string

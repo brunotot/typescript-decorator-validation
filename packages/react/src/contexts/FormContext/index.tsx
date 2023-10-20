@@ -32,15 +32,15 @@ export const FormContext = createContext<FormContextType>(undefined);
  * import { useForm, FormProvider, validators, valid } from "tdv-react";
  *
  * class ParentForm {
- *   //@validators.string.Required()
+ *   \@validators.string.Required()
  *   prop!: string;
  *
- *   //@valid(ExampleNested)
+ *   \@valid(ExampleNested)
  *   child!: ChildForm;
  * }
  *
  * class ChildForm {
- *   //@validators.string.Required()
+ *   \@validators.string.Required()
  *   nestedProp!: string;
  * }
  *

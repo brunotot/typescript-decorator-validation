@@ -60,7 +60,7 @@ namespace ClassDecoratorValidatorService {
    * });
    *
    * class MyClass {
-   *   //@IsPositive
+   *   \@IsPositive
    *   public myValue: number;
    * }
    * ```

@@ -26,7 +26,7 @@ namespace FieldDecoratorValidatorService {
    * });
    *
    * class MyClass {
-   *   //@IsPositive
+   *   \@IsPositive
    *   public myValue: number;
    * }
    * ```

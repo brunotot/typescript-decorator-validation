@@ -36,9 +36,11 @@ stop "/"
 echo ""
 
 if [ "$PROD_ENV" != "true" ]; then
+  DIR=$(pwd)
   LINK_TEXT="View generated output"
-  LINK_HREF="http://127.0.0.1:5500/docs/"
+  LINK_HREF="file://$DIR/../docs/index.html"
   echo -e "\n    🚀 $(color $GREEN)Done!$(color)"
-  echo -e "    $(color $CYAN)⭐ \e]8;;$LINK_HREF\e\\$LINK_TEXT\e]8;;\e\\"
+  #echo -e "    $(color $CYAN)⭐ \e]8;;$LINK_HREF\e\\$LINK_TEXT\e]8;;\e\\"
+  echo -e "$LINK_HREF"
   echo -e "$(color)"
 fi
