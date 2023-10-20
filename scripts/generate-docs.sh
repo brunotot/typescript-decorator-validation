@@ -37,10 +37,9 @@ echo ""
 
 if [ "$PROD_ENV" != "true" ]; then
   DIR=$(pwd)
-  LINK_TEXT="View generated output"
-  LINK_HREF="file://$DIR/../docs/index.html"
+  LINK_TEXT="Output"
+  LINK_HREF="file://$DIR/docs/index.html"
   echo -e "\n    🚀 $(color $GREEN)Done!$(color)"
-  #echo -e "    $(color $CYAN)⭐ \e]8;;$LINK_HREF\e\\$LINK_TEXT\e]8;;\e\\"
-  echo -e "$LINK_HREF"
-  echo -e "$(color)"
+  echo -e "    ℹ️  $LINK_HREF\n"
+  nohup xdg-open "$LINK_HREF" >/dev/null 2>&1 &
 fi
