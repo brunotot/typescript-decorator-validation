@@ -15,7 +15,7 @@ import Validation from "./src/validation";
  * - when not specified ***(example 2)***: an object type is considered as is and it's simplified errors are evaluated by {@link Strategy.Factory.Impl.Errors evaluate<T, string[]>})
  *
  * @example
- * 1: Disabling nested form validation for `Coordinate` class by augmenting the `PrimitiveSet` interface from `tdv-core`. This is a strategy for treating custom object types as primitives and avoid recursive field validation
+ * 1: Disabling nested form validation for `Coordinate` class by augmenting the `PrimitiveSet` interface from `tdv-core`. This is a way of treating custom object types as primitives and avoiding recursive field validation
  * ```ts
  * // coordinate.ts - model class which is considered primitive
  * export class Coordinate {
