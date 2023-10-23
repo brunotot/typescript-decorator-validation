@@ -1,6 +1,7 @@
 {
   "extends": "./../../tsconfig.json",
   "exclude": ["tests", "jest.config.js", "src/main.ts", "dev"],
+  "files": ["dev/playground.ts"],
   "include": [
     "index.ts",
     "src",

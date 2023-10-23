@@ -118,7 +118,7 @@ export class ValidationEngine<TClass> {
    * @returns An object containing detailed error messages.
    */
   public getDetailedErrors(
-    payload: API.Utilities.Objects.Payload<TClass>
+    payload?: API.Utilities.Objects.Payload<TClass>
   ): API.Strategy.Factory.Impl.DetailedErrors<TClass> {
     return this.#cacheMap.get("detailedErrors", payload);
   }
@@ -131,7 +131,7 @@ export class ValidationEngine<TClass> {
    * @returns An object containing error messages.
    */
   public getErrors(
-    payload: API.Utilities.Objects.Payload<TClass>
+    payload?: API.Utilities.Objects.Payload<TClass>
   ): API.Strategy.Factory.Impl.Errors<TClass> {
     return this.#cacheMap.get("errors", payload);
   }

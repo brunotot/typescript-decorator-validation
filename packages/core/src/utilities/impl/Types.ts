@@ -1,5 +1,5 @@
-import { type Overrides } from "api";
 import type API from "api";
+import { PrimitiveSet } from "api";
 
 /**
  * A collection of types representing various data types and handling type-level development.
@@ -21,7 +21,7 @@ namespace Types {
    */
   export type Primitive = [
     ...[string, number, boolean, bigint, Date],
-    ...(Overrides.PrimitiveSet extends {
+    ...(PrimitiveSet extends {
       values: infer CustomPrimitives extends readonly unknown[];
     }
       ? CustomPrimitives

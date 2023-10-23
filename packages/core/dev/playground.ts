@@ -1,6 +1,7 @@
 import decorate from "../collection/index";
 import Objects from "../src/utilities/impl/Objects";
-import Validation from "../src/validation";
+import Validation from "../src/validation/index";
+import { ValidationEngine } from "../src/validation/models/ValidationEngine";
 
 class AddressForm {
   @decorate.any.Required()
@@ -101,7 +102,7 @@ const jobApplicationForm: Objects.Payload<JobApplicationForm> = {
   coverLetter: "I'm passionate about coding...",
 };
 
-const engine = new Validation.ValidationEngine(JobApplicationForm);
+const engine = new ValidationEngine(JobApplicationForm);
 /*engine.registerAsync(({ detailedErrors, errors }) => {
   console.log(errors);
 });*/

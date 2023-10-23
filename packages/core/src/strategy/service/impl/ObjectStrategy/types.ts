@@ -12,27 +12,23 @@ namespace ObjectStrategyType {
 
   /**
    * Represents the simplified error structure for validating object types.
-   *
    * @typeParam F - The type of the field being validated.
-   *
-   * - `root`: An array of string messages that represent validation errors at the object level.
-   * - `data`: An `Errors<F>` object that represents validation errors for each property in the object.
    */
   export type SimpleErrors<F> = {
+    /** An array of string messages that represent validation errors at the decorated field level. */
     root: string[];
+    /** An object that represents simplified validation errors for each property in the object. */
     data: StrategyFactory.Impl.Errors<F>;
   };
 
   /**
    * Represents the detailed error structure for validating object types.
-   *
    * @typeParam F - The type of the field being validated.
-   *
-   * - `root`: An array of `Validation.Result` objects that represent detailed validation errors at the object level.
-   * - `data`: A `DetailedErrors<F>` object that represents detailed validation errors for each property in the object.
    */
   export type DetailedErrors<F> = {
+    /** An array of validation result objects that represent detailed validation errors at the decorated field level. */
     root: API.Validation.Result[];
+    /** An object that represents detailed validation errors for each property in the object. */
     data: StrategyFactory.Impl.DetailedErrors<F>;
   };
 
