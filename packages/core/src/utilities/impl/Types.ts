@@ -1,5 +1,5 @@
 import type API from "api";
-import { PrimitiveSet } from "api";
+import { type PrimitiveSet } from "api";
 
 /**
  * A collection of types representing various data types and handling type-level development.

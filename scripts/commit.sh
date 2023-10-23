@@ -94,7 +94,7 @@ if [ -n "$ticket" ]; then
 fi
 
 # Add all changed files to staging
-git add .
+(cd $PWD_ROOT && git add .)
 
 if ! git diff --cached --quiet -- "./packages/core/src/localization/translations/en.json"; then
   (cd $PWD_ROOT && bash scripts/translations.sh de es fr hr it nl && git add .)
