@@ -27,19 +27,42 @@
 <ul class="tsd-breadcrumb">
 <li><a href="../index.html">Typescript Decorator Validation</a></li>
 <li><a href="../modules/tdv_core.html">tdv-core</a></li>
-<li><a href="../modules/tdv_core.Overrides.html">Overrides</a></li>
-<li><a href="tdv_core.Overrides.PrimitiveSet.html">PrimitiveSet</a></li></ul>
+<li><a href="tdv_core.PrimitiveSet.html">PrimitiveSet</a></li></ul>
 <h1>Interface PrimitiveSet</h1></div>
 <section class="tsd-panel tsd-comment">
-<div class="tsd-comment tsd-typography"><p>An overridable object type with &#39;value&#39; key and array of types as its value</p>
+<div class="tsd-comment tsd-typography"><p>An overridable interface designed for disabling nested validation on custom object types.</p>
+<ul>
+<li>when specified <em><strong>(example 1)</strong></em>: an object type is considered primitive and it&#39;s simplified errors render as <code>string[]</code></li>
+<li>when not specified <em><strong>(example 2)</strong></em>: an object type is considered as is and it&#39;s simplified errors are evaluated by <a href="../types/tdv_core.Strategy.Factory.Impl.Errors.html" class="tsd-kind-type-alias">evaluate&lt;T, string[]&gt;</a>)</li>
+</ul>
 </div>
-<div class="tsd-comment tsd-typography"></div></section>
+<div class="tsd-comment tsd-typography">
+<h4>Example</h4><p>1: Disabling nested form validation for <code>Coordinate</code> class by augmenting the <code>PrimitiveSet</code> interface from <code>tdv-core</code>. This is a strategy for treating custom object types as primitives and avoid recursive field validation</p>
+<pre><code class="language-ts"><span class="hl-4">// coordinate.ts - model class which is considered primitive</span><br/><span class="hl-5">export</span><span class="hl-1"> </span><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Coordinate</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-6">x</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-6">y</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
+</code><button>Copy</button></pre>
+<div style="height: 1rem"></div>
+
+<pre><code class="language-ts"><span class="hl-4">// index.ts - entry point of the app</span><br/><span class="hl-3">declare</span><span class="hl-1"> </span><span class="hl-3">module</span><span class="hl-1"> </span><span class="hl-2">&quot;tdv-core&quot;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-3">interface</span><span class="hl-1"> </span><span class="hl-7">PrimitiveSet</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-4">// Specify object types as primitives here</span><br/><span class="hl-1">    </span><span class="hl-6">values</span><span class="hl-1">: [</span><span class="hl-7">Coordinate</span><span class="hl-1">];</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
+</code><button>Copy</button></pre>
+<div style="height: 1rem"></div>
+
+<pre><code class="language-ts"><span class="hl-4">// consumer.ts - model class which holds Coordinate property</span><br/><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-6">create</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;tdv-core&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">// custom Coordinate validator</span><br/><span class="hl-3">function</span><span class="hl-1"> </span><span class="hl-0">MinX</span><span class="hl-1">(</span><span class="hl-6">minX</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-5">return</span><span class="hl-1"> </span><span class="hl-0">create</span><span class="hl-1">&lt;</span><span class="hl-7">Coordinate</span><span class="hl-1">&gt;(</span><span class="hl-6">coordinate</span><span class="hl-1"> </span><span class="hl-3">=&gt;</span><span class="hl-1"> ({</span><br/><span class="hl-1">    </span><span class="hl-6">key:</span><span class="hl-1"> </span><span class="hl-2">&quot;MinX&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">valid:</span><span class="hl-1"> </span><span class="hl-6">coordinate</span><span class="hl-1">.</span><span class="hl-6">x</span><span class="hl-1"> &gt;= </span><span class="hl-6">minX</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-6">message:</span><span class="hl-1"> </span><span class="hl-2">`Minimum X is </span><span class="hl-3">${</span><span class="hl-6">minX</span><span class="hl-3">}</span><span class="hl-2">`</span><br/><span class="hl-1">  }))</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-4">// Coordinate class definition</span><br/><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Consumer</span><span class="hl-1"> {</span><br/><span class="hl-1">  @</span><span class="hl-0">MinX</span><span class="hl-1">(</span><span class="hl-8">10</span><span class="hl-1">)</span><br/><span class="hl-1">  </span><span class="hl-6">coordinate</span><span class="hl-1">: </span><span class="hl-7">Coordinate</span><span class="hl-1">; </span><span class="hl-4">// primitive, doesn&#39;t validate recursively</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">engine</span><span class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-0">ValidationEngine</span><span class="hl-1">(</span><span class="hl-6">Consumer</span><span class="hl-1">);</span><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">payload</span><span class="hl-1"> = { </span><span class="hl-6">coordinate:</span><span class="hl-1"> { </span><span class="hl-6">x:</span><span class="hl-1"> </span><span class="hl-8">9</span><span class="hl-1">, </span><span class="hl-6">y:</span><span class="hl-1"> </span><span class="hl-8">23</span><span class="hl-1"> } };</span><br/><span class="hl-3">const</span><span class="hl-1"> { </span><span class="hl-9">errors</span><span class="hl-1"> } = </span><span class="hl-6">engine</span><span class="hl-1">.</span><span class="hl-0">validate</span><span class="hl-1">(</span><span class="hl-6">payload</span><span class="hl-1">);</span><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">coordinateErrors</span><span class="hl-1"> = </span><span class="hl-6">errors</span><span class="hl-1">.</span><span class="hl-6">coordinate</span><span class="hl-1">;</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-6">coordinateErrors</span><span class="hl-1">); </span><span class="hl-4">// [&quot;Minimum X is 10&quot;]</span>
+</code><button>Copy</button></pre>
+
+<h4>Example</h4><p>2: Default behavior - nested field validation is enabled for <code>Coordinate</code> class. It uses <code>@attribute</code> for supplying validation engine with the runtime schema representation of the decorated field (if @attribute is not defined then a type mismatch occurs between runtime type and compiled type)</p>
+<pre><code class="language-ts"><span class="hl-4">// coordinate.ts</span><br/><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-6">ValueMin</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;tdv-core/collection/number/ValueMin&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">export</span><span class="hl-1"> </span><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Coordinate</span><span class="hl-1"> {</span><br/><span class="hl-1">  @</span><span class="hl-0">ValueMin</span><span class="hl-1">(</span><span class="hl-8">10</span><span class="hl-1">, { </span><span class="hl-6">message:</span><span class="hl-1"> </span><span class="hl-2">&quot;Minimum X is 10&quot;</span><span class="hl-1"> })</span><br/><span class="hl-1">  </span><span class="hl-6">x</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-6">y</span><span class="hl-1">: </span><span class="hl-7">number</span><span class="hl-1">;</span><br/><span class="hl-1">}</span>
+</code><button>Copy</button></pre>
+<div style="height: 1rem"></div>
+
+<pre><code class="language-ts"><span class="hl-4">// consumer.ts - model class which holds Coordinate property</span><br/><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-6">attribute</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-2">&quot;tdv-core&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-7">Consumer</span><span class="hl-1"> {</span><br/><span class="hl-1">  @</span><span class="hl-0">attribute</span><span class="hl-1">(</span><span class="hl-6">Coordinate</span><span class="hl-1">) </span><span class="hl-4">// enables deep validation</span><br/><span class="hl-1">  </span><span class="hl-6">coordinate</span><span class="hl-1">: </span><span class="hl-7">Coordinate</span><span class="hl-1">; </span><span class="hl-4">// non-primitive</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">engine</span><span class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-0">ValidationEngine</span><span class="hl-1">(</span><span class="hl-6">Consumer</span><span class="hl-1">);</span><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">payload</span><span class="hl-1"> = { </span><span class="hl-6">coordinate:</span><span class="hl-1"> { </span><span class="hl-6">x:</span><span class="hl-1"> </span><span class="hl-8">9</span><span class="hl-1">, </span><span class="hl-6">y:</span><span class="hl-1"> </span><span class="hl-8">23</span><span class="hl-1"> } };</span><br/><span class="hl-3">const</span><span class="hl-1"> { </span><span class="hl-9">errors</span><span class="hl-1"> } = </span><span class="hl-6">engine</span><span class="hl-1">.</span><span class="hl-0">validate</span><span class="hl-1">(</span><span class="hl-6">payload</span><span class="hl-1">);</span><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-9">coordinateErrors</span><span class="hl-1"> = </span><span class="hl-6">errors</span><span class="hl-1">.</span><span class="hl-6">coordinate</span><span class="hl-1">;</span><br/><span class="hl-6">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-6">coordinateErrors</span><span class="hl-1">); </span><span class="hl-4">// { root: [], data: { x: [&quot;Minimum X is 10&quot;], y: [] } }</span>
+</code><button>Copy</button></pre>
+</div></section>
 <section class="tsd-panel tsd-hierarchy">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
 <li><span class="target">PrimitiveSet</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/60be6c0/packages/core/index.ts#L18">index.ts:18</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/brunotot/typescript-decorator-validation/blob/1b98621/packages/core/index.ts#L98">index.ts:98</a></li></ul></aside></div>
 <div class="col-sidebar">
 <div class="page-menu"></div>
 <div class="site-menu">
@@ -51,6 +74,8 @@
 <div>tdv-<wbr/>core -<wbr/> v1.7.1</div></a></summary>
 <div class="tsd-accordion-details">
 <ul class="tsd-nested-navigation">
+<li><a href="../modules/tdv_core.html#attribute"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
+<div>attribute</div></a></li>
 <li><a href="../modules/tdv_core.html#create"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>create</div></a></li>
 <li>
@@ -431,15 +456,6 @@
 <li><a href="../functions/tdv_core.Localization.Service.TranslationService.translate.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg>
 <div>translate
 <div class="menu-item-desc">Localizes a string based on a corresponding key and optional arguments mapped by indices. (ex: `&quot;Hello {0}! How are you?&quot;` )</div></div></a></li></ul></div></details></li></ul></div></details></li></ul></div></details></li>
-<li>
-<details class="tsd-index-accordion" open data-key="tdv-core.Overrides"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Overrides.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
-<div>Overrides
-<div class="menu-item-desc">A namespace which holds all interfaces which are extendable - meaning the developer can feed the library with custom types</div></div></a></summary>
-<div class="tsd-accordion-details">
-<ul class="tsd-nested-navigation">
-<li><a href="tdv_core.Overrides.PrimitiveSet.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>
-<div>Primitive<wbr/>Set
-<div class="menu-item-desc">An overridable object type with &#39;value&#39; key and array of types as its value</div></div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-core.Reflection"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_core.Reflection.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg>
 <div>Reflection
@@ -1020,7 +1036,10 @@
 <li><a href="../modules/tdv_core.default.html#Utilities"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
 <div>Utilities</div></a></li>
 <li><a href="../modules/tdv_core.default.html#Validation"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg>
-<div>Validation</div></a></li></ul></div></details></li></ul></div></details></li>
+<div>Validation</div></a></li></ul></div></details></li>
+<li><a href="tdv_core.PrimitiveSet.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg>
+<div>Primitive<wbr/>Set
+<div class="menu-item-desc">An overridable interface designed for disabling nested validation on custom object types.</div></div></a></li></ul></div></details></li>
 <li>
 <details class="tsd-index-accordion" data-key="tdv-react"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="../modules/tdv_react.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2"></use></svg>
 <div>tdv-<wbr/>react -<wbr/> v1.7.1</div></a></summary>
