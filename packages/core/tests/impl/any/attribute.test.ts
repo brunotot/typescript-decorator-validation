@@ -32,10 +32,10 @@ const errorData: Type[] = [
 ];
 
 class NestedModel {
-  @collection.String.Required()
+  @collection.string.Required()
   stringValue!: string;
 
-  @collection.Number.Integer()
+  @collection.number.Integer()
   numberValue!: number;
 }
 
