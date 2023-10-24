@@ -1,4 +1,4 @@
-import decorate from "../../../collection";
+import collection from "../../../collection";
 import { attribute } from "../../../collection/class/attribute";
 import $ from "../../../index";
 import { standardTest } from "../../common/TestFactory";
@@ -32,10 +32,10 @@ const errorData: Type[] = [
 ];
 
 class NestedModel {
-  @decorate.string.Required()
+  @collection.String.Required()
   stringValue!: string;
 
-  @decorate.number.Integer()
+  @collection.Number.Integer()
   numberValue!: number;
 }
 

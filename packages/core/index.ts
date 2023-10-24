@@ -1,4 +1,4 @@
-import Collection from "./collection";
+import collection from "./collection";
 import { create } from "./collection/any/create";
 import { attribute } from "./collection/class/attribute";
 import Decorator from "./src/decorators";
@@ -8,6 +8,20 @@ import Reflection from "./src/reflection";
 import Strategy from "./src/strategy";
 import Utilities from "./src/utilities";
 import Validation from "./src/validation";
+
+export default TdvCoreApi;
+
+export {
+  Decorator,
+  Localization,
+  Reflection,
+  Strategy,
+  Utilities,
+  Validation,
+  attribute,
+  collection,
+  create,
+};
 
 /**
  * An overridable interface designed for disabling nested validation on custom object types.
@@ -68,10 +82,10 @@ import Validation from "./src/validation";
  * 2: Default behavior - nested field validation is enabled for `Coordinate` class. It uses `\@attribute` for supplying validation engine with the runtime schema representation of the decorated field (if \@attribute is not defined then a type mismatch occurs between runtime type and compiled type)
  * ```ts
  * // coordinate.ts
- * import { ValueMin } from "tdv-core/collection/number/ValueMin";
+ * import { collection } from "tdv-core";
  *
  * export class Coordinate {
- *   \@ValueMin(10, { message: "Minimum X is 10" })
+ *   \@collection.number.ValueMin(10, { message: "Minimum X is 10" })
  *   x: number;
  *   y: number;
  * }
@@ -96,19 +110,3 @@ import Validation from "./src/validation";
  * ```
  */
 export interface PrimitiveSet {}
-
-export type {};
-
-export {
-  Collection,
-  Decorator,
-  Localization,
-  Reflection,
-  Strategy,
-  Utilities,
-  Validation,
-  attribute,
-  create,
-};
-
-export default TdvCoreApi;

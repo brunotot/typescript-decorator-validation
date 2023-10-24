@@ -29,10 +29,10 @@ export const FormContext = createContext<FormContextType>(undefined);
  * `child` field.
  *
  * ```ts
- * import { useForm, FormProvider, validators, valid } from "tdv-react";
+ * import { useForm, FormProvider, collection, valid } from "tdv-react";
  *
  * class ParentForm {
- *   \@validators.string.Required()
+ *   \@collection.string.Required()
  *   prop!: string;
  *
  *   \@valid(ExampleNested)
@@ -40,7 +40,7 @@ export const FormContext = createContext<FormContextType>(undefined);
  * }
  *
  * class ChildForm {
- *   \@validators.string.Required()
+ *   \@collection.strings.Required()
  *   nestedProp!: string;
  * }
  *

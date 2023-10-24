@@ -80,7 +80,7 @@ git checkout -b "[react]-[issue-number]-issue-lorem-ipsum"
 A basic TypeScript form can look something like
 
 ```typescript
-import { validators, ValidationEngine } from "tdv-core";
+import { collection, ValidationEngine } from "tdv-core";
 
 /**
  *  This is an optional layer of abstraction if the class contains complex
@@ -97,26 +97,26 @@ export type User = {
 };
 
 export default class UserForm implements User {
-  @validators.string.MinLength(5)
-  @validators.string.Required()
+  @collection.string.MinLength(5)
+  @collection.string.Required()
   firstName!: string;
 
-  @validators.string.Required()
+  @collection.string.Required()
   lastName!: string;
 
-  @validators.string.Required()
-  @validators.string.Password()
+  @collection.string.Required()
+  @collection.string.Password()
   password!: string;
 
   confirmPassword!: string;
 
-  @validators.string.URL()
+  @collection.string.URL()
   url!: string;
 
-  @validators.number.ValueRange({ min: 18, max: 100 })
+  @collection.number.ValueRange({ min: 18, max: 100 })
   age!: number;
 
-  @validators.boolean.Truthy("Passwords must match")
+  @collection.boolean.Truthy("Passwords must match")
   get passwordsMatch(): boolean {
     return this.password === this.confirmPassword;
   }

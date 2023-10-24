@@ -1,31 +1,32 @@
-import decorate from "../collection/index";
+import { attribute } from "../collection/class/attribute";
+import collection from "../collection/index";
 import Objects from "../src/utilities/impl/Objects";
 import Validation from "../src/validation/index";
 import { ValidationEngine } from "../src/validation/models/ValidationEngine";
 
 class AddressForm {
-  @decorate.any.Required()
+  @collection.any.Required()
   street!: string;
 
-  @decorate.any.Required()
+  @collection.any.Required()
   city!: string;
 
-  @decorate.string.Alpha()
+  @collection.string.Alpha()
   state!: string;
 
-  @decorate.any.Required()
+  @collection.any.Required()
   zipCode!: string;
 }
 
-@decorate.clazz.ValidDateRange("graduationStartDate", "graduationEndDate")
+@collection.clazz.ValidDateRange("graduationStartDate", "graduationEndDate")
 class EducationForm {
-  @decorate.any.Required()
+  @collection.any.Required()
   degree!: string;
 
-  @decorate.any.Required()
+  @collection.any.Required()
   fieldOfStudy!: string;
 
-  @decorate.any.Required()
+  @collection.any.Required()
   university!: string;
 
   graduationStartDate!: Date;
@@ -34,34 +35,34 @@ class EducationForm {
 }
 
 class JobApplicationForm {
-  @decorate.any.Required()
-  @decorate.string.Alpha()
+  @collection.any.Required()
+  @collection.string.Alpha()
   fullName!: string;
 
-  @decorate.any.Required()
-  @decorate.string.Email()
+  @collection.any.Required()
+  @collection.string.Email()
   email!: string;
 
-  @decorate.any.Required()
+  @collection.any.Required()
   phoneNumber!: string;
 
-  @decorate.date.PastDate()
+  @collection.date.PastDate()
   dateOfBirth!: Date;
 
-  @decorate.clazz.attribute(AddressForm)
+  @attribute(AddressForm)
   address!: AddressForm;
 
-  @decorate.array.ArraySizeMin(1)
-  @decorate.clazz.attribute(EducationForm)
+  @collection.array.ArraySizeMin(1)
+  @attribute(EducationForm)
   educations: EducationForm[] = [];
 
-  @decorate.any.Required()
-  @decorate.array.ArraySizeMin(1)
+  @collection.any.Required()
+  @collection.array.ArraySizeMin(1)
   skills!: string[];
 
   portfolioURL?: string;
 
-  @decorate.any.Required()
+  @collection.any.Required()
   coverLetter!: string;
 
   async isCompoundValid(): Promise<Validation.Result> {

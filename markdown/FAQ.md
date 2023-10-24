@@ -86,14 +86,14 @@ class MyClass {
 > 💡 Each predefined validator in <code>tdv-core</code> allows for configurable properties, including custom error messages. To set a custom message, pass the <code>{ message: "Your custom error message" }</code> object to the validator. If a validator doesn't accept any arguments related to the validation logic and is able to process custom-defined messages then it may allow the first argument to be an actual string message instead of (union) configurable object.
 
 ```typescript
-import { decorate } from "tdv-core";
+import { collection } from "tdv-core";
 
 class MyClass {
-  @decorate.string.Required()
+  @collection.string.Required()
   // valid, will use default message defined by `tdv-core`
-  @decorate.string.Required("Custom error message")
+  @collection.string.Required("Custom error message")
   // also valid, will use custom-defined string
-  @decorate.string.Required({ message: "Custom error message" })
+  @collection.string.Required({ message: "Custom error message" })
   // also valid, will use custom-defined string
   input!: string;
 }
@@ -105,14 +105,14 @@ class MyClass {
 > 💡 Like <code>message</code> parameter, we can also provide <code>groups</code> parameter to predefined validators. Validation groups are considered unique primitive identifiers - meaning it accepts identifiers like <code>number</code>, <code>string</code> or <code>symbol</code>. If no groups are provided, they default to an empty array.
 
 ```typescript
-import { decorate } from "tdv-core";
+import { collection } from "tdv-core";
 
 class MyClass {
-  @decorate.string.Required()
+  @collection.string.Required()
   // valid, will use default empty array for `groups`
-  @decorate.string.Required({ groups: "update" })
+  @collection.string.Required({ groups: "update" })
   // also valid, will validate only if validation engine has active "update" group
-  @decorate.string.Required({ groups: ["update", "create"] })
+  @collection.string.Required({ groups: ["update", "create"] })
   // also valid, will validate only if validation engine has active "update" or "create" group
   input!: string;
 }
@@ -166,7 +166,7 @@ const engine = new ValidationEngine(SomeClass, options);
 > 💡 Yes. There is a <code>MessageResolver</code> class exposed specifically for this use-case. Check the example.
 
 ```typescript
-import { Localization, ValidationEngine, decorate } from "tdv-core";
+import { Localization, ValidationEngine, collection } from "tdv-core";
 
 // suppose you have a centralized place where your translations live
 const translations: Record<string, Record<string, string>> = {
@@ -181,7 +181,7 @@ Localization.MessageResolver.configure(
 );
 
 class SomeClass {
-  @decorate.string.Required("required")
+  @collection.string.Required("required")
   input: string = "";
 }
 

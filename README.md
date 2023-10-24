@@ -82,7 +82,7 @@ npm install tdv-react # when using in framework-specific environment
 ```typescript
 import {
   validate,
-  decorate,
+  collection,
   ValidationEngine,
   Localization,
   TdvCore,
@@ -100,7 +100,7 @@ function MinSize(min: number, groups: TdvCore.Validation.Groups = []) {
 }
 
 class Foo {
-  @decorate.string.Email() // predefined
+  @collection.string.Email() // predefined
   @MinSize(10) // custom
   email!: string;
 }
@@ -158,26 +158,26 @@ export type UserFormFields = {
 };
 
 export default class UserForm implements UserFormFields {
-  @decorate.string.MinLength(5)
-  @decorate.string.Required()
+  @collection.string.MinLength(5)
+  @collection.string.Required()
   firstName!: string;
 
-  @decorate.string.Required()
+  @collection.string.Required()
   lastName!: string;
 
-  @decorate.string.Required()
-  @decorate.string.Password()
+  @collection.string.Required()
+  @collection.string.Password()
   password!: string;
 
   confirmPassword!: string;
 
-  @decorate.string.URL()
+  @collection.string.URL()
   url!: string;
 
-  @decorate.number.ValueRange({ min: 18, max: 100 })
+  @collection.number.ValueRange({ min: 18, max: 100 })
   age!: number;
 
-  @decorate.boolean.Truthy("Passwords must match")
+  @collection.boolean.Truthy("Passwords must match")
   get passwordsMatch(): boolean {
     return this.password === this.confirmPassword;
   }
