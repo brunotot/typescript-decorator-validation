@@ -1,5 +1,6 @@
-import { Required } from "../../../collection/any/Required";
 import { foreach } from "../../../collection/array/foreach";
+import { Integer } from "../../../collection/number/Integer";
+import { Email } from "../../../collection/string/regex/impl/Email";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
@@ -12,8 +13,8 @@ const errorData: Type[] = [["", "2", "3"]];
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @foreach(Required())
-  value: Type = [];
+  @foreach(Integer(), Email())
+  value: string[] = [];
 }
 
 /*** Test ***/

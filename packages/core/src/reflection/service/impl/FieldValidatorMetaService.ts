@@ -42,7 +42,7 @@ export class FieldValidatorMetaService extends AbstractMetaService<
    */
   addValidator(
     field: string,
-    isValid: API.Validation.Evaluator<any>,
+    isValid: API.Validation.Evaluator<any, any>,
     groups: string[]
   ): void {
     this.getUntypedDescriptor(field).rules.root.add({

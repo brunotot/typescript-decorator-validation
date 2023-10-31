@@ -12,8 +12,10 @@ namespace ClassDecoratorService {
   /**
    * Return type definition for `Supplier` and `Instance` - a class `T` or nullable.
    */
-  export type ReturnDef<T extends Type> =
-    | API.Utilities.Types.Class<T>
+  export type ReturnDef<
+    Class extends API.Utilities.Types.Class<any> = API.Utilities.Types.Class<any>
+  > =
+    | Class
     | undefined
     // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
     | void;
@@ -24,13 +26,13 @@ namespace ClassDecoratorService {
    * @param baseClass - The base class.
    * @param context - Additional context information.
    */
-  export type Supplier<T extends Type> = ((
-    meta: API.Reflection.Services.ClassValidatorMetaService<
-      API.Utilities.Types.Class<T>
-    >,
-    baseClass: API.Utilities.Types.Class<T>,
-    context: Context<T>
-  ) => ReturnDef<T>) & {};
+  export type Supplier<
+    Class extends API.Utilities.Types.Class<any> = API.Utilities.Types.Class<any>
+  > = ((
+    meta: API.Reflection.Services.ClassValidatorMetaService<Class>,
+    baseClass: Class,
+    context: ClassDecoratorContext<Class>
+  ) => ReturnDef<Class>) & {};
 
   /**
    * Type definition for the native `ClassDecoratorContext`.
@@ -52,10 +54,10 @@ namespace ClassDecoratorService {
    * @param supplier - A Supplier function to use for building the Instance.
    * @returns An Instance function.
    */
-  export function build<T extends Type>(
-    supplier: Supplier<API.Utilities.Types.UnwrapClass<T>>
-  ): Instance<any> {
-    return function (baseClass, context) {
+  export function build<
+    Class extends API.Utilities.Types.Class<any> = API.Utilities.Types.Class<any>
+  >(supplier: Supplier<Class>) {
+    return function (baseClass: Class, context: ClassDecoratorContext<Class>) {
       return supplier(
         API.Reflection.Services.ClassValidatorMetaService.inject(context),
         baseClass,

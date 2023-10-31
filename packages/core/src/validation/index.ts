@@ -16,11 +16,11 @@ namespace Validation {
    *
    * @typeParam T - The type of the value being evaluated.
    */
-  export type Evaluator<T> = ((
-    value: T,
-    context: any,
+  export type Evaluator<This = unknown, Value = unknown> = (
+    value: Value,
+    context: ClassFieldDecoratorContext<This, Value>,
     locale: API.Localization.Resolver.LocaleResolver.Locale
-  ) => Result) & {};
+  ) => Result;
 
   /**
    * Represents metadata for a validation rule, including the associated validation groups and the evaluator function.

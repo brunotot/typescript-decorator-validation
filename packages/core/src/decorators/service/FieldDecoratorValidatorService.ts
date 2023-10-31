@@ -31,15 +31,20 @@ namespace FieldDecoratorValidatorService {
    * }
    * ```
    */
-  export function build<
-    T extends API.Decorator.Service.FieldDecoratorService.Type
-  >(
-    validate: API.Validation.Evaluator<T>,
+  export function build<This, Value>(
+    validate: API.Validation.Evaluator<This, Value>,
     groups?: string[]
-  ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-    return API.Decorator.Service.FieldDecoratorService.build<T>((meta, key) => {
-      meta.addValidator(key, validate, groups ?? []);
-    });
+  ): (
+    target: undefined,
+    context:
+      | ClassGetterDecoratorContext<This, Value>
+      | ClassFieldDecoratorContext<This, Value>
+  ) => void {
+    return API.Decorator.Service.FieldDecoratorService.build<This, Value>(
+      (meta, key) => {
+        meta.addValidator(key, validate, groups ?? []);
+      }
+    );
   }
 }
 

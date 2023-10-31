@@ -52,12 +52,19 @@ import API from "api";
  * }
  * ```
  */
-export function create<T>(
-  validate: API.Validation.Evaluator<T>,
+export function create<This = unknown, Value = unknown>(
+  validate: (
+    value: Value,
+    context: ClassFieldDecoratorContext<This, Value>,
+    locale: API.Localization.Resolver.LocaleResolver.Locale
+  ) => API.Validation.Result,
   groups?: string[]
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
-    validate,
-    groups
-  );
+): (
+  target: undefined,
+  context: ClassFieldDecoratorContext<This, Value>
+) => void {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<
+    This,
+    Value
+  >(validate, groups);
 }

@@ -59,9 +59,12 @@ export function isDecimalValid<
  * }
  * ```
  */
-export function Decimal<T extends API.Utilities.Objects.Optional<number>>(
+export function Decimal<This, Value extends number | undefined | null>(
   options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
+): (
+  target: undefined,
+  context: ClassFieldDecoratorContext<This, Value>
+) => void {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, DECIMAL),

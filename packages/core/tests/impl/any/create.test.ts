@@ -1,4 +1,6 @@
 import { create } from "../../../collection/any/create";
+import { Integer } from "../../../collection/number/Integer";
+import { Email } from "../../../collection/string/regex/impl/Email";
 import $ from "../../../index";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
@@ -18,6 +20,22 @@ class Model implements IMock<Type> {
     valid: !v || (v.length > 5 && v.toLowerCase().includes("test")),
   }))
   value: Type;
+
+  @Email()
+  @Integer()
+  get test1() {
+    return "";
+  }
+
+  @Email()
+  @Integer()
+  test2() {
+    return "";
+  }
+
+  @Email()
+  @Integer()
+  test3!: string;
 }
 
 /*** Test ***/

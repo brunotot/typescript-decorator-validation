@@ -46,7 +46,7 @@ namespace Types {
    * // Creates an instance of MyClass
    * ```
    */
-  export type Class<T> = (new (...args: any[]) => T) & {};
+  export type Class<T> = (abstract new (...args: any) => T) & {};
 
   /**
    * Unwraps a Promise type to its resolved value type.

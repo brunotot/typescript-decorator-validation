@@ -1,14 +1,14 @@
 import API from "api";
 
+export type FieldDecorator<This = unknown, Value = unknown> = (
+  target: undefined,
+  context: ClassFieldDecoratorContext<This, Value>
+) => void;
+
 /**
  * Namespace for FieldDecorator Service Types.
  */
 namespace FieldDecoratorService {
-  /**
-   * Represents the generic type for the value being decorated.
-   */
-  export type Type = unknown;
-
   /**
    * Type definition for supplying a function that will act as the decorator logic.
    *
@@ -20,49 +20,11 @@ namespace FieldDecoratorService {
    *
    * @returns The return definition as specified by ReturnDef.
    */
-  export type Supplier<T extends Type = Type> = ((
+  export type Supplier<This, Value> = (
     meta: API.Reflection.Services.FieldValidatorMetaService,
     name: string,
-    context: Context<T>
-  ) => void) & {};
-
-  /**
-   * Context object passed to a field decorator function.
-   *
-   * @typeParam T - The type of the value being decorated.
-   *
-   * @property kind - The kind of member being decorated (getter, method, field).
-   * @property static - Boolean indicating whether the member is static.
-   * @property private - Boolean indicating whether the member is private.
-   * @property name - The name of the member being decorated.
-   * @property metadata - Additional metadata associated with the decorator.
-   * @property access - An object with a get method for accessing the value.
-   */
-  export type Context<T> = Readonly<{
-    kind: "getter" | "method" | "field";
-    static: boolean;
-    private: boolean;
-    name: string;
-    metadata: globalThis.DecoratorMetadata;
-    access: {
-      get: (object: any) => T;
-    };
-  }>;
-
-  /**
-   * Type definition for a decorator function instance.
-   *
-   * @typeParam T - The type of the value being decorated.
-   *
-   * @param target - The object that owns the decorated property.
-   * @param context - The context in which the decorator is being applied.
-   *
-   * @returns The return definition as specified by ReturnDef.
-   */
-  export type Instance<T extends Type> = ((
-    target: any,
-    context: Context<T>
-  ) => void) & {};
+    context: ClassFieldDecoratorContext<This, Value>
+  ) => void;
 
   /**
    * Creates a new validator function using the provided validation builder options.
@@ -91,11 +53,16 @@ namespace FieldDecoratorService {
    * }
    * ```
    */
-  export function build<T extends Type>(supplier: Supplier<T>): Instance<T> {
+  export function build<This = unknown, Value = unknown>(
+    supplier: Supplier<This, Value>
+  ): (
+    target: undefined,
+    context: ClassFieldDecoratorContext<This, Value>
+  ) => void {
     return function (target, context) {
       const isStage2 = typeof context === "string";
       const nameEval = isStage2 ? context : context.name;
-      const strategyEval = isStage2 ? target.constructor : context;
+      const strategyEval = isStage2 ? (target as any).constructor : context;
       const contextEval = isStage2 ? { name: context, metadata: {} } : context;
       const metaService =
         API.Reflection.Services.FieldValidatorMetaService.inject(strategyEval);

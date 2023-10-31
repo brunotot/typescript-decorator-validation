@@ -16,14 +16,19 @@ import API from "api";
  * }
  * ```
  */
-export function foreach<
-  T extends NonNullable<
-    API.Utilities.Types.Array | (() => API.Utilities.Types.Array)
-  >
->(
-  ...validators: API.Decorator.Instance<API.Utilities.Arrays.getArrayType<T>>[]
-): API.Decorator.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorService.build<T>(
+export function foreach<This, Value extends any[]>(
+  ...validators: ((
+    target: undefined,
+    context: ClassFieldDecoratorContext<
+      This,
+      Value extends (infer U)[] ? U : never
+    >
+  ) => void)[]
+): (
+  target: undefined,
+  context: ClassFieldDecoratorContext<This, Value>
+) => void {
+  return API.Decorator.Service.FieldDecoratorService.build<This, Value>(
     (meta, property, context) => {
       const validationProcessor = meta.getUntypedDescriptor(property);
       validationProcessor.thisDefault = [];

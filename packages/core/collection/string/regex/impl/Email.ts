@@ -62,13 +62,25 @@ export function isEmailValid<T extends API.Utilities.Objects.Optional<string>>(
  * }
  * ```
  */
-export function Email<T extends API.Utilities.Objects.Optional<string>>(
+export function Email<
+  This,
+  Value extends string | undefined | null | ((this: This, ...args: any) => any)
+>(
   options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+): (
+  target: any,
+  context:
+    | ClassGetterDecoratorContext<This, Value>
+    | ClassFieldDecoratorContext<This, Value>
+    | ClassMethodDecoratorContext<This, Value>
+) => void {
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<
+    This,
+    Value
+  >(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, EMAIL),
-      valid: testRegex(RegexConst.EMAIL, value),
+      valid: isEmailValid(value),
       message: API.Decorator.message(options, locale, translate(locale, EMAIL)),
     }),
     API.Decorator.groups(options)

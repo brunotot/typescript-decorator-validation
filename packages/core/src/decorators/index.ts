@@ -5,6 +5,8 @@ import ClassDecoratorValidatorServiceNamespace from "./service/ClassDecoratorVal
 import FieldDecoratorServiceNamespace from "./service/FieldDecoratorService";
 import FieldDecoratorValidatorServiceNamespace from "./service/FieldDecoratorValidatorService";
 
+export type Optional<T> = T | null | undefined;
+
 /**
  * A collection of types and interfaces for creating and handling decorators.
  */

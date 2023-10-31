@@ -57,10 +57,14 @@ function isIntegerValid(num: API.Utilities.Objects.Optional<number>): boolean {
  * }
  * ```
  */
-export function Integer<T extends API.Utilities.Objects.Optional<number>>(
+export function Integer<This, Value extends number | undefined | null>(
   options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+): (target: any, context: Context<Value>) => void {
+  // @ts-ignore
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<
+    This,
+    Value
+  >(
     (num, _context, locale) => ({
       key: API.Decorator.key(options, INTEGER),
       valid: isIntegerValid(num),
@@ -73,3 +77,14 @@ export function Integer<T extends API.Utilities.Objects.Optional<number>>(
     API.Decorator.groups(options)
   );
 }
+
+export type Context<Accept = unknown> = Readonly<{
+  kind: "field" | "method" | "getter";
+  static: boolean;
+  private: boolean;
+  name: string;
+  metadata: globalThis.DecoratorMetadata;
+  access: {
+    get: (object: any) => Accept;
+  };
+}>;
