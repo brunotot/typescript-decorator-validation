@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../index";
 
 import type Arrays from "./Arrays";
 import type Booleans from "./Booleans";
@@ -20,9 +20,7 @@ namespace Objects {
    *
    * @typeParam T - The type of the optional value.
    */
-  export type Optional<T = undefined> = T extends undefined
-    ? any
-    : T | undefined | null;
+  export type Optional<T = undefined> = T extends undefined ? any : T | undefined | null;
 
   /**
    * A function that hashes a value of type `T` and returns a number.
@@ -36,11 +34,7 @@ namespace Objects {
    *
    * @typeParam T - The type of the array elements.
    */
-  export type ArrayPredicate<T> = ((
-    value: T,
-    index: number,
-    array: T[]
-  ) => boolean) & {};
+  export type ArrayPredicate<T> = ((value: T, index: number, array: T[]) => boolean) & {};
 
   /**
    * Filters out getters, functions and read-only properties from a type
@@ -69,9 +63,9 @@ namespace Objects {
    * @typeParam A - The type to return if `X` and `Y` are equal.
    * @typeParam B - The type to return if `X` and `Y` are not equal.
    */
-  export type IfEquals<X, Y, A = X, B = never> = (<T>() => T extends X
-    ? 1
-    : 2) extends <T>() => T extends Y ? 1 : 2
+  export type IfEquals<X, Y, A = X, B = never> = (<T>() => T extends X ? 1 : 2) extends <
+    T
+  >() => T extends Y ? 1 : 2
     ? A
     : B;
 
@@ -84,9 +78,7 @@ namespace Objects {
   export type Exclude<TParent, TExclude> = Pick<
     TParent,
     Values<{
-      [Prop in keyof TParent]: [TParent[Prop]] extends [TExclude]
-        ? never
-        : Prop;
+      [Prop in keyof TParent]: [TParent[Prop]] extends [TExclude] ? never : Prop;
     }>
   >;
 
@@ -110,11 +102,7 @@ namespace Objects {
    * @typeParam T - The object type.
    */
   export type Inputs<T> = {
-    [P in keyof T]-?: IfEquals<
-      { [Q in P]: T[P] },
-      { -readonly [Q in P]: T[P] },
-      P
-    >;
+    [P in keyof T]-?: IfEquals<{ [Q in P]: T[P] }, { -readonly [Q in P]: T[P] }, P>;
   }[keyof T];
 
   /**
@@ -131,12 +119,10 @@ namespace Objects {
    *
    * @typeParam T - The type of the errors.
    */
-  export function hasErrors<T>(
-    data: API.Strategy.Factory.Impl.Errors<T>
-  ): boolean {
+  export function hasErrors<T>(data: API.Strategy.Factory.Impl.Errors<T>): boolean {
     const data0: any = data;
     if (Array.isArray(data0)) {
-      return data0.some((item) => hasErrors(item));
+      return data0.some(item => hasErrors(item));
     } else if (typeof data0 === "object" && data0 !== null) {
       return Object.values(data0).some((value: any) => hasErrors(value));
     } else if (typeof data0 === "string") {
@@ -276,21 +262,18 @@ namespace Objects {
       object?: Payload<Types.UnwrapClass<TConstructor>> | Types.Array
     ): Types.UnwrapClass<TConstructor> {
       if (Array.isArray(object)) {
-        return object.map((item) =>
-          _toClass(clazz, item)
-        ) as Types.UnwrapClass<TConstructor>;
+        return object.map(item => _toClass(clazz, item)) as Types.UnwrapClass<TConstructor>;
       }
 
       const entries = Object.entries<any>(object ?? {});
-      const meta =
-        API.Reflection.Services.FieldValidatorMetaService.inject(clazz);
+      const meta = API.Reflection.Services.FieldValidatorMetaService.inject(clazz);
       const data: Record<string, any> = {};
       for (const [key, value] of entries) {
         const descriptor = meta.getUntypedDescriptor(key);
         const { thisClass } = descriptor;
         if (thisClass) {
           if (Array.isArray(value)) {
-            data[key] = value.map((item) => _toClass(thisClass, item));
+            data[key] = value.map(item => _toClass(thisClass, item));
           } else {
             data[key] = toClass(thisClass, value);
           }
@@ -322,18 +305,10 @@ namespace Objects {
     };
   }
 
-  export type FieldType =
-    | "date"
-    | "array"
-    | "string"
-    | "number"
-    | "boolean"
-    | "object";
+  export type FieldType = "date" | "array" | "string" | "number" | "boolean" | "object";
 
   function throwTypeMismatchError(type: FieldType, value: any): never {
-    throw new Error(
-      `Type '${type}' is not assignable to type ${JSON.stringify(value)}`
-    );
+    throw new Error(`Type '${type}' is not assignable to type ${JSON.stringify(value)}`);
   }
 
   export function assertType(type: FieldType, value: any): void | never {

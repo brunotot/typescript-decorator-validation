@@ -1,13 +1,11 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** TodayDate identifier. */
 export const TODAY_DATE = "TodayDate";
 
 /** Internal validation function for {@link TodayDate} validator. */
-export function isTodayDateValid<
-  T extends API.Utilities.Objects.Optional<Date>
->(date: T): boolean {
+export function isTodayDateValid<T extends API.Utilities.Objects.Optional<Date>>(date: T): boolean {
   API.Utilities.Objects.assertType("date", date);
   const currentDate = new Date();
   return (
@@ -72,11 +70,7 @@ export function TodayDate<T extends API.Utilities.Objects.Optional<Date>>(
     (date, _context, locale) => ({
       key: API.Decorator.key(options, TODAY_DATE),
       valid: isTodayDateValid(date),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, TODAY_DATE, date)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, TODAY_DATE, date)),
     }),
     API.Decorator.groups(options)
   );

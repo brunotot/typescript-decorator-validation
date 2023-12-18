@@ -1,14 +1,11 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** ValueMax identifier. */
 export const VALUE_MAX = "ValueMax";
 
 /** Internal validation function for {@link ValueMax} validator. */
-function isValueMaxValid(
-  num: API.Utilities.Objects.Optional<number>,
-  max: number
-): boolean {
+function isValueMaxValid(num: API.Utilities.Objects.Optional<number>, max: number): boolean {
   API.Utilities.Objects.assertType("number", num);
   return num == null ? true : num <= max;
 }
@@ -69,11 +66,7 @@ export function ValueMax<T extends API.Utilities.Objects.Optional<number>>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, VALUE_MAX),
       valid: isValueMaxValid(value, max),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, VALUE_MAX, max, value)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, VALUE_MAX, max, value)),
     }),
     API.Decorator.groups(options)
   );

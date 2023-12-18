@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** ArrayEvery identifier. */
@@ -70,11 +70,7 @@ export function ArrayEvery<K, T extends Array<K>>(
     (array, _context, locale) => ({
       key: API.Decorator.key(options, ARRAY_EVERY),
       valid: isArrayEveryValid(array, predicate),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, ARRAY_EVERY)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, ARRAY_EVERY)),
     }),
     API.Decorator.groups(options)
   );

@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** ArrayEmpty identifier. */
@@ -65,11 +65,7 @@ export function ArrayEmpty<K, T extends Array<K>>(
     (array, _context, locale) => ({
       key: API.Decorator.key(options, ARRAY_EMPTY),
       valid: isArrayEmptyValid(array),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, ARRAY_EMPTY)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, ARRAY_EMPTY)),
     }),
     API.Decorator.groups(options)
   );

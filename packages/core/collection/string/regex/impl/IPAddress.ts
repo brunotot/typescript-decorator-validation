@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../../index";
 
 import { translate } from "../../../../src/localization/service/TranslationService";
 import { testRegex } from "../Pattern";
@@ -8,9 +8,9 @@ import RegexConst from "../shared/regex.constants";
 export const IP_ADDRESS = "IPAddress";
 
 /** Internal validation function for {@link IPAddress} validator. */
-export function isIPAddressValid<
-  T extends API.Utilities.Objects.Optional<string>
->(value: T): boolean {
+export function isIPAddressValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean {
   API.Utilities.Objects.assertType("string", value);
   return testRegex(RegexConst.IP_ADDRESS, value);
 }
@@ -69,11 +69,7 @@ export function IPAddress<T extends API.Utilities.Objects.Optional<string>>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, IP_ADDRESS),
       valid: testRegex(RegexConst.IP_ADDRESS, value),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, IP_ADDRESS)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, IP_ADDRESS)),
     }),
     API.Decorator.groups(options)
   );

@@ -57,11 +57,13 @@ export default function useForm<TClass>(
   const instantContextValidation = standalone ? validateImmediately! : ctx? ctx.validateImmediately : validateImmediately!;
   const isSubmitted = instantContextValidation || submitted;
 
-  const [form, setForm, { errors, detailedErrors, isValid, engine }] =
-    useValidation<TClass>(model, {
+  const [form, setForm, { errors, detailedErrors, isValid, engine }] = useValidation<TClass>(
+    model,
+    {
       defaultValue,
       groups,
-    });
+    }
+  );
 
   //* Dispatcher function which fires only when
   //* itself isn't a parent and context exists.

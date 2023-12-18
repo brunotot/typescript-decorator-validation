@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { createContext } from "react";
 import ns from "./types";
 
@@ -80,9 +81,7 @@ export default function FormProvider({
   validateImmediately,
 }: ns.FormProviderProps) {
   return (
-    <FormContext.Provider
-      value={{ submitted, setSubmitted, validateImmediately }}
-    >
+    <FormContext.Provider value={{ submitted, setSubmitted, validateImmediately }}>
       {children}
     </FormContext.Provider>
   );

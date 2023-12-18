@@ -1,15 +1,11 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** ArraySizeRange identifier. */
 export const ARRAY_SIZE_RANGE = "ArraySizeRange";
 
 /** Internal validation function for {@link ArraySizeRange} validator. */
-export function isArraySizeRangeValid(
-  array: any[],
-  min: number,
-  max: number
-): boolean {
+export function isArraySizeRangeValid(array: any[], min: number, max: number): boolean {
   API.Utilities.Objects.assertType("array", array);
   return (array ?? []).length >= min && (array ?? []).length <= max;
 }

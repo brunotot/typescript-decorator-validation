@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../index";
 
 /**
  * A generic caching utility class used by `ValidationEngine`.
@@ -20,10 +20,7 @@ export class CacheMap<CacheValue extends object & {}, Payload = any> {
    * @param changeFn - A function that takes a payload and returns a new cache value.
    * @param initialValue - An optional initial value for the cache.
    */
-  constructor(
-    changeFn: (state: Payload) => CacheValue,
-    initialValue?: CacheValue
-  ) {
+  constructor(changeFn: (state: Payload) => CacheValue, initialValue?: CacheValue) {
     this.#cache = initialValue ?? ({} as CacheValue);
     this.#payload = {} as Payload;
     this.#changeFn = changeFn;
@@ -57,9 +54,7 @@ export class CacheMap<CacheValue extends object & {}, Payload = any> {
   patch(partialCache: Partial<CacheValue>, _payload?: Payload): CacheValue {
     const payload = _payload ?? this.#payload;
     this.#payload = payload;
-    Object.entries(partialCache).forEach(
-      ([key, value]) => ((this.#cache as any)[key] = value)
-    );
+    Object.entries(partialCache).forEach(([key, value]) => ((this.#cache as any)[key] = value));
     return this.#cache;
   }
 
@@ -80,8 +75,7 @@ export class CacheMap<CacheValue extends object & {}, Payload = any> {
     cacheKey: CacheKey
   ): CacheValue[CacheKey] {
     const cacheValue: CacheValue[CacheKey] = this.#cache[cacheKey];
-    return cacheValue !== undefined &&
-      API.Utilities.Objects.deepEquals(this.#payload, payload)
+    return cacheValue !== undefined && API.Utilities.Objects.deepEquals(this.#payload, payload)
       ? cacheValue
       : this.#changeFn(payload)[cacheKey];
   }

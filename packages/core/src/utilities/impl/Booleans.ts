@@ -1,4 +1,4 @@
-import type API from "api";
+import type API from "../../../index";
 
 import type Arrays from "./Arrays";
 import type Objects from "./Objects";
@@ -14,10 +14,9 @@ namespace Booleans {
    * @typeParam TCheck - The type to check.
    * @typeParam TData - The array type to check against.
    */
-  export type isAnyOf<
-    TCheck,
-    TData extends Types.Array
-  > = NonNullable<TCheck> extends TData[number] ? true : false;
+  export type isAnyOf<TCheck, TData extends Types.Array> = NonNullable<TCheck> extends TData[number]
+    ? true
+    : false;
 
   /**
    * Checks if `T` is an object type.
@@ -38,9 +37,7 @@ namespace Booleans {
    * @typeParam T - The type to check.
    */
   export type isFunction<T> = NonNullable<T> extends Types.Function
-    ? Types.UnwrapPromise<
-        ReturnType<NonNullable<T>>
-      > extends API.Validation.Result
+    ? Types.UnwrapPromise<ReturnType<NonNullable<T>>> extends API.Validation.Result
       ? true
       : false
     : false;
@@ -51,9 +48,7 @@ namespace Booleans {
    * @typeParam T - The parent type to check.
    * @typeParam T - The key of parent to check.
    */
-  export type isGetter<T, K extends keyof T> = K extends Objects.Inputs<T>
-    ? false
-    : true;
+  export type isGetter<T, K extends keyof T> = K extends Objects.Inputs<T> ? false : true;
 
   /**
    * Checks if `T` is an array type.

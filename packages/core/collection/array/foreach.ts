@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 
 /**
  * Creates a validator decorator which applies multiple validators to each element in array field.
@@ -17,23 +17,19 @@ import API from "api";
  * ```
  */
 export function foreach<
-  T extends NonNullable<
-    API.Utilities.Types.Array | (() => API.Utilities.Types.Array)
-  >
+  T extends NonNullable<API.Utilities.Types.Array | (() => API.Utilities.Types.Array)>
 >(
   ...validators: API.Decorator.Instance<API.Utilities.Arrays.getArrayType<T>>[]
 ): API.Decorator.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorService.build<T>(
-    (meta, property, context) => {
-      const validationProcessor = meta.getUntypedDescriptor(property);
-      validationProcessor.thisDefault = [];
-      validators.forEach((validator) => {
-        validator(undefined, context as any);
-        const rules = validationProcessor.rules;
-        const rootRules = rules.root;
-        const foreachRules = rules.foreach;
-        foreachRules.add(rootRules.pop());
-      });
-    }
-  );
+  return API.Decorator.Service.FieldDecoratorService.build<T>((meta, property, context) => {
+    const validationProcessor = meta.getUntypedDescriptor(property);
+    validationProcessor.thisDefault = [];
+    validators.forEach(validator => {
+      validator(undefined, context as any);
+      const rules = validationProcessor.rules;
+      const rootRules = rules.root;
+      const foreachRules = rules.foreach;
+      foreachRules.add(rootRules.pop());
+    });
+  });
 }

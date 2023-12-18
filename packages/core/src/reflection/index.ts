@@ -1,4 +1,4 @@
-import type API from "api";
+import type API from "../../index";
 
 import ReflectionStrategyNamespace from "../strategy/models/StrategyMapper";
 import ReflectionDescriptor from "./models/ReflectionDescriptor";
@@ -24,7 +24,7 @@ namespace Reflection {
   ): Array<keyof TClass> {
     function getPropertyNames(classInstance: any): string[] {
       return Object.getOwnPropertyNames(classInstance ?? {}).filter(
-        (property) => property !== "constructor"
+        property => property !== "constructor"
       );
     }
     const instance: any = new constructor();
@@ -76,9 +76,7 @@ namespace Reflection {
    * @param strategy - The strategy to check.
    * @returns True if the strategy is a class, false otherwise.
    */
-  export function isClass(
-    strategy: MetaStrategy
-  ): strategy is API.Utilities.Types.Class<any> {
+  export function isClass(strategy: MetaStrategy): strategy is API.Utilities.Types.Class<any> {
     return typeof strategy === "function";
   }
 

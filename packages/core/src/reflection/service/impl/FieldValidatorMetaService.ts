@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../../index";
 
 import { AbstractMetaService } from "../AbstractMetaService";
 
@@ -18,9 +18,7 @@ export class FieldValidatorMetaService extends AbstractMetaService<
    * @param strategy - The strategy to inject.
    * @returns A new instance of FieldValidatorMetaService.
    */
-  public static inject(
-    strategy: API.Reflection.MetaStrategy
-  ): FieldValidatorMetaService {
+  public static inject(strategy: API.Reflection.MetaStrategy): FieldValidatorMetaService {
     return new FieldValidatorMetaService(strategy);
   }
 
@@ -40,11 +38,7 @@ export class FieldValidatorMetaService extends AbstractMetaService<
    * @param isValid - The validation function.
    * @param groups - Optional validation groups.
    */
-  addValidator(
-    field: string,
-    isValid: API.Validation.Evaluator<any>,
-    groups: string[]
-  ): void {
+  addValidator(field: string, isValid: API.Validation.Evaluator<any>, groups: string[]): void {
     this.getUntypedDescriptor(field).rules.root.add({
       validate: isValid,
       groups,
@@ -80,9 +74,11 @@ export class FieldValidatorMetaService extends AbstractMetaService<
   getTypedDescriptor<TClass, TName extends keyof TClass>(
     thisName: TName
   ): API.Reflection.Descriptor.Instance<unknown, TClass, TName> {
-    return this.getUntypedDescriptor(
-      thisName as string
-    ) as API.Reflection.Descriptor.Instance<unknown, TClass, TName>;
+    return this.getUntypedDescriptor(thisName as string) as API.Reflection.Descriptor.Instance<
+      unknown,
+      TClass,
+      TName
+    >;
   }
 
   /**
@@ -91,16 +87,10 @@ export class FieldValidatorMetaService extends AbstractMetaService<
    * @param fieldKey - The key of the field.
    * @returns The untyped descriptor.
    */
-  getUntypedDescriptor(
-    fieldKey: any
-  ): API.Reflection.Descriptor.Instance<any, any, any> {
+  getUntypedDescriptor(fieldKey: any): API.Reflection.Descriptor.Instance<any, any, any> {
     if (!this.hasDescriptor(fieldKey)) {
       const cfg = { thisName: fieldKey };
-      const fieldValue = new API.Reflection.Descriptor.Instance<
-        unknown,
-        unknown,
-        any
-      >(cfg);
+      const fieldValue = new API.Reflection.Descriptor.Instance<unknown, unknown, any>(cfg);
       this.data.set(fieldKey, fieldValue);
     }
     const descriptor = this.data.get(fieldKey);
@@ -121,7 +111,7 @@ export class FieldValidatorMetaService extends AbstractMetaService<
    */
   #handleClassInit(clazz: API.Utilities.Types.Class<any>): void {
     this.#fields = API.Reflection.getClassFieldNames(clazz) as string[];
-    this.#fields.forEach((name) => this.getUntypedDescriptor(name));
+    this.#fields.forEach(name => this.getUntypedDescriptor(name));
   }
 
   /**

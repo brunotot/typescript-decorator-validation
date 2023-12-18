@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../index";
 
 /**
  * A service class which exposes validated-decorator-related actions
@@ -31,9 +31,7 @@ namespace FieldDecoratorValidatorService {
    * }
    * ```
    */
-  export function build<
-    T extends API.Decorator.Service.FieldDecoratorService.Type
-  >(
+  export function build<T extends API.Decorator.Service.FieldDecoratorService.Type>(
     validate: API.Validation.Evaluator<T>,
     groups?: string[]
   ): API.Decorator.Service.FieldDecoratorService.Instance<T> {

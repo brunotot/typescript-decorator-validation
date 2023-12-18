@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** ArraySizeMin identifier. */

@@ -1,5 +1,5 @@
-import API from "api";
-import EventEmitter from "events";
+import API from "../../../index";
+import { EventEmitter } from "../../utilities/misc/EventEmitter";
 import { CacheMap } from "./CacheMap";
 
 /**
@@ -32,34 +32,25 @@ export class ValidationEngine<TClass> {
    * @param clazz - The class type to be processed.
    * @param config - Optional configuration settings.
    */
-  constructor(
-    clazz: API.Utilities.Types.Class<TClass>,
-    config?: API.Validation.Config<TClass>
-  ) {
+  constructor(clazz: API.Utilities.Types.Class<TClass>, config?: API.Validation.Config<TClass>) {
     this.#asyncDelay = config?.asyncDelay ?? 300;
     this.#eventEmitter = new EventEmitter();
     this.#hostClass = clazz;
-    this.locale =
-      config?.locale ?? API.Localization.Resolver.LocaleResolver.getLocale();
+    this.locale = config?.locale ?? API.Localization.Resolver.LocaleResolver.getLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
     this.#hostDefault =
       config?.defaultValue ??
-      (API.Utilities.Objects.toClass(
-        clazz
-      ) as API.Utilities.Objects.Payload<TClass>);
+      (API.Utilities.Objects.toClass(clazz) as API.Utilities.Objects.Payload<TClass>);
     this.#fieldValidatorMetaService =
       API.Reflection.Services.FieldValidatorMetaService.inject(clazz);
-    this.#cacheMap = new CacheMap((state) => this.validate.bind(this)(state));
+    this.#cacheMap = new CacheMap(state => this.validate.bind(this)(state));
   }
 
   public registerAsync(
     handler: (props: API.Validation.AsyncEventResponseProps<TClass>) => void
   ): void {
     this.unregisterAsync();
-    this.#eventListener = ({
-      key,
-      value,
-    }: API.Validation.AsyncEventHandlerProps<TClass>) => {
+    this.#eventListener = ({ key, value }: API.Validation.AsyncEventHandlerProps<TClass>) => {
       const { valid } = value;
       const currentError: any = this.#cacheMap.get("errors");
       const currentDetailedError: any = this.#cacheMap.get("detailedErrors");
@@ -167,13 +158,15 @@ export class ValidationEngine<TClass> {
   public validate(
     payload?: API.Utilities.Objects.Payload<TClass>
   ): API.Validation.Response<TClass> {
-    const state: API.Utilities.Objects.Payload<TClass> =
-      API.Utilities.Objects.toClass(this.#hostClass, payload) as any;
+    const state: API.Utilities.Objects.Payload<TClass> = API.Utilities.Objects.toClass(
+      this.#hostClass,
+      payload
+    ) as any;
 
     const errors: any = {};
     const detailedErrors: any = {};
 
-    this.#fieldValidatorMetaService.getFields().forEach((field) => {
+    this.#fieldValidatorMetaService.getFields().forEach(field => {
       const validation: any = this.validateField(state, field as keyof TClass);
       detailedErrors[field] = validation[0];
       errors[field] = validation[1];
@@ -203,8 +196,7 @@ export class ValidationEngine<TClass> {
     payload: any,
     fieldName: K
   ): API.Strategy.Factory.getStrategyResult<TClass, K> {
-    const descriptor =
-      this.#fieldValidatorMetaService.getUntypedDescriptor(fieldName);
+    const descriptor = this.#fieldValidatorMetaService.getUntypedDescriptor(fieldName);
     const stratImpl = new descriptor.StrategyImpl(
       descriptor,
       this.#hostDefault,

@@ -1,14 +1,11 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** ArrayContains identifier. */
 export const ARRAY_CONTAINS = "ArrayContains";
 
 /** Internal validation function for {@link ArrayContains} validator. */
-export function isArrayContainsValid<K, T extends Array<K>>(
-  value: T,
-  contains: K
-): boolean {
+export function isArrayContainsValid<K, T extends Array<K>>(value: T, contains: K): boolean {
   API.Utilities.Objects.assertType("array", value);
   return (value ?? []).includes(contains);
 }
@@ -70,11 +67,7 @@ export function ArrayContains<K, T extends Array<K>>(
     (array, _context, locale) => ({
       key: API.Decorator.key(options, ARRAY_CONTAINS),
       valid: isArrayContainsValid(array, contains),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, ARRAY_CONTAINS, contains)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, ARRAY_CONTAINS, contains)),
     }),
     API.Decorator.groups(options)
   );

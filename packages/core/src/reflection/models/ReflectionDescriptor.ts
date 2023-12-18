@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../index";
 
 /**
  * A namespace which holds relevant data regarding field descriptors acquired from reflection
@@ -63,11 +63,7 @@ namespace ReflectionDescriptor {
    * @remarks
    * This class is used to store metadata about a specific field, including its validation rules and default values.
    */
-  export class Instance<
-    This,
-    HostClass,
-    Name extends keyof HostClass | undefined = undefined
-  > {
+  export class Instance<This, HostClass, Name extends keyof HostClass | undefined = undefined> {
     hostClass?: API.Utilities.Types.Class<HostClass>;
     hostDefault?: HostClass;
     thisClass?: API.Utilities.Types.Class<This>;
@@ -89,8 +85,7 @@ namespace ReflectionDescriptor {
       this.hostClass = hostClass;
       this.thisName = thisName;
       this.thisClass = thisClass;
-      this.hostDefault =
-        hostDefault ?? hostClass ? new hostClass!() : undefined;
+      this.hostDefault = hostDefault ?? hostClass ? new hostClass!() : undefined;
       this.thisDefault = thisDefault;
       this.rules = rules ?? {
         root: new API.Reflection.Rule.Instance(),
@@ -135,12 +130,8 @@ namespace ReflectionDescriptor {
 
       // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
       const getNativeStrategy = (value: any) => {
-        const meta = API.Reflection.Services.FieldValidatorMetaService.inject(
-          this.hostClass!
-        );
-        const descriptor = meta.getTypedDescriptor<HostClass, keyof HostClass>(
-          this.thisName!
-        );
+        const meta = API.Reflection.Services.FieldValidatorMetaService.inject(this.hostClass!);
+        const descriptor = meta.getTypedDescriptor<HostClass, keyof HostClass>(this.thisName!);
 
         if (
           value instanceof Promise ||
@@ -164,10 +155,7 @@ namespace ReflectionDescriptor {
           : API.Strategy.Types.Primitive.Name;
       };
 
-      const descriptor = API.Reflection.getClassFieldDescriptor(
-        this.hostClass,
-        fieldName
-      );
+      const descriptor = API.Reflection.getClassFieldDescriptor(this.hostClass, fieldName);
       const isGetter = descriptor?.get && !descriptor.set;
 
       if (isGetter) {
@@ -179,9 +167,7 @@ namespace ReflectionDescriptor {
 
       // Check if the field is a function
       if (typeof value === "function") {
-        return getNativeStrategy(
-          value.bind(this.hostDefault ?? new this.hostClass())()
-        );
+        return getNativeStrategy(value.bind(this.hostDefault ?? new this.hostClass())());
       }
 
       return getNativeStrategy(value);

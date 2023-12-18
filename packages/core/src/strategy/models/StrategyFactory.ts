@@ -1,4 +1,4 @@
-import type API from "api";
+import type API from "../../../index";
 
 import { type FunctionStrat } from "../service/impl/FunctionStrategy";
 import { type ObjectArrayGetterStrat } from "../service/impl/ObjectArrayGetterStrategy";
@@ -84,9 +84,7 @@ namespace StrategyFactory {
    *
    * @typeParam Field - The type of the field being validated.
    */
-  export type getStrategyResult<T, K extends keyof T> = ReturnType<
-    getStrategyClass<T, K>["test"]
-  >;
+  export type getStrategyResult<T, K extends keyof T> = ReturnType<getStrategyClass<T, K>["test"]>;
 
   /**
    * A type that maps field types to their respective validation strategy classes.

@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** Negative identifier. */
@@ -64,11 +64,7 @@ export function Negative<T extends API.Utilities.Objects.Optional<number>>(
     (num, _context, locale) => ({
       key: API.Decorator.key(options, NEGATIVE),
       valid: isNegativeValid(num),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, NEGATIVE, num)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, NEGATIVE, num)),
     }),
     API.Decorator.groups(options)
   );

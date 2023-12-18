@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../../index";
 
 import { translate } from "../../../../src/localization/service/TranslationService";
 import { testRegex } from "../Pattern";
@@ -8,9 +8,9 @@ import RegexConst from "../shared/regex.constants";
 export const ALPHANUMERIC = "Alphanumeric";
 
 /** Internal validation function for {@link Alphanumeric} validator. */
-export function isAlphanumericValid<
-  T extends API.Utilities.Objects.Optional<string>
->(value: T): boolean {
+export function isAlphanumericValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean {
   API.Utilities.Objects.assertType("string", value);
   return testRegex(RegexConst.ALPHANUMERIC, value);
 }
@@ -69,11 +69,7 @@ export function Alphanumeric<T extends API.Utilities.Objects.Optional<string>>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, ALPHANUMERIC),
       valid: testRegex(RegexConst.ALPHANUMERIC, value),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, ALPHANUMERIC)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, ALPHANUMERIC)),
     }),
     API.Decorator.groups(options)
   );

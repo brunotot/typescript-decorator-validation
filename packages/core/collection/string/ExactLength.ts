@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** ExactLength identifier. */
@@ -66,11 +66,7 @@ export function ExactLength<T extends API.Utilities.Objects.Optional<string>>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, EXACT_LENGTH),
       valid: isExactLengthValid(value, exact),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, EXACT_LENGTH, exact)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, EXACT_LENGTH, exact)),
     }),
     API.Decorator.groups(options)
   );

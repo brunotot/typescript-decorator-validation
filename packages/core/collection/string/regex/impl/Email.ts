@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../../index";
 
 import { translate } from "../../../../src/localization/service/TranslationService";
 import { testRegex } from "../Pattern";
@@ -8,9 +8,7 @@ import RegexConst from "../shared/regex.constants";
 export const EMAIL = "Email";
 
 /** Internal validation function for {@link Email} validator. */
-export function isEmailValid<T extends API.Utilities.Objects.Optional<string>>(
-  value: T
-): boolean {
+export function isEmailValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
   API.Utilities.Objects.assertType("string", value);
   return testRegex(RegexConst.EMAIL, value);
 }

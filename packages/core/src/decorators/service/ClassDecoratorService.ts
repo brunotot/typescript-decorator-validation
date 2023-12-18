@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../index";
 
 /**
  * Namespace that provides various types and utility functions for Class Decorators.
@@ -25,9 +25,7 @@ namespace ClassDecoratorService {
    * @param context - Additional context information.
    */
   export type Supplier<T extends Type> = ((
-    meta: API.Reflection.Services.ClassValidatorMetaService<
-      API.Utilities.Types.Class<T>
-    >,
+    meta: API.Reflection.Services.ClassValidatorMetaService<API.Utilities.Types.Class<T>>,
     baseClass: API.Utilities.Types.Class<T>,
     context: Context<T>
   ) => ReturnDef<T>) & {};

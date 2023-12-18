@@ -1,4 +1,4 @@
-import type API from "api";
+import type API from "../../../../../index";
 
 import { AbstractValidationStrategyService } from "../../../service/AbstractValidationStrategyService";
 import type ns from "./types";
@@ -15,10 +15,7 @@ export class FunctionStrat<F> extends AbstractValidationStrategyService<
   ns.DetailedErrors,
   ns.SimpleErrors
 > {
-  private static readonly EMPTY: [ns.DetailedErrors, ns.SimpleErrors] = [
-    null,
-    null,
-  ];
+  private static readonly EMPTY: [ns.DetailedErrors, ns.SimpleErrors] = [null, null];
 
   /**
    * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for primitive types by invoking the root rule's `validate` method and then building simplified error messages.
@@ -28,21 +25,17 @@ export class FunctionStrat<F> extends AbstractValidationStrategyService<
    *
    * @returns A tuple containing an array of detailed validation results (`Validation.Result[]`) and an array of simplified error messages (`string[]`).
    */
-  test(
-    value: API.Utilities.Types.Function,
-    _context: any
-  ): [ns.DetailedErrors, ns.SimpleErrors] {
-    const result: API.Validation.Result | Promise<API.Validation.Result> =
-      value.bind(_context)();
+  test(value: API.Utilities.Types.Function, _context: any): [ns.DetailedErrors, ns.SimpleErrors] {
+    const result: API.Validation.Result | Promise<API.Validation.Result> = value.bind(_context)();
     if (result instanceof Promise) {
       result.then(
-        (validationResult) => {
+        validationResult => {
           this.eventEmitter.emit("asyncValidationComplete", {
             key: this.fieldName,
             value: validationResult,
           });
         },
-        (reason) => {
+        reason => {
           throw new Error(reason);
         }
       );

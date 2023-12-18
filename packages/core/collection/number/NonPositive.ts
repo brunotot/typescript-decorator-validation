@@ -1,13 +1,11 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** NonPositive identifier. */
 export const NON_POSITIVE = "NonPositive";
 
 /** Internal validation function for {@link NonPositive} validator. */
-function isNonPositiveValid(
-  num: API.Utilities.Objects.Optional<number>
-): boolean {
+function isNonPositiveValid(num: API.Utilities.Objects.Optional<number>): boolean {
   API.Utilities.Objects.assertType("number", num);
   return num !== undefined && num !== null && num <= 0;
 }
@@ -66,11 +64,7 @@ export function NonPositive<T extends API.Utilities.Objects.Optional<number>>(
     (num, _context, locale) => ({
       key: API.Decorator.key(options, NON_POSITIVE),
       valid: isNonPositiveValid(num),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, NON_POSITIVE, num)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, NON_POSITIVE, num)),
     }),
     API.Decorator.groups(options)
   );

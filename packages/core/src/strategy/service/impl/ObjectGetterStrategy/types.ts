@@ -1,4 +1,4 @@
-import type API from "api";
+import type API from "../../../../../index";
 
 import type StrategyFactory from "../../../models/StrategyFactory";
 import ObjectStrategyType from "../ObjectStrategy/types";

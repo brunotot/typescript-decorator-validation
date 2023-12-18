@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../index";
 
 /**
  * Abstract class for managing metadata.
@@ -21,11 +21,7 @@ export abstract class AbstractMetaService<Entry> {
    * @param strategy - The strategy for which metadata is managed.
    * @param initial - A function that returns the initial value for the metadata entry.
    */
-  constructor(
-    injectionKey: string,
-    strategy: API.Reflection.MetaStrategy,
-    initial: () => Entry
-  ) {
+  constructor(injectionKey: string, strategy: API.Reflection.MetaStrategy, initial: () => Entry) {
     this.#metadata = API.Reflection.getMetadata(strategy);
     this.#injectionKey = injectionKey;
     this.#initial = initial;

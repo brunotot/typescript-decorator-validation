@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../../index";
 import { AbstractMetaService } from "../AbstractMetaService";
 
 /**
@@ -20,17 +20,11 @@ export class ClassValidatorMetaService<
   public static inject<T extends API.Reflection.MetaStrategy>(
     strategy: T
   ): ClassValidatorMetaService<API.Utilities.Types.UnwrapMetaStrategy<T>> {
-    return new ClassValidatorMetaService<
-      API.Utilities.Types.UnwrapMetaStrategy<T>
-    >(strategy);
+    return new ClassValidatorMetaService<API.Utilities.Types.UnwrapMetaStrategy<T>>(strategy);
   }
 
   private constructor(strategy: API.Reflection.MetaStrategy) {
-    super(
-      ClassValidatorMetaService.name,
-      strategy,
-      () => new API.Reflection.Rule.Instance()
-    );
+    super(ClassValidatorMetaService.name, strategy, () => new API.Reflection.Rule.Instance());
   }
 
   /**
@@ -40,9 +34,7 @@ export class ClassValidatorMetaService<
    * @param groups - Optional validation groups.
    */
   addValidator(
-    isValid: API.Validation.Evaluator<
-      API.Utilities.Types.UnwrapClass<TStrategy>
-    >,
+    isValid: API.Validation.Evaluator<API.Utilities.Types.UnwrapClass<TStrategy>>,
     groups: string[]
   ): void {
     this.data.add({

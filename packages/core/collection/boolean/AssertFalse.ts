@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** AssertFalse identifier. */
@@ -64,11 +64,7 @@ export function AssertFalse<T extends boolean>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, ASSERT_FALSE),
       valid: isAssertFalseValid(value),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, ASSERT_FALSE)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, ASSERT_FALSE)),
     }),
     API.Decorator.groups(options)
   );

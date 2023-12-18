@@ -1,13 +1,11 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** PastDate identifier. */
 export const PAST_DATE = "PastDate";
 
 /** Internal validation function for {@link PastDate} validator. */
-export function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(
-  date: T
-): boolean {
+export function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(date: T): boolean {
   API.Utilities.Objects.assertType("date", date);
   return date && date.getTime() < new Date().getTime();
 }
@@ -66,11 +64,7 @@ export function PastDate<T extends API.Utilities.Objects.Optional<Date>>(
     (date, _context, locale) => ({
       key: API.Decorator.key(options, PAST_DATE),
       valid: isPastDateValid(date),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, PAST_DATE, date)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, PAST_DATE, date)),
     }),
     API.Decorator.groups(options)
   );

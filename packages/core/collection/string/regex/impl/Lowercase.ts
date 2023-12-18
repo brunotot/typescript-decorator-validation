@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../../index";
 
 import { translate } from "../../../../src/localization/service/TranslationService";
 import { testRegex } from "../Pattern";
@@ -8,9 +8,9 @@ import RegexConst from "../shared/regex.constants";
 export const LOWERCASE = "Lowercase";
 
 /** Internal validation function for {@link Lowercase} validator. */
-export function isLowercaseValid<
-  T extends API.Utilities.Objects.Optional<string>
->(value: T): boolean {
+export function isLowercaseValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean {
   API.Utilities.Objects.assertType("string", value);
   return testRegex(RegexConst.LOWERCASE, value);
 }
@@ -69,11 +69,7 @@ export function Lowercase<T extends API.Utilities.Objects.Optional<string>>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, LOWERCASE),
       valid: testRegex(RegexConst.LOWERCASE, value),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, LOWERCASE)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, LOWERCASE)),
     }),
     API.Decorator.groups(options)
   );

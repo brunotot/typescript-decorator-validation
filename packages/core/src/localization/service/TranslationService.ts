@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../index";
 
 import MessageReaderService from "./MessageReaderService";
 
@@ -33,8 +33,5 @@ export function translate(
   key: keyof MessageReaderService.LocalizedMessages,
   ...args: any[]
 ): string {
-  return API.Utilities.Strings.sprintf(
-    MessageReaderService.getMessage(key, locale),
-    ...args
-  );
+  return API.Utilities.Strings.sprintf(MessageReaderService.getMessage(key, locale), ...args);
 }

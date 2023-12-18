@@ -1,13 +1,13 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** Decimal identifier. */
 export const DECIMAL = "Decimal";
 
 /** Internal validation function for {@link Decimal} validator. */
-export function isDecimalValid<
-  T extends API.Utilities.Objects.Optional<number>
->(value: T): boolean {
+export function isDecimalValid<T extends API.Utilities.Objects.Optional<number>>(
+  value: T
+): boolean {
   API.Utilities.Objects.assertType("number", value);
   return value !== undefined && value !== null && !Number.isInteger(value);
 }
@@ -66,11 +66,7 @@ export function Decimal<T extends API.Utilities.Objects.Optional<number>>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, DECIMAL),
       valid: isDecimalValid(value),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, DECIMAL, value)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, DECIMAL, value)),
     }),
     API.Decorator.groups(options)
   );

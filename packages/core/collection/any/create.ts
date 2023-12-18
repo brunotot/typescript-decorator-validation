@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 
 /**
  * Creates a custom validator decorator from the `validate` supplier function. Is used by {@link API.Validation.ValidationEngine ValidationEngine} and allows custom validation logic.
@@ -56,8 +56,5 @@ export function create<T>(
   validate: API.Validation.Evaluator<T>,
   groups?: string[]
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
-    validate,
-    groups
-  );
+  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(validate, groups);
 }

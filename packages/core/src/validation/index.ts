@@ -1,4 +1,4 @@
-import type API from "api";
+import type API from "../../index";
 
 import * as CacheMapNamespace from "./models/CacheMap";
 import * as ValidationEngineNamespace from "./models/ValidationEngine";
@@ -63,9 +63,7 @@ namespace Validation {
    * Type for the async event handler function.
    * @typeParam TClass - The type of the class being validated.
    */
-  export type AsyncEventHandler<TClass> = ((
-    data: AsyncEventHandlerProps<TClass>
-  ) => void) & {};
+  export type AsyncEventHandler<TClass> = ((data: AsyncEventHandlerProps<TClass>) => void) & {};
 
   /**
    * Configuration options for entity processing.

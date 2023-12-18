@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 import RegexConst from "./regex/shared/regex.constants";
 
@@ -63,16 +63,10 @@ export function isPasswordValid(
     );
 
   if (numbers && isInvalid(str, "numbers"))
-    return buildConstraintViolation(
-      definedMessage ?? translate(locale, "PasswordNumbers"),
-      false
-    );
+    return buildConstraintViolation(definedMessage ?? translate(locale, "PasswordNumbers"), false);
 
   if (specials && isInvalid(str, "specials"))
-    return buildConstraintViolation(
-      definedMessage ?? translate(locale, "PasswordSpecials"),
-      false
-    );
+    return buildConstraintViolation(definedMessage ?? translate(locale, "PasswordSpecials"), false);
 
   return { key: PASSWORD, message: "", valid: true };
 }
@@ -136,8 +130,7 @@ export function Password<T extends API.Utilities.Objects.Optional<string>>(
   options?: API.Decorator.Options
 ) {
   return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
-    (value, _context, locale) =>
-      isPasswordValid(value, rules, options?.message, locale),
+    (value, _context, locale) => isPasswordValid(value, rules, options?.message, locale),
     API.Decorator.groups(options)
   );
 }

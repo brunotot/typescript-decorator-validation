@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** Required identifier. */
@@ -9,9 +9,7 @@ export const REQUIRED = "Required";
  *
  * @typeParam T - The type of the value.
  */
-export function isRequiredValid<T>(
-  value: T | undefined
-): value is NonNullable<typeof value> {
+export function isRequiredValid<T>(value: T | undefined): value is NonNullable<typeof value> {
   return !(
     value === undefined ||
     value === null ||
@@ -67,11 +65,7 @@ export function Required<T extends API.Utilities.Objects.Optional>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, REQUIRED),
       valid: isRequiredValid(value),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, REQUIRED)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, REQUIRED)),
     }),
     API.Decorator.groups(options)
   );

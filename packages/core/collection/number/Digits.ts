@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** Digits identifier. */
@@ -14,8 +14,7 @@ function isDigitsValid(
     const isMaxIntegersValid = ints !== Infinity && ints % 1 === 0 && ints >= 0;
     const isMaxDecimalsValid = decs !== Infinity && decs % 1 === 0 && decs >= 0;
     const isInputInvalid = !isMaxIntegersValid || !isMaxDecimalsValid;
-    if (isInputInvalid)
-      throw new Error(translate(null, "InvalidDigits", ints, decs));
+    if (isInputInvalid) throw new Error(translate(null, "InvalidDigits", ints, decs));
   };
 
   assertValidInputs();

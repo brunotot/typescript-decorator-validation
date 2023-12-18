@@ -1,4 +1,4 @@
-import API, { PrimitiveSet } from "api";
+import API, { PrimitiveSet } from "../../index";
 
 /**
  * Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T`).
@@ -57,14 +57,10 @@ import API, { PrimitiveSet } from "api";
  *   }
  * }
  */
-export function attribute<
-  T extends API.Utilities.Objects.Optional<object | object[]>
->(
+export function attribute<T extends API.Utilities.Objects.Optional<object | object[]>>(
   clazz: API.Utilities.Types.Class<any>
 ): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorService.build<any>(
-    (meta, name) => {
-      meta.getUntypedDescriptor(name).thisClass = clazz;
-    }
-  );
+  return API.Decorator.Service.FieldDecoratorService.build<any>((meta, name) => {
+    meta.getUntypedDescriptor(name).thisClass = clazz;
+  });
 }

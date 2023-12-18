@@ -1,14 +1,11 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** ValueMin identifier. */
 export const VALUE_MIN = "ValueMin";
 
 /** Internal validation function for {@link ValueMin} validator. */
-function isValueMinValid(
-  num: API.Utilities.Objects.Optional<number>,
-  min: number
-): boolean {
+function isValueMinValid(num: API.Utilities.Objects.Optional<number>, min: number): boolean {
   API.Utilities.Objects.assertType("number", num);
   return num == null ? true : num >= min;
 }
@@ -69,11 +66,7 @@ export function ValueMin<T extends API.Utilities.Objects.Optional<number>>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, VALUE_MIN),
       valid: isValueMinValid(value, min),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, VALUE_MIN, min, value)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, VALUE_MIN, min, value)),
     }),
     API.Decorator.groups(options)
   );

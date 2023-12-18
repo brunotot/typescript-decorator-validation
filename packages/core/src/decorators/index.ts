@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 
 import ClassDecoratorServiceNamespace from "./service/ClassDecoratorService";
 import ClassDecoratorValidatorServiceNamespace from "./service/ClassDecoratorValidatorService";
@@ -90,7 +90,7 @@ namespace Decorator {
     defaultMessage: string
   ): string {
     const msg = options?.message ?? API.Utilities.Strings.EMPTY;
-    return message.length > 0
+    return msg.length > 0
       ? API.Localization.Resolver.MessageResolver.resolve(locale, msg)
       : defaultMessage ?? "";
   }
@@ -101,10 +101,7 @@ namespace Decorator {
    * @param provider - The decorator properties.
    * @returns An array of unique validation groups.
    */
-  export function groups(
-    options?: Options,
-    defaultGroups: string[] = []
-  ): string[] {
+  export function groups(options?: Options, defaultGroups: string[] = []): string[] {
     return Array.isArray(options?.groups)
       ? API.Utilities.Objects.unique(options!.groups)
       : API.Utilities.Objects.unique(defaultGroups);
@@ -116,10 +113,7 @@ namespace Decorator {
    * @param defaultKey - Key of the decorator if none present in options.
    * @returns A defined decorator key or the default value.
    */
-  export function key(
-    options: Options | undefined,
-    defaultKey: string
-  ): string {
+  export function key(options: Options | undefined, defaultKey: string): string {
     return options?.key ?? defaultKey;
   }
 }

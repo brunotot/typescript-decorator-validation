@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../../index";
 
 import { translate } from "../../../../src/localization/service/TranslationService";
 import { testRegex } from "../Pattern";
@@ -8,9 +8,9 @@ import RegexConst from "../shared/regex.constants";
 export const NUMERIC = "Numeric";
 
 /** Internal validation function for {@link Numeric} validator. */
-export function isNumericValid<
-  T extends API.Utilities.Objects.Optional<string>
->(value: T): boolean {
+export function isNumericValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean {
   API.Utilities.Objects.assertType("string", value);
   return testRegex(RegexConst.NUMERIC, value);
 }
@@ -69,11 +69,7 @@ export function Numeric<T extends API.Utilities.Objects.Optional<string>>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, NUMERIC),
       valid: testRegex(RegexConst.NUMERIC, value),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, NUMERIC)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, NUMERIC)),
     }),
     API.Decorator.groups(options)
   );

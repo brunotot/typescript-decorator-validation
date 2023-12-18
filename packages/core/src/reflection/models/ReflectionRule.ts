@@ -1,4 +1,4 @@
-import type API from "api";
+import type API from "../../../index";
 
 /**
  * A namespace containing all data and types for reflection (validation) rule.
@@ -84,9 +84,7 @@ namespace ReflectionRule {
       groups: string[]
     ): Array<API.Validation.Metadata<TFieldType>> {
       return data.filter((meta: API.Validation.Metadata<TFieldType>) =>
-        groups.length > 0
-          ? meta.groups.some((o) => groups.includes(o))
-          : meta.groups.length === 0
+        groups.length > 0 ? meta.groups.some(o => groups.includes(o)) : meta.groups.length === 0
       );
     }
   }

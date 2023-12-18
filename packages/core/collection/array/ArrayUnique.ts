@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** ArrayUnique identifier. */
@@ -8,10 +8,7 @@ export const ARRAY_UNIQUE = "ArrayUnique";
 export function isArrayUniqueValid(array: any[]): boolean {
   API.Utilities.Objects.assertType("array", array);
   const hashFn = API.Utilities.Objects.hash;
-  function isArrayUnique<T>(
-    arr: T[],
-    equals: API.Utilities.Objects.Equals<T>
-  ): boolean {
+  function isArrayUnique<T>(arr: T[], equals: API.Utilities.Objects.Equals<T>): boolean {
     const set = new Set<T>();
     for (const val of arr) {
       for (const el of set) {
@@ -23,10 +20,7 @@ export function isArrayUniqueValid(array: any[]): boolean {
     }
     return true;
   }
-  return isArrayUnique(
-    array ?? [],
-    (obj1, obj2) => hashFn(obj1) === hashFn(obj2)
-  );
+  return isArrayUnique(array ?? [], (obj1, obj2) => hashFn(obj1) === hashFn(obj2));
 }
 
 /**
@@ -84,11 +78,7 @@ export function ArrayUnique<K, T extends Array<K>>(
     (array, _context, locale) => ({
       key: API.Decorator.key(options, ARRAY_UNIQUE),
       valid: isArrayUniqueValid(array),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, ARRAY_UNIQUE)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, ARRAY_UNIQUE)),
     }),
     API.Decorator.groups(options)
   );

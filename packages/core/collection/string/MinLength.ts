@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** MinLength identifier. */
@@ -66,11 +66,7 @@ export function MinLength<T extends API.Utilities.Objects.Optional<string>>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, MIN_LENGTH),
       valid: isMinLengthValid(value, min),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, MIN_LENGTH, min)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, MIN_LENGTH, min)),
     }),
     API.Decorator.groups(options)
   );

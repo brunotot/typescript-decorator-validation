@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** ArrayNone identifier. */
@@ -70,11 +70,7 @@ export function ArrayNone<K, T extends K[]>(
     (array, _context, locale) => ({
       key: API.Decorator.key(options, ARRAY_NONE),
       valid: isArrayNoneValid(array, predicate),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, ARRAY_NONE)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, ARRAY_NONE)),
     }),
     API.Decorator.groups(options)
   );

@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** ValidDateRange identifier. */
@@ -64,15 +64,11 @@ export function isValidDateRangeValid(
  * }
  * ```
  */
-export function ValidDateRange<
-  T extends API.Decorator.Service.ClassDecoratorService.Type
->(
+export function ValidDateRange<T extends API.Decorator.Service.ClassDecoratorService.Type>(
   startDateField: string,
   endDateField: string,
   options?: API.Decorator.Options
-): API.Decorator.Service.ClassDecoratorService.Instance<
-  API.Utilities.Types.UnwrapClass<T>
-> {
+): API.Decorator.Service.ClassDecoratorService.Instance<API.Utilities.Types.UnwrapClass<T>> {
   return API.Decorator.Service.ClassDecoratorValidatorService.build(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, VALID_DATE_RANGE),

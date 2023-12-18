@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** MaxLength identifier. */
@@ -66,11 +66,7 @@ export function MaxLength<T extends API.Utilities.Objects.Optional<string>>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, MAX_LENGTH),
       valid: isMaxLengthValid(value, max),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, MAX_LENGTH, max)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, MAX_LENGTH, max)),
     }),
     API.Decorator.groups(options)
   );

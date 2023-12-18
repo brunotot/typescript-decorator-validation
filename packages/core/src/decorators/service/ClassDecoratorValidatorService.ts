@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../index";
 
 /**
  * A service class which exposes validated-decorator-related actions
@@ -12,9 +12,7 @@ namespace ClassDecoratorValidatorService {
    * @property groups - Optional. An array of group names or a single group name that this validator belongs to. Validators in the same group can be executed together.
    * @property isValid - The function responsible for validation logic, as defined in the Evaluator type.
    */
-  export type Supplier<
-    T extends API.Decorator.Service.ClassDecoratorService.Type
-  > = {
+  export type Supplier<T extends API.Decorator.Service.ClassDecoratorService.Type> = {
     groups?: string | string[];
     isValid: Evaluator<T>;
   };
@@ -30,9 +28,7 @@ namespace ClassDecoratorValidatorService {
    *
    * @returns A result object as defined in API.Validation.Result, indicating validation success or failure along with additional information.
    */
-  export type Evaluator<
-    T extends API.Decorator.Service.ClassDecoratorService.Type
-  > = ((
+  export type Evaluator<T extends API.Decorator.Service.ClassDecoratorService.Type> = ((
     value: any,
     context: API.Decorator.Service.ClassDecoratorService.Context<T>,
     locale: API.Localization.Resolver.LocaleResolver.Locale
@@ -65,13 +61,11 @@ namespace ClassDecoratorValidatorService {
    * }
    * ```
    */
-  export function build<
-    T extends API.Decorator.Service.ClassDecoratorService.Type
-  >(
+  export function build<T extends API.Decorator.Service.ClassDecoratorService.Type>(
     validate: API.Validation.Evaluator<T>,
     options?: API.Decorator.Options
   ): API.Decorator.Service.ClassDecoratorService.Instance<T> {
-    return API.Decorator.Service.ClassDecoratorService.build((meta) => {
+    return API.Decorator.Service.ClassDecoratorService.build(meta => {
       meta.addValidator(validate, API.Decorator.groups(options));
     });
   }

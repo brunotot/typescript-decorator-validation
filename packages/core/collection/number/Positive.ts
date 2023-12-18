@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** Positive identifier. */
@@ -64,11 +64,7 @@ export function Positive<T extends API.Utilities.Objects.Optional<number>>(
     (num, _context, locale) => ({
       key: API.Decorator.key(options, POSITIVE),
       valid: isPositiveValid(num),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, POSITIVE, num)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, POSITIVE, num)),
     }),
     API.Decorator.groups(options)
   );

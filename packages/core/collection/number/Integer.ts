@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** Integer identifier. */
@@ -64,11 +64,7 @@ export function Integer<T extends API.Utilities.Objects.Optional<number>>(
     (num, _context, locale) => ({
       key: API.Decorator.key(options, INTEGER),
       valid: isIntegerValid(num),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, INTEGER, num)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, INTEGER, num)),
     }),
     API.Decorator.groups(options)
   );

@@ -76,7 +76,7 @@ export default function UserFormInput() {
      * accordingly and probably set a new state of its container with included new data that came
      * from the child component.
      */
-    onChange: () => setNumberOfStateChanges((p) => ++p),
+    onChange: () => setNumberOfStateChanges(p => ++p),
 
     /**
      * "defaultValue" is an optional parameter and it allows for defining custom empty constructor
@@ -110,12 +110,11 @@ export default function UserFormInput() {
      * submit button is clicked and the data is invalid.
      */
     onSubmitValidationFail(e) {
-      alert(
-        "Form has invalid data. Please correct them\n" +
-          JSON.stringify(e, null, 2)
-      );
+      alert("Form has invalid data. Please correct them\n" + JSON.stringify(e, null, 2));
     },
   });
+
+  console.log(form);
 
   /**
    * Here you can see additional data which useForm hook exports through the third array arg.
@@ -145,9 +144,7 @@ export default function UserFormInput() {
     reset,
   } = data;
 
-  const dateOfBirthValue = form!.dateOfBirth
-    ? form.dateOfBirth.toISOString().substring(0, 10)
-    : "";
+  const dateOfBirthValue = form!.dateOfBirth ? form.dateOfBirth.toISOString().substring(0, 10) : "";
 
   return (
     <>
@@ -157,21 +154,14 @@ export default function UserFormInput() {
        * to inherit the submission value through FormProvider's context.
        */}
       <FormProvider {...providerProps}>
-        <div
-          style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}
-        >
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
           <Input
             value={form.testEmail}
             onChange={mutations.testEmail}
             errors={errors.testEmail}
             label="Test email"
           />
-          <Input
-            value={form.age}
-            onChange={mutations.age}
-            errors={errors.age}
-            label="Age"
-          />
+          <Input value={form.age} onChange={mutations.age} errors={errors.age} label="Age" />
           <Input
             value={form.password}
             onChange={mutations.password}
@@ -188,7 +178,7 @@ export default function UserFormInput() {
           />
           <Input
             value={dateOfBirthValue}
-            onChange={(v) => mutations.dateOfBirth!(v ? new Date(v) : null!)}
+            onChange={v => mutations.dateOfBirth!(v ? new Date(v) : null!)}
             errors={errors.dateOfBirth}
             type="date"
             label="Date of birth"
@@ -203,10 +193,7 @@ export default function UserFormInput() {
             </button>
           )}
           <p>Form changed state count: {numberOfStateChanges}</p>
-          <button
-            style={{ padding: "0.5rem", fontSize: 18, marginTop: 8 }}
-            onClick={() => reset()}
-          >
+          <button style={{ padding: "0.5rem", fontSize: 18, marginTop: 8 }} onClick={() => reset()}>
             <strong>Reset form</strong>
           </button>
         </div>

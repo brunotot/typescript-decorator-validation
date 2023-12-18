@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../index";
 
 /**
  * Namespace for FieldDecorator Service Types.
@@ -59,10 +59,7 @@ namespace FieldDecoratorService {
    *
    * @returns The return definition as specified by ReturnDef.
    */
-  export type Instance<T extends Type> = ((
-    target: any,
-    context: Context<T>
-  ) => void) & {};
+  export type Instance<T extends Type> = ((target: any, context: Context<T>) => void) & {};
 
   /**
    * Creates a new validator function using the provided validation builder options.
@@ -97,8 +94,7 @@ namespace FieldDecoratorService {
       const nameEval = isStage2 ? context : context.name;
       const strategyEval = isStage2 ? target.constructor : context;
       const contextEval = isStage2 ? { name: context, metadata: {} } : context;
-      const metaService =
-        API.Reflection.Services.FieldValidatorMetaService.inject(strategyEval);
+      const metaService = API.Reflection.Services.FieldValidatorMetaService.inject(strategyEval);
       supplier(metaService, String(nameEval), contextEval as any);
     };
   }

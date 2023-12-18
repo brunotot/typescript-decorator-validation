@@ -1,5 +1,5 @@
-import type API from "api";
-import { type PrimitiveSet } from "api";
+import type API from "../../../index";
+import { type PrimitiveSet } from "../../../index";
 
 /**
  * A collection of types representing various data types and handling type-level development.
@@ -64,11 +64,8 @@ namespace Types {
    * Unwraps a MetaStrategy type to its inferred class.
    * @typeParam TStrategy - The MetaStrategy type to unwrap.
    */
-  export type UnwrapMetaStrategy<
-    TStrategy extends API.Reflection.MetaStrategy
-  > = TStrategy extends Types.Class<infer TInferredClass>
-    ? TInferredClass
-    : any;
+  export type UnwrapMetaStrategy<TStrategy extends API.Reflection.MetaStrategy> =
+    TStrategy extends Types.Class<infer TInferredClass> ? TInferredClass : any;
 
   /**
    * Prettifies a type by retaining the same shape.

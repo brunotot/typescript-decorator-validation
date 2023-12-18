@@ -1,4 +1,4 @@
-import API from "api";
+import API from "../../../../index";
 
 import { translate } from "../../../../src/localization/service/TranslationService";
 import { testRegex } from "../Pattern";
@@ -8,9 +8,7 @@ import RegexConst from "../shared/regex.constants";
 export const URL_KEY = "URL";
 
 /** Internal validation function for {@link URL} validator. */
-export function isURLValid<T extends API.Utilities.Objects.Optional<string>>(
-  value: T
-): boolean {
+export function isURLValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
   API.Utilities.Objects.assertType("string", value);
   return testRegex(RegexConst.URL, value);
 }
@@ -69,11 +67,7 @@ export function URL<T extends API.Utilities.Objects.Optional<string>>(
     (value, _context, locale) => ({
       key: API.Decorator.key(options, URL_KEY),
       valid: testRegex(RegexConst.URL, value),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, URL_KEY)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, URL_KEY)),
     }),
     API.Decorator.groups(options)
   );

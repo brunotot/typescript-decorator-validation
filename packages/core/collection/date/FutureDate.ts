@@ -1,13 +1,13 @@
-import API from "api";
+import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
 
 /** FutureDate identifier. */
 export const FUTURE_DATE = "FutureDate";
 
 /** Internal validation function for {@link FutureDate} validator. */
-export function isFutureDateValid<
-  T extends API.Utilities.Objects.Optional<Date>
->(date: T): boolean {
+export function isFutureDateValid<T extends API.Utilities.Objects.Optional<Date>>(
+  date: T
+): boolean {
   API.Utilities.Objects.assertType("date", date);
   return date && date.getTime() > new Date().getTime();
 }
@@ -66,11 +66,7 @@ export function FutureDate<T extends API.Utilities.Objects.Optional<Date>>(
     (date, _context, locale) => ({
       key: API.Decorator.key(options, FUTURE_DATE),
       valid: isFutureDateValid(date),
-      message: API.Decorator.message(
-        options,
-        locale,
-        translate(locale, FUTURE_DATE, date)
-      ),
+      message: API.Decorator.message(options, locale, translate(locale, FUTURE_DATE, date)),
     }),
     API.Decorator.groups(options)
   );
