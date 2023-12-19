@@ -1,0 +1,12 @@
+import collection from "./collection";
+import { create } from "./collection/any/create";
+import { attribute } from "./collection/class/attribute";
+import Decorator from "./src/decorators";
+import TdvCoreApi from "./src/index";
+import Localization from "./src/localization";
+import Reflection from "./src/reflection";
+import Strategy from "./src/strategy";
+import Utilities from "./src/utilities";
+import Validation from "./src/validation";
+export default TdvCoreApi;
+export { Decorator, Localization, Reflection, Strategy, Utilities, Validation, attribute, collection, create, };
