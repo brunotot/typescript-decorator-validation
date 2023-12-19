@@ -1,0 +1,52 @@
+{
+  "name": "tdv-core",
+  "version": "1.7.1",
+  "description": "Typescript form validation using Decorators",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && npm run test && tsc",
+    "build:noTest": "npm run clean && tsc",
+    "deploy:minor": "bash ../../scripts/deploy.sh core minor",
+    "deploy:major": "bash ../../scripts/deploy.sh core major",
+    "deploy:patch": "bash ../../scripts/deploy.sh core patch",
+    "test": "bash ../../scripts/test.sh core",
+    "playground": "ts-node ./dev/playground.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brunotot/typescript-decorator-validation.git",
+    "directory": "packages/core"
+  },
+  "keywords": [
+    "typescript",
+    "decorator",
+    "form",
+    "validation"
+  ],
+  "author": "Bruno Tot",
+  "bugs": {
+    "url": "https://github.com/brunotot/typescript-decorator-validation/issues"
+  },
+  "homepage": "https://github.com/brunotot/typescript-decorator-validation#readme",
+  "peerDependencies": {
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.2",
+    "@types/node": "^20.3.1",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "auto-i18n": "^1.0.0",
+    "esm": "^3.2.25",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1"
+  }
+}
