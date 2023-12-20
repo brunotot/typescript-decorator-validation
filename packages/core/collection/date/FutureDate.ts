@@ -60,14 +60,14 @@ export function isFutureDateValid<T extends API.Utilities.Objects.Optional<Date>
  * ```
  */
 export function FutureDate<T extends API.Utilities.Objects.Optional<Date>>(
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (date, _context, locale) => ({
-      key: API.Decorator.key(options, FUTURE_DATE),
+      key: API.Decorator.Config.key(options, FUTURE_DATE),
       valid: isFutureDateValid(date),
-      message: API.Decorator.message(options, locale, translate(locale, FUTURE_DATE, date)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, FUTURE_DATE, date)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

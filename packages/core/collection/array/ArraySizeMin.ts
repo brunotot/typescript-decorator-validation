@@ -61,18 +61,18 @@ export function isArraySizeMinValid(array: any[], min: number): boolean {
  */
 export function ArraySizeMin<K, T extends Array<K>>(
   min: number,
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.key(options, ARRAY_SIZE_MIN),
+      key: API.Decorator.Config.key(options, ARRAY_SIZE_MIN),
       valid: isArraySizeMinValid(array, min),
-      message: API.Decorator.message(
+      message: API.Decorator.Config.message(
         options,
         locale,
         translate(locale, ARRAY_SIZE_MIN, min, (array ?? []).length)
       ),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

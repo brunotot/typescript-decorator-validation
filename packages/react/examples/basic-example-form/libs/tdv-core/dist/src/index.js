@@ -1,8 +1,8 @@
 import _collection from "../collection";
 import * as _create from "./../collection/any/create";
 import * as _attribute from "./../collection/class/attribute";
-import _Decorator from "./decorators";
-import _Localization from "./localization";
+import * as _Decorator from "./decorators";
+import * as _Localization from "./localization";
 import _Reflection from "./reflection";
 import _Strategy from "./strategy";
 import _Utilities from "./utilities";

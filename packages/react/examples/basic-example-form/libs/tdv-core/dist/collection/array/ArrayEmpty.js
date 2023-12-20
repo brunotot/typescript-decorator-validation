@@ -56,9 +56,9 @@ export function isArrayEmptyValid(array) {
  * ```
  */
 export function ArrayEmpty(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((array, _context, locale) => ({
-        key: API.Decorator.key(options, ARRAY_EMPTY),
+    return API.Decorator.ForField.Validator.build((array, _context, locale) => ({
+        key: API.Decorator.Config.key(options, ARRAY_EMPTY),
         valid: isArrayEmptyValid(array),
-        message: API.Decorator.message(options, locale, translate(locale, ARRAY_EMPTY)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_EMPTY)),
+    }), API.Decorator.Config.groups(options));
 }

@@ -52,5 +52,5 @@ export declare function isArrayEveryValid<K, T extends Array<K>>(array: T, predi
  * }
  * ```
  **/
-export declare function ArrayEvery<K, T extends Array<K>>(predicate: API.Utilities.Objects.ArrayPredicate<K>, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ArrayEvery<K, T extends Array<K>>(predicate: API.Utilities.Objects.ArrayPredicate<K>, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ArrayEvery.d.ts.map

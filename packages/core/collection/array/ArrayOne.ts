@@ -64,14 +64,14 @@ export function isArrayOneValid<K, T extends Array<K>>(
  **/
 export function ArrayOne<K, T extends Array<K>>(
   predicate: API.Utilities.Objects.ArrayPredicate<K>,
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.key(options, ARRAY_ONE),
+      key: API.Decorator.Config.key(options, ARRAY_ONE),
       valid: isArrayOneValid(array, predicate),
-      message: API.Decorator.message(options, locale, translate(locale, ARRAY_ONE)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_ONE)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

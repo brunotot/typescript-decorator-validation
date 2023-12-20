@@ -58,14 +58,14 @@ function isNonNegativeValid(num: API.Utilities.Objects.Optional<number>): boolea
  * ```
  */
 export function NonNegative<T extends API.Utilities.Objects.Optional<number>>(
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (num, _context, locale) => ({
-      key: API.Decorator.key(options, NON_NEGATIVE),
+      key: API.Decorator.Config.key(options, NON_NEGATIVE),
       valid: isNonNegativeValid(num),
-      message: API.Decorator.message(options, locale, translate(locale, NON_NEGATIVE, num)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, NON_NEGATIVE, num)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

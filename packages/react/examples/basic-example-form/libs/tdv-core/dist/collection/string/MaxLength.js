@@ -5,7 +5,7 @@ export const MAX_LENGTH = "MaxLength";
 /** Internal validation function for {@link MaxLength} validator. */
 export function isMaxLengthValid(value, max) {
     API.Utilities.Objects.assertType("string", value);
-    return (value !== null && value !== void 0 ? value : API.Utilities.Strings.EMPTY).length <= max;
+    return (value !== null && value !== void 0 ? value : "").length <= max;
 }
 /**
  * Checks if decorated string contains a specific number of characters.
@@ -53,9 +53,9 @@ export function isMaxLengthValid(value, max) {
  * ```
  */
 export function MaxLength(max, options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((value, _context, locale) => ({
-        key: API.Decorator.key(options, MAX_LENGTH),
+    return API.Decorator.ForField.Validator.build((value, _context, locale) => ({
+        key: API.Decorator.Config.key(options, MAX_LENGTH),
         valid: isMaxLengthValid(value, max),
-        message: API.Decorator.message(options, locale, translate(locale, MAX_LENGTH, max)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, MAX_LENGTH, max)),
+    }), API.Decorator.Config.groups(options));
 }

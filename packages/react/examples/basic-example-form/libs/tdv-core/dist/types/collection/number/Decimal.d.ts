@@ -50,5 +50,5 @@ export declare function isDecimalValid<T extends API.Utilities.Objects.Optional<
  * }
  * ```
  */
-export declare function Decimal<T extends API.Utilities.Objects.Optional<number>>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function Decimal<T extends API.Utilities.Objects.Optional<number>>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=Decimal.d.ts.map

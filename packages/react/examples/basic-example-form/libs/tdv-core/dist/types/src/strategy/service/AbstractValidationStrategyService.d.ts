@@ -15,13 +15,13 @@ export declare abstract class AbstractValidationStrategyService<TClass = any, TD
      * @param descriptor The reflection descriptor for the field.
      * @param defaultValue The default value for the parent object.
      */
-    constructor(descriptor: API.Reflection.Descriptor.Instance<TClass, any>, defaultValue: TClass, groups: string[], locale: API.Localization.Resolver.LocaleResolver.Locale, eventEmitter: EventEmitter, asyncDelay: number);
+    constructor(descriptor: API.Reflection.Descriptor.Instance<TClass, any>, defaultValue: TClass, groups: string[], locale: API.Localization.LocaleResolver.Locale, eventEmitter: EventEmitter, asyncDelay: number);
     protected get eventEmitter(): EventEmitter;
     protected get fieldEngine(): API.Validation.ValidationEngine<TClass>;
     protected get engineCfg(): API.Validation.Config<any>;
     protected get classRules(): API.Reflection.Rule.Instance<TClass>;
     protected get groups(): string[];
-    protected get locale(): API.Localization.Resolver.LocaleResolver.Locale;
+    protected get locale(): API.Localization.LocaleResolver.Locale;
     /**
      * Constructs and returns the configuration object for entity processing.
      *

@@ -51,5 +51,5 @@ import API from "../../index";
  * }
  * ```
  */
-export declare function create<T>(validate: API.Validation.Evaluator<T>, groups?: string[]): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function create<T>(validate: API.Validation.Evaluator<T>, groups?: string[]): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=create.d.ts.map

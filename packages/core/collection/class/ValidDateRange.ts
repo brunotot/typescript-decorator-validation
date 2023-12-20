@@ -1,5 +1,6 @@
 import API from "../../index";
 import { translate } from "../../src/localization/service/TranslationService";
+import { convertCamelCaseToText } from "../../src/utilities/impl/Strings";
 
 /** ValidDateRange identifier. */
 export const VALID_DATE_RANGE = "ValidDateRange";
@@ -64,26 +65,26 @@ export function isValidDateRangeValid(
  * }
  * ```
  */
-export function ValidDateRange<T extends API.Decorator.Service.ClassDecoratorService.Type>(
+export function ValidDateRange<T extends API.Decorator.ForClass.Basic.Scope>(
   startDateField: string,
   endDateField: string,
-  options?: API.Decorator.Options
-): API.Decorator.Service.ClassDecoratorService.Instance<API.Utilities.Types.UnwrapClass<T>> {
-  return API.Decorator.Service.ClassDecoratorValidatorService.build(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForClass.Basic.Instance<API.Utilities.Types.UnwrapClass<T>> {
+  return API.Decorator.ForClass.Validator.build(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, VALID_DATE_RANGE),
+      key: API.Decorator.Config.key(options, VALID_DATE_RANGE),
       valid: isValidDateRangeValid(value, startDateField, endDateField),
-      message: API.Decorator.message(
+      message: API.Decorator.Config.message(
         options,
         locale,
         translate(
           locale,
           VALID_DATE_RANGE,
-          API.Utilities.Strings.convertCamelCaseToText(endDateField, false),
-          API.Utilities.Strings.convertCamelCaseToText(startDateField)
+          convertCamelCaseToText(endDateField, false),
+          convertCamelCaseToText(startDateField)
         )
       ),
     }),
-    options
+    API.Decorator.Config.groups(options)
   );
 }

@@ -61,18 +61,18 @@ export function isArraySizeExactValid(array: any[]): boolean {
  */
 export function ArraySizeExact<K, T extends K[]>(
   exact: number,
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.key(options, ARRAY_SIZE_EXACT),
+      key: API.Decorator.Config.key(options, ARRAY_SIZE_EXACT),
       valid: (array ?? []).length === exact,
-      message: API.Decorator.message(
+      message: API.Decorator.Config.message(
         options,
         locale,
         translate(locale, ARRAY_SIZE_EXACT, exact, (array ?? []).length)
       ),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

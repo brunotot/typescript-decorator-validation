@@ -48,5 +48,5 @@ export declare const POSITIVE = "Positive";
  * }
  * ```
  */
-export declare function Positive<T extends API.Utilities.Objects.Optional<number>>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function Positive<T extends API.Utilities.Objects.Optional<number>>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=Positive.d.ts.map

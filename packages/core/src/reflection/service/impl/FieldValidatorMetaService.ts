@@ -121,7 +121,7 @@ export class FieldValidatorMetaService extends AbstractMetaService<
    * @remarks
    * This method sets the `#fields` array to an empty array as no class fields are available.
    */
-  #handleContextInit(_context: API.Decorator.Context): void {
+  #handleContextInit(_context: API.Decorator.ForField.Basic.Context<any>): void {
     this.#fields = [];
   }
 }

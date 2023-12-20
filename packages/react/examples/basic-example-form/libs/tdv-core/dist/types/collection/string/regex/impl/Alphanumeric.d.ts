@@ -50,5 +50,5 @@ export declare function isAlphanumericValid<T extends API.Utilities.Objects.Opti
  * }
  * ```
  */
-export declare function Alphanumeric<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function Alphanumeric<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=Alphanumeric.d.ts.map

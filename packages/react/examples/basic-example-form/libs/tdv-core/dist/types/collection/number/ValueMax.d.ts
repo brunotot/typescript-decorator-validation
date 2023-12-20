@@ -49,5 +49,5 @@ export declare const VALUE_MAX = "ValueMax";
  * }
  * ```
  */
-export declare function ValueMax<T extends API.Utilities.Objects.Optional<number>>(max: number, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ValueMax<T extends API.Utilities.Objects.Optional<number>>(max: number, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ValueMax.d.ts.map

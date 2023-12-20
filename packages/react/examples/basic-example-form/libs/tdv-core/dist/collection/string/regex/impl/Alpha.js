@@ -57,9 +57,9 @@ export function isAlphaValid(value) {
  * ```
  */
 export function Alpha(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((value, _context, locale) => ({
-        key: API.Decorator.key(options, ALPHA),
+    return API.Decorator.ForField.Validator.build((value, _context, locale) => ({
+        key: API.Decorator.Config.key(options, ALPHA),
         valid: testRegex(RegexConst.ALPHA, value),
-        message: API.Decorator.message(options, locale, translate(locale, ALPHA)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, ALPHA)),
+    }), API.Decorator.Config.groups(options));
 }

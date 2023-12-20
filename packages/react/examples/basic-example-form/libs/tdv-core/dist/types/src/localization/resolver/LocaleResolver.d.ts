@@ -1,19 +1,21 @@
 /**
- * A configuration class which allows for setting the global `Locale`.
+ * 2-character locale string representation.
+ * Supports following locales:
+ * - **en**: English
+ * - **hr**: Croatian
+ * - **de**: German
+ * - **es**: Spanish
+ * - **fr**: French
+ * - **it**: Italian
+ * - **nl**: Dutch
  */
-declare namespace LocaleResolver {
-    /**
-     * 2-character locale string representation
-     */
-    type Locale = "en" | "hr" | "de" | "es" | "fr" | "it" | "nl";
-    /**
-     * Function which returns current global `Locale` value.
-     */
-    function getLocale(): Locale;
-    /**
-     * Function which sets new global `Locale` value.
-     */
-    function setLocale(localeValue: Locale): void;
-}
-export default LocaleResolver;
+export type Locale = "en" | "hr" | "de" | "es" | "fr" | "it" | "nl";
+/**
+ * Retrieves the current global `Locale`.
+ */
+export declare function getLocale(): Locale;
+/**
+ * Sets the global `Locale` to the specified value.
+ */
+export declare function setLocale(localeValue: Locale): void;
 //# sourceMappingURL=LocaleResolver.d.ts.map

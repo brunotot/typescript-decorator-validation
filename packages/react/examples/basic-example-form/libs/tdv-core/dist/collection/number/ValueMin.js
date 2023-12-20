@@ -56,9 +56,9 @@ function isValueMinValid(num, min) {
  * ```
  */
 export function ValueMin(min, options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((value, _context, locale) => ({
-        key: API.Decorator.key(options, VALUE_MIN),
+    return API.Decorator.ForField.Validator.build((value, _context, locale) => ({
+        key: API.Decorator.Config.key(options, VALUE_MIN),
         valid: isValueMinValid(value, min),
-        message: API.Decorator.message(options, locale, translate(locale, VALUE_MIN, min, value)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, VALUE_MIN, min, value)),
+    }), API.Decorator.Config.groups(options));
 }

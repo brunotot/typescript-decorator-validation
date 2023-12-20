@@ -63,14 +63,14 @@ export function isAlphanumericValid<T extends API.Utilities.Objects.Optional<str
  * ```
  */
 export function Alphanumeric<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, ALPHANUMERIC),
+      key: API.Decorator.Config.key(options, ALPHANUMERIC),
       valid: testRegex(RegexConst.ALPHANUMERIC, value),
-      message: API.Decorator.message(options, locale, translate(locale, ALPHANUMERIC)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, ALPHANUMERIC)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

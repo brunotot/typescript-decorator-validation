@@ -32,9 +32,9 @@ export function testRegex(regex, value) {
  * }
  */
 export function Pattern(regex, options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((value, _context, locale) => ({
-        key: API.Decorator.key(options, "Pattern"),
+    return API.Decorator.ForField.Validator.build((value, _context, locale) => ({
+        key: API.Decorator.Config.key(options, "Pattern"),
         valid: testRegex(regex, value),
-        message: API.Decorator.message(options, locale, translate(locale, "Pattern", regex.toString())),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, "Pattern", regex.toString())),
+    }), API.Decorator.Config.groups(options));
 }

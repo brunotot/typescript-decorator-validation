@@ -50,5 +50,5 @@ export declare function isUppercaseValid<T extends API.Utilities.Objects.Optiona
  * }
  * ```
  */
-export declare function Uppercase<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function Uppercase<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=Uppercase.d.ts.map

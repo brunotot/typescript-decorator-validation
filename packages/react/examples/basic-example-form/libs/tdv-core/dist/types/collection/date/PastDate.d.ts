@@ -50,5 +50,5 @@ export declare function isPastDateValid<T extends API.Utilities.Objects.Optional
  * }
  * ```
  */
-export declare function PastDate<T extends API.Utilities.Objects.Optional<Date>>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function PastDate<T extends API.Utilities.Objects.Optional<Date>>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=PastDate.d.ts.map

@@ -60,14 +60,18 @@ function isValueMaxValid(num: API.Utilities.Objects.Optional<number>, max: numbe
  */
 export function ValueMax<T extends API.Utilities.Objects.Optional<number>>(
   max: number,
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, VALUE_MAX),
+      key: API.Decorator.Config.key(options, VALUE_MAX),
       valid: isValueMaxValid(value, max),
-      message: API.Decorator.message(options, locale, translate(locale, VALUE_MAX, max, value)),
+      message: API.Decorator.Config.message(
+        options,
+        locale,
+        translate(locale, VALUE_MAX, max, value)
+      ),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

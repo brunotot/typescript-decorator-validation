@@ -1,9 +1,9 @@
 import collection from "./collection";
 import { create } from "./collection/any/create";
 import { attribute } from "./collection/class/attribute";
-import Decorator from "./src/decorators";
+import * as Decorator from "./src/decorators";
 import TdvCoreApi from "./src/index";
-import Localization from "./src/localization";
+import * as Localization from "./src/localization";
 import Reflection from "./src/reflection";
 import Strategy from "./src/strategy";
 import Utilities from "./src/utilities";
@@ -83,7 +83,8 @@ export { Decorator, Localization, Reflection, Strategy, Utilities, Validation, a
  * ```ts
  * // consumer.ts - model class which holds Coordinate property
  * import { attribute } from "tdv-core";
- *
+ *import Localization from '../react/examples/basic-example-form/libs/tdv-core/dist/types/src/localization/index.d';
+
  * class Consumer {
  *   \@attribute(Coordinate) // enables deep validation
  *   coordinate: Coordinate; // non-primitive

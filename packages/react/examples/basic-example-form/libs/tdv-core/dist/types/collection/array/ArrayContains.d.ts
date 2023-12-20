@@ -52,5 +52,5 @@ export declare function isArrayContainsValid<K, T extends Array<K>>(value: T, co
  * }
  * ```
  */
-export declare function ArrayContains<K, T extends Array<K>>(contains: K, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ArrayContains<K, T extends Array<K>>(contains: K, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ArrayContains.d.ts.map

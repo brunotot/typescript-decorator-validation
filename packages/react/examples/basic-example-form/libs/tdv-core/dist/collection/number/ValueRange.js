@@ -57,9 +57,9 @@ function isValueRangeValid(num, min, max) {
  * ```
  */
 export function ValueRange(min, max, options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((num, _context, locale) => ({
-        key: API.Decorator.key(options, VALUE_RANGE),
+    return API.Decorator.ForField.Validator.build((num, _context, locale) => ({
+        key: API.Decorator.Config.key(options, VALUE_RANGE),
         valid: isValueRangeValid(num, min, max),
-        message: API.Decorator.message(options, locale, translate(locale, VALUE_RANGE, min, max, num)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, VALUE_RANGE, min, max, num)),
+    }), API.Decorator.Config.groups(options));
 }

@@ -51,5 +51,5 @@ export declare function isArrayUniqueValid(array: any[]): boolean;
  * }
  * ```
  */
-export declare function ArrayUnique<K, T extends Array<K>>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ArrayUnique<K, T extends Array<K>>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ArrayUnique.d.ts.map

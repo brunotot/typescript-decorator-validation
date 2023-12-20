@@ -53,5 +53,5 @@ export declare function isArraySizeRangeValid(array: any[], min: number, max: nu
  * }
  * ```
  */
-export declare function ArraySizeRange<K, T extends K[]>(min: number, max: number, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ArraySizeRange<K, T extends K[]>(min: number, max: number, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ArraySizeRange.d.ts.map

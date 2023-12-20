@@ -55,9 +55,9 @@ function isNegativeValid(num) {
  * ```
  */
 export function Negative(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((num, _context, locale) => ({
-        key: API.Decorator.key(options, NEGATIVE),
+    return API.Decorator.ForField.Validator.build((num, _context, locale) => ({
+        key: API.Decorator.Config.key(options, NEGATIVE),
         valid: isNegativeValid(num),
-        message: API.Decorator.message(options, locale, translate(locale, NEGATIVE, num)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, NEGATIVE, num)),
+    }), API.Decorator.Config.groups(options));
 }

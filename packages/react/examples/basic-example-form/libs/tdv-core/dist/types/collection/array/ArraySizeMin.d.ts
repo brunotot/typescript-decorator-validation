@@ -52,5 +52,5 @@ export declare function isArraySizeMinValid(array: any[], min: number): boolean;
  * }
  * ```
  */
-export declare function ArraySizeMin<K, T extends Array<K>>(min: number, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ArraySizeMin<K, T extends Array<K>>(min: number, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ArraySizeMin.d.ts.map

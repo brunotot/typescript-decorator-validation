@@ -48,5 +48,5 @@ export declare function isMaxLengthValid(value: API.Utilities.Objects.Optional<s
  * }
  * ```
  */
-export declare function MaxLength<T extends API.Utilities.Objects.Optional<string>>(max: number, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function MaxLength<T extends API.Utilities.Objects.Optional<string>>(max: number, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=MaxLength.d.ts.map

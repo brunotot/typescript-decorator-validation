@@ -55,6 +55,6 @@ import API from "../../index";
 export function create<T>(
   validate: API.Validation.Evaluator<T>,
   groups?: string[]
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(validate, groups);
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(validate, groups);
 }

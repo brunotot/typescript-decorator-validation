@@ -1,13 +1,11 @@
 import API from "../../../index";
 
-import MessageReaderService from "./MessageReaderService";
-
 /**
  * Localizes a string based on a corresponding key and optional arguments mapped by indices. (ex: `"Hello {0}! How are you?"`)
  *
  * @param key - The key corresponding to the localized string. (ex: `"Hello"`)
  * @param args - Optional values to replace template placeholders in the localized string. (ex: `["John Doe"]`)
- * @remarks This translation mechanism utilizes {@link API.Utilities.Strings.sprintf sprintf} function for replacing template placeholders with the provided `args`.
+ * @remarks This translation mechanism utilizes {@link sprintf} function for replacing template placeholders with the provided `args`.
  * @returns The localized and formatted message by `key` and `args` params.
  *
  * @example
@@ -29,9 +27,11 @@ import MessageReaderService from "./MessageReaderService";
  * ```
  */
 export function translate(
-  locale: API.Localization.Resolver.LocaleResolver.Locale | null | undefined,
-  key: keyof MessageReaderService.LocalizedMessages,
+  locale: API.Localization.LocaleResolver.Locale | null | undefined,
+  key: keyof API.Localization.MessageReaderService.LocalizedMessages,
   ...args: any[]
 ): string {
-  return API.Utilities.Strings.sprintf(MessageReaderService.getMessage(key, locale), ...args);
+  const message = API.Localization.MessageReaderService.getMessage(key, locale);
+  const translatedMessage = API.Utilities.Strings.sprintf(message, ...args);
+  return translatedMessage;
 }

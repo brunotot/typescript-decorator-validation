@@ -9,7 +9,7 @@ export type PasswordRules = {
     length?: number;
 };
 /** Internal validation function for {@link Password} validator. */
-export declare function isPasswordValid(input: API.Utilities.Objects.Optional<string>, rules: PasswordRules | undefined, definedMessage?: string, locale?: API.Localization.Resolver.LocaleResolver.Locale): {
+export declare function isPasswordValid(input: API.Utilities.Objects.Optional<string>, rules: PasswordRules | undefined, definedMessage?: string, locale?: API.Localization.LocaleResolver.Locale): {
     key: string;
     message: string;
     valid: boolean;
@@ -68,7 +68,7 @@ export declare function isPasswordValid(input: API.Utilities.Objects.Optional<st
  * }
  * ```
  */
-export declare function Password<T extends API.Utilities.Objects.Optional<string>>(rules?: PasswordRules, options?: API.Decorator.Options): (target: any, context: Readonly<{
+export declare function Password<T extends API.Utilities.Objects.Optional<string>>(rules?: PasswordRules, options?: API.Decorator.Config.Options): (target: any, context: Readonly<{
     kind: "getter" | "method" | "field";
     static: boolean;
     private: boolean;

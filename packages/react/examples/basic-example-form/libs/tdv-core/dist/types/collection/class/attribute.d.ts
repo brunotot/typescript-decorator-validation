@@ -56,5 +56,5 @@ import API from "../../index";
  *   }
  * }
  */
-export declare function attribute<T extends API.Utilities.Objects.Optional<object | object[]>>(clazz: API.Utilities.Types.Class<any>): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function attribute<T extends API.Utilities.Objects.Optional<object | object[]>>(clazz: API.Utilities.Types.Class<any>): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=attribute.d.ts.map

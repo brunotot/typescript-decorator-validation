@@ -52,5 +52,5 @@ export declare function isArraySizeExactValid(array: any[]): boolean;
  * }
  * ```
  */
-export declare function ArraySizeExact<K, T extends K[]>(exact: number, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ArraySizeExact<K, T extends K[]>(exact: number, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ArraySizeExact.d.ts.map

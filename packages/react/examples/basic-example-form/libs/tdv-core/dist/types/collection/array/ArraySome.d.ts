@@ -52,5 +52,5 @@ export declare function isArraySomeValid<K, T extends Array<K>>(array: T, predic
  * }
  * ```
  **/
-export declare function ArraySome<K, T extends K[]>(predicate: API.Utilities.Objects.ArrayPredicate<K>, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ArraySome<K, T extends K[]>(predicate: API.Utilities.Objects.ArrayPredicate<K>, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ArraySome.d.ts.map

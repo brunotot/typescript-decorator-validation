@@ -48,7 +48,7 @@ export declare function isMinLengthValid(value: API.Utilities.Objects.Optional<s
  * }
  * ```
  */
-export declare function MinLength<T extends API.Utilities.Objects.Optional<string>>(min: number, options?: API.Decorator.Options): (target: any, context: Readonly<{
+export declare function MinLength<T extends API.Utilities.Objects.Optional<string>>(min: number, options?: API.Decorator.Config.Options): (target: any, context: Readonly<{
     kind: "getter" | "method" | "field";
     static: boolean;
     private: boolean;

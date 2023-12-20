@@ -50,5 +50,5 @@ export declare function isTodayDateValid<T extends API.Utilities.Objects.Optiona
  * }
  * ```
  */
-export declare function TodayDate<T extends API.Utilities.Objects.Optional<Date>>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function TodayDate<T extends API.Utilities.Objects.Optional<Date>>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=TodayDate.d.ts.map

@@ -57,9 +57,9 @@ export function isLowercaseValid(value) {
  * ```
  */
 export function Lowercase(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((value, _context, locale) => ({
-        key: API.Decorator.key(options, LOWERCASE),
+    return API.Decorator.ForField.Validator.build((value, _context, locale) => ({
+        key: API.Decorator.Config.key(options, LOWERCASE),
         valid: testRegex(RegexConst.LOWERCASE, value),
-        message: API.Decorator.message(options, locale, translate(locale, LOWERCASE)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, LOWERCASE)),
+    }), API.Decorator.Config.groups(options));
 }

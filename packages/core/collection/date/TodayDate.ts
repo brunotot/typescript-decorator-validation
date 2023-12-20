@@ -64,14 +64,14 @@ export function isTodayDateValid<T extends API.Utilities.Objects.Optional<Date>>
  * ```
  */
 export function TodayDate<T extends API.Utilities.Objects.Optional<Date>>(
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (date, _context, locale) => ({
-      key: API.Decorator.key(options, TODAY_DATE),
+      key: API.Decorator.Config.key(options, TODAY_DATE),
       valid: isTodayDateValid(date),
-      message: API.Decorator.message(options, locale, translate(locale, TODAY_DATE, date)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, TODAY_DATE, date)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

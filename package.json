@@ -13,6 +13,7 @@
     "core/playground": "npm run playground --prefix=packages/core",
     "core/test": "npm run test --prefix=packages/core",
     "core/build": "npm run build --prefix=packages/core",
+    "core/build:noTest": "npm run build:noTest --prefix=packages/core",
     "core/deploy:minor": "npm run deploy:minor --prefix=packages/core",
     "core/deploy:major": "npm run deploy:major --prefix=packages/core",
     "core/deploy:patch": "npm run deploy:patch --prefix=packages/core",

@@ -1,20 +1,14 @@
-import type LocaleResolver from "./LocaleResolver";
+import * as LocaleResolver from "./LocaleResolver";
 /**
- * A configuration class which allows for defining a custom message parser.
+ * Message parser definition.
  */
-declare namespace MessageResolver {
-    /**
-     * Message parser definition.
-     */
-    type MessageResolverData = ((locale: LocaleResolver.Locale, message: string) => string) & {};
-    /**
-     * Is used to globally define a custom message parser.
-     */
-    function configure(handler?: MessageResolverData): void;
-    /**
-     * Internal handler for the customized message parser
-     */
-    function resolve(locale: LocaleResolver.Locale, message: string): string;
-}
-export default MessageResolver;
+export type MessageResolverData = ((locale: LocaleResolver.Locale, message: string) => string) & {};
+/**
+ * Is used to globally define a custom message parser.
+ */
+export declare function configure(handler?: MessageResolverData): void;
+/**
+ * Internal handler for the customized message parser
+ */
+export declare function resolve(locale: LocaleResolver.Locale, message: string): string;
 //# sourceMappingURL=MessageResolver.d.ts.map

@@ -18,7 +18,7 @@ export function isPasswordValid(
   input: API.Utilities.Objects.Optional<string>,
   rules: PasswordRules | undefined,
   definedMessage?: string,
-  locale?: API.Localization.Resolver.LocaleResolver.Locale
+  locale?: API.Localization.LocaleResolver.Locale
 ) {
   const PASSWORD_REGEXES = {
     uppercase: RegexConst.UPPERCASE_ANYWHERE,
@@ -43,7 +43,7 @@ export function isPasswordValid(
   const numbers = rules?.numbers ?? false;
   const specials = rules?.specials ?? false;
   const length = rules?.length ?? 8;
-  const str = input ?? API.Utilities.Strings.EMPTY;
+  const str = input ?? "";
   if (str.length < length)
     return buildConstraintViolation(
       definedMessage ?? translate(locale, "PasswordLength", length),
@@ -127,10 +127,10 @@ export function isPasswordValid(
  */
 export function Password<T extends API.Utilities.Objects.Optional<string>>(
   rules?: PasswordRules,
-  options?: API.Decorator.Options
+  options?: API.Decorator.Config.Options
 ) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => isPasswordValid(value, rules, options?.message, locale),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

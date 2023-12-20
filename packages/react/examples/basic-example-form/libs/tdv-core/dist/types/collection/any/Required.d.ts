@@ -45,5 +45,5 @@ export declare function isRequiredValid<T>(value: T | undefined): value is NonNu
  * }
  * ```
  */
-export declare function Required<T extends API.Utilities.Objects.Optional>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function Required<T extends API.Utilities.Objects.Optional>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=Required.d.ts.map

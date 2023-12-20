@@ -61,14 +61,14 @@ export function isAlphaValid<T extends API.Utilities.Objects.Optional<string>>(v
  * ```
  */
 export function Alpha<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, ALPHA),
+      key: API.Decorator.Config.key(options, ALPHA),
       valid: testRegex(RegexConst.ALPHA, value),
-      message: API.Decorator.message(options, locale, translate(locale, ALPHA)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, ALPHA)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

@@ -20,7 +20,7 @@ export class ValidationEngine<TClass> {
   #hostDefault: API.Utilities.Objects.Payload<TClass>;
   #cacheMap: CacheMap<API.Validation.Response<TClass>>;
   #hostClass: API.Utilities.Types.Class<TClass>;
-  locale: API.Localization.Resolver.LocaleResolver.Locale;
+  locale: API.Localization.LocaleResolver.Locale;
   #asyncDelay: number;
   #debounceMap: {
     [key in keyof TClass]: ReturnType<typeof API.Utilities.Objects.debounce>;
@@ -36,7 +36,7 @@ export class ValidationEngine<TClass> {
     this.#asyncDelay = config?.asyncDelay ?? 300;
     this.#eventEmitter = new EventEmitter();
     this.#hostClass = clazz;
-    this.locale = config?.locale ?? API.Localization.Resolver.LocaleResolver.getLocale();
+    this.locale = config?.locale ?? API.Localization.LocaleResolver.getLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
     this.#hostDefault =
       config?.defaultValue ??

@@ -60,14 +60,14 @@ export function isDecimalValid<T extends API.Utilities.Objects.Optional<number>>
  * ```
  */
 export function Decimal<T extends API.Utilities.Objects.Optional<number>>(
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, DECIMAL),
+      key: API.Decorator.Config.key(options, DECIMAL),
       valid: isDecimalValid(value),
-      message: API.Decorator.message(options, locale, translate(locale, DECIMAL, value)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, DECIMAL, value)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

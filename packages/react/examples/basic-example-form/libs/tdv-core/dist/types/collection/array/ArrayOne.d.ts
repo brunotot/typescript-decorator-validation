@@ -52,5 +52,5 @@ export declare function isArrayOneValid<K, T extends Array<K>>(array: T, predica
  * }
  * ```
  **/
-export declare function ArrayOne<K, T extends Array<K>>(predicate: API.Utilities.Objects.ArrayPredicate<K>, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ArrayOne<K, T extends Array<K>>(predicate: API.Utilities.Objects.ArrayPredicate<K>, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ArrayOne.d.ts.map

@@ -50,5 +50,5 @@ export declare function isLowercaseValid<T extends API.Utilities.Objects.Optiona
  * }
  * ```
  */
-export declare function Lowercase<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function Lowercase<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=Lowercase.d.ts.map

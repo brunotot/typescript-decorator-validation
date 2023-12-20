@@ -8,7 +8,7 @@ import API from "../../../index";
  */
 export declare abstract class AbstractMetaService<Entry> {
     #private;
-    protected context?: API.Decorator.Context;
+    protected context?: API.Decorator.ForField.Basic.Context<any>;
     /**
      * Constructor for AbstractMetaService.
      *

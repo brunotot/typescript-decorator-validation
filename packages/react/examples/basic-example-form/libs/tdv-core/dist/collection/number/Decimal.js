@@ -55,9 +55,9 @@ export function isDecimalValid(value) {
  * ```
  */
 export function Decimal(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((value, _context, locale) => ({
-        key: API.Decorator.key(options, DECIMAL),
+    return API.Decorator.ForField.Validator.build((value, _context, locale) => ({
+        key: API.Decorator.Config.key(options, DECIMAL),
         valid: isDecimalValid(value),
-        message: API.Decorator.message(options, locale, translate(locale, DECIMAL, value)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, DECIMAL, value)),
+    }), API.Decorator.Config.groups(options));
 }

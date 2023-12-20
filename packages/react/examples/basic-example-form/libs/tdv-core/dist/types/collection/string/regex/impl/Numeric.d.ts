@@ -50,5 +50,5 @@ export declare function isNumericValid<T extends API.Utilities.Objects.Optional<
  * }
  * ```
  */
-export declare function Numeric<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function Numeric<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=Numeric.d.ts.map

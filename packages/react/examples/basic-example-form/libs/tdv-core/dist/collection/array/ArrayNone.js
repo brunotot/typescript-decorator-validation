@@ -57,9 +57,9 @@ export function isArrayNoneValid(array, predicate) {
  * ```
  **/
 export function ArrayNone(predicate, options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((array, _context, locale) => ({
-        key: API.Decorator.key(options, ARRAY_NONE),
+    return API.Decorator.ForField.Validator.build((array, _context, locale) => ({
+        key: API.Decorator.Config.key(options, ARRAY_NONE),
         valid: isArrayNoneValid(array, predicate),
-        message: API.Decorator.message(options, locale, translate(locale, ARRAY_NONE)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_NONE)),
+    }), API.Decorator.Config.groups(options));
 }

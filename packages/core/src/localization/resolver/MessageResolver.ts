@@ -1,44 +1,31 @@
-import type LocaleResolver from "./LocaleResolver";
+import type * as LocaleResolver from "./LocaleResolver";
 
 /**
- * A configuration class which allows for defining a custom message parser.
+ * Message parser definition.
  */
-namespace MessageResolver {
-  /**
-   * Message parser definition.
-   */
-  export type MessageResolverData = ((
-    locale: LocaleResolver.Locale,
-    message: string
-  ) => string) & {};
+export type MessageResolverData = ((locale: LocaleResolver.Locale, message: string) => string) & {};
 
-  const DEFAULT_CONFIGURER: MessageResolverData = (_, message) => message;
+const DEFAULT_CONFIGURER: MessageResolverData = (_, message) => message;
 
-  let configurer: MessageResolverData = DEFAULT_CONFIGURER;
+let configurer: MessageResolverData = DEFAULT_CONFIGURER;
 
-  /**
-   * Is used to globally define a custom message parser.
-   */
-  export function configure(handler?: MessageResolverData): void {
-    configurer = handler ?? DEFAULT_CONFIGURER;
-  }
-
-  /**
-   * Internal handler for the customized message parser
-   */
-  export function resolve(
-    locale: LocaleResolver.Locale,
-    message: string
-  ): string {
-    try {
-      return configurer(locale, message);
-    } catch (error) {
-      const title = `An error occurred while resolving "${message}" for locale "${locale}".`;
-      const descr = `To fix, check your Localization.Resolver.MessageResolver.configure() implementation or review stack-trace.`;
-      const stacktrace = `\n\n${String(error)}`;
-      throw new Error(`${title} ${descr} ${stacktrace}`);
-    }
-  }
+/**
+ * Is used to globally define a custom message parser.
+ */
+export function configure(handler?: MessageResolverData): void {
+  configurer = handler ?? DEFAULT_CONFIGURER;
 }
 
-export default MessageResolver;
+/**
+ * Internal handler for the customized message parser
+ */
+export function resolve(locale: LocaleResolver.Locale, message: string): string {
+  try {
+    return configurer(locale, message);
+  } catch (error) {
+    const title = `An error occurred while resolving "${message}" for locale "${locale}".`;
+    const descr = `To fix, check your Localization.Resolver.MessageResolver.configure() implementation or review stack-trace.`;
+    const stacktrace = `\n\n${String(error)}`;
+    throw new Error(`${title} ${descr} ${stacktrace}`);
+  }
+}

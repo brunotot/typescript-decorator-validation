@@ -52,5 +52,5 @@ export declare function isArraySizeMaxValid(array: any[], max: number): boolean;
  * }
  * ```
  */
-export declare function ArraySizeMax<K, T extends K[]>(max: number, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ArraySizeMax<K, T extends K[]>(max: number, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ArraySizeMax.d.ts.map

@@ -50,5 +50,5 @@ export declare function isURLValid<T extends API.Utilities.Objects.Optional<stri
  * }
  * ```
  */
-export declare function URL<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function URL<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=URL.d.ts.map

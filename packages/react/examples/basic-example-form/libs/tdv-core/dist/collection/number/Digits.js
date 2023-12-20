@@ -69,9 +69,9 @@ function isDigitsValid(number, ints, decs) {
  * ```
  */
 export function Digits(intsLimit, decimalsLimit, options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((value, _context, locale) => ({
-        key: API.Decorator.key(options, DIGITS),
+    return API.Decorator.ForField.Validator.build((value, _context, locale) => ({
+        key: API.Decorator.Config.key(options, DIGITS),
         valid: isDigitsValid(value, intsLimit, decimalsLimit),
-        message: API.Decorator.message(options, locale, translate(locale, DIGITS, intsLimit, decimalsLimit)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, DIGITS, intsLimit, decimalsLimit)),
+    }), API.Decorator.Config.groups(options));
 }

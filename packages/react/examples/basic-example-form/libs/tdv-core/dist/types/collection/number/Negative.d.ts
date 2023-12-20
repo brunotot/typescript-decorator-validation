@@ -48,5 +48,5 @@ export declare const NEGATIVE = "Negative";
  * }
  * ```
  */
-export declare function Negative<T extends API.Utilities.Objects.Optional<number>>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function Negative<T extends API.Utilities.Objects.Optional<number>>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=Negative.d.ts.map

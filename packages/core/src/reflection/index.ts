@@ -84,7 +84,7 @@ namespace Reflection {
    * Type alias for strategies that can either be a decorator context or a class.
    */
   export type MetaStrategy =
-    | API.Decorator.Context
+    | API.Decorator.ForField.Basic.Context<any>
     | API.Utilities.Types.Class<any>
     | DecoratorContext;
 

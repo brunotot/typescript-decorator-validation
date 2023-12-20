@@ -61,18 +61,18 @@ export function isArraySizeMaxValid(array: any[], max: number): boolean {
  */
 export function ArraySizeMax<K, T extends K[]>(
   max: number,
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (array, _, locale) => ({
-      key: API.Decorator.key(options, ARRAY_SIZE_MAX),
+      key: API.Decorator.Config.key(options, ARRAY_SIZE_MAX),
       valid: isArraySizeMaxValid(array, max),
-      message: API.Decorator.message(
+      message: API.Decorator.Config.message(
         options,
         locale,
         translate(locale, ARRAY_SIZE_MAX, max, (array ?? []).length)
       ),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

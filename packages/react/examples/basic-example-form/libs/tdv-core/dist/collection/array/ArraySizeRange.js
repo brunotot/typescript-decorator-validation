@@ -58,9 +58,9 @@ export function isArraySizeRangeValid(array, min, max) {
  * ```
  */
 export function ArraySizeRange(min, max, options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((array, _context, locale) => ({
-        key: API.Decorator.key(options, ARRAY_SIZE_RANGE),
+    return API.Decorator.ForField.Validator.build((array, _context, locale) => ({
+        key: API.Decorator.Config.key(options, ARRAY_SIZE_RANGE),
         valid: isArraySizeRangeValid(array, min, max),
-        message: API.Decorator.message(options, locale, translate(locale, ARRAY_SIZE_RANGE, min, max, (array !== null && array !== void 0 ? array : []).length)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_SIZE_RANGE, min, max, (array !== null && array !== void 0 ? array : []).length)),
+    }), API.Decorator.Config.groups(options));
 }

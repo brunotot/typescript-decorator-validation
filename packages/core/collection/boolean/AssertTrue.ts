@@ -58,14 +58,14 @@ export function isAssertTrueValid(value: boolean): boolean {
  * ```
  */
 export function AssertTrue<T extends boolean>(
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, ASSERT_TRUE),
+      key: API.Decorator.Config.key(options, ASSERT_TRUE),
       valid: isAssertTrueValid(value),
-      message: API.Decorator.message(options, locale, translate(locale, ASSERT_TRUE)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, ASSERT_TRUE)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

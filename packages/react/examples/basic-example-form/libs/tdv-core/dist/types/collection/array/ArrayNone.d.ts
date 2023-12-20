@@ -52,5 +52,5 @@ export declare function isArrayNoneValid<K, T extends Array<K>>(array: T, predic
  * }
  * ```
  **/
-export declare function ArrayNone<K, T extends K[]>(predicate: API.Utilities.Objects.ArrayPredicate<K>, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ArrayNone<K, T extends K[]>(predicate: API.Utilities.Objects.ArrayPredicate<K>, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ArrayNone.d.ts.map

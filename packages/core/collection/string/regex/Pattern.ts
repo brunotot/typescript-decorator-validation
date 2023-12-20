@@ -38,18 +38,18 @@ export function testRegex<T extends API.Utilities.Objects.Optional<string>>(
  */
 export function Pattern<T extends API.Utilities.Objects.Optional<string>>(
   regex: RegExp,
-  options?: API.Decorator.Options
+  options?: API.Decorator.Config.Options
 ) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, "Pattern"),
+      key: API.Decorator.Config.key(options, "Pattern"),
       valid: testRegex(regex, value),
-      message: API.Decorator.message(
+      message: API.Decorator.Config.message(
         options,
         locale,
         translate(locale, "Pattern", regex.toString())
       ),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

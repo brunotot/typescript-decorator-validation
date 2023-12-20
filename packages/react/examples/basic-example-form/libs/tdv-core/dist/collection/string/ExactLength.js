@@ -5,7 +5,7 @@ export const EXACT_LENGTH = "ExactLength";
 /** Internal validation function for {@link ExactLength} validator. */
 export function isExactLengthValid(value, exact) {
     API.Utilities.Objects.assertType("string", value);
-    return (value !== null && value !== void 0 ? value : API.Utilities.Strings.EMPTY).length === exact;
+    return (value !== null && value !== void 0 ? value : "").length === exact;
 }
 /**
  * Checks if decorated string contains a specific number of characters.
@@ -53,9 +53,9 @@ export function isExactLengthValid(value, exact) {
  * ```
  */
 export function ExactLength(exact, options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((value, _context, locale) => ({
-        key: API.Decorator.key(options, EXACT_LENGTH),
+    return API.Decorator.ForField.Validator.build((value, _context, locale) => ({
+        key: API.Decorator.Config.key(options, EXACT_LENGTH),
         valid: isExactLengthValid(value, exact),
-        message: API.Decorator.message(options, locale, translate(locale, EXACT_LENGTH, exact)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, EXACT_LENGTH, exact)),
+    }), API.Decorator.Config.groups(options));
 }

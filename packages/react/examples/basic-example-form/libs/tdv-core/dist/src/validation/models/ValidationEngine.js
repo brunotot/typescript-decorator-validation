@@ -44,7 +44,7 @@ export class ValidationEngine {
         __classPrivateFieldSet(this, _ValidationEngine_asyncDelay, (_a = config === null || config === void 0 ? void 0 : config.asyncDelay) !== null && _a !== void 0 ? _a : 300, "f");
         __classPrivateFieldSet(this, _ValidationEngine_eventEmitter, new EventEmitter(), "f");
         __classPrivateFieldSet(this, _ValidationEngine_hostClass, clazz, "f");
-        this.locale = (_b = config === null || config === void 0 ? void 0 : config.locale) !== null && _b !== void 0 ? _b : API.Localization.Resolver.LocaleResolver.getLocale();
+        this.locale = (_b = config === null || config === void 0 ? void 0 : config.locale) !== null && _b !== void 0 ? _b : API.Localization.LocaleResolver.getLocale();
         __classPrivateFieldSet(this, _ValidationEngine_groups, Array.from(new Set((_c = config === null || config === void 0 ? void 0 : config.groups) !== null && _c !== void 0 ? _c : [])), "f");
         __classPrivateFieldSet(this, _ValidationEngine_hostDefault, (_d = config === null || config === void 0 ? void 0 : config.defaultValue) !== null && _d !== void 0 ? _d : API.Utilities.Objects.toClass(clazz), "f");
         __classPrivateFieldSet(this, _ValidationEngine_fieldValidatorMetaService, API.Reflection.Services.FieldValidatorMetaService.inject(clazz), "f");

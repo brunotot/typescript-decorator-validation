@@ -57,9 +57,9 @@ export function isArraySizeMaxValid(array, max) {
  * ```
  */
 export function ArraySizeMax(max, options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((array, _, locale) => ({
-        key: API.Decorator.key(options, ARRAY_SIZE_MAX),
+    return API.Decorator.ForField.Validator.build((array, _, locale) => ({
+        key: API.Decorator.Config.key(options, ARRAY_SIZE_MAX),
         valid: isArraySizeMaxValid(array, max),
-        message: API.Decorator.message(options, locale, translate(locale, ARRAY_SIZE_MAX, max, (array !== null && array !== void 0 ? array : []).length)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_SIZE_MAX, max, (array !== null && array !== void 0 ? array : []).length)),
+    }), API.Decorator.Config.groups(options));
 }

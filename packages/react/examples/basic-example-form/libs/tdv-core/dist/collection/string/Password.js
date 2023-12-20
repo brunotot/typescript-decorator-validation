@@ -28,7 +28,7 @@ export function isPasswordValid(input, rules, definedMessage, locale) {
     const numbers = (_c = rules === null || rules === void 0 ? void 0 : rules.numbers) !== null && _c !== void 0 ? _c : false;
     const specials = (_d = rules === null || rules === void 0 ? void 0 : rules.specials) !== null && _d !== void 0 ? _d : false;
     const length = (_e = rules === null || rules === void 0 ? void 0 : rules.length) !== null && _e !== void 0 ? _e : 8;
-    const str = input !== null && input !== void 0 ? input : API.Utilities.Strings.EMPTY;
+    const str = input !== null && input !== void 0 ? input : "";
     if (str.length < length)
         return buildConstraintViolation(definedMessage !== null && definedMessage !== void 0 ? definedMessage : translate(locale, "PasswordLength", length), false);
     if (uppercase && isInvalid(str, "uppercase"))
@@ -96,5 +96,5 @@ export function isPasswordValid(input, rules, definedMessage, locale) {
  * ```
  */
 export function Password(rules, options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((value, _context, locale) => isPasswordValid(value, rules, options === null || options === void 0 ? void 0 : options.message, locale), API.Decorator.groups(options));
+    return API.Decorator.ForField.Validator.build((value, _context, locale) => isPasswordValid(value, rules, options === null || options === void 0 ? void 0 : options.message, locale), API.Decorator.Config.groups(options));
 }

@@ -64,14 +64,14 @@ export function isArrayNoneValid<K, T extends Array<K>>(
  **/
 export function ArrayNone<K, T extends K[]>(
   predicate: API.Utilities.Objects.ArrayPredicate<K>,
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.key(options, ARRAY_NONE),
+      key: API.Decorator.Config.key(options, ARRAY_NONE),
       valid: isArrayNoneValid(array, predicate),
-      message: API.Decorator.message(options, locale, translate(locale, ARRAY_NONE)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_NONE)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

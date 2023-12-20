@@ -48,5 +48,5 @@ export declare function isExactLengthValid(value: API.Utilities.Objects.Optional
  * }
  * ```
  */
-export declare function ExactLength<T extends API.Utilities.Objects.Optional<string>>(exact: number, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ExactLength<T extends API.Utilities.Objects.Optional<string>>(exact: number, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ExactLength.d.ts.map

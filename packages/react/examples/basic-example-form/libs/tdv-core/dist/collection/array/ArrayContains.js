@@ -57,9 +57,9 @@ export function isArrayContainsValid(value, contains) {
  * ```
  */
 export function ArrayContains(contains, options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((array, _context, locale) => ({
-        key: API.Decorator.key(options, ARRAY_CONTAINS),
+    return API.Decorator.ForField.Validator.build((array, _context, locale) => ({
+        key: API.Decorator.Config.key(options, ARRAY_CONTAINS),
         valid: isArrayContainsValid(array, contains),
-        message: API.Decorator.message(options, locale, translate(locale, ARRAY_CONTAINS, contains)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_CONTAINS, contains)),
+    }), API.Decorator.Config.groups(options));
 }

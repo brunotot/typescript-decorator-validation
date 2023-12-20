@@ -10,7 +10,7 @@ export function isMaxLengthValid(
   max: number
 ): boolean {
   API.Utilities.Objects.assertType("string", value);
-  return (value ?? API.Utilities.Strings.EMPTY).length <= max;
+  return (value ?? "").length <= max;
 }
 
 /**
@@ -60,14 +60,14 @@ export function isMaxLengthValid(
  */
 export function MaxLength<T extends API.Utilities.Objects.Optional<string>>(
   max: number,
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, MAX_LENGTH),
+      key: API.Decorator.Config.key(options, MAX_LENGTH),
       valid: isMaxLengthValid(value, max),
-      message: API.Decorator.message(options, locale, translate(locale, MAX_LENGTH, max)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, MAX_LENGTH, max)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

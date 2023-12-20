@@ -15,5 +15,5 @@ import API from "../../index";
  * }
  * ```
  */
-export declare function foreach<T extends NonNullable<API.Utilities.Types.Array | (() => API.Utilities.Types.Array)>>(...validators: API.Decorator.Instance<API.Utilities.Arrays.getArrayType<T>>[]): API.Decorator.Instance<T>;
+export declare function foreach<T extends NonNullable<API.Utilities.Types.Array | (() => API.Utilities.Types.Array)>>(...validators: API.Decorator.ForField.Basic.Instance<API.Utilities.Arrays.getArrayType<T>>[]): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=foreach.d.ts.map

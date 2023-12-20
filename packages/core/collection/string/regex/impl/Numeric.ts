@@ -63,14 +63,14 @@ export function isNumericValid<T extends API.Utilities.Objects.Optional<string>>
  * ```
  */
 export function Numeric<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, NUMERIC),
+      key: API.Decorator.Config.key(options, NUMERIC),
       valid: testRegex(RegexConst.NUMERIC, value),
-      message: API.Decorator.message(options, locale, translate(locale, NUMERIC)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, NUMERIC)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

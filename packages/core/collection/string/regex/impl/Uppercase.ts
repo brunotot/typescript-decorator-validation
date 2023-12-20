@@ -63,14 +63,14 @@ export function isUppercaseValid<T extends API.Utilities.Objects.Optional<string
  * ```
  */
 export function Uppercase<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, UPPERCASE),
+      key: API.Decorator.Config.key(options, UPPERCASE),
       valid: testRegex(RegexConst.UPPERCASE, value),
-      message: API.Decorator.message(options, locale, translate(locale, UPPERCASE)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, UPPERCASE)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

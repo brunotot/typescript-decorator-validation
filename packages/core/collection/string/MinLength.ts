@@ -10,7 +10,7 @@ export function isMinLengthValid(
   min: number
 ): boolean {
   API.Utilities.Objects.assertType("string", value);
-  return (value ?? API.Utilities.Strings.EMPTY).length >= min;
+  return (value ?? "").length >= min;
 }
 
 /**
@@ -60,14 +60,14 @@ export function isMinLengthValid(
  */
 export function MinLength<T extends API.Utilities.Objects.Optional<string>>(
   min: number,
-  options?: API.Decorator.Options
+  options?: API.Decorator.Config.Options
 ) {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, MIN_LENGTH),
+      key: API.Decorator.Config.key(options, MIN_LENGTH),
       valid: isMinLengthValid(value, min),
-      message: API.Decorator.message(options, locale, translate(locale, MIN_LENGTH, min)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, MIN_LENGTH, min)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

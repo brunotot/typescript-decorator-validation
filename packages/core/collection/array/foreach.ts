@@ -19,9 +19,9 @@ import API from "../../index";
 export function foreach<
   T extends NonNullable<API.Utilities.Types.Array | (() => API.Utilities.Types.Array)>
 >(
-  ...validators: API.Decorator.Instance<API.Utilities.Arrays.getArrayType<T>>[]
-): API.Decorator.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorService.build<T>((meta, property, context) => {
+  ...validators: API.Decorator.ForField.Basic.Instance<API.Utilities.Arrays.getArrayType<T>>[]
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Basic.build<T>((meta, property, context) => {
     const validationProcessor = meta.getUntypedDescriptor(property);
     validationProcessor.thisDefault = [];
     validators.forEach(validator => {

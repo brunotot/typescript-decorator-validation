@@ -16,7 +16,7 @@ import API from "../../index";
  * ```
  */
 export function foreach(...validators) {
-    return API.Decorator.Service.FieldDecoratorService.build((meta, property, context) => {
+    return API.Decorator.ForField.Basic.build((meta, property, context) => {
         const validationProcessor = meta.getUntypedDescriptor(property);
         validationProcessor.thisDefault = [];
         validators.forEach(validator => {

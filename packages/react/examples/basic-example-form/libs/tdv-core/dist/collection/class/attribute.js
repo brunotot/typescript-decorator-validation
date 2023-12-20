@@ -57,7 +57,7 @@ import API from "../../index";
  * }
  */
 export function attribute(clazz) {
-    return API.Decorator.Service.FieldDecoratorService.build((meta, name) => {
+    return API.Decorator.ForField.Basic.build((meta, name) => {
         meta.getUntypedDescriptor(name).thisClass = clazz;
     });
 }

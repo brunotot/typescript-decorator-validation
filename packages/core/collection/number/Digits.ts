@@ -77,18 +77,18 @@ function isDigitsValid(
 export function Digits<T extends API.Utilities.Objects.Optional<number>>(
   intsLimit: number,
   decimalsLimit: number,
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, DIGITS),
+      key: API.Decorator.Config.key(options, DIGITS),
       valid: isDigitsValid(value, intsLimit, decimalsLimit),
-      message: API.Decorator.message(
+      message: API.Decorator.Config.message(
         options,
         locale,
         translate(locale, DIGITS, intsLimit, decimalsLimit)
       ),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

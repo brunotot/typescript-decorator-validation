@@ -55,9 +55,9 @@ function isPositiveValid(num) {
  * ```
  */
 export function Positive(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((num, _context, locale) => ({
-        key: API.Decorator.key(options, POSITIVE),
+    return API.Decorator.ForField.Validator.build((num, _context, locale) => ({
+        key: API.Decorator.Config.key(options, POSITIVE),
         valid: isPositiveValid(num),
-        message: API.Decorator.message(options, locale, translate(locale, POSITIVE, num)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, POSITIVE, num)),
+    }), API.Decorator.Config.groups(options));
 }

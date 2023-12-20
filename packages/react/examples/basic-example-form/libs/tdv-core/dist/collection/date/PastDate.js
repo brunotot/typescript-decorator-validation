@@ -55,9 +55,9 @@ export function isPastDateValid(date) {
  * ```
  */
 export function PastDate(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((date, _context, locale) => ({
-        key: API.Decorator.key(options, PAST_DATE),
+    return API.Decorator.ForField.Validator.build((date, _context, locale) => ({
+        key: API.Decorator.Config.key(options, PAST_DATE),
         valid: isPastDateValid(date),
-        message: API.Decorator.message(options, locale, translate(locale, PAST_DATE, date)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, PAST_DATE, date)),
+    }), API.Decorator.Config.groups(options));
 }

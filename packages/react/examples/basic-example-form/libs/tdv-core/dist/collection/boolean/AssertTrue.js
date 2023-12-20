@@ -55,9 +55,9 @@ export function isAssertTrueValid(value) {
  * ```
  */
 export function AssertTrue(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((value, _context, locale) => ({
-        key: API.Decorator.key(options, ASSERT_TRUE),
+    return API.Decorator.ForField.Validator.build((value, _context, locale) => ({
+        key: API.Decorator.Config.key(options, ASSERT_TRUE),
         valid: isAssertTrueValid(value),
-        message: API.Decorator.message(options, locale, translate(locale, ASSERT_TRUE)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, ASSERT_TRUE)),
+    }), API.Decorator.Config.groups(options));
 }

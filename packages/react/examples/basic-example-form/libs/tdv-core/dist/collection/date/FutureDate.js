@@ -55,9 +55,9 @@ export function isFutureDateValid(date) {
  * ```
  */
 export function FutureDate(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((date, _context, locale) => ({
-        key: API.Decorator.key(options, FUTURE_DATE),
+    return API.Decorator.ForField.Validator.build((date, _context, locale) => ({
+        key: API.Decorator.Config.key(options, FUTURE_DATE),
         valid: isFutureDateValid(date),
-        message: API.Decorator.message(options, locale, translate(locale, FUTURE_DATE, date)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, FUTURE_DATE, date)),
+    }), API.Decorator.Config.groups(options));
 }

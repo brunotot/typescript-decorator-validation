@@ -35,7 +35,7 @@ declare namespace ReflectionRule {
          *
          * @returns An array of `Validation.Result` containing the validation results.
          */
-        validate<TBody>(value: TFieldType, payload: API.Utilities.Objects.Payload<TBody>, groups: string[], locale: API.Localization.Resolver.LocaleResolver.Locale): API.Validation.Result[];
+        validate<TBody>(value: TFieldType, payload: API.Utilities.Objects.Payload<TBody>, groups: string[], locale: API.Localization.LocaleResolver.Locale): API.Validation.Result[];
         /**
          * Removes and returns the last validation rule from the collection.
          *

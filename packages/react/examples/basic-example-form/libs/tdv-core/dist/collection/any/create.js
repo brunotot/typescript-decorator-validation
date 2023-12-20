@@ -52,5 +52,5 @@ import API from "../../index";
  * ```
  */
 export function create(validate, groups) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build(validate, groups);
+    return API.Decorator.ForField.Validator.build(validate, groups);
 }

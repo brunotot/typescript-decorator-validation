@@ -57,9 +57,9 @@ export function isArrayEveryValid(array, predicate) {
  * ```
  **/
 export function ArrayEvery(predicate, options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((array, _context, locale) => ({
-        key: API.Decorator.key(options, ARRAY_EVERY),
+    return API.Decorator.ForField.Validator.build((array, _context, locale) => ({
+        key: API.Decorator.Config.key(options, ARRAY_EVERY),
         valid: isArrayEveryValid(array, predicate),
-        message: API.Decorator.message(options, locale, translate(locale, ARRAY_EVERY)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_EVERY)),
+    }), API.Decorator.Config.groups(options));
 }

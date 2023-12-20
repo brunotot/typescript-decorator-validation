@@ -63,18 +63,18 @@ export function isArraySizeRangeValid(array: any[], min: number, max: number): b
 export function ArraySizeRange<K, T extends K[]>(
   min: number,
   max: number,
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.key(options, ARRAY_SIZE_RANGE),
+      key: API.Decorator.Config.key(options, ARRAY_SIZE_RANGE),
       valid: isArraySizeRangeValid(array, min, max),
-      message: API.Decorator.message(
+      message: API.Decorator.Config.message(
         options,
         locale,
         translate(locale, ARRAY_SIZE_RANGE, min, max, (array ?? []).length)
       ),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

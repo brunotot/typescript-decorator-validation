@@ -66,18 +66,18 @@ function isValueRangeValid(
 export function ValueRange<T extends API.Utilities.Objects.Optional<number>>(
   min: number,
   max: number,
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (num, _context, locale) => ({
-      key: API.Decorator.key(options, VALUE_RANGE),
+      key: API.Decorator.Config.key(options, VALUE_RANGE),
       valid: isValueRangeValid(num, min, max),
-      message: API.Decorator.message(
+      message: API.Decorator.Config.message(
         options,
         locale,
         translate(locale, VALUE_RANGE, min, max, num)
       ),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

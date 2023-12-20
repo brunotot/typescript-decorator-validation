@@ -50,5 +50,5 @@ export declare const DIGITS = "Digits";
  * }
  * ```
  */
-export declare function Digits<T extends API.Utilities.Objects.Optional<number>>(intsLimit: number, decimalsLimit: number, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function Digits<T extends API.Utilities.Objects.Optional<number>>(intsLimit: number, decimalsLimit: number, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=Digits.d.ts.map

@@ -50,5 +50,5 @@ export declare function isAlphaValid<T extends API.Utilities.Objects.Optional<st
  * }
  * ```
  */
-export declare function Alpha<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function Alpha<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=Alpha.d.ts.map

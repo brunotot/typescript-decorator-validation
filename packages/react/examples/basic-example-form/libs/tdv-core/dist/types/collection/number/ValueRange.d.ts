@@ -50,5 +50,5 @@ export declare const VALUE_RANGE = "ValueRange";
  * }
  * ```
  */
-export declare function ValueRange<T extends API.Utilities.Objects.Optional<number>>(min: number, max: number, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ValueRange<T extends API.Utilities.Objects.Optional<number>>(min: number, max: number, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ValueRange.d.ts.map

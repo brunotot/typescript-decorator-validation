@@ -50,5 +50,5 @@ export declare function isAssertFalseValid(value: boolean): boolean;
  * }
  * ```
  */
-export declare function AssertFalse<T extends boolean>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function AssertFalse<T extends boolean>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=AssertFalse.d.ts.map

@@ -48,5 +48,5 @@ export declare const INTEGER = "Integer";
  * }
  * ```
  */
-export declare function Integer<T extends API.Utilities.Objects.Optional<number>>(options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function Integer<T extends API.Utilities.Objects.Optional<number>>(options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=Integer.d.ts.map

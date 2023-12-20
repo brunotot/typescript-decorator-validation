@@ -69,9 +69,9 @@ export function isArrayUniqueValid(array) {
  * ```
  */
 export function ArrayUnique(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((array, _context, locale) => ({
-        key: API.Decorator.key(options, ARRAY_UNIQUE),
+    return API.Decorator.ForField.Validator.build((array, _context, locale) => ({
+        key: API.Decorator.Config.key(options, ARRAY_UNIQUE),
         valid: isArrayUniqueValid(array),
-        message: API.Decorator.message(options, locale, translate(locale, ARRAY_UNIQUE)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_UNIQUE)),
+    }), API.Decorator.Config.groups(options));
 }

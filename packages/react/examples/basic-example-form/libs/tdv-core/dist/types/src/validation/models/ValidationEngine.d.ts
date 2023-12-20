@@ -11,7 +11,7 @@ import API from "../../../index";
  */
 export declare class ValidationEngine<TClass> {
     #private;
-    locale: API.Localization.Resolver.LocaleResolver.Locale;
+    locale: API.Localization.LocaleResolver.Locale;
     /**
      * Constructs a new `ValidationEngine` instance.
      *

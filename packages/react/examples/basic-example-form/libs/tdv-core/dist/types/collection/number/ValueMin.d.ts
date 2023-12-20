@@ -49,5 +49,5 @@ export declare const VALUE_MIN = "ValueMin";
  * }
  * ```
  */
-export declare function ValueMin<T extends API.Utilities.Objects.Optional<number>>(min: number, options?: API.Decorator.Options): API.Decorator.Service.FieldDecoratorService.Instance<T>;
+export declare function ValueMin<T extends API.Utilities.Objects.Optional<number>>(min: number, options?: API.Decorator.Config.Options): API.Decorator.ForField.Basic.Instance<T>;
 //# sourceMappingURL=ValueMin.d.ts.map

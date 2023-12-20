@@ -14,7 +14,7 @@ export abstract class AbstractValidationStrategyService<
   TDetailedResult = any,
   TSimpleResult = any
 > {
-  #locale: API.Localization.Resolver.LocaleResolver.Locale;
+  #locale: API.Localization.LocaleResolver.Locale;
   #groups: string[];
   #engineCfg: API.Validation.Config<any>;
   #classRules: API.Reflection.Rule.Instance<TClass>;
@@ -33,7 +33,7 @@ export abstract class AbstractValidationStrategyService<
     descriptor: API.Reflection.Descriptor.Instance<TClass, any>,
     defaultValue: TClass,
     groups: string[],
-    locale: API.Localization.Resolver.LocaleResolver.Locale,
+    locale: API.Localization.LocaleResolver.Locale,
     eventEmitter: EventEmitter,
     asyncDelay: number
   ) {
@@ -71,7 +71,7 @@ export abstract class AbstractValidationStrategyService<
     return this.#groups;
   }
 
-  protected get locale(): API.Localization.Resolver.LocaleResolver.Locale {
+  protected get locale(): API.Localization.LocaleResolver.Locale {
     return this.#locale;
   }
 

@@ -57,9 +57,9 @@ export function isURLValid(value) {
  * ```
  */
 export function URL(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((value, _context, locale) => ({
-        key: API.Decorator.key(options, URL_KEY),
+    return API.Decorator.ForField.Validator.build((value, _context, locale) => ({
+        key: API.Decorator.Config.key(options, URL_KEY),
         valid: testRegex(RegexConst.URL, value),
-        message: API.Decorator.message(options, locale, translate(locale, URL_KEY)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, URL_KEY)),
+    }), API.Decorator.Config.groups(options));
 }

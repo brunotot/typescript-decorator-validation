@@ -61,14 +61,14 @@ export function isURLValid<T extends API.Utilities.Objects.Optional<string>>(val
  * ```
  */
 export function URL<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, URL_KEY),
+      key: API.Decorator.Config.key(options, URL_KEY),
       valid: testRegex(RegexConst.URL, value),
-      message: API.Decorator.message(options, locale, translate(locale, URL_KEY)),
+      message: API.Decorator.Config.message(options, locale, translate(locale, URL_KEY)),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

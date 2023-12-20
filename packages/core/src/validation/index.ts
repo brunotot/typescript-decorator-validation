@@ -19,7 +19,7 @@ namespace Validation {
   export type Evaluator<T> = ((
     value: T,
     context: any,
-    locale: API.Localization.Resolver.LocaleResolver.Locale
+    locale: API.Localization.LocaleResolver.Locale
   ) => Result) & {};
 
   /**
@@ -73,7 +73,7 @@ namespace Validation {
   export type Config<TClass> = {
     defaultValue?: API.Utilities.Objects.Payload<TClass>;
     groups?: string[];
-    locale?: API.Localization.Resolver.LocaleResolver.Locale;
+    locale?: API.Localization.LocaleResolver.Locale;
     asyncDelay?: number;
   };
 

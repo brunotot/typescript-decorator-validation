@@ -59,9 +59,9 @@ export function isTodayDateValid(date) {
  * ```
  */
 export function TodayDate(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((date, _context, locale) => ({
-        key: API.Decorator.key(options, TODAY_DATE),
+    return API.Decorator.ForField.Validator.build((date, _context, locale) => ({
+        key: API.Decorator.Config.key(options, TODAY_DATE),
         valid: isTodayDateValid(date),
-        message: API.Decorator.message(options, locale, translate(locale, TODAY_DATE, date)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, TODAY_DATE, date)),
+    }), API.Decorator.Config.groups(options));
 }

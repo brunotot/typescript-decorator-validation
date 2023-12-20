@@ -28,7 +28,7 @@ export declare function testRegex<T extends API.Utilities.Objects.Optional<strin
  *   anotherProperty: string;
  * }
  */
-export declare function Pattern<T extends API.Utilities.Objects.Optional<string>>(regex: RegExp, options?: API.Decorator.Options): (target: any, context: Readonly<{
+export declare function Pattern<T extends API.Utilities.Objects.Optional<string>>(regex: RegExp, options?: API.Decorator.Config.Options): (target: any, context: Readonly<{
     kind: "getter" | "method" | "field";
     static: boolean;
     private: boolean;

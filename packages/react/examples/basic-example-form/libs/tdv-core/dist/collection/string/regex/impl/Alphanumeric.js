@@ -57,9 +57,9 @@ export function isAlphanumericValid(value) {
  * ```
  */
 export function Alphanumeric(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((value, _context, locale) => ({
-        key: API.Decorator.key(options, ALPHANUMERIC),
+    return API.Decorator.ForField.Validator.build((value, _context, locale) => ({
+        key: API.Decorator.Config.key(options, ALPHANUMERIC),
         valid: testRegex(RegexConst.ALPHANUMERIC, value),
-        message: API.Decorator.message(options, locale, translate(locale, ALPHANUMERIC)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, ALPHANUMERIC)),
+    }), API.Decorator.Config.groups(options));
 }

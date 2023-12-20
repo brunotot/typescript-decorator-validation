@@ -42,7 +42,7 @@ declare namespace Reflection {
     /**
      * Type alias for strategies that can either be a decorator context or a class.
      */
-    type MetaStrategy = API.Decorator.Context | API.Utilities.Types.Class<any> | DecoratorContext;
+    type MetaStrategy = API.Decorator.ForField.Basic.Context<any> | API.Utilities.Types.Class<any> | DecoratorContext;
     export import Rule = ReflectionRule;
     export import Strategy = ReflectionStrategyNamespace;
     /**

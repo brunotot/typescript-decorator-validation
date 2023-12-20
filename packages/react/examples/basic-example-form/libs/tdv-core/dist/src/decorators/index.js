@@ -1,63 +1,59 @@
 import API from "../../index";
-import ClassDecoratorServiceNamespace from "./service/ClassDecoratorService";
-import ClassDecoratorValidatorServiceNamespace from "./service/ClassDecoratorValidatorService";
-import FieldDecoratorServiceNamespace from "./service/FieldDecoratorService";
-import FieldDecoratorValidatorServiceNamespace from "./service/FieldDecoratorValidatorService";
-/**
- * A collection of types and interfaces for creating and handling decorators.
- */
-var Decorator;
-(function (Decorator) {
+import * as ClassDecoratorServiceNamespace from "./forClass/BasicClassDecorator";
+import * as ClassDecoratorValidatorServiceNamespace from "./forClass/ValidationClassDecorator";
+import * as FieldDecoratorServiceNamespace from "./forField/BasicFieldDecorator";
+import * as FieldDecoratorValidatorServiceNamespace from "./forField/ValidationFieldDecorator";
+export var ForField;
+(function (ForField) {
+    ForField.Basic = FieldDecoratorServiceNamespace;
+    ForField.Validator = FieldDecoratorValidatorServiceNamespace;
+})(ForField || (ForField = {}));
+export var ForClass;
+(function (ForClass) {
+    ForClass.Basic = ClassDecoratorServiceNamespace;
+    ForClass.Validator = ClassDecoratorValidatorServiceNamespace;
+})(ForClass || (ForClass = {}));
+export var Config;
+(function (Config) {
     /**
-     * A collection of services which allow for easy manipulation of field and class decorators.
-     */
-    let Service;
-    (function (Service) {
-        Service.FieldDecoratorService = FieldDecoratorServiceNamespace;
-        Service.ClassDecoratorService = ClassDecoratorServiceNamespace;
-        Service.FieldDecoratorValidatorService = FieldDecoratorValidatorServiceNamespace;
-        Service.ClassDecoratorValidatorService = ClassDecoratorValidatorServiceNamespace;
-    })(Service = Decorator.Service || (Decorator.Service = {}));
-    /**
-     * Extracts a message from the provided decorator properties.
+     * Retrieves the localized message based on the provided options, locale, and default message.
+     * If the options contain a custom message, it will be resolved using the provided locale.
+     * If no custom message is provided, the default message will be returned.
      *
-     * @typeParam T - The type of the object being validated.
-     *
-     * @param provider - The decorator properties.
-     * @param message - The default message to return if no message is found in the provider.
-     *
-     * @returns The extracted message or the default message if none is found.
+     * @param options - The options object that may contain a custom message.
+     * @param locale - The locale resolver used to resolve the custom message.
+     * @param defaultMessage - The default message to be returned if no custom message is provided.
+     * @returns The localized message.
      */
     function message(options, locale, defaultMessage) {
         var _a;
-        const msg = (_a = options === null || options === void 0 ? void 0 : options.message) !== null && _a !== void 0 ? _a : API.Utilities.Strings.EMPTY;
+        const msg = (_a = options === null || options === void 0 ? void 0 : options.message) !== null && _a !== void 0 ? _a : "";
         return msg.length > 0
-            ? API.Localization.Resolver.MessageResolver.resolve(locale, msg)
+            ? API.Localization.MessageResolver.resolve(locale, msg)
             : defaultMessage !== null && defaultMessage !== void 0 ? defaultMessage : "";
     }
-    Decorator.message = message;
+    Config.message = message;
     /**
-     * Extracts validation groups from the provided decorator properties.
-     * @typeParam T - The type of the object being validated.
-     * @param provider - The decorator properties.
-     * @returns An array of unique validation groups.
+     * Retrieves the unique groups from the provided options or returns the default groups.
+     * @param options - The options object.
+     * @param defaultGroups - The default groups.
+     * @returns An array of unique groups.
      */
     function groups(options, defaultGroups = []) {
         return Array.isArray(options === null || options === void 0 ? void 0 : options.groups)
             ? API.Utilities.Objects.unique(options.groups)
             : API.Utilities.Objects.unique(defaultGroups);
     }
-    Decorator.groups = groups;
+    Config.groups = groups;
     /**
-     * A helper function to determine whether to use a custom or a default key for a decorator.
-     * @param options - Decorator args.
-     * @param defaultKey - Key of the decorator if none present in options.
-     * @returns A defined decorator key or the default value.
+     * Returns the key based on the provided options or the default key.
+     * @param options - The options object.
+     * @param defaultKey - The default key.
+     * @returns The key.
      */
     function key(options, defaultKey) {
         var _a;
         return (_a = options === null || options === void 0 ? void 0 : options.key) !== null && _a !== void 0 ? _a : defaultKey;
     }
-    Decorator.key = key;
-})(Decorator || (Decorator = {}));
-export default Decorator;
+    Config.key = key;
+})(Config || (Config = {}));

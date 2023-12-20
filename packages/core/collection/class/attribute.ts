@@ -59,8 +59,8 @@ import API, { PrimitiveSet } from "../../index";
  */
 export function attribute<T extends API.Utilities.Objects.Optional<object | object[]>>(
   clazz: API.Utilities.Types.Class<any>
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorService.build<any>((meta, name) => {
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Basic.build<any>((meta, name) => {
     meta.getUntypedDescriptor(name).thisClass = clazz;
   });
 }

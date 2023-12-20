@@ -11,7 +11,7 @@ declare namespace Validation {
      *
      * @typeParam T - The type of the value being evaluated.
      */
-    type Evaluator<T> = ((value: T, context: any, locale: API.Localization.Resolver.LocaleResolver.Locale) => Result) & {};
+    type Evaluator<T> = ((value: T, context: any, locale: API.Localization.LocaleResolver.Locale) => Result) & {};
     /**
      * Represents metadata for a validation rule, including the associated validation groups and the evaluator function.
      *
@@ -58,7 +58,7 @@ declare namespace Validation {
     type Config<TClass> = {
         defaultValue?: API.Utilities.Objects.Payload<TClass>;
         groups?: string[];
-        locale?: API.Localization.Resolver.LocaleResolver.Locale;
+        locale?: API.Localization.LocaleResolver.Locale;
         asyncDelay?: number;
     };
     /**

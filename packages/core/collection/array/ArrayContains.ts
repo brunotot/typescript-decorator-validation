@@ -61,14 +61,18 @@ export function isArrayContainsValid<K, T extends Array<K>>(value: T, contains: 
  */
 export function ArrayContains<K, T extends Array<K>>(
   contains: K,
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.key(options, ARRAY_CONTAINS),
+      key: API.Decorator.Config.key(options, ARRAY_CONTAINS),
       valid: isArrayContainsValid(array, contains),
-      message: API.Decorator.message(options, locale, translate(locale, ARRAY_CONTAINS, contains)),
+      message: API.Decorator.Config.message(
+        options,
+        locale,
+        translate(locale, ARRAY_CONTAINS, contains)
+      ),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

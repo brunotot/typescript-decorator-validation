@@ -53,5 +53,5 @@ export declare function isValidDateRangeValid(value: any, startDateField: string
  * }
  * ```
  */
-export declare function ValidDateRange<T extends API.Decorator.Service.ClassDecoratorService.Type>(startDateField: string, endDateField: string, options?: API.Decorator.Options): API.Decorator.Service.ClassDecoratorService.Instance<API.Utilities.Types.UnwrapClass<T>>;
+export declare function ValidDateRange<T extends API.Decorator.ForClass.Basic.Scope>(startDateField: string, endDateField: string, options?: API.Decorator.Config.Options): API.Decorator.ForClass.Basic.Instance<API.Utilities.Types.UnwrapClass<T>>;
 //# sourceMappingURL=ValidDateRange.d.ts.map

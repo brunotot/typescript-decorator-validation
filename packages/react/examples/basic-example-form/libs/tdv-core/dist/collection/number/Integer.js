@@ -55,9 +55,9 @@ function isIntegerValid(num) {
  * ```
  */
 export function Integer(options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((num, _context, locale) => ({
-        key: API.Decorator.key(options, INTEGER),
+    return API.Decorator.ForField.Validator.build((num, _context, locale) => ({
+        key: API.Decorator.Config.key(options, INTEGER),
         valid: isIntegerValid(num),
-        message: API.Decorator.message(options, locale, translate(locale, INTEGER, num)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, INTEGER, num)),
+    }), API.Decorator.Config.groups(options));
 }

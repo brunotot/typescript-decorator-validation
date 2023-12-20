@@ -12,7 +12,7 @@ export abstract class AbstractMetaService<Entry> {
   #injectionKey: string;
   #initial: () => Entry;
   #class?: API.Utilities.Types.Class<any>;
-  protected context?: API.Decorator.Context;
+  protected context?: API.Decorator.ForField.Basic.Context<any>;
 
   /**
    * Constructor for AbstractMetaService.

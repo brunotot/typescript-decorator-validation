@@ -60,14 +60,18 @@ function isValueMinValid(num: API.Utilities.Objects.Optional<number>, min: numbe
  */
 export function ValueMin<T extends API.Utilities.Objects.Optional<number>>(
   min: number,
-  options?: API.Decorator.Options
-): API.Decorator.Service.FieldDecoratorService.Instance<T> {
-  return API.Decorator.Service.FieldDecoratorValidatorService.build<T>(
+  options?: API.Decorator.Config.Options
+): API.Decorator.ForField.Basic.Instance<T> {
+  return API.Decorator.ForField.Validator.build<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.key(options, VALUE_MIN),
+      key: API.Decorator.Config.key(options, VALUE_MIN),
       valid: isValueMinValid(value, min),
-      message: API.Decorator.message(options, locale, translate(locale, VALUE_MIN, min, value)),
+      message: API.Decorator.Config.message(
+        options,
+        locale,
+        translate(locale, VALUE_MIN, min, value)
+      ),
     }),
-    API.Decorator.groups(options)
+    API.Decorator.Config.groups(options)
   );
 }

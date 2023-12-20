@@ -5,7 +5,7 @@ export const MIN_LENGTH = "MinLength";
 /** Internal validation function for {@link MinLength} validator. */
 export function isMinLengthValid(value, min) {
     API.Utilities.Objects.assertType("string", value);
-    return (value !== null && value !== void 0 ? value : API.Utilities.Strings.EMPTY).length >= min;
+    return (value !== null && value !== void 0 ? value : "").length >= min;
 }
 /**
  * Checks if decorated string contains a specific number of characters.
@@ -53,9 +53,9 @@ export function isMinLengthValid(value, min) {
  * ```
  */
 export function MinLength(min, options) {
-    return API.Decorator.Service.FieldDecoratorValidatorService.build((value, _context, locale) => ({
-        key: API.Decorator.key(options, MIN_LENGTH),
+    return API.Decorator.ForField.Validator.build((value, _context, locale) => ({
+        key: API.Decorator.Config.key(options, MIN_LENGTH),
         valid: isMinLengthValid(value, min),
-        message: API.Decorator.message(options, locale, translate(locale, MIN_LENGTH, min)),
-    }), API.Decorator.groups(options));
+        message: API.Decorator.Config.message(options, locale, translate(locale, MIN_LENGTH, min)),
+    }), API.Decorator.Config.groups(options));
 }
