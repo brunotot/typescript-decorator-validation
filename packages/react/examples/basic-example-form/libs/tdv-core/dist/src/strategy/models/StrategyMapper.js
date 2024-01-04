@@ -1,4 +1,3 @@
-import Strategy from "..";
 import { FunctionStrat } from "../service/impl/FunctionStrategy";
 import { ObjectArrayGetterStrat } from "../service/impl/ObjectArrayGetterStrategy";
 import { ObjectArrayStrat } from "../service/impl/ObjectArrayStrategy";
@@ -8,6 +7,7 @@ import { PrimitiveArrayGetterStrat } from "../service/impl/PrimitiveArrayGetterS
 import { PrimitiveArrayStrat } from "../service/impl/PrimitiveArrayStrategy";
 import { PrimitiveGetterStrat } from "../service/impl/PrimitiveGetterStrategy";
 import { PrimitiveStrat } from "../service/impl/PrimitiveStrategy";
+import StrategyTypes from "./StrategyTypes";
 /**
  * A namespace responsible for exposing reflection-strategy-specific methods and types
  */
@@ -23,15 +23,15 @@ var StrategyMapper;
     // prettier-ignore
     StrategyMapper.data = {
         unknown: (() => { }),
-        [Strategy.Types.Primitive.Name]: PrimitiveStrat,
-        [Strategy.Types.Object.Name]: ObjectStrat,
-        [Strategy.Types.PrimitiveArray.Name]: PrimitiveArrayStrat,
-        [Strategy.Types.ObjectArray.Name]: ObjectArrayStrat,
-        [Strategy.Types.PrimitiveGetter.Name]: PrimitiveGetterStrat,
-        [Strategy.Types.ObjectGetter.Name]: ObjectGetterStrat,
-        [Strategy.Types.PrimitiveArrayGetter.Name]: PrimitiveArrayGetterStrat,
-        [Strategy.Types.ObjectArrayGetter.Name]: ObjectArrayGetterStrat,
-        [Strategy.Types.Function.Name]: FunctionStrat
+        [StrategyTypes.Primitive.Name]: PrimitiveStrat,
+        [StrategyTypes.Object.Name]: ObjectStrat,
+        [StrategyTypes.PrimitiveArray.Name]: PrimitiveArrayStrat,
+        [StrategyTypes.ObjectArray.Name]: ObjectArrayStrat,
+        [StrategyTypes.PrimitiveGetter.Name]: PrimitiveGetterStrat,
+        [StrategyTypes.ObjectGetter.Name]: ObjectGetterStrat,
+        [StrategyTypes.PrimitiveArrayGetter.Name]: PrimitiveArrayGetterStrat,
+        [StrategyTypes.ObjectArrayGetter.Name]: ObjectArrayGetterStrat,
+        [StrategyTypes.Function.Name]: FunctionStrat
     };
 })(StrategyMapper || (StrategyMapper = {}));
 export default StrategyMapper;

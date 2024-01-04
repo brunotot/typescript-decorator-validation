@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
+import { type Form, type ValidationResult } from "tdv-core";
 import type TdvCore from "tdv-core";
-import type { Validation } from "tdv-core";
 
 /**
  * A namespace which holds all necessary data for `useValidation` hook
@@ -11,9 +11,10 @@ namespace UseValidationHook {
    */
   export type UseValidationData<TClass> = {
     isValid: boolean;
-    detailedErrors: TdvCore.Strategy.Factory.Impl.DetailedErrors<TClass>;
-    errors: TdvCore.Strategy.Factory.Impl.Errors<TClass>;
-    engine: Validation.ValidationEngine<TClass>;
+    detailedErrors: TdvCore.Strategy.Impl.DetailedErrors<TClass>;
+    errors: TdvCore.Strategy.Impl.Errors<TClass>;
+    engine: Form<TClass>;
+    globalErrors: ValidationResult[];
   };
 
   /**
@@ -31,6 +32,9 @@ namespace UseValidationHook {
   export type UseValidationConfig<TClass> = {
     defaultValue?: TdvCore.Utilities.Objects.Payload<TClass>;
     groups?: string[];
+    resolveDecoratorArgs?: () => TdvCore.Decorator.DecoratorArgs;
+    asyncDelay?: number;
+    locale?: TdvCore.Localization.Locale;
   };
 }
 

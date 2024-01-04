@@ -1,4 +1,4 @@
-import Errors from "./Errors";
+import { TextField } from "@mui/material";
 
 export type InputProps = {
   label: string;
@@ -7,6 +7,7 @@ export type InputProps = {
   onChange: (value: string) => void;
   errors?: string[];
   type?: "text" | "password" | "date";
+  labelFloatAlways?: boolean;
 };
 
 /**
@@ -19,28 +20,19 @@ export default function Input({
   placeholder,
   errors = [],
   type = "text",
+  labelFloatAlways = false,
 }: InputProps) {
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "0.125rem",
-        flexDirection: "column",
-        padding: "0.5rem",
-        borderRadius: "0.25rem",
-        backgroundColor: errors.length === 0 ? "green" : "lightgray",
-        textAlign: "left",
-      }}
-    >
-      {label}
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        style={{ padding: "0.75rem", marginBottom: 2 }}
-        onChange={(e) => onChange(e.target.value)}
-      />
-      <Errors errors={errors} />
-    </div>
+    <TextField
+      fullWidth
+      type={type}
+      label={label}
+      placeholder={placeholder}
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      helperText={errors[0]}
+      error={errors.length > 0}
+      InputLabelProps={{ shrink: labelFloatAlways ? true : undefined }}
+    />
   );
 }

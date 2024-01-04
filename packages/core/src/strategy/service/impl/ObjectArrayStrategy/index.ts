@@ -1,3 +1,4 @@
+import type API from "../../../../index";
 import { AbstractValidationStrategyService } from "../../../service/AbstractValidationStrategyService";
 import { ObjectStrat } from "../ObjectStrategy";
 import type ns from "./types";
@@ -27,9 +28,13 @@ export class ObjectArrayStrat<F> extends AbstractValidationStrategyService<
    * The method validates both the array as a whole (`field`) and each individual object (`data`)
    * using the appropriate validation rules.
    */
-  test(value: any[], context: any): [ns.DetailedErrors<F>, ns.SimpleErrors<F>] {
+  test(
+    value: any[],
+    context: any,
+    args: API.Decorator.DecoratorArgs
+  ): [ns.DetailedErrors<F>, ns.SimpleErrors<F>] {
     const _value = value ?? [];
-    const rootResult = this.getRootErrors(value, context);
+    const rootResult = this.getRootErrors(value, context, args);
 
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     const getData = (element: any) => {
@@ -40,7 +45,7 @@ export class ObjectArrayStrat<F> extends AbstractValidationStrategyService<
         this.locale,
         this.eventEmitter,
         this.engineCfg.asyncDelay!
-      ).test(element, context);
+      ).test(element, context, args);
       return {
         detailedErrors,
         errors,

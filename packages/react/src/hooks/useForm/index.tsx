@@ -41,11 +41,14 @@ export default function useForm<TClass>(
     standalone,
     validateImmediately,
     validationGroups: groups,
+    resolveDecoratorArgs,
     onChange,
+    asyncDelay,
+    locale,
   }: ns.UseFormConfig<TClass> = {
     onSubmit: async () => {},
     standalone: true,
-    validateImmediately: false,
+    validateImmediately: true,
     validationGroups: [],
     onChange: () => {},
   }
@@ -57,13 +60,14 @@ export default function useForm<TClass>(
   const instantContextValidation = standalone ? validateImmediately! : ctx? ctx.validateImmediately : validateImmediately!;
   const isSubmitted = instantContextValidation || submitted;
 
-  const [form, setForm, { errors, detailedErrors, isValid, engine }] = useValidation<TClass>(
-    model,
-    {
+  const [form, setForm, { globalErrors, errors, detailedErrors, isValid, engine }] =
+    useValidation<TClass>(model, {
       defaultValue,
       groups,
-    }
-  );
+      resolveDecoratorArgs,
+      asyncDelay,
+      locale,
+    });
 
   //* Dispatcher function which fires only when
   //* itself isn't a parent and context exists.
@@ -83,7 +87,7 @@ export default function useForm<TClass>(
   };
 
   //* When input data changes execute callback.
-  useEffectWhenMounted(() => onChange?.(), [form]);
+  useEffectWhenMounted(() => onChange?.(form), [form]);
 
   //* When submitted flag from context gets changed.
   useEffect(() => {
@@ -123,8 +127,9 @@ export default function useForm<TClass>(
     isSubmitted,
     onSubmit,
     providerProps,
-    errors: isSubmitted ? errors : ({} as any),
-    detailedErrors: isSubmitted ? detailedErrors : ({} as any),
+    globalErrors,
+    errors: /*isSubmitted ? */ errors /* : (clearErrors(errors) as any)*/,
+    detailedErrors: /*isSubmitted ? */ detailedErrors /* : (clearErrors(detailedErrors) as any)*/,
     reset,
   };
 

@@ -6,7 +6,7 @@ import type ns from "./types";
  *
  * @typeParam F - The type of the field being validated.
  *
- * @extends AbstractValidationStrategyService<F, Validation.Result[], string[]>
+ * @extends AbstractValidationStrategyService<F, ValidationResult[], string[]>
  */
 export declare class FunctionStrat<F> extends AbstractValidationStrategyService<F, ns.DetailedErrors, ns.SimpleErrors> {
     private static readonly EMPTY;
@@ -16,8 +16,8 @@ export declare class FunctionStrat<F> extends AbstractValidationStrategyService<
      * @param value - The value to be validated.
      * @param context - The context in which the validation is taking place.
      *
-     * @returns A tuple containing an array of detailed validation results (`Validation.Result[]`) and an array of simplified error messages (`string[]`).
+     * @returns A tuple containing an array of detailed validation results (`ValidationResult[]`) and an array of simplified error messages (`string[]`).
      */
-    test(value: API.Utilities.Types.Function, _context: any): [ns.DetailedErrors, ns.SimpleErrors];
+    test(value: API.Utilities.Types.FunctionType, _context: any): [ns.DetailedErrors, ns.SimpleErrors];
 }
 //# sourceMappingURL=index.d.ts.map

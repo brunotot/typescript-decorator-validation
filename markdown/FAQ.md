@@ -66,7 +66,7 @@ import { validate } from "tdv-core";
 function MinLength(minLength: number) {
   return validate<string>({
     groups: [],
-    isValid: (value) => ({
+    isValid: value => ({
       key: "MinLength",
       message: `Input must have at least ${minLength} characters.`,
       valid: value.length >= minLength,
@@ -176,9 +176,7 @@ const translations: Record<string, Record<string, string>> = {
 };
 
 // provide a custom functional configurer which consumes your localized messages
-Localization.MessageResolver.configure(
-  (locale, message) => translations[locale][message]
-);
+Localization.MessageResolver.configureParser((locale, message) => translations[locale][message]);
 
 class SomeClass {
   @collection.string.Required("required")

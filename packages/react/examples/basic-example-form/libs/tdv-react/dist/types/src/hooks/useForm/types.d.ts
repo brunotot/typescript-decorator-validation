@@ -1,5 +1,5 @@
 import { type Dispatch, type SetStateAction } from "react";
-import type TdvCore from "tdv-core";
+import TdvCore, { ValidationResult } from "tdv-core";
 import type FormContextNamespace from "../../contexts/FormContext/types";
 /**
  * A namespace containing all types related to the `useForm` hook.
@@ -13,9 +13,12 @@ declare namespace UseFormHook {
         validationGroups?: string[];
         validateImmediately?: boolean;
         standalone?: boolean;
+        resolveDecoratorArgs?: () => TdvCore.Decorator.DecoratorArgs;
         onSubmit?: () => Promise<void> | void;
         onSubmitValidationFail?: (errors: TdvCore.Strategy.Factory.Impl.Errors<TClass>) => void;
-        onChange?: () => void;
+        onChange?: (value: TdvCore.Utilities.Objects.Payload<TClass>) => void;
+        asyncDelay?: number;
+        locale?: TdvCore.Localization.Locale;
     };
     /**
      * Data returned from the `useForm` hook.
@@ -26,6 +29,7 @@ declare namespace UseFormHook {
         onSubmit: () => Promise<void>;
         mutations: UseFormChangeHandlerMap<TdvCore.Utilities.Objects.Payload<TClass>>;
         providerProps: Omit<FormContextNamespace.FormProviderProps, "children">;
+        globalErrors: ValidationResult[];
         errors: TdvCore.Strategy.Factory.Impl.Errors<TClass>;
         detailedErrors: TdvCore.Strategy.Factory.Impl.DetailedErrors<TClass>;
         reset: (...fieldPaths: Array<PayloadFieldPath<TdvCore.Utilities.Objects.Payload<TClass>>>) => void;

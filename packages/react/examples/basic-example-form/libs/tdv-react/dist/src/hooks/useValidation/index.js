@@ -21,28 +21,36 @@ import useValidationEngine from "../useValidationEngine";
  *
  * @typeParam TClass - represents parent form class model holding context of current compontent
  */
-export default function useValidation(model, { defaultValue, groups } = {}) {
+export default function useValidation(model, { defaultValue, groups, asyncDelay, locale, resolveDecoratorArgs = () => ({}), } = {}) {
     const engine = useValidationEngine(model, {
         groups,
         defaultValue,
+        asyncDelay,
+        locale,
     });
-    const [form, setForm] = useState(engine.hostDefault);
-    const [details, setDetails] = useState({});
-    const [simpleErrors, setSimpleErrors] = useState({});
+    const [form, setForm] = useState(engine.defaultValue);
+    const decoratorArgs = resolveDecoratorArgs();
+    const [globalErrors, setGlobalErrors] = useState(() => engine.validate(form, decoratorArgs).globalErrors);
+    const [details, setDetails] = useState(() => engine.validate(form, decoratorArgs).detailedErrors);
+    const [simpleErrors, setSimpleErrors] = useState(() => {
+        return engine.validate(form, decoratorArgs).errors;
+    });
     useEffect(() => {
-        engine.registerAsync(({ errors, detailedErrors }) => {
+        engine.async.register(({ errors, detailedErrors, globalErrors }) => {
             setDetails(detailedErrors);
             setSimpleErrors(errors);
+            setGlobalErrors(globalErrors);
         });
         return () => {
-            engine.unregisterAsync();
+            engine.async.unregister();
         };
-    }, []);
+    }, [engine]);
     useEffect(() => {
-        const { errors, detailedErrors } = engine.validate(form);
+        const { errors, detailedErrors, globalErrors } = engine.validate(form, decoratorArgs);
         setDetails(detailedErrors);
         setSimpleErrors(errors);
-    }, [form]);
+        setGlobalErrors(globalErrors);
+    }, [form, engine, JSON.stringify(decoratorArgs)]);
     return [
         form,
         setForm,
@@ -51,6 +59,7 @@ export default function useValidation(model, { defaultValue, groups } = {}) {
             errors: simpleErrors,
             detailedErrors: details,
             engine,
+            globalErrors,
         },
     ];
 }

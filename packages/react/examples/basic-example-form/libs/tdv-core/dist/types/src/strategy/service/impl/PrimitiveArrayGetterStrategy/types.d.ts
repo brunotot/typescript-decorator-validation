@@ -20,19 +20,19 @@ declare namespace PrimitiveArrayGetterStrategyType {
     /**
      * Represents the detailed error structure for validating arrays of primitive types.
      *
-     * - `node`: An array of `Validation.Result` objects that represent detailed validation errors at the array level.
-     * - `children`: A two-dimensional array of `Validation.Result` objects that represent detailed validation errors for each element in the array.
+     * - `node`: An array of `ValidationResult` objects that represent detailed validation errors at the array level.
+     * - `children`: A two-dimensional array of `ValidationResult` objects that represent detailed validation errors for each element in the array.
      */
     type DetailedErrors = {
-        node: API.Validation.Result[];
-        children: API.Validation.Result[][];
+        node: API.Validation.ValidationResult[];
+        children: API.Validation.ValidationResult[][];
     };
     /**
      * Type guard to check if a certain field in a type matches this strategy.
      * @typeParam T - The type containing the field.
      * @typeParam K - The key of the field.
      */
-    type matches<T, K extends keyof T> = true extends API.Utilities.Booleans.isGetter<T, K> ? API.Utilities.Arrays.getArrayType<T[K]> extends never ? false : API.Utilities.Booleans.isAnyOf<API.Utilities.Arrays.getArrayType<T[K]>, API.Utilities.Types.Primitive> : false;
+    type matches<T, K extends keyof T> = true extends API.Utilities.Booleans.isGetter<T, K> ? API.Utilities.Arrays.getArrayType<T[K]> extends never ? false : API.Utilities.Booleans.isAnyOf<API.Utilities.Arrays.getArrayType<T[K]>, API.Utilities.Types.PrimitiveType> : false;
     /**
      * Type for the handler function based on the field and result types.
      * @typeParam T - The type containing the field.

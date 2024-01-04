@@ -1,11 +1,4 @@
 /**
- * Converts a camelCase string to a text string with spaces.
- * @param camelCase - The camelCase string to convert.
- * @param capitalizeFirstLetter - Whether to capitalize the first letter. Default is true.
- * @returns A string where camelCasing is replaced by spaces.
- */
-export declare function convertCamelCaseToText(camelCase: string, capitalizeFirstLetter?: boolean): string;
-/**
  * Formats a string by replacing placeholders with provided arguments.
  *
  * @param str - The string containing placeholders in the form of `{0}`, `{1}`, etc.

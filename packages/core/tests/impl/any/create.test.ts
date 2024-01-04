@@ -1,5 +1,5 @@
-import { create } from "../../../collection/any/create";
 import $ from "../../../index";
+import { createFieldValidator } from "../../../src/decorators";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 
@@ -12,7 +12,7 @@ const errorData: Type[] = ["aaaaaaaaaaa", "test"];
 
 /*** Model ***/
 class Model implements IMock<Type> {
-  @create((v) => ({
+  @createFieldValidator(v => ({
     key: "CustomRule",
     message: "Invalid",
     valid: !v || (v.length > 5 && v.toLowerCase().includes("test")),

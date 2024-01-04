@@ -25,5 +25,5 @@ import ns from "./types";
  *
  * @typeParam TClass - represents parent form class model holding context of current compontent
  */
-export default function useForm<TClass>(model: TdvCore.Utilities.Types.Class<TClass>, { defaultValue, onSubmit: onSubmitParam, onSubmitValidationFail, standalone, validateImmediately, validationGroups: groups, onChange, }?: ns.UseFormConfig<TClass>): ns.UseFormReturn<TClass>;
+export default function useForm<TClass>(model: TdvCore.Utilities.Types.Class<TClass>, { defaultValue, onSubmit: onSubmitParam, onSubmitValidationFail, standalone, validateImmediately, validationGroups: groups, resolveDecoratorArgs, onChange, asyncDelay, locale, }?: ns.UseFormConfig<TClass>): ns.UseFormReturn<TClass>;
 //# sourceMappingURL=index.d.ts.map

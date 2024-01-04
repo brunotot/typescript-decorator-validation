@@ -9,7 +9,7 @@ export default function useReset<TClass>({
   handleSetSubmitted,
 }: ns.UseResetConfig<TClass>): ns.UseResetReturn<TClass> {
   const reset: UseFormNamespace.UseFormData<TClass>["reset"] = (...paths) => {
-    const noArgsInstance = engine.hostDefault;
+    const noArgsInstance = engine.defaultValue;
 
     if (paths.length === 0) {
       setForm(noArgsInstance);
@@ -33,9 +33,7 @@ export default function useReset<TClass>({
     }
 
     const formClone = structuredClone(form);
-    const hasCloned = paths.some((p) =>
-      cloneField(noArgsInstance, formClone, p.split("."))
-    );
+    const hasCloned = paths.some(p => cloneField(noArgsInstance, formClone, p.split(".")));
     if (hasCloned) {
       setForm(formClone);
     }

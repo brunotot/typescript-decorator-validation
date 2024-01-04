@@ -1,13 +1,13 @@
 {
   "extends": "./../../tsconfig.json",
   "exclude": ["tests", "jest.config.js", "src/main.ts", "dev"],
-  "files": ["dev/playground.ts"],
+  "files": [],
   "include": [
     "index.ts",
     "src",
     "src/localization/translations/*.json",
     "translations",
-    "collection"
+    "validators"
   ],
   "compilerOptions": {
     "module": "ESNext",

@@ -1,0 +1,12 @@
+.syntax-highlighter {
+  position: relative;
+}
+
+.syntax-highlighter > pre {
+  letter-spacing: 1.5px;
+  margin: 0 !important;
+}
+
+.syntax-highlighter > pre * {
+  word-spacing: 2px;
+}

@@ -20,10 +20,10 @@ export class ObjectStrat extends AbstractValidationStrategyService {
      * The method validates both the object as a whole (`node`) and its properties (`children`)
      * using the appropriate validation rules.
      */
-    test(value, context) {
+    test(value, context, args) {
         const { detailedErrors, errors } = this.fieldEngine.validate(value);
         const rootResult = [
-            ...this.getRootErrors(value, context),
+            ...this.getRootErrors(value, context, args),
             ...this.getClassErrors(value, context),
         ];
         const detailedErrorsResult = {

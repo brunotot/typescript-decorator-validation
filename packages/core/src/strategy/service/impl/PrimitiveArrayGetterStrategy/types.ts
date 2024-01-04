@@ -24,12 +24,12 @@ namespace PrimitiveArrayGetterStrategyType {
   /**
    * Represents the detailed error structure for validating arrays of primitive types.
    *
-   * - `node`: An array of `Validation.Result` objects that represent detailed validation errors at the array level.
-   * - `children`: A two-dimensional array of `Validation.Result` objects that represent detailed validation errors for each element in the array.
+   * - `node`: An array of `ValidationResult` objects that represent detailed validation errors at the array level.
+   * - `children`: A two-dimensional array of `ValidationResult` objects that represent detailed validation errors for each element in the array.
    */
   export type DetailedErrors = {
-    node: API.Validation.Result[];
-    children: API.Validation.Result[][];
+    node: API.Validation.ValidationResult[];
+    children: API.Validation.ValidationResult[][];
   };
 
   /**
@@ -42,7 +42,7 @@ namespace PrimitiveArrayGetterStrategyType {
     true extends API.Utilities.Booleans.isGetter<T, K>
       ? API.Utilities.Arrays.getArrayType<T[K]> extends never
         ? false
-        : API.Utilities.Booleans.isAnyOf<API.Utilities.Arrays.getArrayType<T[K]>, API.Utilities.Types.Primitive>
+        : API.Utilities.Booleans.isAnyOf<API.Utilities.Arrays.getArrayType<T[K]>, API.Utilities.Types.PrimitiveType>
       : false;
 
   /**

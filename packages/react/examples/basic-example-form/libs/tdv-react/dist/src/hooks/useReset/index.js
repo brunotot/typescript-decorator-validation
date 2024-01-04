@@ -1,6 +1,6 @@
 export default function useReset({ engine, form, setForm, submitted, handleSetSubmitted, }) {
     const reset = (...paths) => {
-        const noArgsInstance = engine.hostDefault;
+        const noArgsInstance = engine.defaultValue;
         if (paths.length === 0) {
             setForm(noArgsInstance);
             handleSetSubmitted(false);
@@ -21,7 +21,7 @@ export default function useReset({ engine, form, setForm, submitted, handleSetSu
             return cloneField(from[parentPath], to[parentPath], restPaths);
         }
         const formClone = structuredClone(form);
-        const hasCloned = paths.some((p) => cloneField(noArgsInstance, formClone, p.split(".")));
+        const hasCloned = paths.some(p => cloneField(noArgsInstance, formClone, p.split(".")));
         if (hasCloned) {
             setForm(formClone);
         }

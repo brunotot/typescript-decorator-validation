@@ -1,1 +1,1 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/localization/index.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,cAAc,MAAM,2BAA2B,CAAC;AAC5D,OAAO,KAAK,eAAe,MAAM,4BAA4B,CAAC;AAC9D,OAAO,KAAK,oBAAoB,MAAM,gCAAgC,CAAC;AACvE,OAAO,KAAK,kBAAkB,MAAM,8BAA8B,CAAC"}
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/localization/index.ts"],"names":[],"mappings":"AAAA,cAAc,2BAA2B,CAAC;AAC1C,cAAc,4BAA4B,CAAC"}

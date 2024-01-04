@@ -18,7 +18,7 @@ namespace PrimitiveGetterStrategyType {
   /**
    * Represents the detailed error structure for validating getter methods that return primitive types.
    */
-  export type DetailedErrors = API.Validation.Result[];
+  export type DetailedErrors = API.Validation.ValidationResult[];
 
   /**
    * Type guard to check if a certain field in a type matches this strategy.
@@ -28,7 +28,7 @@ namespace PrimitiveGetterStrategyType {
   // prettier-ignore
   export type matches<T, K extends keyof T> =
     true extends API.Utilities.Booleans.isGetter<T, K>
-      ? API.Utilities.Booleans.isAnyOf<T[K], API.Utilities.Types.Primitive>
+      ? API.Utilities.Booleans.isAnyOf<T[K], API.Utilities.Types.PrimitiveType>
       : false;
 
   /**

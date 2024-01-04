@@ -21,5 +21,5 @@ import type ns from "./types";
  *
  * @typeParam TClass - represents parent form class model holding context of current compontent
  */
-export default function useValidation<TClass>(model: TdvCore.Utilities.Types.Class<TClass>, { defaultValue, groups }?: ns.UseValidationConfig<TClass>): ns.UseValidationReturn<TClass>;
+export default function useValidation<TClass>(model: TdvCore.Utilities.Types.Class<TClass>, { defaultValue, groups, asyncDelay, locale, resolveDecoratorArgs, }?: ns.UseValidationConfig<TClass>): ns.UseValidationReturn<TClass>;
 //# sourceMappingURL=index.d.ts.map

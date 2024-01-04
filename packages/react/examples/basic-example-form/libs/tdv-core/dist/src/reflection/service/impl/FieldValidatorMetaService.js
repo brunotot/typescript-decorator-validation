@@ -12,27 +12,25 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
 var _FieldValidatorMetaService_instances, _FieldValidatorMetaService_fields, _FieldValidatorMetaService_handleClassInit, _FieldValidatorMetaService_handleContextInit;
 import API from "../../../../index";
 import { AbstractMetaService } from "../AbstractMetaService";
+import { ControlDescriptor } from "./../../models/ControlDescriptor";
 /**
  * A configurer class which allows for easier manipulation of decorated fields and corresponding metadata
- *
- * @remarks
- * This class is responsible for managing metadata related to validation.
- * It provides methods to add validators, get field names, and manage descriptors.
+ * @remarks This class is responsible for managing metadata related to validation. It provides methods to add validators, get field names, and manage descriptors.
  */
 export class FieldValidatorMetaService extends AbstractMetaService {
     /**
      * Static method to create a new instance of FieldValidatorMetaService.
-     *
      * @param strategy - The strategy to inject.
      * @returns A new instance of FieldValidatorMetaService.
      */
-    static inject(strategy) {
-        return new FieldValidatorMetaService(strategy);
+    static inject(strategy, eventEmitter) {
+        return new FieldValidatorMetaService(strategy, eventEmitter);
     }
-    constructor(strategy) {
+    constructor(strategy, eventEmitter) {
         super(FieldValidatorMetaService.name, strategy, () => new Map());
         _FieldValidatorMetaService_instances.add(this);
         _FieldValidatorMetaService_fields.set(this, void 0);
+        this.eventEmitter = eventEmitter;
         API.Reflection.isClass(strategy)
             ? __classPrivateFieldGet(this, _FieldValidatorMetaService_instances, "m", _FieldValidatorMetaService_handleClassInit).call(this, strategy)
             : __classPrivateFieldGet(this, _FieldValidatorMetaService_instances, "m", _FieldValidatorMetaService_handleContextInit).call(this, strategy);
@@ -45,7 +43,7 @@ export class FieldValidatorMetaService extends AbstractMetaService {
      * @param groups - Optional validation groups.
      */
     addValidator(field, isValid, groups) {
-        this.getUntypedDescriptor(field).rules.root.add({
+        this.getUntypedDescriptor(field).validations.root.add({
             validate: isValid,
             groups,
         });
@@ -83,17 +81,18 @@ export class FieldValidatorMetaService extends AbstractMetaService {
      * @param fieldKey - The key of the field.
      * @returns The untyped descriptor.
      */
-    getUntypedDescriptor(fieldKey) {
+    getUntypedDescriptor(fieldKey, eventEmitter) {
+        this.eventEmitter = eventEmitter !== null && eventEmitter !== void 0 ? eventEmitter : this.eventEmitter;
         if (!this.hasDescriptor(fieldKey)) {
-            const cfg = { thisName: fieldKey };
-            const fieldValue = new API.Reflection.Descriptor.Instance(cfg);
+            const cfg = { thisName: fieldKey, eventEmitter: this.eventEmitter };
+            const fieldValue = new ControlDescriptor(cfg);
             this.data.set(fieldKey, fieldValue);
         }
         const descriptor = this.data.get(fieldKey);
-        if (!descriptor) {
+        if (!descriptor)
             throw new Error(`Descriptor "${fieldKey}" does not exist`);
-        }
         descriptor.hostClass = this.class ? this.class : descriptor.hostClass;
+        descriptor.eventEmitter = this.eventEmitter;
         return descriptor;
     }
 }

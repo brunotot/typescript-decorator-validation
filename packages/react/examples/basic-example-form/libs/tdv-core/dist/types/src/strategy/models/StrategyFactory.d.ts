@@ -62,7 +62,7 @@ declare namespace StrategyFactory {
          * Type for detailed errors during validation.
          * @typeParam T - The type being validated.
          */
-        type DetailedErrors<T> = evaluate<T, API.Validation.Result[]>;
+        type DetailedErrors<T> = evaluate<T, API.Validation.ValidationResult[]>;
         /**
          * Type for basic errors during validation.
          * @typeParam T - The type being validated.

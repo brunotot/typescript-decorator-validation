@@ -1,3 +1,4 @@
+import API from "../../../../";
 import { AbstractValidationStrategyService } from "../../../service/AbstractValidationStrategyService";
 import type ns from "./types";
 /**
@@ -21,6 +22,6 @@ export declare class PrimitiveArrayGetterStrat<F> extends AbstractValidationStra
      * The method validates both the array as a whole (`node`) and each individual element (`children`)
      * using the appropriate validation rules.
      */
-    test(value: any[], context: any): [ns.DetailedErrors, ns.SimpleErrors];
+    test(value: any[], context: any, args: API.Decorator.DecoratorArgs): [ns.DetailedErrors, ns.SimpleErrors];
 }
 //# sourceMappingURL=index.d.ts.map

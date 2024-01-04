@@ -1,3 +1,4 @@
+import type API from "../../../../index";
 import { AbstractValidationStrategyService } from "../../../service/AbstractValidationStrategyService";
 import type ns from "./types";
 
@@ -26,11 +27,15 @@ export class ObjectStrat<F> extends AbstractValidationStrategyService<
    * The method validates both the object as a whole (`node`) and its properties (`children`)
    * using the appropriate validation rules.
    */
-  test(value: any, context: any): [ns.DetailedErrors<F>, ns.SimpleErrors<F>] {
+  test(
+    value: any,
+    context: any,
+    args: API.Decorator.DecoratorArgs
+  ): [ns.DetailedErrors<F>, ns.SimpleErrors<F>] {
     const { detailedErrors, errors } = this.fieldEngine.validate(value);
 
     const rootResult = [
-      ...this.getRootErrors(value, context),
+      ...this.getRootErrors(value, context, args),
       ...this.getClassErrors(value, context),
     ];
 

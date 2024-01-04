@@ -26,38 +26,48 @@ import type ns from "./types";
  */
 export default function useValidation<TClass>(
   model: TdvCore.Utilities.Types.Class<TClass>,
-  { defaultValue, groups }: ns.UseValidationConfig<TClass> = {}
+  {
+    defaultValue,
+    groups,
+    asyncDelay,
+    locale,
+    resolveDecoratorArgs = () => ({}),
+  }: ns.UseValidationConfig<TClass> = {}
 ): ns.UseValidationReturn<TClass> {
   const engine = useValidationEngine<TClass>(model, {
     groups,
     defaultValue,
+    asyncDelay,
+    locale,
   });
-  const [form, setForm] = useState<TdvCore.Utilities.Objects.Payload<TClass>>(
-    engine.hostDefault
+  const [form, setForm] = useState<TdvCore.Utilities.Objects.Payload<TClass>>(engine.defaultValue);
+  const decoratorArgs = resolveDecoratorArgs();
+  const [globalErrors, setGlobalErrors] = useState(
+    () => engine.validate(form, decoratorArgs).globalErrors
   );
-  const [details, setDetails] = useState(
-    {} as TdvCore.Strategy.Factory.Impl.DetailedErrors<TClass>
-  );
-  const [simpleErrors, setSimpleErrors] = useState(
-    {} as TdvCore.Strategy.Factory.Impl.Errors<TClass>
-  );
+  const [details, setDetails] = useState(() => engine.validate(form, decoratorArgs).detailedErrors);
+  const [simpleErrors, setSimpleErrors] = useState(() => {
+    return engine.validate(form, decoratorArgs).errors;
+  });
 
   useEffect(() => {
-    engine.registerAsync(({ errors, detailedErrors }) => {
+    engine.async.register(({ errors, detailedErrors, globalErrors }) => {
       setDetails(detailedErrors);
       setSimpleErrors(errors);
+      setGlobalErrors(globalErrors);
     });
 
     return () => {
-      engine.unregisterAsync();
+      engine.async.unregister();
     };
-  }, []);
+  }, [engine]);
 
   useEffect(() => {
-    const { errors, detailedErrors } = engine.validate(form);
+    const { errors, detailedErrors, globalErrors } = engine.validate(form, decoratorArgs);
     setDetails(detailedErrors);
     setSimpleErrors(errors);
-  }, [form]);
+    setGlobalErrors(globalErrors);
+  }, [form, engine, JSON.stringify(decoratorArgs)]);
 
   return [
     form,
@@ -67,6 +77,7 @@ export default function useValidation<TClass>(
       errors: simpleErrors,
       detailedErrors: details,
       engine,
+      globalErrors,
     },
   ];
 }

@@ -24,7 +24,7 @@ declare namespace ObjectStrategyType {
      */
     type DetailedErrors<F> = {
         /** An array of validation result objects that represent detailed validation errors at the decorated field level. */
-        root: API.Validation.Result[];
+        root: API.Validation.ValidationResult[];
         /** An object that represents detailed validation errors for each property in the object. */
         data: StrategyFactory.Impl.DetailedErrors<F>;
     };

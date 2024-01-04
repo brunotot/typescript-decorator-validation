@@ -16,8 +16,7 @@
     "deploy:minor": "bash ../../scripts/deploy.sh core minor",
     "deploy:major": "bash ../../scripts/deploy.sh core major",
     "deploy:patch": "bash ../../scripts/deploy.sh core patch",
-    "test": "bash ../../scripts/test.sh core",
-    "playground": "ts-node ./dev/playground.ts"
+    "test": "bash ../../scripts/test.sh core"
   },
   "repository": {
     "type": "git",

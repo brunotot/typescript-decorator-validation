@@ -10,7 +10,8 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _AbstractValidationStrategyService_locale, _AbstractValidationStrategyService_groups, _AbstractValidationStrategyService_engineCfg, _AbstractValidationStrategyService_classRules, _AbstractValidationStrategyService_descriptor, _AbstractValidationStrategyService_defaultParent, _AbstractValidationStrategyService_fieldDescriptor, _AbstractValidationStrategyService_eventEmitter;
-import API from "../../../index";
+import API from "../../index";
+import { Form } from "../../validation/models/Form";
 /**
  * The `AbstractValidationStrategyService` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.
  *
@@ -45,13 +46,16 @@ export class AbstractValidationStrategyService {
             asyncDelay,
         }, "f");
         const host = descriptor.hostClass;
-        __classPrivateFieldSet(this, _AbstractValidationStrategyService_classRules, API.Reflection.Services.ClassValidatorMetaService.inject(host).data, "f");
+        __classPrivateFieldSet(this, _AbstractValidationStrategyService_classRules, API.Reflection.ClassValidatorMetaService.inject(host, eventEmitter).data, "f");
+    }
+    set eventEmitter(v) {
+        __classPrivateFieldSet(this, _AbstractValidationStrategyService_eventEmitter, v, "f");
     }
     get eventEmitter() {
         return __classPrivateFieldGet(this, _AbstractValidationStrategyService_eventEmitter, "f");
     }
     get fieldEngine() {
-        return new API.Validation.ValidationEngine(__classPrivateFieldGet(this, _AbstractValidationStrategyService_descriptor, "f").thisClass, this.engineCfg);
+        return new Form(__classPrivateFieldGet(this, _AbstractValidationStrategyService_descriptor, "f").thisClass, this.engineCfg);
     }
     get engineCfg() {
         return __classPrivateFieldGet(this, _AbstractValidationStrategyService_engineCfg, "f");
@@ -75,7 +79,7 @@ export class AbstractValidationStrategyService {
     get fieldDescriptor() {
         if (__classPrivateFieldGet(this, _AbstractValidationStrategyService_fieldDescriptor, "f"))
             return __classPrivateFieldGet(this, _AbstractValidationStrategyService_fieldDescriptor, "f");
-        __classPrivateFieldSet(this, _AbstractValidationStrategyService_fieldDescriptor, API.Reflection.Services.FieldValidatorMetaService.inject(__classPrivateFieldGet(this, _AbstractValidationStrategyService_descriptor, "f").hostClass).getUntypedDescriptor(this.fieldName), "f");
+        __classPrivateFieldSet(this, _AbstractValidationStrategyService_fieldDescriptor, API.Reflection.FieldValidatorMetaService.inject(__classPrivateFieldGet(this, _AbstractValidationStrategyService_descriptor, "f").hostClass, __classPrivateFieldGet(this, _AbstractValidationStrategyService_eventEmitter, "f")).getUntypedDescriptor(this.fieldName, this.eventEmitter), "f");
         return __classPrivateFieldGet(this, _AbstractValidationStrategyService_fieldDescriptor, "f");
     }
     /**
@@ -102,11 +106,11 @@ export class AbstractValidationStrategyService {
     getClassErrors(fieldValue, parentValue) {
         return this.classRules.validate(fieldValue, parentValue, this.groups, this.locale);
     }
-    getRootErrors(fieldValue, parentValue) {
-        return this.fieldDescriptor.rules.root.validate(fieldValue, parentValue, this.groups, this.locale);
+    getRootErrors(fieldValue, parentValue, args) {
+        return this.fieldDescriptor.validations.root.validate(fieldValue, parentValue, this.groups, this.locale, args, __classPrivateFieldGet(this, _AbstractValidationStrategyService_eventEmitter, "f"), this.fieldName);
     }
     getArrayItemErrors(arrayItem, parentValue) {
-        return this.fieldDescriptor.rules.foreach.validate(arrayItem, parentValue, this.groups, this.locale);
+        return this.fieldDescriptor.validations.foreach.validate(arrayItem, parentValue, this.groups, this.locale);
     }
 }
 _AbstractValidationStrategyService_locale = new WeakMap(), _AbstractValidationStrategyService_groups = new WeakMap(), _AbstractValidationStrategyService_engineCfg = new WeakMap(), _AbstractValidationStrategyService_classRules = new WeakMap(), _AbstractValidationStrategyService_descriptor = new WeakMap(), _AbstractValidationStrategyService_defaultParent = new WeakMap(), _AbstractValidationStrategyService_fieldDescriptor = new WeakMap(), _AbstractValidationStrategyService_eventEmitter = new WeakMap();

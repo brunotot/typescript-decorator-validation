@@ -1,5 +1,5 @@
-import StrategyFactoryNamespace from "./models/StrategyFactory";
 import StrategyMapperNamespace from "./models/StrategyMapper";
+import StrategyFactoryNamespace from "./models/StrategyFactory";
 import StrategyTypesNamespace from "./models/StrategyTypes";
 import * as AbstractStrategyNamespace from "./service/AbstractValidationStrategyService";
 import * as FunctionStrategyNamespace from "./service/impl/FunctionStrategy";

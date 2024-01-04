@@ -1,32 +1,38 @@
-import collection from "./collection";
-import { create } from "./collection/any/create";
-import { attribute } from "./collection/class/attribute";
-import * as Decorator from "./src/decorators";
+import * as Decorators from "./src/decorators";
+import {
+  createClassDecorator,
+  createClassValidator,
+  createFieldDecorator,
+  createFieldValidator,
+} from "./src/decorators";
+import { attribute } from "./src/decorators/data/structural/attribute";
 import TdvCoreApi from "./src/index";
 import * as Localization from "./src/localization";
-import Reflection from "./src/reflection";
-import Strategy from "./src/strategy";
-import Utilities from "./src/utilities";
-import Validation from "./src/validation";
+import * as Reflection from "./src/reflection";
+import * as Strategy from "./src/strategy";
+import * as Utilities from "./src/utilities";
+import * as Validation from "./src/validation";
+import { Form } from "./src/validation/models/Form";
 
-export default TdvCoreApi;
+export import Class = Utilities.Types.Class;
+export import UnwrapClass = Utilities.Types.UnwrapClass;
+export import ValidationResult = Validation.ValidationResult;
 
 export {
-  Decorator,
-  Localization,
-  Reflection,
-  Strategy,
-  Utilities,
-  Validation,
+  Form,
   attribute,
-  collection,
-  create,
+  createClassDecorator,
+  createClassValidator,
+  createFieldDecorator,
+  createFieldValidator,
 };
+
+export { Decorators, Localization, Reflection, Strategy, Utilities, Validation };
 
 /**
  * An overridable interface designed for disabling nested validation on custom object types.
  * - when specified ***(example 1)***: an object type is considered primitive and it's simplified errors render as `string[]`
- * - when not specified ***(example 2)***: an object type is considered as is and it's simplified errors are evaluated by {@link Strategy.Factory.Impl.Errors evaluate<T, string[]>})
+ * - when not specified ***(example 2)***: an object type is considered as is and it's simplified errors are evaluated by {@link Strategy.Impl.Errors evaluate<T, string[]>})
  *
  * @example
  * 1: Disabling nested form validation for `Coordinate` class by augmenting the `PrimitiveSet` interface from `tdv-core`. This is a way of treating custom object types as primitives and avoiding recursive field validation
@@ -54,11 +60,11 @@ export {
  *
  * ```ts
  * // consumer.ts - model class which holds Coordinate property
- * import { create } from "tdv-core";
+ * import { createFieldValidator } from "tdv-core";
  *
  * // custom Coordinate validator
  * function MinX(minX: number) {
- *   return create<Coordinate>(coordinate => ({
+ *   return createFieldValidator<Coordinate>(coordinate => ({
  *     key: "MinX",
  *     valid: coordinate.x >= minX,
  *     message: `Minimum X is ${minX}`
@@ -97,6 +103,8 @@ export {
  * // consumer.ts - model class which holds Coordinate property
  * import { attribute } from "tdv-core";
  *import Localization from '../react/examples/basic-example-form/libs/tdv-core/dist/types/src/localization/index.d';
+import Utilities from './dist/src/utilities/index';
+import { Form } from './src/validation/models/Form';
 
  * class Consumer {
  *   \@attribute(Coordinate) // enables deep validation
@@ -111,3 +119,5 @@ export {
  * ```
  */
 export interface PrimitiveSet {}
+
+export default TdvCoreApi;

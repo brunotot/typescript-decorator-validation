@@ -1,17 +1,14 @@
 import API from "../../../index";
+import { FieldDecoratorCtx } from "./../../decorators";
 /**
  * Abstract class for managing metadata.
- *
- * @remarks
- * This class provides methods for managing metadata associated with a given strategy.
- * It can be used to get, set, and check for the existence of attributes in the metadata.
+ * @remarks This class provides methods for managing metadata associated with a given strategy. It can be used to get, set, and check for the existence of attributes in the metadata.
  */
 export declare abstract class AbstractMetaService<Entry> {
     #private;
-    protected context?: API.Decorator.ForField.Basic.Context<any>;
+    protected context?: FieldDecoratorCtx<any>;
     /**
      * Constructor for AbstractMetaService.
-     *
      * @param injectionKey - The key used for metadata injection.
      * @param strategy - The strategy for which metadata is managed.
      * @param initial - A function that returns the initial value for the metadata entry.

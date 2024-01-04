@@ -1,18 +1,9 @@
 import API from "../../index";
-import * as ClassDecoratorServiceNamespace from "./forClass/BasicClassDecorator";
-import * as ClassDecoratorValidatorServiceNamespace from "./forClass/ValidationClassDecorator";
-import * as FieldDecoratorServiceNamespace from "./forField/BasicFieldDecorator";
-import * as FieldDecoratorValidatorServiceNamespace from "./forField/ValidationFieldDecorator";
 
-export namespace ForField {
-  export import Basic = FieldDecoratorServiceNamespace;
-  export import Validator = FieldDecoratorValidatorServiceNamespace;
-}
+export * from "./data";
+export * from "./factory";
 
-export namespace ForClass {
-  export import Basic = ClassDecoratorServiceNamespace;
-  export import Validator = ClassDecoratorValidatorServiceNamespace;
-}
+export type DecoratorArgs = Record<string, any>;
 
 export namespace Config {
   /** Generic validator decorator configurable options. */
@@ -37,13 +28,11 @@ export namespace Config {
    */
   export function message(
     options: Options | undefined,
-    locale: API.Localization.LocaleResolver.Locale,
+    locale: API.Localization.Locale,
     defaultMessage: string
   ): string {
     const msg = options?.message ?? "";
-    return msg.length > 0
-      ? API.Localization.MessageResolver.resolve(locale, msg)
-      : defaultMessage ?? "";
+    return msg.length > 0 ? API.Localization.parseMessage(locale, msg) : defaultMessage ?? "";
   }
 
   /**

@@ -14,7 +14,7 @@ declare namespace FunctionStrategyType {
     /**
      * Type definition for detailed errors in this strategy.
      */
-    type DetailedErrors = API.Validation.Result | null;
+    type DetailedErrors = API.Validation.ValidationResult | null;
     /**
      * Type guard to check if a certain field in a type matches this strategy.
      * @typeParam T - The type containing the field.

@@ -23,12 +23,12 @@ namespace PrimitiveArrayStrategyType {
   /**
    * Represents the detailed error structure for validating arrays of primitive types.
    *
-   * - `root`: An array of `Validation.Result` objects that represent detailed validation errors at the array level.
-   * - `data`: A two-dimensional array of `Validation.Result` objects that represent detailed validation errors for each element in the array.
+   * - `root`: An array of `ValidationResult` objects that represent detailed validation errors at the array level.
+   * - `data`: A two-dimensional array of `ValidationResult` objects that represent detailed validation errors for each element in the array.
    */
   export type DetailedErrors = {
-    root: API.Validation.Result[];
-    data: API.Validation.Result[][];
+    root: API.Validation.ValidationResult[];
+    data: API.Validation.ValidationResult[][];
   };
 
   /**
@@ -40,7 +40,7 @@ namespace PrimitiveArrayStrategyType {
   export type matches<T, K extends keyof T> =
   API.Utilities.Arrays.getArrayType<T[K]> extends never
       ? false
-  : API.Utilities.Booleans.isAnyOf<API.Utilities.Arrays.getArrayType<T[K]>, API.Utilities.Types.Primitive>
+  : API.Utilities.Booleans.isAnyOf<API.Utilities.Arrays.getArrayType<T[K]>, API.Utilities.Types.PrimitiveType>
 
   /**
    * Type for the handler function based on the field and result types.
