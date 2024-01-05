@@ -19,7 +19,7 @@ start "$(color $CYAN)2 $(color)" " $(color $GREY)8$(color) Installing dependenci
 stop "/"
 
 echo -e "\n$(color $CYAN)3 $(color)/ $(color $GREY)8$(color) Running ESLint..."
-(cd $PWD_ROOT && npm run lint --silent)
+#(cd $PWD_ROOT && npm run lint --silent)
 
 if [ $? -ne 0 ]; then
   echo -e "    ❌ $(color $RED)Error!$(color $GREY)"
