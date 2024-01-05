@@ -1,3 +1,4 @@
+import type API from "../../../../index";
 import { AbstractValidationStrategyService } from "../../../service/AbstractValidationStrategyService";
 import type ns from "./types";
 
@@ -6,7 +7,7 @@ import type ns from "./types";
  *
  * @typeParam F - The type of the field being validated.
  *
- * @extends AbstractValidationStrategyService<F, Validation.Result[], string[]>
+ * @extends AbstractValidationStrategyService<F,ValidationResult[],string[]>
  */
 export class PrimitiveStrat<F> extends AbstractValidationStrategyService<
   F,
@@ -20,10 +21,14 @@ export class PrimitiveStrat<F> extends AbstractValidationStrategyService<
    * @param context - The context in which the validation is taking place.
    * @param groups - Optional validation groups to consider during validation.
    *
-   * @returns A tuple containing an array of detailed validation results (`Validation.Result[]`) and an array of simplified error messages (`string[]`).
+   * @returns A tuple containing an array of detailed validation results (`ValidationResult[]`) and an array of simplified error messages (`string[]`).
    */
-  test(value: any, context: any): [ns.DetailedErrors, ns.SimpleErrors] {
-    const root = this.getRootErrors(value, context);
+  test(
+    value: any,
+    context: any,
+    args: API.Decorator.DecoratorArgs
+  ): [ns.DetailedErrors, ns.SimpleErrors] {
+    const root = this.getRootErrors(value, context, args);
     return [root, this.getErrorMessages(root)];
   }
 }

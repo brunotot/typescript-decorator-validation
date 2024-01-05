@@ -1,3 +1,4 @@
+import TdvCoreApi from "tdv-core";
 import FormProvider from "./src/contexts/FormContext";
 import FormContextNamespace from "./src/contexts/FormContext/types";
 import useForm from "./src/hooks/useForm";
@@ -21,4 +22,4 @@ export namespace Hooks {
   export import UseValidation = UseValidationNamespace;
 }
 
-export { FormProvider, useForm, useValidation };
+export { FormProvider, TdvCoreApi, useForm, useValidation };

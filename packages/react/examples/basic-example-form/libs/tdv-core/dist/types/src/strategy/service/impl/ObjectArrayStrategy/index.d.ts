@@ -1,3 +1,4 @@
+import type API from "../../../../index";
 import { AbstractValidationStrategyService } from "../../../service/AbstractValidationStrategyService";
 import type ns from "./types";
 /**
@@ -21,6 +22,6 @@ export declare class ObjectArrayStrat<F> extends AbstractValidationStrategyServi
      * The method validates both the array as a whole (`field`) and each individual object (`data`)
      * using the appropriate validation rules.
      */
-    test(value: any[], context: any): [ns.DetailedErrors<F>, ns.SimpleErrors<F>];
+    test(value: any[], context: any, args: API.Decorator.DecoratorArgs): [ns.DetailedErrors<F>, ns.SimpleErrors<F>];
 }
 //# sourceMappingURL=index.d.ts.map

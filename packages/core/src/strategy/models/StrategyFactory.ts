@@ -1,5 +1,4 @@
 import type API from "../../../index";
-
 import { type FunctionStrat } from "../service/impl/FunctionStrategy";
 import { type ObjectArrayGetterStrat } from "../service/impl/ObjectArrayGetterStrategy";
 import { type ObjectArrayStrat } from "../service/impl/ObjectArrayStrategy";
@@ -9,48 +8,44 @@ import { type PrimitiveArrayGetterStrat } from "../service/impl/PrimitiveArrayGe
 import { type PrimitiveArrayStrat } from "../service/impl/PrimitiveArrayStrategy";
 import { type PrimitiveGetterStrat } from "../service/impl/PrimitiveGetterStrategy";
 import { type PrimitiveStrat } from "../service/impl/PrimitiveStrategy";
-import type StrategyTypes from "./StrategyTypes";
+import type * as StrategyTypes from "./StrategyTypes";
 
 /**
- * Namespace for Strategy Factory types and utilities.
+ * Evaluates a type, returning either an optional or mandatory evaluation based on the second type parameter.
+ * @typeParam T - The type to evaluate.
+ * @typeParam R - The result type. Determines if the evaluation is optional or mandatory.
  */
-namespace StrategyFactory {
-  /**
-   * Evaluates a type, returning either an optional or mandatory evaluation based on the second type parameter.
-   * @typeParam T - The type to evaluate.
-   * @typeParam R - The result type. Determines if the evaluation is optional or mandatory.
-   */
-  // prettier-ignore
-  export type evaluate<T, R = undefined> = true extends API.Utilities.Booleans.isUndefined<R>
+// prettier-ignore
+export type evaluate<T, R = undefined> = true extends API.Utilities.Booleans.isUndefined<R>
     ? API.Utilities.Types.Prettify<API.Utilities.Objects.Purify<evaluateOptional<T, R>>>
     : API.Utilities.Types.Prettify<API.Utilities.Objects.Purify<evaluateMandatory<T, R>>>;
 
-  /**
-   * Type for optional evaluation of each field in a type.
-   * @typeParam T - The type to evaluate.
-   * @typeParam R - The result type.
-   */
-  export type evaluateOptional<T, R> = {
-    [K in keyof T]?: fieldEvaluation<T, K, R>;
-  };
+/**
+ * Type for optional evaluation of each field in a type.
+ * @typeParam T - The type to evaluate.
+ * @typeParam R - The result type.
+ */
+export type evaluateOptional<T, R> = {
+  [K in keyof T]?: fieldEvaluation<T, K, R>;
+};
 
-  /**
-   * Type for mandatory evaluation of each field in a type.
-   * @typeParam T - The type to evaluate.
-   * @typeParam R - The result type.
-   */
-  export type evaluateMandatory<T, R> = {
-    [K in keyof T]-?: fieldEvaluation<T, K, R>;
-  };
+/**
+ * Type for mandatory evaluation of each field in a type.
+ * @typeParam T - The type to evaluate.
+ * @typeParam R - The result type.
+ */
+export type evaluateMandatory<T, R> = {
+  [K in keyof T]-?: fieldEvaluation<T, K, R>;
+};
 
-  /**
-   * Determines the evaluation strategy for a field in a type.
-   * @typeParam T - The type containing the field.
-   * @typeParam K - The key of the field.
-   * @typeParam R - The result type.
-   */
-  // prettier-ignore
-  export type fieldEvaluation<T, K extends keyof T, R> =
+/**
+ * Determines the evaluation strategy for a field in a type.
+ * @typeParam T - The type containing the field.
+ * @typeParam K - The key of the field.
+ * @typeParam R - The result type.
+ */
+// prettier-ignore
+export type fieldEvaluation<T, K extends keyof T, R> =
     true extends StrategyTypes.Function.matches<T, K>
     ? StrategyTypes.Function.handler<T, K, R>
 
@@ -79,20 +74,20 @@ namespace StrategyFactory {
     ? StrategyTypes.Object.handler<T, K, R>
   : never;
 
-  /**
-   * A type that maps field types to their respective validation strategy results.
-   *
-   * @typeParam Field - The type of the field being validated.
-   */
-  export type getStrategyResult<T, K extends keyof T> = ReturnType<getStrategyClass<T, K>["test"]>;
+/**
+ * A type that maps field types to their respective validation strategy results.
+ *
+ * @typeParam Field - The type of the field being validated.
+ */
+export type getStrategyResult<T, K extends keyof T> = ReturnType<getStrategyClass<T, K>["test"]>;
 
-  /**
-   * A type that maps field types to their respective validation strategy classes.
-   *
-   * @typeParam Field - The type of the field being validated.
-   */
-  // prettier-ignore
-  export type getStrategyClass<T, K extends keyof T> =
+/**
+ * A type that maps field types to their respective validation strategy classes.
+ *
+ * @typeParam Field - The type of the field being validated.
+ */
+// prettier-ignore
+export type getStrategyClass<T, K extends keyof T> =
     true extends StrategyTypes.Function.matches<T, K>
     ? FunctionStrat<T[K]>
 
@@ -121,22 +116,19 @@ namespace StrategyFactory {
     ? ObjectStrat<T[K]>
   : never;
 
+/**
+ * Namespace for Strategy Factory Implementations.
+ */
+export namespace Impl {
   /**
-   * Namespace for Strategy Factory Implementations.
+   * Type for detailed errors during validation.
+   * @typeParam T - The type being validated.
    */
-  export namespace Impl {
-    /**
-     * Type for detailed errors during validation.
-     * @typeParam T - The type being validated.
-     */
-    export type DetailedErrors<T> = evaluate<T, API.Validation.Result[]>;
+  export type DetailedErrors<T> = evaluate<T, API.Validation.ValidationResult[]>;
 
-    /**
-     * Type for basic errors during validation.
-     * @typeParam T - The type being validated.
-     */
-    export type Errors<T> = evaluate<T, string[]>;
-  }
+  /**
+   * Type for basic errors during validation.
+   * @typeParam T - The type being validated.
+   */
+  export type Errors<T> = evaluate<T, string[]>;
 }
-
-export default StrategyFactory;

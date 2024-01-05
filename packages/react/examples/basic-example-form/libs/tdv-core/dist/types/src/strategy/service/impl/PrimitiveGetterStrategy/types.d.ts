@@ -14,13 +14,13 @@ declare namespace PrimitiveGetterStrategyType {
     /**
      * Represents the detailed error structure for validating getter methods that return primitive types.
      */
-    type DetailedErrors = API.Validation.Result[];
+    type DetailedErrors = API.Validation.ValidationResult[];
     /**
      * Type guard to check if a certain field in a type matches this strategy.
      * @typeParam T - The type containing the field.
      * @typeParam K - The key of the field.
      */
-    type matches<T, K extends keyof T> = true extends API.Utilities.Booleans.isGetter<T, K> ? API.Utilities.Booleans.isAnyOf<T[K], API.Utilities.Types.Primitive> : false;
+    type matches<T, K extends keyof T> = true extends API.Utilities.Booleans.isGetter<T, K> ? API.Utilities.Booleans.isAnyOf<T[K], API.Utilities.Types.PrimitiveType> : false;
     /**
      * Type for the handler function based on the field and result types.
      * @typeParam T - The type containing the field.

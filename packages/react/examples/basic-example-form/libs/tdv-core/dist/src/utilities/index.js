@@ -1,16 +1,6 @@
-import ObjectsNamespace from "./impl/Objects";
-import * as StringsNamespace from "./impl/Strings";
-import * as EventEmitterNamespace from "./misc/EventEmitter";
-/**
- * A namespace which holds utility methods and types regarding native TypeScript types.
- */
-var Utilities;
-(function (Utilities) {
-    Utilities.Objects = ObjectsNamespace;
-    Utilities.Strings = StringsNamespace;
-    let Misc;
-    (function (Misc) {
-        Misc.EventEmitter = EventEmitterNamespace;
-    })(Misc = Utilities.Misc || (Utilities.Misc = {}));
-})(Utilities || (Utilities = {}));
-export default Utilities;
+export * as Arrays from "./impl/Arrays";
+export * as Booleans from "./impl/Booleans";
+export * as Objects from "./impl/Objects";
+export * as Strings from "./impl/Strings";
+export * as Types from "./impl/Types";
+export * from "./misc/EventEmitter";

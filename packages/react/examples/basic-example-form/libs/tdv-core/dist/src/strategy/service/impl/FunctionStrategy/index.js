@@ -1,10 +1,11 @@
+import { Events } from "../../../../validation/models/Events";
 import { AbstractValidationStrategyService } from "../../../service/AbstractValidationStrategyService";
 /**
  * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating primitive types like numbers, strings, etc.
  *
  * @typeParam F - The type of the field being validated.
  *
- * @extends AbstractValidationStrategyService<F, Validation.Result[], string[]>
+ * @extends AbstractValidationStrategyService<F, ValidationResult[], string[]>
  */
 export class FunctionStrat extends AbstractValidationStrategyService {
     /**
@@ -13,13 +14,13 @@ export class FunctionStrat extends AbstractValidationStrategyService {
      * @param value - The value to be validated.
      * @param context - The context in which the validation is taking place.
      *
-     * @returns A tuple containing an array of detailed validation results (`Validation.Result[]`) and an array of simplified error messages (`string[]`).
+     * @returns A tuple containing an array of detailed validation results (`ValidationResult[]`) and an array of simplified error messages (`string[]`).
      */
     test(value, _context) {
         const result = value.bind(_context)();
         if (result instanceof Promise) {
             result.then(validationResult => {
-                this.eventEmitter.emit("asyncValidationComplete", {
+                this.eventEmitter.emit(Events.ASYNC_VALIDATION_COMPLETE, {
                     key: this.fieldName,
                     value: validationResult,
                 });

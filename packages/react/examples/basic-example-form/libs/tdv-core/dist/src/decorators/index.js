@@ -1,18 +1,6 @@
 import API from "../../index";
-import * as ClassDecoratorServiceNamespace from "./forClass/BasicClassDecorator";
-import * as ClassDecoratorValidatorServiceNamespace from "./forClass/ValidationClassDecorator";
-import * as FieldDecoratorServiceNamespace from "./forField/BasicFieldDecorator";
-import * as FieldDecoratorValidatorServiceNamespace from "./forField/ValidationFieldDecorator";
-export var ForField;
-(function (ForField) {
-    ForField.Basic = FieldDecoratorServiceNamespace;
-    ForField.Validator = FieldDecoratorValidatorServiceNamespace;
-})(ForField || (ForField = {}));
-export var ForClass;
-(function (ForClass) {
-    ForClass.Basic = ClassDecoratorServiceNamespace;
-    ForClass.Validator = ClassDecoratorValidatorServiceNamespace;
-})(ForClass || (ForClass = {}));
+export * from "./data";
+export * from "./factory";
 export var Config;
 (function (Config) {
     /**
@@ -28,9 +16,7 @@ export var Config;
     function message(options, locale, defaultMessage) {
         var _a;
         const msg = (_a = options === null || options === void 0 ? void 0 : options.message) !== null && _a !== void 0 ? _a : "";
-        return msg.length > 0
-            ? API.Localization.MessageResolver.resolve(locale, msg)
-            : defaultMessage !== null && defaultMessage !== void 0 ? defaultMessage : "";
+        return msg.length > 0 ? API.Localization.parseMessage(locale, msg) : defaultMessage !== null && defaultMessage !== void 0 ? defaultMessage : "";
     }
     Config.message = message;
     /**

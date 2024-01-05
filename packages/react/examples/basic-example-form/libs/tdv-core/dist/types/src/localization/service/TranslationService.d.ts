@@ -1,4 +1,5 @@
 import API from "../../../index";
+import { type LocalizedMessages } from "./MessageReaderService";
 /**
  * Localizes a string based on a corresponding key and optional arguments mapped by indices. (ex: `"Hello {0}! How are you?"`)
  *
@@ -25,5 +26,5 @@ import API from "../../../index";
  * const greeting = translate("en", "Hello", "John Doe");  // "Hello John Doe! How are you?"
  * ```
  */
-export declare function translate(locale: API.Localization.LocaleResolver.Locale | null | undefined, key: keyof API.Localization.MessageReaderService.LocalizedMessages, ...args: any[]): string;
+export declare function translate(locale: API.Localization.Locale | null | undefined, key: keyof LocalizedMessages, ...args: any[]): string;
 //# sourceMappingURL=TranslationService.d.ts.map

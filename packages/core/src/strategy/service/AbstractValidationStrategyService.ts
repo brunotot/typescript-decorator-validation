@@ -1,6 +1,8 @@
-import API from "../../../index";
-
+import API from "../../index";
+import { type ControlDescriptor } from "../../reflection/models/ControlDescriptor";
+import { type ValidationMetadata } from "../../reflection/models/ValidationMetadata";
 import { type EventEmitter } from "../../utilities/misc/EventEmitter";
+import { Form } from "../../validation/models/Form";
 
 /**
  * The `AbstractValidationStrategyService` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.
@@ -14,13 +16,13 @@ export abstract class AbstractValidationStrategyService<
   TDetailedResult = any,
   TSimpleResult = any
 > {
-  #locale: API.Localization.LocaleResolver.Locale;
+  #locale: API.Localization.Locale;
   #groups: string[];
-  #engineCfg: API.Validation.Config<any>;
-  #classRules: API.Reflection.Rule.Instance<TClass>;
-  #descriptor: API.Reflection.Descriptor.Instance<any, any>;
+  #engineCfg: API.Validation.FormConfig<any>;
+  #classRules: ValidationMetadata<TClass>;
+  #descriptor: ControlDescriptor<any, any>;
   #defaultParent: TClass;
-  #fieldDescriptor?: API.Reflection.Descriptor.Instance<TClass, any>;
+  #fieldDescriptor?: ControlDescriptor<TClass, any>;
   #eventEmitter: EventEmitter;
 
   /**
@@ -30,10 +32,10 @@ export abstract class AbstractValidationStrategyService<
    * @param defaultValue The default value for the parent object.
    */
   constructor(
-    descriptor: API.Reflection.Descriptor.Instance<TClass, any>,
+    descriptor: ControlDescriptor<TClass, any>,
     defaultValue: TClass,
     groups: string[],
-    locale: API.Localization.LocaleResolver.Locale,
+    locale: API.Localization.Locale,
     eventEmitter: EventEmitter,
     asyncDelay: number
   ) {
@@ -48,22 +50,26 @@ export abstract class AbstractValidationStrategyService<
       asyncDelay,
     };
     const host = descriptor.hostClass!;
-    this.#classRules = API.Reflection.Services.ClassValidatorMetaService.inject(host).data;
+    this.#classRules = API.Reflection.ClassValidatorMetaService.inject(host, eventEmitter).data;
   }
 
-  protected get eventEmitter(): EventEmitter {
+  public set eventEmitter(v: EventEmitter) {
+    this.#eventEmitter = v;
+  }
+
+  public get eventEmitter(): EventEmitter {
     return this.#eventEmitter;
   }
 
-  protected get fieldEngine(): API.Validation.ValidationEngine<TClass> {
-    return new API.Validation.ValidationEngine<TClass>(this.#descriptor.thisClass!, this.engineCfg);
+  protected get fieldEngine(): Form<TClass> {
+    return new Form<TClass>(this.#descriptor.thisClass!, this.engineCfg);
   }
 
-  protected get engineCfg(): API.Validation.Config<any> {
+  protected get engineCfg(): API.Validation.FormConfig<any> {
     return this.#engineCfg;
   }
 
-  protected get classRules(): API.Reflection.Rule.Instance<TClass> {
+  protected get classRules(): ValidationMetadata<TClass> {
     return this.#classRules;
   }
 
@@ -71,7 +77,7 @@ export abstract class AbstractValidationStrategyService<
     return this.#groups;
   }
 
-  protected get locale(): API.Localization.LocaleResolver.Locale {
+  protected get locale(): API.Localization.Locale {
     return this.#locale;
   }
 
@@ -82,11 +88,12 @@ export abstract class AbstractValidationStrategyService<
    *
    * @returns An `ValidationEngineNs.Config` object configured for the field type.
    */
-  protected get fieldDescriptor(): API.Reflection.Descriptor.Instance<TClass, any, undefined> {
+  protected get fieldDescriptor(): ControlDescriptor<TClass, any, undefined> {
     if (this.#fieldDescriptor) return this.#fieldDescriptor;
-    this.#fieldDescriptor = API.Reflection.Services.FieldValidatorMetaService.inject(
-      this.#descriptor.hostClass!
-    ).getUntypedDescriptor(this.fieldName);
+    this.#fieldDescriptor = API.Reflection.FieldValidatorMetaService.inject(
+      this.#descriptor.hostClass!,
+      this.#eventEmitter
+    ).getUntypedDescriptor(this.fieldName, this.eventEmitter);
     return this.#fieldDescriptor;
   }
 
@@ -108,26 +115,36 @@ export abstract class AbstractValidationStrategyService<
     return (this.#defaultParent as any)?.[this.fieldName];
   }
 
-  protected getErrorMessages(validations: API.Validation.Result[] = []): string[] {
+  protected getErrorMessages(validations: API.Validation.ValidationResult[] = []): string[] {
     const nonNullableValidations = validations ?? [];
     return Array.isArray(nonNullableValidations) ? nonNullableValidations.map(e => e.message) : [];
   }
 
-  protected getClassErrors(fieldValue: any, parentValue: any): API.Validation.Result[] {
+  protected getClassErrors(fieldValue: any, parentValue: any): API.Validation.ValidationResult[] {
     return this.classRules.validate(fieldValue, parentValue, this.groups, this.locale);
   }
 
-  protected getRootErrors(fieldValue: any, parentValue: any): API.Validation.Result[] {
-    return this.fieldDescriptor.rules.root.validate(
+  protected getRootErrors(
+    fieldValue: any,
+    parentValue: any,
+    args: API.Decorator.DecoratorArgs
+  ): API.Validation.ValidationResult[] {
+    return this.fieldDescriptor.validations.root.validate(
       fieldValue,
       parentValue,
       this.groups,
-      this.locale
+      this.locale,
+      args,
+      this.#eventEmitter,
+      this.fieldName
     );
   }
 
-  protected getArrayItemErrors(arrayItem: any, parentValue: any): API.Validation.Result[] {
-    return this.fieldDescriptor.rules.foreach.validate(
+  protected getArrayItemErrors(
+    arrayItem: any,
+    parentValue: any
+  ): API.Validation.ValidationResult[] {
+    return this.fieldDescriptor.validations.foreach.validate(
       arrayItem,
       parentValue,
       this.groups,
@@ -148,5 +165,9 @@ export abstract class AbstractValidationStrategyService<
    * It returns a tuple where the first element is the detailed validation result and the second element is
    * the simplified validation result.
    */
-  abstract test(value: any, context: any): [TDetailedResult, TSimpleResult];
+  abstract test(
+    value: any,
+    context: any,
+    args: API.Decorator.DecoratorArgs
+  ): [TDetailedResult, TSimpleResult];
 }

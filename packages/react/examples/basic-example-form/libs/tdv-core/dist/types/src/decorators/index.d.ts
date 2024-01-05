@@ -1,16 +1,7 @@
 import API from "../../index";
-import * as ClassDecoratorServiceNamespace from "./forClass/BasicClassDecorator";
-import * as ClassDecoratorValidatorServiceNamespace from "./forClass/ValidationClassDecorator";
-import * as FieldDecoratorServiceNamespace from "./forField/BasicFieldDecorator";
-import * as FieldDecoratorValidatorServiceNamespace from "./forField/ValidationFieldDecorator";
-export declare namespace ForField {
-    export import Basic = FieldDecoratorServiceNamespace;
-    export import Validator = FieldDecoratorValidatorServiceNamespace;
-}
-export declare namespace ForClass {
-    export import Basic = ClassDecoratorServiceNamespace;
-    export import Validator = ClassDecoratorValidatorServiceNamespace;
-}
+export * from "./data";
+export * from "./factory";
+export type DecoratorArgs = Record<string, any>;
 export declare namespace Config {
     /** Generic validator decorator configurable options. */
     type Options = {
@@ -31,7 +22,7 @@ export declare namespace Config {
      * @param defaultMessage - The default message to be returned if no custom message is provided.
      * @returns The localized message.
      */
-    function message(options: Options | undefined, locale: API.Localization.LocaleResolver.Locale, defaultMessage: string): string;
+    function message(options: Options | undefined, locale: API.Localization.Locale, defaultMessage: string): string;
     /**
      * Retrieves the unique groups from the provided options or returns the default groups.
      * @param options - The options object.

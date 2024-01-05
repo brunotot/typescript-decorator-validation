@@ -1,6 +1,5 @@
 import type API from "../../../../../index";
-
-import type StrategyFactory from "../../../models/StrategyFactory";
+import type * as StrategyFactory from "../../../models/StrategyFactory";
 import ObjectStrategyType from "../ObjectStrategy/types";
 
 namespace ObjectGetterStrategyType {
@@ -24,11 +23,11 @@ namespace ObjectGetterStrategyType {
    *
    * @typeParam F - The type of the field being validated.
    *
-   * - `root`: An array of `Validation.Result` objects that represent detailed validation errors at the object level.
+   * - `root`: An array of `ValidationResult` objects that represent detailed validation errors at the object level.
    * - `data`: A `DetailedErrors<F>` object that represents detailed validation errors for each property in the object.
    */
   export type DetailedErrors<F> = {
-    root: API.Validation.Result[];
+    root: API.Validation.ValidationResult[];
     data: StrategyFactory.Impl.DetailedErrors<F>;
   };
 

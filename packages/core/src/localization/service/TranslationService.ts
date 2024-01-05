@@ -1,4 +1,5 @@
 import API from "../../../index";
+import { type LocalizedMessages, getMessage } from "./MessageReaderService";
 
 /**
  * Localizes a string based on a corresponding key and optional arguments mapped by indices. (ex: `"Hello {0}! How are you?"`)
@@ -27,11 +28,11 @@ import API from "../../../index";
  * ```
  */
 export function translate(
-  locale: API.Localization.LocaleResolver.Locale | null | undefined,
-  key: keyof API.Localization.MessageReaderService.LocalizedMessages,
+  locale: API.Localization.Locale | null | undefined,
+  key: keyof LocalizedMessages,
   ...args: any[]
 ): string {
-  const message = API.Localization.MessageReaderService.getMessage(key, locale);
+  const message = getMessage(key, locale);
   const translatedMessage = API.Utilities.Strings.sprintf(message, ...args);
   return translatedMessage;
 }

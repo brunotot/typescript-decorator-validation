@@ -21,12 +21,12 @@ export class ObjectArrayStrat extends AbstractValidationStrategyService {
      * The method validates both the array as a whole (`field`) and each individual object (`data`)
      * using the appropriate validation rules.
      */
-    test(value, context) {
+    test(value, context, args) {
         const _value = value !== null && value !== void 0 ? value : [];
-        const rootResult = this.getRootErrors(value, context);
+        const rootResult = this.getRootErrors(value, context, args);
         // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
         const getData = (element) => {
-            const [errors, detailedErrors] = new ObjectStrat(this.fieldDescriptor, this.defaultValue, this.groups, this.locale, this.eventEmitter, this.engineCfg.asyncDelay).test(element, context);
+            const [errors, detailedErrors] = new ObjectStrat(this.fieldDescriptor, this.defaultValue, this.groups, this.locale, this.eventEmitter, this.engineCfg.asyncDelay).test(element, context, args);
             return {
                 detailedErrors,
                 errors,

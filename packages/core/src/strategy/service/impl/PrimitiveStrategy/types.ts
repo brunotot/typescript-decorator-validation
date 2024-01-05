@@ -17,7 +17,7 @@ namespace PrimitiveStrategyType {
   /**
    * Represents the detailed error structure for validating primitive types.
    */
-  export type DetailedErrors = API.Validation.Result[];
+  export type DetailedErrors = API.Validation.ValidationResult[];
 
   /**
    * Type guard to check if a certain field in a type matches this strategy.
@@ -25,7 +25,7 @@ namespace PrimitiveStrategyType {
    * @typeParam K - The key of the field.
    */
   // prettier-ignore
-  export type matches<T, K extends keyof T> = API.Utilities.Booleans.isAnyOf<T[K], API.Utilities.Types.Primitive>;
+  export type matches<T, K extends keyof T> = API.Utilities.Booleans.isAnyOf<T[K], API.Utilities.Types.PrimitiveType>;
 
   /**
    * Type for the handler function based on the field and result types.

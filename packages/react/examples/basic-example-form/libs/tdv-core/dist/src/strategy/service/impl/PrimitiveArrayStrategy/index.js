@@ -20,16 +20,16 @@ export class PrimitiveArrayStrat extends AbstractValidationStrategyService {
      * The method validates both the array as a whole (`root`) and each individual element (`data`)
      * using the appropriate validation rules.
      */
-    test(value, context) {
+    test(value, context, args) {
         const valueArray = value !== null && value !== void 0 ? value : [];
-        const rootResult = this.getRootErrors(valueArray, context);
+        const rootResult = this.getRootErrors(valueArray, context, args);
         const details = {
             root: rootResult,
-            data: valueArray.map((v) => this.getArrayItemErrors(v, context)),
+            data: valueArray.map(v => this.getArrayItemErrors(v, context)),
         };
         const simple = {
             root: this.getErrorMessages(rootResult),
-            data: details.data.map((v) => this.getErrorMessages(v)),
+            data: details.data.map(v => this.getErrorMessages(v)),
         };
         return [details, simple];
     }

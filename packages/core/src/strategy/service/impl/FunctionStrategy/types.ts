@@ -17,7 +17,7 @@ namespace FunctionStrategyType {
   /**
    * Type definition for detailed errors in this strategy.
    */
-  export type DetailedErrors = API.Validation.Result | null;
+  export type DetailedErrors = API.Validation.ValidationResult | null;
 
   /**
    * Type guard to check if a certain field in a type matches this strategy.

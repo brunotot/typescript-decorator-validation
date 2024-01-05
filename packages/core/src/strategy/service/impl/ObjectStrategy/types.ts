@@ -1,5 +1,5 @@
 import type API from "../../../../../index";
-import type StrategyFactory from "../../../models/StrategyFactory";
+import type * as StrategyFactory from "../../../models/StrategyFactory";
 
 /**
  * Namespace for Object Strategy Types.
@@ -27,7 +27,7 @@ namespace ObjectStrategyType {
    */
   export type DetailedErrors<F> = {
     /** An array of validation result objects that represent detailed validation errors at the decorated field level. */
-    root: API.Validation.Result[];
+    root: API.Validation.ValidationResult[];
     /** An object that represents detailed validation errors for each property in the object. */
     data: StrategyFactory.Impl.DetailedErrors<F>;
   };

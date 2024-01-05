@@ -1,3 +1,4 @@
+import type API from "../../../../";
 import { AbstractValidationStrategyService } from "../../../service/AbstractValidationStrategyService";
 import type ns from "./types";
 
@@ -8,9 +9,7 @@ import type ns from "./types";
  *
  * @extends AbstractValidationStrategyService<F, PrimitiveArrayGetterDetailedErrors, PrimitiveArrayGetterSimpleErrors>
  */
-export class PrimitiveArrayGetterStrat<
-  F
-> extends AbstractValidationStrategyService<
+export class PrimitiveArrayGetterStrat<F> extends AbstractValidationStrategyService<
   F,
   ns.DetailedErrors,
   ns.SimpleErrors
@@ -28,18 +27,22 @@ export class PrimitiveArrayGetterStrat<
    * The method validates both the array as a whole (`node`) and each individual element (`children`)
    * using the appropriate validation rules.
    */
-  test(value: any[], context: any): [ns.DetailedErrors, ns.SimpleErrors] {
+  test(
+    value: any[],
+    context: any,
+    args: API.Decorator.DecoratorArgs
+  ): [ns.DetailedErrors, ns.SimpleErrors] {
     const valueArray = value ?? [];
-    const rootResult = this.getRootErrors(valueArray, context);
+    const rootResult = this.getRootErrors(valueArray, context, args);
 
     const details = {
       node: rootResult,
-      children: valueArray.map((v) => this.getArrayItemErrors(v, context)),
+      children: valueArray.map(v => this.getArrayItemErrors(v, context)),
     };
 
     const simple = {
       node: this.getErrorMessages(rootResult),
-      children: details.children.map((v) => this.getErrorMessages(v)),
+      children: details.children.map(v => this.getErrorMessages(v)),
     };
 
     return [details, simple];

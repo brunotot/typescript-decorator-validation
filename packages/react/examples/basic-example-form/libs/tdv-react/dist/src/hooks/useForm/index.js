@@ -38,10 +38,10 @@ import useValidation from "../useValidation";
  *
  * @typeParam TClass - represents parent form class model holding context of current compontent
  */
-export default function useForm(model, { defaultValue, onSubmit: onSubmitParam, onSubmitValidationFail, standalone, validateImmediately, validationGroups: groups, onChange, } = {
+export default function useForm(model, { defaultValue, onSubmit: onSubmitParam, onSubmitValidationFail, standalone, validateImmediately, validationGroups: groups, resolveDecoratorArgs, onChange, asyncDelay, locale, } = {
     onSubmit: () => __awaiter(this, void 0, void 0, function* () { }),
     standalone: true,
-    validateImmediately: false,
+    validateImmediately: true,
     validationGroups: [],
     onChange: () => { },
 }) {
@@ -51,9 +51,12 @@ export default function useForm(model, { defaultValue, onSubmit: onSubmitParam, 
     // prettier-ignore
     const instantContextValidation = standalone ? validateImmediately : ctx ? ctx.validateImmediately : validateImmediately;
     const isSubmitted = instantContextValidation || submitted;
-    const [form, setForm, { errors, detailedErrors, isValid, engine }] = useValidation(model, {
+    const [form, setForm, { globalErrors, errors, detailedErrors, isValid, engine }] = useValidation(model, {
         defaultValue,
         groups,
+        resolveDecoratorArgs,
+        asyncDelay,
+        locale,
     });
     //* Dispatcher function which fires only when
     //* itself isn't a parent and context exists.
@@ -71,7 +74,7 @@ export default function useForm(model, { defaultValue, onSubmit: onSubmitParam, 
         setSubmitted(value);
     };
     //* When input data changes execute callback.
-    useEffectWhenMounted(() => onChange === null || onChange === void 0 ? void 0 : onChange(), [form]);
+    useEffectWhenMounted(() => onChange === null || onChange === void 0 ? void 0 : onChange(form), [form]);
     //* When submitted flag from context gets changed.
     useEffect(() => {
         const contextValue = !!(ctx === null || ctx === void 0 ? void 0 : ctx.submitted);
@@ -106,8 +109,9 @@ export default function useForm(model, { defaultValue, onSubmit: onSubmitParam, 
         isSubmitted,
         onSubmit,
         providerProps,
-        errors: isSubmitted ? errors : {},
-        detailedErrors: isSubmitted ? detailedErrors : {},
+        globalErrors,
+        errors: /*isSubmitted ? */ errors /* : (clearErrors(errors) as any)*/,
+        detailedErrors: /*isSubmitted ? */ detailedErrors /* : (clearErrors(detailedErrors) as any)*/,
         reset,
     };
     return [form, setForm, data];

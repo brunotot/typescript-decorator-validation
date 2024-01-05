@@ -1,21 +1,20 @@
 import API from "../../../../index";
+import { type EventEmitter } from "../../../utilities/misc/EventEmitter";
 import { AbstractMetaService } from "../AbstractMetaService";
+import { ControlDescriptor } from "./../../models/ControlDescriptor";
 /**
  * A configurer class which allows for easier manipulation of decorated fields and corresponding metadata
- *
- * @remarks
- * This class is responsible for managing metadata related to validation.
- * It provides methods to add validators, get field names, and manage descriptors.
+ * @remarks This class is responsible for managing metadata related to validation. It provides methods to add validators, get field names, and manage descriptors.
  */
-export declare class FieldValidatorMetaService extends AbstractMetaService<Map<string, API.Reflection.Descriptor.Instance<any, any, any>>> {
+export declare class FieldValidatorMetaService extends AbstractMetaService<Map<string, ControlDescriptor<any, any, any>>> {
     #private;
     /**
      * Static method to create a new instance of FieldValidatorMetaService.
-     *
      * @param strategy - The strategy to inject.
      * @returns A new instance of FieldValidatorMetaService.
      */
-    static inject(strategy: API.Reflection.MetaStrategy): FieldValidatorMetaService;
+    static inject(strategy: API.Reflection.MetaStrategy, eventEmitter: EventEmitter): FieldValidatorMetaService;
+    eventEmitter: EventEmitter;
     private constructor();
     /**
      * Adds a validator to a field.
@@ -24,7 +23,7 @@ export declare class FieldValidatorMetaService extends AbstractMetaService<Map<s
      * @param isValid - The validation function.
      * @param groups - Optional validation groups.
      */
-    addValidator(field: string, isValid: API.Validation.Evaluator<any>, groups: string[]): void;
+    addValidator(field: string, isValid: API.Validation.ValidationEvaluator<any>, groups: string[]): void;
     /**
      * Gets the names of all fields present within given
      * reflection strategy (`Types.Class<T>` or `Decorator.Context`).
@@ -45,13 +44,13 @@ export declare class FieldValidatorMetaService extends AbstractMetaService<Map<s
      * @param thisName - The name of the field.
      * @returns The typed descriptor.
      */
-    getTypedDescriptor<TClass, TName extends keyof TClass>(thisName: TName): API.Reflection.Descriptor.Instance<unknown, TClass, TName>;
+    getTypedDescriptor<TClass, TName extends keyof TClass>(thisName: TName): ControlDescriptor<unknown, TClass, TName>;
     /**
      * Gets an untyped descriptor for a given field key.
      *
      * @param fieldKey - The key of the field.
      * @returns The untyped descriptor.
      */
-    getUntypedDescriptor(fieldKey: any): API.Reflection.Descriptor.Instance<any, any, any>;
+    getUntypedDescriptor(fieldKey: any, eventEmitter?: EventEmitter): ControlDescriptor<any, any, any>;
 }
 //# sourceMappingURL=FieldValidatorMetaService.d.ts.map

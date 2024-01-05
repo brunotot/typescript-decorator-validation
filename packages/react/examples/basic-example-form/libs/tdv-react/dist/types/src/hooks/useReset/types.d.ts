@@ -1,9 +1,9 @@
+import { type Form } from "tdv-core";
 import type TdvCore from "tdv-core";
-import type { Validation } from "tdv-core";
 import type UseFormHook from "../useForm/types";
 declare namespace UseResetHook {
     type UseResetConfig<TClass> = {
-        engine: Validation.ValidationEngine<TClass>;
+        engine: Form<TClass>;
         form: TdvCore.Utilities.Objects.Payload<TClass>;
         setForm: (v: TdvCore.Utilities.Objects.Payload<TClass>) => void;
         submitted: boolean;
