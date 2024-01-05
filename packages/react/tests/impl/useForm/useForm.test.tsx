@@ -1,11 +1,11 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { Required } from "tdv-core/validators";
+import { Decorators } from "tdv-core";
 import useValidation from "../../../src/hooks/useValidation";
 
 jest.spyOn(console, "error").mockImplementation(() => {});
 
 class TestForm {
-  @Required()
+  @Decorators.Required()
   username!: string;
 }
 

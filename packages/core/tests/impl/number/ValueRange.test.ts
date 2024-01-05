@@ -1,5 +1,5 @@
-import { ValueRange } from "../../../collection/number/ValueRange";
 import $ from "../../../index";
+import { ValueRange } from "../../../src/decorators";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

@@ -1,5 +1,5 @@
-import { Numeric } from "../../../../../collection/string/regex/impl/Numeric";
 import $ from "../../../../../index";
+import { Numeric } from "../../../../../src/decorators";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 

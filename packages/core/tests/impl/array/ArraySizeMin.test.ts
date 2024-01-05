@@ -1,6 +1,6 @@
-import { ArraySizeMin } from "../../../collection/array/ArraySizeMin";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
+import { ArraySizeMin } from "./../../../src/decorators";
 
 /*** Data ***/
 type Type = string[];

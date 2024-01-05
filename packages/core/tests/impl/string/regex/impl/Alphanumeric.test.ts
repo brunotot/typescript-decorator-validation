@@ -1,5 +1,5 @@
-import { Alphanumeric } from "../../../../../collection/string/regex/impl/Alphanumeric";
-import Objects from "../../../../../src/utilities/impl/Objects";
+import { Alphanumeric } from "../../../../../src/decorators";
+import { Objects } from "../../../../../src/utilities";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 

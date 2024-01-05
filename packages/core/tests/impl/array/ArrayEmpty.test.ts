@@ -1,4 +1,4 @@
-import { ArrayEmpty } from "../../../collection/array/ArrayEmpty";
+import { ArrayEmpty } from "../../../src/decorators";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

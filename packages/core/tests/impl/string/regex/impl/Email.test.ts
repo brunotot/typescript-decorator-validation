@@ -1,5 +1,5 @@
-import { Email } from "../../../../../collection/string/regex/impl/Email";
 import $ from "../../../../../index";
+import { Email } from "../../../../../src/decorators";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 

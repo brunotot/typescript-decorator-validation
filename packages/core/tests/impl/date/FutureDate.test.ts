@@ -1,5 +1,5 @@
-import { FutureDate } from "../../../collection/date/FutureDate";
 import $ from "../../../index";
+import { FutureDate } from "../../../src/decorators";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

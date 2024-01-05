@@ -1,6 +1,6 @@
-import { ArraySizeMax } from "../../../collection/array/ArraySizeMax";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
+import { ArraySizeMax } from "./../../../src/decorators";
 
 /*** Data ***/
 type Type = string[];

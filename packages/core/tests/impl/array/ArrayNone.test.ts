@@ -1,6 +1,6 @@
-import { ArrayNone } from "../../../collection/array/ArrayNone";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
+import { ArrayNone } from "./../../../src/decorators";
 
 /*** Data ***/
 type Type = string[];

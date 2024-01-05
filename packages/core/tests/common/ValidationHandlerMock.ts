@@ -1,4 +1,4 @@
-import ValidationEngine from "../../src/validation";
+import { Form } from "../../src/validation";
 
 export interface IMock<T> {
   value: T;
@@ -13,10 +13,10 @@ function buildItMessage(valid: boolean, value: any) {
 }
 
 export default class ValidationHandlerMock<T> {
-  constructor(private handler: ValidationEngine.ValidationEngine<IMock<T>>) {}
+  constructor(private handler: Form<IMock<T>>) {}
 
   expect(data: T[], valid: boolean) {
-    data.forEach((value) => {
+    data.forEach(value => {
       it(buildItMessage(valid, value), () => {
         const state: any = { value };
         const res = this.handler.validate(state);

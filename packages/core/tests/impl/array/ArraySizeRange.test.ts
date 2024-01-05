@@ -1,6 +1,6 @@
-import { ArraySizeRange } from "../../../collection/array/ArraySizeRange";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
+import { ArraySizeRange } from "./../../../src/decorators";
 
 /*** Data ***/
 type Type = string[];

@@ -1,5 +1,5 @@
-import { Uppercase } from "../../../../../collection/string/regex/impl/Uppercase";
 import $ from "../../../../../index";
+import { Uppercase } from "../../../../../src/decorators";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 

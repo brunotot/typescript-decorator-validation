@@ -1,5 +1,5 @@
-import { Password } from "../../../collection/string/Password";
 import $ from "../../../index";
+import { Password } from "../../../src/decorators";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

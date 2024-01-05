@@ -1,5 +1,5 @@
-import { Integer } from "../../../collection/number/Integer";
 import $ from "../../../index";
+import { Integer } from "../../../src/decorators";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

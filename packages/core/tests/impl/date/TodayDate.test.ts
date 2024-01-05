@@ -1,5 +1,5 @@
-import { TodayDate } from "../../../collection/date/TodayDate";
 import $ from "../../../index";
+import { TodayDate } from "../../../src/decorators";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

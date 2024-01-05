@@ -1,5 +1,5 @@
-import { Digits } from "../../../collection/number/Digits";
 import $ from "../../../index";
+import { Digits } from "../../../src/decorators";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

@@ -1,5 +1,5 @@
-import { ValueMax } from "../../../collection/number/ValueMax";
 import $ from "../../../index";
+import { ValueMax } from "../../../src/decorators";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
 

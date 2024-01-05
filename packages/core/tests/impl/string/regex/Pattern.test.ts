@@ -1,8 +1,8 @@
-import { Pattern } from "../../../../collection/string/regex/Pattern";
-import RegexConst from "../../../../collection/string/regex/shared/regex.constants";
 import $ from "../../../../index";
+import RegexConst from "../../../../src/decorators/data/validators/string/regex/shared/regex.constants";
 import { standardTest } from "../../../common/TestFactory";
 import { IMock } from "../../../common/ValidationHandlerMock";
+import { Pattern } from "./../../../../src/decorators";
 
 /*** Data ***/
 type Type = $.Utilities.Objects.Optional<string>;

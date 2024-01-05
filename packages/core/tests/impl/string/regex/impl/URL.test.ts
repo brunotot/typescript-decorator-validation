@@ -1,5 +1,5 @@
-import { URL } from "../../../../../collection/string/regex/impl/URL";
 import $ from "../../../../../index";
+import { URL } from "../../../../../src/decorators";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 
@@ -7,12 +7,7 @@ import { IMock } from "../../../../common/ValidationHandlerMock";
 type Type = $.Utilities.Objects.Optional<string>;
 const type = "String";
 const identifier = "URL";
-const successData: Type[] = [
-  "www.google.hr",
-  "https://www.facebook.com/?query=",
-  null,
-  undefined,
-];
+const successData: Type[] = ["www.google.hr", "https://www.facebook.com/?query=", null, undefined];
 const errorData: Type[] = ["/google.com", "test@test"];
 
 /*** Model ***/

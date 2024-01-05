@@ -1,6 +1,6 @@
-import { ArraySome } from "../../../collection/array/ArraySome";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
+import { ArraySome } from "./../../../src/decorators";
 
 /*** Data ***/
 type Type = string[];

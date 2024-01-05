@@ -1,7 +1,7 @@
-import { Required } from "../../../collection/any/Required";
-import { foreach } from "../../../collection/array/foreach";
+import { Required } from "../../../src/decorators";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
+import { foreach } from "./../../../src/decorators";
 
 /*** Data ***/
 type Type = string[];

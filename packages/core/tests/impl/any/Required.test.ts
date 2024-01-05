@@ -1,7 +1,7 @@
-import { Required } from "../../../collection/any/Required";
-import Objects from "../../../src/utilities/impl/Objects";
+import * as Objects from "../../../src/utilities/impl/Objects";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
+import { Required } from "./../../../src/decorators";
 
 /*** Data ***/
 type Type = Objects.Optional<any>;

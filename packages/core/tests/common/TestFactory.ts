@@ -1,9 +1,6 @@
-import Types from "../../src/utilities/impl/Types";
-import ValidationEngine from "../../src/validation";
-import ValidationHandlerMock, {
-  IMock,
-  buildIOName,
-} from "./ValidationHandlerMock";
+import { Types } from "../../src/utilities";
+import { Form } from "../../src/validation";
+import ValidationHandlerMock, { IMock, buildIOName } from "./ValidationHandlerMock";
 
 export type StandardTestProps<T> = {
   Model: Types.Class<IMock<T>>;
@@ -20,7 +17,7 @@ export function standardTest<T>({
   errorData,
   type,
 }: StandardTestProps<T>) {
-  const handler = new ValidationEngine.ValidationEngine<T>(Model as any);
+  const handler = new Form<T>(Model as any);
   const expectService = new ValidationHandlerMock(handler as any);
 
   describe(buildIOName(identifier, true, type), () => {

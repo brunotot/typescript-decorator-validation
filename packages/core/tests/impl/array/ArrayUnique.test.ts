@@ -1,6 +1,6 @@
-import { ArrayUnique } from "../../../collection/array/ArrayUnique";
 import { standardTest } from "../../common/TestFactory";
 import { IMock } from "../../common/ValidationHandlerMock";
+import { ArrayUnique } from "./../../../src/decorators";
 
 /*** Data ***/
 type Type = string[];

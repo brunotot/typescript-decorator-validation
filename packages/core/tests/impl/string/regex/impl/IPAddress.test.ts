@@ -1,5 +1,5 @@
-import { IPAddress } from "../../../../../collection/string/regex/impl/IPAddress";
 import $ from "../../../../../index";
+import { IPAddress } from "../../../../../src/decorators";
 import { standardTest } from "../../../../common/TestFactory";
 import { IMock } from "../../../../common/ValidationHandlerMock";
 
@@ -8,13 +8,7 @@ type Type = $.Utilities.Objects.Optional<string>;
 const type = "String";
 const identifier = "IPAddress";
 const successData: Type[] = ["192.168.1.0", "", null, undefined];
-const errorData: Type[] = [
-  "test123",
-  "192.168",
-  "@@@",
-  "gmail.com",
-  "www.google.hr",
-];
+const errorData: Type[] = ["test123", "192.168", "@@@", "gmail.com", "www.google.hr"];
 
 /*** Model ***/
 class Model implements IMock<Type> {
