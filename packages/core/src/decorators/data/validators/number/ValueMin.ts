@@ -1,8 +1,8 @@
-import API from "../../../../../index";
-import { type FieldDecorator, createFieldValidator } from "../../../../decorators";
+import * as API from "../../../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../../decorators";
 import { translate } from "../../../../localization/service/TranslationService";
 
-/** ValueMin identifier. */
+/** `@ValueMin` key. */
 export const VALUE_MIN = "ValueMin";
 
 /** Internal validation function for {@link ValueMin} validator. */
@@ -61,18 +61,18 @@ function isValueMinValid(num: API.Utilities.Objects.Optional<number>, min: numbe
  */
 export function ValueMin<T extends API.Utilities.Objects.Optional<number>>(
   min: number,
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.Config.key(options, VALUE_MIN),
+      key: API.Decorators.buildKeyProp(options, VALUE_MIN),
       valid: isValueMinValid(value, min),
-      message: API.Decorator.Config.message(
+      message: API.Decorators.buildMessageProp(
         options,
         locale,
         translate(locale, VALUE_MIN, min, value)
       ),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

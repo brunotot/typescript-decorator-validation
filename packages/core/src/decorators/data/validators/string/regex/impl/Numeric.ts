@@ -1,17 +1,14 @@
-import API from "../../../../../../../index";
-
-import { type FieldDecorator, createFieldValidator } from "../../../../../../decorators";
+import * as API from "../../../../../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../../../../decorators";
 import { translate } from "../../../../../../localization/service/TranslationService";
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
 
-/** Numeric identifier. */
+/** `@Numeric` key. */
 export const NUMERIC = "Numeric";
 
 /** Internal validation function for {@link Numeric} validator. */
-export function isNumericValid<T extends API.Utilities.Objects.Optional<string>>(
-  value: T
-): boolean {
+function isNumericValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
   API.Utilities.Objects.assertType("string", value);
   return testRegex(RegexConst.NUMERIC, value);
 }
@@ -64,14 +61,14 @@ export function isNumericValid<T extends API.Utilities.Objects.Optional<string>>
  * ```
  */
 export function Numeric<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.Config.key(options, NUMERIC),
+      key: API.Decorators.buildKeyProp(options, NUMERIC),
       valid: testRegex(RegexConst.NUMERIC, value),
-      message: API.Decorator.Config.message(options, locale, translate(locale, NUMERIC)),
+      message: API.Decorators.buildMessageProp(options, locale, translate(locale, NUMERIC)),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

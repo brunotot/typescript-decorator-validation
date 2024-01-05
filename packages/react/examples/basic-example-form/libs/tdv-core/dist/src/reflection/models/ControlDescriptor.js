@@ -1,5 +1,5 @@
 import API from "../../../index";
-import StrategyMapper from "./../../strategy/models/StrategyMapper";
+import * as StrategyMapper from "./../../strategy/models/StrategyMapper";
 import { ValidationMetadata } from "./ValidationMetadata";
 /**
  * A class responsible for describing reflection metadata for a specific field within a class.
@@ -49,7 +49,7 @@ export class ControlDescriptor {
             return "unknown";
         }
         if (!this.thisName) {
-            return API.Strategy.Types.Object.Name;
+            return API.Strategy.Object.Name;
         }
         const instance = new this.hostClass();
         const fieldName = this.thisName;
@@ -66,15 +66,15 @@ export class ControlDescriptor {
                     typeof value.valid === "boolean" &&
                     "message" in value &&
                     typeof value.message === "string")) {
-                return API.Strategy.Types.Function.Name;
+                return API.Strategy.Function.Name;
             }
             return Array.isArray(value)
                 ? descriptor.thisClass
-                    ? API.Strategy.Types.ObjectArray.Name
-                    : API.Strategy.Types.PrimitiveArray.Name
+                    ? API.Strategy.ObjectArray.Name
+                    : API.Strategy.PrimitiveArray.Name
                 : descriptor.thisClass
-                    ? API.Strategy.Types.Object.Name
-                    : API.Strategy.Types.Primitive.Name;
+                    ? API.Strategy.Object.Name
+                    : API.Strategy.Primitive.Name;
         };
         const descriptor = API.Reflection.getClassFieldDescriptor(this.hostClass, fieldName);
         const isGetter = (descriptor === null || descriptor === void 0 ? void 0 : descriptor.get) && !descriptor.set;

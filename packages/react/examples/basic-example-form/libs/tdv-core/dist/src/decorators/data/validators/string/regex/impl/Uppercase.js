@@ -7,8 +7,8 @@ import RegexConst from "../shared/regex.constants";
 export const UPPERCASE = "Uppercase";
 /** Internal validation function for {@link Uppercase} validator. */
 export function isUppercaseValid(value) {
-    API.Utilities.Objects.assertType("string", value);
-    return testRegex(RegexConst.UPPERCASE, value);
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.UPPERCASE, value);
 }
 /**
  * Checks if decorated string contains only uppercase characters.
@@ -58,9 +58,12 @@ export function isUppercaseValid(value) {
  * ```
  */
 export function Uppercase(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: API.Decorator.Config.key(options, UPPERCASE),
-        valid: testRegex(RegexConst.UPPERCASE, value),
-        message: API.Decorator.Config.message(options, locale, translate(locale, UPPERCASE)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: API.Decorators.key(options, UPPERCASE),
+      valid: testRegex(RegexConst.UPPERCASE, value),
+      message: API.Decorators.message(options, locale, translate(locale, UPPERCASE)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

@@ -1,8 +1,15 @@
-import API from "../../../../../index";
+import {
+  DecoratorOptions,
+  FieldDecorator,
+  buildGroupsProp,
+  buildKeyProp,
+  buildMessageProp,
+  createFieldValidator,
+} from "../../../../decorators/index";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type FieldDecorator, createFieldValidator } from "../../../index";
+import { Optional } from "../../../../utilities/impl/Objects";
 
-/** Required identifier. */
+/** `@Required` key. */
 export const REQUIRED = "Required";
 
 /**
@@ -10,7 +17,7 @@ export const REQUIRED = "Required";
  *
  * @typeParam T - The type of the value.
  */
-export function isRequiredValid<T>(value: T | undefined): value is NonNullable<typeof value> {
+function isRequiredValid<T>(value: T | undefined): value is NonNullable<typeof value> {
   return !(
     value === undefined ||
     value === null ||
@@ -59,15 +66,13 @@ export function isRequiredValid<T>(value: T | undefined): value is NonNullable<t
  * }
  * ```
  */
-export function Required<T extends API.Utilities.Objects.Optional>(
-  options?: API.Decorator.Config.Options
-): FieldDecorator<T> {
+export function Required<T extends Optional>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.Config.key(options, REQUIRED),
+      key: buildKeyProp(options, REQUIRED),
       valid: isRequiredValid(value),
-      message: API.Decorator.Config.message(options, locale, translate(locale, REQUIRED)),
+      message: buildMessageProp(options, locale, translate(locale, REQUIRED)),
     }),
-    API.Decorator.Config.groups(options)
+    buildGroupsProp(options)
   );
 }

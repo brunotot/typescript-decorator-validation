@@ -1,4 +1,4 @@
-import API from "../../../../index";
+import type API from "../../../../index";
 import { AbstractValidationStrategyService } from "../../../service/AbstractValidationStrategyService";
 import type ns from "./types";
 /**

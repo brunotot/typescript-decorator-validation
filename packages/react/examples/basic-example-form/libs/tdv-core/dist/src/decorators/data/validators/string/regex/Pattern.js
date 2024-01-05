@@ -2,7 +2,7 @@ import API from "../../../../../../index";
 import { createFieldValidator } from "../../../../../decorators";
 import { translate } from "../../../../../localization/service/TranslationService";
 export function testRegex(regex, value) {
-    return (value !== null && value !== void 0 ? value : "").length === 0 || regex.test(value);
+  return (value !== null && value !== void 0 ? value : "").length === 0 || regex.test(value);
 }
 /**
  * Creates a validator decorator that checks if a string value matches a regular expression pattern.
@@ -33,9 +33,16 @@ export function testRegex(regex, value) {
  * }
  */
 export function Pattern(regex, options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: API.Decorator.Config.key(options, "Pattern"),
-        valid: testRegex(regex, value),
-        message: API.Decorator.Config.message(options, locale, translate(locale, "Pattern", regex.toString())),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: API.Decorators.key(options, "Pattern"),
+      valid: testRegex(regex, value),
+      message: API.Decorators.message(
+        options,
+        locale,
+        translate(locale, "Pattern", regex.toString())
+      ),
+    }),
+    API.Decorators.groups(options)
+  );
 }

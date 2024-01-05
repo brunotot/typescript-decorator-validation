@@ -5,8 +5,8 @@ import { translate } from "../../../../localization/service/TranslationService";
 export const NON_NEGATIVE = "NonNegative";
 /** Internal validation function for {@link NonNegative} validator. */
 function isNonNegativeValid(num) {
-    API.Utilities.Objects.assertType("number", num);
-    return num !== undefined && num !== null && num >= 0;
+  API.Utilities.Objects.assertType("number", num);
+  return num !== undefined && num !== null && num >= 0;
 }
 /**
  * Checks if decorated number is not a negative number (can be 0).
@@ -56,9 +56,12 @@ function isNonNegativeValid(num) {
  * ```
  */
 export function NonNegative(options) {
-    return createFieldValidator((num, _context, locale) => ({
-        key: API.Decorator.Config.key(options, NON_NEGATIVE),
-        valid: isNonNegativeValid(num),
-        message: API.Decorator.Config.message(options, locale, translate(locale, NON_NEGATIVE, num)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (num, _context, locale) => ({
+      key: API.Decorators.key(options, NON_NEGATIVE),
+      valid: isNonNegativeValid(num),
+      message: API.Decorators.message(options, locale, translate(locale, NON_NEGATIVE, num)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

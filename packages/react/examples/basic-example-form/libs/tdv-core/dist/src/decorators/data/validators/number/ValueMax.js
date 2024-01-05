@@ -5,8 +5,8 @@ import { translate } from "../../../../localization/service/TranslationService";
 export const VALUE_MAX = "ValueMax";
 /** Internal validation function for {@link ValueMax} validator. */
 function isValueMaxValid(num, max) {
-    API.Utilities.Objects.assertType("number", num);
-    return num == null ? true : num <= max;
+  API.Utilities.Objects.assertType("number", num);
+  return num == null ? true : num <= max;
 }
 /**
  * Checks if decorated number is not greater than given `max` parameter.
@@ -57,9 +57,12 @@ function isValueMaxValid(num, max) {
  * ```
  */
 export function ValueMax(max, options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: API.Decorator.Config.key(options, VALUE_MAX),
-        valid: isValueMaxValid(value, max),
-        message: API.Decorator.Config.message(options, locale, translate(locale, VALUE_MAX, max, value)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: API.Decorators.key(options, VALUE_MAX),
+      valid: isValueMaxValid(value, max),
+      message: API.Decorators.message(options, locale, translate(locale, VALUE_MAX, max, value)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

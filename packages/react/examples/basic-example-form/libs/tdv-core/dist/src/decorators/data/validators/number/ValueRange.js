@@ -5,8 +5,8 @@ import { translate } from "../../../../localization/service/TranslationService";
 export const VALUE_RANGE = "ValueRange";
 /** Internal validation function for {@link ValueRange} validator. */
 function isValueRangeValid(num, min, max) {
-    API.Utilities.Objects.assertType("number", num);
-    return num == null ? true : num >= min && num <= max;
+  API.Utilities.Objects.assertType("number", num);
+  return num == null ? true : num >= min && num <= max;
 }
 /**
  * Checks if decorated number is within a given range of `min` and `max` parameters.
@@ -58,9 +58,16 @@ function isValueRangeValid(num, min, max) {
  * ```
  */
 export function ValueRange(min, max, options) {
-    return createFieldValidator((num, _context, locale) => ({
-        key: API.Decorator.Config.key(options, VALUE_RANGE),
-        valid: isValueRangeValid(num, min, max),
-        message: API.Decorator.Config.message(options, locale, translate(locale, VALUE_RANGE, min, max, num)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (num, _context, locale) => ({
+      key: API.Decorators.key(options, VALUE_RANGE),
+      valid: isValueRangeValid(num, min, max),
+      message: API.Decorators.message(
+        options,
+        locale,
+        translate(locale, VALUE_RANGE, min, max, num)
+      ),
+    }),
+    API.Decorators.groups(options)
+  );
 }

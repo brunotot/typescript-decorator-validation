@@ -1,12 +1,12 @@
-import API from "../../../../../index";
+import * as API from "../../../../../index";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type FieldDecorator, createFieldValidator } from "../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../index";
 
-/** ArraySizeMin identifier. */
+/** `@ArraySizeMin` key. */
 export const ARRAY_SIZE_MIN = "ArraySizeMin";
 
 /** Internal validation function for {@link ArraySizeMin} validator. */
-export function isArraySizeMinValid(array: any[], min: number): boolean {
+function isArraySizeMinValid(array: any[], min: number): boolean {
   API.Utilities.Objects.assertType("array", array);
   return (array ?? []).length >= min;
 }
@@ -62,18 +62,18 @@ export function isArraySizeMinValid(array: any[], min: number): boolean {
  */
 export function ArraySizeMin<K, T extends K[]>(
   min: number,
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.Config.key(options, ARRAY_SIZE_MIN),
+      key: API.Decorators.buildKeyProp(options, ARRAY_SIZE_MIN),
       valid: isArraySizeMinValid(array, min),
-      message: API.Decorator.Config.message(
+      message: API.Decorators.buildMessageProp(
         options,
         locale,
         translate(locale, ARRAY_SIZE_MIN, min, (array ?? []).length)
       ),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

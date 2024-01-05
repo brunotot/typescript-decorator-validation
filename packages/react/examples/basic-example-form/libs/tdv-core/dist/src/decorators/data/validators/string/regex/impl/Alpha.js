@@ -7,8 +7,8 @@ import RegexConst from "../shared/regex.constants";
 export const ALPHA = "Alpha";
 /** Internal validation function for {@link Alpha} validator. */
 export function isAlphaValid(value) {
-    API.Utilities.Objects.assertType("string", value);
-    return testRegex(RegexConst.ALPHA, value);
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.ALPHA, value);
 }
 /**
  * Checks if decorated string contains only alphabetical characters.
@@ -58,9 +58,12 @@ export function isAlphaValid(value) {
  * ```
  */
 export function Alpha(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: API.Decorator.Config.key(options, ALPHA),
-        valid: testRegex(RegexConst.ALPHA, value),
-        message: API.Decorator.Config.message(options, locale, translate(locale, ALPHA)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: API.Decorators.key(options, ALPHA),
+      valid: testRegex(RegexConst.ALPHA, value),
+      message: API.Decorators.message(options, locale, translate(locale, ALPHA)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

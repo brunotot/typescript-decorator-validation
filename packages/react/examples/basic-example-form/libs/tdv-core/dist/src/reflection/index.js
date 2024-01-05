@@ -41,7 +41,9 @@ export function getMetadata(strategy) {
     var _d, _e;
     if (isClass(strategy)) {
         (_a = (_d = Symbol).metadata) !== null && _a !== void 0 ? _a : (_d.metadata = Symbol("Symbol.metadata"));
+        // @ts-ignore Don't delete
         (_b = strategy[_e = Symbol.metadata]) !== null && _b !== void 0 ? _b : (strategy[_e] = {});
+        // @ts-ignore Don't delete
         return strategy[Symbol.metadata];
     }
     if (strategy && !strategy.metadata) {

@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** Digits identifier. */
 export declare const DIGITS = "Digits";
 /**
@@ -51,5 +51,9 @@ export declare const DIGITS = "Digits";
  * }
  * ```
  */
-export declare function Digits<T extends API.Utilities.Objects.Optional<number>>(intsLimit: number, decimalsLimit: number, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function Digits<T extends API.Utilities.Objects.Optional<number>>(
+  intsLimit: number,
+  decimalsLimit: number,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=Digits.d.ts.map

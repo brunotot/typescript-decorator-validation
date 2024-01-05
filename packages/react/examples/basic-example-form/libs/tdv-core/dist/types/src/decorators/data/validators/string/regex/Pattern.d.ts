@@ -1,5 +1,8 @@
 import API from "../../../../../../index";
-export declare function testRegex<T extends API.Utilities.Objects.Optional<string>>(regex: RegExp, value: T): boolean;
+export declare function testRegex<T extends API.Utilities.Objects.Optional<string>>(
+  regex: RegExp,
+  value: T
+): boolean;
 /**
  * Creates a validator decorator that checks if a string value matches a regular expression pattern.
  *
@@ -28,5 +31,8 @@ export declare function testRegex<T extends API.Utilities.Objects.Optional<strin
  *   anotherProperty: string;
  * }
  */
-export declare function Pattern<T extends API.Utilities.Objects.Optional<string>>(regex: RegExp, options?: API.Decorator.Config.Options): API.Decorator.FieldDecorator<T>;
+export declare function Pattern<T extends API.Utilities.Objects.Optional<string>>(
+  regex: RegExp,
+  options?: API.Decorators.Options
+): API.Decorator.FieldDecorator<T>;
 //# sourceMappingURL=Pattern.d.ts.map

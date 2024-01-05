@@ -1,15 +1,14 @@
-import API from "../../../../../../../index";
-
-import { type FieldDecorator, createFieldValidator } from "../../../../../../decorators";
+import * as API from "../../../../../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../../../../decorators";
 import { translate } from "../../../../../../localization/service/TranslationService";
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
 
-/** URL identifier. */
+/** `@URL` key. */
 export const URL_KEY = "URL";
 
 /** Internal validation function for {@link URL} validator. */
-export function isURLValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
+function isURLValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
   API.Utilities.Objects.assertType("string", value);
   return testRegex(RegexConst.URL, value);
 }
@@ -62,14 +61,14 @@ export function isURLValid<T extends API.Utilities.Objects.Optional<string>>(val
  * ```
  */
 export function URL<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.Config.key(options, URL_KEY),
+      key: API.Decorators.buildKeyProp(options, URL_KEY),
       valid: testRegex(RegexConst.URL, value),
-      message: API.Decorator.Config.message(options, locale, translate(locale, URL_KEY)),
+      message: API.Decorators.buildMessageProp(options, locale, translate(locale, URL_KEY)),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

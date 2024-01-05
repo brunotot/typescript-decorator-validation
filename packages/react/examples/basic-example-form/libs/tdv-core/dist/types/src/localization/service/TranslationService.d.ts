@@ -1,5 +1,5 @@
 import API from "../../../index";
-import { LocalizedMessages } from "./MessageReaderService";
+import { type LocalizedMessages } from "./MessageReaderService";
 /**
  * Localizes a string based on a corresponding key and optional arguments mapped by indices. (ex: `"Hello {0}! How are you?"`)
  *

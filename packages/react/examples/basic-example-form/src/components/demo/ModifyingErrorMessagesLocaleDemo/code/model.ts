@@ -1,16 +1,16 @@
-import { Required } from "tdv-core/validators";
+import { Decorators } from "tdv-core";
 
 export class ModelForm {
-  @Required()
+  @Decorators.Required()
   id: string = "";
 
-  @Required()
+  @Decorators.Required()
   description: string = "";
 
-  @Required()
+  @Decorators.Required()
   creationDate: string = "";
 
-  @Required()
+  @Decorators.Required()
   deadlineDate: string = "";
 }
 

@@ -5,8 +5,8 @@ import { createFieldValidator } from "../../../index";
 export const PAST_DATE = "PastDate";
 /** Internal validation function for {@link PastDate} validator. */
 export function isPastDateValid(date) {
-    API.Utilities.Objects.assertType("date", date);
-    return date && date.getTime() < new Date().getTime();
+  API.Utilities.Objects.assertType("date", date);
+  return date && date.getTime() < new Date().getTime();
 }
 /**
  * Checks if a {@link Date} is in the past.
@@ -56,9 +56,12 @@ export function isPastDateValid(date) {
  * ```
  */
 export function PastDate(options) {
-    return createFieldValidator((date, _context, locale) => ({
-        key: API.Decorator.Config.key(options, PAST_DATE),
-        valid: isPastDateValid(date),
-        message: API.Decorator.Config.message(options, locale, translate(locale, PAST_DATE, date)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (date, _context, locale) => ({
+      key: API.Decorators.key(options, PAST_DATE),
+      valid: isPastDateValid(date),
+      message: API.Decorators.message(options, locale, translate(locale, PAST_DATE, date)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

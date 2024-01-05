@@ -1,15 +1,14 @@
-import API from "../../../../../../../index";
-import { type FieldDecorator, createFieldValidator } from "../../../../../../decorators";
-
+import * as API from "../../../../../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../../../../decorators";
 import { translate } from "../../../../../../localization/service/TranslationService";
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
 
-/** Alpha identifier. */
+/** `@Alpha` key. */
 export const ALPHA = "Alpha";
 
 /** Internal validation function for {@link Alpha} validator. */
-export function isAlphaValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
+function isAlphaValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
   API.Utilities.Objects.assertType("string", value);
   return testRegex(RegexConst.ALPHA, value);
 }
@@ -62,14 +61,14 @@ export function isAlphaValid<T extends API.Utilities.Objects.Optional<string>>(v
  * ```
  */
 export function Alpha<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.Config.key(options, ALPHA),
+      key: API.Decorators.buildKeyProp(options, ALPHA),
       valid: testRegex(RegexConst.ALPHA, value),
-      message: API.Decorator.Config.message(options, locale, translate(locale, ALPHA)),
+      message: API.Decorators.buildMessageProp(options, locale, translate(locale, ALPHA)),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

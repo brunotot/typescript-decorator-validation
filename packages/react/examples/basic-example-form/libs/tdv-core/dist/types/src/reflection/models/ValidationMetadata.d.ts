@@ -1,6 +1,6 @@
-import API from "../../index";
-import { EventEmitter } from "../../utilities/misc/EventEmitter";
-import { ValidationMetadataEntry } from "../../validation";
+import type API from "../../index";
+import { type EventEmitter } from "../../utilities/misc/EventEmitter";
+import { ValidationResult, type ValidationMetadataEntry } from "../../validation";
 /**
  * Manages a collection of validation rules for a specific field.
  *
@@ -33,7 +33,7 @@ export declare class ValidationMetadata<TFieldType> {
      *
      * @returns An array of `ValidationResult` containing the validation results.
      */
-    validate<TBody>(value: TFieldType, payload: API.Utilities.Objects.Payload<TBody>, groups: string[], locale: API.Localization.Locale, args?: API.Decorator.DecoratorArgs, emitter?: EventEmitter, field?: string): API.Validation.ValidationResult[];
+    validate<TBody>(value: TFieldType, payload: API.Utilities.Objects.Payload<TBody>, groups: string[], locale: API.Localization.Locale, args?: API.Decorator.DecoratorArgs, emitter?: EventEmitter, field?: string): ValidationResult[];
     /**
      * Removes and returns the last validation rule from the collection.
      *

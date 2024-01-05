@@ -2,6 +2,7 @@ import { createFieldValidator, ValidationResult } from "tdv-core";
 import { ModelForm } from "../code/model";
 
 export const UniqueUsername = (...groups: string[]) => {
+  // @ts-ignore
   return createFieldValidator<string>((username, _this: ModelForm, _locale, { token }) => {
     return new Promise<ValidationResult>(resolve => {
       setTimeout(() => {

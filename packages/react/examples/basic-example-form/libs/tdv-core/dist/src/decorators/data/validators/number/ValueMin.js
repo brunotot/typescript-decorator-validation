@@ -5,8 +5,8 @@ import { translate } from "../../../../localization/service/TranslationService";
 export const VALUE_MIN = "ValueMin";
 /** Internal validation function for {@link ValueMin} validator. */
 function isValueMinValid(num, min) {
-    API.Utilities.Objects.assertType("number", num);
-    return num == null ? true : num >= min;
+  API.Utilities.Objects.assertType("number", num);
+  return num == null ? true : num >= min;
 }
 /**
  * Checks if decorated number is not lesser than given `min` parameter.
@@ -57,9 +57,12 @@ function isValueMinValid(num, min) {
  * ```
  */
 export function ValueMin(min, options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: API.Decorator.Config.key(options, VALUE_MIN),
-        valid: isValueMinValid(value, min),
-        message: API.Decorator.Config.message(options, locale, translate(locale, VALUE_MIN, min, value)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: API.Decorators.key(options, VALUE_MIN),
+      valid: isValueMinValid(value, min),
+      message: API.Decorators.message(options, locale, translate(locale, VALUE_MIN, min, value)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

@@ -1,9 +1,9 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** ArrayContains identifier. */
 export declare const ARRAY_CONTAINS = "ArrayContains";
 /** Internal validation function for {@link ArrayContains} validator. */
-export declare function isArrayContainsValid<K, T extends Array<K>>(value: T, contains: K): boolean;
+export declare function isArrayContainsValid<K, T extends K[]>(value: T, contains: K): boolean;
 /**
  * Checks if the decorated array contains a specific value.
  *
@@ -53,5 +53,8 @@ export declare function isArrayContainsValid<K, T extends Array<K>>(value: T, co
  * }
  * ```
  */
-export declare function ArrayContains<K, T extends Array<K>>(contains: K, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ArrayContains<K, T extends K[]>(
+  contains: K,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ArrayContains.d.ts.map

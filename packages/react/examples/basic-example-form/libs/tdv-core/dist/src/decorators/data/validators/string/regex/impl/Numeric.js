@@ -7,8 +7,8 @@ import RegexConst from "../shared/regex.constants";
 export const NUMERIC = "Numeric";
 /** Internal validation function for {@link Numeric} validator. */
 export function isNumericValid(value) {
-    API.Utilities.Objects.assertType("string", value);
-    return testRegex(RegexConst.NUMERIC, value);
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.NUMERIC, value);
 }
 /**
  * Checks if decorated string contains only numeric characters.
@@ -58,9 +58,12 @@ export function isNumericValid(value) {
  * ```
  */
 export function Numeric(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: API.Decorator.Config.key(options, NUMERIC),
-        valid: testRegex(RegexConst.NUMERIC, value),
-        message: API.Decorator.Config.message(options, locale, translate(locale, NUMERIC)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: API.Decorators.key(options, NUMERIC),
+      valid: testRegex(RegexConst.NUMERIC, value),
+      message: API.Decorators.message(options, locale, translate(locale, NUMERIC)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

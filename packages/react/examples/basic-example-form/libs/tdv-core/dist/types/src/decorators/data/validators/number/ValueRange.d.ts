@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../../decorators";
+import { type FieldDecorator } from "../../../../decorators";
 /** ValueRange identifier. */
 export declare const VALUE_RANGE = "ValueRange";
 /**
@@ -51,5 +51,9 @@ export declare const VALUE_RANGE = "ValueRange";
  * }
  * ```
  */
-export declare function ValueRange<T extends API.Utilities.Objects.Optional<number>>(min: number, max: number, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ValueRange<T extends API.Utilities.Objects.Optional<number>>(
+  min: number,
+  max: number,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ValueRange.d.ts.map

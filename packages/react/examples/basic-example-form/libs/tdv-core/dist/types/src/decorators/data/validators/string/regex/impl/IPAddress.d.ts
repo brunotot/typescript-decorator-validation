@@ -1,9 +1,11 @@
 import API from "../../../../../../../index";
-import { FieldDecorator } from "../../../../../../decorators";
+import { type FieldDecorator } from "../../../../../../decorators";
 /** IPAddress identifier. */
 export declare const IP_ADDRESS = "IPAddress";
 /** Internal validation function for {@link IPAddress} validator. */
-export declare function isIPAddressValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean;
+export declare function isIPAddressValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean;
 /**
  * Checks if decorated string is a valid IP address.
  *
@@ -51,5 +53,7 @@ export declare function isIPAddressValid<T extends API.Utilities.Objects.Optiona
  * }
  * ```
  */
-export declare function IPAddress<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function IPAddress<T extends API.Utilities.Objects.Optional<string>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=IPAddress.d.ts.map

@@ -1,8 +1,8 @@
-import API from "../../../../../index";
-import { type FieldDecorator, createFieldValidator } from "../../../../decorators";
+import * as API from "../../../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../../decorators";
 import { translate } from "../../../../localization/service/TranslationService";
 
-/** ValueRange identifier. */
+/** `@ValueRange` key. */
 export const VALUE_RANGE = "ValueRange";
 
 /** Internal validation function for {@link ValueRange} validator. */
@@ -67,18 +67,18 @@ function isValueRangeValid(
 export function ValueRange<T extends API.Utilities.Objects.Optional<number>>(
   min: number,
   max: number,
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (num, _context, locale) => ({
-      key: API.Decorator.Config.key(options, VALUE_RANGE),
+      key: API.Decorators.buildKeyProp(options, VALUE_RANGE),
       valid: isValueRangeValid(num, min, max),
-      message: API.Decorator.Config.message(
+      message: API.Decorators.buildMessageProp(
         options,
         locale,
         translate(locale, VALUE_RANGE, min, max, num)
       ),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

@@ -33,7 +33,7 @@ export class EventEmitter {
                 if (existingTimeout) {
                     clearTimeout(existingTimeout);
                 }
-                const timeout = setTimeout(() => handler(data), TdvCoreApi.Configuration.asyncValidationDelay);
+                const timeout = setTimeout(() => { handler(data); }, TdvCoreApi.Configuration.asyncValidationDelay);
                 this.handlersTimeout.set(handlerKey, timeout);
             });
         }

@@ -5,8 +5,8 @@ import { createFieldValidator } from "../../../index";
 export const DECIMAL = "Decimal";
 /** Internal validation function for {@link Decimal} validator. */
 export function isDecimalValid(value) {
-    API.Utilities.Objects.assertType("number", value);
-    return value !== undefined && value !== null && !Number.isInteger(value);
+  API.Utilities.Objects.assertType("number", value);
+  return value !== undefined && value !== null && !Number.isInteger(value);
 }
 /**
  * Checks if decorated number is a decimal number.
@@ -56,9 +56,12 @@ export function isDecimalValid(value) {
  * ```
  */
 export function Decimal(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: API.Decorator.Config.key(options, DECIMAL),
-        valid: isDecimalValid(value),
-        message: API.Decorator.Config.message(options, locale, translate(locale, DECIMAL, value)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: API.Decorators.key(options, DECIMAL),
+      valid: isDecimalValid(value),
+      message: API.Decorators.message(options, locale, translate(locale, DECIMAL, value)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

@@ -1,5 +1,5 @@
-import API from "../../../index";
-import { ClassDecorator } from "./createClassDecorator";
+import type API from "../../../index";
+import { type ClassDecorator } from "./createClassDecorator";
 /**
  * Creates validation decorators for classes.
  *

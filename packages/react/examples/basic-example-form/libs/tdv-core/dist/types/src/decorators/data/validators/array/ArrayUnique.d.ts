@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** ArrayUnique identifier. */
 export declare const ARRAY_UNIQUE = "ArrayUnique";
 /** Internal validation function for {@link ArrayUnique} validator. */
@@ -52,5 +52,7 @@ export declare function isArrayUniqueValid(array: any[]): boolean;
  * }
  * ```
  */
-export declare function ArrayUnique<K, T extends Array<K>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ArrayUnique<K, T extends K[]>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ArrayUnique.d.ts.map

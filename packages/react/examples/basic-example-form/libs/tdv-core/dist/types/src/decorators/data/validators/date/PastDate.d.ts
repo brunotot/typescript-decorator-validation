@@ -1,9 +1,11 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** PastDate identifier. */
 export declare const PAST_DATE = "PastDate";
 /** Internal validation function for {@link PastDate} validator. */
-export declare function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(date: T): boolean;
+export declare function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(
+  date: T
+): boolean;
 /**
  * Checks if a {@link Date} is in the past.
  *
@@ -51,5 +53,7 @@ export declare function isPastDateValid<T extends API.Utilities.Objects.Optional
  * }
  * ```
  */
-export declare function PastDate<T extends API.Utilities.Objects.Optional<Date>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function PastDate<T extends API.Utilities.Objects.Optional<Date>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=PastDate.d.ts.map

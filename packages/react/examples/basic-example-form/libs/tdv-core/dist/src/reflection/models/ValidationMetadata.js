@@ -80,10 +80,12 @@ _ValidationMetadata_contents = new WeakMap(), _ValidationMetadata_instances = ne
     if (!emitter)
         return;
     Promise.all(asyncResults).then(results => {
-        results.forEach(value => emitter.emit(Events.ASYNC_VALIDATION_COMPLETE, {
-            key: field,
-            value,
-        }));
+        results.forEach(value => {
+            emitter.emit(Events.ASYNC_VALIDATION_COMPLETE, {
+                key: field,
+                value,
+            });
+        });
     });
 }, _ValidationMetadata_groupedValidators = function _ValidationMetadata_groupedValidators(data, groups) {
     return data.filter((meta) => groups.length > 0 ? meta.groups.some(o => groups.includes(o)) : meta.groups.length === 0);

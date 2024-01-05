@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** ArrayEmpty identifier. */
 export declare const ARRAY_EMPTY = "ArrayEmpty";
 /** Internal validation function for {@link ArrayEmpty} validator. */
@@ -52,5 +52,7 @@ export declare function isArrayEmptyValid(array: any[]): boolean;
  * }
  * ```
  */
-export declare function ArrayEmpty<K, T extends Array<K>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ArrayEmpty<K, T extends K[]>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ArrayEmpty.d.ts.map

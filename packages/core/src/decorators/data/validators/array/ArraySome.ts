@@ -1,12 +1,12 @@
-import API from "../../../../../index";
+import * as API from "../../../../../index";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type FieldDecorator, createFieldValidator } from "../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../index";
 
-/** ArraySome identifier. */
+/** `@ArraySome` key. */
 export const ARRAY_SOME = "ArraySome";
 
 /** Internal validation function for {@link ArraySome} validator. */
-export function isArraySomeValid<K, T extends K[]>(
+function isArraySomeValid<K, T extends K[]>(
   array: T,
   predicate: API.Utilities.Objects.ArrayPredicate<K>
 ): boolean {
@@ -65,14 +65,14 @@ export function isArraySomeValid<K, T extends K[]>(
  **/
 export function ArraySome<K, T extends K[]>(
   predicate: API.Utilities.Objects.ArrayPredicate<K>,
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.Config.key(options, ARRAY_SOME),
+      key: API.Decorators.buildKeyProp(options, ARRAY_SOME),
       valid: isArraySomeValid(array, predicate),
-      message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_SOME)),
+      message: API.Decorators.buildMessageProp(options, locale, translate(locale, ARRAY_SOME)),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

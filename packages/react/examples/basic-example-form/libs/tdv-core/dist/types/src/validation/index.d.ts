@@ -1,4 +1,4 @@
-import API from "../index";
+import type API from "../index";
 export * from "./models";
 /**
  * Represents a function that evaluates a value and returns a validation result.
@@ -28,8 +28,8 @@ export type ValidationResult = {
  * @typeParam TClass - The type of the class being validated.
  */
 export type AsyncEventResponseProps<TClass> = {
-    errors: API.Strategy.Factory.Impl.Errors<TClass>;
-    detailedErrors: API.Strategy.Factory.Impl.DetailedErrors<TClass>;
+    errors: API.Strategy.Impl.Errors<TClass>;
+    detailedErrors: API.Strategy.Impl.DetailedErrors<TClass>;
     globalErrors: API.Validation.ValidationResult[];
 };
 /**
@@ -63,8 +63,8 @@ export type FormConfig<TClass> = {
  */
 export type FormValidateResponse<T> = {
     valid: boolean;
-    detailedErrors: API.Strategy.Factory.Impl.DetailedErrors<T>;
-    errors: API.Strategy.Factory.Impl.Errors<T>;
+    detailedErrors: API.Strategy.Impl.DetailedErrors<T>;
+    errors: API.Strategy.Impl.Errors<T>;
     globalErrors: API.Validation.ValidationResult[];
 };
 //# sourceMappingURL=index.d.ts.map

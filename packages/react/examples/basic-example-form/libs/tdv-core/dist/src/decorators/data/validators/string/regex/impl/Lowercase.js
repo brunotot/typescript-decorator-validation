@@ -7,8 +7,8 @@ import RegexConst from "../shared/regex.constants";
 export const LOWERCASE = "Lowercase";
 /** Internal validation function for {@link Lowercase} validator. */
 export function isLowercaseValid(value) {
-    API.Utilities.Objects.assertType("string", value);
-    return testRegex(RegexConst.LOWERCASE, value);
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.LOWERCASE, value);
 }
 /**
  * Checks if decorated string contains only lowercase characters.
@@ -58,9 +58,12 @@ export function isLowercaseValid(value) {
  * ```
  */
 export function Lowercase(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: API.Decorator.Config.key(options, LOWERCASE),
-        valid: testRegex(RegexConst.LOWERCASE, value),
-        message: API.Decorator.Config.message(options, locale, translate(locale, LOWERCASE)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: API.Decorators.key(options, LOWERCASE),
+      valid: testRegex(RegexConst.LOWERCASE, value),
+      message: API.Decorators.message(options, locale, translate(locale, LOWERCASE)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

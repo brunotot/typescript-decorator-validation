@@ -1,12 +1,12 @@
-import API from "../../../../../index";
+import * as API from "../../../../../index";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type FieldDecorator, createFieldValidator } from "../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../index";
 
-/** ArrayNone identifier. */
+/** `@ArrayNone` key. */
 export const ARRAY_NONE = "ArrayNone";
 
 /** Internal validation function for {@link ArrayNone} validator. */
-export function isArrayNoneValid<K, T extends K[]>(
+function isArrayNoneValid<K, T extends K[]>(
   array: T,
   predicate: API.Utilities.Objects.ArrayPredicate<K>
 ): boolean {
@@ -65,14 +65,14 @@ export function isArrayNoneValid<K, T extends K[]>(
  **/
 export function ArrayNone<K, T extends K[]>(
   predicate: API.Utilities.Objects.ArrayPredicate<K>,
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.Config.key(options, ARRAY_NONE),
+      key: API.Decorators.buildKeyProp(options, ARRAY_NONE),
       valid: isArrayNoneValid(array, predicate),
-      message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_NONE)),
+      message: API.Decorators.buildMessageProp(options, locale, translate(locale, ARRAY_NONE)),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

@@ -7,8 +7,8 @@ import RegexConst from "../shared/regex.constants";
 export const EMAIL = "Email";
 /** Internal validation function for {@link Email} validator. */
 export function isEmailValid(value) {
-    API.Utilities.Objects.assertType("string", value);
-    return testRegex(RegexConst.EMAIL, value);
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.EMAIL, value);
 }
 /**
  * Checks if decorated string is a valid email.
@@ -58,9 +58,12 @@ export function isEmailValid(value) {
  * ```
  */
 export function Email(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: API.Decorator.Config.key(options, EMAIL),
-        valid: testRegex(RegexConst.EMAIL, value),
-        message: API.Decorator.Config.message(options, locale, translate(locale, EMAIL)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: API.Decorators.key(options, EMAIL),
+      valid: testRegex(RegexConst.EMAIL, value),
+      message: API.Decorators.message(options, locale, translate(locale, EMAIL)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

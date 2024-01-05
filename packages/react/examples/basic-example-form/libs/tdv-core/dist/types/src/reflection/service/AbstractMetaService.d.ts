@@ -1,5 +1,5 @@
 import API from "../../../index";
-import { FieldDecoratorCtx } from "./../../decorators";
+import { type FieldDecoratorCtx } from "./../../decorators";
 /**
  * Abstract class for managing metadata.
  * @remarks This class provides methods for managing metadata associated with a given strategy. It can be used to get, set, and check for the existence of attributes in the metadata.

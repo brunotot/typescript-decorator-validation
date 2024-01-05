@@ -1,6 +1,6 @@
 import API from "../../index";
-import * as Arrays from "./Arrays";
-import * as Booleans from "./Booleans";
+import type * as Arrays from "./Arrays";
+import type * as Booleans from "./Booleans";
 import type * as Types from "./Types";
 /**
  * A type that represents an optional value.
@@ -76,7 +76,7 @@ export declare function unique<T>(data: T[]): T[];
  *
  * @typeParam T - The type of the errors.
  */
-export declare function hasErrors<T>(data: API.Strategy.Factory.Impl.Errors<T>): boolean;
+export declare function hasErrors<T>(data: API.Strategy.Impl.Errors<T>): boolean;
 /**
  * Recursively checks if two values are deep equal.
  */

@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** ArraySizeMax identifier. */
 export declare const ARRAY_SIZE_MAX = "ArraySizeMax";
 /** Internal validation function for {@link ArraySizeMax} validator. */
@@ -53,5 +53,8 @@ export declare function isArraySizeMaxValid(array: any[], max: number): boolean;
  * }
  * ```
  */
-export declare function ArraySizeMax<K, T extends K[]>(max: number, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ArraySizeMax<K, T extends K[]>(
+  max: number,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ArraySizeMax.d.ts.map

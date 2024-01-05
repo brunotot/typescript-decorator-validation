@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** ArraySizeRange identifier. */
 export declare const ARRAY_SIZE_RANGE = "ArraySizeRange";
 /** Internal validation function for {@link ArraySizeRange} validator. */
@@ -54,5 +54,9 @@ export declare function isArraySizeRangeValid(array: any[], min: number, max: nu
  * }
  * ```
  */
-export declare function ArraySizeRange<K, T extends K[]>(min: number, max: number, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ArraySizeRange<K, T extends K[]>(
+  min: number,
+  max: number,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ArraySizeRange.d.ts.map

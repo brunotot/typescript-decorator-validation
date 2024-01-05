@@ -1,9 +1,11 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** TodayDate identifier. */
 export declare const TODAY_DATE = "TodayDate";
 /** Internal validation function for {@link TodayDate} validator. */
-export declare function isTodayDateValid<T extends API.Utilities.Objects.Optional<Date>>(date: T): boolean;
+export declare function isTodayDateValid<T extends API.Utilities.Objects.Optional<Date>>(
+  date: T
+): boolean;
 /**
  * Checks if a {@link Date} is the today's date based on year, month and day.
  *
@@ -51,5 +53,7 @@ export declare function isTodayDateValid<T extends API.Utilities.Objects.Optiona
  * }
  * ```
  */
-export declare function TodayDate<T extends API.Utilities.Objects.Optional<Date>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function TodayDate<T extends API.Utilities.Objects.Optional<Date>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=TodayDate.d.ts.map

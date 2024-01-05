@@ -1,5 +1,5 @@
-import API from "../../../../index";
-import { FieldDecorator } from "./../../index";
+import type API from "../../../../index";
+import { type FieldDecorator } from "./../../index";
 /**
  * Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T`).
  *

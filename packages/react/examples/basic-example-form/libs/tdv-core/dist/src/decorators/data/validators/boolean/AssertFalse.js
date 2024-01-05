@@ -5,8 +5,8 @@ import { createFieldValidator } from "../../../index";
 export const ASSERT_FALSE = "AssertFalse";
 /** Internal validation function for {@link AssertFalse} validator. */
 export function isAssertFalseValid(value) {
-    API.Utilities.Objects.assertType("boolean", value);
-    return !value;
+  API.Utilities.Objects.assertType("boolean", value);
+  return !value;
 }
 /**
  * Checks if a boolean value is `false`.
@@ -56,9 +56,12 @@ export function isAssertFalseValid(value) {
  * ```
  */
 export function AssertFalse(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: API.Decorator.Config.key(options, ASSERT_FALSE),
-        valid: isAssertFalseValid(value),
-        message: API.Decorator.Config.message(options, locale, translate(locale, ASSERT_FALSE)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: API.Decorators.key(options, ASSERT_FALSE),
+      valid: isAssertFalseValid(value),
+      message: API.Decorators.message(options, locale, translate(locale, ASSERT_FALSE)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

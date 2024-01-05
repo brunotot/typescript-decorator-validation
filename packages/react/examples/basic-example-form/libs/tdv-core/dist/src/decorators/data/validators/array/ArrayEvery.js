@@ -5,8 +5,8 @@ import { createFieldValidator } from "../../../index";
 export const ARRAY_EVERY = "ArrayEvery";
 /** Internal validation function for {@link ArrayEvery} validator. */
 export function isArrayEveryValid(array, predicate) {
-    API.Utilities.Objects.assertType("array", array);
-    return (array !== null && array !== void 0 ? array : []).every(predicate);
+  API.Utilities.Objects.assertType("array", array);
+  return (array !== null && array !== void 0 ? array : []).every(predicate);
 }
 /**
  * Checks if all elements of decorated array satisfy the given predicate criteria.
@@ -58,9 +58,12 @@ export function isArrayEveryValid(array, predicate) {
  * ```
  **/
 export function ArrayEvery(predicate, options) {
-    return createFieldValidator((array, _context, locale) => ({
-        key: API.Decorator.Config.key(options, ARRAY_EVERY),
-        valid: isArrayEveryValid(array, predicate),
-        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_EVERY)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (array, _context, locale) => ({
+      key: API.Decorators.key(options, ARRAY_EVERY),
+      valid: isArrayEveryValid(array, predicate),
+      message: API.Decorators.message(options, locale, translate(locale, ARRAY_EVERY)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

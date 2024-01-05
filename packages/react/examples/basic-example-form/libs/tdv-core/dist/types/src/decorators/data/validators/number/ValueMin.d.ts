@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../../decorators";
+import { type FieldDecorator } from "../../../../decorators";
 /** ValueMin identifier. */
 export declare const VALUE_MIN = "ValueMin";
 /**
@@ -50,5 +50,8 @@ export declare const VALUE_MIN = "ValueMin";
  * }
  * ```
  */
-export declare function ValueMin<T extends API.Utilities.Objects.Optional<number>>(min: number, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ValueMin<T extends API.Utilities.Objects.Optional<number>>(
+  min: number,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ValueMin.d.ts.map

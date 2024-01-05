@@ -1,5 +1,5 @@
-import API from "../../../../index";
-import { FieldDecorator } from "./../../../decorators";
+import type API from "../../../../index";
+import { type FieldDecorator } from "./../../../decorators";
 /**
  * Creates a validator decorator which applies multiple validators to each element in array field.
  *
@@ -16,5 +16,5 @@ import { FieldDecorator } from "./../../../decorators";
  * }
  * ```
  */
-export declare function foreach<T extends NonNullable<API.Utilities.Types.ArrayType | (() => API.Utilities.Types.ArrayType)>>(...validators: FieldDecorator<API.Utilities.Arrays.getArrayType<T>>[]): FieldDecorator<T>;
+export declare function foreach<T extends NonNullable<API.Utilities.Types.ArrayType | (() => API.Utilities.Types.ArrayType)>>(...validators: Array<FieldDecorator<API.Utilities.Arrays.getArrayType<T>>>): FieldDecorator<T>;
 //# sourceMappingURL=foreach.d.ts.map

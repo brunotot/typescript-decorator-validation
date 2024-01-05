@@ -101,11 +101,8 @@ export { Decorators, Localization, Reflection, Strategy, Utilities, Validation }
  *
  * ```ts
  * // consumer.ts - model class which holds Coordinate property
- * import { attribute } from "tdv-core";
- *import Localization from '../react/examples/basic-example-form/libs/tdv-core/dist/types/src/localization/index.d';
-import Utilities from './dist/src/utilities/index';
-import { Form } from './src/validation/models/Form';
-
+ * import { attribute, Localization, Form, Utilities } from "tdv-core";
+ *
  * class Consumer {
  *   \@attribute(Coordinate) // enables deep validation
  *   coordinate: Coordinate; // non-primitive

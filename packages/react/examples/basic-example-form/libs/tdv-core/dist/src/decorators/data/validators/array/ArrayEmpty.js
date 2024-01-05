@@ -5,8 +5,8 @@ import { createFieldValidator } from "../../../index";
 export const ARRAY_EMPTY = "ArrayEmpty";
 /** Internal validation function for {@link ArrayEmpty} validator. */
 export function isArrayEmptyValid(array) {
-    API.Utilities.Objects.assertType("array", array);
-    return (array !== null && array !== void 0 ? array : []).length === 0;
+  API.Utilities.Objects.assertType("array", array);
+  return (array !== null && array !== void 0 ? array : []).length === 0;
 }
 /**
  * Checks if the decorated array is empty.
@@ -57,9 +57,12 @@ export function isArrayEmptyValid(array) {
  * ```
  */
 export function ArrayEmpty(options) {
-    return createFieldValidator((array, _context, locale) => ({
-        key: API.Decorator.Config.key(options, ARRAY_EMPTY),
-        valid: isArrayEmptyValid(array),
-        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_EMPTY)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (array, _context, locale) => ({
+      key: API.Decorators.key(options, ARRAY_EMPTY),
+      valid: isArrayEmptyValid(array),
+      message: API.Decorators.message(options, locale, translate(locale, ARRAY_EMPTY)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

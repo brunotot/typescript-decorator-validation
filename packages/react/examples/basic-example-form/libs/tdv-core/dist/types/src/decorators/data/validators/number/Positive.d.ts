@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../../decorators";
+import { type FieldDecorator } from "../../../../decorators";
 /** Positive identifier. */
 export declare const POSITIVE = "Positive";
 /**
@@ -49,5 +49,7 @@ export declare const POSITIVE = "Positive";
  * }
  * ```
  */
-export declare function Positive<T extends API.Utilities.Objects.Optional<number>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function Positive<T extends API.Utilities.Objects.Optional<number>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=Positive.d.ts.map

@@ -1,4 +1,4 @@
-import * as Booleans from "./Booleans";
+import type * as Booleans from "./Booleans";
 /**
  * Returns depth of provided generic array (example: getArrayDepth<string[][]> returns 2).
  * @remarks Due to TypeScript's compiler - evaluation is limited to the depth of 5.

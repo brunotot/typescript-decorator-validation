@@ -1,5 +1,5 @@
 import type API from "../../../../../index";
-import type StrategyFactory from "../../../models/StrategyFactory";
+import type * as StrategyFactory from "../../../models/StrategyFactory";
 import type ObjectStrategyType from "../ObjectStrategy/types";
 /**
  * Namespace for ObjectArray Strategy Types.

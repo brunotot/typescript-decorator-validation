@@ -1,9 +1,11 @@
 import API from "../../../../../../../index";
-import { FieldDecorator } from "../../../../../../decorators";
+import { type FieldDecorator } from "../../../../../../decorators";
 /** Email identifier. */
 export declare const EMAIL = "Email";
 /** Internal validation function for {@link Email} validator. */
-export declare function isEmailValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean;
+export declare function isEmailValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean;
 /**
  * Checks if decorated string is a valid email.
  *
@@ -51,5 +53,7 @@ export declare function isEmailValid<T extends API.Utilities.Objects.Optional<st
  * }
  * ```
  */
-export declare function Email<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function Email<T extends API.Utilities.Objects.Optional<string>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=Email.d.ts.map

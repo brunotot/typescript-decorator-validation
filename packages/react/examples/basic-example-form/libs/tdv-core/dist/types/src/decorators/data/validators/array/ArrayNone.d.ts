@@ -1,9 +1,12 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** ArrayNone identifier. */
 export declare const ARRAY_NONE = "ArrayNone";
 /** Internal validation function for {@link ArrayNone} validator. */
-export declare function isArrayNoneValid<K, T extends Array<K>>(array: T, predicate: API.Utilities.Objects.ArrayPredicate<K>): boolean;
+export declare function isArrayNoneValid<K, T extends K[]>(
+  array: T,
+  predicate: API.Utilities.Objects.ArrayPredicate<K>
+): boolean;
 /**
  * Checks if no elements of decorated array satisfy the given predicate criteria.
  *
@@ -53,5 +56,8 @@ export declare function isArrayNoneValid<K, T extends Array<K>>(array: T, predic
  * }
  * ```
  **/
-export declare function ArrayNone<K, T extends K[]>(predicate: API.Utilities.Objects.ArrayPredicate<K>, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ArrayNone<K, T extends K[]>(
+  predicate: API.Utilities.Objects.ArrayPredicate<K>,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ArrayNone.d.ts.map

@@ -1,15 +1,14 @@
-import API from "../../../../../../../index";
-
-import { type FieldDecorator, createFieldValidator } from "../../../../../../decorators";
+import * as API from "../../../../../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../../../../decorators";
 import { translate } from "../../../../../../localization/service/TranslationService";
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
 
-/** Email identifier. */
+/** `@Email` key. */
 export const EMAIL = "Email";
 
 /** Internal validation function for {@link Email} validator. */
-export function isEmailValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
+function isEmailValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
   API.Utilities.Objects.assertType("string", value);
   return testRegex(RegexConst.EMAIL, value);
 }
@@ -62,14 +61,14 @@ export function isEmailValid<T extends API.Utilities.Objects.Optional<string>>(v
  * ```
  */
 export function Email<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.Config.key(options, EMAIL),
+      key: API.Decorators.buildKeyProp(options, EMAIL),
       valid: testRegex(RegexConst.EMAIL, value),
-      message: API.Decorator.Config.message(options, locale, translate(locale, EMAIL)),
+      message: API.Decorators.buildMessageProp(options, locale, translate(locale, EMAIL)),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** Required identifier. */
 export declare const REQUIRED = "Required";
 /**
@@ -7,7 +7,9 @@ export declare const REQUIRED = "Required";
  *
  * @typeParam T - The type of the value.
  */
-export declare function isRequiredValid<T>(value: T | undefined): value is NonNullable<typeof value>;
+export declare function isRequiredValid<T>(
+  value: T | undefined
+): value is NonNullable<typeof value>;
 /**
  * Creates a validator decorator which requires that a value must be present.
  *
@@ -46,5 +48,7 @@ export declare function isRequiredValid<T>(value: T | undefined): value is NonNu
  * }
  * ```
  */
-export declare function Required<T extends API.Utilities.Objects.Optional>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function Required<T extends API.Utilities.Objects.Optional>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=Required.d.ts.map

@@ -1,6 +1,6 @@
 import type API from "../../index";
 import { type EventEmitter } from "../../utilities/misc/EventEmitter";
-import { type ValidationMetadataEntry } from "../../validation";
+import { ValidationResult, type ValidationMetadataEntry } from "../../validation";
 import { Events } from "../../validation/models/Events";
 
 /**
@@ -50,37 +50,34 @@ export class ValidationMetadata<TFieldType> {
     args?: API.Decorator.DecoratorArgs,
     emitter?: EventEmitter,
     field?: string
-  ): API.Validation.ValidationResult[] {
+  ): ValidationResult[] {
     function isPromise(value: any): value is Promise<any> {
       return Boolean(value && typeof value.then === "function");
     }
 
     const groupedValidators = this.#groupedValidators(this.#contents, groups);
-    const results = groupedValidators.map(async ({ validate }) =>
-      await validate(value, payload, locale, args ?? {})
+    const results = groupedValidators.map(({ validate }) =>
+      validate(value, payload, locale, args ?? {})
     );
-    const asyncResults = results.filter(v =>
-      isPromise(v)
-    );
+    const asyncResults = results.filter(v => isPromise(v)) as Array<Promise<ValidationResult>>;
     this.#handleAsyncResults(asyncResults, emitter, field);
-    const syncResults = results.filter(v => !isPromise(v)) as API.Validation.ValidationResult[];
+    const syncResults = results.filter(v => !isPromise(v)) as ValidationResult[];
     return syncResults.filter(({ valid }) => !valid);
   }
 
   #handleAsyncResults(
-    asyncResults: Array<Promise<API.Validation.ValidationResult>>,
+    asyncResults: Array<Promise<ValidationResult>>,
     emitter?: EventEmitter,
     field?: string
   ) {
     if (!emitter) return;
     Promise.all(asyncResults).then(results => {
       results.forEach(value => {
- emitter.emit(Events.ASYNC_VALIDATION_COMPLETE, {
+        emitter.emit(Events.ASYNC_VALIDATION_COMPLETE, {
           key: field,
           value,
         });
-}
-      );
+      });
     });
   }
 

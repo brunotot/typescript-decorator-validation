@@ -52,7 +52,9 @@ export function getClassFieldDescriptor<TClass>(
 export function getMetadata(strategy: MetaStrategy): DecoratorMetadataObject {
   if (isClass(strategy)) {
     (Symbol as any).metadata ??= Symbol("Symbol.metadata");
+    // @ts-ignore Don't delete
     strategy[Symbol.metadata] ??= {};
+    // @ts-ignore Don't delete
     return strategy[Symbol.metadata]!;
   }
   if (strategy && !strategy.metadata) {

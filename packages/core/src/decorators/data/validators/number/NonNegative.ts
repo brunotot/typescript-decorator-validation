@@ -1,8 +1,8 @@
-import API from "../../../../../index";
-import { type FieldDecorator, createFieldValidator } from "../../../../decorators";
+import * as API from "../../../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../../decorators";
 import { translate } from "../../../../localization/service/TranslationService";
 
-/** NonNegative identifier. */
+/** `@NonNegative` key. */
 export const NON_NEGATIVE = "NonNegative";
 
 /** Internal validation function for {@link NonNegative} validator. */
@@ -59,14 +59,18 @@ function isNonNegativeValid(num: API.Utilities.Objects.Optional<number>): boolea
  * ```
  */
 export function NonNegative<T extends API.Utilities.Objects.Optional<number>>(
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (num, _context, locale) => ({
-      key: API.Decorator.Config.key(options, NON_NEGATIVE),
+      key: API.Decorators.buildKeyProp(options, NON_NEGATIVE),
       valid: isNonNegativeValid(num),
-      message: API.Decorator.Config.message(options, locale, translate(locale, NON_NEGATIVE, num)),
+      message: API.Decorators.buildMessageProp(
+        options,
+        locale,
+        translate(locale, NON_NEGATIVE, num)
+      ),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

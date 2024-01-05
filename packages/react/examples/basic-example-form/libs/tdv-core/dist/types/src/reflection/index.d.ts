@@ -1,5 +1,5 @@
 import type API from "../../index";
-import { FieldDecoratorCtx } from "./../decorators";
+import { type FieldDecoratorCtx } from "./../decorators";
 export * from "./models";
 export * from "./service";
 /**

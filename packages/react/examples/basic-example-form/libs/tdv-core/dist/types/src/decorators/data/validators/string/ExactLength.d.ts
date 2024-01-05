@@ -1,9 +1,12 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../../decorators";
+import { type FieldDecorator } from "../../../../decorators";
 /** ExactLength identifier. */
 export declare const EXACT_LENGTH = "ExactLength";
 /** Internal validation function for {@link ExactLength} validator. */
-export declare function isExactLengthValid(value: API.Utilities.Objects.Optional<string>, exact: number): boolean;
+export declare function isExactLengthValid(
+  value: API.Utilities.Objects.Optional<string>,
+  exact: number
+): boolean;
 /**
  * Checks if decorated string contains a specific number of characters.
  *
@@ -49,5 +52,8 @@ export declare function isExactLengthValid(value: API.Utilities.Objects.Optional
  * }
  * ```
  */
-export declare function ExactLength<T extends API.Utilities.Objects.Optional<string>>(exact: number, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ExactLength<T extends API.Utilities.Objects.Optional<string>>(
+  exact: number,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ExactLength.d.ts.map

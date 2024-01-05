@@ -1,8 +1,8 @@
-import API from "../../../../../index";
-import { type FieldDecorator, createFieldValidator } from "../../../../decorators";
+import * as API from "../../../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../../decorators";
 import { translate } from "../../../../localization/service/TranslationService";
 
-/** Positive identifier. */
+/** `@Positive` key. */
 export const POSITIVE = "Positive";
 
 /** Internal validation function for {@link Positive} validator. */
@@ -59,14 +59,14 @@ function isPositiveValid(num: API.Utilities.Objects.Optional<number>): boolean {
  * ```
  */
 export function Positive<T extends API.Utilities.Objects.Optional<number>>(
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (num, _context, locale) => ({
-      key: API.Decorator.Config.key(options, POSITIVE),
+      key: API.Decorators.buildKeyProp(options, POSITIVE),
       valid: isPositiveValid(num),
-      message: API.Decorator.Config.message(options, locale, translate(locale, POSITIVE, num)),
+      message: API.Decorators.buildMessageProp(options, locale, translate(locale, POSITIVE, num)),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

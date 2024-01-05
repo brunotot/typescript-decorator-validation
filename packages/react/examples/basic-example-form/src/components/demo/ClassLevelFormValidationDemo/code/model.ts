@@ -1,9 +1,9 @@
-import { Required } from "tdv-core";
+import { Decorators } from "tdv-core";
 import { EqualFields } from "../shared/validators";
 
 @EqualFields("password", "confirmPassword")
 export class ModelForm {
-  @Required({ message: "Password field is mandatory" })
+  @Decorators.Required({ message: "Password field is mandatory" })
   password: string = "";
   confirmPassword: string = "";
 }

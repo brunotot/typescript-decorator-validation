@@ -1,9 +1,11 @@
 import API from "../../../../../../../index";
-import { FieldDecorator } from "../../../../../../decorators";
+import { type FieldDecorator } from "../../../../../../decorators";
 /** Numeric identifier. */
 export declare const NUMERIC = "Numeric";
 /** Internal validation function for {@link Numeric} validator. */
-export declare function isNumericValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean;
+export declare function isNumericValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean;
 /**
  * Checks if decorated string contains only numeric characters.
  *
@@ -51,5 +53,7 @@ export declare function isNumericValid<T extends API.Utilities.Objects.Optional<
  * }
  * ```
  */
-export declare function Numeric<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function Numeric<T extends API.Utilities.Objects.Optional<string>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=Numeric.d.ts.map

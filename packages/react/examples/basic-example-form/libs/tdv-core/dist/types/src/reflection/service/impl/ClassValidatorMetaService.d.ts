@@ -1,5 +1,5 @@
-import API from "../../../../index";
-import { EventEmitter } from "../../../utilities/misc/EventEmitter";
+import type API from "../../../../index";
+import { type EventEmitter } from "../../../utilities/misc/EventEmitter";
 import { ValidationMetadata } from "../../models/ValidationMetadata";
 import { AbstractMetaService } from "../AbstractMetaService";
 /**

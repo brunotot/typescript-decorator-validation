@@ -1,16 +1,12 @@
-import API from "../../../../../index";
+import * as API from "../../../../../index";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type ClassDecorator, createClassValidator } from "../../../index";
+import { createClassValidator, type ClassDecorator } from "../../../index";
 
-/** ValidDateRange identifier. */
+/** `@ValidDateRange` key. */
 export const VALID_DATE_RANGE = "ValidDateRange";
 
 /** Internal validation function for {@link ValidDateRange} validator. */
-export function isValidDateRangeValid(
-  value: any,
-  startDateField: string,
-  endDateField: string
-): boolean {
+function isValidDateRangeValid(value: any, startDateField: string, endDateField: string): boolean {
   API.Utilities.Objects.assertType("object", value);
   return value[startDateField].getTime() < value[endDateField].getTime();
 }
@@ -68,13 +64,13 @@ export function isValidDateRangeValid(
 export function ValidDateRange<T extends API.Utilities.Types.Class>(
   startDateField: string,
   endDateField: string,
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): ClassDecorator<T> {
   return createClassValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.Config.key(options, VALID_DATE_RANGE),
+      key: API.Decorators.buildKeyProp(options, VALID_DATE_RANGE),
       valid: isValidDateRangeValid(value, startDateField, endDateField),
-      message: API.Decorator.Config.message(
+      message: API.Decorators.buildMessageProp(
         options,
         locale,
         translate(
@@ -85,7 +81,7 @@ export function ValidDateRange<T extends API.Utilities.Types.Class>(
         )
       ),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }
 

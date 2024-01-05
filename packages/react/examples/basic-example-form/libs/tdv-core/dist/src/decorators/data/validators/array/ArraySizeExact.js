@@ -5,8 +5,8 @@ import { createFieldValidator } from "../../../index";
 export const ARRAY_SIZE_EXACT = "ArraySizeExact";
 /** Internal validation function for {@link ArraySizeExact} validator. */
 export function isArraySizeExactValid(array) {
-    API.Utilities.Objects.assertType("array", array);
-    return (array !== null && array !== void 0 ? array : []).length === 0;
+  API.Utilities.Objects.assertType("array", array);
+  return (array !== null && array !== void 0 ? array : []).length === 0;
 }
 /**
  * Checks if the decorated array contains an exact number of elements.
@@ -58,9 +58,21 @@ export function isArraySizeExactValid(array) {
  * ```
  */
 export function ArraySizeExact(exact, options) {
-    return createFieldValidator((array, _context, locale) => ({
-        key: API.Decorator.Config.key(options, ARRAY_SIZE_EXACT),
-        valid: (array !== null && array !== void 0 ? array : []).length === exact,
-        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_SIZE_EXACT, exact, (array !== null && array !== void 0 ? array : []).length)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (array, _context, locale) => ({
+      key: API.Decorators.key(options, ARRAY_SIZE_EXACT),
+      valid: (array !== null && array !== void 0 ? array : []).length === exact,
+      message: API.Decorators.message(
+        options,
+        locale,
+        translate(
+          locale,
+          ARRAY_SIZE_EXACT,
+          exact,
+          (array !== null && array !== void 0 ? array : []).length
+        )
+      ),
+    }),
+    API.Decorators.groups(options)
+  );
 }

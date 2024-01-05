@@ -2,17 +2,22 @@ import API from "../../../../../index";
 /** Password identifier. */
 export declare const PASSWORD = "Password";
 export type PasswordRules = {
-    uppercase?: boolean;
-    lowercase?: boolean;
-    numbers?: boolean;
-    specials?: boolean;
-    length?: number;
+  uppercase?: boolean;
+  lowercase?: boolean;
+  numbers?: boolean;
+  specials?: boolean;
+  length?: number;
 };
 /** Internal validation function for {@link Password} validator. */
-export declare function isPasswordValid(input: API.Utilities.Objects.Optional<string>, rules: PasswordRules | undefined, definedMessage?: string, locale?: API.Localization.Locale): {
-    key: string;
-    message: string;
-    valid: boolean;
+export declare function isPasswordValid(
+  input: API.Utilities.Objects.Optional<string>,
+  rules: PasswordRules | undefined,
+  definedMessage?: string,
+  locale?: API.Localization.Locale
+): {
+  key: string;
+  message: string;
+  valid: boolean;
 };
 /**
  * Checks if decorated string contains a specific number of characters.
@@ -68,5 +73,8 @@ export declare function isPasswordValid(input: API.Utilities.Objects.Optional<st
  * }
  * ```
  */
-export declare function Password<T extends API.Utilities.Objects.Optional<string>>(rules?: PasswordRules, options?: API.Decorator.Config.Options): API.Decorator.FieldDecorator<T>;
+export declare function Password<T extends API.Utilities.Objects.Optional<string>>(
+  rules?: PasswordRules,
+  options?: API.Decorators.Options
+): API.Decorator.FieldDecorator<T>;
 //# sourceMappingURL=Password.d.ts.map

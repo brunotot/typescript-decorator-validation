@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** AssertTrue identifier. */
 export declare const ASSERT_TRUE = "AssertTrue";
 /** Internal validation function for {@link AssertTrue} validator. */
@@ -51,5 +51,7 @@ export declare function isAssertTrueValid(value: boolean): boolean;
  * }
  * ```
  */
-export declare function AssertTrue<T extends boolean>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function AssertTrue<T extends boolean>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=AssertTrue.d.ts.map

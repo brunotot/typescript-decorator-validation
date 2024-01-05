@@ -1,9 +1,12 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** ArrayEvery identifier. */
 export declare const ARRAY_EVERY = "ArrayEvery";
 /** Internal validation function for {@link ArrayEvery} validator. */
-export declare function isArrayEveryValid<K, T extends Array<K>>(array: T, predicate: API.Utilities.Objects.ArrayPredicate<K>): boolean;
+export declare function isArrayEveryValid<K, T extends K[]>(
+  array: T,
+  predicate: API.Utilities.Objects.ArrayPredicate<K>
+): boolean;
 /**
  * Checks if all elements of decorated array satisfy the given predicate criteria.
  *
@@ -53,5 +56,8 @@ export declare function isArrayEveryValid<K, T extends Array<K>>(array: T, predi
  * }
  * ```
  **/
-export declare function ArrayEvery<K, T extends Array<K>>(predicate: API.Utilities.Objects.ArrayPredicate<K>, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ArrayEvery<K, T extends K[]>(
+  predicate: API.Utilities.Objects.ArrayPredicate<K>,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ArrayEvery.d.ts.map

@@ -44,7 +44,7 @@ export declare class Form<TClass> {
      *
      * @returns An object containing detailed error messages.
      */
-    getDetailedErrors(payload?: API.Utilities.Objects.Payload<TClass>): API.Strategy.Factory.Impl.DetailedErrors<TClass>;
+    getDetailedErrors(payload?: API.Utilities.Objects.Payload<TClass>): API.Strategy.Impl.DetailedErrors<TClass>;
     /**
      * Retrieves error messages for the given payload.
      *
@@ -52,7 +52,7 @@ export declare class Form<TClass> {
      *
      * @returns An object containing error messages.
      */
-    getErrors(payload?: API.Utilities.Objects.Payload<TClass>): API.Strategy.Factory.Impl.Errors<TClass>;
+    getErrors(payload?: API.Utilities.Objects.Payload<TClass>): API.Strategy.Impl.Errors<TClass>;
     getGlobalErrors(payload?: API.Utilities.Objects.Payload<TClass>): API.Validation.ValidationResult[];
     /**
      * Validates the given payload and updates the cache.

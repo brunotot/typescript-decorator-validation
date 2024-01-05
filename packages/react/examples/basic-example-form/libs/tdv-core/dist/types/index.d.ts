@@ -4,6 +4,7 @@ import { attribute } from "./src/decorators/data/structural/attribute";
 import TdvCoreApi from "./src/index";
 import * as Localization from "./src/localization";
 import * as Reflection from "./src/reflection";
+import * as Strategy from "./src/strategy";
 import * as Utilities from "./src/utilities";
 import * as Validation from "./src/validation";
 import { Form } from "./src/validation/models/Form";
@@ -11,11 +12,11 @@ export import Class = Utilities.Types.Class;
 export import UnwrapClass = Utilities.Types.UnwrapClass;
 export import ValidationResult = Validation.ValidationResult;
 export { Form, attribute, createClassDecorator, createClassValidator, createFieldDecorator, createFieldValidator, };
-export { Decorators, Localization, Reflection, Utilities, Validation };
+export { Decorators, Localization, Reflection, Strategy, Utilities, Validation };
 /**
  * An overridable interface designed for disabling nested validation on custom object types.
  * - when specified ***(example 1)***: an object type is considered primitive and it's simplified errors render as `string[]`
- * - when not specified ***(example 2)***: an object type is considered as is and it's simplified errors are evaluated by {@link Strategy.Factory.Impl.Errors evaluate<T, string[]>})
+ * - when not specified ***(example 2)***: an object type is considered as is and it's simplified errors are evaluated by {@link Strategy.Impl.Errors evaluate<T, string[]>})
  *
  * @example
  * 1: Disabling nested form validation for `Coordinate` class by augmenting the `PrimitiveSet` interface from `tdv-core`. This is a way of treating custom object types as primitives and avoiding recursive field validation

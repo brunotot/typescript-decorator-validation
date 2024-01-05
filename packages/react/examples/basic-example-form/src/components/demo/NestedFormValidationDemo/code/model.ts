@@ -1,21 +1,21 @@
-import { Pattern, Required, attribute } from "tdv-core/validators";
+import { Decorators } from "tdv-core";
 
 export class AddressForm {
-  @Required()
+  @Decorators.Required()
   country: string = "";
-  @Required()
+  @Decorators.Required()
   city: string = "";
   street: string = "";
-  @Pattern(/^\d{5}$/, { message: "Postal code must be 5 digits" })
+  @Decorators.Pattern(/^\d{5}$/, { message: "Postal code must be 5 digits" })
   postalCode: string = "";
 }
 
 export class UserForm {
-  @Required()
+  @Decorators.Required()
   firstName: string = "";
-  @Required()
+  @Decorators.Required()
   lastName: string = "";
-  @attribute(AddressForm)
+  @Decorators.attribute(AddressForm)
   addressForm: AddressForm = new AddressForm();
 }
 

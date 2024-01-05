@@ -1,12 +1,12 @@
-import API from "../../../../../index";
+import * as API from "../../../../../index";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type FieldDecorator, createFieldValidator } from "../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../index";
 
-/** ArrayEvery identifier. */
+/** `@ArrayEvery` key. */
 export const ARRAY_EVERY = "ArrayEvery";
 
 /** Internal validation function for {@link ArrayEvery} validator. */
-export function isArrayEveryValid<K, T extends K[]>(
+function isArrayEveryValid<K, T extends K[]>(
   array: T,
   predicate: API.Utilities.Objects.ArrayPredicate<K>
 ): boolean {
@@ -65,14 +65,14 @@ export function isArrayEveryValid<K, T extends K[]>(
  **/
 export function ArrayEvery<K, T extends K[]>(
   predicate: API.Utilities.Objects.ArrayPredicate<K>,
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.Config.key(options, ARRAY_EVERY),
+      key: API.Decorators.buildKeyProp(options, ARRAY_EVERY),
       valid: isArrayEveryValid(array, predicate),
-      message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_EVERY)),
+      message: API.Decorators.buildMessageProp(options, locale, translate(locale, ARRAY_EVERY)),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

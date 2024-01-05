@@ -1,9 +1,11 @@
 import API from "../../../../../../../index";
-import { FieldDecorator } from "../../../../../../decorators";
+import { type FieldDecorator } from "../../../../../../decorators";
 /** Lowercase identifier. */
 export declare const LOWERCASE = "Lowercase";
 /** Internal validation function for {@link Lowercase} validator. */
-export declare function isLowercaseValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean;
+export declare function isLowercaseValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean;
 /**
  * Checks if decorated string contains only lowercase characters.
  *
@@ -51,5 +53,7 @@ export declare function isLowercaseValid<T extends API.Utilities.Objects.Optiona
  * }
  * ```
  */
-export declare function Lowercase<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function Lowercase<T extends API.Utilities.Objects.Optional<string>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=Lowercase.d.ts.map

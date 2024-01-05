@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../../decorators";
+import { type FieldDecorator } from "../../../../decorators";
 /** Integer identifier. */
 export declare const INTEGER = "Integer";
 /**
@@ -49,5 +49,7 @@ export declare const INTEGER = "Integer";
  * }
  * ```
  */
-export declare function Integer<T extends API.Utilities.Objects.Optional<number>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function Integer<T extends API.Utilities.Objects.Optional<number>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=Integer.d.ts.map

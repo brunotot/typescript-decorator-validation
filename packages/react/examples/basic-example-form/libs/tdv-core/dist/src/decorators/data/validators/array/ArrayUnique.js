@@ -5,21 +5,24 @@ import { createFieldValidator } from "../../../index";
 export const ARRAY_UNIQUE = "ArrayUnique";
 /** Internal validation function for {@link ArrayUnique} validator. */
 export function isArrayUniqueValid(array) {
-    API.Utilities.Objects.assertType("array", array);
-    const hashFn = API.Utilities.Objects.hash;
-    function isArrayUnique(arr, equals) {
-        const set = new Set();
-        for (const val of arr) {
-            for (const el of set) {
-                if (equals(val, el)) {
-                    return false;
-                }
-            }
-            set.add(val);
+  API.Utilities.Objects.assertType("array", array);
+  const hashFn = API.Utilities.Objects.hash;
+  function isArrayUnique(arr, equals) {
+    const set = new Set();
+    for (const val of arr) {
+      for (const el of set) {
+        if (equals(val, el)) {
+          return false;
         }
-        return true;
+      }
+      set.add(val);
     }
-    return isArrayUnique(array !== null && array !== void 0 ? array : [], (obj1, obj2) => hashFn(obj1) === hashFn(obj2));
+    return true;
+  }
+  return isArrayUnique(
+    array !== null && array !== void 0 ? array : [],
+    (obj1, obj2) => hashFn(obj1) === hashFn(obj2)
+  );
 }
 /**
  * Checks if all elements in decorated array are unique.
@@ -70,9 +73,12 @@ export function isArrayUniqueValid(array) {
  * ```
  */
 export function ArrayUnique(options) {
-    return createFieldValidator((array, _context, locale) => ({
-        key: API.Decorator.Config.key(options, ARRAY_UNIQUE),
-        valid: isArrayUniqueValid(array),
-        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_UNIQUE)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (array, _context, locale) => ({
+      key: API.Decorators.key(options, ARRAY_UNIQUE),
+      valid: isArrayUniqueValid(array),
+      message: API.Decorators.message(options, locale, translate(locale, ARRAY_UNIQUE)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

@@ -7,8 +7,8 @@ import RegexConst from "../shared/regex.constants";
 export const ALPHANUMERIC = "Alphanumeric";
 /** Internal validation function for {@link Alphanumeric} validator. */
 export function isAlphanumericValid(value) {
-    API.Utilities.Objects.assertType("string", value);
-    return testRegex(RegexConst.ALPHANUMERIC, value);
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.ALPHANUMERIC, value);
 }
 /**
  * Checks if decorated string contains only alphabetical or number characters.
@@ -58,9 +58,12 @@ export function isAlphanumericValid(value) {
  * ```
  */
 export function Alphanumeric(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: API.Decorator.Config.key(options, ALPHANUMERIC),
-        valid: testRegex(RegexConst.ALPHANUMERIC, value),
-        message: API.Decorator.Config.message(options, locale, translate(locale, ALPHANUMERIC)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: API.Decorators.key(options, ALPHANUMERIC),
+      valid: testRegex(RegexConst.ALPHANUMERIC, value),
+      message: API.Decorators.message(options, locale, translate(locale, ALPHANUMERIC)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

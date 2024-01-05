@@ -1,13 +1,20 @@
-import API from "../../../../../index";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type FieldDecorator, createFieldValidator } from "../../../index";
+import { assertType } from "../../../../utilities/impl/Objects";
+import {
+  buildGroupsProp,
+  buildKeyProp,
+  buildMessageProp,
+  createFieldValidator,
+  DecoratorOptions,
+  FieldDecorator,
+} from "../../../index";
 
-/** ArrayContains identifier. */
+/** `@ArrayContains` key. */
 export const ARRAY_CONTAINS = "ArrayContains";
 
 /** Internal validation function for {@link ArrayContains} validator. */
-export function isArrayContainsValid<K, T extends K[]>(value: T, contains: K): boolean {
-  API.Utilities.Objects.assertType("array", value);
+function isArrayContainsValid<K, T extends K[]>(value: T, contains: K): boolean {
+  assertType("array", value);
   return (value ?? []).includes(contains);
 }
 
@@ -62,18 +69,14 @@ export function isArrayContainsValid<K, T extends K[]>(value: T, contains: K): b
  */
 export function ArrayContains<K, T extends K[]>(
   contains: K,
-  options?: API.Decorator.Config.Options
+  options?: DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.Config.key(options, ARRAY_CONTAINS),
+      key: buildKeyProp(options, ARRAY_CONTAINS),
       valid: isArrayContainsValid(array, contains),
-      message: API.Decorator.Config.message(
-        options,
-        locale,
-        translate(locale, ARRAY_CONTAINS, contains)
-      ),
+      message: buildMessageProp(options, locale, translate(locale, ARRAY_CONTAINS, contains)),
     }),
-    API.Decorator.Config.groups(options)
+    buildGroupsProp(options)
   );
 }

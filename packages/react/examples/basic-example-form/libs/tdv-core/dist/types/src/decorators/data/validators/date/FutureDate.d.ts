@@ -1,9 +1,11 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** FutureDate identifier. */
 export declare const FUTURE_DATE = "FutureDate";
 /** Internal validation function for {@link FutureDate} validator. */
-export declare function isFutureDateValid<T extends API.Utilities.Objects.Optional<Date>>(date: T): boolean;
+export declare function isFutureDateValid<T extends API.Utilities.Objects.Optional<Date>>(
+  date: T
+): boolean;
 /**
  * Checks if a {@link Date} is in the future.
  *
@@ -51,5 +53,7 @@ export declare function isFutureDateValid<T extends API.Utilities.Objects.Option
  * }
  * ```
  */
-export declare function FutureDate<T extends API.Utilities.Objects.Optional<Date>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function FutureDate<T extends API.Utilities.Objects.Optional<Date>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=FutureDate.d.ts.map

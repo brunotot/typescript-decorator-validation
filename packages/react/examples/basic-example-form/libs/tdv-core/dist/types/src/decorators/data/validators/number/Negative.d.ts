@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../../decorators";
+import { type FieldDecorator } from "../../../../decorators";
 /** Negative identifier. */
 export declare const NEGATIVE = "Negative";
 /**
@@ -49,5 +49,7 @@ export declare const NEGATIVE = "Negative";
  * }
  * ```
  */
-export declare function Negative<T extends API.Utilities.Objects.Optional<number>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function Negative<T extends API.Utilities.Objects.Optional<number>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=Negative.d.ts.map

@@ -1,14 +1,12 @@
-import API from "../../../../../index";
+import * as API from "../../../../../index";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type FieldDecorator, createFieldValidator } from "../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../index";
 
-/** FutureDate identifier. */
+/** `@FutureDate` key. */
 export const FUTURE_DATE = "FutureDate";
 
 /** Internal validation function for {@link FutureDate} validator. */
-export function isFutureDateValid<T extends API.Utilities.Objects.Optional<Date>>(
-  date: T
-): boolean {
+function isFutureDateValid<T extends API.Utilities.Objects.Optional<Date>>(date: T): boolean {
   API.Utilities.Objects.assertType("date", date);
   return date && date.getTime() > new Date().getTime();
 }
@@ -61,14 +59,18 @@ export function isFutureDateValid<T extends API.Utilities.Objects.Optional<Date>
  * ```
  */
 export function FutureDate<T extends API.Utilities.Objects.Optional<Date>>(
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (date, _context, locale) => ({
-      key: API.Decorator.Config.key(options, FUTURE_DATE),
+      key: API.Decorators.buildKeyProp(options, FUTURE_DATE),
       valid: isFutureDateValid(date),
-      message: API.Decorator.Config.message(options, locale, translate(locale, FUTURE_DATE, date)),
+      message: API.Decorators.buildMessageProp(
+        options,
+        locale,
+        translate(locale, FUTURE_DATE, date)
+      ),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

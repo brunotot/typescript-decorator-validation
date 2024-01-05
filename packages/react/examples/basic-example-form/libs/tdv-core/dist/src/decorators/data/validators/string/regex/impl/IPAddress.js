@@ -7,8 +7,8 @@ import RegexConst from "../shared/regex.constants";
 export const IP_ADDRESS = "IPAddress";
 /** Internal validation function for {@link IPAddress} validator. */
 export function isIPAddressValid(value) {
-    API.Utilities.Objects.assertType("string", value);
-    return testRegex(RegexConst.IP_ADDRESS, value);
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.IP_ADDRESS, value);
 }
 /**
  * Checks if decorated string is a valid IP address.
@@ -58,9 +58,12 @@ export function isIPAddressValid(value) {
  * ```
  */
 export function IPAddress(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: API.Decorator.Config.key(options, IP_ADDRESS),
-        valid: testRegex(RegexConst.IP_ADDRESS, value),
-        message: API.Decorator.Config.message(options, locale, translate(locale, IP_ADDRESS)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: API.Decorators.key(options, IP_ADDRESS),
+      valid: testRegex(RegexConst.IP_ADDRESS, value),
+      message: API.Decorators.message(options, locale, translate(locale, IP_ADDRESS)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

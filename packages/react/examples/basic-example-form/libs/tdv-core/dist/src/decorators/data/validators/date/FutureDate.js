@@ -5,8 +5,8 @@ import { createFieldValidator } from "../../../index";
 export const FUTURE_DATE = "FutureDate";
 /** Internal validation function for {@link FutureDate} validator. */
 export function isFutureDateValid(date) {
-    API.Utilities.Objects.assertType("date", date);
-    return date && date.getTime() > new Date().getTime();
+  API.Utilities.Objects.assertType("date", date);
+  return date && date.getTime() > new Date().getTime();
 }
 /**
  * Checks if a {@link Date} is in the future.
@@ -56,9 +56,12 @@ export function isFutureDateValid(date) {
  * ```
  */
 export function FutureDate(options) {
-    return createFieldValidator((date, _context, locale) => ({
-        key: API.Decorator.Config.key(options, FUTURE_DATE),
-        valid: isFutureDateValid(date),
-        message: API.Decorator.Config.message(options, locale, translate(locale, FUTURE_DATE, date)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (date, _context, locale) => ({
+      key: API.Decorators.key(options, FUTURE_DATE),
+      valid: isFutureDateValid(date),
+      message: API.Decorators.message(options, locale, translate(locale, FUTURE_DATE, date)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

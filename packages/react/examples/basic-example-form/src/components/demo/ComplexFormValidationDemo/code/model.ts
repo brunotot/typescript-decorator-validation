@@ -1,4 +1,4 @@
-import { Email, Numeric, Required } from "tdv-core/validators";
+import { Decorators } from "tdv-core";
 import { AdultAgeValid, CaseInsensitiveContains, PasswordsMustMatch } from "../shared/validators";
 
 export type Model = {
@@ -11,21 +11,21 @@ export type Model = {
 
 export default class ModelForm implements Model {
   @CaseInsensitiveContains("Test", "custom")
-  @Email({ groups: ["native"] })
-  @Required({ groups: ["native"] })
+  @Decorators.Email({ groups: ["native"] })
+  @Decorators.Required({ groups: ["native"] })
   testEmail: string = "";
 
   @AdultAgeValid("custom")
-  @Numeric({ groups: ["native"] })
+  @Decorators.Numeric({ groups: ["native"] })
   age: string = "";
 
-  @Required({ groups: ["native"] })
+  @Decorators.Required({ groups: ["native"] })
   password: string = "";
 
   @PasswordsMustMatch("custom")
   confirmPassword: string = "";
 
-  @Required({ groups: ["native"] })
+  @Decorators.Required({ groups: ["native"] })
   dateOfBirth?: Date;
 
   // TODO isAsyncValid!

@@ -1,11 +1,12 @@
-import API from "../../../../../index";
+import * as API from "../../../../../index";
 import { createFieldValidator } from "../../../../decorators";
 import { translate } from "../../../../localization/service/TranslationService";
 import RegexConst from "./regex/shared/regex.constants";
 
-/** Password identifier. */
+/** `@Password` key. */
 export const PASSWORD = "Password";
 
+/** Configurable options for `@Password` decorator. */
 export type PasswordRules = {
   uppercase?: boolean;
   lowercase?: boolean;
@@ -15,7 +16,7 @@ export type PasswordRules = {
 };
 
 /** Internal validation function for {@link Password} validator. */
-export function isPasswordValid(
+function isPasswordValid(
   input: API.Utilities.Objects.Optional<string>,
   rules: PasswordRules | undefined,
   definedMessage?: string,
@@ -46,29 +47,33 @@ export function isPasswordValid(
   const length = rules?.length ?? 8;
   const str = input ?? "";
   if (str.length < length) {
- return buildConstraintViolation(
+    return buildConstraintViolation(
       definedMessage ?? translate(locale, "PasswordLength", length),
       false
     );
-}
+  }
 
   if (uppercase && isInvalid(str, "uppercase")) {
- return buildConstraintViolation(
+    return buildConstraintViolation(
       definedMessage ?? translate(locale, "PasswordUppercase"),
       false
     );
-}
+  }
 
   if (lowercase && isInvalid(str, "lowercase")) {
- return buildConstraintViolation(
+    return buildConstraintViolation(
       definedMessage ?? translate(locale, "PasswordLowercase"),
       false
     );
-}
+  }
 
-  if (numbers && isInvalid(str, "numbers")) { return buildConstraintViolation(definedMessage ?? translate(locale, "PasswordNumbers"), false); }
+  if (numbers && isInvalid(str, "numbers")) {
+    return buildConstraintViolation(definedMessage ?? translate(locale, "PasswordNumbers"), false);
+  }
 
-  if (specials && isInvalid(str, "specials")) { return buildConstraintViolation(definedMessage ?? translate(locale, "PasswordSpecials"), false); }
+  if (specials && isInvalid(str, "specials")) {
+    return buildConstraintViolation(definedMessage ?? translate(locale, "PasswordSpecials"), false);
+  }
 
   return { key: PASSWORD, message: "", valid: true };
 }
@@ -129,10 +134,10 @@ export function isPasswordValid(
  */
 export function Password<T extends API.Utilities.Objects.Optional<string>>(
   rules?: PasswordRules,
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ) {
   return createFieldValidator<T>(
     (value, _context, locale) => isPasswordValid(value, rules, options?.message, locale),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

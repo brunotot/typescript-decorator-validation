@@ -1,9 +1,11 @@
 import API from "../../../../../../../index";
-import { FieldDecorator } from "../../../../../../decorators";
+import { type FieldDecorator } from "../../../../../../decorators";
 /** Uppercase identifier. */
 export declare const UPPERCASE = "Uppercase";
 /** Internal validation function for {@link Uppercase} validator. */
-export declare function isUppercaseValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean;
+export declare function isUppercaseValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean;
 /**
  * Checks if decorated string contains only uppercase characters.
  *
@@ -51,5 +53,7 @@ export declare function isUppercaseValid<T extends API.Utilities.Objects.Optiona
  * }
  * ```
  */
-export declare function Uppercase<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function Uppercase<T extends API.Utilities.Objects.Optional<string>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=Uppercase.d.ts.map

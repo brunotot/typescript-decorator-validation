@@ -1,9 +1,12 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** ArraySome identifier. */
 export declare const ARRAY_SOME = "ArraySome";
 /** Internal validation function for {@link ArraySome} validator. */
-export declare function isArraySomeValid<K, T extends Array<K>>(array: T, predicate: API.Utilities.Objects.ArrayPredicate<K>): boolean;
+export declare function isArraySomeValid<K, T extends K[]>(
+  array: T,
+  predicate: API.Utilities.Objects.ArrayPredicate<K>
+): boolean;
 /**
  * Checks if at least one element of decorated array satisfies the given predicate criteria.
  *
@@ -53,5 +56,8 @@ export declare function isArraySomeValid<K, T extends Array<K>>(array: T, predic
  * }
  * ```
  **/
-export declare function ArraySome<K, T extends K[]>(predicate: API.Utilities.Objects.ArrayPredicate<K>, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ArraySome<K, T extends K[]>(
+  predicate: API.Utilities.Objects.ArrayPredicate<K>,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ArraySome.d.ts.map

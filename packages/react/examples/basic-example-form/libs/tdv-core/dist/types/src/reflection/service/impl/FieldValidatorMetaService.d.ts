@@ -1,5 +1,5 @@
 import API from "../../../../index";
-import { EventEmitter } from "../../../utilities/misc/EventEmitter";
+import { type EventEmitter } from "../../../utilities/misc/EventEmitter";
 import { AbstractMetaService } from "../AbstractMetaService";
 import { ControlDescriptor } from "./../../models/ControlDescriptor";
 /**

@@ -1,17 +1,14 @@
-import API from "../../../../../../../index";
-
-import { type FieldDecorator, createFieldValidator } from "../../../../../../decorators";
+import * as API from "../../../../../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../../../../decorators";
 import { translate } from "../../../../../../localization/service/TranslationService";
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
 
-/** IPAddress identifier. */
+/** `@IPAddress` key. */
 export const IP_ADDRESS = "IPAddress";
 
 /** Internal validation function for {@link IPAddress} validator. */
-export function isIPAddressValid<T extends API.Utilities.Objects.Optional<string>>(
-  value: T
-): boolean {
+function isIPAddressValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
   API.Utilities.Objects.assertType("string", value);
   return testRegex(RegexConst.IP_ADDRESS, value);
 }
@@ -64,14 +61,14 @@ export function isIPAddressValid<T extends API.Utilities.Objects.Optional<string
  * ```
  */
 export function IPAddress<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.Config.key(options, IP_ADDRESS),
+      key: API.Decorators.buildKeyProp(options, IP_ADDRESS),
       valid: testRegex(RegexConst.IP_ADDRESS, value),
-      message: API.Decorator.Config.message(options, locale, translate(locale, IP_ADDRESS)),
+      message: API.Decorators.buildMessageProp(options, locale, translate(locale, IP_ADDRESS)),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

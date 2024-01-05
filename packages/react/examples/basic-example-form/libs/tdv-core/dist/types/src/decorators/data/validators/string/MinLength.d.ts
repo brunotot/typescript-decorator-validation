@@ -2,7 +2,10 @@ import API from "../../../../../index";
 /** MinLength identifier. */
 export declare const MIN_LENGTH = "MinLength";
 /** Internal validation function for {@link MinLength} validator. */
-export declare function isMinLengthValid(value: API.Utilities.Objects.Optional<string>, min: number): boolean;
+export declare function isMinLengthValid(
+  value: API.Utilities.Objects.Optional<string>,
+  min: number
+): boolean;
 /**
  * Checks if decorated string contains a specific number of characters.
  *
@@ -48,5 +51,8 @@ export declare function isMinLengthValid(value: API.Utilities.Objects.Optional<s
  * }
  * ```
  */
-export declare function MinLength<T extends API.Utilities.Objects.Optional<string>>(min: number, options?: API.Decorator.Config.Options): API.Decorator.FieldDecorator<T>;
+export declare function MinLength<T extends API.Utilities.Objects.Optional<string>>(
+  min: number,
+  options?: API.Decorators.Options
+): API.Decorator.FieldDecorator<T>;
 //# sourceMappingURL=MinLength.d.ts.map

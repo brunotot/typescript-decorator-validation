@@ -1,12 +1,12 @@
-import API from "../../../../../index";
+import * as API from "../../../../../index";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type FieldDecorator, createFieldValidator } from "../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../index";
 
-/** ArraySizeRange identifier. */
+/** `@ArraySizeRange` key. */
 export const ARRAY_SIZE_RANGE = "ArraySizeRange";
 
 /** Internal validation function for {@link ArraySizeRange} validator. */
-export function isArraySizeRangeValid(array: any[], min: number, max: number): boolean {
+function isArraySizeRangeValid(array: any[], min: number, max: number): boolean {
   API.Utilities.Objects.assertType("array", array);
   return (array ?? []).length >= min && (array ?? []).length <= max;
 }
@@ -64,18 +64,18 @@ export function isArraySizeRangeValid(array: any[], min: number, max: number): b
 export function ArraySizeRange<K, T extends K[]>(
   min: number,
   max: number,
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.Config.key(options, ARRAY_SIZE_RANGE),
+      key: API.Decorators.buildKeyProp(options, ARRAY_SIZE_RANGE),
       valid: isArraySizeRangeValid(array, min, max),
-      message: API.Decorator.Config.message(
+      message: API.Decorators.buildMessageProp(
         options,
         locale,
         translate(locale, ARRAY_SIZE_RANGE, min, max, (array ?? []).length)
       ),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

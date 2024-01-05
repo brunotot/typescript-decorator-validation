@@ -1,6 +1,6 @@
 import API from "../../../index";
-import { EventEmitter } from "../../utilities/misc/EventEmitter";
-import StrategyMapper from "./../../strategy/models/StrategyMapper";
+import { type EventEmitter } from "../../utilities/misc/EventEmitter";
+import * as StrategyMapper from "./../../strategy/models/StrategyMapper";
 import { ValidationMetadata } from "./ValidationMetadata";
 /**
  * Describes the reflection rules for a specific field within a class.
@@ -52,7 +52,7 @@ export declare class ControlDescriptor<This, HostClass, Name extends keyof HostC
      * Gets the implementation of the reflection strategy.
      * @throws {Error} If the strategy is not implemented.
      */
-    get StrategyImpl(): API.Utilities.Types.Class<API.Strategy.Service.AbstractStrategy>;
+    get StrategyImpl(): API.Utilities.Types.Class<API.Strategy.AbstractValidationStrategyService>;
     /**
      * Determines the reflection strategy type for the descriptor.
      * @returns The type of the reflection strategy.

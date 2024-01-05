@@ -5,8 +5,8 @@ import { translate } from "../../../../localization/service/TranslationService";
 export const INTEGER = "Integer";
 /** Internal validation function for {@link Integer} validator. */
 function isIntegerValid(num) {
-    API.Utilities.Objects.assertType("number", num);
-    return num !== undefined && num !== null && Number.isInteger(num);
+  API.Utilities.Objects.assertType("number", num);
+  return num !== undefined && num !== null && Number.isInteger(num);
 }
 /**
  * Checks if decorated number is an integer number.
@@ -56,9 +56,12 @@ function isIntegerValid(num) {
  * ```
  */
 export function Integer(options) {
-    return createFieldValidator((num, _context, locale) => ({
-        key: API.Decorator.Config.key(options, INTEGER),
-        valid: isIntegerValid(num),
-        message: API.Decorator.Config.message(options, locale, translate(locale, INTEGER, num)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (num, _context, locale) => ({
+      key: API.Decorators.key(options, INTEGER),
+      valid: isIntegerValid(num),
+      message: API.Decorators.message(options, locale, translate(locale, INTEGER, num)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

@@ -7,31 +7,24 @@ import { PrimitiveArrayGetterStrat } from "../service/impl/PrimitiveArrayGetterS
 import { PrimitiveArrayStrat } from "../service/impl/PrimitiveArrayStrategy";
 import { PrimitiveGetterStrat } from "../service/impl/PrimitiveGetterStrategy";
 import { PrimitiveStrat } from "../service/impl/PrimitiveStrategy";
-import StrategyTypes from "./StrategyTypes";
+import * as StrategyTypes from "./StrategyTypes";
 /**
- * A namespace responsible for exposing reflection-strategy-specific methods and types
+ * A mapping of reflection strategy types to their corresponding `ValidationStrategy` classes.
+ *
+ * @remarks
+ * This object provides a way to look up the `ValidationStrategy` class that should be used for a given
+ * reflection strategy type.
  */
-var StrategyMapper;
-(function (StrategyMapper) {
-    /**
-     * A mapping of reflection strategy types to their corresponding `ValidationStrategy` classes.
-     *
-     * @remarks
-     * This object provides a way to look up the `ValidationStrategy` class that should be used for a given
-     * reflection strategy type.
-     */
-    // prettier-ignore
-    StrategyMapper.data = {
-        unknown: (() => { }),
-        [StrategyTypes.Primitive.Name]: PrimitiveStrat,
-        [StrategyTypes.Object.Name]: ObjectStrat,
-        [StrategyTypes.PrimitiveArray.Name]: PrimitiveArrayStrat,
-        [StrategyTypes.ObjectArray.Name]: ObjectArrayStrat,
-        [StrategyTypes.PrimitiveGetter.Name]: PrimitiveGetterStrat,
-        [StrategyTypes.ObjectGetter.Name]: ObjectGetterStrat,
-        [StrategyTypes.PrimitiveArrayGetter.Name]: PrimitiveArrayGetterStrat,
-        [StrategyTypes.ObjectArrayGetter.Name]: ObjectArrayGetterStrat,
-        [StrategyTypes.Function.Name]: FunctionStrat
-    };
-})(StrategyMapper || (StrategyMapper = {}));
-export default StrategyMapper;
+// prettier-ignore
+export const data = {
+    unknown: (() => { }),
+    [StrategyTypes.Primitive.Name]: PrimitiveStrat,
+    [StrategyTypes.Object.Name]: ObjectStrat,
+    [StrategyTypes.PrimitiveArray.Name]: PrimitiveArrayStrat,
+    [StrategyTypes.ObjectArray.Name]: ObjectArrayStrat,
+    [StrategyTypes.PrimitiveGetter.Name]: PrimitiveGetterStrat,
+    [StrategyTypes.ObjectGetter.Name]: ObjectGetterStrat,
+    [StrategyTypes.PrimitiveArrayGetter.Name]: PrimitiveArrayGetterStrat,
+    [StrategyTypes.ObjectArrayGetter.Name]: ObjectArrayGetterStrat,
+    [StrategyTypes.Function.Name]: FunctionStrat
+};

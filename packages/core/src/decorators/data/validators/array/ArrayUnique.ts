@@ -1,12 +1,12 @@
-import API from "../../../../../index";
+import * as API from "../../../../../index";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type FieldDecorator, createFieldValidator } from "../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../index";
 
-/** ArrayUnique identifier. */
+/** `@ArrayUnique` key. */
 export const ARRAY_UNIQUE = "ArrayUnique";
 
 /** Internal validation function for {@link ArrayUnique} validator. */
-export function isArrayUniqueValid(array: any[]): boolean {
+function isArrayUniqueValid(array: any[]): boolean {
   API.Utilities.Objects.assertType("array", array);
   const hashFn = API.Utilities.Objects.hash;
   function isArrayUnique<T>(arr: T[], equals: (a: T, b: T) => boolean): boolean {
@@ -73,14 +73,14 @@ export function isArrayUniqueValid(array: any[]): boolean {
  * ```
  */
 export function ArrayUnique<K, T extends K[]>(
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.Config.key(options, ARRAY_UNIQUE),
+      key: API.Decorators.buildKeyProp(options, ARRAY_UNIQUE),
       valid: isArrayUniqueValid(array),
-      message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_UNIQUE)),
+      message: API.Decorators.buildMessageProp(options, locale, translate(locale, ARRAY_UNIQUE)),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

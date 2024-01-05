@@ -1,6 +1,6 @@
 import API from "../../index";
-import { ControlDescriptor } from "../../reflection/models/ControlDescriptor";
-import { ValidationMetadata } from "../../reflection/models/ValidationMetadata";
+import { type ControlDescriptor } from "../../reflection/models/ControlDescriptor";
+import { type ValidationMetadata } from "../../reflection/models/ValidationMetadata";
 import { type EventEmitter } from "../../utilities/misc/EventEmitter";
 import { Form } from "../../validation/models/Form";
 /**

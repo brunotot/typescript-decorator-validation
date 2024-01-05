@@ -1,12 +1,12 @@
-import API from "../../../../../index";
+import * as API from "../../../../../index";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type FieldDecorator, createFieldValidator } from "../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../index";
 
-/** ArraySizeExact identifier. */
+/** `@ArraySizeExact` key. */
 export const ARRAY_SIZE_EXACT = "ArraySizeExact";
 
 /** Internal validation function for {@link ArraySizeExact} validator. */
-export function isArraySizeExactValid(array: any[]): boolean {
+function isArraySizeExactValid(array: any[]): boolean {
   API.Utilities.Objects.assertType("array", array);
   return (array ?? []).length === 0;
 }
@@ -62,18 +62,18 @@ export function isArraySizeExactValid(array: any[]): boolean {
  */
 export function ArraySizeExact<K, T extends K[]>(
   exact: number,
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: API.Decorator.Config.key(options, ARRAY_SIZE_EXACT),
+      key: API.Decorators.buildKeyProp(options, ARRAY_SIZE_EXACT),
       valid: (array ?? []).length === exact,
-      message: API.Decorator.Config.message(
+      message: API.Decorators.buildMessageProp(
         options,
         locale,
         translate(locale, ARRAY_SIZE_EXACT, exact, (array ?? []).length)
       ),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

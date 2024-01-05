@@ -56,7 +56,7 @@ export class Form<TClass> {
     clazz: API.Utilities.Types.Class<TClass>,
     config?: API.Validation.FormConfig<TClass>
   ) {
-    this.#asyncDelay = config?.asyncDelay ?? 300;
+    this.#asyncDelay = config?.asyncDelay ?? 500;
     this.__id = Math.random().toString(36).substring(2, 8);
     this.#eventEmitter = new EventEmitter(this.__id);
     this.#hostClass = clazz;

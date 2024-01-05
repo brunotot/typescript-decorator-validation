@@ -51,7 +51,7 @@ export class Form {
         _Form_eventListener.set(this, void 0);
         _Form_eventEmitter.set(this, void 0);
         _Form_fieldValidatorMetaService.set(this, void 0);
-        // @ts-ignore
+        // @ts-expect-error
         _Form_classValidatorMetaService.set(this, void 0);
         _Form_groups.set(this, void 0);
         _Form_defaultValue.set(this, void 0);
@@ -59,7 +59,7 @@ export class Form {
         _Form_hostClass.set(this, void 0);
         _Form_asyncDelay.set(this, void 0);
         _Form_debounceMap.set(this, {});
-        __classPrivateFieldSet(this, _Form_asyncDelay, (_a = config === null || config === void 0 ? void 0 : config.asyncDelay) !== null && _a !== void 0 ? _a : 300, "f");
+        __classPrivateFieldSet(this, _Form_asyncDelay, (_a = config === null || config === void 0 ? void 0 : config.asyncDelay) !== null && _a !== void 0 ? _a : 500, "f");
         this.__id = Math.random().toString(36).substring(2, 8);
         __classPrivateFieldSet(this, _Form_eventEmitter, new EventEmitter(this.__id), "f");
         __classPrivateFieldSet(this, _Form_hostClass, clazz, "f");
@@ -168,7 +168,7 @@ export class Form {
     }
 }
 _Form_eventListener = new WeakMap(), _Form_eventEmitter = new WeakMap(), _Form_fieldValidatorMetaService = new WeakMap(), _Form_classValidatorMetaService = new WeakMap(), _Form_groups = new WeakMap(), _Form_defaultValue = new WeakMap(), _Form_cache = new WeakMap(), _Form_hostClass = new WeakMap(), _Form_asyncDelay = new WeakMap(), _Form_debounceMap = new WeakMap(), _Form_instances = new WeakSet(), _Form_validateField = function _Form_validateField(fieldName, 
-// @ts-ignore
+// @ts-expect-error
 payload, args = {}) {
     var _a, _b;
     const descriptor = __classPrivateFieldGet(this, _Form_fieldValidatorMetaService, "f").getUntypedDescriptor(fieldName, __classPrivateFieldGet(this, _Form_eventEmitter, "f"));
@@ -179,7 +179,7 @@ payload, args = {}) {
                 stratImpl.test(value, context, args);
             }, __classPrivateFieldGet(this, _Form_asyncDelay, "f"));
         }
-        // @ts-ignore
+        // @ts-expect-error
         __classPrivateFieldGet(this, _Form_debounceMap, "f")[fieldName](payload[fieldName], payload, args);
         return [
             (_a = __classPrivateFieldGet(this, _Form_cache, "f").get("detailedErrors")) === null || _a === void 0 ? void 0 : _a[fieldName],

@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** ArraySizeMin identifier. */
 export declare const ARRAY_SIZE_MIN = "ArraySizeMin";
 /** Internal validation function for {@link ArraySizeMin} validator. */
@@ -53,5 +53,8 @@ export declare function isArraySizeMinValid(array: any[], min: number): boolean;
  * }
  * ```
  */
-export declare function ArraySizeMin<K, T extends Array<K>>(min: number, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ArraySizeMin<K, T extends K[]>(
+  min: number,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ArraySizeMin.d.ts.map

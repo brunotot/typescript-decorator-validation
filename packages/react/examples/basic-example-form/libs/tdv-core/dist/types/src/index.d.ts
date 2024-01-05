@@ -3,9 +3,9 @@ import * as _collection from "./decorators/data";
 import * as _attribute from "./decorators/data/structural/attribute";
 import * as _Localization from "./localization";
 import * as _Reflection from "./reflection";
+import * as _Strategy from "./strategy";
 import * as _Utilities from "./utilities";
 import * as _Validation from "./validation";
-import _Strategy from "./strategy";
 /** `tdv-core` API entry-point. */
 declare namespace API {
     export import Localization = _Localization;

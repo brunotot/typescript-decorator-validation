@@ -1,9 +1,12 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../../decorators";
+import { type FieldDecorator } from "../../../../decorators";
 /** MaxLength identifier. */
 export declare const MAX_LENGTH = "MaxLength";
 /** Internal validation function for {@link MaxLength} validator. */
-export declare function isMaxLengthValid(value: API.Utilities.Objects.Optional<string>, max: number): boolean;
+export declare function isMaxLengthValid(
+  value: API.Utilities.Objects.Optional<string>,
+  max: number
+): boolean;
 /**
  * Checks if decorated string contains a specific number of characters.
  *
@@ -49,5 +52,8 @@ export declare function isMaxLengthValid(value: API.Utilities.Objects.Optional<s
  * }
  * ```
  */
-export declare function MaxLength<T extends API.Utilities.Objects.Optional<string>>(max: number, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function MaxLength<T extends API.Utilities.Objects.Optional<string>>(
+  max: number,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=MaxLength.d.ts.map

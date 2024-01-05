@@ -1,9 +1,12 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** ArrayOne identifier. */
 export declare const ARRAY_ONE = "ArrayOne";
 /** Internal validation function for {@link ArrayOne} validator. */
-export declare function isArrayOneValid<K, T extends Array<K>>(array: T, predicate: API.Utilities.Objects.ArrayPredicate<K>): boolean;
+export declare function isArrayOneValid<K, T extends K[]>(
+  array: T,
+  predicate: API.Utilities.Objects.ArrayPredicate<K>
+): boolean;
 /**
  * Checks if exactly one element of decorated array satisfies the given predicate criteria.
  *
@@ -53,5 +56,8 @@ export declare function isArrayOneValid<K, T extends Array<K>>(array: T, predica
  * }
  * ```
  **/
-export declare function ArrayOne<K, T extends Array<K>>(predicate: API.Utilities.Objects.ArrayPredicate<K>, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ArrayOne<K, T extends K[]>(
+  predicate: API.Utilities.Objects.ArrayPredicate<K>,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ArrayOne.d.ts.map

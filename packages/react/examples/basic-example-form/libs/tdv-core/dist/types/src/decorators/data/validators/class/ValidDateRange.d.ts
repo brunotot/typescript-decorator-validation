@@ -1,9 +1,13 @@
 import API from "../../../../../index";
-import { ClassDecorator } from "../../../index";
+import { type ClassDecorator } from "../../../index";
 /** ValidDateRange identifier. */
 export declare const VALID_DATE_RANGE = "ValidDateRange";
 /** Internal validation function for {@link ValidDateRange} validator. */
-export declare function isValidDateRangeValid(value: any, startDateField: string, endDateField: string): boolean;
+export declare function isValidDateRangeValid(
+  value: any,
+  startDateField: string,
+  endDateField: string
+): boolean;
 /**
  * Checks if {@link Date} `startDateField` is before {@link Date} `endDateField` of a class.
  *
@@ -54,5 +58,9 @@ export declare function isValidDateRangeValid(value: any, startDateField: string
  * }
  * ```
  */
-export declare function ValidDateRange<T extends API.Utilities.Types.Class>(startDateField: string, endDateField: string, options?: API.Decorator.Config.Options): ClassDecorator<T>;
+export declare function ValidDateRange<T extends API.Utilities.Types.Class>(
+  startDateField: string,
+  endDateField: string,
+  options?: API.Decorators.Options
+): ClassDecorator<T>;
 //# sourceMappingURL=ValidDateRange.d.ts.map

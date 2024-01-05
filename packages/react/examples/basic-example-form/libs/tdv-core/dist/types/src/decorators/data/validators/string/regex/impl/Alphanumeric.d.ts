@@ -1,9 +1,11 @@
 import API from "../../../../../../../index";
-import { FieldDecorator } from "../../../../../../decorators";
+import { type FieldDecorator } from "../../../../../../decorators";
 /** Alphanumeric identifier. */
 export declare const ALPHANUMERIC = "Alphanumeric";
 /** Internal validation function for {@link Alphanumeric} validator. */
-export declare function isAlphanumericValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean;
+export declare function isAlphanumericValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean;
 /**
  * Checks if decorated string contains only alphabetical or number characters.
  *
@@ -51,5 +53,7 @@ export declare function isAlphanumericValid<T extends API.Utilities.Objects.Opti
  * }
  * ```
  */
-export declare function Alphanumeric<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function Alphanumeric<T extends API.Utilities.Objects.Optional<string>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=Alphanumeric.d.ts.map

@@ -5,8 +5,8 @@ import { createFieldValidator } from "../../../index";
 export const ARRAY_SIZE_MIN = "ArraySizeMin";
 /** Internal validation function for {@link ArraySizeMin} validator. */
 export function isArraySizeMinValid(array, min) {
-    API.Utilities.Objects.assertType("array", array);
-    return (array !== null && array !== void 0 ? array : []).length >= min;
+  API.Utilities.Objects.assertType("array", array);
+  return (array !== null && array !== void 0 ? array : []).length >= min;
 }
 /**
  * Checks if the decorated array contains at least `min` number of elements.
@@ -58,9 +58,21 @@ export function isArraySizeMinValid(array, min) {
  * ```
  */
 export function ArraySizeMin(min, options) {
-    return createFieldValidator((array, _context, locale) => ({
-        key: API.Decorator.Config.key(options, ARRAY_SIZE_MIN),
-        valid: isArraySizeMinValid(array, min),
-        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_SIZE_MIN, min, (array !== null && array !== void 0 ? array : []).length)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (array, _context, locale) => ({
+      key: API.Decorators.key(options, ARRAY_SIZE_MIN),
+      valid: isArraySizeMinValid(array, min),
+      message: API.Decorators.message(
+        options,
+        locale,
+        translate(
+          locale,
+          ARRAY_SIZE_MIN,
+          min,
+          (array !== null && array !== void 0 ? array : []).length
+        )
+      ),
+    }),
+    API.Decorators.groups(options)
+  );
 }

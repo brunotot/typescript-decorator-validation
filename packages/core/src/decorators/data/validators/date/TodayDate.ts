@@ -1,12 +1,12 @@
-import API from "../../../../../index";
+import * as API from "../../../../../index";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type FieldDecorator, createFieldValidator } from "../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../index";
 
-/** TodayDate identifier. */
+/** `@TodayDate` key. */
 export const TODAY_DATE = "TodayDate";
 
 /** Internal validation function for {@link TodayDate} validator. */
-export function isTodayDateValid<T extends API.Utilities.Objects.Optional<Date>>(date: T): boolean {
+function isTodayDateValid<T extends API.Utilities.Objects.Optional<Date>>(date: T): boolean {
   API.Utilities.Objects.assertType("date", date);
   const currentDate = new Date();
   return (
@@ -65,14 +65,18 @@ export function isTodayDateValid<T extends API.Utilities.Objects.Optional<Date>>
  * ```
  */
 export function TodayDate<T extends API.Utilities.Objects.Optional<Date>>(
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (date, _context, locale) => ({
-      key: API.Decorator.Config.key(options, TODAY_DATE),
+      key: API.Decorators.buildKeyProp(options, TODAY_DATE),
       valid: isTodayDateValid(date),
-      message: API.Decorator.Config.message(options, locale, translate(locale, TODAY_DATE, date)),
+      message: API.Decorators.buildMessageProp(
+        options,
+        locale,
+        translate(locale, TODAY_DATE, date)
+      ),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

@@ -1,15 +1,12 @@
-import API from "../../../../../index";
+import * as API from "../../../../../index";
 import { createFieldValidator } from "../../../../decorators";
 import { translate } from "../../../../localization/service/TranslationService";
 
-/** MinLength identifier. */
+/** `@MinLength` key. */
 export const MIN_LENGTH = "MinLength";
 
 /** Internal validation function for {@link MinLength} validator. */
-export function isMinLengthValid(
-  value: API.Utilities.Objects.Optional<string>,
-  min: number
-): boolean {
+function isMinLengthValid(value: API.Utilities.Objects.Optional<string>, min: number): boolean {
   API.Utilities.Objects.assertType("string", value);
   return (value ?? "").length >= min;
 }
@@ -61,14 +58,14 @@ export function isMinLengthValid(
  */
 export function MinLength<T extends API.Utilities.Objects.Optional<string>>(
   min: number,
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ) {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.Config.key(options, MIN_LENGTH),
+      key: API.Decorators.buildKeyProp(options, MIN_LENGTH),
       valid: isMinLengthValid(value, min),
-      message: API.Decorator.Config.message(options, locale, translate(locale, MIN_LENGTH, min)),
+      message: API.Decorators.buildMessageProp(options, locale, translate(locale, MIN_LENGTH, min)),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

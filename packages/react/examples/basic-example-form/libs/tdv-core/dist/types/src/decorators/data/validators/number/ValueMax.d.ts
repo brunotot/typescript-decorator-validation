@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../../decorators";
+import { type FieldDecorator } from "../../../../decorators";
 /** ValueMax identifier. */
 export declare const VALUE_MAX = "ValueMax";
 /**
@@ -50,5 +50,8 @@ export declare const VALUE_MAX = "ValueMax";
  * }
  * ```
  */
-export declare function ValueMax<T extends API.Utilities.Objects.Optional<number>>(max: number, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ValueMax<T extends API.Utilities.Objects.Optional<number>>(
+  max: number,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ValueMax.d.ts.map

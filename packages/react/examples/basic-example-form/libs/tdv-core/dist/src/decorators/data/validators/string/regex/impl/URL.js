@@ -7,8 +7,8 @@ import RegexConst from "../shared/regex.constants";
 export const URL_KEY = "URL";
 /** Internal validation function for {@link URL} validator. */
 export function isURLValid(value) {
-    API.Utilities.Objects.assertType("string", value);
-    return testRegex(RegexConst.URL, value);
+  API.Utilities.Objects.assertType("string", value);
+  return testRegex(RegexConst.URL, value);
 }
 /**
  * Checks if decorated string is a valid URL.
@@ -58,9 +58,12 @@ export function isURLValid(value) {
  * ```
  */
 export function URL(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: API.Decorator.Config.key(options, URL_KEY),
-        valid: testRegex(RegexConst.URL, value),
-        message: API.Decorator.Config.message(options, locale, translate(locale, URL_KEY)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: API.Decorators.key(options, URL_KEY),
+      valid: testRegex(RegexConst.URL, value),
+      message: API.Decorators.message(options, locale, translate(locale, URL_KEY)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

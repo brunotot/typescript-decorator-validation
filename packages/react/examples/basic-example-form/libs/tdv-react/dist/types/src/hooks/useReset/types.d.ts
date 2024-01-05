@@ -1,4 +1,5 @@
-import TdvCore, { Form } from "tdv-core";
+import { type Form } from "tdv-core";
+import type TdvCore from "tdv-core";
 import type UseFormHook from "../useForm/types";
 declare namespace UseResetHook {
     type UseResetConfig<TClass> = {

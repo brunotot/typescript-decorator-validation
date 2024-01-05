@@ -5,8 +5,8 @@ import { createFieldValidator } from "../../../index";
 export const ARRAY_SOME = "ArraySome";
 /** Internal validation function for {@link ArraySome} validator. */
 export function isArraySomeValid(array, predicate) {
-    API.Utilities.Objects.assertType("array", array);
-    return (array !== null && array !== void 0 ? array : []).some(predicate);
+  API.Utilities.Objects.assertType("array", array);
+  return (array !== null && array !== void 0 ? array : []).some(predicate);
 }
 /**
  * Checks if at least one element of decorated array satisfies the given predicate criteria.
@@ -58,9 +58,12 @@ export function isArraySomeValid(array, predicate) {
  * ```
  **/
 export function ArraySome(predicate, options) {
-    return createFieldValidator((array, _context, locale) => ({
-        key: API.Decorator.Config.key(options, ARRAY_SOME),
-        valid: isArraySomeValid(array, predicate),
-        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_SOME)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (array, _context, locale) => ({
+      key: API.Decorators.key(options, ARRAY_SOME),
+      valid: isArraySomeValid(array, predicate),
+      message: API.Decorators.message(options, locale, translate(locale, ARRAY_SOME)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

@@ -1,8 +1,8 @@
-import API from "../../../../../index";
+import * as API from "../../../../../index";
 import { translate } from "../../../../localization/service/TranslationService";
-import { type FieldDecorator, createFieldValidator } from "../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../index";
 
-/** Digits identifier. */
+/** `@Digits` key. */
 export const DIGITS = "Digits";
 
 /** Internal validation function for {@link Digits} validator. */
@@ -78,18 +78,18 @@ function isDigitsValid(
 export function Digits<T extends API.Utilities.Objects.Optional<number>>(
   intsLimit: number,
   decimalsLimit: number,
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.Config.key(options, DIGITS),
+      key: API.Decorators.buildKeyProp(options, DIGITS),
       valid: isDigitsValid(value, intsLimit, decimalsLimit),
-      message: API.Decorator.Config.message(
+      message: API.Decorators.buildMessageProp(
         options,
         locale,
         translate(locale, DIGITS, intsLimit, decimalsLimit)
       ),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

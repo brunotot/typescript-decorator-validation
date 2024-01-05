@@ -1,17 +1,14 @@
-import API from "../../../../../../../index";
-
-import { type FieldDecorator, createFieldValidator } from "../../../../../../decorators";
+import * as API from "../../../../../../../index";
+import { createFieldValidator, type FieldDecorator } from "../../../../../../decorators";
 import { translate } from "../../../../../../localization/service/TranslationService";
 import { testRegex } from "../Pattern";
 import RegexConst from "../shared/regex.constants";
 
-/** Uppercase identifier. */
+/** `@Uppercase` key. */
 export const UPPERCASE = "Uppercase";
 
 /** Internal validation function for {@link Uppercase} validator. */
-export function isUppercaseValid<T extends API.Utilities.Objects.Optional<string>>(
-  value: T
-): boolean {
+function isUppercaseValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
   API.Utilities.Objects.assertType("string", value);
   return testRegex(RegexConst.UPPERCASE, value);
 }
@@ -64,14 +61,14 @@ export function isUppercaseValid<T extends API.Utilities.Objects.Optional<string
  * ```
  */
 export function Uppercase<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorator.Config.Options
+  options?: API.Decorators.DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorator.Config.key(options, UPPERCASE),
+      key: API.Decorators.buildKeyProp(options, UPPERCASE),
       valid: testRegex(RegexConst.UPPERCASE, value),
-      message: API.Decorator.Config.message(options, locale, translate(locale, UPPERCASE)),
+      message: API.Decorators.buildMessageProp(options, locale, translate(locale, UPPERCASE)),
     }),
-    API.Decorator.Config.groups(options)
+    API.Decorators.buildGroupsProp(options)
   );
 }

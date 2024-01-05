@@ -1,5 +1,5 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** ArraySizeExact identifier. */
 export declare const ARRAY_SIZE_EXACT = "ArraySizeExact";
 /** Internal validation function for {@link ArraySizeExact} validator. */
@@ -53,5 +53,8 @@ export declare function isArraySizeExactValid(array: any[]): boolean;
  * }
  * ```
  */
-export declare function ArraySizeExact<K, T extends K[]>(exact: number, options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function ArraySizeExact<K, T extends K[]>(
+  exact: number,
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=ArraySizeExact.d.ts.map

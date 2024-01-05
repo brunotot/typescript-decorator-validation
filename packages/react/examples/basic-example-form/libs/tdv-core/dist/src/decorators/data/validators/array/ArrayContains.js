@@ -5,8 +5,8 @@ import { createFieldValidator } from "../../../index";
 export const ARRAY_CONTAINS = "ArrayContains";
 /** Internal validation function for {@link ArrayContains} validator. */
 export function isArrayContainsValid(value, contains) {
-    API.Utilities.Objects.assertType("array", value);
-    return (value !== null && value !== void 0 ? value : []).includes(contains);
+  API.Utilities.Objects.assertType("array", value);
+  return (value !== null && value !== void 0 ? value : []).includes(contains);
 }
 /**
  * Checks if the decorated array contains a specific value.
@@ -58,9 +58,12 @@ export function isArrayContainsValid(value, contains) {
  * ```
  */
 export function ArrayContains(contains, options) {
-    return createFieldValidator((array, _context, locale) => ({
-        key: API.Decorator.Config.key(options, ARRAY_CONTAINS),
-        valid: isArrayContainsValid(array, contains),
-        message: API.Decorator.Config.message(options, locale, translate(locale, ARRAY_CONTAINS, contains)),
-    }), API.Decorator.Config.groups(options));
+  return createFieldValidator(
+    (array, _context, locale) => ({
+      key: API.Decorators.key(options, ARRAY_CONTAINS),
+      valid: isArrayContainsValid(array, contains),
+      message: API.Decorators.message(options, locale, translate(locale, ARRAY_CONTAINS, contains)),
+    }),
+    API.Decorators.groups(options)
+  );
 }

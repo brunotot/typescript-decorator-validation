@@ -1,9 +1,11 @@
 import API from "../../../../../../../index";
-import { FieldDecorator } from "../../../../../../decorators";
+import { type FieldDecorator } from "../../../../../../decorators";
 /** Alpha identifier. */
 export declare const ALPHA = "Alpha";
 /** Internal validation function for {@link Alpha} validator. */
-export declare function isAlphaValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean;
+export declare function isAlphaValid<T extends API.Utilities.Objects.Optional<string>>(
+  value: T
+): boolean;
 /**
  * Checks if decorated string contains only alphabetical characters.
  *
@@ -51,5 +53,7 @@ export declare function isAlphaValid<T extends API.Utilities.Objects.Optional<st
  * }
  * ```
  */
-export declare function Alpha<T extends API.Utilities.Objects.Optional<string>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function Alpha<T extends API.Utilities.Objects.Optional<string>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=Alpha.d.ts.map

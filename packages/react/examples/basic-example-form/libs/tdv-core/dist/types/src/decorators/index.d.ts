@@ -1,9 +1,7 @@
 import API from "../../index";
 export * from "./data";
 export * from "./factory";
-export type DecoratorArgs = {
-    [K: string]: any;
-};
+export type DecoratorArgs = Record<string, any>;
 export declare namespace Config {
     /** Generic validator decorator configurable options. */
     type Options = {

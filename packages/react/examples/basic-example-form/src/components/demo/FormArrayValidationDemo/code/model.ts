@@ -1,17 +1,17 @@
-import { Required } from "tdv-core/validators";
+import { Decorators } from "tdv-core";
 import { ValidationGroup } from "../shared/groups";
 
 export class ModelForm {
-  @Required({ groups: [ValidationGroup.DEMO_ID] })
+  @Decorators.Required({ groups: [ValidationGroup.DEMO_ID] })
   id: string = "";
 
-  @Required({ groups: [ValidationGroup.DEMO_DESCRIPTION] })
+  @Decorators.Required({ groups: [ValidationGroup.DEMO_DESCRIPTION] })
   description: string = "";
 
-  @Required({ groups: [ValidationGroup.DEMO_CREATION_DATE] })
+  @Decorators.Required({ groups: [ValidationGroup.DEMO_CREATION_DATE] })
   creationDate: string = "";
 
-  @Required({ groups: [ValidationGroup.DEMO_DEADLINE_DATE] })
+  @Decorators.Required({ groups: [ValidationGroup.DEMO_DEADLINE_DATE] })
   deadlineDate: string = "";
 }
 

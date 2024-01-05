@@ -1,9 +1,11 @@
 import API from "../../../../../index";
-import { FieldDecorator } from "../../../index";
+import { type FieldDecorator } from "../../../index";
 /** Decimal identifier. */
 export declare const DECIMAL = "Decimal";
 /** Internal validation function for {@link Decimal} validator. */
-export declare function isDecimalValid<T extends API.Utilities.Objects.Optional<number>>(value: T): boolean;
+export declare function isDecimalValid<T extends API.Utilities.Objects.Optional<number>>(
+  value: T
+): boolean;
 /**
  * Checks if decorated number is a decimal number.
  *
@@ -51,5 +53,7 @@ export declare function isDecimalValid<T extends API.Utilities.Objects.Optional<
  * }
  * ```
  */
-export declare function Decimal<T extends API.Utilities.Objects.Optional<number>>(options?: API.Decorator.Config.Options): FieldDecorator<T>;
+export declare function Decimal<T extends API.Utilities.Objects.Optional<number>>(
+  options?: API.Decorators.Options
+): FieldDecorator<T>;
 //# sourceMappingURL=Decimal.d.ts.map

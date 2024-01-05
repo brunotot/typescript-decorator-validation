@@ -1,5 +1,5 @@
-import API from "../../../index";
-import { FieldDecorator } from "./createFieldDecorator";
+import type API from "../../../index";
+import { type FieldDecorator } from "./createFieldDecorator";
 /**
  * Creates validation decorators for fields.
  *

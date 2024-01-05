@@ -1,4 +1,4 @@
-import { AssertTrue, Required } from "tdv-core/validators";
+import { Decorators } from "tdv-core";
 
 export type Model = {
   password: string;
@@ -6,11 +6,11 @@ export type Model = {
 };
 
 export class ModelForm implements Model {
-  @Required({ message: "Password field is mandatory" })
+  @Decorators.Required({ message: "Password field is mandatory" })
   password: string = "";
   confirmPassword: string = "";
 
-  @AssertTrue({ message: "Passwords must match" })
+  @Decorators.AssertTrue({ message: "Passwords must match" })
   get passwordsMatch() {
     return this.password === this.confirmPassword;
   }
