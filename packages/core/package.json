@@ -1,6 +1,6 @@
 {
   "name": "tdv-core",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "description": "Typescript form validation using Decorators",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -10,6 +10,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "lint": "echo \"No linting configured\"",
     "clean": "rm -rf dist",
     "build": "npm run clean && npm run test && tsc",
     "build:noTest": "npm run clean && tsc",

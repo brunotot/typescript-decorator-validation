@@ -9,6 +9,7 @@
   ],
   "private": false,
   "scripts": {
+    "lint": "echo \"No linting configured\"",
     "clean": "rm -rf dist",
     "build": "npm run test && npm run build:noTest",
     "build:noTest": "npm run clean && tsc",
