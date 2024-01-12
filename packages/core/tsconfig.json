@@ -3,6 +3,8 @@
   "include": ["index.ts", "src/**/*"],
   "exclude": ["tests", "jest.config.js", "dev"],
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "./dist/types"
   }
 }
