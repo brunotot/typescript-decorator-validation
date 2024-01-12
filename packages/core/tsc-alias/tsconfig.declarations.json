@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "outDir": "../dist/types",
+    "paths": {
+      "@decorators": ["src/decorators"],
+      "@decorators/*": ["src/decorators/*"],
+
+      "@validation": ["src/validation"],
+      "@validation/*": ["src/validation/*"],
+
+      "@reflection": ["src/reflection"],
+      "@reflection/*": ["src/reflection/*"],
+
+      "@utilities": ["src/utilities"],
+      "@utilities/*": ["src/utilities/*"],
+
+      "@strategy": ["src/strategy"],
+      "@strategy/*": ["src/strategy/*"],
+
+      "@localization": ["src/localization"],
+      "@localization/*": ["src/localization/*"]
+    }
+  }
+}

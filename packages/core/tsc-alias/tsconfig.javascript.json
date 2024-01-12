@@ -1,6 +1,7 @@
 {
+  "exclude": ["types"],
   "compilerOptions": {
-    "outDir": "dist/types",
+    "outDir": "../dist",
     "paths": {
       "@decorators": ["src/decorators"],
       "@decorators/*": ["src/decorators/*"],

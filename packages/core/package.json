@@ -1,6 +1,6 @@
 {
   "name": "tdv-core",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Typescript form validation using Decorators",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -13,7 +13,7 @@
     "lint": "echo \"No linting configured\"",
     "clean": "rm -rf dist",
     "build": "npm run clean && npm run test && tsc",
-    "build:noTest": "npm run clean && tsc && npx tsc-alias -p tsconfig.alias.json",
+    "build:noTest": "npm run clean && tsc && npx tsc-alias -p tsc-alias/tsconfig.declarations.json && npx tsc-alias -p tsc-alias/tsconfig.javascript.json",
     "deploy:minor": "bash ../../scripts/deploy.sh core minor",
     "deploy:major": "bash ../../scripts/deploy.sh core major",
     "deploy:patch": "bash ../../scripts/deploy.sh core patch",
