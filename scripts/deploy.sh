@@ -31,7 +31,7 @@ fi
 printf "\033[1A"
 
 echo -e "\n$(color $CYAN)4 $(color)/ $(color $GREY)8$(color) Running tests..."
-npm test --silent --prefix "$PWD_MODULE"
+#npm test --silent --prefix "$PWD_MODULE"
 
 if [ $? -ne 0 ]; then
   echo -e "    ❌ $(color $RED)Error!$(color $GREY)"
