@@ -1,10 +1,7 @@
-import TdvCoreApi from "../../index";
-
-/**
- * Event emitter class.
- */
+/** Event emitter class. */
 export class EventEmitter {
   #id: string;
+  #asyncDelay: number;
   public static EMPTY = new EventEmitter("EMPTY");
   private readonly events: Map<string, Array<(data?: any) => void>>;
   private readonly handlersTimeout: Map<string, NodeJS.Timeout>;
@@ -13,10 +10,11 @@ export class EventEmitter {
     return this.#id;
   }
 
-  constructor(id: string) {
+  constructor(id: string, asyncDelay: number = 500) {
     this.events = new Map();
     this.handlersTimeout = new Map();
     this.#id = id;
+    this.#asyncDelay = asyncDelay;
   }
 
   emit(event: string, data?: any): void {
@@ -28,10 +26,9 @@ export class EventEmitter {
         if (existingTimeout) {
           clearTimeout(existingTimeout);
         }
-        const timeout = setTimeout(
-          () => { handler(data); },
-          TdvCoreApi.Configuration.asyncValidationDelay
-        );
+        const timeout = setTimeout(() => {
+          handler(data);
+        }, this.#asyncDelay);
         this.handlersTimeout.set(handlerKey, timeout);
       });
     }

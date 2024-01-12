@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { createFieldValidator } from "../../../../decorators";
-import { translate } from "../../../../localization/service/TranslationService";
-/** MaxLength identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@MaxLength` key. */
 export const MAX_LENGTH = "MaxLength";
 /** Internal validation function for {@link MaxLength} validator. */
-export function isMaxLengthValid(value, max) {
-  API.Utilities.Objects.assertType("string", value);
-  return (value !== null && value !== void 0 ? value : "").length <= max;
+function isMaxLengthValid(value, max) {
+    Objects.assertType("string", value);
+    return (value !== null && value !== void 0 ? value : "").length <= max;
 }
 /**
  * Checks if decorated string contains a specific number of characters.
@@ -54,12 +55,9 @@ export function isMaxLengthValid(value, max) {
  * ```
  */
 export function MaxLength(max, options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, MAX_LENGTH),
-      valid: isMaxLengthValid(value, max),
-      message: API.Decorators.message(options, locale, translate(locale, MAX_LENGTH, max)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, MAX_LENGTH),
+        valid: isMaxLengthValid(value, max),
+        message: buildMessageProp(options, locale, translate(locale, MAX_LENGTH, max)),
+    }), buildGroupsProp(options));
 }

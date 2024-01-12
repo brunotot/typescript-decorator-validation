@@ -9,20 +9,19 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _EventEmitter_id;
-import TdvCoreApi from "../../index";
-/**
- * Event emitter class.
- */
+var _EventEmitter_id, _EventEmitter_asyncDelay;
+/** Event emitter class. */
 export class EventEmitter {
     get id() {
         return __classPrivateFieldGet(this, _EventEmitter_id, "f");
     }
-    constructor(id) {
+    constructor(id, asyncDelay = 500) {
         _EventEmitter_id.set(this, void 0);
+        _EventEmitter_asyncDelay.set(this, void 0);
         this.events = new Map();
         this.handlersTimeout = new Map();
         __classPrivateFieldSet(this, _EventEmitter_id, id, "f");
+        __classPrivateFieldSet(this, _EventEmitter_asyncDelay, asyncDelay, "f");
     }
     emit(event, data) {
         const handlers = this.events.get(event);
@@ -33,7 +32,9 @@ export class EventEmitter {
                 if (existingTimeout) {
                     clearTimeout(existingTimeout);
                 }
-                const timeout = setTimeout(() => { handler(data); }, TdvCoreApi.Configuration.asyncValidationDelay);
+                const timeout = setTimeout(() => {
+                    handler(data);
+                }, __classPrivateFieldGet(this, _EventEmitter_asyncDelay, "f"));
                 this.handlersTimeout.set(handlerKey, timeout);
             });
         }
@@ -66,5 +67,5 @@ export class EventEmitter {
         }
     }
 }
-_EventEmitter_id = new WeakMap();
+_EventEmitter_id = new WeakMap(), _EventEmitter_asyncDelay = new WeakMap();
 EventEmitter.EMPTY = new EventEmitter("EMPTY");

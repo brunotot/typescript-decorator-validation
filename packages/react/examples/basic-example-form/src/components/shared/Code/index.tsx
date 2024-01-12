@@ -1,9 +1,9 @@
 import { ContentCopy, DoneAll } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { useState } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import "./index.css";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { vs2015 as theme } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import "./index.css?inline";
 
 export type CodeProps = {
   code: string;
@@ -13,7 +13,7 @@ export type CodeProps = {
   style?: any;
 };
 
-export default function Code({
+export function Code({
   code,
   style = {},
   language = "typescript",
@@ -49,7 +49,7 @@ export default function Code({
         showLineNumbers={showLineNumbers}
         customStyle={{ padding: "1rem" }}
         language={language}
-        style={vscDarkPlus}
+        style={theme}
       >
         {code}
       </SyntaxHighlighter>

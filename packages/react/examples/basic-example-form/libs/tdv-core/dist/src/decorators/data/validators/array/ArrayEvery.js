@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** ArrayEvery identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@ArrayEvery` key. */
 export const ARRAY_EVERY = "ArrayEvery";
 /** Internal validation function for {@link ArrayEvery} validator. */
-export function isArrayEveryValid(array, predicate) {
-  API.Utilities.Objects.assertType("array", array);
-  return (array !== null && array !== void 0 ? array : []).every(predicate);
+function isArrayEveryValid(array, predicate) {
+    Objects.assertType("array", array);
+    return (array !== null && array !== void 0 ? array : []).every(predicate);
 }
 /**
  * Checks if all elements of decorated array satisfy the given predicate criteria.
@@ -58,12 +59,9 @@ export function isArrayEveryValid(array, predicate) {
  * ```
  **/
 export function ArrayEvery(predicate, options) {
-  return createFieldValidator(
-    (array, _context, locale) => ({
-      key: API.Decorators.key(options, ARRAY_EVERY),
-      valid: isArrayEveryValid(array, predicate),
-      message: API.Decorators.message(options, locale, translate(locale, ARRAY_EVERY)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((array, _context, locale) => ({
+        key: buildKeyProp(options, ARRAY_EVERY),
+        valid: isArrayEveryValid(array, predicate),
+        message: buildMessageProp(options, locale, translate(locale, ARRAY_EVERY)),
+    }), buildGroupsProp(options));
 }

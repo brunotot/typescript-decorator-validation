@@ -1,5 +1,23 @@
-import API from "../../../index";
-import { type LocalizedMessages, getMessage } from "./MessageReaderService";
+import { Locale } from "@localization/resolver/LocaleResolver";
+import { LocalizedMessages, getMessage } from "@localization/service/MessageReaderService";
+
+/**
+ * Formats a string by replacing placeholders with provided arguments.
+ * @param str - The string containing placeholders in the form of `{0}`, `{1}`, etc.
+ * @param args - The values to replace the placeholders with.
+ * @returns The formatted string with placeholders replaced by the corresponding values from `args`.
+ * @remarks If a placeholder's corresponding value is not provided in `args`, the placeholder will remain unchanged in the output string.
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * const formatted = sprintf("Hello, {0}!", "World");  // Output: "Hello, World!"
+ * ```
+ */
+function sprintf(str: string, ...args: any[]): string {
+  return str.replace(/{(\d+)}/g, function (match, number) {
+    return typeof args[number] !== "undefined" ? args[number] : match;
+  });
+}
 
 /**
  * Localizes a string based on a corresponding key and optional arguments mapped by indices. (ex: `"Hello {0}! How are you?"`)
@@ -27,12 +45,8 @@ import { type LocalizedMessages, getMessage } from "./MessageReaderService";
  * const greeting = translate("en", "Hello", "John Doe");  // "Hello John Doe! How are you?"
  * ```
  */
-export function translate(
-  locale: API.Localization.Locale | null | undefined,
-  key: keyof LocalizedMessages,
-  ...args: any[]
-): string {
+export function translate(locale: Locale | null | undefined, key: keyof LocalizedMessages, ...args: any[]): string {
   const message = getMessage(key, locale);
-  const translatedMessage = API.Utilities.Strings.sprintf(message, ...args);
+  const translatedMessage = sprintf(message, ...args);
   return translatedMessage;
 }

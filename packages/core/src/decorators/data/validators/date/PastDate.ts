@@ -1,13 +1,14 @@
-import * as API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator, type FieldDecorator } from "../../../index";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@PastDate` key. */
 export const PAST_DATE = "PastDate";
 
 /** Internal validation function for {@link PastDate} validator. */
-function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(date: T): boolean {
-  API.Utilities.Objects.assertType("date", date);
+function isPastDateValid<T extends Objects.Optional<Date>>(date: T): boolean {
+  Objects.assertType("date", date);
   return date && date.getTime() < new Date().getTime();
 }
 
@@ -58,15 +59,13 @@ function isPastDateValid<T extends API.Utilities.Objects.Optional<Date>>(date: T
  * }
  * ```
  */
-export function PastDate<T extends API.Utilities.Objects.Optional<Date>>(
-  options?: API.Decorators.DecoratorOptions
-): FieldDecorator<T> {
+export function PastDate<T extends Objects.Optional<Date>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (date, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, PAST_DATE),
+      key: buildKeyProp(options, PAST_DATE),
       valid: isPastDateValid(date),
-      message: API.Decorators.buildMessageProp(options, locale, translate(locale, PAST_DATE, date)),
+      message: buildMessageProp(options, locale, translate(locale, PAST_DATE, date)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

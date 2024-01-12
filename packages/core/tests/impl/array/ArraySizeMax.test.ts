@@ -1,6 +1,6 @@
+import { IMock } from "@common/ValidationHandlerMock";
+import { ArraySizeMax } from "@src/decorators";
 import { standardTest } from "../../common/TestFactory";
-import { IMock } from "../../common/ValidationHandlerMock";
-import { ArraySizeMax } from "./../../../src/decorators";
 
 /*** Data ***/
 type Type = string[];

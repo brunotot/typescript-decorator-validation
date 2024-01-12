@@ -1,4 +1,23 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "includeVersion": true
-} 
+  "includeVersion": true,
+  "compilerOptions": {
+    "module": "CommonJS",
+    "outDir": "docs",
+    "baseUrl": ".",
+    "paths": {
+      "@decorators": ["packages/core/src/decorators"],
+      "@localization": ["packages/core/src/localization"],
+      "@reflection": ["packages/core/src/reflection"],
+      "@strategy": ["packages/core/src/strategy"],
+      "@utilities": ["packages/core/src/utilities"],
+      "@validation": ["packages/core/src/validation"],
+      "@decorators/*": ["packages/core/src/decorators/*"],
+      "@localization/*": ["packages/core/src/localization/*"],
+      "@reflection/*": ["packages/core/src/reflection/*"],
+      "@strategy/*": ["packages/core/src/strategy/*"],
+      "@utilities/*": ["packages/core/src/utilities/*"],
+      "@validation/*": ["packages/core/src/validation/*"]
+    }
+  }
+}

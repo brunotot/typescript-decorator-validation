@@ -1,14 +1,15 @@
-import API from "../../../../../../../index";
-import { createFieldValidator } from "../../../../../../decorators";
-import { translate } from "../../../../../../localization/service/TranslationService";
-import { testRegex } from "../Pattern";
-import RegexConst from "../shared/regex.constants";
-/** URL identifier. */
+import { testRegex } from "../../../../../data/validators/string/regex/Pattern";
+import { RegexConst } from "../../../../../data/validators/string/regex/shared/regex.constants";
+import { createFieldValidator } from "../../../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../../helper";
+import { translate } from "../../../../../../localization";
+import { Objects } from "../../../../../../utilities";
+/** `@URL` key. */
 export const URL_KEY = "URL";
 /** Internal validation function for {@link URL} validator. */
-export function isURLValid(value) {
-  API.Utilities.Objects.assertType("string", value);
-  return testRegex(RegexConst.URL, value);
+function isURLValid(value) {
+    Objects.assertType("string", value);
+    return testRegex(RegexConst.URL, value);
 }
 /**
  * Checks if decorated string is a valid URL.
@@ -58,12 +59,9 @@ export function isURLValid(value) {
  * ```
  */
 export function URL(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, URL_KEY),
-      valid: testRegex(RegexConst.URL, value),
-      message: API.Decorators.message(options, locale, translate(locale, URL_KEY)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, URL_KEY),
+        valid: isURLValid(value),
+        message: buildMessageProp(options, locale, translate(locale, URL_KEY)),
+    }), buildGroupsProp(options));
 }

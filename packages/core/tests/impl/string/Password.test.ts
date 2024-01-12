@@ -1,24 +1,14 @@
+import { IMock } from "@common/ValidationHandlerMock";
+import { Password } from "@src/decorators";
 import $ from "../../../index";
-import { Password } from "../../../src/decorators";
 import { standardTest } from "../../common/TestFactory";
-import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
 type Type = $.Utilities.Objects.Optional<string>;
 const type = "String";
 const identifier = "Password";
 const successData: Type[] = ["Test12345!"];
-const errorData: Type[] = [
-  "",
-  null,
-  undefined,
-  "12345",
-  "12345678",
-  "12345678!",
-  "12345678!",
-  "12345678!A",
-  "123aA!",
-];
+const errorData: Type[] = ["", null, undefined, "12345", "12345678", "12345678!", "12345678!", "12345678!A", "123aA!"];
 
 /*** Model ***/
 class Model implements IMock<Type> {

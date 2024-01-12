@@ -1,8 +1,8 @@
-import { createFieldDecorator } from "./../../index";
+import { createFieldDecorator } from "../../factory/forField/createFieldDecorator";
 /**
  * Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T`).
  *
- * If a field which is being decorated is not a {@link API.Utilities.Types.PrimitiveType primitive}
+ * If a field which is being decorated is not a {@link Types.PrimitiveType primitive}
  * (`string`, `number`, `boolean`, `bigint`, `Date`) and isn't marked as a primitive in {@link PrimitiveSet overrides} interface
  * then the framework treats it as a custom, client-defined validable class. That having in mind, you will always want to apply `@attribute`
  * to those types of fields so the runtime evaluation matches the TypeScript compiler type evaluation. For more clarity check examples below.

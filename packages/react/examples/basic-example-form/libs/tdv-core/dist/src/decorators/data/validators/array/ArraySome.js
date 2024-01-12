@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** ArraySome identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@ArraySome` key. */
 export const ARRAY_SOME = "ArraySome";
 /** Internal validation function for {@link ArraySome} validator. */
-export function isArraySomeValid(array, predicate) {
-  API.Utilities.Objects.assertType("array", array);
-  return (array !== null && array !== void 0 ? array : []).some(predicate);
+function isArraySomeValid(array, predicate) {
+    Objects.assertType("array", array);
+    return (array !== null && array !== void 0 ? array : []).some(predicate);
 }
 /**
  * Checks if at least one element of decorated array satisfies the given predicate criteria.
@@ -58,12 +59,9 @@ export function isArraySomeValid(array, predicate) {
  * ```
  **/
 export function ArraySome(predicate, options) {
-  return createFieldValidator(
-    (array, _context, locale) => ({
-      key: API.Decorators.key(options, ARRAY_SOME),
-      valid: isArraySomeValid(array, predicate),
-      message: API.Decorators.message(options, locale, translate(locale, ARRAY_SOME)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((array, _context, locale) => ({
+        key: buildKeyProp(options, ARRAY_SOME),
+        valid: isArraySomeValid(array, predicate),
+        message: buildMessageProp(options, locale, translate(locale, ARRAY_SOME)),
+    }), buildGroupsProp(options));
 }

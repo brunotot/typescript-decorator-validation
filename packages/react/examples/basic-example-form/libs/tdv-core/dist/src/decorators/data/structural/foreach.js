@@ -1,11 +1,9 @@
-import { createFieldDecorator } from "./../../../decorators";
+import { createFieldDecorator } from "../../factory/forField/createFieldDecorator";
 /**
  * Creates a validator decorator which applies multiple validators to each element in array field.
- *
  * @typeParam T - The type of the array property.
  * @param validators - An array of validators to apply to each element in the array.
  * @returns A decorator function to use with class array fields.
- *
  * @example
  * 1: Applies the `MinLength` and `MaxLength` validators to each element in the `names` array property.
  * ```ts

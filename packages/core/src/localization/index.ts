@@ -1,2 +1,2 @@
-export * from "./resolver/LocaleResolver";
-export * from "./resolver/MessageResolver";
+export * from "./resolver";
+export * from "./service";

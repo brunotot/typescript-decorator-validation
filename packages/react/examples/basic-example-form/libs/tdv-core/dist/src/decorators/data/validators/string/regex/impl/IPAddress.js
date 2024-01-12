@@ -1,14 +1,15 @@
-import API from "../../../../../../../index";
-import { createFieldValidator } from "../../../../../../decorators";
-import { translate } from "../../../../../../localization/service/TranslationService";
-import { testRegex } from "../Pattern";
-import RegexConst from "../shared/regex.constants";
-/** IPAddress identifier. */
+import { testRegex } from "../../../../../data/validators/string/regex/Pattern";
+import { RegexConst } from "../../../../../data/validators/string/regex/shared/regex.constants";
+import { createFieldValidator } from "../../../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../../helper";
+import { translate } from "../../../../../../localization";
+import { Objects } from "../../../../../../utilities";
+/** `@IPAddress` key. */
 export const IP_ADDRESS = "IPAddress";
 /** Internal validation function for {@link IPAddress} validator. */
-export function isIPAddressValid(value) {
-  API.Utilities.Objects.assertType("string", value);
-  return testRegex(RegexConst.IP_ADDRESS, value);
+function isIPAddressValid(value) {
+    Objects.assertType("string", value);
+    return testRegex(RegexConst.IP_ADDRESS, value);
 }
 /**
  * Checks if decorated string is a valid IP address.
@@ -58,12 +59,9 @@ export function isIPAddressValid(value) {
  * ```
  */
 export function IPAddress(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, IP_ADDRESS),
-      valid: testRegex(RegexConst.IP_ADDRESS, value),
-      message: API.Decorators.message(options, locale, translate(locale, IP_ADDRESS)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, IP_ADDRESS),
+        valid: isIPAddressValid(value),
+        message: buildMessageProp(options, locale, translate(locale, IP_ADDRESS)),
+    }), buildGroupsProp(options));
 }

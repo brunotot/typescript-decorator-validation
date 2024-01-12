@@ -1,14 +1,8 @@
 {
-  "extends": "./../../tsconfig.json",
+  "extends": "../../tsconfig.json",
   "exclude": ["tests", "jest.config.js"],
-  "include": ["src", "index.ts"],
+  "include": ["index.ts", "src/**/*"],
   "compilerOptions": {
-    "module": "ESNext",
-    "jsx": "react",
-    "outDir": "dist",
-    "declarationDir": "dist/types",
-    "paths": {
-      "api": ["../core/index"]
-    }
+    "outDir": "dist"
   }
 }

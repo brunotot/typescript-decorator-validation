@@ -1,7 +1,7 @@
+import { IMock } from "@common/ValidationHandlerMock";
+import { URL } from "@src/decorators";
 import $ from "../../../../../index";
-import { URL } from "../../../../../src/decorators";
 import { standardTest } from "../../../../common/TestFactory";
-import { IMock } from "../../../../common/ValidationHandlerMock";
 
 /*** Data ***/
 type Type = $.Utilities.Objects.Optional<string>;

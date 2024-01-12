@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { createFieldValidator } from "../../../../decorators";
-import { translate } from "../../../../localization/service/TranslationService";
-/** NonNegative identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@NonNegative` key. */
 export const NON_NEGATIVE = "NonNegative";
 /** Internal validation function for {@link NonNegative} validator. */
 function isNonNegativeValid(num) {
-  API.Utilities.Objects.assertType("number", num);
-  return num !== undefined && num !== null && num >= 0;
+    Objects.assertType("number", num);
+    return num !== undefined && num !== null && num >= 0;
 }
 /**
  * Checks if decorated number is not a negative number (can be 0).
@@ -56,12 +57,9 @@ function isNonNegativeValid(num) {
  * ```
  */
 export function NonNegative(options) {
-  return createFieldValidator(
-    (num, _context, locale) => ({
-      key: API.Decorators.key(options, NON_NEGATIVE),
-      valid: isNonNegativeValid(num),
-      message: API.Decorators.message(options, locale, translate(locale, NON_NEGATIVE, num)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((num, _context, locale) => ({
+        key: buildKeyProp(options, NON_NEGATIVE),
+        valid: isNonNegativeValid(num),
+        message: buildMessageProp(options, locale, translate(locale, NON_NEGATIVE, num)),
+    }), buildGroupsProp(options));
 }

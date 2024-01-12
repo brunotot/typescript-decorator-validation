@@ -1,13 +1,14 @@
-import * as API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator, type FieldDecorator } from "../../../index";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@ArrayEmpty` key. */
 export const ARRAY_EMPTY = "ArrayEmpty";
 
 /** Internal validation function for {@link ArrayEmpty} validator. */
 function isArrayEmptyValid(array: any[]): boolean {
-  API.Utilities.Objects.assertType("array", array);
+  Objects.assertType("array", array);
   return (array ?? []).length === 0;
 }
 
@@ -59,15 +60,13 @@ function isArrayEmptyValid(array: any[]): boolean {
  * }
  * ```
  */
-export function ArrayEmpty<K, T extends K[]>(
-  options?: API.Decorators.DecoratorOptions
-): FieldDecorator<T> {
+export function ArrayEmpty<K, T extends K[]>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, ARRAY_EMPTY),
+      key: buildKeyProp(options, ARRAY_EMPTY),
       valid: isArrayEmptyValid(array),
-      message: API.Decorators.buildMessageProp(options, locale, translate(locale, ARRAY_EMPTY)),
+      message: buildMessageProp(options, locale, translate(locale, ARRAY_EMPTY)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

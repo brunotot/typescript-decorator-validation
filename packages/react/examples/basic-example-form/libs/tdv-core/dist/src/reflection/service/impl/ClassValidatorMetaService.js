@@ -1,5 +1,5 @@
-import { ValidationMetadata } from "../../models/ValidationMetadata";
-import { AbstractMetaService } from "../AbstractMetaService";
+import { AbstractMetaService } from "../../service/AbstractMetaService";
+import { ValidationMetadata } from "../../../validation/models/ValidationMetadata";
 /**
  * A configurer class which allows for easier manipulation of decorated class validators and corresponding metadata
  * @remarks This class is responsible for managing metadata related to validation (at class level). It provides methods to add validators and read them.

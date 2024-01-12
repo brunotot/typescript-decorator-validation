@@ -1,7 +1,7 @@
 import { Warning } from "@mui/icons-material";
 import * as MUI from "@mui/material";
 import { useForm } from "tdv-react";
-import Code from "../../../shared/Code";
+import { Code } from "../../../shared/Code";
 import { Model, ModelForm } from "./model";
 
 export default function Component() {
@@ -37,7 +37,7 @@ export default function Component() {
           </MUI.Grid>
         </MUI.Grid>
       </MUI.Box>
-      {errors.passwordsMatch.map(msg => (
+      {errors.passwordsMatch.map((msg: string) => (
         <MUI.Box key={msg} gap={1} display="flex" alignItems="center" paddingTop={1.5}>
           <Warning color="warning" /> <MUI.Typography color="warning.main">{msg}</MUI.Typography>
         </MUI.Box>

@@ -21,7 +21,7 @@ import useValidationEngine from "../useValidationEngine";
  *
  * @typeParam TClass - represents parent form class model holding context of current compontent
  */
-export default function useValidation(model, { defaultValue, groups, asyncDelay, locale, resolveDecoratorArgs = () => ({}), } = {}) {
+export default function useValidation(model, { defaultValue, groups, asyncDelay, locale, resolveDecoratorArgs = () => ({}) } = {}) {
     const engine = useValidationEngine(model, {
         groups,
         defaultValue,

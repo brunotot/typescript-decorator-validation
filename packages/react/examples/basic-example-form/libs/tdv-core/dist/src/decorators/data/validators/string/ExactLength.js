@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { createFieldValidator } from "../../../../decorators";
-import { translate } from "../../../../localization/service/TranslationService";
-/** ExactLength identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@ExactLength` key. */
 export const EXACT_LENGTH = "ExactLength";
 /** Internal validation function for {@link ExactLength} validator. */
-export function isExactLengthValid(value, exact) {
-  API.Utilities.Objects.assertType("string", value);
-  return (value !== null && value !== void 0 ? value : "").length === exact;
+function isExactLengthValid(value, exact) {
+    Objects.assertType("string", value);
+    return (value !== null && value !== void 0 ? value : "").length === exact;
 }
 /**
  * Checks if decorated string contains a specific number of characters.
@@ -54,12 +55,9 @@ export function isExactLengthValid(value, exact) {
  * ```
  */
 export function ExactLength(exact, options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, EXACT_LENGTH),
-      valid: isExactLengthValid(value, exact),
-      message: API.Decorators.message(options, locale, translate(locale, EXACT_LENGTH, exact)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, EXACT_LENGTH),
+        valid: isExactLengthValid(value, exact),
+        message: buildMessageProp(options, locale, translate(locale, EXACT_LENGTH, exact)),
+    }), buildGroupsProp(options));
 }

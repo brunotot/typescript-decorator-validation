@@ -1,8 +1,77 @@
-import API from "../../index";
-import { ValidationMetadata } from "../../reflection/models/ValidationMetadata";
-import { EventEmitter } from "../../utilities/misc/EventEmitter";
-import { Cache } from "./Cache";
-import { Events } from "./Events";
+import { Locale, getLocale } from "@localization";
+import { ClassValidatorMetaService } from "@reflection/service/impl/ClassValidatorMetaService";
+import { FieldValidatorMetaService } from "@reflection/service/impl/FieldValidatorMetaService";
+import { DetailedErrorsResponse, SimpleErrorsResponse, getStrategyResult } from "@strategy";
+import { EventEmitter, Objects, Types } from "@utilities";
+import { Cache } from "@validation/models/Cache";
+import { Events } from "@validation/models/Events";
+import { ValidationMetadata } from "@validation/models/ValidationMetadata";
+import type {
+  AsyncEventHandler,
+  AsyncEventHandlerProps,
+  AsyncEventResponseProps,
+  FormConfig,
+  FormValidateResponse,
+  ValidationResult,
+} from "@validation/types";
+/**
+ * Checks if an error object has errors.
+ * @typeParam T - The type of the errors.
+ */
+export function hasErrors<T>(data: SimpleErrorsResponse<T>): boolean {
+  const data0: any = data;
+  if (Array.isArray(data0)) {
+    return data0.some(item => hasErrors(item));
+  } else if (typeof data0 === "object" && data0 !== null) {
+    return Object.values(data0).some((value: any) => hasErrors(value));
+  } else if (typeof data0 === "string") {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Transforms a plain object into an instance of the given class.
+ * @param clazz - The class to transform the object into.
+ * @param object - The object to transform.
+ * @typeParam TClass - The type of the class.
+ * @returns An instance of TClass.
+ */
+export function toClass<const TClass extends Types.Class<any>>(
+  clazz: TClass,
+  object?: Objects.Payload<Types.UnwrapClass<TClass>>
+): Types.UnwrapClass<TClass> {
+  function _toClass<const TConstructor extends Types.Class<any>>(
+    clazz: TConstructor,
+    object?: Objects.Payload<Types.UnwrapClass<TConstructor>> | Types.ArrayType
+  ): Types.UnwrapClass<TConstructor> {
+    if (Array.isArray(object)) {
+      return object.map(item => _toClass(clazz, item)) as Types.UnwrapClass<TConstructor>;
+    }
+
+    const entries = Object.entries<any>(object ?? {});
+    const meta = FieldValidatorMetaService.inject(clazz, EventEmitter.EMPTY);
+    const data: any = {};
+    for (const [key, value] of entries) {
+      const descriptor = meta.getUntypedDescriptor(key);
+      const { thisClass } = descriptor;
+      if (thisClass) {
+        if (Array.isArray(value)) {
+          data[key] = value.map(item => _toClass(thisClass, item));
+        } else {
+          data[key] = toClass(thisClass, value);
+        }
+      } else {
+        data[key] = value;
+      }
+    }
+
+    const instance = new clazz();
+    Object.entries(data).forEach(([k, v]) => (instance[k] = v));
+    return instance;
+  }
+  return _toClass(clazz, object);
+}
 
 /**
  * A class responsible for processing and validating class instances through its decorated validators.
@@ -16,19 +85,19 @@ import { Events } from "./Events";
  */
 export class Form<TClass> {
   __id: string;
-  locale: API.Localization.Locale;
-  #eventListener?: API.Validation.AsyncEventHandler<TClass>;
+  locale: Locale;
+  #eventListener?: AsyncEventHandler<TClass>;
   #eventEmitter: EventEmitter;
-  #fieldValidatorMetaService: API.Reflection.FieldValidatorMetaService;
+  #fieldValidatorMetaService: FieldValidatorMetaService;
   // @ts-expect-error
-  #classValidatorMetaService: API.Reflection.ClassValidatorMetaService<TClass>;
+  #classValidatorMetaService: ClassValidatorMetaService<TClass>;
   #groups: string[];
-  #defaultValue: API.Utilities.Objects.Payload<TClass>;
-  #cache: Cache<API.Validation.FormValidateResponse<TClass>>;
-  #hostClass: API.Utilities.Types.Class<TClass>;
+  #defaultValue: Objects.Payload<TClass>;
+  #cache: Cache<FormValidateResponse<TClass>>;
+  #hostClass: Types.Class<TClass>;
   #asyncDelay: number;
   #debounceMap: {
-    [key in keyof TClass]: ReturnType<typeof API.Utilities.Objects.debounce>;
+    [key in keyof TClass]: ReturnType<typeof Objects.debounce>;
   } = {} as any;
 
   public get async() {
@@ -52,27 +121,16 @@ export class Form<TClass> {
    * @param clazz - The class type to be processed.
    * @param config - Optional configuration settings.
    */
-  constructor(
-    clazz: API.Utilities.Types.Class<TClass>,
-    config?: API.Validation.FormConfig<TClass>
-  ) {
+  constructor(clazz: Types.Class<TClass>, config?: FormConfig<TClass>) {
     this.#asyncDelay = config?.asyncDelay ?? 500;
     this.__id = Math.random().toString(36).substring(2, 8);
-    this.#eventEmitter = new EventEmitter(this.__id);
+    this.#eventEmitter = new EventEmitter(this.__id, this.#asyncDelay);
     this.#hostClass = clazz;
-    this.locale = config?.locale ?? API.Localization.getLocale();
+    this.locale = config?.locale ?? getLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
-    this.#defaultValue =
-      config?.defaultValue ??
-      (API.Utilities.Objects.toClass(clazz) as API.Utilities.Objects.Payload<TClass>);
-    this.#fieldValidatorMetaService = API.Reflection.FieldValidatorMetaService.inject(
-      clazz,
-      this.#eventEmitter
-    );
-    this.#classValidatorMetaService = API.Reflection.ClassValidatorMetaService.inject(
-      clazz,
-      this.#eventEmitter
-    );
+    this.#defaultValue = config?.defaultValue ?? (toClass(clazz) as Objects.Payload<TClass>);
+    this.#fieldValidatorMetaService = FieldValidatorMetaService.inject(clazz, this.#eventEmitter);
+    this.#classValidatorMetaService = ClassValidatorMetaService.inject(clazz, this.#eventEmitter);
     this.#cache = new Cache(state => this.validate.bind(this)(state));
   }
 
@@ -83,7 +141,7 @@ export class Form<TClass> {
    *
    * @returns `true` if valid, `false` otherwise.
    */
-  public isValid(payload: API.Utilities.Objects.Payload<TClass>): boolean {
+  public isValid(payload: Objects.Payload<TClass>): boolean {
     return this.#cache.get("valid", payload);
   }
 
@@ -94,9 +152,7 @@ export class Form<TClass> {
    *
    * @returns An object containing detailed error messages.
    */
-  public getDetailedErrors(
-    payload?: API.Utilities.Objects.Payload<TClass>
-  ): API.Strategy.Impl.DetailedErrors<TClass> {
+  public getDetailedErrors(payload?: Objects.Payload<TClass>): DetailedErrorsResponse<TClass> {
     return this.#cache.get("detailedErrors", payload);
   }
 
@@ -107,15 +163,11 @@ export class Form<TClass> {
    *
    * @returns An object containing error messages.
    */
-  public getErrors(
-    payload?: API.Utilities.Objects.Payload<TClass>
-  ): API.Strategy.Impl.Errors<TClass> {
+  public getErrors(payload?: Objects.Payload<TClass>): SimpleErrorsResponse<TClass> {
     return this.#cache.get("errors", payload);
   }
 
-  public getGlobalErrors(
-    payload?: API.Utilities.Objects.Payload<TClass>
-  ): API.Validation.ValidationResult[] {
+  public getGlobalErrors(payload?: Objects.Payload<TClass>): ValidationResult[] {
     return this.#cache.get("globalErrors", payload);
   }
 
@@ -147,14 +199,8 @@ export class Form<TClass> {
    * console.log(result.valid);  // Output: true or false
    * ```
    */
-  public validate(
-    payload?: API.Utilities.Objects.Payload<TClass>,
-    args: API.Decorator.DecoratorArgs = {}
-  ): API.Validation.FormValidateResponse<TClass> {
-    const state: API.Utilities.Objects.Payload<TClass> = API.Utilities.Objects.toClass(
-      this.#hostClass,
-      payload
-    ) as any;
+  public validate(payload?: Objects.Payload<TClass>, args: Record<string, any> = {}): FormValidateResponse<TClass> {
+    const state: Objects.Payload<TClass> = toClass(this.#hostClass, payload) as any;
 
     const errors: any = {};
     const detailedErrors: any = {};
@@ -178,7 +224,7 @@ export class Form<TClass> {
 
     return this.#cache.patch(
       {
-        valid: !API.Utilities.Objects.hasErrors(errors),
+        valid: !hasErrors(errors),
         detailedErrors,
         errors,
         globalErrors: classValidationErrors,
@@ -217,14 +263,10 @@ export class Form<TClass> {
    */
   #validateField<K extends keyof TClass>(
     fieldName: K,
-    // @ts-expect-error
-    payload: API.Utilities.Objects.Payload<TClass>[K],
-    args: API.Decorator.DecoratorArgs = {}
-  ): API.Strategy.getStrategyResult<TClass, K> {
-    const descriptor = this.#fieldValidatorMetaService.getUntypedDescriptor(
-      fieldName,
-      this.#eventEmitter
-    );
+    payload: Objects.Payload<TClass>[K],
+    args: Record<string, any> = {}
+  ): getStrategyResult<TClass, K> {
+    const descriptor = this.#fieldValidatorMetaService.getUntypedDescriptor(fieldName, this.#eventEmitter);
     const stratImpl = new descriptor.StrategyImpl(
       descriptor,
       this.#defaultValue,
@@ -235,30 +277,26 @@ export class Form<TClass> {
 
     if (descriptor.strategy === "function") {
       if (!this.#debounceMap[fieldName]) {
-        this.#debounceMap[fieldName] = API.Utilities.Objects.debounce(
-          (value: any, context: any) => {
-            stratImpl.test(value, context, args);
-          },
-          this.#asyncDelay
-        );
+        this.#debounceMap[fieldName] = Objects.debounce((value: any, context: any) => {
+          stratImpl.test(value, context, args);
+        }, this.#asyncDelay);
       }
 
-      // @ts-expect-error
       this.#debounceMap[fieldName](payload[fieldName], payload, args);
 
       return [
         (this.#cache.get("detailedErrors") as any)?.[fieldName],
         (this.#cache.get("errors") as any)?.[fieldName],
-      ] as API.Strategy.getStrategyResult<TClass, K>;
+      ] as getStrategyResult<TClass, K>;
     }
 
     // @ts-expect-error We expect error here due to the nature of arbitrary types depending on the different types of fields (primitive, object, primitive array, object array and so on...)
     return stratImpl.test(payload[fieldName], payload, args);
   }
 
-  #registerAsync(handler: (props: API.Validation.AsyncEventResponseProps<TClass>) => void): void {
+  #registerAsync(handler: (props: AsyncEventResponseProps<TClass>) => void): void {
     this.#unregisterAsync();
-    this.#eventListener = ({ key, value }: API.Validation.AsyncEventHandlerProps<TClass>) => {
+    this.#eventListener = ({ key, value }: AsyncEventHandlerProps<TClass>) => {
       const { valid } = value;
       const currentErrors: any = this.#cache.get("errors");
       const currentDetailedErrors: any = this.#cache.get("detailedErrors");
@@ -266,7 +304,7 @@ export class Form<TClass> {
 
       if (key) {
         let simpleResults = currentErrors[key] as string[];
-        let detailedResults = currentDetailedErrors[key] as API.Validation.ValidationResult[];
+        let detailedResults = currentDetailedErrors[key] as ValidationResult[];
 
         if (valid) {
           detailedResults = detailedResults.filter(r => r.key !== value.key);

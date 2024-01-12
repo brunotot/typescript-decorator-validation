@@ -1,13 +1,14 @@
-import * as API from "../../../../../index";
-import { createFieldValidator, type FieldDecorator } from "../../../../decorators";
-import { translate } from "../../../../localization/service/TranslationService";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@NonPositive` key. */
 export const NON_POSITIVE = "NonPositive";
 
 /** Internal validation function for {@link NonPositive} validator. */
-function isNonPositiveValid(num: API.Utilities.Objects.Optional<number>): boolean {
-  API.Utilities.Objects.assertType("number", num);
+function isNonPositiveValid(num: Objects.Optional<number>): boolean {
+  Objects.assertType("number", num);
   return num !== undefined && num !== null && num <= 0;
 }
 
@@ -58,19 +59,13 @@ function isNonPositiveValid(num: API.Utilities.Objects.Optional<number>): boolea
  * }
  * ```
  */
-export function NonPositive<T extends API.Utilities.Objects.Optional<number>>(
-  options?: API.Decorators.DecoratorOptions
-): FieldDecorator<T> {
+export function NonPositive<T extends Objects.Optional<number>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (num, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, NON_POSITIVE),
+      key: buildKeyProp(options, NON_POSITIVE),
       valid: isNonPositiveValid(num),
-      message: API.Decorators.buildMessageProp(
-        options,
-        locale,
-        translate(locale, NON_POSITIVE, num)
-      ),
+      message: buildMessageProp(options, locale, translate(locale, NON_POSITIVE, num)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

@@ -1,7 +1,6 @@
 import { createClassDecorator } from "./createClassDecorator";
 /**
  * Creates validation decorators for classes.
- *
  * @typeParam T - The type of class being validated.
  * @param validate - The callback that defines the validation logic.
  * @param groups - Validation groups.
@@ -15,7 +14,7 @@ import { createClassDecorator } from "./createClassDecorator";
  * }
  *
  * function PropGreaterThan<T extends typeof MyClass>(prop: keyof MyClass, value: number) {
- *   return API.Decorator.ForClass.Validator.build<T>(instance => ({
+ *   return Decorators.ForClass.Validator.build<T>(instance => ({
  *     key: "PropGreaterThan",
  *     valid: instance[prop] > value,
  *     message: `${prop} must be greater than ${value}`

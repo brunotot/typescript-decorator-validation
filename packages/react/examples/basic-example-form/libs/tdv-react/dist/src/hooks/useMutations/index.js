@@ -1,15 +1,14 @@
 import { useMemo } from "react";
-import { Reflection } from "tdv-core";
+import { Utilities } from "tdv-core";
 export default function useMutations(clazz, { setForm }) {
-    const fields = useMemo(() => Reflection.getClassFieldNames(clazz), []);
+    const fields = useMemo(() => Utilities.Classes.getClassFieldNames(clazz), []);
     const handleChange = (key, value) => {
-        setForm((prev) => {
+        setForm(prev => {
             const obj = {};
             for (const prop of fields) {
                 obj[prop] = prev[prop];
             }
-            obj[key] =
-                typeof value === "function" ? value(prev[key]) : value;
+            obj[key] = typeof value === "function" ? value(prev[key]) : value;
             return obj;
         });
     };

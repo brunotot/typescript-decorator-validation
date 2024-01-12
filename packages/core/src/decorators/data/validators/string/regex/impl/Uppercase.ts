@@ -1,15 +1,16 @@
-import * as API from "../../../../../../../index";
-import { createFieldValidator, type FieldDecorator } from "../../../../../../decorators";
-import { translate } from "../../../../../../localization/service/TranslationService";
-import { testRegex } from "../Pattern";
-import RegexConst from "../shared/regex.constants";
+import { testRegex } from "@decorators/data/validators/string/regex/Pattern";
+import { RegexConst } from "@decorators/data/validators/string/regex/shared/regex.constants";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@Uppercase` key. */
 export const UPPERCASE = "Uppercase";
 
 /** Internal validation function for {@link Uppercase} validator. */
-function isUppercaseValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
-  API.Utilities.Objects.assertType("string", value);
+function isUppercaseValid<T extends Objects.Optional<string>>(value: T): boolean {
+  Objects.assertType("string", value);
   return testRegex(RegexConst.UPPERCASE, value);
 }
 
@@ -60,15 +61,13 @@ function isUppercaseValid<T extends API.Utilities.Objects.Optional<string>>(valu
  * }
  * ```
  */
-export function Uppercase<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorators.DecoratorOptions
-): FieldDecorator<T> {
+export function Uppercase<T extends Objects.Optional<string>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, UPPERCASE),
-      valid: testRegex(RegexConst.UPPERCASE, value),
-      message: API.Decorators.buildMessageProp(options, locale, translate(locale, UPPERCASE)),
+      key: buildKeyProp(options, UPPERCASE),
+      valid: isUppercaseValid(value),
+      message: buildMessageProp(options, locale, translate(locale, UPPERCASE)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

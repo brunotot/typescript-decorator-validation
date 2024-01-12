@@ -1,7 +1,7 @@
+import { IMock } from "@common/ValidationHandlerMock";
+import { Digits } from "@src/decorators";
 import $ from "../../../index";
-import { Digits } from "../../../src/decorators";
 import { standardTest } from "../../common/TestFactory";
-import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
 type Type = $.Utilities.Objects.Optional<number>;

@@ -1,13 +1,14 @@
-import * as API from "../../../../../index";
-import { createFieldValidator, type FieldDecorator } from "../../../../decorators";
-import { translate } from "../../../../localization/service/TranslationService";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@ExactLength` key. */
 export const EXACT_LENGTH = "ExactLength";
 
 /** Internal validation function for {@link ExactLength} validator. */
-function isExactLengthValid(value: API.Utilities.Objects.Optional<string>, exact: number): boolean {
-  API.Utilities.Objects.assertType("string", value);
+function isExactLengthValid(value: Objects.Optional<string>, exact: number): boolean {
+  Objects.assertType("string", value);
   return (value ?? "").length === exact;
 }
 
@@ -56,20 +57,16 @@ function isExactLengthValid(value: API.Utilities.Objects.Optional<string>, exact
  * }
  * ```
  */
-export function ExactLength<T extends API.Utilities.Objects.Optional<string>>(
+export function ExactLength<T extends Objects.Optional<string>>(
   exact: number,
-  options?: API.Decorators.DecoratorOptions
+  options?: DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, EXACT_LENGTH),
+      key: buildKeyProp(options, EXACT_LENGTH),
       valid: isExactLengthValid(value, exact),
-      message: API.Decorators.buildMessageProp(
-        options,
-        locale,
-        translate(locale, EXACT_LENGTH, exact)
-      ),
+      message: buildMessageProp(options, locale, translate(locale, EXACT_LENGTH, exact)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

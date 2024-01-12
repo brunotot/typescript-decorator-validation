@@ -1,4 +1,5 @@
-import * as LocaleResolver from "../resolver/LocaleResolver";
+import { Locale, getLocale } from "@localization/resolver/LocaleResolver";
+
 import * as de from "../translations/de.json";
 import * as en from "../translations/en.json";
 import * as es from "../translations/es.json";
@@ -33,7 +34,7 @@ export type LocalizedMessages = typeof en;
  * in which the key represents a translation identifier while the value
  * corresponds to the identifier's localized string.
  */
-export type Messages = Record<LocaleResolver.Locale, LocalizedMessages>;
+export type Messages = Record<Locale, LocalizedMessages>;
 
 export type MessageKey = keyof LocalizedMessages;
 
@@ -43,11 +44,8 @@ export type MessageKey = keyof LocalizedMessages;
  * @param locale Locale to translate by
  * @returns Localized message by key.
  */
-export function getMessage(
-  key: keyof LocalizedMessages,
-  locale?: LocaleResolver.Locale | null
-): string {
-  const computedLocale = locale ?? LocaleResolver.getLocale();
+export function getMessage(key: keyof LocalizedMessages, locale?: Locale | null): string {
+  const computedLocale = locale ?? getLocale();
   const computedLocaleMessages = messages[computedLocale];
   return computedLocaleMessages[key];
 }

@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** ArraySizeExact identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@ArraySizeExact` key. */
 export const ARRAY_SIZE_EXACT = "ArraySizeExact";
 /** Internal validation function for {@link ArraySizeExact} validator. */
-export function isArraySizeExactValid(array) {
-  API.Utilities.Objects.assertType("array", array);
-  return (array !== null && array !== void 0 ? array : []).length === 0;
+function isArraySizeExactValid(array) {
+    Objects.assertType("array", array);
+    return (array !== null && array !== void 0 ? array : []).length === 0;
 }
 /**
  * Checks if the decorated array contains an exact number of elements.
@@ -58,21 +59,9 @@ export function isArraySizeExactValid(array) {
  * ```
  */
 export function ArraySizeExact(exact, options) {
-  return createFieldValidator(
-    (array, _context, locale) => ({
-      key: API.Decorators.key(options, ARRAY_SIZE_EXACT),
-      valid: (array !== null && array !== void 0 ? array : []).length === exact,
-      message: API.Decorators.message(
-        options,
-        locale,
-        translate(
-          locale,
-          ARRAY_SIZE_EXACT,
-          exact,
-          (array !== null && array !== void 0 ? array : []).length
-        )
-      ),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((array, _context, locale) => ({
+        key: buildKeyProp(options, ARRAY_SIZE_EXACT),
+        valid: isArraySizeExactValid(array),
+        message: buildMessageProp(options, locale, translate(locale, ARRAY_SIZE_EXACT, exact, (array !== null && array !== void 0 ? array : []).length)),
+    }), buildGroupsProp(options));
 }

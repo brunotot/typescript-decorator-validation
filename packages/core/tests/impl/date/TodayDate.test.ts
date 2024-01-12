@@ -1,7 +1,7 @@
+import { IMock } from "@common/ValidationHandlerMock";
+import { TodayDate } from "@src/decorators";
 import $ from "../../../index";
-import { TodayDate } from "../../../src/decorators";
 import { standardTest } from "../../common/TestFactory";
-import { IMock } from "../../common/ValidationHandlerMock";
 
 const NEG_INFINITY = new Date(1990, 0, 1);
 const POS_INFINITY = new Date(2099, 11, 31);

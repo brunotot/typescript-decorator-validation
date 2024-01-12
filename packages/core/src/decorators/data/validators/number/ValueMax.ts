@@ -1,13 +1,14 @@
-import * as API from "../../../../../index";
-import { createFieldValidator, type FieldDecorator } from "../../../../decorators";
-import { translate } from "../../../../localization/service/TranslationService";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@ValueMax` key. */
 export const VALUE_MAX = "ValueMax";
 
 /** Internal validation function for {@link ValueMax} validator. */
-function isValueMaxValid(num: API.Utilities.Objects.Optional<number>, max: number): boolean {
-  API.Utilities.Objects.assertType("number", num);
+function isValueMaxValid(num: Objects.Optional<number>, max: number): boolean {
+  Objects.assertType("number", num);
   return num == null ? true : num <= max;
 }
 
@@ -59,20 +60,16 @@ function isValueMaxValid(num: API.Utilities.Objects.Optional<number>, max: numbe
  * }
  * ```
  */
-export function ValueMax<T extends API.Utilities.Objects.Optional<number>>(
+export function ValueMax<T extends Objects.Optional<number>>(
   max: number,
-  options?: API.Decorators.DecoratorOptions
+  options?: DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, VALUE_MAX),
+      key: buildKeyProp(options, VALUE_MAX),
       valid: isValueMaxValid(value, max),
-      message: API.Decorators.buildMessageProp(
-        options,
-        locale,
-        translate(locale, VALUE_MAX, max, value)
-      ),
+      message: buildMessageProp(options, locale, translate(locale, VALUE_MAX, max, value)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

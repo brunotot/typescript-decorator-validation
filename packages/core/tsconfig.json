@@ -1,15 +1,8 @@
 {
-  "extends": "./../../tsconfig.json",
-  "exclude": ["tests", "jest.config.js", "src/main.ts", "dev"],
-  "files": [],
-  "include": ["index.ts", "src", "src/localization/translations/*.json", "translations"],
+  "extends": "../../tsconfig.json",
+  "include": ["index.ts", "src/**/*"],
+  "exclude": ["tests", "jest.config.js", "dev"],
   "compilerOptions": {
-    "module": "ESNext",
-    "outDir": "dist",
-    "declarationDir": "dist/types",
-    "baseUrl": "./", // or the base directory where your index.ts is
-    "paths": {
-      "api": ["index"]
-    }
+    "outDir": "dist"
   }
 }

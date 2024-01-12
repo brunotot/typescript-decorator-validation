@@ -1,6 +1,6 @@
 import { type Dispatch, type SetStateAction } from "react";
+import type * as TdvCore from "tdv-core";
 import { type ValidationResult } from "tdv-core";
-import type TdvCore from "tdv-core";
 import type FormContextNamespace from "../../contexts/FormContext/types";
 
 /**
@@ -15,9 +15,9 @@ namespace UseFormHook {
     validationGroups?: string[];
     validateImmediately?: boolean;
     standalone?: boolean;
-    resolveDecoratorArgs?: () => TdvCore.Decorator.DecoratorArgs;
+    resolveDecoratorArgs?: () => TdvCore.Decorators.DecoratorArgs;
     onSubmit?: () => Promise<void> | void;
-    onSubmitValidationFail?: (errors: TdvCore.Strategy.Impl.Errors<TClass>) => void;
+    onSubmitValidationFail?: (errors: TdvCore.Strategy.SimpleErrorsResponse<TClass>) => void;
     onChange?: (value: TdvCore.Utilities.Objects.Payload<TClass>) => void;
     asyncDelay?: number;
     locale?: TdvCore.Localization.Locale;
@@ -33,11 +33,9 @@ namespace UseFormHook {
     mutations: UseFormChangeHandlerMap<TdvCore.Utilities.Objects.Payload<TClass>>;
     providerProps: Omit<FormContextNamespace.FormProviderProps, "children">;
     globalErrors: ValidationResult[];
-    errors: TdvCore.Strategy.Impl.Errors<TClass>;
-    detailedErrors: TdvCore.Strategy.Impl.DetailedErrors<TClass>;
-    reset: (
-      ...fieldPaths: Array<PayloadFieldPath<TdvCore.Utilities.Objects.Payload<TClass>>>
-    ) => void;
+    errors: TdvCore.Strategy.SimpleErrorsResponse<TClass>;
+    detailedErrors: TdvCore.Strategy.DetailedErrorsResponse<TClass>;
+    reset: (...fieldPaths: Array<PayloadFieldPath<TdvCore.Utilities.Objects.Payload<TClass>>>) => void;
   };
 
   /**
@@ -52,9 +50,7 @@ namespace UseFormHook {
   /**
    * Argument type for the form field setter function.
    */
-  export type UseFormSetterFnArg<TBody, TKey extends keyof TBody> =
-    | TBody[TKey]
-    | ((prev: TBody[TKey]) => TBody[TKey]);
+  export type UseFormSetterFnArg<TBody, TKey extends keyof TBody> = TBody[TKey] | ((prev: TBody[TKey]) => TBody[TKey]);
 
   /**
    * Type of the form field setter function.

@@ -1,6 +1,7 @@
-import * as API from "../../../../../../index";
-import { createFieldValidator } from "../../../../../decorators";
-import { translate } from "../../../../../localization/service/TranslationService";
+import { createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /**
  * Tests if a value matches a regular expression pattern.
@@ -9,10 +10,7 @@ import { translate } from "../../../../../localization/service/TranslationServic
  * @param value - The value to test.
  * @returns A boolean indicating whether the value matches the pattern.
  */
-export function testRegex<T extends API.Utilities.Objects.Optional<string>>(
-  regex: RegExp,
-  value: T
-): boolean {
+export function testRegex<T extends Objects.Optional<string>>(regex: RegExp, value: T): boolean {
   return (value ?? "").length === 0 || regex.test(value!);
 }
 
@@ -45,20 +43,13 @@ export function testRegex<T extends API.Utilities.Objects.Optional<string>>(
  * }
  * ```
  */
-export function Pattern<T extends API.Utilities.Objects.Optional<string>>(
-  regex: RegExp,
-  options?: API.Decorators.DecoratorOptions
-) {
+export function Pattern<T extends Objects.Optional<string>>(regex: RegExp, options?: DecoratorOptions) {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, "Pattern"),
+      key: buildKeyProp(options, "Pattern"),
       valid: testRegex(regex, value),
-      message: API.Decorators.buildMessageProp(
-        options,
-        locale,
-        translate(locale, "Pattern", regex.toString())
-      ),
+      message: buildMessageProp(options, locale, translate(locale, "Pattern", regex.toString())),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

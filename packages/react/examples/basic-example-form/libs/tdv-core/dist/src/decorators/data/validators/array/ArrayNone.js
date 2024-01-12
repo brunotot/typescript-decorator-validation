@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** ArrayNone identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@ArrayNone` key. */
 export const ARRAY_NONE = "ArrayNone";
 /** Internal validation function for {@link ArrayNone} validator. */
-export function isArrayNoneValid(array, predicate) {
-  API.Utilities.Objects.assertType("array", array);
-  return !(array !== null && array !== void 0 ? array : []).some(predicate);
+function isArrayNoneValid(array, predicate) {
+    Objects.assertType("array", array);
+    return !(array !== null && array !== void 0 ? array : []).some(predicate);
 }
 /**
  * Checks if no elements of decorated array satisfy the given predicate criteria.
@@ -58,12 +59,9 @@ export function isArrayNoneValid(array, predicate) {
  * ```
  **/
 export function ArrayNone(predicate, options) {
-  return createFieldValidator(
-    (array, _context, locale) => ({
-      key: API.Decorators.key(options, ARRAY_NONE),
-      valid: isArrayNoneValid(array, predicate),
-      message: API.Decorators.message(options, locale, translate(locale, ARRAY_NONE)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((array, _context, locale) => ({
+        key: buildKeyProp(options, ARRAY_NONE),
+        valid: isArrayNoneValid(array, predicate),
+        message: buildMessageProp(options, locale, translate(locale, ARRAY_NONE)),
+    }), buildGroupsProp(options));
 }

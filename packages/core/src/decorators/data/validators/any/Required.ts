@@ -1,13 +1,7 @@
-import {
-  DecoratorOptions,
-  FieldDecorator,
-  buildGroupsProp,
-  buildKeyProp,
-  buildMessageProp,
-  createFieldValidator,
-} from "../../../../decorators/index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { Optional } from "../../../../utilities/impl/Objects";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
+import { Objects } from "@utilities";
 
 /** `@Required` key. */
 export const REQUIRED = "Required";
@@ -66,7 +60,7 @@ function isRequiredValid<T>(value: T | undefined): value is NonNullable<typeof v
  * }
  * ```
  */
-export function Required<T extends Optional>(options?: DecoratorOptions): FieldDecorator<T> {
+export function Required<T extends Objects.Optional>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
       key: buildKeyProp(options, REQUIRED),

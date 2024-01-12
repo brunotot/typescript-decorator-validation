@@ -1,13 +1,14 @@
-import * as API from "../../../../../index";
-import { createFieldValidator, type FieldDecorator } from "../../../../decorators";
-import { translate } from "../../../../localization/service/TranslationService";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@MaxLength` key. */
 export const MAX_LENGTH = "MaxLength";
 
 /** Internal validation function for {@link MaxLength} validator. */
-function isMaxLengthValid(value: API.Utilities.Objects.Optional<string>, max: number): boolean {
-  API.Utilities.Objects.assertType("string", value);
+function isMaxLengthValid(value: Objects.Optional<string>, max: number): boolean {
+  Objects.assertType("string", value);
   return (value ?? "").length <= max;
 }
 
@@ -56,16 +57,16 @@ function isMaxLengthValid(value: API.Utilities.Objects.Optional<string>, max: nu
  * }
  * ```
  */
-export function MaxLength<T extends API.Utilities.Objects.Optional<string>>(
+export function MaxLength<T extends Objects.Optional<string>>(
   max: number,
-  options?: API.Decorators.DecoratorOptions
+  options?: DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, MAX_LENGTH),
+      key: buildKeyProp(options, MAX_LENGTH),
       valid: isMaxLengthValid(value, max),
-      message: API.Decorators.buildMessageProp(options, locale, translate(locale, MAX_LENGTH, max)),
+      message: buildMessageProp(options, locale, translate(locale, MAX_LENGTH, max)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

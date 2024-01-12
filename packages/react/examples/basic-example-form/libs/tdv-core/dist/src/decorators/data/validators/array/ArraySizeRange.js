@@ -1,15 +1,13 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** ArraySizeRange identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@ArraySizeRange` key. */
 export const ARRAY_SIZE_RANGE = "ArraySizeRange";
 /** Internal validation function for {@link ArraySizeRange} validator. */
-export function isArraySizeRangeValid(array, min, max) {
-  API.Utilities.Objects.assertType("array", array);
-  return (
-    (array !== null && array !== void 0 ? array : []).length >= min &&
-    (array !== null && array !== void 0 ? array : []).length <= max
-  );
+function isArraySizeRangeValid(array, min, max) {
+    Objects.assertType("array", array);
+    return (array !== null && array !== void 0 ? array : []).length >= min && (array !== null && array !== void 0 ? array : []).length <= max;
 }
 /**
  * Checks if the decorated array contains at least `min` number of elements.
@@ -62,22 +60,9 @@ export function isArraySizeRangeValid(array, min, max) {
  * ```
  */
 export function ArraySizeRange(min, max, options) {
-  return createFieldValidator(
-    (array, _context, locale) => ({
-      key: API.Decorators.key(options, ARRAY_SIZE_RANGE),
-      valid: isArraySizeRangeValid(array, min, max),
-      message: API.Decorators.message(
-        options,
-        locale,
-        translate(
-          locale,
-          ARRAY_SIZE_RANGE,
-          min,
-          max,
-          (array !== null && array !== void 0 ? array : []).length
-        )
-      ),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((array, _context, locale) => ({
+        key: buildKeyProp(options, ARRAY_SIZE_RANGE),
+        valid: isArraySizeRangeValid(array, min, max),
+        message: buildMessageProp(options, locale, translate(locale, ARRAY_SIZE_RANGE, min, max, (array !== null && array !== void 0 ? array : []).length)),
+    }), buildGroupsProp(options));
 }

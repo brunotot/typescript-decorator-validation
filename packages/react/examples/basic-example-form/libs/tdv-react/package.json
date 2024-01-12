@@ -1,6 +1,6 @@
 {
   "name": "tdv-react",
-  "version": "1.7.1",
+  "version": "1.9.0",
   "description": "React library that allows form validation manipulation through TypeScript Decorators",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -9,6 +9,7 @@
   ],
   "private": false,
   "scripts": {
+    "lint": "echo \"No linting configured\"",
     "clean": "rm -rf dist",
     "build": "npm run test && npm run build:noTest",
     "build:noTest": "npm run clean && tsc",
@@ -36,14 +37,14 @@
     "@types/react-dom": "^18.0.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tdv-core": "^1.7.1",
+    "tdv-core": "^1.9.0",
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.11",
-    "@babel/preset-env": "^7.22.10",
-    "@babel/preset-react": "^7.22.5",
-    "@babel/preset-typescript": "^7.22.11",
+    "@babel/core": "^7.23.7",
+    "@babel/plugin-proposal-decorators": "^7.23.7",
+    "@babel/preset-env": "^7.23.8",
+    "@babel/preset-typescript": "^7.23.3",
     "@jest/reporters": "^29.6.4",
     "@testing-library/jest-dom": "^6.1.2",
     "@testing-library/react": "^14.0.0",

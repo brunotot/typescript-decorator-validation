@@ -6,6 +6,8 @@
     "skipLibCheck": true,
     "useDefineForClassFields": true,
 
+    "experimentalDecorators": false,
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,

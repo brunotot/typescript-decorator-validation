@@ -1,4 +1,4 @@
-import TdvCoreApi from "tdv-core";
+//import * as TdvCoreApi from "tdv-core";
 import FormProvider from "./src/contexts/FormContext";
 import useForm from "./src/hooks/useForm";
 import useValidation from "./src/hooks/useValidation";
@@ -14,4 +14,4 @@ export var Contexts;
 export var Hooks;
 (function (Hooks) {
 })(Hooks || (Hooks = {}));
-export { FormProvider, TdvCoreApi, useForm, useValidation };
+export { FormProvider, useForm, useValidation };

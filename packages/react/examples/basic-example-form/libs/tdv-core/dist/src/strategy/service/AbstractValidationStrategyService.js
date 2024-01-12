@@ -10,7 +10,8 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _AbstractValidationStrategyService_locale, _AbstractValidationStrategyService_groups, _AbstractValidationStrategyService_engineCfg, _AbstractValidationStrategyService_classRules, _AbstractValidationStrategyService_descriptor, _AbstractValidationStrategyService_defaultParent, _AbstractValidationStrategyService_fieldDescriptor, _AbstractValidationStrategyService_eventEmitter;
-import API from "../../index";
+import { ClassValidatorMetaService } from "../../reflection/service/impl/ClassValidatorMetaService";
+import { FieldValidatorMetaService } from "../../reflection/service/impl/FieldValidatorMetaService";
 import { Form } from "../../validation/models/Form";
 /**
  * The `AbstractValidationStrategyService` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.
@@ -45,8 +46,7 @@ export class AbstractValidationStrategyService {
             groups: this.groups,
             asyncDelay,
         }, "f");
-        const host = descriptor.hostClass;
-        __classPrivateFieldSet(this, _AbstractValidationStrategyService_classRules, API.Reflection.ClassValidatorMetaService.inject(host, eventEmitter).data, "f");
+        __classPrivateFieldSet(this, _AbstractValidationStrategyService_classRules, ClassValidatorMetaService.inject(__classPrivateFieldGet(this, _AbstractValidationStrategyService_descriptor, "f").hostClass, this.eventEmitter).data, "f");
     }
     set eventEmitter(v) {
         __classPrivateFieldSet(this, _AbstractValidationStrategyService_eventEmitter, v, "f");
@@ -79,7 +79,7 @@ export class AbstractValidationStrategyService {
     get fieldDescriptor() {
         if (__classPrivateFieldGet(this, _AbstractValidationStrategyService_fieldDescriptor, "f"))
             return __classPrivateFieldGet(this, _AbstractValidationStrategyService_fieldDescriptor, "f");
-        __classPrivateFieldSet(this, _AbstractValidationStrategyService_fieldDescriptor, API.Reflection.FieldValidatorMetaService.inject(__classPrivateFieldGet(this, _AbstractValidationStrategyService_descriptor, "f").hostClass, __classPrivateFieldGet(this, _AbstractValidationStrategyService_eventEmitter, "f")).getUntypedDescriptor(this.fieldName, this.eventEmitter), "f");
+        __classPrivateFieldSet(this, _AbstractValidationStrategyService_fieldDescriptor, FieldValidatorMetaService.inject(__classPrivateFieldGet(this, _AbstractValidationStrategyService_descriptor, "f").hostClass, __classPrivateFieldGet(this, _AbstractValidationStrategyService_eventEmitter, "f")).getUntypedDescriptor(this.fieldName, this.eventEmitter), "f");
         return __classPrivateFieldGet(this, _AbstractValidationStrategyService_fieldDescriptor, "f");
     }
     /**

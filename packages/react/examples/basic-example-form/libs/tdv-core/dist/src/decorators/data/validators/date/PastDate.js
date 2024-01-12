@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** PastDate identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@PastDate` key. */
 export const PAST_DATE = "PastDate";
 /** Internal validation function for {@link PastDate} validator. */
-export function isPastDateValid(date) {
-  API.Utilities.Objects.assertType("date", date);
-  return date && date.getTime() < new Date().getTime();
+function isPastDateValid(date) {
+    Objects.assertType("date", date);
+    return date && date.getTime() < new Date().getTime();
 }
 /**
  * Checks if a {@link Date} is in the past.
@@ -56,12 +57,9 @@ export function isPastDateValid(date) {
  * ```
  */
 export function PastDate(options) {
-  return createFieldValidator(
-    (date, _context, locale) => ({
-      key: API.Decorators.key(options, PAST_DATE),
-      valid: isPastDateValid(date),
-      message: API.Decorators.message(options, locale, translate(locale, PAST_DATE, date)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((date, _context, locale) => ({
+        key: buildKeyProp(options, PAST_DATE),
+        valid: isPastDateValid(date),
+        message: buildMessageProp(options, locale, translate(locale, PAST_DATE, date)),
+    }), buildGroupsProp(options));
 }

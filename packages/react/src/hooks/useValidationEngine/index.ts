@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type TdvCore from "tdv-core";
+import type * as TdvCore from "tdv-core";
 import { Form } from "tdv-core";
 import type ns from "./types";
 

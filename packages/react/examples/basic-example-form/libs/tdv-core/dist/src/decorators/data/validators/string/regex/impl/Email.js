@@ -1,14 +1,15 @@
-import API from "../../../../../../../index";
-import { createFieldValidator } from "../../../../../../decorators";
-import { translate } from "../../../../../../localization/service/TranslationService";
-import { testRegex } from "../Pattern";
-import RegexConst from "../shared/regex.constants";
-/** Email identifier. */
+import { testRegex } from "../../../../../data/validators/string/regex/Pattern";
+import { RegexConst } from "../../../../../data/validators/string/regex/shared/regex.constants";
+import { createFieldValidator } from "../../../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../../helper";
+import { translate } from "../../../../../../localization";
+import { Objects } from "../../../../../../utilities";
+/** `@Email` key. */
 export const EMAIL = "Email";
 /** Internal validation function for {@link Email} validator. */
-export function isEmailValid(value) {
-  API.Utilities.Objects.assertType("string", value);
-  return testRegex(RegexConst.EMAIL, value);
+function isEmailValid(value) {
+    Objects.assertType("string", value);
+    return testRegex(RegexConst.EMAIL, value);
 }
 /**
  * Checks if decorated string is a valid email.
@@ -58,12 +59,9 @@ export function isEmailValid(value) {
  * ```
  */
 export function Email(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, EMAIL),
-      valid: testRegex(RegexConst.EMAIL, value),
-      message: API.Decorators.message(options, locale, translate(locale, EMAIL)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, EMAIL),
+        valid: isEmailValid(value),
+        message: buildMessageProp(options, locale, translate(locale, EMAIL)),
+    }), buildGroupsProp(options));
 }

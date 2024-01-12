@@ -1,13 +1,14 @@
-import * as API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createClassValidator, type ClassDecorator } from "../../../index";
+import { ClassDecorator, createClassValidator } from "@decorators/factory/forClass";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects, Types } from "@utilities";
 
 /** `@ValidDateRange` key. */
 export const VALID_DATE_RANGE = "ValidDateRange";
 
 /** Internal validation function for {@link ValidDateRange} validator. */
 function isValidDateRangeValid(value: any, startDateField: string, endDateField: string): boolean {
-  API.Utilities.Objects.assertType("object", value);
+  Objects.assertType("object", value);
   return value[startDateField].getTime() < value[endDateField].getTime();
 }
 
@@ -61,16 +62,16 @@ function isValidDateRangeValid(value: any, startDateField: string, endDateField:
  * }
  * ```
  */
-export function ValidDateRange<T extends API.Utilities.Types.Class>(
+export function ValidDateRange<T extends Types.Class>(
   startDateField: string,
   endDateField: string,
-  options?: API.Decorators.DecoratorOptions
+  options?: DecoratorOptions
 ): ClassDecorator<T> {
   return createClassValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, VALID_DATE_RANGE),
+      key: buildKeyProp(options, VALID_DATE_RANGE),
       valid: isValidDateRangeValid(value, startDateField, endDateField),
-      message: API.Decorators.buildMessageProp(
+      message: buildMessageProp(
         options,
         locale,
         translate(
@@ -81,7 +82,7 @@ export function ValidDateRange<T extends API.Utilities.Types.Class>(
         )
       ),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }
 
@@ -90,9 +91,7 @@ function convertCamelCaseToText(camelCase: string, capitalizeFirstLetter: boolea
     return camelCase;
   }
 
-  const result = camelCase
-    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-    .replace(/ (\w)/g, str => str.toLowerCase());
+  const result = camelCase.replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/ (\w)/g, str => str.toLowerCase());
 
   return capitalizeFirstLetter ? result.replace(/^./, str => str.toUpperCase()) : result;
 }

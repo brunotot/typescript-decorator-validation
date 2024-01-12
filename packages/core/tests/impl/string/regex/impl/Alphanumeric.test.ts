@@ -1,7 +1,7 @@
-import { Alphanumeric } from "../../../../../src/decorators";
-import { Objects } from "../../../../../src/utilities";
+import { IMock } from "@common/ValidationHandlerMock";
+import { Alphanumeric } from "@src/decorators";
+import { Objects } from "@src/utilities";
 import { standardTest } from "../../../../common/TestFactory";
-import { IMock } from "../../../../common/ValidationHandlerMock";
 
 /*** Data ***/
 type Type = Objects.Optional<string>;

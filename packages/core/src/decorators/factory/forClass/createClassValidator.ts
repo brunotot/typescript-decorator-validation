@@ -1,9 +1,9 @@
-import type API from "../../../index";
-import { type ClassDecorator, createClassDecorator } from "./createClassDecorator";
+import { Types } from "@utilities";
+import type { ValidationEvaluator } from "@validation/types";
+import { ClassDecorator, createClassDecorator } from "./createClassDecorator";
 
 /**
  * Creates validation decorators for classes.
- *
  * @typeParam T - The type of class being validated.
  * @param validate - The callback that defines the validation logic.
  * @param groups - Validation groups.
@@ -17,7 +17,7 @@ import { type ClassDecorator, createClassDecorator } from "./createClassDecorato
  * }
  *
  * function PropGreaterThan<T extends typeof MyClass>(prop: keyof MyClass, value: number) {
- *   return API.Decorator.ForClass.Validator.build<T>(instance => ({
+ *   return Decorators.ForClass.Validator.build<T>(instance => ({
  *     key: "PropGreaterThan",
  *     valid: instance[prop] > value,
  *     message: `${prop} must be greater than ${value}`
@@ -25,8 +25,8 @@ import { type ClassDecorator, createClassDecorator } from "./createClassDecorato
  * }
  * ```
  */
-export function createClassValidator<T extends API.Utilities.Types.Class>(
-  validate: API.Validation.ValidationEvaluator<API.Utilities.Types.UnwrapClass<T>>,
+export function createClassValidator<T extends Types.Class>(
+  validate: ValidationEvaluator<Types.UnwrapClass<T>>,
   groups: string[] = []
 ): ClassDecorator<T> {
   return createClassDecorator<T>(meta => {

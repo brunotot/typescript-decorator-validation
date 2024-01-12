@@ -1,5 +1,5 @@
-import { Types } from "../../src/utilities";
-import { Form } from "../../src/validation";
+import { Types } from "@src/utilities";
+import { Form } from "@src/validation";
 import ValidationHandlerMock, { IMock, buildIOName } from "./ValidationHandlerMock";
 
 export type StandardTestProps<T> = {
@@ -10,13 +10,7 @@ export type StandardTestProps<T> = {
   errorData: T[];
 };
 
-export function standardTest<T>({
-  Model,
-  identifier,
-  successData,
-  errorData,
-  type,
-}: StandardTestProps<T>) {
+export function standardTest<T>({ Model, identifier, successData, errorData, type }: StandardTestProps<T>) {
   const handler = new Form<T>(Model as any);
   const expectService = new ValidationHandlerMock(handler as any);
 

@@ -1,10 +1,41 @@
 {
-  "extends": "./tsconfig.base.json",
   "exclude": ["tests", "jest.config.js"],
-  "include": [],
-  "files": [],
   "compilerOptions": {
-    "module": "CommonJS",
-    "outDir": "dist"
+    "module": "esnext",
+    "target": "ES6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "declarationMap": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "allowJs": true,
+    "strict": true,
+    "isolatedModules": false,
+    "jsx": "react",
+    "baseUrl": ".",
+    "outDir": "dist",
+    "paths": {
+      "@decorators": ["packages/core/src/decorators"],
+      "@decorators/*": ["packages/core/src/decorators/*"],
+      "@localization": ["packages/core/src/localization"],
+      "@localization/*": ["packages/core/src/localization/*"],
+      "@reflection": ["packages/core/src/reflection"],
+      "@reflection/*": ["packages/core/src/reflection/*"],
+      "@strategy": ["packages/core/src/strategy"],
+      "@strategy/*": ["packages/core/src/strategy/*"],
+      "@utilities": ["packages/core/src/utilities"],
+      "@utilities/*": ["packages/core/src/utilities/*"],
+      "@validation": ["packages/core/src/validation"],
+      "@validation/*": ["packages/core/src/validation/*"]
+    }
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
   }
 }

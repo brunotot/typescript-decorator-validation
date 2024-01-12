@@ -1,13 +1,14 @@
-import * as API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator, type FieldDecorator } from "../../../index";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@Decimal` key. */
 export const DECIMAL = "Decimal";
 
 /** Internal validation function for {@link Decimal} validator. */
-function isDecimalValid<T extends API.Utilities.Objects.Optional<number>>(value: T): boolean {
-  API.Utilities.Objects.assertType("number", value);
+function isDecimalValid<T extends Objects.Optional<number>>(value: T): boolean {
+  Objects.assertType("number", value);
   return value !== undefined && value !== null && !Number.isInteger(value);
 }
 
@@ -58,15 +59,13 @@ function isDecimalValid<T extends API.Utilities.Objects.Optional<number>>(value:
  * }
  * ```
  */
-export function Decimal<T extends API.Utilities.Objects.Optional<number>>(
-  options?: API.Decorators.DecoratorOptions
-): FieldDecorator<T> {
+export function Decimal<T extends Objects.Optional<number>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, DECIMAL),
+      key: buildKeyProp(options, DECIMAL),
       valid: isDecimalValid(value),
-      message: API.Decorators.buildMessageProp(options, locale, translate(locale, DECIMAL, value)),
+      message: buildMessageProp(options, locale, translate(locale, DECIMAL, value)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

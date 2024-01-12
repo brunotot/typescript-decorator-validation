@@ -1,14 +1,15 @@
-import API from "../../../../../../../index";
-import { createFieldValidator } from "../../../../../../decorators";
-import { translate } from "../../../../../../localization/service/TranslationService";
-import { testRegex } from "../Pattern";
-import RegexConst from "../shared/regex.constants";
-/** Uppercase identifier. */
+import { testRegex } from "../../../../../data/validators/string/regex/Pattern";
+import { RegexConst } from "../../../../../data/validators/string/regex/shared/regex.constants";
+import { createFieldValidator } from "../../../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../../helper";
+import { translate } from "../../../../../../localization";
+import { Objects } from "../../../../../../utilities";
+/** `@Uppercase` key. */
 export const UPPERCASE = "Uppercase";
 /** Internal validation function for {@link Uppercase} validator. */
-export function isUppercaseValid(value) {
-  API.Utilities.Objects.assertType("string", value);
-  return testRegex(RegexConst.UPPERCASE, value);
+function isUppercaseValid(value) {
+    Objects.assertType("string", value);
+    return testRegex(RegexConst.UPPERCASE, value);
 }
 /**
  * Checks if decorated string contains only uppercase characters.
@@ -58,12 +59,9 @@ export function isUppercaseValid(value) {
  * ```
  */
 export function Uppercase(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, UPPERCASE),
-      valid: testRegex(RegexConst.UPPERCASE, value),
-      message: API.Decorators.message(options, locale, translate(locale, UPPERCASE)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, UPPERCASE),
+        valid: isUppercaseValid(value),
+        message: buildMessageProp(options, locale, translate(locale, UPPERCASE)),
+    }), buildGroupsProp(options));
 }

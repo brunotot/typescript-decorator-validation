@@ -1,15 +1,16 @@
-import * as API from "../../../../../../../index";
-import { createFieldValidator, type FieldDecorator } from "../../../../../../decorators";
-import { translate } from "../../../../../../localization/service/TranslationService";
-import { testRegex } from "../Pattern";
-import RegexConst from "../shared/regex.constants";
+import { testRegex } from "@decorators/data/validators/string/regex/Pattern";
+import { RegexConst } from "@decorators/data/validators/string/regex/shared/regex.constants";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@URL` key. */
 export const URL_KEY = "URL";
 
 /** Internal validation function for {@link URL} validator. */
-function isURLValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
-  API.Utilities.Objects.assertType("string", value);
+function isURLValid<T extends Objects.Optional<string>>(value: T): boolean {
+  Objects.assertType("string", value);
   return testRegex(RegexConst.URL, value);
 }
 
@@ -60,15 +61,13 @@ function isURLValid<T extends API.Utilities.Objects.Optional<string>>(value: T):
  * }
  * ```
  */
-export function URL<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorators.DecoratorOptions
-): FieldDecorator<T> {
+export function URL<T extends Objects.Optional<string>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, URL_KEY),
-      valid: testRegex(RegexConst.URL, value),
-      message: API.Decorators.buildMessageProp(options, locale, translate(locale, URL_KEY)),
+      key: buildKeyProp(options, URL_KEY),
+      valid: isURLValid(value),
+      message: buildMessageProp(options, locale, translate(locale, URL_KEY)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

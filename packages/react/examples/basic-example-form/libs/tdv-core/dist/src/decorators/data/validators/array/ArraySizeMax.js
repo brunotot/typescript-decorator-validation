@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** ArraySizeMax identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@ArraySizeMax` key. */
 export const ARRAY_SIZE_MAX = "ArraySizeMax";
 /** Internal validation function for {@link ArraySizeMax} validator. */
-export function isArraySizeMaxValid(array, max) {
-  API.Utilities.Objects.assertType("array", array);
-  return (array !== null && array !== void 0 ? array : []).length <= max;
+function isArraySizeMaxValid(array, max) {
+    Objects.assertType("array", array);
+    return (array !== null && array !== void 0 ? array : []).length <= max;
 }
 /**
  * Checks if the decorated array contains up to `max` number of elements.
@@ -58,21 +59,9 @@ export function isArraySizeMaxValid(array, max) {
  * ```
  */
 export function ArraySizeMax(max, options) {
-  return createFieldValidator(
-    (array, _, locale) => ({
-      key: API.Decorators.key(options, ARRAY_SIZE_MAX),
-      valid: isArraySizeMaxValid(array, max),
-      message: API.Decorators.message(
-        options,
-        locale,
-        translate(
-          locale,
-          ARRAY_SIZE_MAX,
-          max,
-          (array !== null && array !== void 0 ? array : []).length
-        )
-      ),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((array, _, locale) => ({
+        key: buildKeyProp(options, ARRAY_SIZE_MAX),
+        valid: isArraySizeMaxValid(array, max),
+        message: buildMessageProp(options, locale, translate(locale, ARRAY_SIZE_MAX, max, (array !== null && array !== void 0 ? array : []).length)),
+    }), buildGroupsProp(options));
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type TdvCore from "tdv-core";
+import type * as TdvCore from "tdv-core";
 import useValidationEngine from "../useValidationEngine";
 import type ns from "./types";
 
@@ -26,13 +26,7 @@ import type ns from "./types";
  */
 export default function useValidation<TClass>(
   model: TdvCore.Utilities.Types.Class<TClass>,
-  {
-    defaultValue,
-    groups,
-    asyncDelay,
-    locale,
-    resolveDecoratorArgs = () => ({}),
-  }: ns.UseValidationConfig<TClass> = {}
+  { defaultValue, groups, asyncDelay, locale, resolveDecoratorArgs = () => ({}) }: ns.UseValidationConfig<TClass> = {}
 ): ns.UseValidationReturn<TClass> {
   const engine = useValidationEngine<TClass>(model, {
     groups,
@@ -42,9 +36,7 @@ export default function useValidation<TClass>(
   });
   const [form, setForm] = useState<TdvCore.Utilities.Objects.Payload<TClass>>(engine.defaultValue);
   const decoratorArgs = resolveDecoratorArgs();
-  const [globalErrors, setGlobalErrors] = useState(
-    () => engine.validate(form, decoratorArgs).globalErrors
-  );
+  const [globalErrors, setGlobalErrors] = useState(() => engine.validate(form, decoratorArgs).globalErrors);
   const [details, setDetails] = useState(() => engine.validate(form, decoratorArgs).detailedErrors);
   const [simpleErrors, setSimpleErrors] = useState(() => {
     return engine.validate(form, decoratorArgs).errors;

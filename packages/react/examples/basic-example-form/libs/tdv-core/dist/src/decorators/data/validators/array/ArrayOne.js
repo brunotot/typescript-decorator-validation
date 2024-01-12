@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** ArrayOne identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@ArrayOne` key. */
 export const ARRAY_ONE = "ArrayOne";
 /** Internal validation function for {@link ArrayOne} validator. */
-export function isArrayOneValid(array, predicate) {
-  API.Utilities.Objects.assertType("array", array);
-  return (array !== null && array !== void 0 ? array : []).filter(predicate).length === 1;
+function isArrayOneValid(array, predicate) {
+    Objects.assertType("array", array);
+    return (array !== null && array !== void 0 ? array : []).filter(predicate).length === 1;
 }
 /**
  * Checks if exactly one element of decorated array satisfies the given predicate criteria.
@@ -58,12 +59,9 @@ export function isArrayOneValid(array, predicate) {
  * ```
  **/
 export function ArrayOne(predicate, options) {
-  return createFieldValidator(
-    (array, _context, locale) => ({
-      key: API.Decorators.key(options, ARRAY_ONE),
-      valid: isArrayOneValid(array, predicate),
-      message: API.Decorators.message(options, locale, translate(locale, ARRAY_ONE)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((array, _context, locale) => ({
+        key: buildKeyProp(options, ARRAY_ONE),
+        valid: isArrayOneValid(array, predicate),
+        message: buildMessageProp(options, locale, translate(locale, ARRAY_ONE)),
+    }), buildGroupsProp(options));
 }

@@ -1,24 +1,25 @@
-import type API from "../../../index";
-import { type FunctionStrat } from "../service/impl/FunctionStrategy";
-import { type ObjectArrayGetterStrat } from "../service/impl/ObjectArrayGetterStrategy";
-import { type ObjectArrayStrat } from "../service/impl/ObjectArrayStrategy";
-import { type ObjectGetterStrat } from "../service/impl/ObjectGetterStrategy";
-import { type ObjectStrat } from "../service/impl/ObjectStrategy";
-import { type PrimitiveArrayGetterStrat } from "../service/impl/PrimitiveArrayGetterStrategy";
-import { type PrimitiveArrayStrat } from "../service/impl/PrimitiveArrayStrategy";
-import { type PrimitiveGetterStrat } from "../service/impl/PrimitiveGetterStrategy";
-import { type PrimitiveStrat } from "../service/impl/PrimitiveStrategy";
-import type * as StrategyTypes from "./StrategyTypes";
+import {
+  FunctionStrategy,
+  ObjectArrayGetterStrategy,
+  ObjectArrayStrategy,
+  ObjectGetterStrategy,
+  ObjectStrategy,
+  PrimitiveArrayGetterStrategy,
+  PrimitiveArrayStrategy,
+  PrimitiveGetterStrategy,
+  PrimitiveStrategy,
+} from "@strategy/service/impl";
+import { Booleans, Objects, Types } from "@utilities";
+import type { ValidationResult } from "@validation/types";
 
 /**
  * Evaluates a type, returning either an optional or mandatory evaluation based on the second type parameter.
  * @typeParam T - The type to evaluate.
  * @typeParam R - The result type. Determines if the evaluation is optional or mandatory.
  */
-// prettier-ignore
-export type evaluate<T, R = undefined> = true extends API.Utilities.Booleans.isUndefined<R>
-    ? API.Utilities.Types.Prettify<API.Utilities.Objects.Purify<evaluateOptional<T, R>>>
-    : API.Utilities.Types.Prettify<API.Utilities.Objects.Purify<evaluateMandatory<T, R>>>;
+export type evaluate<T, R = undefined> = true extends Booleans.isUndefined<R>
+  ? Types.Prettify<Objects.Purify<evaluateOptional<T, R>>>
+  : Types.Prettify<Objects.Purify<evaluateMandatory<T, R>>>;
 
 /**
  * Type for optional evaluation of each field in a type.
@@ -46,32 +47,32 @@ export type evaluateMandatory<T, R> = {
  */
 // prettier-ignore
 export type fieldEvaluation<T, K extends keyof T, R> =
-    true extends StrategyTypes.Function.matches<T, K>
-    ? StrategyTypes.Function.handler<T, K, R>
+    true extends FunctionStrategy.matches<T, K>
+    ? FunctionStrategy.handler<T, K, R>
 
-    : true extends StrategyTypes.PrimitiveArray.matches<T, K>
-    ? StrategyTypes.PrimitiveArray.handler<T, K, R>
+    : true extends PrimitiveArrayStrategy.matches<T, K>
+    ? PrimitiveArrayStrategy.handler<T, K, R>
 
-    : true extends StrategyTypes.PrimitiveGetter.matches<T, K>
-    ? StrategyTypes.PrimitiveGetter.handler<T, K, R>
+    : true extends PrimitiveGetterStrategy.matches<T, K>
+    ? PrimitiveGetterStrategy.handler<T, K, R>
 
-    : true extends StrategyTypes.PrimitiveArrayGetter.matches<T, K>
-    ? StrategyTypes.PrimitiveArrayGetter.handler<T, K, R>
+    : true extends PrimitiveArrayGetterStrategy.matches<T, K>
+    ? PrimitiveArrayGetterStrategy.handler<T, K, R>
 
-    : true extends StrategyTypes.Primitive.matches<T, K>
-    ? StrategyTypes.Primitive.handler<T, K, R>
+    : true extends PrimitiveStrategy.matches<T, K>
+    ? PrimitiveStrategy.handler<T, K, R>
 
-    : true extends StrategyTypes.ObjectArray.matches<T, K>
-    ? StrategyTypes.ObjectArray.handler<T, K, R>
+    : true extends ObjectArrayStrategy.matches<T, K>
+    ? ObjectArrayStrategy.handler<T, K, R>
 
-    : true extends StrategyTypes.ObjectArrayGetter.matches<T, K>
-    ? StrategyTypes.ObjectArrayGetter.handler<T, K, R>
+    : true extends ObjectArrayGetterStrategy.matches<T, K>
+    ? ObjectArrayGetterStrategy.handler<T, K, R>
 
-    : true extends StrategyTypes.ObjectGetter.matches<T, K>
-    ? StrategyTypes.ObjectGetter.handler<T, K, R>
+    : true extends ObjectGetterStrategy.matches<T, K>
+    ? ObjectGetterStrategy.handler<T, K, R>
 
-    : true extends StrategyTypes.Object.matches<T, K>
-    ? StrategyTypes.Object.handler<T, K, R>
+    : true extends ObjectStrategy.matches<T, K>
+    ? ObjectStrategy.handler<T, K, R>
   : never;
 
 /**
@@ -88,47 +89,42 @@ export type getStrategyResult<T, K extends keyof T> = ReturnType<getStrategyClas
  */
 // prettier-ignore
 export type getStrategyClass<T, K extends keyof T> =
-    true extends StrategyTypes.Function.matches<T, K>
-    ? FunctionStrat<T[K]>
+    true extends FunctionStrategy.matches<T, K>
+    ? FunctionStrategy.StrategyResolver<T[K]>
 
-    : true extends StrategyTypes.PrimitiveArray.matches<T, K>
-    ? PrimitiveArrayStrat<T[K]>
+    : true extends PrimitiveArrayStrategy.matches<T, K>
+    ? PrimitiveArrayStrategy.StrategyResolver<T[K]>
 
-    : true extends StrategyTypes.PrimitiveGetter.matches<T, K>
-    ? PrimitiveGetterStrat<T[K]>
+    : true extends PrimitiveGetterStrategy.matches<T, K>
+    ? PrimitiveGetterStrategy.StrategyResolver<T[K]>
 
-    : true extends StrategyTypes.PrimitiveArrayGetter.matches<T, K>
-    ? PrimitiveArrayGetterStrat<T[K]>
+    : true extends PrimitiveArrayGetterStrategy.matches<T, K>
+    ? PrimitiveArrayGetterStrategy.StrategyResolver<T[K]>
 
-    : true extends StrategyTypes.Primitive.matches<T, K>
-    ? PrimitiveStrat<T[K]>
+    : true extends PrimitiveStrategy.matches<T, K>
+    ? PrimitiveStrategy.StrategyResolver<T[K]>
 
-    : true extends StrategyTypes.ObjectArray.matches<T, K>
-    ? ObjectArrayStrat<T[K]>
+    : true extends ObjectArrayStrategy.matches<T, K>
+    ? ObjectArrayStrategy.StrategyResolver<T[K]>
 
-    : true extends StrategyTypes.ObjectArrayGetter.matches<T, K>
-    ? ObjectArrayGetterStrat<T[K]>
+    : true extends ObjectArrayGetterStrategy.matches<T, K>
+    ? ObjectArrayGetterStrategy.StrategyResolver<T[K]>
 
-    : true extends StrategyTypes.ObjectGetter.matches<T, K>
-    ? ObjectGetterStrat<T[K]>
+    : true extends ObjectGetterStrategy.matches<T, K>
+    ? ObjectGetterStrategy.StrategyResolver<T[K]>
 
-    : true extends StrategyTypes.Object.matches<T, K>
-    ? ObjectStrat<T[K]>
+    : true extends ObjectStrategy.matches<T, K>
+    ? ObjectStrategy.StrategyResolver<T[K]>
   : never;
 
 /**
- * Namespace for Strategy Factory Implementations.
+ * Type for detailed errors during validation.
+ * @typeParam T - The type being validated.
  */
-export namespace Impl {
-  /**
-   * Type for detailed errors during validation.
-   * @typeParam T - The type being validated.
-   */
-  export type DetailedErrors<T> = evaluate<T, API.Validation.ValidationResult[]>;
+export type DetailedErrorsResponse<T> = evaluate<T, ValidationResult[]>;
 
-  /**
-   * Type for basic errors during validation.
-   * @typeParam T - The type being validated.
-   */
-  export type Errors<T> = evaluate<T, string[]>;
-}
+/**
+ * Type for basic errors during validation.
+ * @typeParam T - The type being validated.
+ */
+export type SimpleErrorsResponse<T> = evaluate<T, string[]>;

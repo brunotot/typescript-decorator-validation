@@ -1,15 +1,16 @@
-import * as API from "../../../../../../../index";
-import { createFieldValidator, type FieldDecorator } from "../../../../../../decorators";
-import { translate } from "../../../../../../localization/service/TranslationService";
-import { testRegex } from "../Pattern";
-import RegexConst from "../shared/regex.constants";
+import { testRegex } from "@decorators/data/validators/string/regex/Pattern";
+import { RegexConst } from "@decorators/data/validators/string/regex/shared/regex.constants";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@Alpha` key. */
 export const ALPHA = "Alpha";
 
 /** Internal validation function for {@link Alpha} validator. */
-function isAlphaValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
-  API.Utilities.Objects.assertType("string", value);
+function isAlphaValid<T extends Objects.Optional<string>>(value: T): boolean {
+  Objects.assertType("string", value);
   return testRegex(RegexConst.ALPHA, value);
 }
 
@@ -60,15 +61,13 @@ function isAlphaValid<T extends API.Utilities.Objects.Optional<string>>(value: T
  * }
  * ```
  */
-export function Alpha<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorators.DecoratorOptions
-): FieldDecorator<T> {
+export function Alpha<T extends Objects.Optional<string>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, ALPHA),
-      valid: testRegex(RegexConst.ALPHA, value),
-      message: API.Decorators.buildMessageProp(options, locale, translate(locale, ALPHA)),
+      key: buildKeyProp(options, ALPHA),
+      valid: isAlphaValid(value),
+      message: buildMessageProp(options, locale, translate(locale, ALPHA)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

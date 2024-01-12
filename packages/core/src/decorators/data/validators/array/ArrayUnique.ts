@@ -1,14 +1,15 @@
-import * as API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator, type FieldDecorator } from "../../../index";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@ArrayUnique` key. */
 export const ARRAY_UNIQUE = "ArrayUnique";
 
 /** Internal validation function for {@link ArrayUnique} validator. */
 function isArrayUniqueValid(array: any[]): boolean {
-  API.Utilities.Objects.assertType("array", array);
-  const hashFn = API.Utilities.Objects.hash;
+  Objects.assertType("array", array);
+  const hashFn = Objects.hash;
   function isArrayUnique<T>(arr: T[], equals: (a: T, b: T) => boolean): boolean {
     const set = new Set<T>();
     for (const val of arr) {
@@ -72,15 +73,13 @@ function isArrayUniqueValid(array: any[]): boolean {
  * }
  * ```
  */
-export function ArrayUnique<K, T extends K[]>(
-  options?: API.Decorators.DecoratorOptions
-): FieldDecorator<T> {
+export function ArrayUnique<K, T extends K[]>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, ARRAY_UNIQUE),
+      key: buildKeyProp(options, ARRAY_UNIQUE),
       valid: isArrayUniqueValid(array),
-      message: API.Decorators.buildMessageProp(options, locale, translate(locale, ARRAY_UNIQUE)),
+      message: buildMessageProp(options, locale, translate(locale, ARRAY_UNIQUE)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

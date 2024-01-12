@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createClassValidator } from "../../../index";
-/** ValidDateRange identifier. */
+import { createClassValidator } from "../../../factory/forClass";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@ValidDateRange` key. */
 export const VALID_DATE_RANGE = "ValidDateRange";
 /** Internal validation function for {@link ValidDateRange} validator. */
-export function isValidDateRangeValid(value, startDateField, endDateField) {
-  API.Utilities.Objects.assertType("object", value);
-  return value[startDateField].getTime() < value[endDateField].getTime();
+function isValidDateRangeValid(value, startDateField, endDateField) {
+    Objects.assertType("object", value);
+    return value[startDateField].getTime() < value[endDateField].getTime();
 }
 /**
  * Checks if {@link Date} `startDateField` is before {@link Date} `endDateField` of a class.
@@ -59,30 +60,16 @@ export function isValidDateRangeValid(value, startDateField, endDateField) {
  * ```
  */
 export function ValidDateRange(startDateField, endDateField, options) {
-  return createClassValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, VALID_DATE_RANGE),
-      valid: isValidDateRangeValid(value, startDateField, endDateField),
-      message: API.Decorators.message(
-        options,
-        locale,
-        translate(
-          locale,
-          VALID_DATE_RANGE,
-          convertCamelCaseToText(endDateField, false),
-          convertCamelCaseToText(startDateField)
-        )
-      ),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createClassValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, VALID_DATE_RANGE),
+        valid: isValidDateRangeValid(value, startDateField, endDateField),
+        message: buildMessageProp(options, locale, translate(locale, VALID_DATE_RANGE, convertCamelCaseToText(endDateField, false), convertCamelCaseToText(startDateField))),
+    }), buildGroupsProp(options));
 }
 function convertCamelCaseToText(camelCase, capitalizeFirstLetter = true) {
-  if (camelCase === camelCase.toUpperCase()) {
-    return camelCase;
-  }
-  const result = camelCase
-    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
-    .replace(/ (\w)/g, str => str.toLowerCase());
-  return capitalizeFirstLetter ? result.replace(/^./, str => str.toUpperCase()) : result;
+    if (camelCase === camelCase.toUpperCase()) {
+        return camelCase;
+    }
+    const result = camelCase.replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/ (\w)/g, str => str.toLowerCase());
+    return capitalizeFirstLetter ? result.replace(/^./, str => str.toUpperCase()) : result;
 }

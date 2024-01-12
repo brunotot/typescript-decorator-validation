@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** ArrayEmpty identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@ArrayEmpty` key. */
 export const ARRAY_EMPTY = "ArrayEmpty";
 /** Internal validation function for {@link ArrayEmpty} validator. */
-export function isArrayEmptyValid(array) {
-  API.Utilities.Objects.assertType("array", array);
-  return (array !== null && array !== void 0 ? array : []).length === 0;
+function isArrayEmptyValid(array) {
+    Objects.assertType("array", array);
+    return (array !== null && array !== void 0 ? array : []).length === 0;
 }
 /**
  * Checks if the decorated array is empty.
@@ -57,12 +58,9 @@ export function isArrayEmptyValid(array) {
  * ```
  */
 export function ArrayEmpty(options) {
-  return createFieldValidator(
-    (array, _context, locale) => ({
-      key: API.Decorators.key(options, ARRAY_EMPTY),
-      valid: isArrayEmptyValid(array),
-      message: API.Decorators.message(options, locale, translate(locale, ARRAY_EMPTY)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((array, _context, locale) => ({
+        key: buildKeyProp(options, ARRAY_EMPTY),
+        valid: isArrayEmptyValid(array),
+        message: buildMessageProp(options, locale, translate(locale, ARRAY_EMPTY)),
+    }), buildGroupsProp(options));
 }

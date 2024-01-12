@@ -1,9 +1,7 @@
-import type * as LocaleResolver from "./LocaleResolver";
+import { Locale } from "@localization/resolver/LocaleResolver";
 
-/**
- * Message parser definition.
- */
-export type MessageParser = ((locale: LocaleResolver.Locale, message: string) => string) & {};
+/** Message parser definition. */
+export type MessageParser = ((locale: Locale, message: string) => string) & {};
 
 const DEFAULT_CONFIGURER: MessageParser = (_, message) => message;
 
@@ -19,7 +17,7 @@ export function configureParser(handler?: MessageParser): void {
 /**
  * Internal handler for the customized message parser
  */
-export function parseMessage(locale: LocaleResolver.Locale, message: string): string {
+export function parseMessage(locale: Locale, message: string): string {
   try {
     return configurer(locale, message);
   } catch (error) {

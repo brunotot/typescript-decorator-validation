@@ -1,7 +1,7 @@
 import { Warning } from "@mui/icons-material";
 import * as MUI from "@mui/material";
 import { useForm } from "tdv-react";
-import Code from "../../../shared/Code";
+import { Code } from "../../../shared/Code";
 import { ModelForm } from "./model";
 
 export default function Component() {
@@ -39,8 +39,7 @@ export default function Component() {
       </MUI.Box>
       {globalErrors.map(({ key, message }) => (
         <MUI.Box key={key} gap={1} display="flex" alignItems="center" paddingTop={1.5}>
-          <Warning color="warning" />{" "}
-          <MUI.Typography color="warning.main">{message}</MUI.Typography>
+          <Warning color="warning" /> <MUI.Typography color="warning.main">{message}</MUI.Typography>
         </MUI.Box>
       ))}
     </>

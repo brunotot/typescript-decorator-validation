@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { createFieldValidator } from "../../../../decorators";
-import { translate } from "../../../../localization/service/TranslationService";
-/** Negative identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@Negative` key. */
 export const NEGATIVE = "Negative";
 /** Internal validation function for {@link Negative} validator. */
 function isNegativeValid(num) {
-  API.Utilities.Objects.assertType("number", num);
-  return num !== undefined && num !== null && num < 0;
+    Objects.assertType("number", num);
+    return num !== undefined && num !== null && num < 0;
 }
 /**
  * Checks if decorated number is a negative number (number less than 0).
@@ -56,12 +57,9 @@ function isNegativeValid(num) {
  * ```
  */
 export function Negative(options) {
-  return createFieldValidator(
-    (num, _context, locale) => ({
-      key: API.Decorators.key(options, NEGATIVE),
-      valid: isNegativeValid(num),
-      message: API.Decorators.message(options, locale, translate(locale, NEGATIVE, num)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((num, _context, locale) => ({
+        key: buildKeyProp(options, NEGATIVE),
+        valid: isNegativeValid(num),
+        message: buildMessageProp(options, locale, translate(locale, NEGATIVE, num)),
+    }), buildGroupsProp(options));
 }

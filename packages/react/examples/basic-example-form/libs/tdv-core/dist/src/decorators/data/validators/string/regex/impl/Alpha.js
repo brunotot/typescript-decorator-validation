@@ -1,14 +1,15 @@
-import API from "../../../../../../../index";
-import { createFieldValidator } from "../../../../../../decorators";
-import { translate } from "../../../../../../localization/service/TranslationService";
-import { testRegex } from "../Pattern";
-import RegexConst from "../shared/regex.constants";
-/** Alpha identifier. */
+import { testRegex } from "../../../../../data/validators/string/regex/Pattern";
+import { RegexConst } from "../../../../../data/validators/string/regex/shared/regex.constants";
+import { createFieldValidator } from "../../../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../../helper";
+import { translate } from "../../../../../../localization";
+import { Objects } from "../../../../../../utilities";
+/** `@Alpha` key. */
 export const ALPHA = "Alpha";
 /** Internal validation function for {@link Alpha} validator. */
-export function isAlphaValid(value) {
-  API.Utilities.Objects.assertType("string", value);
-  return testRegex(RegexConst.ALPHA, value);
+function isAlphaValid(value) {
+    Objects.assertType("string", value);
+    return testRegex(RegexConst.ALPHA, value);
 }
 /**
  * Checks if decorated string contains only alphabetical characters.
@@ -58,12 +59,9 @@ export function isAlphaValid(value) {
  * ```
  */
 export function Alpha(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, ALPHA),
-      valid: testRegex(RegexConst.ALPHA, value),
-      message: API.Decorators.message(options, locale, translate(locale, ALPHA)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, ALPHA),
+        valid: isAlphaValid(value),
+        message: buildMessageProp(options, locale, translate(locale, ALPHA)),
+    }), buildGroupsProp(options));
 }

@@ -1,5 +1,18 @@
-import API from "../../../index";
-import { type FieldDecoratorCtx } from "./../../decorators";
+import { Classes, Types } from "@utilities";
+
+type FieldDecoratorCtx<T = unknown> = Readonly<{
+  kind: "getter" | "method" | "field";
+  static: boolean;
+  private: boolean;
+  name: string;
+  metadata?: globalThis.DecoratorMetadataObject;
+  access: {
+    get: (object: any) => T;
+  };
+}>;
+
+/** Type alias for strategies that can either be a decorator context or a class. */
+export type MetaStrategy = FieldDecoratorCtx<any> | Types.Class<any> | DecoratorContext;
 
 /**
  * Abstract class for managing metadata.
@@ -9,7 +22,7 @@ export abstract class AbstractMetaService<Entry> {
   #metadata: DecoratorMetadataObject;
   #injectionKey: string;
   #initial: () => Entry;
-  #class?: API.Utilities.Types.Class<any>;
+  #class?: Types.Class<any>;
   protected context?: FieldDecoratorCtx<any>;
 
   /**
@@ -18,11 +31,11 @@ export abstract class AbstractMetaService<Entry> {
    * @param strategy - The strategy for which metadata is managed.
    * @param initial - A function that returns the initial value for the metadata entry.
    */
-  constructor(injectionKey: string, strategy: API.Reflection.MetaStrategy, initial: () => Entry) {
-    this.#metadata = API.Reflection.getMetadata(strategy);
+  constructor(injectionKey: string, strategy: MetaStrategy, initial: () => Entry) {
+    this.#metadata = Classes.getMetadata(strategy);
     this.#injectionKey = injectionKey;
     this.#initial = initial;
-    if (API.Reflection.isClass(strategy)) {
+    if (Classes.isClass(strategy)) {
       this.class = strategy;
     } else {
       this.context = strategy as any;
@@ -32,14 +45,14 @@ export abstract class AbstractMetaService<Entry> {
   /**
    * Gets the class associated with this AbstractMetaService.
    */
-  get class(): API.Utilities.Types.Class<any> {
+  get class(): Types.Class<any> {
     return this.#class!;
   }
 
   /**
    * Sets the class associated with this AbstractMetaService.
    */
-  set class(clazz: API.Utilities.Types.Class<any>) {
+  set class(clazz: Types.Class<any>) {
     this.#class = clazz;
   }
 

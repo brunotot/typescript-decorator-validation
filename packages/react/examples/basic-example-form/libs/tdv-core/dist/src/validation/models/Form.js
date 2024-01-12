@@ -10,11 +10,66 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
 var _Form_instances, _Form_eventListener, _Form_eventEmitter, _Form_fieldValidatorMetaService, _Form_classValidatorMetaService, _Form_groups, _Form_defaultValue, _Form_cache, _Form_hostClass, _Form_asyncDelay, _Form_debounceMap, _Form_validateField, _Form_registerAsync, _Form_unregisterAsync;
-import API from "../../index";
-import { ValidationMetadata } from "../../reflection/models/ValidationMetadata";
-import { EventEmitter } from "../../utilities/misc/EventEmitter";
-import { Cache } from "./Cache";
-import { Events } from "./Events";
+import { getLocale } from "../../localization";
+import { ClassValidatorMetaService } from "../../reflection/service/impl/ClassValidatorMetaService";
+import { FieldValidatorMetaService } from "../../reflection/service/impl/FieldValidatorMetaService";
+import { EventEmitter, Objects } from "../../utilities";
+import { Cache } from "../models/Cache";
+import { Events } from "../models/Events";
+import { ValidationMetadata } from "../models/ValidationMetadata";
+/**
+ * Checks if an error object has errors.
+ * @typeParam T - The type of the errors.
+ */
+export function hasErrors(data) {
+    const data0 = data;
+    if (Array.isArray(data0)) {
+        return data0.some(item => hasErrors(item));
+    }
+    else if (typeof data0 === "object" && data0 !== null) {
+        return Object.values(data0).some((value) => hasErrors(value));
+    }
+    else if (typeof data0 === "string") {
+        return true;
+    }
+    return false;
+}
+/**
+ * Transforms a plain object into an instance of the given class.
+ * @param clazz - The class to transform the object into.
+ * @param object - The object to transform.
+ * @typeParam TClass - The type of the class.
+ * @returns An instance of TClass.
+ */
+export function toClass(clazz, object) {
+    function _toClass(clazz, object) {
+        if (Array.isArray(object)) {
+            return object.map(item => _toClass(clazz, item));
+        }
+        const entries = Object.entries(object !== null && object !== void 0 ? object : {});
+        const meta = FieldValidatorMetaService.inject(clazz, EventEmitter.EMPTY);
+        const data = {};
+        for (const [key, value] of entries) {
+            const descriptor = meta.getUntypedDescriptor(key);
+            const { thisClass } = descriptor;
+            if (thisClass) {
+                if (Array.isArray(value)) {
+                    data[key] = value.map(item => _toClass(thisClass, item));
+                }
+                else {
+                    data[key] = toClass(thisClass, value);
+                }
+            }
+            else {
+                data[key] = value;
+            }
+        }
+        const instance = new clazz();
+        Object.entries(data).forEach(([k, v]) => (instance[k] = v));
+        return instance;
+    }
+    return _toClass(clazz, object);
+}
 /**
  * A class responsible for processing and validating class instances through its decorated validators.
  *
@@ -61,13 +116,13 @@ export class Form {
         _Form_debounceMap.set(this, {});
         __classPrivateFieldSet(this, _Form_asyncDelay, (_a = config === null || config === void 0 ? void 0 : config.asyncDelay) !== null && _a !== void 0 ? _a : 500, "f");
         this.__id = Math.random().toString(36).substring(2, 8);
-        __classPrivateFieldSet(this, _Form_eventEmitter, new EventEmitter(this.__id), "f");
+        __classPrivateFieldSet(this, _Form_eventEmitter, new EventEmitter(this.__id, __classPrivateFieldGet(this, _Form_asyncDelay, "f")), "f");
         __classPrivateFieldSet(this, _Form_hostClass, clazz, "f");
-        this.locale = (_b = config === null || config === void 0 ? void 0 : config.locale) !== null && _b !== void 0 ? _b : API.Localization.getLocale();
+        this.locale = (_b = config === null || config === void 0 ? void 0 : config.locale) !== null && _b !== void 0 ? _b : getLocale();
         __classPrivateFieldSet(this, _Form_groups, Array.from(new Set((_c = config === null || config === void 0 ? void 0 : config.groups) !== null && _c !== void 0 ? _c : [])), "f");
-        __classPrivateFieldSet(this, _Form_defaultValue, (_d = config === null || config === void 0 ? void 0 : config.defaultValue) !== null && _d !== void 0 ? _d : API.Utilities.Objects.toClass(clazz), "f");
-        __classPrivateFieldSet(this, _Form_fieldValidatorMetaService, API.Reflection.FieldValidatorMetaService.inject(clazz, __classPrivateFieldGet(this, _Form_eventEmitter, "f")), "f");
-        __classPrivateFieldSet(this, _Form_classValidatorMetaService, API.Reflection.ClassValidatorMetaService.inject(clazz, __classPrivateFieldGet(this, _Form_eventEmitter, "f")), "f");
+        __classPrivateFieldSet(this, _Form_defaultValue, (_d = config === null || config === void 0 ? void 0 : config.defaultValue) !== null && _d !== void 0 ? _d : toClass(clazz), "f");
+        __classPrivateFieldSet(this, _Form_fieldValidatorMetaService, FieldValidatorMetaService.inject(clazz, __classPrivateFieldGet(this, _Form_eventEmitter, "f")), "f");
+        __classPrivateFieldSet(this, _Form_classValidatorMetaService, ClassValidatorMetaService.inject(clazz, __classPrivateFieldGet(this, _Form_eventEmitter, "f")), "f");
         __classPrivateFieldSet(this, _Form_cache, new Cache(state => this.validate.bind(this)(state)), "f");
     }
     /**
@@ -132,7 +187,7 @@ export class Form {
      * ```
      */
     validate(payload, args = {}) {
-        const state = API.Utilities.Objects.toClass(__classPrivateFieldGet(this, _Form_hostClass, "f"), payload);
+        const state = toClass(__classPrivateFieldGet(this, _Form_hostClass, "f"), payload);
         const errors = {};
         const detailedErrors = {};
         const classValidators = __classPrivateFieldGet(this, _Form_classValidatorMetaService, "f").data.contents;
@@ -144,7 +199,7 @@ export class Form {
             errors[field] = validation[1];
         });
         return __classPrivateFieldGet(this, _Form_cache, "f").patch({
-            valid: !API.Utilities.Objects.hasErrors(errors),
+            valid: !hasErrors(errors),
             detailedErrors,
             errors,
             globalErrors: classValidationErrors,
@@ -167,19 +222,16 @@ export class Form {
         __classPrivateFieldGet(this, _Form_eventEmitter, "f").emit(event, data);
     }
 }
-_Form_eventListener = new WeakMap(), _Form_eventEmitter = new WeakMap(), _Form_fieldValidatorMetaService = new WeakMap(), _Form_classValidatorMetaService = new WeakMap(), _Form_groups = new WeakMap(), _Form_defaultValue = new WeakMap(), _Form_cache = new WeakMap(), _Form_hostClass = new WeakMap(), _Form_asyncDelay = new WeakMap(), _Form_debounceMap = new WeakMap(), _Form_instances = new WeakSet(), _Form_validateField = function _Form_validateField(fieldName, 
-// @ts-expect-error
-payload, args = {}) {
+_Form_eventListener = new WeakMap(), _Form_eventEmitter = new WeakMap(), _Form_fieldValidatorMetaService = new WeakMap(), _Form_classValidatorMetaService = new WeakMap(), _Form_groups = new WeakMap(), _Form_defaultValue = new WeakMap(), _Form_cache = new WeakMap(), _Form_hostClass = new WeakMap(), _Form_asyncDelay = new WeakMap(), _Form_debounceMap = new WeakMap(), _Form_instances = new WeakSet(), _Form_validateField = function _Form_validateField(fieldName, payload, args = {}) {
     var _a, _b;
     const descriptor = __classPrivateFieldGet(this, _Form_fieldValidatorMetaService, "f").getUntypedDescriptor(fieldName, __classPrivateFieldGet(this, _Form_eventEmitter, "f"));
     const stratImpl = new descriptor.StrategyImpl(descriptor, __classPrivateFieldGet(this, _Form_defaultValue, "f"), __classPrivateFieldGet(this, _Form_groups, "f"), this.locale, __classPrivateFieldGet(this, _Form_eventEmitter, "f"));
     if (descriptor.strategy === "function") {
         if (!__classPrivateFieldGet(this, _Form_debounceMap, "f")[fieldName]) {
-            __classPrivateFieldGet(this, _Form_debounceMap, "f")[fieldName] = API.Utilities.Objects.debounce((value, context) => {
+            __classPrivateFieldGet(this, _Form_debounceMap, "f")[fieldName] = Objects.debounce((value, context) => {
                 stratImpl.test(value, context, args);
             }, __classPrivateFieldGet(this, _Form_asyncDelay, "f"));
         }
-        // @ts-expect-error
         __classPrivateFieldGet(this, _Form_debounceMap, "f")[fieldName](payload[fieldName], payload, args);
         return [
             (_a = __classPrivateFieldGet(this, _Form_cache, "f").get("detailedErrors")) === null || _a === void 0 ? void 0 : _a[fieldName],

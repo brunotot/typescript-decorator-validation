@@ -1,15 +1,16 @@
-import * as API from "../../../../../../../index";
-import { createFieldValidator, type FieldDecorator } from "../../../../../../decorators";
-import { translate } from "../../../../../../localization/service/TranslationService";
-import { testRegex } from "../Pattern";
-import RegexConst from "../shared/regex.constants";
+import { testRegex } from "@decorators/data/validators/string/regex/Pattern";
+import { RegexConst } from "@decorators/data/validators/string/regex/shared/regex.constants";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@Numeric` key. */
 export const NUMERIC = "Numeric";
 
 /** Internal validation function for {@link Numeric} validator. */
-function isNumericValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
-  API.Utilities.Objects.assertType("string", value);
+function isNumericValid<T extends Objects.Optional<string>>(value: T): boolean {
+  Objects.assertType("string", value);
   return testRegex(RegexConst.NUMERIC, value);
 }
 
@@ -60,15 +61,13 @@ function isNumericValid<T extends API.Utilities.Objects.Optional<string>>(value:
  * }
  * ```
  */
-export function Numeric<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorators.DecoratorOptions
-): FieldDecorator<T> {
+export function Numeric<T extends Objects.Optional<string>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, NUMERIC),
+      key: buildKeyProp(options, NUMERIC),
       valid: testRegex(RegexConst.NUMERIC, value),
-      message: API.Decorators.buildMessageProp(options, locale, translate(locale, NUMERIC)),
+      message: buildMessageProp(options, locale, translate(locale, NUMERIC)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

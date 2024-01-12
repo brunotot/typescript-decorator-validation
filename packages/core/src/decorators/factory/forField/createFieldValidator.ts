@@ -1,5 +1,5 @@
-import type API from "../../../index";
-import { type FieldDecorator, createFieldDecorator } from "./createFieldDecorator";
+import type { ValidationEvaluator } from "@validation/types";
+import { FieldDecorator, createFieldDecorator } from "./createFieldDecorator";
 
 /**
  * Creates validation decorators for fields.
@@ -26,7 +26,7 @@ import { type FieldDecorator, createFieldDecorator } from "./createFieldDecorato
  * ```
  */
 export function createFieldValidator<T extends unknown>(
-  validate: API.Validation.ValidationEvaluator<T>,
+  validate: ValidationEvaluator<T>,
   groups?: string[]
 ): FieldDecorator<T> {
   return createFieldDecorator<T>((meta, key) => {

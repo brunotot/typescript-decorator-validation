@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { createFieldValidator } from "../../../../decorators";
-import { translate } from "../../../../localization/service/TranslationService";
-/** MinLength identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@MinLength` key. */
 export const MIN_LENGTH = "MinLength";
 /** Internal validation function for {@link MinLength} validator. */
-export function isMinLengthValid(value, min) {
-  API.Utilities.Objects.assertType("string", value);
-  return (value !== null && value !== void 0 ? value : "").length >= min;
+function isMinLengthValid(value, min) {
+    Objects.assertType("string", value);
+    return (value !== null && value !== void 0 ? value : "").length >= min;
 }
 /**
  * Checks if decorated string contains a specific number of characters.
@@ -54,12 +55,9 @@ export function isMinLengthValid(value, min) {
  * ```
  */
 export function MinLength(min, options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, MIN_LENGTH),
-      valid: isMinLengthValid(value, min),
-      message: API.Decorators.message(options, locale, translate(locale, MIN_LENGTH, min)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, MIN_LENGTH),
+        valid: isMinLengthValid(value, min),
+        message: buildMessageProp(options, locale, translate(locale, MIN_LENGTH, min)),
+    }), buildGroupsProp(options));
 }

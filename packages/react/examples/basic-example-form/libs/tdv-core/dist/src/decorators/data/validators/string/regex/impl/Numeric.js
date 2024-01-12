@@ -1,14 +1,15 @@
-import API from "../../../../../../../index";
-import { createFieldValidator } from "../../../../../../decorators";
-import { translate } from "../../../../../../localization/service/TranslationService";
-import { testRegex } from "../Pattern";
-import RegexConst from "../shared/regex.constants";
-/** Numeric identifier. */
+import { testRegex } from "../../../../../data/validators/string/regex/Pattern";
+import { RegexConst } from "../../../../../data/validators/string/regex/shared/regex.constants";
+import { createFieldValidator } from "../../../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../../helper";
+import { translate } from "../../../../../../localization";
+import { Objects } from "../../../../../../utilities";
+/** `@Numeric` key. */
 export const NUMERIC = "Numeric";
 /** Internal validation function for {@link Numeric} validator. */
-export function isNumericValid(value) {
-  API.Utilities.Objects.assertType("string", value);
-  return testRegex(RegexConst.NUMERIC, value);
+function isNumericValid(value) {
+    Objects.assertType("string", value);
+    return testRegex(RegexConst.NUMERIC, value);
 }
 /**
  * Checks if decorated string contains only numeric characters.
@@ -58,12 +59,9 @@ export function isNumericValid(value) {
  * ```
  */
 export function Numeric(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, NUMERIC),
-      valid: testRegex(RegexConst.NUMERIC, value),
-      message: API.Decorators.message(options, locale, translate(locale, NUMERIC)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, NUMERIC),
+        valid: testRegex(RegexConst.NUMERIC, value),
+        message: buildMessageProp(options, locale, translate(locale, NUMERIC)),
+    }), buildGroupsProp(options));
 }

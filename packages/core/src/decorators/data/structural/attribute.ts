@@ -1,11 +1,10 @@
-import type API from "../../../../index";
-import { PrimitiveSet } from "../../../../index";
-import { type FieldDecorator, createFieldDecorator } from "./../../index";
+import { FieldDecorator, createFieldDecorator } from "@decorators/factory/forField/createFieldDecorator";
+import { Objects, PrimitiveSet, Types } from "@utilities";
 
 /**
  * Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T`).
  *
- * If a field which is being decorated is not a {@link API.Utilities.Types.PrimitiveType primitive}
+ * If a field which is being decorated is not a {@link Types.PrimitiveType primitive}
  * (`string`, `number`, `boolean`, `bigint`, `Date`) and isn't marked as a primitive in {@link PrimitiveSet overrides} interface
  * then the framework treats it as a custom, client-defined validable class. That having in mind, you will always want to apply `@attribute`
  * to those types of fields so the runtime evaluation matches the TypeScript compiler type evaluation. For more clarity check examples below.
@@ -59,9 +58,7 @@ import { type FieldDecorator, createFieldDecorator } from "./../../index";
  *   }
  * }
  */
-export function attribute<T extends API.Utilities.Objects.Optional<object | object[]>>(
-  clazz: API.Utilities.Types.Class<any>
-): FieldDecorator<T> {
+export function attribute<T extends Objects.Optional<object | object[]>>(clazz: Types.Class<any>): FieldDecorator<T> {
   return createFieldDecorator<any>((meta, name) => {
     meta.getUntypedDescriptor(name).thisClass = clazz;
   });

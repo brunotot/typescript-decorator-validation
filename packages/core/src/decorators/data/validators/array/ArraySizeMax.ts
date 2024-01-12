@@ -1,13 +1,14 @@
-import * as API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator, type FieldDecorator } from "../../../index";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@ArraySizeMax` key. */
 export const ARRAY_SIZE_MAX = "ArraySizeMax";
 
 /** Internal validation function for {@link ArraySizeMax} validator. */
 function isArraySizeMaxValid(array: any[], max: number): boolean {
-  API.Utilities.Objects.assertType("array", array);
+  Objects.assertType("array", array);
   return (array ?? []).length <= max;
 }
 
@@ -60,20 +61,13 @@ function isArraySizeMaxValid(array: any[], max: number): boolean {
  * }
  * ```
  */
-export function ArraySizeMax<K, T extends K[]>(
-  max: number,
-  options?: API.Decorators.DecoratorOptions
-): FieldDecorator<T> {
+export function ArraySizeMax<K, T extends K[]>(max: number, options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _, locale) => ({
-      key: API.Decorators.buildKeyProp(options, ARRAY_SIZE_MAX),
+      key: buildKeyProp(options, ARRAY_SIZE_MAX),
       valid: isArraySizeMaxValid(array, max),
-      message: API.Decorators.buildMessageProp(
-        options,
-        locale,
-        translate(locale, ARRAY_SIZE_MAX, max, (array ?? []).length)
-      ),
+      message: buildMessageProp(options, locale, translate(locale, ARRAY_SIZE_MAX, max, (array ?? []).length)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

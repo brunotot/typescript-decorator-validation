@@ -12,20 +12,20 @@ for arg in "$@"; do
   fi
 done
 
-start "$(color $CYAN)1 $(color)" " $(color $GREY)5$(color) Cleaning cache..."
-npm run clean --force --silent
-stop "/"
-
-start "$(color $CYAN)2 $(color)" " $(color $GREY)5$(color) Running build script..."
-tsc --build
-stop "/"
-
-start "$(color $CYAN)3 $(color)" " $(color $GREY)5$(color) Installing dependencies..."
+start "$(color $CYAN)1 $(color)" " $(color $GREY)5$(color) Installing dependencies..."
 npm i --force --silent --no-progress
 stop "/"
 
+start "$(color $CYAN)2 $(color)" " $(color $GREY)5$(color) Building core..."
+npm run build:noTest --prefix="$PWD_ROOT/packages/core" --silent
+stop "/"
+
+start "$(color $CYAN)3 $(color)" " $(color $GREY)5$(color) Building react..."
+npm run build:noTest --prefix="$PWD_ROOT/packages/react" --silent
+stop "/"
+
 start "$(color $CYAN)4 $(color)" " $(color $GREY)5$(color) Generating documentation..."
-npx typedoc --logLevel None
+(cd "$PWD_ROOT" && npx typedoc --logLevel None)
 stop "/"
 
 start "$(color $CYAN)5 $(color)" " $(color $GREY)5$(color) Normalizing output..."

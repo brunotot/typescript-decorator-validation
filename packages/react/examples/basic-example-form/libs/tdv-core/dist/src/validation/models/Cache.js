@@ -10,7 +10,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _Cache_instances, _Cache_cache, _Cache_payload, _Cache_changeFn, _Cache_fromCache;
-import API from "../../../index";
+import { Objects } from "../../utilities";
 /**
  * A generic caching utility class used by `ValidationEngine`.
  *
@@ -69,7 +69,7 @@ export class Cache {
 }
 _Cache_cache = new WeakMap(), _Cache_payload = new WeakMap(), _Cache_changeFn = new WeakMap(), _Cache_instances = new WeakSet(), _Cache_fromCache = function _Cache_fromCache(payload, cacheKey) {
     const cacheValue = __classPrivateFieldGet(this, _Cache_cache, "f")[cacheKey];
-    return cacheValue !== undefined && API.Utilities.Objects.deepEquals(__classPrivateFieldGet(this, _Cache_payload, "f"), payload)
+    return cacheValue !== undefined && Objects.deepEquals(__classPrivateFieldGet(this, _Cache_payload, "f"), payload)
         ? cacheValue
         : __classPrivateFieldGet(this, _Cache_changeFn, "f").call(this, payload)[cacheKey];
 };

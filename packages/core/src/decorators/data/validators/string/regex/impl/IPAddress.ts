@@ -1,15 +1,16 @@
-import * as API from "../../../../../../../index";
-import { createFieldValidator, type FieldDecorator } from "../../../../../../decorators";
-import { translate } from "../../../../../../localization/service/TranslationService";
-import { testRegex } from "../Pattern";
-import RegexConst from "../shared/regex.constants";
+import { testRegex } from "@decorators/data/validators/string/regex/Pattern";
+import { RegexConst } from "@decorators/data/validators/string/regex/shared/regex.constants";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@IPAddress` key. */
 export const IP_ADDRESS = "IPAddress";
 
 /** Internal validation function for {@link IPAddress} validator. */
-function isIPAddressValid<T extends API.Utilities.Objects.Optional<string>>(value: T): boolean {
-  API.Utilities.Objects.assertType("string", value);
+function isIPAddressValid<T extends Objects.Optional<string>>(value: T): boolean {
+  Objects.assertType("string", value);
   return testRegex(RegexConst.IP_ADDRESS, value);
 }
 
@@ -60,15 +61,13 @@ function isIPAddressValid<T extends API.Utilities.Objects.Optional<string>>(valu
  * }
  * ```
  */
-export function IPAddress<T extends API.Utilities.Objects.Optional<string>>(
-  options?: API.Decorators.DecoratorOptions
-): FieldDecorator<T> {
+export function IPAddress<T extends Objects.Optional<string>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, IP_ADDRESS),
-      valid: testRegex(RegexConst.IP_ADDRESS, value),
-      message: API.Decorators.buildMessageProp(options, locale, translate(locale, IP_ADDRESS)),
+      key: buildKeyProp(options, IP_ADDRESS),
+      valid: isIPAddressValid(value),
+      message: buildMessageProp(options, locale, translate(locale, IP_ADDRESS)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

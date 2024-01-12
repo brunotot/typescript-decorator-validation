@@ -1,5 +1,21 @@
-import API from "../../../index";
-import { getMessage } from "./MessageReaderService";
+import { getMessage } from "../service/MessageReaderService";
+/**
+ * Formats a string by replacing placeholders with provided arguments.
+ * @param str - The string containing placeholders in the form of `{0}`, `{1}`, etc.
+ * @param args - The values to replace the placeholders with.
+ * @returns The formatted string with placeholders replaced by the corresponding values from `args`.
+ * @remarks If a placeholder's corresponding value is not provided in `args`, the placeholder will remain unchanged in the output string.
+ * @example
+ * 1: Basic usage
+ * ```ts
+ * const formatted = sprintf("Hello, {0}!", "World");  // Output: "Hello, World!"
+ * ```
+ */
+function sprintf(str, ...args) {
+    return str.replace(/{(\d+)}/g, function (match, number) {
+        return typeof args[number] !== "undefined" ? args[number] : match;
+    });
+}
 /**
  * Localizes a string based on a corresponding key and optional arguments mapped by indices. (ex: `"Hello {0}! How are you?"`)
  *
@@ -28,6 +44,6 @@ import { getMessage } from "./MessageReaderService";
  */
 export function translate(locale, key, ...args) {
     const message = getMessage(key, locale);
-    const translatedMessage = API.Utilities.Strings.sprintf(message, ...args);
+    const translatedMessage = sprintf(message, ...args);
     return translatedMessage;
 }

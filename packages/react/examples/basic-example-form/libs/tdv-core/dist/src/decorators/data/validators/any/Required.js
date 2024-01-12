@@ -1,22 +1,20 @@
-import API from "../../../../../index";
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** Required identifier. */
+/** `@Required` key. */
 export const REQUIRED = "Required";
 /**
  * Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.
  *
  * @typeParam T - The type of the value.
  */
-export function isRequiredValid(value) {
-  return !(
-    value === undefined ||
-    value === null ||
-    value === false ||
-    (Array.isArray(value) && value.length === 0) ||
-    (typeof value === "string" && value.trim().length === 0) ||
-    (value instanceof Date && value.toString() === "Invalid Date")
-  );
+function isRequiredValid(value) {
+    return !(value === undefined ||
+        value === null ||
+        value === false ||
+        (Array.isArray(value) && value.length === 0) ||
+        (typeof value === "string" && value.trim().length === 0) ||
+        (value instanceof Date && value.toString() === "Invalid Date"));
 }
 /**
  * Creates a validator decorator which requires that a value must be present.
@@ -57,12 +55,9 @@ export function isRequiredValid(value) {
  * ```
  */
 export function Required(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, REQUIRED),
-      valid: isRequiredValid(value),
-      message: API.Decorators.message(options, locale, translate(locale, REQUIRED)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, REQUIRED),
+        valid: isRequiredValid(value),
+        message: buildMessageProp(options, locale, translate(locale, REQUIRED)),
+    }), buildGroupsProp(options));
 }

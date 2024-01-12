@@ -1,31 +1,13 @@
-import * as _Decorator from "./decorators";
-import * as _collection from "./decorators/data";
-import * as _attribute from "./decorators/data/structural/attribute";
-import * as _Localization from "./localization";
-import * as _Reflection from "./reflection";
-import * as _Strategy from "./strategy";
-import * as _Utilities from "./utilities";
-import * as _Validation from "./validation";
+// samo prati redoslijed
 
-/** `tdv-core` API entry-point. */
-namespace API {
-  export import Localization = _Localization;
-  export import Validation = _Validation;
-  export import Decorator = _Decorator;
-  export import Utilities = _Utilities;
-  export import Reflection = _Reflection;
-  export import collection = _collection;
-  export import attribute = _attribute.attribute;
-  export import Strategy = _Strategy;
-  /**
-   * Configuration object for the `tdv-core` package.
-   */
-  export const Configuration = {
-    /**
-     * The delay in milliseconds for async validation. Defaults to `500 ms`
-     */
-    asyncValidationDelay: 500,
-  };
-}
+export * from "./utilities";
 
-export default API;
+export * from "./localization";
+
+export * from "./decorators";
+
+export * from "./reflection";
+
+export * from "./strategy";
+
+export * from "./validation";

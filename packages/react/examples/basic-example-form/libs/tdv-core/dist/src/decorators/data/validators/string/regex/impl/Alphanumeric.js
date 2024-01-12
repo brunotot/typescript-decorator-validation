@@ -1,14 +1,15 @@
-import API from "../../../../../../../index";
-import { createFieldValidator } from "../../../../../../decorators";
-import { translate } from "../../../../../../localization/service/TranslationService";
-import { testRegex } from "../Pattern";
-import RegexConst from "../shared/regex.constants";
-/** Alphanumeric identifier. */
+import { testRegex } from "../../../../../data/validators/string/regex/Pattern";
+import { RegexConst } from "../../../../../data/validators/string/regex/shared/regex.constants";
+import { createFieldValidator } from "../../../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../../helper";
+import { translate } from "../../../../../../localization";
+import { Objects } from "../../../../../../utilities";
+/** `@Alphanumeric` key. */
 export const ALPHANUMERIC = "Alphanumeric";
 /** Internal validation function for {@link Alphanumeric} validator. */
-export function isAlphanumericValid(value) {
-  API.Utilities.Objects.assertType("string", value);
-  return testRegex(RegexConst.ALPHANUMERIC, value);
+function isAlphanumericValid(value) {
+    Objects.assertType("string", value);
+    return testRegex(RegexConst.ALPHANUMERIC, value);
 }
 /**
  * Checks if decorated string contains only alphabetical or number characters.
@@ -58,12 +59,9 @@ export function isAlphanumericValid(value) {
  * ```
  */
 export function Alphanumeric(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, ALPHANUMERIC),
-      valid: testRegex(RegexConst.ALPHANUMERIC, value),
-      message: API.Decorators.message(options, locale, translate(locale, ALPHANUMERIC)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, ALPHANUMERIC),
+        valid: isAlphanumericValid(value),
+        message: buildMessageProp(options, locale, translate(locale, ALPHANUMERIC)),
+    }), buildGroupsProp(options));
 }

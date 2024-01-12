@@ -1,18 +1,17 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** TodayDate identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@TodayDate` key. */
 export const TODAY_DATE = "TodayDate";
 /** Internal validation function for {@link TodayDate} validator. */
-export function isTodayDateValid(date) {
-  API.Utilities.Objects.assertType("date", date);
-  const currentDate = new Date();
-  return (
-    date &&
-    date.getDate() === currentDate.getDate() &&
-    date.getMonth() === currentDate.getMonth() &&
-    date.getFullYear() === currentDate.getFullYear()
-  );
+function isTodayDateValid(date) {
+    Objects.assertType("date", date);
+    const currentDate = new Date();
+    return (date &&
+        date.getDate() === currentDate.getDate() &&
+        date.getMonth() === currentDate.getMonth() &&
+        date.getFullYear() === currentDate.getFullYear());
 }
 /**
  * Checks if a {@link Date} is the today's date based on year, month and day.
@@ -62,12 +61,9 @@ export function isTodayDateValid(date) {
  * ```
  */
 export function TodayDate(options) {
-  return createFieldValidator(
-    (date, _context, locale) => ({
-      key: API.Decorators.key(options, TODAY_DATE),
-      valid: isTodayDateValid(date),
-      message: API.Decorators.message(options, locale, translate(locale, TODAY_DATE, date)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((date, _context, locale) => ({
+        key: buildKeyProp(options, TODAY_DATE),
+        valid: isTodayDateValid(date),
+        message: buildMessageProp(options, locale, translate(locale, TODAY_DATE, date)),
+    }), buildGroupsProp(options));
 }

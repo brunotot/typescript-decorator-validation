@@ -1,5 +1,5 @@
-import API from "../../../index";
-import { EventEmitter } from "../../../utilities/misc/EventEmitter";
+import { ClassValidatorMetaService } from "../../../reflection";
+import { EventEmitter } from "../../../utilities";
 /**
  * Creates a new class decorator function using the provided supplier.
  *
@@ -9,6 +9,6 @@ import { EventEmitter } from "../../../utilities/misc/EventEmitter";
  */
 export function createClassDecorator(supplier) {
     return function (baseClass, context) {
-        return supplier(API.Reflection.ClassValidatorMetaService.inject(baseClass !== null && baseClass !== void 0 ? baseClass : context, EventEmitter.EMPTY), baseClass, context);
+        return supplier(ClassValidatorMetaService.inject(baseClass !== null && baseClass !== void 0 ? baseClass : context, EventEmitter.EMPTY), baseClass, context);
     };
 }

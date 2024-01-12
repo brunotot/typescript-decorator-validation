@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import TdvCore from "tdv-core";
+import * as TdvCore from "tdv-core";
 import { FormContext } from "../../contexts/FormContext";
 import useEffectWhenMounted from "../useAfterMount";
 import useMutations from "../useMutations";
@@ -60,14 +60,13 @@ export default function useForm<TClass>(
   const instantContextValidation = standalone ? validateImmediately! : ctx? ctx.validateImmediately : validateImmediately!;
   const isSubmitted = instantContextValidation || submitted;
 
-  const [form, setForm, { globalErrors, errors, detailedErrors, isValid, engine }] =
-    useValidation<TClass>(model, {
-      defaultValue,
-      groups,
-      resolveDecoratorArgs,
-      asyncDelay,
-      locale,
-    });
+  const [form, setForm, { globalErrors, errors, detailedErrors, isValid, engine }] = useValidation<TClass>(model, {
+    defaultValue,
+    groups,
+    resolveDecoratorArgs,
+    asyncDelay,
+    locale,
+  });
 
   //* Dispatcher function which fires only when
   //* itself isn't a parent and context exists.

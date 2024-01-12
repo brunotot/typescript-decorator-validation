@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { createFieldValidator } from "../../../../decorators";
-import { translate } from "../../../../localization/service/TranslationService";
-/** Integer identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@Integer` key. */
 export const INTEGER = "Integer";
 /** Internal validation function for {@link Integer} validator. */
 function isIntegerValid(num) {
-  API.Utilities.Objects.assertType("number", num);
-  return num !== undefined && num !== null && Number.isInteger(num);
+    Objects.assertType("number", num);
+    return num !== undefined && num !== null && Number.isInteger(num);
 }
 /**
  * Checks if decorated number is an integer number.
@@ -56,12 +57,9 @@ function isIntegerValid(num) {
  * ```
  */
 export function Integer(options) {
-  return createFieldValidator(
-    (num, _context, locale) => ({
-      key: API.Decorators.key(options, INTEGER),
-      valid: isIntegerValid(num),
-      message: API.Decorators.message(options, locale, translate(locale, INTEGER, num)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((num, _context, locale) => ({
+        key: buildKeyProp(options, INTEGER),
+        valid: isIntegerValid(num),
+        message: buildMessageProp(options, locale, translate(locale, INTEGER, num)),
+    }), buildGroupsProp(options));
 }

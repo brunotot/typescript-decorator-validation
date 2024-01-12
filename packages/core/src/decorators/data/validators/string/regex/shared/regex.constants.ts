@@ -1,16 +1,14 @@
 /**
  * A collection of commonly used regular expressions.
- *
- * @remarks
- * This object provides regular expressions for various validation scenarios.
- *
+ * @remarks This object provides regular expressions for various validation scenarios.
  * @example
- * ```typescript
+ * 1: Validating URLs
+ * ```ts
  * const isURL = RegexConst.URL.test("https://example.com");
  * ```
  */
 // prettier-ignore
-const RegexConst = {
+export const RegexConst = {
   /** Regular expression for validating URLs. */
   URL: /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/,
 
@@ -47,5 +45,3 @@ const RegexConst = {
   /** Regular expression for validating alphanumeric strings. */
   ALPHANUMERIC: /^[a-zA-Z0-9]+$/
 } as const;
-
-export default RegexConst;

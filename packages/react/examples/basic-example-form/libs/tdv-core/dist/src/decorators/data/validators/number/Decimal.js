@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** Decimal identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@Decimal` key. */
 export const DECIMAL = "Decimal";
 /** Internal validation function for {@link Decimal} validator. */
-export function isDecimalValid(value) {
-  API.Utilities.Objects.assertType("number", value);
-  return value !== undefined && value !== null && !Number.isInteger(value);
+function isDecimalValid(value) {
+    Objects.assertType("number", value);
+    return value !== undefined && value !== null && !Number.isInteger(value);
 }
 /**
  * Checks if decorated number is a decimal number.
@@ -56,12 +57,9 @@ export function isDecimalValid(value) {
  * ```
  */
 export function Decimal(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, DECIMAL),
-      valid: isDecimalValid(value),
-      message: API.Decorators.message(options, locale, translate(locale, DECIMAL, value)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, DECIMAL),
+        valid: isDecimalValid(value),
+        message: buildMessageProp(options, locale, translate(locale, DECIMAL, value)),
+    }), buildGroupsProp(options));
 }

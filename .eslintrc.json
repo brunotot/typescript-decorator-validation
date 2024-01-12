@@ -4,7 +4,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": "standard-with-typescript",
+  "extends": ["standard-with-typescript", "plugin:import/typescript"],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
@@ -24,6 +24,13 @@
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "no-proto": "off",
-    "valid-typeof": "off"
+    "valid-typeof": "off",
+    "import/no-cycle": [
+      "error",
+      {
+        "maxDepth": 10,
+        "ignoreExternal": true
+      }
+    ]
   }
 }

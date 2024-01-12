@@ -1,16 +1,13 @@
-import * as API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator, type FieldDecorator } from "../../../index";
+import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization";
+import { Objects } from "@utilities";
 
 /** `@Digits` key. */
 export const DIGITS = "Digits";
 
 /** Internal validation function for {@link Digits} validator. */
-function isDigitsValid(
-  number: API.Utilities.Objects.Optional<number>,
-  ints: number,
-  decs: number
-): boolean {
+function isDigitsValid(number: Objects.Optional<number>, ints: number, decs: number): boolean {
   const assertValidInputs = () => {
     const isMaxIntegersValid = ints !== Infinity && ints % 1 === 0 && ints >= 0;
     const isMaxDecimalsValid = decs !== Infinity && decs % 1 === 0 && decs >= 0;
@@ -75,21 +72,17 @@ function isDigitsValid(
  * }
  * ```
  */
-export function Digits<T extends API.Utilities.Objects.Optional<number>>(
+export function Digits<T extends Objects.Optional<number>>(
   intsLimit: number,
   decimalsLimit: number,
-  options?: API.Decorators.DecoratorOptions
+  options?: DecoratorOptions
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: API.Decorators.buildKeyProp(options, DIGITS),
+      key: buildKeyProp(options, DIGITS),
       valid: isDigitsValid(value, intsLimit, decimalsLimit),
-      message: API.Decorators.buildMessageProp(
-        options,
-        locale,
-        translate(locale, DIGITS, intsLimit, decimalsLimit)
-      ),
+      message: buildMessageProp(options, locale, translate(locale, DIGITS, intsLimit, decimalsLimit)),
     }),
-    API.Decorators.buildGroupsProp(options)
+    buildGroupsProp(options)
   );
 }

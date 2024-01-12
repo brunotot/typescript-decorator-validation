@@ -1,4 +1,4 @@
-import API from "../../../index";
+import { Objects } from "@utilities";
 
 /**
  * A generic caching utility class used by `ValidationEngine`.
@@ -70,12 +70,9 @@ export class Cache<CacheValue extends object & {}, Payload = any> {
    *
    * @private
    */
-  #fromCache<CacheKey extends keyof CacheValue>(
-    payload: Payload,
-    cacheKey: CacheKey
-  ): CacheValue[CacheKey] {
+  #fromCache<CacheKey extends keyof CacheValue>(payload: Payload, cacheKey: CacheKey): CacheValue[CacheKey] {
     const cacheValue: CacheValue[CacheKey] = this.#cache[cacheKey];
-    return cacheValue !== undefined && API.Utilities.Objects.deepEquals(this.#payload, payload)
+    return cacheValue !== undefined && Objects.deepEquals(this.#payload, payload)
       ? cacheValue
       : this.#changeFn(payload)[cacheKey];
   }

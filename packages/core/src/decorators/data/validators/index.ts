@@ -40,3 +40,4 @@ export * from "./string/regex/impl/Lowercase";
 export * from "./string/regex/impl/Numeric";
 export * from "./string/regex/impl/URL";
 export * from "./string/regex/impl/Uppercase";
+export * from "./string/regex/shared/regex.constants";

@@ -1,6 +1,6 @@
+import { IMock } from "@common/ValidationHandlerMock";
 import $, { attribute, Decorators } from "../../../index";
 import { standardTest } from "../../common/TestFactory";
-import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
 type Type = $.Utilities.Objects.Optional<NestedModel>;

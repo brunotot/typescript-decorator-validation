@@ -1,12 +1,13 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** AssertFalse identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@AssertFalse` key. */
 export const ASSERT_FALSE = "AssertFalse";
 /** Internal validation function for {@link AssertFalse} validator. */
-export function isAssertFalseValid(value) {
-  API.Utilities.Objects.assertType("boolean", value);
-  return !value;
+function isAssertFalseValid(value) {
+    Objects.assertType("boolean", value);
+    return !value;
 }
 /**
  * Checks if a boolean value is `false`.
@@ -56,12 +57,9 @@ export function isAssertFalseValid(value) {
  * ```
  */
 export function AssertFalse(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: API.Decorators.key(options, ASSERT_FALSE),
-      valid: isAssertFalseValid(value),
-      message: API.Decorators.message(options, locale, translate(locale, ASSERT_FALSE)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((value, _context, locale) => ({
+        key: buildKeyProp(options, ASSERT_FALSE),
+        valid: isAssertFalseValid(value),
+        message: buildMessageProp(options, locale, translate(locale, ASSERT_FALSE)),
+    }), buildGroupsProp(options));
 }

@@ -1,4 +1,4 @@
-import * as LocaleResolver from "../resolver/LocaleResolver";
+import { getLocale } from "../resolver/LocaleResolver";
 import * as de from "../translations/de.json";
 import * as en from "../translations/en.json";
 import * as es from "../translations/es.json";
@@ -25,7 +25,7 @@ export const messages = {
  * @returns Localized message by key.
  */
 export function getMessage(key, locale) {
-    const computedLocale = locale !== null && locale !== void 0 ? locale : LocaleResolver.getLocale();
+    const computedLocale = locale !== null && locale !== void 0 ? locale : getLocale();
     const computedLocaleMessages = messages[computedLocale];
     return computedLocaleMessages[key];
 }

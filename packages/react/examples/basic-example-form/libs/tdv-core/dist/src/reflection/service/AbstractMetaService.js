@@ -10,7 +10,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _AbstractMetaService_metadata, _AbstractMetaService_injectionKey, _AbstractMetaService_initial, _AbstractMetaService_class;
-import API from "../../../index";
+import { Classes } from "../../utilities";
 /**
  * Abstract class for managing metadata.
  * @remarks This class provides methods for managing metadata associated with a given strategy. It can be used to get, set, and check for the existence of attributes in the metadata.
@@ -27,10 +27,10 @@ export class AbstractMetaService {
         _AbstractMetaService_injectionKey.set(this, void 0);
         _AbstractMetaService_initial.set(this, void 0);
         _AbstractMetaService_class.set(this, void 0);
-        __classPrivateFieldSet(this, _AbstractMetaService_metadata, API.Reflection.getMetadata(strategy), "f");
+        __classPrivateFieldSet(this, _AbstractMetaService_metadata, Classes.getMetadata(strategy), "f");
         __classPrivateFieldSet(this, _AbstractMetaService_injectionKey, injectionKey, "f");
         __classPrivateFieldSet(this, _AbstractMetaService_initial, initial, "f");
-        if (API.Reflection.isClass(strategy)) {
+        if (Classes.isClass(strategy)) {
             this.class = strategy;
         }
         else {

@@ -1,5 +1,5 @@
-import API from "../../../index";
-import { EventEmitter } from "../../../utilities/misc/EventEmitter";
+import { ClassValidatorMetaService } from "@reflection";
+import { EventEmitter, Types } from "@utilities";
 
 /**
  * Represents a class decorator function.
@@ -8,7 +8,7 @@ import { EventEmitter } from "../../../utilities/misc/EventEmitter";
  * @param context - The context object for the class decorator.
  * @returns The decorated class or undefined/void.
  */
-export type ClassDecorator<TClass extends API.Utilities.Types.Class> = ((
+export type ClassDecorator<TClass extends Types.Class> = ((
   baseClass: TClass,
   context: ClassDecoratorCtx<TClass>
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
@@ -24,8 +24,8 @@ export type ClassDecorator<TClass extends API.Utilities.Types.Class> = ((
  * @param context - The context object for the class decorator.
  * @returns The modified class or undefined/void.
  */
-export type ClassDecoratorSupplier<TClass extends API.Utilities.Types.Class> = ((
-  meta: API.Reflection.ClassValidatorMetaService<TClass>,
+export type ClassDecoratorSupplier<TClass extends Types.Class> = ((
+  meta: ClassValidatorMetaService<TClass>,
   baseClass: TClass,
   context: ClassDecoratorCtx<TClass>
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
@@ -35,7 +35,7 @@ export type ClassDecoratorSupplier<TClass extends API.Utilities.Types.Class> = (
  * Type definition for the context of a class decorator.
  * @typeParam T - The type of the class being decorated.
  */
-export type ClassDecoratorCtx<T extends API.Utilities.Types.Class> = ClassDecoratorContext<T>;
+export type ClassDecoratorCtx<T extends Types.Class> = ClassDecoratorContext<T>;
 
 /**
  * Creates a new class decorator function using the provided supplier.
@@ -44,14 +44,10 @@ export type ClassDecoratorCtx<T extends API.Utilities.Types.Class> = ClassDecora
  * @param supplier - A callback that defines the basic class decorator behavior and returns the modified class.
  * @returns A basic class decorator factory.
  */
-export function createClassDecorator<TClass extends API.Utilities.Types.Class>(
+export function createClassDecorator<TClass extends Types.Class>(
   supplier: ClassDecoratorSupplier<TClass>
 ): ClassDecorator<any> {
   return function (baseClass, context) {
-    return supplier(
-      API.Reflection.ClassValidatorMetaService.inject(baseClass ?? context, EventEmitter.EMPTY),
-      baseClass,
-      context
-    );
+    return supplier(ClassValidatorMetaService.inject(baseClass ?? context, EventEmitter.EMPTY), baseClass, context);
   };
 }

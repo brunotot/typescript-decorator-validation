@@ -1,2 +1,2 @@
-export * from "./forClass/index";
-export * from "./forField/index";
+export * from "./forClass";
+export * from "./forField";

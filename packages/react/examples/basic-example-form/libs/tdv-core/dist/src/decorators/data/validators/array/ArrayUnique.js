@@ -1,28 +1,26 @@
-import API from "../../../../../index";
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../index";
-/** ArrayUnique identifier. */
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+import { translate } from "../../../../localization";
+import { Objects } from "../../../../utilities";
+/** `@ArrayUnique` key. */
 export const ARRAY_UNIQUE = "ArrayUnique";
 /** Internal validation function for {@link ArrayUnique} validator. */
-export function isArrayUniqueValid(array) {
-  API.Utilities.Objects.assertType("array", array);
-  const hashFn = API.Utilities.Objects.hash;
-  function isArrayUnique(arr, equals) {
-    const set = new Set();
-    for (const val of arr) {
-      for (const el of set) {
-        if (equals(val, el)) {
-          return false;
+function isArrayUniqueValid(array) {
+    Objects.assertType("array", array);
+    const hashFn = Objects.hash;
+    function isArrayUnique(arr, equals) {
+        const set = new Set();
+        for (const val of arr) {
+            for (const el of set) {
+                if (equals(val, el)) {
+                    return false;
+                }
+            }
+            set.add(val);
         }
-      }
-      set.add(val);
+        return true;
     }
-    return true;
-  }
-  return isArrayUnique(
-    array !== null && array !== void 0 ? array : [],
-    (obj1, obj2) => hashFn(obj1) === hashFn(obj2)
-  );
+    return isArrayUnique(array !== null && array !== void 0 ? array : [], (obj1, obj2) => hashFn(obj1) === hashFn(obj2));
 }
 /**
  * Checks if all elements in decorated array are unique.
@@ -73,12 +71,9 @@ export function isArrayUniqueValid(array) {
  * ```
  */
 export function ArrayUnique(options) {
-  return createFieldValidator(
-    (array, _context, locale) => ({
-      key: API.Decorators.key(options, ARRAY_UNIQUE),
-      valid: isArrayUniqueValid(array),
-      message: API.Decorators.message(options, locale, translate(locale, ARRAY_UNIQUE)),
-    }),
-    API.Decorators.groups(options)
-  );
+    return createFieldValidator((array, _context, locale) => ({
+        key: buildKeyProp(options, ARRAY_UNIQUE),
+        valid: isArrayUniqueValid(array),
+        message: buildMessageProp(options, locale, translate(locale, ARRAY_UNIQUE)),
+    }), buildGroupsProp(options));
 }
