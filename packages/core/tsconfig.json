@@ -5,6 +5,6 @@
   "compilerOptions": {
     "outDir": "dist",
     "declaration": true,
-    "declarationDir": "./dist/types"
+    "declarationDir": "dist/types"
   }
 }
