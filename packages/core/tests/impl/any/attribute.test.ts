@@ -1,9 +1,10 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import $, { attribute, Decorators } from "../../../index";
+import { Integer, Required, attribute } from "@decorators";
+import { Objects } from "@utilities";
 import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Utilities.Objects.Optional<NestedModel>;
+type Type = Objects.Optional<NestedModel>;
 const type = "Nested form";
 const identifier = "valid";
 const successData: Type[] = [
@@ -30,10 +31,10 @@ const errorData: Type[] = [
 ];
 
 class NestedModel {
-  @Decorators.Required()
+  @Required()
   stringValue!: string;
 
-  @Decorators.Integer()
+  @Integer()
   numberValue!: number;
 }
 

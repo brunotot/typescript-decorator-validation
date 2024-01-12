@@ -1,10 +1,10 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { ValueRange } from "@src/decorators";
-import $ from "../../../index";
+import { ValueRange } from "@decorators";
+import { Objects } from "@utilities";
 import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Utilities.Objects.Optional<number>;
+type Type = Objects.Optional<number>;
 const type = "Number";
 const identifier = "ValueRange";
 const successData: Type[] = [5, 10, 7, null];

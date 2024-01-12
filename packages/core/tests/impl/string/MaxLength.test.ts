@@ -1,10 +1,10 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { MaxLength } from "@src/decorators";
-import $ from "../../../index";
+import { MaxLength } from "@decorators";
+import { Objects } from "@utilities";
 import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Utilities.Objects.Optional<string>;
+type Type = Objects.Optional<string>;
 const type = "String";
 const identifier = "MaxLength";
 const successData: Type[] = [undefined, null, "12345", "1234567", "1234567890"];

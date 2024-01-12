@@ -1,6 +1,6 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { ArrayContains } from "@src/decorators";
+import { ArrayContains } from "@decorators";
 import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 const SEARCH_ITEM = 7;
 const NON_SEARCH_ITEM_STRING = "X";

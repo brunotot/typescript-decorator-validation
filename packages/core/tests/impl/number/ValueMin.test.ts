@@ -1,10 +1,10 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { ValueMin } from "@src/decorators";
-import $ from "../../../index";
+import { ValueMin } from "@decorators";
+import { Objects } from "@utilities";
 import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Utilities.Objects.Optional<number>;
+type Type = Objects.Optional<number>;
 const type = "Number";
 const identifier = "ValueMin";
 const successData: Type[] = [10, 15, 20, 100, undefined, null];

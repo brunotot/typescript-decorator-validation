@@ -1,13 +1,13 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { TodayDate } from "@src/decorators";
-import $ from "../../../index";
+import { TodayDate } from "@decorators";
+import { Objects } from "@utilities";
 import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 const NEG_INFINITY = new Date(1990, 0, 1);
 const POS_INFINITY = new Date(2099, 11, 31);
 
 /*** Data ***/
-type Type = $.Utilities.Objects.Optional<Date>;
+type Type = Objects.Optional<Date>;
 const type = "Date";
 const identifier = "TodayDate";
 const successData: Type[] = [new Date()];

@@ -1,6 +1,6 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { Required, foreach } from "@src/decorators";
+import { Required, foreach } from "@decorators";
 import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
 type Type = string[];

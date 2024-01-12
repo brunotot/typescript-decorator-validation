@@ -1,6 +1,6 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { ArrayUnique } from "@src/decorators";
+import { ArrayUnique } from "@decorators";
 import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
 type Type = string[];

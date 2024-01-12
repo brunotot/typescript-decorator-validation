@@ -1,10 +1,10 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { Numeric } from "@src/decorators";
-import $ from "../../../../../index";
+import { Numeric } from "@decorators";
+import { Objects } from "@utilities";
 import { standardTest } from "../../../../common/TestFactory";
+import { IMock } from "../../../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Utilities.Objects.Optional<string>;
+type Type = Objects.Optional<string>;
 const type = "String";
 const identifier = "Numeric";
 const successData: Type[] = ["123456", "", null, undefined];

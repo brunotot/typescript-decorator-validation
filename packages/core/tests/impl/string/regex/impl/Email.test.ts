@@ -1,10 +1,10 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { Email } from "@src/decorators";
-import $ from "../../../../../index";
+import { Email } from "@decorators";
+import { Objects } from "@utilities";
 import { standardTest } from "../../../../common/TestFactory";
+import { IMock } from "../../../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Utilities.Objects.Optional<string>;
+type Type = Objects.Optional<string>;
 const type = "String";
 const identifier = "Email";
 const successData: Type[] = ["mail@mail.com", null, undefined];

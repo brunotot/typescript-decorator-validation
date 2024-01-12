@@ -1,10 +1,10 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { URL } from "@src/decorators";
-import $ from "../../../../../index";
+import { URL } from "@decorators";
+import { Objects } from "@utilities";
 import { standardTest } from "../../../../common/TestFactory";
+import { IMock } from "../../../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Utilities.Objects.Optional<string>;
+type Type = Objects.Optional<string>;
 const type = "String";
 const identifier = "URL";
 const successData: Type[] = ["www.google.hr", "https://www.facebook.com/?query=", null, undefined];

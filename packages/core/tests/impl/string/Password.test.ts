@@ -1,10 +1,10 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { Password } from "@src/decorators";
-import $ from "../../../index";
+import { Password } from "@decorators";
+import { Objects } from "@utilities";
 import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Utilities.Objects.Optional<string>;
+type Type = Objects.Optional<string>;
 const type = "String";
 const identifier = "Password";
 const successData: Type[] = ["Test12345!"];

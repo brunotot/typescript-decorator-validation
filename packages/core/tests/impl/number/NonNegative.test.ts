@@ -1,10 +1,10 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { NonNegative } from "@src/decorators";
-import $ from "../../../index";
+import { NonNegative } from "@decorators";
+import { Objects } from "@utilities";
 import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Utilities.Objects.Optional<number>;
+type Type = Objects.Optional<number>;
 const type = "Number";
 const identifier = "NonNegative";
 const successData: Type[] = [0, 1, 5, 10, 1500];

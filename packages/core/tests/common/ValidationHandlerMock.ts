@@ -1,4 +1,4 @@
-import { Form } from "@src/validation";
+import { Form } from "./../../src/validation";
 
 export interface IMock<T> {
   value: T;

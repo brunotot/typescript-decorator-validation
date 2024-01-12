@@ -1,10 +1,10 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { Lowercase } from "@src/decorators";
-import $ from "../../../../../index";
+import { Lowercase } from "@decorators";
+import { Objects } from "@utilities";
 import { standardTest } from "../../../../common/TestFactory";
+import { IMock } from "../../../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Utilities.Objects.Optional<string>;
+type Type = Objects.Optional<string>;
 const type = "String";
 const identifier = "Lowercase";
 const successData: Type[] = ["test", "", null, undefined];

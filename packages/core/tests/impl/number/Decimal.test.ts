@@ -1,10 +1,10 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { Decimal } from "@src/decorators";
-import $ from "../../../index";
+import { Decimal } from "@decorators";
+import { Objects } from "@utilities";
 import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
-type Type = $.Utilities.Objects.Optional<number>;
+type Type = Objects.Optional<number>;
 const type = "Number";
 const identifier = "Decimal";
 const successData: Type[] = [1.25, 23.15, 677.999];

@@ -1,6 +1,6 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { AssertFalse } from "@src/decorators";
+import { AssertFalse } from "@decorators";
 import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
 type Type = boolean;

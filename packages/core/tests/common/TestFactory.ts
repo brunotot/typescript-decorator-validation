@@ -1,5 +1,5 @@
-import { Types } from "@src/utilities";
-import { Form } from "@src/validation";
+import { Form } from "@./../../src/validation";
+import { Types } from "./../../src/utilities";
 import ValidationHandlerMock, { IMock, buildIOName } from "./ValidationHandlerMock";
 
 export type StandardTestProps<T> = {

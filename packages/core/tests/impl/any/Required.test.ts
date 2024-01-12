@@ -1,7 +1,7 @@
-import { IMock } from "@common/ValidationHandlerMock";
-import { Required } from "@src/decorators";
-import * as Objects from "@src/utilities/impl/Objects";
+import { Required } from "@decorators";
+import { Objects } from "@utilities";
 import { standardTest } from "../../common/TestFactory";
+import { IMock } from "../../common/ValidationHandlerMock";
 
 /*** Data ***/
 type Type = Objects.Optional<any>;
