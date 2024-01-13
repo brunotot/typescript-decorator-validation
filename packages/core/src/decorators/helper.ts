@@ -1,4 +1,5 @@
 import { Locale, parseMessage } from "@localization";
+import { MessageProp } from "@overrides";
 import { Objects } from "@utilities";
 
 /** Represents decorator external dependency arguments. */
@@ -9,7 +10,7 @@ export type DecoratorOptions = {
   /** Identifier of the validator decorator. */
   key?: string;
   /** Error message to be evaluated through a preprocessor, which can have a custom or default implementation based on library setup. */
-  message?: string;
+  message?: MessageProp;
   /** Unique list of groups for conditional validation. Validator triggers only if the form is applied on a listed group. */
   groups?: string[];
 };
@@ -27,10 +28,11 @@ export type DecoratorOptions = {
 export function buildMessageProp(
   options: DecoratorOptions | undefined,
   locale: Locale,
-  defaultMessage: string
+  defaultMessage: string = "",
+  args: Record<string, string> = {}
 ): string {
-  const msg = options?.message ?? "";
-  return msg.length > 0 ? parseMessage(locale, msg) : defaultMessage ?? "";
+  if (!options?.message) return defaultMessage ?? "";
+  return parseMessage(locale, options.message, args);
 }
 
 /**

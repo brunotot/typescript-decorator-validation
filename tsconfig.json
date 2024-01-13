@@ -22,16 +22,24 @@
     "paths": {
       "@decorators": ["packages/core/src/decorators"],
       "@decorators/*": ["packages/core/src/decorators/*"],
+
       "@localization": ["packages/core/src/localization"],
       "@localization/*": ["packages/core/src/localization/*"],
+
       "@reflection": ["packages/core/src/reflection"],
       "@reflection/*": ["packages/core/src/reflection/*"],
+
       "@strategy": ["packages/core/src/strategy"],
       "@strategy/*": ["packages/core/src/strategy/*"],
+
       "@utilities": ["packages/core/src/utilities"],
       "@utilities/*": ["packages/core/src/utilities/*"],
+
       "@validation": ["packages/core/src/validation"],
-      "@validation/*": ["packages/core/src/validation/*"]
+      "@validation/*": ["packages/core/src/validation/*"],
+
+      "@overrides": ["packages/core/src/overrides"],
+      "@overrides/*": ["packages/core/src/overrides/*"]
     }
   },
   "ts-node": {

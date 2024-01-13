@@ -1,7 +1,12 @@
 import { Locale } from "@localization/resolver/LocaleResolver";
+import { MessageProp } from "@overrides";
 
-/** Message parser definition. */
-export type MessageParser = ((locale: Locale, message: string) => string) & {};
+/**
+ * Message parser definition.
+ * @param locale - current locale
+ * @param message - message to parse
+ */
+export type MessageParser = ((locale: Locale, message: MessageProp, args: Record<string, string>) => string) & {};
 
 const DEFAULT_CONFIGURER: MessageParser = (_, message) => message;
 
@@ -17,9 +22,9 @@ export function configureParser(handler?: MessageParser): void {
 /**
  * Internal handler for the customized message parser
  */
-export function parseMessage(locale: Locale, message: string): string {
+export function parseMessage(locale: Locale, message: string, args: Record<string, string> = {}): string {
   try {
-    return configurer(locale, message);
+    return configurer(locale, message, args);
   } catch (error) {
     const title = `An error occurred while resolving "${message}" for locale "${locale}".`;
     const descr = `To fix, check your Localization.configureParser() implementation or review stack-trace.`;

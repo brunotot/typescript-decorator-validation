@@ -5,9 +5,10 @@ import * as Strategy from "@strategy";
 import * as Utilities from "@utilities";
 import * as Validation from "@validation";
 
+export * from "@overrides";
+
 export { Decorators, Localization, Reflection, Strategy, Utilities, Validation };
 
-export import PrimitiveSet = Utilities.PrimitiveSet;
 export import createClassDecorator = Decorators.createClassDecorator;
 export import createClassValidator = Decorators.createClassValidator;
 export import createFieldDecorator = Decorators.createFieldDecorator;

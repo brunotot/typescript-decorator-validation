@@ -1,6 +1,6 @@
 import { RegexConst } from "@decorators/data/validators/string/regex/shared/regex.constants";
 import { createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp } from "@decorators/helper";
+import { DecoratorOptions, buildGroupsProp, buildMessageProp } from "@decorators/helper";
 import { Locale, translate } from "@localization";
 import { Objects } from "@utilities";
 
@@ -126,7 +126,7 @@ function isPasswordValid(
  */
 export function Password<T extends Objects.Optional<string>>(rules?: PasswordRules, options?: DecoratorOptions) {
   return createFieldValidator<T>(
-    (value, _context, locale) => isPasswordValid(value, rules, options?.message, locale),
+    (value, _context, locale) => isPasswordValid(value, rules, buildMessageProp(options, locale), locale),
     buildGroupsProp(options)
   );
 }
