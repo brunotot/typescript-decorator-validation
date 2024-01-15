@@ -1,4 +1,5 @@
 /**
+ * An overridable interface designed for specifying custom decorator message prop.
  * @example
  * 1: Basic usage
  * ```ts

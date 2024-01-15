@@ -1,12 +1,12 @@
+import { Objects } from "../../../../../../utilities";
 import { FieldDecorator } from "../../../../../factory/forField";
 import { DecoratorOptions } from "../../../../../helper";
-import { Objects } from "../../../../../../utilities";
 /** `@Lowercase` key. */
 export declare const LOWERCASE = "Lowercase";
 /**
  * Checks if decorated string contains only lowercase characters.
  *
- * @key {@link LOWERCASE Lowercase}
+ * @key {@link DecoratorKeys.LOWERCASE}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.

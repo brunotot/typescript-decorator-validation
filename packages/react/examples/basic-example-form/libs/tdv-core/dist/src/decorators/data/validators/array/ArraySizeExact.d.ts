@@ -5,7 +5,7 @@ export declare const ARRAY_SIZE_EXACT = "ArraySizeExact";
 /**
  * Checks if the decorated array contains an exact number of elements.
  *
- * @key {@link ARRAY_SIZE_EXACT ArraySizeExact}
+ * @key {@link DecoratorKeys.ARRAY_SIZE_EXACT}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param exact - Exact size value.

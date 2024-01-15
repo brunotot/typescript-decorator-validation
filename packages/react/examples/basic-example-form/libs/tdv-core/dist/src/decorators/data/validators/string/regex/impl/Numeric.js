@@ -1,20 +1,18 @@
+import { translate } from "../../../../../../localization";
+import { Objects } from "../../../../../../utilities";
 import { testRegex } from "../../../../../data/validators/string/regex/Pattern";
 import { RegexConst } from "../../../../../data/validators/string/regex/shared/regex.constants";
 import { createFieldValidator } from "../../../../../factory/forField";
 import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../../helper";
-import { translate } from "../../../../../../localization";
-import { Objects } from "../../../../../../utilities";
-/** `@Numeric` key. */
-export const NUMERIC = "Numeric";
 /** Internal validation function for {@link Numeric} validator. */
 function isNumericValid(value) {
-    Objects.assertType("string", value);
-    return testRegex(RegexConst.NUMERIC, value);
+  Objects.assertType("string", value);
+  return testRegex(RegexConst.NUMERIC, value);
 }
 /**
  * Checks if decorated string contains only numeric characters.
  *
- * @key {@link NUMERIC Numeric}
+ * @key {@link DecoratorKeys.NUMERIC}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.
@@ -59,9 +57,12 @@ function isNumericValid(value) {
  * ```
  */
 export function Numeric(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: buildKeyProp(options, NUMERIC),
-        valid: testRegex(RegexConst.NUMERIC, value),
-        message: buildMessageProp(options, locale, translate(locale, NUMERIC)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.NUMERIC),
+      valid: testRegex(RegexConst.NUMERIC, value),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.NUMERIC)),
+    }),
+    buildGroupsProp(options)
+  );
 }

@@ -1,12 +1,12 @@
+import { Objects } from "../../../../../../utilities";
 import { FieldDecorator } from "../../../../../factory/forField";
 import { DecoratorOptions } from "../../../../../helper";
-import { Objects } from "../../../../../../utilities";
 /** `@Numeric` key. */
 export declare const NUMERIC = "Numeric";
 /**
  * Checks if decorated string contains only numeric characters.
  *
- * @key {@link NUMERIC Numeric}
+ * @key {@link DecoratorKeys.NUMERIC}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.

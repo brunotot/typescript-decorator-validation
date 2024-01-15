@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@ValueRange` key. */
-export const VALUE_RANGE = "ValueRange";
 
 /** Internal validation function for {@link ValueRange} validator. */
 function isValueRangeValid(num: Objects.Optional<number>, min: number, max: number): boolean {
@@ -15,7 +13,7 @@ function isValueRangeValid(num: Objects.Optional<number>, min: number, max: numb
 /**
  * Checks if decorated number is within a given range of `min` and `max` parameters.
  *
- * @key {@link VALUE_RANGE ValueRange}
+ * @key {@link DecoratorKeys.VALUE_RANGE}
  * @typeParam T - The type of the number property.
  * @param min - Minimum allowed value.
  * @param max - Maximum allowed value.
@@ -68,9 +66,9 @@ export function ValueRange<T extends Objects.Optional<number>>(
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (num, _context, locale) => ({
-      key: buildKeyProp(options, VALUE_RANGE),
+      key: buildKeyProp(options, DecoratorKeys.VALUE_RANGE),
       valid: isValueRangeValid(num, min, max),
-      message: buildMessageProp(options, locale, translate(locale, VALUE_RANGE, min, max, num)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.VALUE_RANGE, min, max, num)),
     }),
     buildGroupsProp(options)
   );

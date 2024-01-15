@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@ArrayOne` key. */
 export declare const ARRAY_ONE = "ArrayOne";
 /**
  * Checks if exactly one element of decorated array satisfies the given predicate criteria.
  *
- * @key {@link ARRAY_ONE ArrayOne}
+ * @key {@link DecoratorKeys.ARRAY_ONE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param predicate - The predicate for `Array.filter()` call.
@@ -52,5 +52,8 @@ export declare const ARRAY_ONE = "ArrayOne";
  * }
  * ```
  **/
-export declare function ArrayOne<K, T extends K[]>(predicate: Objects.ArrayPredicate<K>, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ArrayOne<K, T extends K[]>(
+  predicate: Objects.ArrayPredicate<K>,
+  options?: DecoratorOptions
+): FieldDecorator<T>;
 //# sourceMappingURL=ArrayOne.d.ts.map

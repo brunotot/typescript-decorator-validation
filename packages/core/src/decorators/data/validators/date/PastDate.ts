@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@PastDate` key. */
-export const PAST_DATE = "PastDate";
 
 /** Internal validation function for {@link PastDate} validator. */
 function isPastDateValid<T extends Objects.Optional<Date>>(date: T): boolean {
@@ -15,7 +13,7 @@ function isPastDateValid<T extends Objects.Optional<Date>>(date: T): boolean {
 /**
  * Checks if a {@link Date} is in the past.
  *
- * @key {@link PAST_DATE PastDate}
+ * @key {@link DecoratorKeys.PAST_DATE}
  * @typeParam T - The type of the date property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `Date`.
@@ -62,9 +60,9 @@ function isPastDateValid<T extends Objects.Optional<Date>>(date: T): boolean {
 export function PastDate<T extends Objects.Optional<Date>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (date, _context, locale) => ({
-      key: buildKeyProp(options, PAST_DATE),
+      key: buildKeyProp(options, DecoratorKeys.PAST_DATE),
       valid: isPastDateValid(date),
-      message: buildMessageProp(options, locale, translate(locale, PAST_DATE, date)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.PAST_DATE, date)),
     }),
     buildGroupsProp(options)
   );

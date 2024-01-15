@@ -1,6 +1,6 @@
-import { FieldDecorator, createFieldDecorator } from "@decorators/factory/forField/createFieldDecorator";
+import { type FieldDecorator, createFieldDecorator } from "@decorators/factory/forField/createFieldDecorator";
 import { PrimitiveTypeOverride } from "@overrides";
-import { Objects, Types } from "@utilities";
+import { type Objects, type Types } from "@utilities";
 
 /**
  * Creates a decorator which flags the given field as a non-primitive (will validate inner fields of `T`).

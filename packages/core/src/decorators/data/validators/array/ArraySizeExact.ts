@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@ArraySizeExact` key. */
-export const ARRAY_SIZE_EXACT = "ArraySizeExact";
 
 /** Internal validation function for {@link ArraySizeExact} validator. */
 function isArraySizeExactValid(array: any[]): boolean {
@@ -15,7 +13,7 @@ function isArraySizeExactValid(array: any[]): boolean {
 /**
  * Checks if the decorated array contains an exact number of elements.
  *
- * @key {@link ARRAY_SIZE_EXACT ArraySizeExact}
+ * @key {@link DecoratorKeys.ARRAY_SIZE_EXACT}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param exact - Exact size value.
@@ -64,9 +62,13 @@ function isArraySizeExactValid(array: any[]): boolean {
 export function ArraySizeExact<K, T extends K[]>(exact: number, options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: buildKeyProp(options, ARRAY_SIZE_EXACT),
+      key: buildKeyProp(options, DecoratorKeys.ARRAY_SIZE_EXACT),
       valid: isArraySizeExactValid(array),
-      message: buildMessageProp(options, locale, translate(locale, ARRAY_SIZE_EXACT, exact, (array ?? []).length)),
+      message: buildMessageProp(
+        options,
+        locale,
+        translate(locale, DecoratorKeys.ARRAY_SIZE_EXACT, exact, (array ?? []).length)
+      ),
     }),
     buildGroupsProp(options)
   );

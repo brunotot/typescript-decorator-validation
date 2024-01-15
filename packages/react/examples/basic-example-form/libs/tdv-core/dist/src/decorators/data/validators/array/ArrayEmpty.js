@@ -1,18 +1,16 @@
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 import { translate } from "../../../../localization";
 import { Objects } from "../../../../utilities";
-/** `@ArrayEmpty` key. */
-export const ARRAY_EMPTY = "ArrayEmpty";
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 /** Internal validation function for {@link ArrayEmpty} validator. */
 function isArrayEmptyValid(array) {
-    Objects.assertType("array", array);
-    return (array !== null && array !== void 0 ? array : []).length === 0;
+  Objects.assertType("array", array);
+  return (array !== null && array !== void 0 ? array : []).length === 0;
 }
 /**
  * Checks if the decorated array is empty.
  *
- * @key {@link ARRAY_EMPTY ArrayEmpty}
+ * @key {@link DecoratorKeys.ARRAY_EMPTY}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -58,9 +56,12 @@ function isArrayEmptyValid(array) {
  * ```
  */
 export function ArrayEmpty(options) {
-    return createFieldValidator((array, _context, locale) => ({
-        key: buildKeyProp(options, ARRAY_EMPTY),
-        valid: isArrayEmptyValid(array),
-        message: buildMessageProp(options, locale, translate(locale, ARRAY_EMPTY)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (array, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.ARRAY_EMPTY),
+      valid: isArrayEmptyValid(array),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ARRAY_EMPTY)),
+    }),
+    buildGroupsProp(options)
+  );
 }

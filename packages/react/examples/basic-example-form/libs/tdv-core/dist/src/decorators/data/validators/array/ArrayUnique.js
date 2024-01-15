@@ -1,31 +1,29 @@
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 import { translate } from "../../../../localization";
 import { Objects } from "../../../../utilities";
-/** `@ArrayUnique` key. */
-export const ARRAY_UNIQUE = "ArrayUnique";
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 /** Internal validation function for {@link ArrayUnique} validator. */
 function isArrayUniqueValid(array) {
-    Objects.assertType("array", array);
-    const hashFn = Objects.hash;
-    function isArrayUnique(arr, equals) {
-        const set = new Set();
-        for (const val of arr) {
-            for (const el of set) {
-                if (equals(val, el)) {
-                    return false;
-                }
-            }
-            set.add(val);
+  Objects.assertType("array", array);
+  const hashFn = Objects.hash;
+  function isArrayUnique(arr, equals) {
+    const set = new Set();
+    for (const val of arr) {
+      for (const el of set) {
+        if (equals(val, el)) {
+          return false;
         }
-        return true;
+      }
+      set.add(val);
     }
-    return isArrayUnique(array !== null && array !== void 0 ? array : [], (obj1, obj2) => hashFn(obj1) === hashFn(obj2));
+    return true;
+  }
+  return isArrayUnique(array !== null && array !== void 0 ? array : [], (obj1, obj2) => hashFn(obj1) === hashFn(obj2));
 }
 /**
  * Checks if all elements in decorated array are unique.
  *
- * @key {@link ARRAY_UNIQUE ArrayUnique}
+ * @key {@link DecoratorKeys.ARRAY_UNIQUE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -71,9 +69,12 @@ function isArrayUniqueValid(array) {
  * ```
  */
 export function ArrayUnique(options) {
-    return createFieldValidator((array, _context, locale) => ({
-        key: buildKeyProp(options, ARRAY_UNIQUE),
-        valid: isArrayUniqueValid(array),
-        message: buildMessageProp(options, locale, translate(locale, ARRAY_UNIQUE)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (array, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.ARRAY_UNIQUE),
+      valid: isArrayUniqueValid(array),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ARRAY_UNIQUE)),
+    }),
+    buildGroupsProp(options)
+  );
 }

@@ -1,13 +1,7 @@
-// samo prati redoslijed
-
-export * from "./utilities";
-
-export * from "./localization";
-
 export * from "./decorators";
-
+export * from "./localization";
+export * from "./overrides";
 export * from "./reflection";
-
 export * from "./strategy";
-
+export * from "./utilities";
 export * from "./validation";

@@ -1,18 +1,19 @@
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 import { translate } from "../../../../localization";
 import { Objects } from "../../../../utilities";
-/** `@ArraySizeRange` key. */
-export const ARRAY_SIZE_RANGE = "ArraySizeRange";
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 /** Internal validation function for {@link ArraySizeRange} validator. */
 function isArraySizeRangeValid(array, min, max) {
-    Objects.assertType("array", array);
-    return (array !== null && array !== void 0 ? array : []).length >= min && (array !== null && array !== void 0 ? array : []).length <= max;
+  Objects.assertType("array", array);
+  return (
+    (array !== null && array !== void 0 ? array : []).length >= min &&
+    (array !== null && array !== void 0 ? array : []).length <= max
+  );
 }
 /**
  * Checks if the decorated array contains at least `min` number of elements.
  *
- * @key {@link ARRAY_SIZE_RANGE ArraySizeRange}
+ * @key {@link DecoratorKeys.ARRAY_SIZE_RANGE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param min - Min size value.
@@ -60,9 +61,22 @@ function isArraySizeRangeValid(array, min, max) {
  * ```
  */
 export function ArraySizeRange(min, max, options) {
-    return createFieldValidator((array, _context, locale) => ({
-        key: buildKeyProp(options, ARRAY_SIZE_RANGE),
-        valid: isArraySizeRangeValid(array, min, max),
-        message: buildMessageProp(options, locale, translate(locale, ARRAY_SIZE_RANGE, min, max, (array !== null && array !== void 0 ? array : []).length)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (array, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.ARRAY_SIZE_RANGE),
+      valid: isArraySizeRangeValid(array, min, max),
+      message: buildMessageProp(
+        options,
+        locale,
+        translate(
+          locale,
+          DecoratorKeys.ARRAY_SIZE_RANGE,
+          min,
+          max,
+          (array !== null && array !== void 0 ? array : []).length
+        )
+      ),
+    }),
+    buildGroupsProp(options)
+  );
 }

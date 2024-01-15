@@ -1,12 +1,12 @@
+import { Objects } from "../../../../../../utilities";
 import { FieldDecorator } from "../../../../../factory/forField";
 import { DecoratorOptions } from "../../../../../helper";
-import { Objects } from "../../../../../../utilities";
 /** `@IPAddress` key. */
 export declare const IP_ADDRESS = "IPAddress";
 /**
  * Checks if decorated string is a valid IP address.
  *
- * @key {@link IP_ADDRESS IPAddress}
+ * @key {@link DecoratorKeys.IP_ADDRESS}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.

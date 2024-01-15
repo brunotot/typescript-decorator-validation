@@ -5,7 +5,7 @@ export declare const ASSERT_TRUE = "AssertTrue";
 /**
  * Checks if a boolean value is `true`.
  *
- * @key {@link ASSERT_TRUE AssertTrue}
+ * @key {@link DecoratorKeys.ASSERT_TRUE}
  * @typeParam T - The type of the decorated property (boolean).
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `boolean`.

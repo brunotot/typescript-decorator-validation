@@ -5,7 +5,7 @@ export declare const ARRAY_UNIQUE = "ArrayUnique";
 /**
  * Checks if all elements in decorated array are unique.
  *
- * @key {@link ARRAY_UNIQUE ArrayUnique}
+ * @key {@link DecoratorKeys.ARRAY_UNIQUE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

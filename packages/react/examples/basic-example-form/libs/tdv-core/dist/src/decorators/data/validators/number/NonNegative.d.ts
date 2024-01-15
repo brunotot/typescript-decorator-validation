@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@NonNegative` key. */
 export declare const NON_NEGATIVE = "NonNegative";
 /**
  * Checks if decorated number is not a negative number (can be 0).
  *
- * @key {@link NON_NEGATIVE NonNegative}
+ * @key {@link DecoratorKeys.NON_NEGATIVE}
  * @typeParam T - The type of the number property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `number`.

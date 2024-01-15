@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@Integer` key. */
-export const INTEGER = "Integer";
 
 /** Internal validation function for {@link Integer} validator. */
 function isIntegerValid(num: Objects.Optional<number>): boolean {
@@ -15,7 +13,7 @@ function isIntegerValid(num: Objects.Optional<number>): boolean {
 /**
  * Checks if decorated number is an integer number.
  *
- * @key {@link INTEGER Integer}
+ * @key {@link DecoratorKeys.INTEGER}
  * @typeParam T - The type of the number property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `number`.
@@ -62,9 +60,9 @@ function isIntegerValid(num: Objects.Optional<number>): boolean {
 export function Integer<T extends Objects.Optional<number>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (num, _context, locale) => ({
-      key: buildKeyProp(options, INTEGER),
+      key: buildKeyProp(options, DecoratorKeys.INTEGER),
       valid: isIntegerValid(num),
-      message: buildMessageProp(options, locale, translate(locale, INTEGER, num)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.INTEGER, num)),
     }),
     buildGroupsProp(options)
   );

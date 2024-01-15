@@ -1,7 +1,7 @@
 import { createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
-import { Objects } from "@utilities";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
+import { type Objects } from "@utilities";
 
 /**
  * Tests if a value matches a regular expression pattern.

@@ -1,8 +1,8 @@
-import { AbstractMetaService, MetaStrategy } from "@reflection/service/AbstractMetaService";
+import { AbstractMetaService, type MetaStrategy } from "@reflection/service/AbstractMetaService";
 import { type AbstractValidationStrategyService } from "@strategy";
 import { StrategyData } from "@strategy/models/StrategyMapper";
 import * as Strategies from "@strategy/service/impl";
-import { Classes, EventEmitter, Types } from "@utilities";
+import { Classes, type EventEmitter, type Types } from "@utilities";
 import { ValidationMetadata } from "@validation/models/ValidationMetadata";
 import type { ValidationEvaluator } from "@validation/types";
 
@@ -98,7 +98,7 @@ export class ControlDescriptor<This, HostClass, Name extends keyof HostClass | u
       return "unknown";
     }
     if (!this.thisName) {
-      return Strategies["ObjectStrategy"].Name;
+      return Strategies.ObjectStrategy.Name;
     }
     const instance = new this.hostClass();
     const fieldName = this.thisName;
@@ -119,16 +119,16 @@ export class ControlDescriptor<This, HostClass, Name extends keyof HostClass | u
           "message" in value &&
           typeof value.message === "string")
       ) {
-        return Strategies["FunctionStrategy"].Name;
+        return Strategies.FunctionStrategy.Name;
       }
 
       return Array.isArray(value)
         ? descriptor.thisClass
-          ? Strategies["ObjectArrayStrategy"].Name
-          : Strategies["PrimitiveArrayStrategy"].Name
+          ? Strategies.ObjectArrayStrategy.Name
+          : Strategies.PrimitiveArrayStrategy.Name
         : descriptor.thisClass
-        ? Strategies["ObjectStrategy"].Name
-        : Strategies["PrimitiveStrategy"].Name;
+        ? Strategies.ObjectStrategy.Name
+        : Strategies.PrimitiveStrategy.Name;
     };
 
     const descriptor = Classes.getClassFieldDescriptor(this.hostClass, fieldName);

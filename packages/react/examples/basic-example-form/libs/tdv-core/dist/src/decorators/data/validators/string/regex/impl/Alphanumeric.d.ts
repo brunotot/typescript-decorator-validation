@@ -1,12 +1,12 @@
+import { Objects } from "../../../../../../utilities";
 import { FieldDecorator } from "../../../../../factory/forField";
 import { DecoratorOptions } from "../../../../../helper";
-import { Objects } from "../../../../../../utilities";
 /** `@Alphanumeric` key. */
 export declare const ALPHANUMERIC = "Alphanumeric";
 /**
  * Checks if decorated string contains only alphabetical or number characters.
  *
- * @key {@link ALPHANUMERIC Alphanumeric}
+ * @key {@link DecoratorKeys.ALPHANUMERIC}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.

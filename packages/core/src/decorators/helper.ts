@@ -1,5 +1,5 @@
-import { Locale, parseMessage } from "@localization";
-import { MessageProp } from "@overrides";
+import { type Locale, getMessageParser } from "@localization";
+import { type MessageProp } from "@overrides";
 import { Objects } from "@utilities";
 
 /** Represents decorator external dependency arguments. */
@@ -14,6 +14,17 @@ export type DecoratorOptions = {
   /** Unique list of groups for conditional validation. Validator triggers only if the form is applied on a listed group. */
   groups?: string[];
 };
+
+function parseMessage(locale: Locale, message: string, args: Record<string, string> = {}): string {
+  try {
+    return getMessageParser()(locale, message, args);
+  } catch (error) {
+    const title = `An error occurred while resolving "${message}" for locale "${locale}".`;
+    const descr = `To fix, check your Localization.configureParser() implementation or review stack-trace.`;
+    const stacktrace = `\n\n${String(error)}`;
+    throw new Error(`${title} ${descr} ${stacktrace}`);
+  }
+}
 
 /**
  * Retrieves the localized message based on the provided options, locale, and default message.

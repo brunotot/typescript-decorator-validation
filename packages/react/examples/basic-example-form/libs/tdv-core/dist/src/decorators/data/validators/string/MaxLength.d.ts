@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@MaxLength` key. */
 export declare const MAX_LENGTH = "MaxLength";
 /**
  * Checks if decorated string contains a specific number of characters.
  *
- * @key {@link MAX_LENGTH MaxLength}
+ * @key {@link DecoratorKeys.MAX_LENGTH}
  * @typeParam T - The type of the string property.
  * @param max - Maximum length value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -48,5 +48,8 @@ export declare const MAX_LENGTH = "MaxLength";
  * }
  * ```
  */
-export declare function MaxLength<T extends Objects.Optional<string>>(max: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function MaxLength<T extends Objects.Optional<string>>(
+  max: number,
+  options?: DecoratorOptions
+): FieldDecorator<T>;
 //# sourceMappingURL=MaxLength.d.ts.map

@@ -1,18 +1,16 @@
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 import { translate } from "../../../../localization";
 import { Objects } from "../../../../utilities";
-/** `@ValueMax` key. */
-export const VALUE_MAX = "ValueMax";
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 /** Internal validation function for {@link ValueMax} validator. */
 function isValueMaxValid(num, max) {
-    Objects.assertType("number", num);
-    return num == null ? true : num <= max;
+  Objects.assertType("number", num);
+  return num == null ? true : num <= max;
 }
 /**
  * Checks if decorated number is not greater than given `max` parameter.
  *
- * @key {@link VALUE_MAX ValueMax}
+ * @key {@link DecoratorKeys.VALUE_MAX}
  * @typeParam T - The type of the number property.
  * @param max - Maximum allowed value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -58,9 +56,12 @@ function isValueMaxValid(num, max) {
  * ```
  */
 export function ValueMax(max, options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: buildKeyProp(options, VALUE_MAX),
-        valid: isValueMaxValid(value, max),
-        message: buildMessageProp(options, locale, translate(locale, VALUE_MAX, max, value)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.VALUE_MAX),
+      valid: isValueMaxValid(value, max),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.VALUE_MAX, max, value)),
+    }),
+    buildGroupsProp(options)
+  );
 }

@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@ValueMax` key. */
 export declare const VALUE_MAX = "ValueMax";
 /**
  * Checks if decorated number is not greater than given `max` parameter.
  *
- * @key {@link VALUE_MAX ValueMax}
+ * @key {@link DecoratorKeys.VALUE_MAX}
  * @typeParam T - The type of the number property.
  * @param max - Maximum allowed value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -51,5 +51,8 @@ export declare const VALUE_MAX = "ValueMax";
  * }
  * ```
  */
-export declare function ValueMax<T extends Objects.Optional<number>>(max: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ValueMax<T extends Objects.Optional<number>>(
+  max: number,
+  options?: DecoratorOptions
+): FieldDecorator<T>;
 //# sourceMappingURL=ValueMax.d.ts.map

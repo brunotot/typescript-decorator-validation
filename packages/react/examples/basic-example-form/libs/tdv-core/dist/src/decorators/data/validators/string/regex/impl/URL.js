@@ -1,20 +1,18 @@
+import { translate } from "../../../../../../localization";
+import { Objects } from "../../../../../../utilities";
 import { testRegex } from "../../../../../data/validators/string/regex/Pattern";
 import { RegexConst } from "../../../../../data/validators/string/regex/shared/regex.constants";
 import { createFieldValidator } from "../../../../../factory/forField";
 import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../../helper";
-import { translate } from "../../../../../../localization";
-import { Objects } from "../../../../../../utilities";
-/** `@URL` key. */
-export const URL_KEY = "URL";
 /** Internal validation function for {@link URL} validator. */
 function isURLValid(value) {
-    Objects.assertType("string", value);
-    return testRegex(RegexConst.URL, value);
+  Objects.assertType("string", value);
+  return testRegex(RegexConst.URL, value);
 }
 /**
  * Checks if decorated string is a valid URL.
  *
- * @key {@link URL_KEY URL}
+ * @key {@link DecoratorKeys.URL_KEY}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.
@@ -59,9 +57,12 @@ function isURLValid(value) {
  * ```
  */
 export function URL(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: buildKeyProp(options, URL_KEY),
-        valid: isURLValid(value),
-        message: buildMessageProp(options, locale, translate(locale, URL_KEY)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.URL_KEY),
+      valid: isURLValid(value),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.URL_KEY)),
+    }),
+    buildGroupsProp(options)
+  );
 }

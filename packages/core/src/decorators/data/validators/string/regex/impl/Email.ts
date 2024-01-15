@@ -1,12 +1,10 @@
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
 import { testRegex } from "@decorators/data/validators/string/regex/Pattern";
 import { RegexConst } from "@decorators/data/validators/string/regex/shared/regex.constants";
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@Email` key. */
-export const EMAIL = "Email";
 
 /** Internal validation function for {@link Email} validator. */
 function isEmailValid<T extends Objects.Optional<string>>(value: T): boolean {
@@ -17,7 +15,7 @@ function isEmailValid<T extends Objects.Optional<string>>(value: T): boolean {
 /**
  * Checks if decorated string is a valid email.
  *
- * @key {@link EMAIL Email}
+ * @key {@link DecoratorKeys.EMAIL}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.
@@ -64,9 +62,9 @@ function isEmailValid<T extends Objects.Optional<string>>(value: T): boolean {
 export function Email<T extends Objects.Optional<string>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: buildKeyProp(options, EMAIL),
+      key: buildKeyProp(options, DecoratorKeys.EMAIL),
       valid: isEmailValid(value),
-      message: buildMessageProp(options, locale, translate(locale, EMAIL)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.EMAIL)),
     }),
     buildGroupsProp(options)
   );

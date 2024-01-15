@@ -11,21 +11,14 @@
  */
 export type Locale = "en" | "hr" | "de" | "es" | "fr" | "it" | "nl";
 
-/**
- *  Current global locale setting, defaulted to English (**en**).
- */
 let locale: Locale = "en";
 
-/**
- * Retrieves the current global `Locale`.
- */
-export function getLocale(): Locale {
+/** Returns the current global {@link Locale `Locale`} value. */
+export function getGlobalLocale(): Locale {
   return locale;
 }
 
-/**
- * Sets the global `Locale` to the specified value.
- */
-export function setLocale(localeValue: Locale): void {
+/** Sets the global {@link Locale `Locale`} to the specified value. */
+export function setGlobalLocale(localeValue: Locale): void {
   locale = localeValue;
 }

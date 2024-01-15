@@ -1,18 +1,16 @@
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 import { translate } from "../../../../localization";
 import { Objects } from "../../../../utilities";
-/** `@MaxLength` key. */
-export const MAX_LENGTH = "MaxLength";
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 /** Internal validation function for {@link MaxLength} validator. */
 function isMaxLengthValid(value, max) {
-    Objects.assertType("string", value);
-    return (value !== null && value !== void 0 ? value : "").length <= max;
+  Objects.assertType("string", value);
+  return (value !== null && value !== void 0 ? value : "").length <= max;
 }
 /**
  * Checks if decorated string contains a specific number of characters.
  *
- * @key {@link MAX_LENGTH MaxLength}
+ * @key {@link DecoratorKeys.MAX_LENGTH}
  * @typeParam T - The type of the string property.
  * @param max - Maximum length value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -55,9 +53,12 @@ function isMaxLengthValid(value, max) {
  * ```
  */
 export function MaxLength(max, options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: buildKeyProp(options, MAX_LENGTH),
-        valid: isMaxLengthValid(value, max),
-        message: buildMessageProp(options, locale, translate(locale, MAX_LENGTH, max)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.MAX_LENGTH),
+      valid: isMaxLengthValid(value, max),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.MAX_LENGTH, max)),
+    }),
+    buildGroupsProp(options)
+  );
 }

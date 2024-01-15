@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@ArraySizeMax` key. */
-export const ARRAY_SIZE_MAX = "ArraySizeMax";
 
 /** Internal validation function for {@link ArraySizeMax} validator. */
 function isArraySizeMaxValid(array: any[], max: number): boolean {
@@ -15,7 +13,7 @@ function isArraySizeMaxValid(array: any[], max: number): boolean {
 /**
  * Checks if the decorated array contains up to `max` number of elements.
  *
- * @key {@link ARRAY_SIZE_MAX ArraySizeMax}
+ * @key {@link DecoratorKeys.ARRAY_SIZE_MAX}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param max - Max size value.
@@ -64,9 +62,13 @@ function isArraySizeMaxValid(array: any[], max: number): boolean {
 export function ArraySizeMax<K, T extends K[]>(max: number, options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _, locale) => ({
-      key: buildKeyProp(options, ARRAY_SIZE_MAX),
+      key: buildKeyProp(options, DecoratorKeys.ARRAY_SIZE_MAX),
       valid: isArraySizeMaxValid(array, max),
-      message: buildMessageProp(options, locale, translate(locale, ARRAY_SIZE_MAX, max, (array ?? []).length)),
+      message: buildMessageProp(
+        options,
+        locale,
+        translate(locale, DecoratorKeys.ARRAY_SIZE_MAX, max, (array ?? []).length)
+      ),
     }),
     buildGroupsProp(options)
   );

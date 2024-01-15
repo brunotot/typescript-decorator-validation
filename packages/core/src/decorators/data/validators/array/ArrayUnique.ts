@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@ArrayUnique` key. */
-export const ARRAY_UNIQUE = "ArrayUnique";
 
 /** Internal validation function for {@link ArrayUnique} validator. */
 function isArrayUniqueValid(array: any[]): boolean {
@@ -28,7 +26,7 @@ function isArrayUniqueValid(array: any[]): boolean {
 /**
  * Checks if all elements in decorated array are unique.
  *
- * @key {@link ARRAY_UNIQUE ArrayUnique}
+ * @key {@link DecoratorKeys.ARRAY_UNIQUE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -76,9 +74,9 @@ function isArrayUniqueValid(array: any[]): boolean {
 export function ArrayUnique<K, T extends K[]>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: buildKeyProp(options, ARRAY_UNIQUE),
+      key: buildKeyProp(options, DecoratorKeys.ARRAY_UNIQUE),
       valid: isArrayUniqueValid(array),
-      message: buildMessageProp(options, locale, translate(locale, ARRAY_UNIQUE)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ARRAY_UNIQUE)),
     }),
     buildGroupsProp(options)
   );

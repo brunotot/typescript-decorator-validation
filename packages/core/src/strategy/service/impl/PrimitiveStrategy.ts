@@ -1,5 +1,5 @@
-import { DecoratorArgs } from "@decorators";
-import { Booleans, Types } from "@utilities";
+import { type DecoratorArgs } from "@decorators";
+import { type Booleans, type Types } from "@utilities";
 import type { ValidationResult } from "@validation/types";
 import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
 

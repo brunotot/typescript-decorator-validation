@@ -1,6 +1,6 @@
-import { Locale } from "@localization";
+import { type Locale } from "@localization";
 import type { DetailedErrorsResponse, SimpleErrorsResponse } from "@strategy";
-import { Objects } from "@utilities";
+import { type Objects } from "@utilities";
 
 /**
  * Represents a function that evaluates a value and returns a validation result.

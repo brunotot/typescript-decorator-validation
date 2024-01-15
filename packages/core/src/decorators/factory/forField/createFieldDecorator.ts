@@ -1,4 +1,4 @@
-import { DecoratorArgs } from "@decorators/helper";
+import { type DecoratorArgs } from "@decorators/helper";
 import { FieldValidatorMetaService } from "@reflection";
 import { EventEmitter } from "@utilities";
 

@@ -1,12 +1,10 @@
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
 import { testRegex } from "@decorators/data/validators/string/regex/Pattern";
 import { RegexConst } from "@decorators/data/validators/string/regex/shared/regex.constants";
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@URL` key. */
-export const URL_KEY = "URL";
 
 /** Internal validation function for {@link URL} validator. */
 function isURLValid<T extends Objects.Optional<string>>(value: T): boolean {
@@ -17,7 +15,7 @@ function isURLValid<T extends Objects.Optional<string>>(value: T): boolean {
 /**
  * Checks if decorated string is a valid URL.
  *
- * @key {@link URL_KEY URL}
+ * @key {@link DecoratorKeys.URL}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.
@@ -64,9 +62,9 @@ function isURLValid<T extends Objects.Optional<string>>(value: T): boolean {
 export function URL<T extends Objects.Optional<string>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: buildKeyProp(options, URL_KEY),
+      key: buildKeyProp(options, DecoratorKeys.URL),
       valid: isURLValid(value),
-      message: buildMessageProp(options, locale, translate(locale, URL_KEY)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.URL)),
     }),
     buildGroupsProp(options)
   );

@@ -1,4 +1,5 @@
 export * from "../structural/foreach";
+export * from "./DecoratorKeys";
 export * from "./any/Required";
 export * from "./array/ArrayContains";
 export * from "./array/ArrayEmpty";

@@ -1,6 +1,6 @@
-import { AbstractValidationStrategyService } from "@strategy/service/AbstractValidationStrategyService";
+import { type AbstractValidationStrategyService } from "@strategy/service/AbstractValidationStrategyService";
 import * as Strategies from "@strategy/service/impl";
-import { Types } from "@utilities";
+import { type Types } from "@utilities";
 
 /**
  * A mapping of reflection strategy types to their corresponding `ValidationStrategy` classes.
@@ -8,13 +8,13 @@ import { Types } from "@utilities";
  */
 export const StrategyData: Record<string, Types.Class<AbstractValidationStrategyService>> = {
   unknown: (() => {}) as any,
-  [Strategies["PrimitiveStrategy"].Name]: Strategies.PrimitiveStrategy.StrategyResolver,
-  [Strategies["ObjectStrategy"].Name]: Strategies.ObjectStrategy.StrategyResolver,
-  [Strategies["PrimitiveArrayStrategy"].Name]: Strategies.PrimitiveArrayStrategy.StrategyResolver,
-  [Strategies["ObjectArrayStrategy"].Name]: Strategies.ObjectArrayStrategy.StrategyResolver,
-  [Strategies["PrimitiveGetterStrategy"].Name]: Strategies.PrimitiveGetterStrategy.StrategyResolver,
-  [Strategies["ObjectGetterStrategy"].Name]: Strategies.ObjectGetterStrategy.StrategyResolver,
-  [Strategies["PrimitiveArrayGetterStrategy"].Name]: Strategies.PrimitiveArrayGetterStrategy.StrategyResolver,
-  [Strategies["ObjectArrayGetterStrategy"].Name]: Strategies.ObjectArrayGetterStrategy.StrategyResolver,
-  [Strategies["FunctionStrategy"].Name]: Strategies.FunctionStrategy.StrategyResolver,
+  [Strategies.PrimitiveStrategy.Name]: Strategies.PrimitiveStrategy.StrategyResolver,
+  [Strategies.ObjectStrategy.Name]: Strategies.ObjectStrategy.StrategyResolver,
+  [Strategies.PrimitiveArrayStrategy.Name]: Strategies.PrimitiveArrayStrategy.StrategyResolver,
+  [Strategies.ObjectArrayStrategy.Name]: Strategies.ObjectArrayStrategy.StrategyResolver,
+  [Strategies.PrimitiveGetterStrategy.Name]: Strategies.PrimitiveGetterStrategy.StrategyResolver,
+  [Strategies.ObjectGetterStrategy.Name]: Strategies.ObjectGetterStrategy.StrategyResolver,
+  [Strategies.PrimitiveArrayGetterStrategy.Name]: Strategies.PrimitiveArrayGetterStrategy.StrategyResolver,
+  [Strategies.ObjectArrayGetterStrategy.Name]: Strategies.ObjectArrayGetterStrategy.StrategyResolver,
+  [Strategies.FunctionStrategy.Name]: Strategies.FunctionStrategy.StrategyResolver,
 };

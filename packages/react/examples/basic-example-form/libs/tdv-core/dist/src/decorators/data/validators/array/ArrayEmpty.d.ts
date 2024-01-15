@@ -5,7 +5,7 @@ export declare const ARRAY_EMPTY = "ArrayEmpty";
 /**
  * Checks if the decorated array is empty.
  *
- * @key {@link ARRAY_EMPTY ArrayEmpty}
+ * @key {@link DecoratorKeys.ARRAY_EMPTY}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

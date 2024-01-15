@@ -1,5 +1,5 @@
 import type { ValidationEvaluator } from "@validation/types";
-import { FieldDecorator, createFieldDecorator } from "./createFieldDecorator";
+import { type FieldDecorator, createFieldDecorator } from "./createFieldDecorator";
 
 /**
  * Creates validation decorators for fields.

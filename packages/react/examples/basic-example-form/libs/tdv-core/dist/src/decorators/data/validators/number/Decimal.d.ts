@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@Decimal` key. */
 export declare const DECIMAL = "Decimal";
 /**
  * Checks if decorated number is a decimal number.
  *
- * @key {@link DECIMAL Decimal}
+ * @key {@link DecoratorKeys.DECIMAL}
  * @typeParam T - The type of the number property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `number`.

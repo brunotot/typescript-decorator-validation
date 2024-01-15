@@ -1,5 +1,5 @@
-import { AbstractMetaService, MetaStrategy } from "@reflection/service/AbstractMetaService";
-import { EventEmitter, Types } from "@utilities";
+import { AbstractMetaService, type MetaStrategy } from "@reflection/service/AbstractMetaService";
+import { type EventEmitter, type Types } from "@utilities";
 import { ValidationMetadata } from "@validation/models/ValidationMetadata";
 import type { ValidationEvaluator } from "@validation/types";
 

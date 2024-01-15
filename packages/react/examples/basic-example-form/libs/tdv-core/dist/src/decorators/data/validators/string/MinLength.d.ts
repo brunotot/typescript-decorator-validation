@@ -1,11 +1,11 @@
-import { DecoratorOptions } from "../../../helper";
 import { Objects } from "../../../../utilities";
+import { DecoratorOptions } from "../../../helper";
 /** `@MinLength` key. */
 export declare const MIN_LENGTH = "MinLength";
 /**
  * Checks if decorated string contains a specific number of characters.
  *
- * @key {@link MIN_LENGTH MinLength}
+ * @key {@link DecoratorKeys.MIN_LENGTH}
  * @typeParam T - The type of the string property.
  * @param min - Minimum length value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -47,5 +47,8 @@ export declare const MIN_LENGTH = "MinLength";
  * }
  * ```
  */
-export declare function MinLength<T extends Objects.Optional<string>>(min: number, options?: DecoratorOptions): import("../../../factory/forField").FieldDecorator<T>;
+export declare function MinLength<T extends Objects.Optional<string>>(
+  min: number,
+  options?: DecoratorOptions
+): import("../../../factory/forField").FieldDecorator<T>;
 //# sourceMappingURL=MinLength.d.ts.map

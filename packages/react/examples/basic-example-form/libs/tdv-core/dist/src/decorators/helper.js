@@ -30,7 +30,7 @@ export function buildGroupsProp(options, defaultGroups = []) {
  * @param defaultKey - The default key.
  * @returns The key.
  */
-export function buildKeyProp(options, defaultKey) {
+export function buildKeyProp(options, DecoratorKeys.defaultKey) {
     var _a;
     return (_a = options === null || options === void 0 ? void 0 : options.key) !== null && _a !== void 0 ? _a : defaultKey;
 }

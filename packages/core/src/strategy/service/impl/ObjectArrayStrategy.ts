@@ -1,6 +1,6 @@
-import { DecoratorArgs } from "@decorators";
-import { DetailedErrorsResponse, SimpleErrorsResponse } from "@strategy/models";
-import { Arrays, Booleans } from "@utilities";
+import { type DecoratorArgs } from "@decorators";
+import { type DetailedErrorsResponse, type SimpleErrorsResponse } from "@strategy/models";
+import { type Arrays, type Booleans } from "@utilities";
 import type { ValidationResult } from "@validation/types";
 import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
 import { ObjectStrategy } from "./ObjectStrategy";

@@ -1,11 +1,10 @@
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
 import { RegexConst } from "@decorators/data/validators/string/regex/shared/regex.constants";
 import { createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildMessageProp } from "@decorators/helper";
-import { Locale, translate } from "@localization";
-import { Objects } from "@utilities";
-
-/** `@Password` key. */
-export const PASSWORD = "Password";
+import { type DecoratorOptions, buildGroupsProp, buildMessageProp } from "@decorators/helper";
+import { type Locale } from "@localization";
+import { translate } from "@localization/service/TranslationService";
+import { type Objects } from "@utilities";
 
 /** Configurable options for `@Password` decorator. */
 export type PasswordRules = {
@@ -36,7 +35,7 @@ function isPasswordValid(
 
   function buildConstraintViolation(message: string, valid: boolean) {
     return {
-      key: PASSWORD,
+      key: DecoratorKeys.PASSWORD,
       message,
       valid,
     };
@@ -67,13 +66,13 @@ function isPasswordValid(
     return buildConstraintViolation(definedMessage ?? translate(locale, "PasswordSpecials"), false);
   }
 
-  return { key: PASSWORD, message: "", valid: true };
+  return { key: DecoratorKeys.PASSWORD, message: "", valid: true };
 }
 
 /**
  * Checks if decorated string contains a specific number of characters.
  *
- * @key {@link PASSWORD Password}
+ * @key {@link DecoratorKeys.PASSWORD}
  * @typeParam T - The type of the string property.
  * @param rules - Customizable rules for specific password validations.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)

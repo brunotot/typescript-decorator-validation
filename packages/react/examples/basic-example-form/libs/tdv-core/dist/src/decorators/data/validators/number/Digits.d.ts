@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@Digits` key. */
 export declare const DIGITS = "Digits";
 /**
  * Checks if decorated number is a decimal number.
  *
- * @key {@link DIGITS Digits}
+ * @key {@link DecoratorKeys.DIGITS}
  * @typeParam T - The type of the number property.
  * @param intsLimit - The maximum number of allowed integer digits.
  * @param decimalsLimit - The maximum number of allowed decimal digits.
@@ -52,5 +52,9 @@ export declare const DIGITS = "Digits";
  * }
  * ```
  */
-export declare function Digits<T extends Objects.Optional<number>>(intsLimit: number, decimalsLimit: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function Digits<T extends Objects.Optional<number>>(
+  intsLimit: number,
+  decimalsLimit: number,
+  options?: DecoratorOptions
+): FieldDecorator<T>;
 //# sourceMappingURL=Digits.d.ts.map

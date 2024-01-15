@@ -1,25 +1,25 @@
+import { translate } from "../../../../localization/service/TranslationService";
 import { createFieldValidator } from "../../../factory/forField";
 import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
-import { translate } from "../../../../localization/service/TranslationService";
-/** `@Required` key. */
-export const REQUIRED = "Required";
 /**
  * Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.
  *
  * @typeParam T - The type of the value.
  */
 function isRequiredValid(value) {
-    return !(value === undefined ||
-        value === null ||
-        value === false ||
-        (Array.isArray(value) && value.length === 0) ||
-        (typeof value === "string" && value.trim().length === 0) ||
-        (value instanceof Date && value.toString() === "Invalid Date"));
+  return !(
+    value === undefined ||
+    value === null ||
+    value === false ||
+    (Array.isArray(value) && value.length === 0) ||
+    (typeof value === "string" && value.trim().length === 0) ||
+    (value instanceof Date && value.toString() === "Invalid Date")
+  );
 }
 /**
  * Creates a validator decorator which requires that a value must be present.
  *
- * @key {@link REQUIRED Required}
+ * @key {@link DecoratorKeys.REQUIRED}
  * @typeParam T - The type of the decorated property (any class field).
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use with class fields.
@@ -55,9 +55,12 @@ function isRequiredValid(value) {
  * ```
  */
 export function Required(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: buildKeyProp(options, REQUIRED),
-        valid: isRequiredValid(value),
-        message: buildMessageProp(options, locale, translate(locale, REQUIRED)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.REQUIRED),
+      valid: isRequiredValid(value),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.REQUIRED)),
+    }),
+    buildGroupsProp(options)
+  );
 }

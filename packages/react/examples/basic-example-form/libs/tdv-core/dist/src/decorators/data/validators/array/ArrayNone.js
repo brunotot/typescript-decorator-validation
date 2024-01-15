@@ -1,18 +1,16 @@
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 import { translate } from "../../../../localization";
 import { Objects } from "../../../../utilities";
-/** `@ArrayNone` key. */
-export const ARRAY_NONE = "ArrayNone";
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 /** Internal validation function for {@link ArrayNone} validator. */
 function isArrayNoneValid(array, predicate) {
-    Objects.assertType("array", array);
-    return !(array !== null && array !== void 0 ? array : []).some(predicate);
+  Objects.assertType("array", array);
+  return !(array !== null && array !== void 0 ? array : []).some(predicate);
 }
 /**
  * Checks if no elements of decorated array satisfy the given predicate criteria.
  *
- * @key {@link ARRAY_NONE ArrayNone}
+ * @key {@link DecoratorKeys.ARRAY_NONE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param predicate - The predicate for `!Array.every()` call.
@@ -59,9 +57,12 @@ function isArrayNoneValid(array, predicate) {
  * ```
  **/
 export function ArrayNone(predicate, options) {
-    return createFieldValidator((array, _context, locale) => ({
-        key: buildKeyProp(options, ARRAY_NONE),
-        valid: isArrayNoneValid(array, predicate),
-        message: buildMessageProp(options, locale, translate(locale, ARRAY_NONE)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (array, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.ARRAY_NONE),
+      valid: isArrayNoneValid(array, predicate),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ARRAY_NONE)),
+    }),
+    buildGroupsProp(options)
+  );
 }

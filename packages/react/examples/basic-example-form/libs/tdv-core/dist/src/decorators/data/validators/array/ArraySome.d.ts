@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@ArraySome` key. */
 export declare const ARRAY_SOME = "ArraySome";
 /**
  * Checks if at least one element of decorated array satisfies the given predicate criteria.
  *
- * @key {@link ARRAY_SOME ArraySome}
+ * @key {@link DecoratorKeys.ARRAY_SOME}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param predicate - The predicate for `Array.some()` call.
@@ -52,5 +52,8 @@ export declare const ARRAY_SOME = "ArraySome";
  * }
  * ```
  **/
-export declare function ArraySome<K, T extends K[]>(predicate: Objects.ArrayPredicate<K>, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ArraySome<K, T extends K[]>(
+  predicate: Objects.ArrayPredicate<K>,
+  options?: DecoratorOptions
+): FieldDecorator<T>;
 //# sourceMappingURL=ArraySome.d.ts.map

@@ -1,12 +1,12 @@
+import { Objects } from "../../../../../../utilities";
 import { FieldDecorator } from "../../../../../factory/forField";
 import { DecoratorOptions } from "../../../../../helper";
-import { Objects } from "../../../../../../utilities";
 /** `@Uppercase` key. */
 export declare const UPPERCASE = "Uppercase";
 /**
  * Checks if decorated string contains only uppercase characters.
  *
- * @key {@link UPPERCASE Uppercase}
+ * @key {@link DecoratorKeys.UPPERCASE}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.

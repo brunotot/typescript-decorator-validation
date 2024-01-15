@@ -1,20 +1,18 @@
+import { translate } from "../../../../../../localization";
+import { Objects } from "../../../../../../utilities";
 import { testRegex } from "../../../../../data/validators/string/regex/Pattern";
 import { RegexConst } from "../../../../../data/validators/string/regex/shared/regex.constants";
 import { createFieldValidator } from "../../../../../factory/forField";
 import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../../helper";
-import { translate } from "../../../../../../localization";
-import { Objects } from "../../../../../../utilities";
-/** `@Lowercase` key. */
-export const LOWERCASE = "Lowercase";
 /** Internal validation function for {@link Lowercase} validator. */
 function isLowercaseValid(value) {
-    Objects.assertType("string", value);
-    return testRegex(RegexConst.LOWERCASE, value);
+  Objects.assertType("string", value);
+  return testRegex(RegexConst.LOWERCASE, value);
 }
 /**
  * Checks if decorated string contains only lowercase characters.
  *
- * @key {@link LOWERCASE Lowercase}
+ * @key {@link DecoratorKeys.LOWERCASE}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.
@@ -59,9 +57,12 @@ function isLowercaseValid(value) {
  * ```
  */
 export function Lowercase(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: buildKeyProp(options, LOWERCASE),
-        valid: isLowercaseValid(value),
-        message: buildMessageProp(options, locale, translate(locale, LOWERCASE)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.LOWERCASE),
+      valid: isLowercaseValid(value),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.LOWERCASE)),
+    }),
+    buildGroupsProp(options)
+  );
 }

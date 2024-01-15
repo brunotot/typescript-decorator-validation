@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@TodayDate` key. */
-export const TODAY_DATE = "TodayDate";
 
 /** Internal validation function for {@link TodayDate} validator. */
 function isTodayDateValid<T extends Objects.Optional<Date>>(date: T): boolean {
@@ -21,7 +19,7 @@ function isTodayDateValid<T extends Objects.Optional<Date>>(date: T): boolean {
 /**
  * Checks if a {@link Date} is the today's date based on year, month and day.
  *
- * @key {@link TODAY_DATE TodayDate}
+ * @key {@link DecoratorKeys.TODAY_DATE}
  * @typeParam T - The type of the date property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `Date`.
@@ -68,9 +66,9 @@ function isTodayDateValid<T extends Objects.Optional<Date>>(date: T): boolean {
 export function TodayDate<T extends Objects.Optional<Date>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (date, _context, locale) => ({
-      key: buildKeyProp(options, TODAY_DATE),
+      key: buildKeyProp(options, DecoratorKeys.TODAY_DATE),
       valid: isTodayDateValid(date),
-      message: buildMessageProp(options, locale, translate(locale, TODAY_DATE, date)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.TODAY_DATE, date)),
     }),
     buildGroupsProp(options)
   );

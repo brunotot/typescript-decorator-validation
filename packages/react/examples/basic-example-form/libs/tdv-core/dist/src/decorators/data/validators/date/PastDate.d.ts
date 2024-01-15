@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@PastDate` key. */
 export declare const PAST_DATE = "PastDate";
 /**
  * Checks if a {@link Date} is in the past.
  *
- * @key {@link PAST_DATE PastDate}
+ * @key {@link DecoratorKeys.PAST_DATE}
  * @typeParam T - The type of the date property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `Date`.

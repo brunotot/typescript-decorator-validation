@@ -1,12 +1,12 @@
+import { Objects } from "../../../../../../utilities";
 import { FieldDecorator } from "../../../../../factory/forField";
 import { DecoratorOptions } from "../../../../../helper";
-import { Objects } from "../../../../../../utilities";
 /** `@URL` key. */
 export declare const URL_KEY = "URL";
 /**
  * Checks if decorated string is a valid URL.
  *
- * @key {@link URL_KEY URL}
+ * @key {@link DecoratorKeys.URL_KEY}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.

@@ -17,7 +17,7 @@ export namespace Objects {
    * Filters out getters, functions and read-only properties from a type
    */
   // prettier-ignore
-  export type Payload<T> = any/*Types.Prettify<Purify<{
+  export type Payload<T> = any/* Types.Prettify<Purify<{
     [K in keyof T]: true extends Booleans.isAnyOf<true, [
       Booleans.isGetter<T, K>,
       Booleans.isFunction<T[K]>,
@@ -30,7 +30,7 @@ export namespace Objects {
         : true extends Booleans.isPrimitive<T[K]>
           ? T[K]
           : Payload<T[K]>
-  }>>*/;
+  }>> */;
 
   /**
    * A conditional type that checks if types `X` and `Y` are equal. It returns type `A` if they are equal, and type `B` if they are not.

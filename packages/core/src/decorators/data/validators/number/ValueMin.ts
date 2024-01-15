@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@ValueMin` key. */
-export const VALUE_MIN = "ValueMin";
 
 /** Internal validation function for {@link ValueMin} validator. */
 function isValueMinValid(num: Objects.Optional<number>, min: number): boolean {
@@ -15,7 +13,7 @@ function isValueMinValid(num: Objects.Optional<number>, min: number): boolean {
 /**
  * Checks if decorated number is not lesser than given `min` parameter.
  *
- * @key {@link VALUE_MIN ValueMin}
+ * @key {@link DecoratorKeys.VALUE_MIN}
  * @typeParam T - The type of the number property.
  * @param min - Minimum allowed value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -66,9 +64,9 @@ export function ValueMin<T extends Objects.Optional<number>>(
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: buildKeyProp(options, VALUE_MIN),
+      key: buildKeyProp(options, DecoratorKeys.VALUE_MIN),
       valid: isValueMinValid(value, min),
-      message: buildMessageProp(options, locale, translate(locale, VALUE_MIN, min, value)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.VALUE_MIN, min, value)),
     }),
     buildGroupsProp(options)
   );

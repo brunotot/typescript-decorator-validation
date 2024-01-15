@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@Integer` key. */
 export declare const INTEGER = "Integer";
 /**
  * Checks if decorated number is an integer number.
  *
- * @key {@link INTEGER Integer}
+ * @key {@link DecoratorKeys.INTEGER}
  * @typeParam T - The type of the number property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `number`.

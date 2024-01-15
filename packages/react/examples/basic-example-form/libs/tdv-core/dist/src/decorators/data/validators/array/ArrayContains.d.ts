@@ -5,7 +5,7 @@ export declare const ARRAY_CONTAINS = "ArrayContains";
 /**
  * Checks if the decorated array contains a specific value.
  *
- * @key {@link ARRAY_CONTAINS ArrayContains}
+ * @key {@link DecoratorKeys.ARRAY_CONTAINS}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param contains - The value to check.

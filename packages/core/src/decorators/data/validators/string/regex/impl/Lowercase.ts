@@ -1,12 +1,10 @@
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
 import { testRegex } from "@decorators/data/validators/string/regex/Pattern";
 import { RegexConst } from "@decorators/data/validators/string/regex/shared/regex.constants";
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@Lowercase` key. */
-export const LOWERCASE = "Lowercase";
 
 /** Internal validation function for {@link Lowercase} validator. */
 function isLowercaseValid<T extends Objects.Optional<string>>(value: T): boolean {
@@ -17,7 +15,7 @@ function isLowercaseValid<T extends Objects.Optional<string>>(value: T): boolean
 /**
  * Checks if decorated string contains only lowercase characters.
  *
- * @key {@link LOWERCASE Lowercase}
+ * @key {@link DecoratorKeys.LOWERCASE}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.
@@ -64,9 +62,9 @@ function isLowercaseValid<T extends Objects.Optional<string>>(value: T): boolean
 export function Lowercase<T extends Objects.Optional<string>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: buildKeyProp(options, LOWERCASE),
+      key: buildKeyProp(options, DecoratorKeys.LOWERCASE),
       valid: isLowercaseValid(value),
-      message: buildMessageProp(options, locale, translate(locale, LOWERCASE)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.LOWERCASE)),
     }),
     buildGroupsProp(options)
   );

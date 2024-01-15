@@ -25,7 +25,7 @@ npm run build:noTest --prefix="$PWD_ROOT/packages/react" --silent
 stop "/"
 
 start "$(color $CYAN)4 $(color)" " $(color $GREY)5$(color) Generating documentation..."
-(cd "$PWD_ROOT" && npx typedoc --logLevel None)
+(cd "$PWD_ROOT" && npx typedoc --logLevel None --excludeInternal)
 stop "/"
 
 start "$(color $CYAN)5 $(color)" " $(color $GREY)5$(color) Normalizing output..."

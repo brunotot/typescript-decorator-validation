@@ -1,4 +1,4 @@
-import { Types } from "@utilities/impl/Types";
+import { type Types } from "@utilities/impl/Types";
 
 export namespace Classes {
   /**
@@ -45,9 +45,9 @@ export namespace Classes {
   export function getMetadata(strategy: any /* MetaStrategy */): DecoratorMetadataObject {
     if (isClass(strategy)) {
       (Symbol as any).metadata ??= Symbol("Symbol.metadata");
-      // @ts-ignore
+      // @ts-expect-error
       strategy[Symbol.metadata] ??= {};
-      // @ts-ignore
+      // @ts-expect-error
       return strategy[Symbol.metadata]!;
     }
     if (strategy && !strategy.metadata) {

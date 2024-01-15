@@ -1,6 +1,6 @@
-import { Types } from "@utilities";
+import { type Types } from "@utilities";
 import type { ValidationEvaluator } from "@validation/types";
-import { ClassDecorator, createClassDecorator } from "./createClassDecorator";
+import { type ClassDecorator, createClassDecorator } from "./createClassDecorator";
 
 /**
  * Creates validation decorators for classes.

@@ -42,7 +42,7 @@ function sprintf(str, ...args) {
  * const greeting = translate("en", "Hello", "John Doe");  // "Hello John Doe! How are you?"
  * ```
  */
-export function translate(locale, key, ...args) {
+export function translate(locale, DecoratorKeys.key, ...args) {
     const message = getMessage(key, locale);
     const translatedMessage = sprintf(message, ...args);
     return translatedMessage;

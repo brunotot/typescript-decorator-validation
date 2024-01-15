@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@ExactLength` key. */
 export declare const EXACT_LENGTH = "ExactLength";
 /**
  * Checks if decorated string contains a specific number of characters.
  *
- * @key {@link EXACT_LENGTH ExactLength}
+ * @key {@link DecoratorKeys.EXACT_LENGTH}
  * @typeParam T - The type of the string property.
  * @param exact - Exact length value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -48,5 +48,8 @@ export declare const EXACT_LENGTH = "ExactLength";
  * }
  * ```
  */
-export declare function ExactLength<T extends Objects.Optional<string>>(exact: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ExactLength<T extends Objects.Optional<string>>(
+  exact: number,
+  options?: DecoratorOptions
+): FieldDecorator<T>;
 //# sourceMappingURL=ExactLength.d.ts.map

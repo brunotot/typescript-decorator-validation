@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@Required` key. */
 export declare const REQUIRED = "Required";
 /**
  * Creates a validator decorator which requires that a value must be present.
  *
- * @key {@link REQUIRED Required}
+ * @key {@link DecoratorKeys.REQUIRED}
  * @typeParam T - The type of the decorated property (any class field).
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use with class fields.

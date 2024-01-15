@@ -1,20 +1,18 @@
+import { translate } from "../../../../../../localization";
+import { Objects } from "../../../../../../utilities";
 import { testRegex } from "../../../../../data/validators/string/regex/Pattern";
 import { RegexConst } from "../../../../../data/validators/string/regex/shared/regex.constants";
 import { createFieldValidator } from "../../../../../factory/forField";
 import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../../helper";
-import { translate } from "../../../../../../localization";
-import { Objects } from "../../../../../../utilities";
-/** `@Alphanumeric` key. */
-export const ALPHANUMERIC = "Alphanumeric";
 /** Internal validation function for {@link Alphanumeric} validator. */
 function isAlphanumericValid(value) {
-    Objects.assertType("string", value);
-    return testRegex(RegexConst.ALPHANUMERIC, value);
+  Objects.assertType("string", value);
+  return testRegex(RegexConst.ALPHANUMERIC, value);
 }
 /**
  * Checks if decorated string contains only alphabetical or number characters.
  *
- * @key {@link ALPHANUMERIC Alphanumeric}
+ * @key {@link DecoratorKeys.ALPHANUMERIC}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.
@@ -59,9 +57,12 @@ function isAlphanumericValid(value) {
  * ```
  */
 export function Alphanumeric(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: buildKeyProp(options, ALPHANUMERIC),
-        valid: isAlphanumericValid(value),
-        message: buildMessageProp(options, locale, translate(locale, ALPHANUMERIC)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.ALPHANUMERIC),
+      valid: isAlphanumericValid(value),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ALPHANUMERIC)),
+    }),
+    buildGroupsProp(options)
+  );
 }

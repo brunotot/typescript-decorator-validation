@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@Decimal` key. */
-export const DECIMAL = "Decimal";
 
 /** Internal validation function for {@link Decimal} validator. */
 function isDecimalValid<T extends Objects.Optional<number>>(value: T): boolean {
@@ -15,7 +13,7 @@ function isDecimalValid<T extends Objects.Optional<number>>(value: T): boolean {
 /**
  * Checks if decorated number is a decimal number.
  *
- * @key {@link DECIMAL Decimal}
+ * @key {@link DecoratorKeys.DECIMAL}
  * @typeParam T - The type of the number property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `number`.
@@ -62,9 +60,9 @@ function isDecimalValid<T extends Objects.Optional<number>>(value: T): boolean {
 export function Decimal<T extends Objects.Optional<number>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: buildKeyProp(options, DECIMAL),
+      key: buildKeyProp(options, DecoratorKeys.DECIMAL),
       valid: isDecimalValid(value),
-      message: buildMessageProp(options, locale, translate(locale, DECIMAL, value)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.DECIMAL, value)),
     }),
     buildGroupsProp(options)
   );

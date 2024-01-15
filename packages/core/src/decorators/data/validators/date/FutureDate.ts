@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@FutureDate` key. */
-export const FUTURE_DATE = "FutureDate";
 
 /** Internal validation function for {@link FutureDate} validator. */
 function isFutureDateValid<T extends Objects.Optional<Date>>(date: T): boolean {
@@ -15,7 +13,7 @@ function isFutureDateValid<T extends Objects.Optional<Date>>(date: T): boolean {
 /**
  * Checks if a {@link Date} is in the future.
  *
- * @key {@link FUTURE_DATE FutureDate}
+ * @key {@link DecoratorKeys.FUTURE_DATE}
  * @typeParam T - The type of the date property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `Date`.
@@ -62,9 +60,9 @@ function isFutureDateValid<T extends Objects.Optional<Date>>(date: T): boolean {
 export function FutureDate<T extends Objects.Optional<Date>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (date, _context, locale) => ({
-      key: buildKeyProp(options, FUTURE_DATE),
+      key: buildKeyProp(options, DecoratorKeys.FUTURE_DATE),
       valid: isFutureDateValid(date),
-      message: buildMessageProp(options, locale, translate(locale, FUTURE_DATE, date)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.FUTURE_DATE, date)),
     }),
     buildGroupsProp(options)
   );

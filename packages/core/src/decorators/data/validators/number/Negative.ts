@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@Negative` key. */
-export const NEGATIVE = "Negative";
 
 /** Internal validation function for {@link Negative} validator. */
 function isNegativeValid(num: Objects.Optional<number>): boolean {
@@ -15,7 +13,7 @@ function isNegativeValid(num: Objects.Optional<number>): boolean {
 /**
  * Checks if decorated number is a negative number (number less than 0).
  *
- * @key {@link NEGATIVE Negative}
+ * @key {@link DecoratorKeys.NEGATIVE}
  * @typeParam T - The type of the number property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `number`.
@@ -62,9 +60,9 @@ function isNegativeValid(num: Objects.Optional<number>): boolean {
 export function Negative<T extends Objects.Optional<number>>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (num, _context, locale) => ({
-      key: buildKeyProp(options, NEGATIVE),
+      key: buildKeyProp(options, DecoratorKeys.NEGATIVE),
       valid: isNegativeValid(num),
-      message: buildMessageProp(options, locale, translate(locale, NEGATIVE, num)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.NEGATIVE, num)),
     }),
     buildGroupsProp(options)
   );

@@ -1,8 +1,8 @@
-import { Locale, getLocale } from "@localization";
+import { type Locale, getGlobalLocale } from "@localization";
 import { ClassValidatorMetaService } from "@reflection/service/impl/ClassValidatorMetaService";
 import { FieldValidatorMetaService } from "@reflection/service/impl/FieldValidatorMetaService";
-import { DetailedErrorsResponse, SimpleErrorsResponse, getStrategyResult } from "@strategy";
-import { EventEmitter, Objects, Types } from "@utilities";
+import { type DetailedErrorsResponse, type SimpleErrorsResponse, type getStrategyResult } from "@strategy";
+import { EventEmitter, Objects, type Types } from "@utilities";
 import { Cache } from "@validation/models/Cache";
 import { Events } from "@validation/models/Events";
 import { ValidationMetadata } from "@validation/models/ValidationMetadata";
@@ -100,14 +100,6 @@ export class Form<TClass> {
     [key in keyof TClass]: ReturnType<typeof Objects.debounce>;
   } = {} as any;
 
-  public get async() {
-    return {
-      register: this.#registerAsync.bind(this),
-      unregister: this.#unregisterAsync.bind(this),
-      delay: this.#asyncDelay,
-    };
-  }
-
   /**
    * Gets the default host value.
    */
@@ -126,7 +118,7 @@ export class Form<TClass> {
     this.__id = Math.random().toString(36).substring(2, 8);
     this.#eventEmitter = new EventEmitter(this.__id, this.#asyncDelay);
     this.#hostClass = clazz;
-    this.locale = config?.locale ?? getLocale();
+    this.locale = config?.locale ?? getGlobalLocale();
     this.#groups = Array.from(new Set(config?.groups ?? []));
     this.#defaultValue = config?.defaultValue ?? (toClass(clazz) as Objects.Payload<TClass>);
     this.#fieldValidatorMetaService = FieldValidatorMetaService.inject(clazz, this.#eventEmitter);
@@ -217,7 +209,7 @@ export class Form<TClass> {
     );
 
     this.#fieldValidatorMetaService.getFields().forEach(field => {
-      const validation: any = this.#validateField(field as keyof TClass, state as any, args);
+      const validation: any = this.#validateField(field as keyof TClass, state, args);
       detailedErrors[field] = validation[0];
       errors[field] = validation[1];
     });
@@ -294,8 +286,8 @@ export class Form<TClass> {
     return stratImpl.test(payload[fieldName], payload, args);
   }
 
-  #registerAsync(handler: (props: AsyncEventResponseProps<TClass>) => void): void {
-    this.#unregisterAsync();
+  public registerAsync(handler: (props: AsyncEventResponseProps<TClass>) => void): void {
+    this.unregisterAsync();
     this.#eventListener = ({ key, value }: AsyncEventHandlerProps<TClass>) => {
       const { valid } = value;
       const currentErrors: any = this.#cache.get("errors");
@@ -346,7 +338,7 @@ export class Form<TClass> {
     this.#eventEmitter.on(Events.ASYNC_VALIDATION_COMPLETE, this.#eventListener);
   }
 
-  #unregisterAsync(): void {
+  public unregisterAsync(): void {
     if (this.#eventListener != null) {
       this.#eventEmitter.off(Events.ASYNC_VALIDATION_COMPLETE, this.#eventListener);
     }

@@ -1,18 +1,16 @@
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 import { translate } from "../../../../localization";
 import { Objects } from "../../../../utilities";
-/** `@ExactLength` key. */
-export const EXACT_LENGTH = "ExactLength";
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 /** Internal validation function for {@link ExactLength} validator. */
 function isExactLengthValid(value, exact) {
-    Objects.assertType("string", value);
-    return (value !== null && value !== void 0 ? value : "").length === exact;
+  Objects.assertType("string", value);
+  return (value !== null && value !== void 0 ? value : "").length === exact;
 }
 /**
  * Checks if decorated string contains a specific number of characters.
  *
- * @key {@link EXACT_LENGTH ExactLength}
+ * @key {@link DecoratorKeys.EXACT_LENGTH}
  * @typeParam T - The type of the string property.
  * @param exact - Exact length value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -55,9 +53,12 @@ function isExactLengthValid(value, exact) {
  * ```
  */
 export function ExactLength(exact, options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: buildKeyProp(options, EXACT_LENGTH),
-        valid: isExactLengthValid(value, exact),
-        message: buildMessageProp(options, locale, translate(locale, EXACT_LENGTH, exact)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.EXACT_LENGTH),
+      valid: isExactLengthValid(value, exact),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.EXACT_LENGTH, exact)),
+    }),
+    buildGroupsProp(options)
+  );
 }

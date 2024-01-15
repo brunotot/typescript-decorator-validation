@@ -1,10 +1,8 @@
-import { ClassDecorator, createClassValidator } from "@decorators/factory/forClass";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
-import { Objects, Types } from "@utilities";
-
-/** `@ValidDateRange` key. */
-export const VALID_DATE_RANGE = "ValidDateRange";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type ClassDecorator, createClassValidator } from "@decorators/factory/forClass";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
+import { Objects, type Types } from "@utilities";
 
 /** Internal validation function for {@link ValidDateRange} validator. */
 function isValidDateRangeValid(value: any, startDateField: string, endDateField: string): boolean {
@@ -15,7 +13,7 @@ function isValidDateRangeValid(value: any, startDateField: string, endDateField:
 /**
  * Checks if {@link Date} `startDateField` is before {@link Date} `endDateField` of a class.
  *
- * @key {@link VALID_DATE_RANGE ValidDateRange}
+ * @key {@link DecoratorKeys.VALID_DATE_RANGE}
  * @typeParam T - Class type on which the decorator is put.
  * @param startDateField - Field name for the start {@link Date} property.
  * @param endDateField - Field name for the end {@link Date} property.
@@ -69,14 +67,14 @@ export function ValidDateRange<T extends Types.Class>(
 ): ClassDecorator<T> {
   return createClassValidator<T>(
     (value, _context, locale) => ({
-      key: buildKeyProp(options, VALID_DATE_RANGE),
+      key: buildKeyProp(options, DecoratorKeys.VALID_DATE_RANGE),
       valid: isValidDateRangeValid(value, startDateField, endDateField),
       message: buildMessageProp(
         options,
         locale,
         translate(
           locale,
-          VALID_DATE_RANGE,
+          DecoratorKeys.VALID_DATE_RANGE,
           convertCamelCaseToText(endDateField, false),
           convertCamelCaseToText(startDateField)
         )

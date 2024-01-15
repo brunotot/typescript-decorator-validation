@@ -5,7 +5,7 @@ export declare const ARRAY_SIZE_MIN = "ArraySizeMin";
 /**
  * Checks if the decorated array contains at least `min` number of elements.
  *
- * @key {@link ARRAY_SIZE_MIN ArraySizeMin}
+ * @key {@link DecoratorKeys.ARRAY_SIZE_MIN}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param min - Min size value.

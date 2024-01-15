@@ -1,6 +1,6 @@
-import { Arrays } from "@utilities/impl/Arrays";
-import { Objects } from "@utilities/impl/Objects";
-import { Types } from "@utilities/impl/Types";
+import { type Arrays } from "@utilities/impl/Arrays";
+import { type Objects } from "@utilities/impl/Objects";
+import { type Types } from "@utilities/impl/Types";
 
 export namespace Booleans {
   /**

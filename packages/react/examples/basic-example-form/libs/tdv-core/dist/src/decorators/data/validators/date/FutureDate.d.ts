@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@FutureDate` key. */
 export declare const FUTURE_DATE = "FutureDate";
 /**
  * Checks if a {@link Date} is in the future.
  *
- * @key {@link FUTURE_DATE FutureDate}
+ * @key {@link DecoratorKeys.FUTURE_DATE}
  * @typeParam T - The type of the date property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `Date`.

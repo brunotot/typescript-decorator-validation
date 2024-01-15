@@ -1,18 +1,16 @@
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 import { translate } from "../../../../localization";
 import { Objects } from "../../../../utilities";
-/** `@NonPositive` key. */
-export const NON_POSITIVE = "NonPositive";
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 /** Internal validation function for {@link NonPositive} validator. */
 function isNonPositiveValid(num) {
-    Objects.assertType("number", num);
-    return num !== undefined && num !== null && num <= 0;
+  Objects.assertType("number", num);
+  return num !== undefined && num !== null && num <= 0;
 }
 /**
  * Checks if decorated number is not a positive number (can be 0).
  *
- * @key {@link NON_POSITIVE NonPositive}
+ * @key {@link DecoratorKeys.NON_POSITIVE}
  * @typeParam T - The type of the number property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `number`.
@@ -57,9 +55,12 @@ function isNonPositiveValid(num) {
  * ```
  */
 export function NonPositive(options) {
-    return createFieldValidator((num, _context, locale) => ({
-        key: buildKeyProp(options, NON_POSITIVE),
-        valid: isNonPositiveValid(num),
-        message: buildMessageProp(options, locale, translate(locale, NON_POSITIVE, num)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (num, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.NON_POSITIVE),
+      valid: isNonPositiveValid(num),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.NON_POSITIVE, num)),
+    }),
+    buildGroupsProp(options)
+  );
 }

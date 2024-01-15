@@ -1,18 +1,16 @@
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 import { translate } from "../../../../localization";
 import { Objects } from "../../../../utilities";
-/** `@ArrayContains` key. */
-export const ARRAY_CONTAINS = "ArrayContains";
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 /** Internal validation function for {@link ArrayContains} validator. */
 function isArrayContainsValid(value, contains) {
-    Objects.assertType("array", value);
-    return (value !== null && value !== void 0 ? value : []).includes(contains);
+  Objects.assertType("array", value);
+  return (value !== null && value !== void 0 ? value : []).includes(contains);
 }
 /**
  * Checks if the decorated array contains a specific value.
  *
- * @key {@link ARRAY_CONTAINS ArrayContains}
+ * @key {@link DecoratorKeys.ARRAY_CONTAINS}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param contains - The value to check.
@@ -59,9 +57,12 @@ function isArrayContainsValid(value, contains) {
  * ```
  */
 export function ArrayContains(contains, options) {
-    return createFieldValidator((array, _context, locale) => ({
-        key: buildKeyProp(options, ARRAY_CONTAINS),
-        valid: isArrayContainsValid(array, contains),
-        message: buildMessageProp(options, locale, translate(locale, ARRAY_CONTAINS, contains)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (array, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.ARRAY_CONTAINS),
+      valid: isArrayContainsValid(array, contains),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ARRAY_CONTAINS, contains)),
+    }),
+    buildGroupsProp(options)
+  );
 }

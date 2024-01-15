@@ -1,34 +1,24 @@
-import { Locale } from "@localization/resolver/LocaleResolver";
-import { MessageProp } from "@overrides";
+import { type Locale } from "@localization/resolver/LocaleResolver";
+import { type MessageProp } from "@overrides";
 
 /**
  * Message parser definition.
- * @param locale - current locale
- * @param message - message to parse
+ * @param {Locale} locale - Current locale
+ * @param {MessageProp} message - Message to parse
+ * @param {Record<string,string>} args - Arguments to parse message with
  */
 export type MessageParser = ((locale: Locale, message: MessageProp, args: Record<string, string>) => string) & {};
 
-const DEFAULT_CONFIGURER: MessageParser = (_, message) => message;
+const DEFAULT_MESSAGE_PARSER: MessageParser = (_, message) => String(message);
 
-let configurer: MessageParser = DEFAULT_CONFIGURER;
+const messageParser: MessageParser = DEFAULT_MESSAGE_PARSER;
 
-/**
- * Is used to globally define a custom message parser.
- */
-export function configureParser(handler?: MessageParser): void {
-  configurer = handler ?? DEFAULT_CONFIGURER;
+/** Returns the current global {@link MessageParser `MessageParser`} value. */
+export function getMessageParser(): MessageParser {
+  return messageParser;
 }
 
-/**
- * Internal handler for the customized message parser
- */
-export function parseMessage(locale: Locale, message: string, args: Record<string, string> = {}): string {
-  try {
-    return configurer(locale, message, args);
-  } catch (error) {
-    const title = `An error occurred while resolving "${message}" for locale "${locale}".`;
-    const descr = `To fix, check your Localization.configureParser() implementation or review stack-trace.`;
-    const stacktrace = `\n\n${String(error)}`;
-    throw new Error(`${title} ${descr} ${stacktrace}`);
-  }
+/** Sets the global {@link MessageParser `MessageParser`} to the specified value (pass `undefined` to revert to default). */
+export function setMessageParser(messageParser?: MessageParser): void {
+  messageParser = messageParser ?? DEFAULT_MESSAGE_PARSER;
 }

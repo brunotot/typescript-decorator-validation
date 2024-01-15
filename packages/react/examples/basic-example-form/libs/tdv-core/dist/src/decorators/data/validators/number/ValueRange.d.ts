@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@ValueRange` key. */
 export declare const VALUE_RANGE = "ValueRange";
 /**
  * Checks if decorated number is within a given range of `min` and `max` parameters.
  *
- * @key {@link VALUE_RANGE ValueRange}
+ * @key {@link DecoratorKeys.VALUE_RANGE}
  * @typeParam T - The type of the number property.
  * @param min - Minimum allowed value.
  * @param max - Maximum allowed value.
@@ -52,5 +52,9 @@ export declare const VALUE_RANGE = "ValueRange";
  * }
  * ```
  */
-export declare function ValueRange<T extends Objects.Optional<number>>(min: number, max: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ValueRange<T extends Objects.Optional<number>>(
+  min: number,
+  max: number,
+  options?: DecoratorOptions
+): FieldDecorator<T>;
 //# sourceMappingURL=ValueRange.d.ts.map

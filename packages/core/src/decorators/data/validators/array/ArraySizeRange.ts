@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@ArraySizeRange` key. */
-export const ARRAY_SIZE_RANGE = "ArraySizeRange";
 
 /** Internal validation function for {@link ArraySizeRange} validator. */
 function isArraySizeRangeValid(array: any[], min: number, max: number): boolean {
@@ -15,7 +13,7 @@ function isArraySizeRangeValid(array: any[], min: number, max: number): boolean 
 /**
  * Checks if the decorated array contains at least `min` number of elements.
  *
- * @key {@link ARRAY_SIZE_RANGE ArraySizeRange}
+ * @key {@link DecoratorKeys.ARRAY_SIZE_RANGE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param min - Min size value.
@@ -69,9 +67,13 @@ export function ArraySizeRange<K, T extends K[]>(
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: buildKeyProp(options, ARRAY_SIZE_RANGE),
+      key: buildKeyProp(options, DecoratorKeys.ARRAY_SIZE_RANGE),
       valid: isArraySizeRangeValid(array, min, max),
-      message: buildMessageProp(options, locale, translate(locale, ARRAY_SIZE_RANGE, min, max, (array ?? []).length)),
+      message: buildMessageProp(
+        options,
+        locale,
+        translate(locale, DecoratorKeys.ARRAY_SIZE_RANGE, min, max, (array ?? []).length)
+      ),
     }),
     buildGroupsProp(options)
   );

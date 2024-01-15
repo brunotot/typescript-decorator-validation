@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import type * as TdvCore from "tdv-core";
-import useValidationEngine from "../useValidationEngine";
-import type ns from "./types";
+import { type Utilities, type Validation } from "tdv-core";
+import { useEngine } from "../useEngine";
+import { type UseValidationConfig, type UseValidationReturn } from "./types";
 
 /**
  * React hook which exposes validation-related props to a form component
@@ -24,41 +24,38 @@ import type ns from "./types";
  *
  * @typeParam TClass - represents parent form class model holding context of current compontent
  */
-export default function useValidation<TClass>(
-  model: TdvCore.Utilities.Types.Class<TClass>,
-  { defaultValue, groups, asyncDelay, locale, resolveDecoratorArgs = () => ({}) }: ns.UseValidationConfig<TClass> = {}
-): ns.UseValidationReturn<TClass> {
-  const engine = useValidationEngine<TClass>(model, {
-    groups,
-    defaultValue,
-    asyncDelay,
-    locale,
-  });
-  const [form, setForm] = useState<TdvCore.Utilities.Objects.Payload<TClass>>(engine.defaultValue);
+// prettier-ignore
+export function useValidation<TClass>(
+  Class: Utilities.Types.Class<TClass>,
+  props: UseValidationConfig<TClass> = {}
+): UseValidationReturn<TClass> {
+  const { groups, defaultValue, asyncDelay, locale } = props;
+  const resolveDecoratorArgs = props.resolveDecoratorArgs ?? (() => ({}));
   const decoratorArgs = resolveDecoratorArgs();
-  const [globalErrors, setGlobalErrors] = useState(() => engine.validate(form, decoratorArgs).globalErrors);
-  const [details, setDetails] = useState(() => engine.validate(form, decoratorArgs).detailedErrors);
-  const [simpleErrors, setSimpleErrors] = useState(() => {
-    return engine.validate(form, decoratorArgs).errors;
-  });
+  const formConfig = { groups, defaultValue, asyncDelay, locale } satisfies Validation.FormConfig<TClass>;
+  const engine = useEngine<TClass>(Class, formConfig);
+  const [form, setForm] = useState<Utilities.Objects.Payload<TClass>>(engine.defaultValue);
+  const [classSimpleErrors, setClassSimpleErrors] = useState(() => engine.validate(form, decoratorArgs).globalErrors);
+  const [fieldDetailedErrors, setFieldDetailedErrors] = useState(() => engine.validate(form, decoratorArgs).detailedErrors);
+  const [fieldSimpleErrors, setFieldSimpleErrors] = useState(() => engine.validate(form, decoratorArgs).errors);
 
   useEffect(() => {
-    engine.async.register(({ errors, detailedErrors, globalErrors }) => {
-      setDetails(detailedErrors);
-      setSimpleErrors(errors);
-      setGlobalErrors(globalErrors);
+    engine.registerAsync(({ errors, detailedErrors, globalErrors }) => {
+      setFieldDetailedErrors(detailedErrors);
+      setFieldSimpleErrors(errors);
+      setClassSimpleErrors(globalErrors);
     });
 
     return () => {
-      engine.async.unregister();
+      engine.unregisterAsync();
     };
   }, [engine]);
 
   useEffect(() => {
     const { errors, detailedErrors, globalErrors } = engine.validate(form, decoratorArgs);
-    setDetails(detailedErrors);
-    setSimpleErrors(errors);
-    setGlobalErrors(globalErrors);
+    setFieldDetailedErrors(detailedErrors);
+    setFieldSimpleErrors(errors);
+    setClassSimpleErrors(globalErrors);
   }, [form, engine, JSON.stringify(decoratorArgs)]);
 
   return [
@@ -66,10 +63,10 @@ export default function useValidation<TClass>(
     setForm,
     {
       isValid: engine.isValid(form),
-      errors: simpleErrors,
-      detailedErrors: details,
+      errors: fieldSimpleErrors,
+      detailedErrors: fieldDetailedErrors,
+      globalErrors: classSimpleErrors,
       engine,
-      globalErrors,
     },
   ];
 }

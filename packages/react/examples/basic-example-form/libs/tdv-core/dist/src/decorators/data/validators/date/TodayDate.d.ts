@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@TodayDate` key. */
 export declare const TODAY_DATE = "TodayDate";
 /**
  * Checks if a {@link Date} is the today's date based on year, month and day.
  *
- * @key {@link TODAY_DATE TodayDate}
+ * @key {@link DecoratorKeys.TODAY_DATE}
  * @typeParam T - The type of the date property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `Date`.

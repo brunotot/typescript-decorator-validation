@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@ArrayOne` key. */
-export const ARRAY_ONE = "ArrayOne";
 
 /** Internal validation function for {@link ArrayOne} validator. */
 function isArrayOneValid<K, T extends K[]>(array: T, predicate: Objects.ArrayPredicate<K>): boolean {
@@ -15,7 +13,7 @@ function isArrayOneValid<K, T extends K[]>(array: T, predicate: Objects.ArrayPre
 /**
  * Checks if exactly one element of decorated array satisfies the given predicate criteria.
  *
- * @key {@link ARRAY_ONE ArrayOne}
+ * @key {@link DecoratorKeys.ARRAY_ONE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param predicate - The predicate for `Array.filter()` call.
@@ -67,9 +65,9 @@ export function ArrayOne<K, T extends K[]>(
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: buildKeyProp(options, ARRAY_ONE),
+      key: buildKeyProp(options, DecoratorKeys.ARRAY_ONE),
       valid: isArrayOneValid(array, predicate),
-      message: buildMessageProp(options, locale, translate(locale, ARRAY_ONE)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ARRAY_ONE)),
     }),
     buildGroupsProp(options)
   );

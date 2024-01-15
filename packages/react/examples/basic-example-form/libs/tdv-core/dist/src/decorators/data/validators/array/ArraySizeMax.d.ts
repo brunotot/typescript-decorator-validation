@@ -5,7 +5,7 @@ export declare const ARRAY_SIZE_MAX = "ArraySizeMax";
 /**
  * Checks if the decorated array contains up to `max` number of elements.
  *
- * @key {@link ARRAY_SIZE_MAX ArraySizeMax}
+ * @key {@link DecoratorKeys.ARRAY_SIZE_MAX}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param max - Max size value.

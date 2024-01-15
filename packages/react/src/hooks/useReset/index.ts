@@ -1,14 +1,25 @@
-import type UseFormNamespace from "./../useForm/types";
-import type ns from "./types";
+import { type UseFormData } from "../useForm/types";
+import { type UseResetConfig, type UseResetReturn } from "./types";
 
-export default function useReset<TClass>({
+/**
+ * Resets the form values and submission status.
+ * If no arguments are provided, the form is reset to its default values.
+ * If specific paths are provided, only those paths are reset to their default values.
+ * @param engine - The form engine instance.
+ * @param form - The current form values.
+ * @param setForm - The function to update the form values.
+ * @param submitted - The current submission status.
+ * @param handleSetSubmitted - The function to update the submission status.
+ * @returns The reset function.
+ */
+export function useReset<TClass>({
   engine,
   form,
   setForm,
   submitted,
   handleSetSubmitted,
-}: ns.UseResetConfig<TClass>): ns.UseResetReturn<TClass> {
-  const reset: UseFormNamespace.UseFormData<TClass>["reset"] = (...paths) => {
+}: UseResetConfig<TClass>): UseResetReturn<TClass> {
+  const reset: UseFormData<TClass>["reset"] = (...paths) => {
     const noArgsInstance = engine.defaultValue;
 
     if (paths.length === 0) {

@@ -1,12 +1,12 @@
+import { Objects } from "../../../../../../utilities";
 import { FieldDecorator } from "../../../../../factory/forField";
 import { DecoratorOptions } from "../../../../../helper";
-import { Objects } from "../../../../../../utilities";
 /** `@Email` key. */
 export declare const EMAIL = "Email";
 /**
  * Checks if decorated string is a valid email.
  *
- * @key {@link EMAIL Email}
+ * @key {@link DecoratorKeys.EMAIL}
  * @typeParam T - The type of the string property.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `string`.

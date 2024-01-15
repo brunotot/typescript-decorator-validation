@@ -1,19 +1,19 @@
-import { DecoratorOptions } from "../../../helper";
 import { Objects } from "../../../../utilities";
+import { DecoratorOptions } from "../../../helper";
 /** `@Password` key. */
 export declare const PASSWORD = "Password";
 /** Configurable options for `@Password` decorator. */
 export type PasswordRules = {
-    uppercase?: boolean;
-    lowercase?: boolean;
-    numbers?: boolean;
-    specials?: boolean;
-    length?: number;
+  uppercase?: boolean;
+  lowercase?: boolean;
+  numbers?: boolean;
+  specials?: boolean;
+  length?: number;
 };
 /**
  * Checks if decorated string contains a specific number of characters.
  *
- * @key {@link PASSWORD Password}
+ * @key {@link DecoratorKeys.PASSWORD}
  * @typeParam T - The type of the string property.
  * @param rules - Customizable rules for specific password validations.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -64,5 +64,8 @@ export type PasswordRules = {
  * }
  * ```
  */
-export declare function Password<T extends Objects.Optional<string>>(rules?: PasswordRules, options?: DecoratorOptions): import("../../../factory/forField").FieldDecorator<T>;
+export declare function Password<T extends Objects.Optional<string>>(
+  rules?: PasswordRules,
+  options?: DecoratorOptions
+): import("../../../factory/forField").FieldDecorator<T>;
 //# sourceMappingURL=Password.d.ts.map

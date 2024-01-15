@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@ArrayEvery` key. */
 export declare const ARRAY_EVERY = "ArrayEvery";
 /**
  * Checks if all elements of decorated array satisfy the given predicate criteria.
  *
- * @key {@link ARRAY_EVERY ArrayEvery}
+ * @key {@link DecoratorKeys.ARRAY_EVERY}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param predicate - The predicate for `Array.every()` call.
@@ -52,5 +52,8 @@ export declare const ARRAY_EVERY = "ArrayEvery";
  * }
  * ```
  **/
-export declare function ArrayEvery<K, T extends K[]>(predicate: Objects.ArrayPredicate<K>, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ArrayEvery<K, T extends K[]>(
+  predicate: Objects.ArrayPredicate<K>,
+  options?: DecoratorOptions
+): FieldDecorator<T>;
 //# sourceMappingURL=ArrayEvery.d.ts.map

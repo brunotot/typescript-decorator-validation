@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@ArrayContains` key. */
-export const ARRAY_CONTAINS = "ArrayContains";
 
 /** Internal validation function for {@link ArrayContains} validator. */
 function isArrayContainsValid<K, T extends K[]>(value: T, contains: K): boolean {
@@ -15,7 +13,7 @@ function isArrayContainsValid<K, T extends K[]>(value: T, contains: K): boolean 
 /**
  * Checks if the decorated array contains a specific value.
  *
- * @key {@link ARRAY_CONTAINS ArrayContains}
+ * @key {@link DecoratorKeys.ARRAY_CONTAINS}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param contains - The value to check.
@@ -64,9 +62,9 @@ function isArrayContainsValid<K, T extends K[]>(value: T, contains: K): boolean 
 export function ArrayContains<K, T extends K[]>(contains: K, options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: buildKeyProp(options, ARRAY_CONTAINS),
+      key: buildKeyProp(options, DecoratorKeys.ARRAY_CONTAINS),
       valid: isArrayContainsValid(array, contains),
-      message: buildMessageProp(options, locale, translate(locale, ARRAY_CONTAINS, contains)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ARRAY_CONTAINS, contains)),
     }),
     buildGroupsProp(options)
   );

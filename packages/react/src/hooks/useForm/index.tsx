@@ -1,11 +1,10 @@
-import { useContext, useEffect, useState } from "react";
-import * as TdvCore from "tdv-core";
-import { FormContext } from "../../contexts/FormContext";
-import useEffectWhenMounted from "../useAfterMount";
-import useMutations from "../useMutations";
-import useReset from "../useReset";
-import useValidation from "../useValidation";
-import ns from "./types";
+import { useContext, useEffect, useRef, useState } from "react";
+import { Utilities, ValidationResult } from "tdv-core";
+import { FormContext } from "../../components/FormProvider";
+import { useChangeHandlers } from "../useChangeHandlers";
+import { useReset } from "../useReset";
+import { useValidation } from "../useValidation";
+import { UseFormConfig, UseFormData, UseFormReturn } from "./types";
 
 /**
  * React hook which exposes useful form and validation-related props to a form component
@@ -32,8 +31,8 @@ import ns from "./types";
  *
  * @typeParam TClass - represents parent form class model holding context of current compontent
  */
-export default function useForm<TClass>(
-  model: TdvCore.Utilities.Types.Class<TClass>,
+export function useForm<TClass>(
+  model: Utilities.Types.Class<TClass>,
   {
     defaultValue,
     onSubmit: onSubmitParam,
@@ -45,14 +44,15 @@ export default function useForm<TClass>(
     onChange,
     asyncDelay,
     locale,
-  }: ns.UseFormConfig<TClass> = {
+  }: UseFormConfig<TClass> = {
     onSubmit: async () => {},
     standalone: true,
     validateImmediately: true,
     validationGroups: [],
     onChange: () => {},
   }
-): ns.UseFormReturn<TClass> {
+): UseFormReturn<TClass> {
+  const isMounted = useRef(false);
   const ctx = useContext(FormContext);
   // prettier-ignore
   const [submitted, setSubmitted] = useState(!standalone && !!ctx && ctx.submitted);
@@ -86,7 +86,13 @@ export default function useForm<TClass>(
   };
 
   //* When input data changes execute callback.
-  useEffectWhenMounted(() => onChange?.(form), [form]);
+  useEffect(() => {
+    if (isMounted.current) {
+      isMounted.current = false;
+      return;
+    }
+    onChange?.(form);
+  }, [form]);
 
   //* When submitted flag from context gets changed.
   useEffect(() => {
@@ -120,8 +126,8 @@ export default function useForm<TClass>(
     submitted,
   });
 
-  const data: ns.UseFormData<TClass> = {
-    mutations: useMutations(model, { setForm }),
+  const data: UseFormData<TClass> = {
+    mutations: useChangeHandlers(model, { setForm }),
     isValid,
     isSubmitted,
     onSubmit,
@@ -133,4 +139,29 @@ export default function useForm<TClass>(
   };
 
   return [form, setForm, data];
+}
+
+function clearErrors(data: Record<string, any>): Record<string, any> {
+  function isEmptyArrayStringOrValidationResult(value: any): value is string[] | ValidationResult[] {
+    return (
+      Array.isArray(value) &&
+      (value.length === 0 || typeof value[0] === "string" || (value[0] as ValidationResult) !== undefined)
+    );
+  }
+
+  const obj = {} as any;
+  Object.keys(data).forEach(key => {
+    if (isEmptyArrayStringOrValidationResult(data[key])) {
+      // Empty the array if it's an Array<string> or Array<ValidationResult>
+      obj[key] = [];
+    } else if (typeof obj[key] === "object" && obj[key] !== null && !Array.isArray(obj[key])) {
+      // Recurse into non-array objects
+      obj[key] = clearErrors(obj[key]);
+    } else {
+      obj[key] = structuredClone(data[key]);
+    }
+    // If it's not an array or an object, do nothing
+  });
+
+  return obj;
 }

@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
-import { Objects } from "@utilities";
-
-/** `@Digits` key. */
-export const DIGITS = "Digits";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
+import { type Objects } from "@utilities";
 
 /** Internal validation function for {@link Digits} validator. */
 function isDigitsValid(number: Objects.Optional<number>, ints: number, decs: number): boolean {
@@ -26,7 +24,7 @@ function isDigitsValid(number: Objects.Optional<number>, ints: number, decs: num
 /**
  * Checks if decorated number is a decimal number.
  *
- * @key {@link DIGITS Digits}
+ * @key {@link DecoratorKeys.DIGITS}
  * @typeParam T - The type of the number property.
  * @param intsLimit - The maximum number of allowed integer digits.
  * @param decimalsLimit - The maximum number of allowed decimal digits.
@@ -79,9 +77,9 @@ export function Digits<T extends Objects.Optional<number>>(
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: buildKeyProp(options, DIGITS),
+      key: buildKeyProp(options, DecoratorKeys.DIGITS),
       valid: isDigitsValid(value, intsLimit, decimalsLimit),
-      message: buildMessageProp(options, locale, translate(locale, DIGITS, intsLimit, decimalsLimit)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.DIGITS, intsLimit, decimalsLimit)),
     }),
     buildGroupsProp(options)
   );

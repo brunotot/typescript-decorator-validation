@@ -1,10 +1,15 @@
-// @ts-ignore
 import React, { createContext } from "react";
-import ns from "./types";
 
-type FormContextType = Omit<ns.FormProviderProps, "children"> | undefined;
+/** Context for the FormProvider component. */
+export const FormContext = createContext<Omit<FormProviderProps, "children"> | undefined>(undefined);
 
-export const FormContext = createContext<FormContextType>(undefined);
+/** Represents the props which `FormProvider` component accepts. */
+export type FormProviderProps = {
+  children: React.ReactNode;
+  submitted: boolean;
+  setSubmitted: (bool: boolean) => void;
+  validateImmediately: boolean;
+};
 
 /**
  * Provides form-related context to its children
@@ -12,7 +17,7 @@ export const FormContext = createContext<FormContextType>(undefined);
  * You should always invoke FormProvider at the top of your returned JSX chain
  * because it allows form context state to propagate to your child components.
  * This is particularly useful when your form model contains deeply nested
- * forms which have it's own React component implementations. If your form
+ * forms which have it's own React component implementatio If your form
  * doesn't contain any deeply nested forms then FormProvider isn't mandatory
  * but is still considered best-practice due to possibility of future changes
  * being made to the form, causing it to require context data.
@@ -74,15 +79,8 @@ export const FormContext = createContext<FormContextType>(undefined);
  * }
  * ```
  */
-export default function FormProvider({
-  children,
-  submitted,
-  setSubmitted,
-  validateImmediately,
-}: ns.FormProviderProps) {
+export default function FormProvider({ children, submitted, setSubmitted, validateImmediately }: FormProviderProps) {
   return (
-    <FormContext.Provider value={{ submitted, setSubmitted, validateImmediately }}>
-      {children}
-    </FormContext.Provider>
+    <FormContext.Provider value={{ submitted, setSubmitted, validateImmediately }}>{children}</FormContext.Provider>
   );
 }

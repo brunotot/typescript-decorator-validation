@@ -5,7 +5,7 @@ export declare const ARRAY_SIZE_RANGE = "ArraySizeRange";
 /**
  * Checks if the decorated array contains at least `min` number of elements.
  *
- * @key {@link ARRAY_SIZE_RANGE ArraySizeRange}
+ * @key {@link DecoratorKeys.ARRAY_SIZE_RANGE}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param min - Min size value.
@@ -52,5 +52,9 @@ export declare const ARRAY_SIZE_RANGE = "ArraySizeRange";
  * }
  * ```
  */
-export declare function ArraySizeRange<K, T extends K[]>(min: number, max: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ArraySizeRange<K, T extends K[]>(
+  min: number,
+  max: number,
+  options?: DecoratorOptions
+): FieldDecorator<T>;
 //# sourceMappingURL=ArraySizeRange.d.ts.map

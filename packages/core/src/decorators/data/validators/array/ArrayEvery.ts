@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@ArrayEvery` key. */
-export const ARRAY_EVERY = "ArrayEvery";
 
 /** Internal validation function for {@link ArrayEvery} validator. */
 function isArrayEveryValid<K, T extends K[]>(array: T, predicate: Objects.ArrayPredicate<K>): boolean {
@@ -15,7 +13,7 @@ function isArrayEveryValid<K, T extends K[]>(array: T, predicate: Objects.ArrayP
 /**
  * Checks if all elements of decorated array satisfy the given predicate criteria.
  *
- * @key {@link ARRAY_EVERY ArrayEvery}
+ * @key {@link DecoratorKeys.ARRAY_EVERY}
  * @typeParam T - The type of decorated array property.
  * @typeParam K - The type of elements in the decorated array.
  * @param predicate - The predicate for `Array.every()` call.
@@ -67,9 +65,9 @@ export function ArrayEvery<K, T extends K[]>(
 ): FieldDecorator<T> {
   return createFieldValidator<T>(
     (array, _context, locale) => ({
-      key: buildKeyProp(options, ARRAY_EVERY),
+      key: buildKeyProp(options, DecoratorKeys.ARRAY_EVERY),
       valid: isArrayEveryValid(array, predicate),
-      message: buildMessageProp(options, locale, translate(locale, ARRAY_EVERY)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ARRAY_EVERY)),
     }),
     buildGroupsProp(options)
   );

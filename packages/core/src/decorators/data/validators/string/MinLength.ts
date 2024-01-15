@@ -1,10 +1,8 @@
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
 import { createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
-import { translate } from "@localization";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
-
-/** `@MinLength` key. */
-export const MIN_LENGTH = "MinLength";
 
 /** Internal validation function for {@link MinLength} validator. */
 function isMinLengthValid(value: Objects.Optional<string>, min: number): boolean {
@@ -15,7 +13,7 @@ function isMinLengthValid(value: Objects.Optional<string>, min: number): boolean
 /**
  * Checks if decorated string contains a specific number of characters.
  *
- * @key {@link MIN_LENGTH MinLength}
+ * @key {@link DecoratorKeys.MIN_LENGTH}
  * @typeParam T - The type of the string property.
  * @param min - Minimum length value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -60,9 +58,9 @@ function isMinLengthValid(value: Objects.Optional<string>, min: number): boolean
 export function MinLength<T extends Objects.Optional<string>>(min: number, options?: DecoratorOptions) {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: buildKeyProp(options, MIN_LENGTH),
+      key: buildKeyProp(options, DecoratorKeys.MIN_LENGTH),
       valid: isMinLengthValid(value, min),
-      message: buildMessageProp(options, locale, translate(locale, MIN_LENGTH, min)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.MIN_LENGTH, min)),
     }),
     buildGroupsProp(options)
   );

@@ -1,5 +1,5 @@
-import { Locale } from "@localization/resolver/LocaleResolver";
-import { LocalizedMessages, getMessage } from "@localization/service/MessageReaderService";
+import { type Locale } from "@localization/resolver/LocaleResolver";
+import { type MessageKey, readMessage } from "@localization/service/MessageReaderService";
 
 /**
  * Formats a string by replacing placeholders with provided arguments.
@@ -45,8 +45,8 @@ function sprintf(str: string, ...args: any[]): string {
  * const greeting = translate("en", "Hello", "John Doe");  // "Hello John Doe! How are you?"
  * ```
  */
-export function translate(locale: Locale | null | undefined, key: keyof LocalizedMessages, ...args: any[]): string {
-  const message = getMessage(key, locale);
+export function translate(locale: Locale | null | undefined, key: MessageKey, ...args: any[]): string {
+  const message = readMessage(key, locale);
   const translatedMessage = sprintf(message, ...args);
   return translatedMessage;
 }

@@ -1,10 +1,8 @@
-import { FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
+import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
+import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
-import { Objects } from "@utilities";
-
-/** `@Required` key. */
-export const REQUIRED = "Required";
+import { type Objects } from "@utilities";
 
 /**
  * Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.
@@ -25,7 +23,7 @@ function isRequiredValid<T>(value: T | undefined): value is NonNullable<typeof v
 /**
  * Creates a validator decorator which requires that a value must be present.
  *
- * @key {@link REQUIRED Required}
+ * @key {@link DecoratorKeys.REQUIRED}
  * @typeParam T - The type of the decorated property (any class field).
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use with class fields.
@@ -63,9 +61,9 @@ function isRequiredValid<T>(value: T | undefined): value is NonNullable<typeof v
 export function Required<T extends Objects.Optional>(options?: DecoratorOptions): FieldDecorator<T> {
   return createFieldValidator<T>(
     (value, _context, locale) => ({
-      key: buildKeyProp(options, REQUIRED),
+      key: buildKeyProp(options, DecoratorKeys.REQUIRED),
       valid: isRequiredValid(value),
-      message: buildMessageProp(options, locale, translate(locale, REQUIRED)),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.REQUIRED)),
     }),
     buildGroupsProp(options)
   );

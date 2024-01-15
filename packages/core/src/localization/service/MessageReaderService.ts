@@ -1,51 +1,34 @@
-import { Locale, getLocale } from "@localization/resolver/LocaleResolver";
+import * as Decorators from "@decorators";
+import { type Locale, getGlobalLocale } from "@localization/resolver/LocaleResolver";
 
-import * as de from "../translations/de.json";
-import * as en from "../translations/en.json";
-import * as es from "../translations/es.json";
-import * as fr from "../translations/fr.json";
-import * as hr from "../translations/hr.json";
-import * as it from "../translations/it.json";
-import * as nl from "../translations/nl.json";
+import de from "../translations/de.json";
+import en from "../translations/en.json";
+import es from "../translations/es.json";
+import fr from "../translations/fr.json";
+import hr from "../translations/hr.json";
+import it from "../translations/it.json";
+import nl from "../translations/nl.json";
 
-/**
- * All translation json files content in map, grouped by `Locale`.
- */
-export const messages: Messages = {
-  hr,
-  de,
-  en,
-  es,
-  fr,
-  it,
-  nl,
-};
+/** All translation json files content in map, grouped by {@link Locale `Locale`}. */
+const __MESSAGE_COLLECTION = { hr, de, en, es, fr, it, nl } as const;
 
 /**
- * Represents translation json file's contents. Is unknown on TypeDocs due to the nature of inferring json contents type.
+ * Represents the union of all predefined validator decorator keys (and extras) which `tdv-core` provides.
+ * For example, {@link Decorators.Alpha @Alpha\(\)} decorator has a key defined as {@link Decorators.ALPHA ALPHA}
+ * (which is also available at the root import through {@link Decorators} module).
  */
-export type LocalizedMessages = typeof en;
-
-/**
- * Type definition for a collection of locale-specific messages.
- *
- * @remarks
- * The keys are locale codes (e.g. "en", "de"...), and the values are objects
- * in which the key represents a translation identifier while the value
- * corresponds to the identifier's localized string.
- */
-export type Messages = Record<Locale, LocalizedMessages>;
-
-export type MessageKey = keyof LocalizedMessages;
+export type MessageKey = keyof typeof en;
 
 /**
  * Returns localized message by key, allowing `locale` to be optional (defaults to global `locale`).
- * @param key Translation key
- * @param locale Locale to translate by
- * @returns Localized message by key.
+ * @param messageKey A key of any predefined decorator validator (or extras) from `tdv-core`
+ * @param locale Locale to translate by (`en`, `hr`, `de`, ...)
+ * @returns Default translated message by message key
+ * @see {@link MessageKey}
  */
-export function getMessage(key: keyof LocalizedMessages, locale?: Locale | null): string {
-  const computedLocale = locale ?? getLocale();
-  const computedLocaleMessages = messages[computedLocale];
-  return computedLocaleMessages[key];
+export function readMessage(messageKey: MessageKey, locale?: Locale | null): string {
+  const computedLocale = locale ?? getGlobalLocale();
+  const computedLocaleMessages = __MESSAGE_COLLECTION[computedLocale];
+  const decoratorMessage = computedLocaleMessages[messageKey];
+  return decoratorMessage;
 }

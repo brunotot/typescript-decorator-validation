@@ -1,10 +1,10 @@
-import { DecoratorArgs } from "@decorators";
-import { Locale } from "@localization";
+import { type DecoratorArgs } from "@decorators";
+import { type Locale } from "@localization";
 import { ClassValidatorMetaService } from "@reflection/service/impl/ClassValidatorMetaService";
-import { ControlDescriptor, FieldValidatorMetaService } from "@reflection/service/impl/FieldValidatorMetaService";
-import { EventEmitter } from "@utilities";
+import { type ControlDescriptor, FieldValidatorMetaService } from "@reflection/service/impl/FieldValidatorMetaService";
+import { type EventEmitter } from "@utilities";
 import { Form } from "@validation/models/Form";
-import { ValidationMetadata } from "@validation/models/ValidationMetadata";
+import { type ValidationMetadata } from "@validation/models/ValidationMetadata";
 import type { FormConfig, ValidationResult } from "@validation/types";
 
 /**

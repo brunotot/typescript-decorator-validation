@@ -1,12 +1,12 @@
+import { Objects } from "../../../../utilities";
 import { FieldDecorator } from "../../../factory/forField";
 import { DecoratorOptions } from "../../../helper";
-import { Objects } from "../../../../utilities";
 /** `@ValueMin` key. */
 export declare const VALUE_MIN = "ValueMin";
 /**
  * Checks if decorated number is not lesser than given `min` parameter.
  *
- * @key {@link VALUE_MIN ValueMin}
+ * @key {@link DecoratorKeys.VALUE_MIN}
  * @typeParam T - The type of the number property.
  * @param min - Minimum allowed value.
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
@@ -51,5 +51,8 @@ export declare const VALUE_MIN = "ValueMin";
  * }
  * ```
  */
-export declare function ValueMin<T extends Objects.Optional<number>>(min: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ValueMin<T extends Objects.Optional<number>>(
+  min: number,
+  options?: DecoratorOptions
+): FieldDecorator<T>;
 //# sourceMappingURL=ValueMin.d.ts.map

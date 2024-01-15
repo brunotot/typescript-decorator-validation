@@ -1,18 +1,16 @@
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 import { translate } from "../../../../localization";
 import { Objects } from "../../../../utilities";
-/** `@AssertTrue` key. */
-export const ASSERT_TRUE = "AssertTrue";
+import { createFieldValidator } from "../../../factory/forField";
+import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
 /** Internal validation function for {@link AssertTrue} validator. */
 function isAssertTrueValid(value) {
-    Objects.assertType("boolean", value);
-    return !!value;
+  Objects.assertType("boolean", value);
+  return !!value;
 }
 /**
  * Checks if a boolean value is `true`.
  *
- * @key {@link ASSERT_TRUE AssertTrue}
+ * @key {@link DecoratorKeys.ASSERT_TRUE}
  * @typeParam T - The type of the decorated property (boolean).
  * @param options - Common decorator options (`key`, `message`, `groups`, etc...)
  * @returns A decorator function to use on class fields of type `boolean`.
@@ -57,9 +55,12 @@ function isAssertTrueValid(value) {
  * ```
  */
 export function AssertTrue(options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: buildKeyProp(options, ASSERT_TRUE),
-        valid: isAssertTrueValid(value),
-        message: buildMessageProp(options, locale, translate(locale, ASSERT_TRUE)),
-    }), buildGroupsProp(options));
+  return createFieldValidator(
+    (value, _context, locale) => ({
+      key: buildKeyProp(options, DecoratorKeys.ASSERT_TRUE),
+      valid: isAssertTrueValid(value),
+      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ASSERT_TRUE)),
+    }),
+    buildGroupsProp(options)
+  );
 }

@@ -1,12 +1,12 @@
+import { Types } from "../../../../utilities";
 import { ClassDecorator } from "../../../factory/forClass";
 import { DecoratorOptions } from "../../../helper";
-import { Types } from "../../../../utilities";
 /** `@ValidDateRange` key. */
 export declare const VALID_DATE_RANGE = "ValidDateRange";
 /**
  * Checks if {@link Date} `startDateField` is before {@link Date} `endDateField` of a class.
  *
- * @key {@link VALID_DATE_RANGE ValidDateRange}
+ * @key {@link DecoratorKeys.VALID_DATE_RANGE}
  * @typeParam T - Class type on which the decorator is put.
  * @param startDateField - Field name for the start {@link Date} property.
  * @param endDateField - Field name for the end {@link Date} property.
@@ -53,5 +53,9 @@ export declare const VALID_DATE_RANGE = "ValidDateRange";
  * }
  * ```
  */
-export declare function ValidDateRange<T extends Types.Class>(startDateField: string, endDateField: string, options?: DecoratorOptions): ClassDecorator<T>;
+export declare function ValidDateRange<T extends Types.Class>(
+  startDateField: string,
+  endDateField: string,
+  options?: DecoratorOptions
+): ClassDecorator<T>;
 //# sourceMappingURL=ValidDateRange.d.ts.map
