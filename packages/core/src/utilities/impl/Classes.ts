@@ -45,9 +45,7 @@ export namespace Classes {
   export function getMetadata(strategy: any /* MetaStrategy */): DecoratorMetadataObject {
     if (isClass(strategy)) {
       (Symbol as any).metadata ??= Symbol("Symbol.metadata");
-      // @ts-expect-error
       strategy[Symbol.metadata] ??= {};
-      // @ts-expect-error
       return strategy[Symbol.metadata]!;
     }
     if (strategy && !strategy.metadata) {

@@ -56,8 +56,8 @@ export class ValidationMetadata<TFieldType> {
     }
 
     const groupedValidators = this.#groupedValidators(this.#contents, groups);
-    const results = groupedValidators.map(async ({ validate }) => await validate(value, payload, locale, args ?? {}));
-    const asyncResults = results.filter(v => isPromise(v));
+    const results = groupedValidators.map(({ validate }) => validate(value, payload, locale, args ?? {}));
+    const asyncResults = results.filter(v => isPromise(v)) as Promise<ValidationResult>[];
     this.#handleAsyncResults(asyncResults, emitter, field);
     const syncResults = results.filter(v => !isPromise(v)) as ValidationResult[];
     return syncResults.filter(({ valid }) => !valid);
