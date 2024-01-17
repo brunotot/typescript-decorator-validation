@@ -1,5 +1,8 @@
-import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
-export var PrimitiveArrayStrategy;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PrimitiveArrayStrategy = void 0;
+const AbstractValidationStrategyService_1 = require("../AbstractValidationStrategyService");
+var PrimitiveArrayStrategy;
 (function (PrimitiveArrayStrategy) {
     /**
      * Constant name identifier for this strategy.
@@ -12,7 +15,7 @@ export var PrimitiveArrayStrategy;
      *
      * @extends AbstractValidationStrategyService<F,DetailedErrors,SimpleErrors>
      */
-    class StrategyResolver extends AbstractValidationStrategyService {
+    class StrategyResolver extends AbstractValidationStrategyService_1.AbstractValidationStrategyService {
         /**
          * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for arrays of primitive types.
          *
@@ -41,4 +44,4 @@ export var PrimitiveArrayStrategy;
         }
     }
     PrimitiveArrayStrategy.StrategyResolver = StrategyResolver;
-})(PrimitiveArrayStrategy || (PrimitiveArrayStrategy = {}));
+})(PrimitiveArrayStrategy || (exports.PrimitiveArrayStrategy = PrimitiveArrayStrategy = {}));

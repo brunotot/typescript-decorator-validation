@@ -1,4 +1,7 @@
-export var Classes;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Classes = void 0;
+var Classes;
 (function (Classes) {
     /**
      * Retrieves the names of all fields in a class.
@@ -43,9 +46,7 @@ export var Classes;
         var _d, _e;
         if (isClass(strategy)) {
             (_a = (_d = Symbol).metadata) !== null && _a !== void 0 ? _a : (_d.metadata = Symbol("Symbol.metadata"));
-            // @ts-ignore
             (_b = strategy[_e = Symbol.metadata]) !== null && _b !== void 0 ? _b : (strategy[_e] = {});
-            // @ts-ignore
             return strategy[Symbol.metadata];
         }
         if (strategy && !strategy.metadata) {
@@ -64,4 +65,4 @@ export var Classes;
         return typeof strategy === "function";
     }
     Classes.isClass = isClass;
-})(Classes || (Classes = {}));
+})(Classes || (exports.Classes = Classes = {}));

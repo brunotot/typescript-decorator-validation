@@ -1,11 +1,15 @@
-import { translate } from "../../../../localization";
-import { Objects } from "../../../../utilities";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ArrayContains = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../utilities");
 /** Internal validation function for {@link ArrayContains} validator. */
 function isArrayContainsValid(value, contains) {
-  Objects.assertType("array", value);
-  return (value !== null && value !== void 0 ? value : []).includes(contains);
+    _utilities_1.Objects.assertType("array", value);
+    return (value !== null && value !== void 0 ? value : []).includes(contains);
 }
 /**
  * Checks if the decorated array contains a specific value.
@@ -56,13 +60,11 @@ function isArrayContainsValid(value, contains) {
  * }
  * ```
  */
-export function ArrayContains(contains, options) {
-  return createFieldValidator(
-    (array, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.ARRAY_CONTAINS),
-      valid: isArrayContainsValid(array, contains),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ARRAY_CONTAINS, contains)),
-    }),
-    buildGroupsProp(options)
-  );
+function ArrayContains(contains, options) {
+    return (0, forField_1.createFieldValidator)((array, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.ARRAY_CONTAINS),
+        valid: isArrayContainsValid(array, contains),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.ARRAY_CONTAINS, contains)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.ArrayContains = ArrayContains;

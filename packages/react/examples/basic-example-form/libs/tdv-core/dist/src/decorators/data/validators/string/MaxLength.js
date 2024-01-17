@@ -1,11 +1,15 @@
-import { translate } from "../../../../localization";
-import { Objects } from "../../../../utilities";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MaxLength = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../utilities");
 /** Internal validation function for {@link MaxLength} validator. */
 function isMaxLengthValid(value, max) {
-  Objects.assertType("string", value);
-  return (value !== null && value !== void 0 ? value : "").length <= max;
+    _utilities_1.Objects.assertType("string", value);
+    return (value !== null && value !== void 0 ? value : "").length <= max;
 }
 /**
  * Checks if decorated string contains a specific number of characters.
@@ -52,13 +56,11 @@ function isMaxLengthValid(value, max) {
  * }
  * ```
  */
-export function MaxLength(max, options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.MAX_LENGTH),
-      valid: isMaxLengthValid(value, max),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.MAX_LENGTH, max)),
-    }),
-    buildGroupsProp(options)
-  );
+function MaxLength(max, options) {
+    return (0, forField_1.createFieldValidator)((value, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.MAX_LENGTH),
+        valid: isMaxLengthValid(value, max),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.MAX_LENGTH, max)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.MaxLength = MaxLength;

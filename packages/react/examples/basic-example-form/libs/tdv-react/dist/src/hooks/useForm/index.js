@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,12 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { useContext, useEffect, useState } from "react";
-import { FormContext } from "../../contexts/FormContext";
-import useEffectWhenMounted from "../useAfterMount";
-import useMutations from "../useMutations";
-import useReset from "../useReset";
-import useValidation from "../useValidation";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useForm = void 0;
+const react_1 = require("react");
+const FormProvider_1 = require("../../components/FormProvider");
+const useChangeHandlers_1 = require("../useChangeHandlers");
+const useReset_1 = require("../useReset");
+const useValidation_1 = require("../useValidation");
 /**
  * React hook which exposes useful form and validation-related props to a form component
  *
@@ -38,20 +40,21 @@ import useValidation from "../useValidation";
  *
  * @typeParam TClass - represents parent form class model holding context of current compontent
  */
-export default function useForm(model, { defaultValue, onSubmit: onSubmitParam, onSubmitValidationFail, standalone, validateImmediately, validationGroups: groups, resolveDecoratorArgs, onChange, asyncDelay, locale, } = {
+function useForm(model, { defaultValue, onSubmit: onSubmitParam, onSubmitValidationFail, standalone, validateImmediately, validationGroups: groups, resolveDecoratorArgs, onChange, asyncDelay, locale, } = {
     onSubmit: () => __awaiter(this, void 0, void 0, function* () { }),
     standalone: true,
     validateImmediately: true,
     validationGroups: [],
     onChange: () => { },
 }) {
-    const ctx = useContext(FormContext);
+    const isMounted = (0, react_1.useRef)(false);
+    const ctx = (0, react_1.useContext)(FormProvider_1.FormContext);
     // prettier-ignore
-    const [submitted, setSubmitted] = useState(!standalone && !!ctx && ctx.submitted);
+    const [submitted, setSubmitted] = (0, react_1.useState)(!standalone && !!ctx && ctx.submitted);
     // prettier-ignore
     const instantContextValidation = standalone ? validateImmediately : ctx ? ctx.validateImmediately : validateImmediately;
     const isSubmitted = instantContextValidation || submitted;
-    const [form, setForm, { globalErrors, errors, detailedErrors, isValid, engine }] = useValidation(model, {
+    const [form, setForm, { globalErrors, errors, detailedErrors, isValid, engine }] = (0, useValidation_1.useValidation)(model, {
         defaultValue,
         groups,
         resolveDecoratorArgs,
@@ -74,9 +77,15 @@ export default function useForm(model, { defaultValue, onSubmit: onSubmitParam, 
         setSubmitted(value);
     };
     //* When input data changes execute callback.
-    useEffectWhenMounted(() => onChange === null || onChange === void 0 ? void 0 : onChange(form), [form]);
+    (0, react_1.useEffect)(() => {
+        if (isMounted.current) {
+            isMounted.current = false;
+            return;
+        }
+        onChange === null || onChange === void 0 ? void 0 : onChange(form);
+    }, [form]);
     //* When submitted flag from context gets changed.
-    useEffect(() => {
+    (0, react_1.useEffect)(() => {
         const contextValue = !!(ctx === null || ctx === void 0 ? void 0 : ctx.submitted);
         const hasParentContext = !!ctx;
         if (!standalone && hasParentContext) {
@@ -96,7 +105,7 @@ export default function useForm(model, { defaultValue, onSubmit: onSubmitParam, 
         setSubmitted: handleSetSubmitted,
         validateImmediately: instantContextValidation,
     };
-    const reset = useReset({
+    const reset = (0, useReset_1.useReset)({
         form,
         handleSetSubmitted,
         setForm,
@@ -104,7 +113,7 @@ export default function useForm(model, { defaultValue, onSubmit: onSubmitParam, 
         submitted,
     });
     const data = {
-        mutations: useMutations(model, { setForm }),
+        mutations: (0, useChangeHandlers_1.useChangeHandlers)(model, { setForm }),
         isValid,
         isSubmitted,
         onSubmit,
@@ -115,4 +124,27 @@ export default function useForm(model, { defaultValue, onSubmit: onSubmitParam, 
         reset,
     };
     return [form, setForm, data];
+}
+exports.useForm = useForm;
+function clearErrors(data) {
+    function isEmptyArrayStringOrValidationResult(value) {
+        return (Array.isArray(value) &&
+            (value.length === 0 || typeof value[0] === "string" || value[0] !== undefined));
+    }
+    const obj = {};
+    Object.keys(data).forEach(key => {
+        if (isEmptyArrayStringOrValidationResult(data[key])) {
+            // Empty the array if it's an Array<string> or Array<ValidationResult>
+            obj[key] = [];
+        }
+        else if (typeof obj[key] === "object" && obj[key] !== null && !Array.isArray(obj[key])) {
+            // Recurse into non-array objects
+            obj[key] = clearErrors(obj[key]);
+        }
+        else {
+            obj[key] = structuredClone(data[key]);
+        }
+        // If it's not an array or an object, do nothing
+    });
+    return obj;
 }

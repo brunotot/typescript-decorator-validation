@@ -1,11 +1,15 @@
-import { translate } from "../../../../localization";
-import { Objects } from "../../../../utilities";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PastDate = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../utilities");
 /** Internal validation function for {@link PastDate} validator. */
 function isPastDateValid(date) {
-  Objects.assertType("date", date);
-  return date && date.getTime() < new Date().getTime();
+    _utilities_1.Objects.assertType("date", date);
+    return date && date.getTime() < new Date().getTime();
 }
 /**
  * Checks if a {@link Date} is in the past.
@@ -54,13 +58,11 @@ function isPastDateValid(date) {
  * }
  * ```
  */
-export function PastDate(options) {
-  return createFieldValidator(
-    (date, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.PAST_DATE),
-      valid: isPastDateValid(date),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.PAST_DATE, date)),
-    }),
-    buildGroupsProp(options)
-  );
+function PastDate(options) {
+    return (0, forField_1.createFieldValidator)((date, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.PAST_DATE),
+        valid: isPastDateValid(date),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.PAST_DATE, date)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.PastDate = PastDate;

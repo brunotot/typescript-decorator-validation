@@ -1,6 +1,9 @@
-import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
-import { ObjectStrategy } from "./ObjectStrategy";
-export var ObjectArrayStrategy;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ObjectArrayStrategy = void 0;
+const AbstractValidationStrategyService_1 = require("../AbstractValidationStrategyService");
+const ObjectStrategy_1 = require("./ObjectStrategy");
+var ObjectArrayStrategy;
 (function (ObjectArrayStrategy) {
     /**
      * Constant name identifier for this strategy.
@@ -13,7 +16,7 @@ export var ObjectArrayStrategy;
      *
      * @extends AbstractValidationStrategyService<F, ObjectArrayDetailedErrors<F>, ObjectArraySimpleErrors<F>>
      */
-    class StrategyResolver extends AbstractValidationStrategyService {
+    class StrategyResolver extends AbstractValidationStrategyService_1.AbstractValidationStrategyService {
         /**
          * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for arrays of object types.
          *
@@ -32,7 +35,7 @@ export var ObjectArrayStrategy;
             const rootResult = this.getRootErrors(value, context, args);
             // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
             const getData = (element) => {
-                const [errors, detailedErrors] = new ObjectStrategy.StrategyResolver(this.fieldDescriptor, this.defaultValue, this.groups, this.locale, this.eventEmitter, this.engineCfg.asyncDelay).test(element, context, args);
+                const [errors, detailedErrors] = new ObjectStrategy_1.ObjectStrategy.StrategyResolver(this.fieldDescriptor, this.defaultValue, this.groups, this.locale, this.eventEmitter, this.engineCfg.asyncDelay).test(element, context, args);
                 return {
                     detailedErrors,
                     errors,
@@ -54,4 +57,4 @@ export var ObjectArrayStrategy;
         }
     }
     ObjectArrayStrategy.StrategyResolver = StrategyResolver;
-})(ObjectArrayStrategy || (ObjectArrayStrategy = {}));
+})(ObjectArrayStrategy || (exports.ObjectArrayStrategy = ObjectArrayStrategy = {}));

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../../src/hooks/useEngine/index.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,IAAI,EAAE,KAAK,SAAS,EAAE,KAAK,UAAU,EAAE,MAAM,UAAU,CAAC;AAEjE;;;;;;GAMG;AACH,wBAAgB,SAAS,CAAC,MAAM,EAC9B,KAAK,EAAE,SAAS,CAAC,KAAK,CAAC,KAAK,CAAC,MAAM,CAAC,EACpC,MAAM,CAAC,EAAE,UAAU,CAAC,UAAU,CAAC,MAAM,CAAC,GACrC,IAAI,CAAC,MAAM,CAAC,CAId"}

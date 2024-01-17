@@ -1,4 +1,7 @@
-import { createFieldDecorator } from "./createFieldDecorator";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createFieldValidator = void 0;
+const createFieldDecorator_1 = require("./createFieldDecorator");
 /**
  * Creates validation decorators for fields.
  *
@@ -23,8 +26,9 @@ import { createFieldDecorator } from "./createFieldDecorator";
  * }
  * ```
  */
-export function createFieldValidator(validate, groups) {
-    return createFieldDecorator((meta, key) => {
+function createFieldValidator(validate, groups) {
+    return (0, createFieldDecorator_1.createFieldDecorator)((meta, key) => {
         meta.addValidator(key, validate, groups !== null && groups !== void 0 ? groups : []);
     });
 }
+exports.createFieldValidator = createFieldValidator;

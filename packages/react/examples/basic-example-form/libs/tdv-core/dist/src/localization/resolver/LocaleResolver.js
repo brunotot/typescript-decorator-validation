@@ -1,16 +1,14 @@
-/**
- *  Current global locale setting, defaulted to English (**en**).
- */
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.setGlobalLocale = exports.getGlobalLocale = void 0;
 let locale = "en";
-/**
- * Retrieves the current global `Locale`.
- */
-export function getLocale() {
+/** Returns the current global {@link Locale `Locale`} value. */
+function getGlobalLocale() {
     return locale;
 }
-/**
- * Sets the global `Locale` to the specified value.
- */
-export function setLocale(localeValue) {
+exports.getGlobalLocale = getGlobalLocale;
+/** Sets the global {@link Locale `Locale`} to the specified value. */
+function setGlobalLocale(localeValue) {
     locale = localeValue;
 }
+exports.setGlobalLocale = setGlobalLocale;

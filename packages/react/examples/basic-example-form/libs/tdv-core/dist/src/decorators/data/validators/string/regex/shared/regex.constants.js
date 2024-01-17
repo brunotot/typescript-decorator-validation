@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RegexConst = void 0;
 /**
  * A collection of commonly used regular expressions.
  * @remarks This object provides regular expressions for various validation scenarios.
@@ -8,7 +11,7 @@
  * ```
  */
 // prettier-ignore
-export const RegexConst = {
+exports.RegexConst = {
     /** Regular expression for validating URLs. */
     URL: /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/,
     /** Regular expression for validating email addresses. */

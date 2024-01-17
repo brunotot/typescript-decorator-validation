@@ -1,11 +1,15 @@
-import { translate } from "../../../../localization";
-import { Objects } from "../../../../utilities";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ArraySizeExact = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../utilities");
 /** Internal validation function for {@link ArraySizeExact} validator. */
 function isArraySizeExactValid(array) {
-  Objects.assertType("array", array);
-  return (array !== null && array !== void 0 ? array : []).length === 0;
+    _utilities_1.Objects.assertType("array", array);
+    return (array !== null && array !== void 0 ? array : []).length === 0;
 }
 /**
  * Checks if the decorated array contains an exact number of elements.
@@ -56,22 +60,11 @@ function isArraySizeExactValid(array) {
  * }
  * ```
  */
-export function ArraySizeExact(exact, options) {
-  return createFieldValidator(
-    (array, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.ARRAY_SIZE_EXACT),
-      valid: isArraySizeExactValid(array),
-      message: buildMessageProp(
-        options,
-        locale,
-        translate(
-          locale,
-          DecoratorKeys.ARRAY_SIZE_EXACT,
-          exact,
-          (array !== null && array !== void 0 ? array : []).length
-        )
-      ),
-    }),
-    buildGroupsProp(options)
-  );
+function ArraySizeExact(exact, options) {
+    return (0, forField_1.createFieldValidator)((array, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.ARRAY_SIZE_EXACT),
+        valid: isArraySizeExactValid(array),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.ARRAY_SIZE_EXACT, exact, (array !== null && array !== void 0 ? array : []).length)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.ArraySizeExact = ArraySizeExact;

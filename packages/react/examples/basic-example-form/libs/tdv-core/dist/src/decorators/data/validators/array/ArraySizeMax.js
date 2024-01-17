@@ -1,11 +1,15 @@
-import { translate } from "../../../../localization";
-import { Objects } from "../../../../utilities";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ArraySizeMax = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../utilities");
 /** Internal validation function for {@link ArraySizeMax} validator. */
 function isArraySizeMaxValid(array, max) {
-  Objects.assertType("array", array);
-  return (array !== null && array !== void 0 ? array : []).length <= max;
+    _utilities_1.Objects.assertType("array", array);
+    return (array !== null && array !== void 0 ? array : []).length <= max;
 }
 /**
  * Checks if the decorated array contains up to `max` number of elements.
@@ -56,17 +60,11 @@ function isArraySizeMaxValid(array, max) {
  * }
  * ```
  */
-export function ArraySizeMax(max, options) {
-  return createFieldValidator(
-    (array, _, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.ARRAY_SIZE_MAX),
-      valid: isArraySizeMaxValid(array, max),
-      message: buildMessageProp(
-        options,
-        locale,
-        translate(locale, DecoratorKeys.ARRAY_SIZE_MAX, max, (array !== null && array !== void 0 ? array : []).length)
-      ),
-    }),
-    buildGroupsProp(options)
-  );
+function ArraySizeMax(max, options) {
+    return (0, forField_1.createFieldValidator)((array, _, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.ARRAY_SIZE_MAX),
+        valid: isArraySizeMaxValid(array, max),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.ARRAY_SIZE_MAX, max, (array !== null && array !== void 0 ? array : []).length)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.ArraySizeMax = ArraySizeMax;

@@ -1,13 +1,17 @@
-import { translate } from "../../../../../../localization";
-import { Objects } from "../../../../../../utilities";
-import { testRegex } from "../../../../../data/validators/string/regex/Pattern";
-import { RegexConst } from "../../../../../data/validators/string/regex/shared/regex.constants";
-import { createFieldValidator } from "../../../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Lowercase = void 0;
+const DecoratorKeys_1 = require("../../../../../data/validators/DecoratorKeys");
+const Pattern_1 = require("../../../../../data/validators/string/regex/Pattern");
+const regex_constants_1 = require("../../../../../data/validators/string/regex/shared/regex.constants");
+const forField_1 = require("../../../../../factory/forField");
+const helper_1 = require("../../../../../helper");
+const TranslationService_1 = require("../../../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../../../utilities");
 /** Internal validation function for {@link Lowercase} validator. */
 function isLowercaseValid(value) {
-  Objects.assertType("string", value);
-  return testRegex(RegexConst.LOWERCASE, value);
+    _utilities_1.Objects.assertType("string", value);
+    return (0, Pattern_1.testRegex)(regex_constants_1.RegexConst.LOWERCASE, value);
 }
 /**
  * Checks if decorated string contains only lowercase characters.
@@ -56,13 +60,11 @@ function isLowercaseValid(value) {
  * }
  * ```
  */
-export function Lowercase(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.LOWERCASE),
-      valid: isLowercaseValid(value),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.LOWERCASE)),
-    }),
-    buildGroupsProp(options)
-  );
+function Lowercase(options) {
+    return (0, forField_1.createFieldValidator)((value, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.LOWERCASE),
+        valid: isLowercaseValid(value),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.LOWERCASE)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.Lowercase = Lowercase;

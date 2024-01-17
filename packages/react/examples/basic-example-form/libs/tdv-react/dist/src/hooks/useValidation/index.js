@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
-import useValidationEngine from "../useValidationEngine";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useValidation = void 0;
+const react_1 = require("react");
+const useEngine_1 = require("../useEngine");
 /**
  * React hook which exposes validation-related props to a form component
  *
@@ -21,45 +24,44 @@ import useValidationEngine from "../useValidationEngine";
  *
  * @typeParam TClass - represents parent form class model holding context of current compontent
  */
-export default function useValidation(model, { defaultValue, groups, asyncDelay, locale, resolveDecoratorArgs = () => ({}) } = {}) {
-    const engine = useValidationEngine(model, {
-        groups,
-        defaultValue,
-        asyncDelay,
-        locale,
-    });
-    const [form, setForm] = useState(engine.defaultValue);
+// prettier-ignore
+function useValidation(Class, props = {}) {
+    var _a;
+    const { groups, defaultValue, asyncDelay, locale } = props;
+    const resolveDecoratorArgs = (_a = props.resolveDecoratorArgs) !== null && _a !== void 0 ? _a : (() => ({}));
     const decoratorArgs = resolveDecoratorArgs();
-    const [globalErrors, setGlobalErrors] = useState(() => engine.validate(form, decoratorArgs).globalErrors);
-    const [details, setDetails] = useState(() => engine.validate(form, decoratorArgs).detailedErrors);
-    const [simpleErrors, setSimpleErrors] = useState(() => {
-        return engine.validate(form, decoratorArgs).errors;
-    });
-    useEffect(() => {
-        engine.async.register(({ errors, detailedErrors, globalErrors }) => {
-            setDetails(detailedErrors);
-            setSimpleErrors(errors);
-            setGlobalErrors(globalErrors);
+    const formConfig = { groups, defaultValue, asyncDelay, locale };
+    const engine = (0, useEngine_1.useEngine)(Class, formConfig);
+    const [form, setForm] = (0, react_1.useState)(engine.defaultValue);
+    const [classSimpleErrors, setClassSimpleErrors] = (0, react_1.useState)(() => engine.validate(form, decoratorArgs).globalErrors);
+    const [fieldDetailedErrors, setFieldDetailedErrors] = (0, react_1.useState)(() => engine.validate(form, decoratorArgs).detailedErrors);
+    const [fieldSimpleErrors, setFieldSimpleErrors] = (0, react_1.useState)(() => engine.validate(form, decoratorArgs).errors);
+    (0, react_1.useEffect)(() => {
+        engine.registerAsync(({ errors, detailedErrors, globalErrors }) => {
+            setFieldDetailedErrors(detailedErrors);
+            setFieldSimpleErrors(errors);
+            setClassSimpleErrors(globalErrors);
         });
         return () => {
-            engine.async.unregister();
+            engine.unregisterAsync();
         };
     }, [engine]);
-    useEffect(() => {
+    (0, react_1.useEffect)(() => {
         const { errors, detailedErrors, globalErrors } = engine.validate(form, decoratorArgs);
-        setDetails(detailedErrors);
-        setSimpleErrors(errors);
-        setGlobalErrors(globalErrors);
+        setFieldDetailedErrors(detailedErrors);
+        setFieldSimpleErrors(errors);
+        setClassSimpleErrors(globalErrors);
     }, [form, engine, JSON.stringify(decoratorArgs)]);
     return [
         form,
         setForm,
         {
             isValid: engine.isValid(form),
-            errors: simpleErrors,
-            detailedErrors: details,
+            errors: fieldSimpleErrors,
+            detailedErrors: fieldDetailedErrors,
+            globalErrors: classSimpleErrors,
             engine,
-            globalErrors,
         },
     ];
 }
+exports.useValidation = useValidation;

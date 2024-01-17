@@ -1,20 +1,26 @@
-import { translate } from "../../../../localization";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Digits = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
 /** Internal validation function for {@link Digits} validator. */
 function isDigitsValid(number, ints, decs) {
-  const assertValidInputs = () => {
-    const isMaxIntegersValid = ints !== Infinity && ints % 1 === 0 && ints >= 0;
-    const isMaxDecimalsValid = decs !== Infinity && decs % 1 === 0 && decs >= 0;
-    const isInputInvalid = !isMaxIntegersValid || !isMaxDecimalsValid;
-    if (isInputInvalid) throw new Error(translate(null, "InvalidDigits", ints, decs));
-  };
-  assertValidInputs();
-  if (number == null) return true;
-  const parts = number.toString().split(".");
-  const integerPart = parts[0];
-  const fractionPart = parts[1] || "";
-  return integerPart.length <= ints && fractionPart.length <= decs;
+    const assertValidInputs = () => {
+        const isMaxIntegersValid = ints !== Infinity && ints % 1 === 0 && ints >= 0;
+        const isMaxDecimalsValid = decs !== Infinity && decs % 1 === 0 && decs >= 0;
+        const isInputInvalid = !isMaxIntegersValid || !isMaxDecimalsValid;
+        if (isInputInvalid)
+            throw new Error((0, TranslationService_1.translate)(null, "InvalidDigits", ints, decs));
+    };
+    assertValidInputs();
+    if (number == null)
+        return true;
+    const parts = number.toString().split(".");
+    const integerPart = parts[0];
+    const fractionPart = parts[1] || "";
+    return integerPart.length <= ints && fractionPart.length <= decs;
 }
 /**
  * Checks if decorated number is a decimal number.
@@ -65,13 +71,11 @@ function isDigitsValid(number, ints, decs) {
  * }
  * ```
  */
-export function Digits(intsLimit, decimalsLimit, options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.DIGITS),
-      valid: isDigitsValid(value, intsLimit, decimalsLimit),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.DIGITS, intsLimit, decimalsLimit)),
-    }),
-    buildGroupsProp(options)
-  );
+function Digits(intsLimit, decimalsLimit, options) {
+    return (0, forField_1.createFieldValidator)((value, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.DIGITS),
+        valid: isDigitsValid(value, intsLimit, decimalsLimit),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.DIGITS, intsLimit, decimalsLimit)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.Digits = Digits;

@@ -16,7 +16,7 @@ export import Form = Validation.Form;
 export import Class = Utilities.Types.Class;
 export import UnwrapClass = Utilities.Types.UnwrapClass;
 export import ValidationResult = Validation.ValidationResult;
+export * from "@overrides";
 
 /* Namespace exports */
-export * from "@overrides";
 export { Decorators, Localization, Reflection, Strategy, Utilities, Validation };

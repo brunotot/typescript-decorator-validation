@@ -1,11 +1,14 @@
-import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
-import { PrimitiveStrategy } from "./PrimitiveStrategy";
-export var PrimitiveGetterStrategy;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PrimitiveGetterStrategy = void 0;
+const AbstractValidationStrategyService_1 = require("../AbstractValidationStrategyService");
+const PrimitiveStrategy_1 = require("./PrimitiveStrategy");
+var PrimitiveGetterStrategy;
 (function (PrimitiveGetterStrategy) {
     /**
      * Constant name identifier for this strategy.
      */
-    PrimitiveGetterStrategy.Name = `get (): ${PrimitiveStrategy.Name}`;
+    PrimitiveGetterStrategy.Name = `get (): ${PrimitiveStrategy_1.PrimitiveStrategy.Name}`;
     /**
      * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating getter primitive types like numbers, strings, etc.
      *
@@ -13,7 +16,7 @@ export var PrimitiveGetterStrategy;
      *
      * @extends AbstractValidationStrategyService<F,ValidationResult[],string[]>
      */
-    class StrategyResolver extends AbstractValidationStrategyService {
+    class StrategyResolver extends AbstractValidationStrategyService_1.AbstractValidationStrategyService {
         /**
          * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for primitive types by invoking the root rule's `validate` method and then building simplified error messages.
          *
@@ -28,4 +31,4 @@ export var PrimitiveGetterStrategy;
         }
     }
     PrimitiveGetterStrategy.StrategyResolver = StrategyResolver;
-})(PrimitiveGetterStrategy || (PrimitiveGetterStrategy = {}));
+})(PrimitiveGetterStrategy || (exports.PrimitiveGetterStrategy = PrimitiveGetterStrategy = {}));

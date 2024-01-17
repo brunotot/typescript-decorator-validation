@@ -1,11 +1,15 @@
-import { translate } from "../../../../localization";
-import { Objects } from "../../../../utilities";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ValueMin = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../utilities");
 /** Internal validation function for {@link ValueMin} validator. */
 function isValueMinValid(num, min) {
-  Objects.assertType("number", num);
-  return num == null ? true : num >= min;
+    _utilities_1.Objects.assertType("number", num);
+    return num == null ? true : num >= min;
 }
 /**
  * Checks if decorated number is not lesser than given `min` parameter.
@@ -55,13 +59,11 @@ function isValueMinValid(num, min) {
  * }
  * ```
  */
-export function ValueMin(min, options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.VALUE_MIN),
-      valid: isValueMinValid(value, min),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.VALUE_MIN, min, value)),
-    }),
-    buildGroupsProp(options)
-  );
+function ValueMin(min, options) {
+    return (0, forField_1.createFieldValidator)((value, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.VALUE_MIN),
+        valid: isValueMinValid(value, min),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.VALUE_MIN, min, value)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.ValueMin = ValueMin;

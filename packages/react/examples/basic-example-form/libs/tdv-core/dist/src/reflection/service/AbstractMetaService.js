@@ -1,3 +1,4 @@
+"use strict";
 var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
@@ -10,12 +11,14 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _AbstractMetaService_metadata, _AbstractMetaService_injectionKey, _AbstractMetaService_initial, _AbstractMetaService_class;
-import { Classes } from "../../utilities";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AbstractMetaService = void 0;
+const _utilities_1 = require("../../utilities");
 /**
  * Abstract class for managing metadata.
  * @remarks This class provides methods for managing metadata associated with a given strategy. It can be used to get, set, and check for the existence of attributes in the metadata.
  */
-export class AbstractMetaService {
+class AbstractMetaService {
     /**
      * Constructor for AbstractMetaService.
      * @param injectionKey - The key used for metadata injection.
@@ -27,10 +30,10 @@ export class AbstractMetaService {
         _AbstractMetaService_injectionKey.set(this, void 0);
         _AbstractMetaService_initial.set(this, void 0);
         _AbstractMetaService_class.set(this, void 0);
-        __classPrivateFieldSet(this, _AbstractMetaService_metadata, Classes.getMetadata(strategy), "f");
+        __classPrivateFieldSet(this, _AbstractMetaService_metadata, _utilities_1.Classes.getMetadata(strategy), "f");
         __classPrivateFieldSet(this, _AbstractMetaService_injectionKey, injectionKey, "f");
         __classPrivateFieldSet(this, _AbstractMetaService_initial, initial, "f");
-        if (Classes.isClass(strategy)) {
+        if (_utilities_1.Classes.isClass(strategy)) {
             this.class = strategy;
         }
         else {
@@ -88,4 +91,5 @@ export class AbstractMetaService {
         return __classPrivateFieldGet(this, _AbstractMetaService_metadata, "f")[attrKey];
     }
 }
+exports.AbstractMetaService = AbstractMetaService;
 _AbstractMetaService_metadata = new WeakMap(), _AbstractMetaService_injectionKey = new WeakMap(), _AbstractMetaService_initial = new WeakMap(), _AbstractMetaService_class = new WeakMap();

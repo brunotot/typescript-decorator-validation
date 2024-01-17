@@ -1,3 +1,4 @@
+"use strict";
 var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
@@ -10,9 +11,11 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _AbstractValidationStrategyService_locale, _AbstractValidationStrategyService_groups, _AbstractValidationStrategyService_engineCfg, _AbstractValidationStrategyService_classRules, _AbstractValidationStrategyService_descriptor, _AbstractValidationStrategyService_defaultParent, _AbstractValidationStrategyService_fieldDescriptor, _AbstractValidationStrategyService_eventEmitter;
-import { ClassValidatorMetaService } from "../../reflection/service/impl/ClassValidatorMetaService";
-import { FieldValidatorMetaService } from "../../reflection/service/impl/FieldValidatorMetaService";
-import { Form } from "../../validation/models/Form";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AbstractValidationStrategyService = void 0;
+const ClassValidatorMetaService_1 = require("../../reflection/service/impl/ClassValidatorMetaService");
+const FieldValidatorMetaService_1 = require("../../reflection/service/impl/FieldValidatorMetaService");
+const Form_1 = require("../../validation/models/Form");
 /**
  * The `AbstractValidationStrategyService` class serves as an abstract base class for implementing various validation strategies. It provides essential utility methods and properties to facilitate the validation process.
  *
@@ -20,7 +23,7 @@ import { Form } from "../../validation/models/Form";
  * @typeParam TDetailedResult The detailed result of the validation.
  * @typeParam TSimpleResult A simplified version of the validation result.
  */
-export class AbstractValidationStrategyService {
+class AbstractValidationStrategyService {
     /**
      * Initializes the `#descriptor` and `#defaultParent` fields.
      *
@@ -46,7 +49,7 @@ export class AbstractValidationStrategyService {
             groups: this.groups,
             asyncDelay,
         }, "f");
-        __classPrivateFieldSet(this, _AbstractValidationStrategyService_classRules, ClassValidatorMetaService.inject(__classPrivateFieldGet(this, _AbstractValidationStrategyService_descriptor, "f").hostClass, this.eventEmitter).data, "f");
+        __classPrivateFieldSet(this, _AbstractValidationStrategyService_classRules, ClassValidatorMetaService_1.ClassValidatorMetaService.inject(__classPrivateFieldGet(this, _AbstractValidationStrategyService_descriptor, "f").hostClass, this.eventEmitter).data, "f");
     }
     set eventEmitter(v) {
         __classPrivateFieldSet(this, _AbstractValidationStrategyService_eventEmitter, v, "f");
@@ -55,7 +58,7 @@ export class AbstractValidationStrategyService {
         return __classPrivateFieldGet(this, _AbstractValidationStrategyService_eventEmitter, "f");
     }
     get fieldEngine() {
-        return new Form(__classPrivateFieldGet(this, _AbstractValidationStrategyService_descriptor, "f").thisClass, this.engineCfg);
+        return new Form_1.Form(__classPrivateFieldGet(this, _AbstractValidationStrategyService_descriptor, "f").thisClass, this.engineCfg);
     }
     get engineCfg() {
         return __classPrivateFieldGet(this, _AbstractValidationStrategyService_engineCfg, "f");
@@ -79,7 +82,7 @@ export class AbstractValidationStrategyService {
     get fieldDescriptor() {
         if (__classPrivateFieldGet(this, _AbstractValidationStrategyService_fieldDescriptor, "f"))
             return __classPrivateFieldGet(this, _AbstractValidationStrategyService_fieldDescriptor, "f");
-        __classPrivateFieldSet(this, _AbstractValidationStrategyService_fieldDescriptor, FieldValidatorMetaService.inject(__classPrivateFieldGet(this, _AbstractValidationStrategyService_descriptor, "f").hostClass, __classPrivateFieldGet(this, _AbstractValidationStrategyService_eventEmitter, "f")).getUntypedDescriptor(this.fieldName, this.eventEmitter), "f");
+        __classPrivateFieldSet(this, _AbstractValidationStrategyService_fieldDescriptor, FieldValidatorMetaService_1.FieldValidatorMetaService.inject(__classPrivateFieldGet(this, _AbstractValidationStrategyService_descriptor, "f").hostClass, __classPrivateFieldGet(this, _AbstractValidationStrategyService_eventEmitter, "f")).getUntypedDescriptor(this.fieldName, this.eventEmitter), "f");
         return __classPrivateFieldGet(this, _AbstractValidationStrategyService_fieldDescriptor, "f");
     }
     /**
@@ -113,4 +116,5 @@ export class AbstractValidationStrategyService {
         return this.fieldDescriptor.validations.foreach.validate(arrayItem, parentValue, this.groups, this.locale);
     }
 }
+exports.AbstractValidationStrategyService = AbstractValidationStrategyService;
 _AbstractValidationStrategyService_locale = new WeakMap(), _AbstractValidationStrategyService_groups = new WeakMap(), _AbstractValidationStrategyService_engineCfg = new WeakMap(), _AbstractValidationStrategyService_classRules = new WeakMap(), _AbstractValidationStrategyService_descriptor = new WeakMap(), _AbstractValidationStrategyService_defaultParent = new WeakMap(), _AbstractValidationStrategyService_fieldDescriptor = new WeakMap(), _AbstractValidationStrategyService_eventEmitter = new WeakMap();

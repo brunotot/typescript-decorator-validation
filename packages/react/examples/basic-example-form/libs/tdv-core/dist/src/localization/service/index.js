@@ -1,2 +1,2 @@
-export * from "./MessageReaderService";
-export * from "./TranslationService";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });

@@ -1,3 +1,4 @@
+"use strict";
 var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
@@ -10,7 +11,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _Cache_instances, _Cache_cache, _Cache_payload, _Cache_changeFn, _Cache_fromCache;
-import { Objects } from "../../utilities";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Cache = void 0;
+const _utilities_1 = require("../../utilities");
 /**
  * A generic caching utility class used by `ValidationEngine`.
  *
@@ -20,7 +23,7 @@ import { Objects } from "../../utilities";
  * @remarks
  * This class provides methods to get and patch cached values based on a payload.
  */
-export class Cache {
+class Cache {
     /**
      * Constructs a new `CacheMap` instance.
      *
@@ -67,9 +70,10 @@ export class Cache {
         return __classPrivateFieldGet(this, _Cache_cache, "f");
     }
 }
+exports.Cache = Cache;
 _Cache_cache = new WeakMap(), _Cache_payload = new WeakMap(), _Cache_changeFn = new WeakMap(), _Cache_instances = new WeakSet(), _Cache_fromCache = function _Cache_fromCache(payload, cacheKey) {
     const cacheValue = __classPrivateFieldGet(this, _Cache_cache, "f")[cacheKey];
-    return cacheValue !== undefined && Objects.deepEquals(__classPrivateFieldGet(this, _Cache_payload, "f"), payload)
+    return cacheValue !== undefined && _utilities_1.Objects.deepEquals(__classPrivateFieldGet(this, _Cache_payload, "f"), payload)
         ? cacheValue
         : __classPrivateFieldGet(this, _Cache_changeFn, "f").call(this, payload)[cacheKey];
 };

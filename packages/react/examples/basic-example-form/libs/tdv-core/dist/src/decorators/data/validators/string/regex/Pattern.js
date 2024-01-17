@@ -1,6 +1,9 @@
-import { createFieldValidator } from "../../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../helper";
-import { translate } from "../../../../../localization";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Pattern = exports.testRegex = void 0;
+const forField_1 = require("../../../../factory/forField");
+const helper_1 = require("../../../../helper");
+const TranslationService_1 = require("../../../../../localization/service/TranslationService");
 /**
  * Tests if a value matches a regular expression pattern.
  * @template T - The type of the value being tested.
@@ -8,9 +11,10 @@ import { translate } from "../../../../../localization";
  * @param value - The value to test.
  * @returns A boolean indicating whether the value matches the pattern.
  */
-export function testRegex(regex, value) {
+function testRegex(regex, value) {
     return (value !== null && value !== void 0 ? value : "").length === 0 || regex.test(value);
 }
+exports.testRegex = testRegex;
 /**
  * Creates a validator decorator that checks if a string value matches a regular expression pattern.
  * @typeparam T - The type of the decorated property (optional string).
@@ -40,10 +44,11 @@ export function testRegex(regex, value) {
  * }
  * ```
  */
-export function Pattern(regex, options) {
-    return createFieldValidator((value, _context, locale) => ({
-        key: buildKeyProp(options, "Pattern"),
+function Pattern(regex, options) {
+    return (0, forField_1.createFieldValidator)((value, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, "Pattern"),
         valid: testRegex(regex, value),
-        message: buildMessageProp(options, locale, translate(locale, "Pattern", regex.toString())),
-    }), buildGroupsProp(options));
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, "Pattern", regex.toString())),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.Pattern = Pattern;

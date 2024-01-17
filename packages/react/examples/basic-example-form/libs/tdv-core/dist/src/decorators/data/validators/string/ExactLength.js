@@ -1,11 +1,15 @@
-import { translate } from "../../../../localization";
-import { Objects } from "../../../../utilities";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ExactLength = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../utilities");
 /** Internal validation function for {@link ExactLength} validator. */
 function isExactLengthValid(value, exact) {
-  Objects.assertType("string", value);
-  return (value !== null && value !== void 0 ? value : "").length === exact;
+    _utilities_1.Objects.assertType("string", value);
+    return (value !== null && value !== void 0 ? value : "").length === exact;
 }
 /**
  * Checks if decorated string contains a specific number of characters.
@@ -52,13 +56,11 @@ function isExactLengthValid(value, exact) {
  * }
  * ```
  */
-export function ExactLength(exact, options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.EXACT_LENGTH),
-      valid: isExactLengthValid(value, exact),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.EXACT_LENGTH, exact)),
-    }),
-    buildGroupsProp(options)
-  );
+function ExactLength(exact, options) {
+    return (0, forField_1.createFieldValidator)((value, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.EXACT_LENGTH),
+        valid: isExactLengthValid(value, exact),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.EXACT_LENGTH, exact)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.ExactLength = ExactLength;

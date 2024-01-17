@@ -79,7 +79,7 @@ export type FormProviderProps = {
  * }
  * ```
  */
-export default function FormProvider({ children, submitted, setSubmitted, validateImmediately }: FormProviderProps) {
+export function FormProvider({ children, submitted, setSubmitted, validateImmediately }: FormProviderProps) {
   return (
     <FormContext.Provider value={{ submitted, setSubmitted, validateImmediately }}>{children}</FormContext.Provider>
   );

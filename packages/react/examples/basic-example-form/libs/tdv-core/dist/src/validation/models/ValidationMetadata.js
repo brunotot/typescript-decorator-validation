@@ -1,3 +1,4 @@
+"use strict";
 var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
@@ -10,7 +11,9 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
 var _ValidationMetadata_instances, _ValidationMetadata_contents, _ValidationMetadata_handleAsyncResults, _ValidationMetadata_groupedValidators;
-import { Events } from "../models/Events";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ValidationMetadata = void 0;
+const Events_1 = require("../models/Events");
 /**
  * Manages a collection of validation rules for a specific field.
  *
@@ -20,7 +23,7 @@ import { Events } from "../models/Events";
  * This class is responsible for storing and applying validation rules to a specific field.
  * It allows you to validate the field against a payload and a set of validation groups.
  */
-export class ValidationMetadata {
+class ValidationMetadata {
     /**
      * Gets the contents of the reflection rule.
      *
@@ -76,12 +79,13 @@ export class ValidationMetadata {
         __classPrivateFieldGet(this, _ValidationMetadata_contents, "f").push(rule);
     }
 }
+exports.ValidationMetadata = ValidationMetadata;
 _ValidationMetadata_contents = new WeakMap(), _ValidationMetadata_instances = new WeakSet(), _ValidationMetadata_handleAsyncResults = function _ValidationMetadata_handleAsyncResults(asyncResults, emitter, field) {
     if (!emitter)
         return;
     Promise.all(asyncResults).then(results => {
         results.forEach(value => {
-            emitter.emit(Events.ASYNC_VALIDATION_COMPLETE, {
+            emitter.emit(Events_1.Events.ASYNC_VALIDATION_COMPLETE, {
                 key: field,
                 value,
             });

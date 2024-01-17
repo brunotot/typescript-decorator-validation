@@ -1,4 +1,7 @@
-import { createFieldDecorator } from "../../factory/forField/createFieldDecorator";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.foreach = void 0;
+const createFieldDecorator_1 = require("../../factory/forField/createFieldDecorator");
 /**
  * Creates a validator decorator which applies multiple validators to each element in array field.
  * @typeParam T - The type of the array property.
@@ -13,8 +16,8 @@ import { createFieldDecorator } from "../../factory/forField/createFieldDecorato
  * }
  * ```
  */
-export function foreach(...validators) {
-    return createFieldDecorator((meta, property, context) => {
+function foreach(...validators) {
+    return (0, createFieldDecorator_1.createFieldDecorator)((meta, property, context) => {
         const validationProcessor = meta.getUntypedDescriptor(property);
         validationProcessor.thisDefault = [];
         validators.forEach(validator => {
@@ -26,3 +29,4 @@ export function foreach(...validators) {
         });
     });
 }
+exports.foreach = foreach;

@@ -1,22 +1,15 @@
-const DEFAULT_CONFIGURER = (_, message) => message;
-let configurer = DEFAULT_CONFIGURER;
-/**
- * Is used to globally define a custom message parser.
- */
-export function configureParser(handler) {
-    configurer = handler !== null && handler !== void 0 ? handler : DEFAULT_CONFIGURER;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.setMessageParser = exports.getMessageParser = void 0;
+const DEFAULT_MESSAGE_PARSER = (_, message) => String(message);
+const messageParser = DEFAULT_MESSAGE_PARSER;
+/** Returns the current global {@link MessageParser `MessageParser`} value. */
+function getMessageParser() {
+    return messageParser;
 }
-/**
- * Internal handler for the customized message parser
- */
-export function parseMessage(locale, message) {
-    try {
-        return configurer(locale, message);
-    }
-    catch (error) {
-        const title = `An error occurred while resolving "${message}" for locale "${locale}".`;
-        const descr = `To fix, check your Localization.configureParser() implementation or review stack-trace.`;
-        const stacktrace = `\n\n${String(error)}`;
-        throw new Error(`${title} ${descr} ${stacktrace}`);
-    }
+exports.getMessageParser = getMessageParser;
+/** Sets the global {@link MessageParser `MessageParser`} to the specified value (pass `undefined` to revert to default). */
+function setMessageParser(messageParser) {
+    messageParser = messageParser !== null && messageParser !== void 0 ? messageParser : DEFAULT_MESSAGE_PARSER;
 }
+exports.setMessageParser = setMessageParser;

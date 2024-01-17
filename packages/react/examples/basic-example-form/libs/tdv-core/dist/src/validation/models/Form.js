@@ -1,3 +1,4 @@
+"use strict";
 var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
@@ -9,19 +10,21 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _Form_instances, _Form_eventListener, _Form_eventEmitter, _Form_fieldValidatorMetaService, _Form_classValidatorMetaService, _Form_groups, _Form_defaultValue, _Form_cache, _Form_hostClass, _Form_asyncDelay, _Form_debounceMap, _Form_validateField, _Form_registerAsync, _Form_unregisterAsync;
-import { getLocale } from "../../localization";
-import { ClassValidatorMetaService } from "../../reflection/service/impl/ClassValidatorMetaService";
-import { FieldValidatorMetaService } from "../../reflection/service/impl/FieldValidatorMetaService";
-import { EventEmitter, Objects } from "../../utilities";
-import { Cache } from "../models/Cache";
-import { Events } from "../models/Events";
-import { ValidationMetadata } from "../models/ValidationMetadata";
+var _Form_instances, _Form_eventListener, _Form_eventEmitter, _Form_fieldValidatorMetaService, _Form_classValidatorMetaService, _Form_groups, _Form_defaultValue, _Form_cache, _Form_hostClass, _Form_asyncDelay, _Form_debounceMap, _Form_validateField;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Form = exports.toClass = exports.hasErrors = void 0;
+const _localization_1 = require("../../localization");
+const ClassValidatorMetaService_1 = require("../../reflection/service/impl/ClassValidatorMetaService");
+const FieldValidatorMetaService_1 = require("../../reflection/service/impl/FieldValidatorMetaService");
+const _utilities_1 = require("../../utilities");
+const Cache_1 = require("../models/Cache");
+const Events_1 = require("../models/Events");
+const ValidationMetadata_1 = require("../models/ValidationMetadata");
 /**
  * Checks if an error object has errors.
  * @typeParam T - The type of the errors.
  */
-export function hasErrors(data) {
+function hasErrors(data) {
     const data0 = data;
     if (Array.isArray(data0)) {
         return data0.some(item => hasErrors(item));
@@ -34,6 +37,7 @@ export function hasErrors(data) {
     }
     return false;
 }
+exports.hasErrors = hasErrors;
 /**
  * Transforms a plain object into an instance of the given class.
  * @param clazz - The class to transform the object into.
@@ -41,13 +45,13 @@ export function hasErrors(data) {
  * @typeParam TClass - The type of the class.
  * @returns An instance of TClass.
  */
-export function toClass(clazz, object) {
+function toClass(clazz, object) {
     function _toClass(clazz, object) {
         if (Array.isArray(object)) {
             return object.map(item => _toClass(clazz, item));
         }
         const entries = Object.entries(object !== null && object !== void 0 ? object : {});
-        const meta = FieldValidatorMetaService.inject(clazz, EventEmitter.EMPTY);
+        const meta = FieldValidatorMetaService_1.FieldValidatorMetaService.inject(clazz, _utilities_1.EventEmitter.EMPTY);
         const data = {};
         for (const [key, value] of entries) {
             const descriptor = meta.getUntypedDescriptor(key);
@@ -70,6 +74,7 @@ export function toClass(clazz, object) {
     }
     return _toClass(clazz, object);
 }
+exports.toClass = toClass;
 /**
  * A class responsible for processing and validating class instances through its decorated validators.
  *
@@ -80,14 +85,7 @@ export function toClass(clazz, object) {
  * This class uses a `CacheMap` to store validation results for better performance.
  * It also leverages `FieldValidatorMetaService` to retrieve metadata about the class being processed.
  */
-export class Form {
-    get async() {
-        return {
-            register: __classPrivateFieldGet(this, _Form_instances, "m", _Form_registerAsync).bind(this),
-            unregister: __classPrivateFieldGet(this, _Form_instances, "m", _Form_unregisterAsync).bind(this),
-            delay: __classPrivateFieldGet(this, _Form_asyncDelay, "f"),
-        };
-    }
+class Form {
     /**
      * Gets the default host value.
      */
@@ -116,14 +114,14 @@ export class Form {
         _Form_debounceMap.set(this, {});
         __classPrivateFieldSet(this, _Form_asyncDelay, (_a = config === null || config === void 0 ? void 0 : config.asyncDelay) !== null && _a !== void 0 ? _a : 500, "f");
         this.__id = Math.random().toString(36).substring(2, 8);
-        __classPrivateFieldSet(this, _Form_eventEmitter, new EventEmitter(this.__id, __classPrivateFieldGet(this, _Form_asyncDelay, "f")), "f");
+        __classPrivateFieldSet(this, _Form_eventEmitter, new _utilities_1.EventEmitter(this.__id, __classPrivateFieldGet(this, _Form_asyncDelay, "f")), "f");
         __classPrivateFieldSet(this, _Form_hostClass, clazz, "f");
-        this.locale = (_b = config === null || config === void 0 ? void 0 : config.locale) !== null && _b !== void 0 ? _b : getLocale();
+        this.locale = (_b = config === null || config === void 0 ? void 0 : config.locale) !== null && _b !== void 0 ? _b : (0, _localization_1.getGlobalLocale)();
         __classPrivateFieldSet(this, _Form_groups, Array.from(new Set((_c = config === null || config === void 0 ? void 0 : config.groups) !== null && _c !== void 0 ? _c : [])), "f");
         __classPrivateFieldSet(this, _Form_defaultValue, (_d = config === null || config === void 0 ? void 0 : config.defaultValue) !== null && _d !== void 0 ? _d : toClass(clazz), "f");
-        __classPrivateFieldSet(this, _Form_fieldValidatorMetaService, FieldValidatorMetaService.inject(clazz, __classPrivateFieldGet(this, _Form_eventEmitter, "f")), "f");
-        __classPrivateFieldSet(this, _Form_classValidatorMetaService, ClassValidatorMetaService.inject(clazz, __classPrivateFieldGet(this, _Form_eventEmitter, "f")), "f");
-        __classPrivateFieldSet(this, _Form_cache, new Cache(state => this.validate.bind(this)(state)), "f");
+        __classPrivateFieldSet(this, _Form_fieldValidatorMetaService, FieldValidatorMetaService_1.FieldValidatorMetaService.inject(clazz, __classPrivateFieldGet(this, _Form_eventEmitter, "f")), "f");
+        __classPrivateFieldSet(this, _Form_classValidatorMetaService, ClassValidatorMetaService_1.ClassValidatorMetaService.inject(clazz, __classPrivateFieldGet(this, _Form_eventEmitter, "f")), "f");
+        __classPrivateFieldSet(this, _Form_cache, new Cache_1.Cache(state => this.validate.bind(this)(state)), "f");
     }
     /**
      * Checks if the given payload is valid.
@@ -191,7 +189,7 @@ export class Form {
         const errors = {};
         const detailedErrors = {};
         const classValidators = __classPrivateFieldGet(this, _Form_classValidatorMetaService, "f").data.contents;
-        const classReflectionRule = new ValidationMetadata(classValidators);
+        const classReflectionRule = new ValidationMetadata_1.ValidationMetadata(classValidators);
         const classValidationErrors = classReflectionRule.validate(state, state, __classPrivateFieldGet(this, _Form_groups, "f"), this.locale, args, __classPrivateFieldGet(this, _Form_eventEmitter, "f"));
         __classPrivateFieldGet(this, _Form_fieldValidatorMetaService, "f").getFields().forEach(field => {
             const validation = __classPrivateFieldGet(this, _Form_instances, "m", _Form_validateField).call(this, field, state, args);
@@ -221,14 +219,69 @@ export class Form {
     emit(event, data) {
         __classPrivateFieldGet(this, _Form_eventEmitter, "f").emit(event, data);
     }
+    registerAsync(handler) {
+        this.unregisterAsync();
+        __classPrivateFieldSet(this, _Form_eventListener, ({ key, value }) => {
+            const { valid } = value;
+            const currentErrors = __classPrivateFieldGet(this, _Form_cache, "f").get("errors");
+            const currentDetailedErrors = __classPrivateFieldGet(this, _Form_cache, "f").get("detailedErrors");
+            let currentGlobalErrors = __classPrivateFieldGet(this, _Form_cache, "f").get("globalErrors");
+            if (key) {
+                let simpleResults = currentErrors[key];
+                let detailedResults = currentDetailedErrors[key];
+                if (valid) {
+                    detailedResults = detailedResults.filter(r => r.key !== value.key);
+                    simpleResults = simpleResults.filter(r => r !== value.message);
+                }
+                else {
+                    const existing = detailedResults.find(r => r.key === value.key);
+                    if (!existing) {
+                        detailedResults = [...detailedResults, value];
+                        simpleResults = [...simpleResults, value.message];
+                    }
+                }
+                currentErrors[key] = simpleResults;
+                currentDetailedErrors[key] = detailedResults;
+            }
+            else {
+                if (valid) {
+                    currentGlobalErrors = currentGlobalErrors.filter((r) => r.key !== value.key);
+                }
+                else {
+                    const existing = currentGlobalErrors.find((r) => r.key === value.key);
+                    if (!existing) {
+                        currentGlobalErrors = [...currentGlobalErrors, value];
+                    }
+                }
+            }
+            const patched = __classPrivateFieldGet(this, _Form_cache, "f").patch({
+                valid,
+                detailedErrors: Object.assign({}, currentDetailedErrors),
+                errors: Object.assign({}, currentErrors),
+                globalErrors: [...currentGlobalErrors],
+            });
+            handler({
+                errors: patched.errors,
+                detailedErrors: patched.detailedErrors,
+                globalErrors: patched.globalErrors,
+            });
+        }, "f");
+        __classPrivateFieldGet(this, _Form_eventEmitter, "f").on(Events_1.Events.ASYNC_VALIDATION_COMPLETE, __classPrivateFieldGet(this, _Form_eventListener, "f"));
+    }
+    unregisterAsync() {
+        if (__classPrivateFieldGet(this, _Form_eventListener, "f") != null) {
+            __classPrivateFieldGet(this, _Form_eventEmitter, "f").off(Events_1.Events.ASYNC_VALIDATION_COMPLETE, __classPrivateFieldGet(this, _Form_eventListener, "f"));
+        }
+    }
 }
+exports.Form = Form;
 _Form_eventListener = new WeakMap(), _Form_eventEmitter = new WeakMap(), _Form_fieldValidatorMetaService = new WeakMap(), _Form_classValidatorMetaService = new WeakMap(), _Form_groups = new WeakMap(), _Form_defaultValue = new WeakMap(), _Form_cache = new WeakMap(), _Form_hostClass = new WeakMap(), _Form_asyncDelay = new WeakMap(), _Form_debounceMap = new WeakMap(), _Form_instances = new WeakSet(), _Form_validateField = function _Form_validateField(fieldName, payload, args = {}) {
     var _a, _b;
     const descriptor = __classPrivateFieldGet(this, _Form_fieldValidatorMetaService, "f").getUntypedDescriptor(fieldName, __classPrivateFieldGet(this, _Form_eventEmitter, "f"));
     const stratImpl = new descriptor.StrategyImpl(descriptor, __classPrivateFieldGet(this, _Form_defaultValue, "f"), __classPrivateFieldGet(this, _Form_groups, "f"), this.locale, __classPrivateFieldGet(this, _Form_eventEmitter, "f"));
     if (descriptor.strategy === "function") {
         if (!__classPrivateFieldGet(this, _Form_debounceMap, "f")[fieldName]) {
-            __classPrivateFieldGet(this, _Form_debounceMap, "f")[fieldName] = Objects.debounce((value, context) => {
+            __classPrivateFieldGet(this, _Form_debounceMap, "f")[fieldName] = _utilities_1.Objects.debounce((value, context) => {
                 stratImpl.test(value, context, args);
             }, __classPrivateFieldGet(this, _Form_asyncDelay, "f"));
         }
@@ -240,56 +293,4 @@ _Form_eventListener = new WeakMap(), _Form_eventEmitter = new WeakMap(), _Form_f
     }
     // @ts-expect-error We expect error here due to the nature of arbitrary types depending on the different types of fields (primitive, object, primitive array, object array and so on...)
     return stratImpl.test(payload[fieldName], payload, args);
-}, _Form_registerAsync = function _Form_registerAsync(handler) {
-    __classPrivateFieldGet(this, _Form_instances, "m", _Form_unregisterAsync).call(this);
-    __classPrivateFieldSet(this, _Form_eventListener, ({ key, value }) => {
-        const { valid } = value;
-        const currentErrors = __classPrivateFieldGet(this, _Form_cache, "f").get("errors");
-        const currentDetailedErrors = __classPrivateFieldGet(this, _Form_cache, "f").get("detailedErrors");
-        let currentGlobalErrors = __classPrivateFieldGet(this, _Form_cache, "f").get("globalErrors");
-        if (key) {
-            let simpleResults = currentErrors[key];
-            let detailedResults = currentDetailedErrors[key];
-            if (valid) {
-                detailedResults = detailedResults.filter(r => r.key !== value.key);
-                simpleResults = simpleResults.filter(r => r !== value.message);
-            }
-            else {
-                const existing = detailedResults.find(r => r.key === value.key);
-                if (!existing) {
-                    detailedResults = [...detailedResults, value];
-                    simpleResults = [...simpleResults, value.message];
-                }
-            }
-            currentErrors[key] = simpleResults;
-            currentDetailedErrors[key] = detailedResults;
-        }
-        else {
-            if (valid) {
-                currentGlobalErrors = currentGlobalErrors.filter((r) => r.key !== value.key);
-            }
-            else {
-                const existing = currentGlobalErrors.find((r) => r.key === value.key);
-                if (!existing) {
-                    currentGlobalErrors = [...currentGlobalErrors, value];
-                }
-            }
-        }
-        const patched = __classPrivateFieldGet(this, _Form_cache, "f").patch({
-            valid,
-            detailedErrors: Object.assign({}, currentDetailedErrors),
-            errors: Object.assign({}, currentErrors),
-            globalErrors: [...currentGlobalErrors],
-        });
-        handler({
-            errors: patched.errors,
-            detailedErrors: patched.detailedErrors,
-            globalErrors: patched.globalErrors,
-        });
-    }, "f");
-    __classPrivateFieldGet(this, _Form_eventEmitter, "f").on(Events.ASYNC_VALIDATION_COMPLETE, __classPrivateFieldGet(this, _Form_eventListener, "f"));
-}, _Form_unregisterAsync = function _Form_unregisterAsync() {
-    if (__classPrivateFieldGet(this, _Form_eventListener, "f") != null) {
-        __classPrivateFieldGet(this, _Form_eventEmitter, "f").off(Events.ASYNC_VALIDATION_COMPLETE, __classPrivateFieldGet(this, _Form_eventListener, "f"));
-    }
 };

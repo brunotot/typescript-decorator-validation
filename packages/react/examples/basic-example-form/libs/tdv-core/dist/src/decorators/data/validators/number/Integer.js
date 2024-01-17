@@ -1,11 +1,15 @@
-import { translate } from "../../../../localization";
-import { Objects } from "../../../../utilities";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Integer = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../utilities");
 /** Internal validation function for {@link Integer} validator. */
 function isIntegerValid(num) {
-  Objects.assertType("number", num);
-  return num !== undefined && num !== null && Number.isInteger(num);
+    _utilities_1.Objects.assertType("number", num);
+    return num !== undefined && num !== null && Number.isInteger(num);
 }
 /**
  * Checks if decorated number is an integer number.
@@ -54,13 +58,11 @@ function isIntegerValid(num) {
  * }
  * ```
  */
-export function Integer(options) {
-  return createFieldValidator(
-    (num, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.INTEGER),
-      valid: isIntegerValid(num),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.INTEGER, num)),
-    }),
-    buildGroupsProp(options)
-  );
+function Integer(options) {
+    return (0, forField_1.createFieldValidator)((num, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.INTEGER),
+        valid: isIntegerValid(num),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.INTEGER, num)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.Integer = Integer;

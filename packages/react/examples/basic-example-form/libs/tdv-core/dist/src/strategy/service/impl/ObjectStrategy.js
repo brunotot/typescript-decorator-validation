@@ -1,5 +1,8 @@
-import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
-export var ObjectStrategy;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ObjectStrategy = void 0;
+const AbstractValidationStrategyService_1 = require("../AbstractValidationStrategyService");
+var ObjectStrategy;
 (function (ObjectStrategy) {
     /**
      * Constant name identifier for this strategy.
@@ -12,7 +15,7 @@ export var ObjectStrategy;
      *
      * @extends AbstractValidationStrategyService<F, ObjectDetailedErrors<F>, ObjectSimpleErrors<F>>
      */
-    class StrategyResolver extends AbstractValidationStrategyService {
+    class StrategyResolver extends AbstractValidationStrategyService_1.AbstractValidationStrategyService {
         /**
          * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for object types.
          *
@@ -41,4 +44,4 @@ export var ObjectStrategy;
         }
     }
     ObjectStrategy.StrategyResolver = StrategyResolver;
-})(ObjectStrategy || (ObjectStrategy = {}));
+})(ObjectStrategy || (exports.ObjectStrategy = ObjectStrategy = {}));

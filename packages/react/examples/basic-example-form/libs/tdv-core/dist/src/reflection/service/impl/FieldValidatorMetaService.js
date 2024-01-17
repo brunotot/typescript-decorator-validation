@@ -1,3 +1,27 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
@@ -10,11 +34,13 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
 var _FieldValidatorMetaService_instances, _FieldValidatorMetaService_fields, _FieldValidatorMetaService_handleClassInit, _FieldValidatorMetaService_handleContextInit;
-import { AbstractMetaService } from "../../service/AbstractMetaService";
-import { StrategyData } from "../../../strategy/models/StrategyMapper";
-import * as Strategies from "../../../strategy/service/impl";
-import { Classes } from "../../../utilities";
-import { ValidationMetadata } from "../../../validation/models/ValidationMetadata";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FieldValidatorMetaService = exports.ControlDescriptor = void 0;
+const AbstractMetaService_1 = require("../../service/AbstractMetaService");
+const StrategyMapper_1 = require("../../../strategy/models/StrategyMapper");
+const Strategies = __importStar(require("../../../strategy/service/impl"));
+const _utilities_1 = require("../../../utilities");
+const ValidationMetadata_1 = require("../../../validation/models/ValidationMetadata");
 /**
  * A class responsible for describing reflection metadata for a specific field within a class.
  * @typeParam This - The type of the current class.
@@ -22,7 +48,7 @@ import { ValidationMetadata } from "../../../validation/models/ValidationMetadat
  * @typeParam Name - The name of the descriptor within the host class.
  * @remarks This class is used to store metadata about a specific field, including its validation rules and default values.
  */
-export class ControlDescriptor {
+class ControlDescriptor {
     constructor(props) {
         var _a, _b;
         this.hostClass = props.hostClass;
@@ -32,8 +58,8 @@ export class ControlDescriptor {
         this.thisDefault = props.thisDefault;
         this.eventEmitter = props.eventEmitter;
         this.validations = (_b = props.validations) !== null && _b !== void 0 ? _b : {
-            root: new ValidationMetadata(),
-            foreach: new ValidationMetadata(),
+            root: new ValidationMetadata_1.ValidationMetadata(),
+            foreach: new ValidationMetadata_1.ValidationMetadata(),
         };
     }
     /**
@@ -42,11 +68,11 @@ export class ControlDescriptor {
      */
     get StrategyImpl() {
         const strategy = this.strategy;
-        if (!(strategy in StrategyData)) {
+        if (!(strategy in StrategyMapper_1.StrategyData)) {
             const error = `Validation strategy not implemented for field type '${strategy}'`;
             throw new Error(error);
         }
-        return StrategyData[strategy];
+        return StrategyMapper_1.StrategyData[strategy];
     }
     /**
      * Determines the reflection strategy type for the descriptor.
@@ -63,7 +89,7 @@ export class ControlDescriptor {
             return "unknown";
         }
         if (!this.thisName) {
-            return Strategies["ObjectStrategy"].Name;
+            return Strategies.ObjectStrategy.Name;
         }
         const instance = new this.hostClass();
         const fieldName = this.thisName;
@@ -80,17 +106,17 @@ export class ControlDescriptor {
                     typeof value.valid === "boolean" &&
                     "message" in value &&
                     typeof value.message === "string")) {
-                return Strategies["FunctionStrategy"].Name;
+                return Strategies.FunctionStrategy.Name;
             }
             return Array.isArray(value)
                 ? descriptor.thisClass
-                    ? Strategies["ObjectArrayStrategy"].Name
-                    : Strategies["PrimitiveArrayStrategy"].Name
+                    ? Strategies.ObjectArrayStrategy.Name
+                    : Strategies.PrimitiveArrayStrategy.Name
                 : descriptor.thisClass
-                    ? Strategies["ObjectStrategy"].Name
-                    : Strategies["PrimitiveStrategy"].Name;
+                    ? Strategies.ObjectStrategy.Name
+                    : Strategies.PrimitiveStrategy.Name;
         };
-        const descriptor = Classes.getClassFieldDescriptor(this.hostClass, fieldName);
+        const descriptor = _utilities_1.Classes.getClassFieldDescriptor(this.hostClass, fieldName);
         const isGetter = (descriptor === null || descriptor === void 0 ? void 0 : descriptor.get) && !descriptor.set;
         if (isGetter) {
             const value = descriptor.get.call(instance);
@@ -103,11 +129,12 @@ export class ControlDescriptor {
         return getNativeStrategy(value);
     }
 }
+exports.ControlDescriptor = ControlDescriptor;
 /**
  * A configurer class which allows for easier manipulation of decorated fields and corresponding metadata
  * @remarks This class is responsible for managing metadata related to validation. It provides methods to add validators, get field names, and manage descriptors.
  */
-export class FieldValidatorMetaService extends AbstractMetaService {
+class FieldValidatorMetaService extends AbstractMetaService_1.AbstractMetaService {
     /**
      * Static method to create a new instance of FieldValidatorMetaService.
      * @param strategy - The strategy to inject.
@@ -121,7 +148,7 @@ export class FieldValidatorMetaService extends AbstractMetaService {
         _FieldValidatorMetaService_instances.add(this);
         _FieldValidatorMetaService_fields.set(this, void 0);
         this.eventEmitter = eventEmitter;
-        Classes.isClass(strategy) ? __classPrivateFieldGet(this, _FieldValidatorMetaService_instances, "m", _FieldValidatorMetaService_handleClassInit).call(this, strategy) : __classPrivateFieldGet(this, _FieldValidatorMetaService_instances, "m", _FieldValidatorMetaService_handleContextInit).call(this, strategy);
+        _utilities_1.Classes.isClass(strategy) ? __classPrivateFieldGet(this, _FieldValidatorMetaService_instances, "m", _FieldValidatorMetaService_handleClassInit).call(this, strategy) : __classPrivateFieldGet(this, _FieldValidatorMetaService_instances, "m", _FieldValidatorMetaService_handleContextInit).call(this, strategy);
     }
     /**
      * Adds a validator to a field.
@@ -184,8 +211,9 @@ export class FieldValidatorMetaService extends AbstractMetaService {
         return descriptor;
     }
 }
+exports.FieldValidatorMetaService = FieldValidatorMetaService;
 _FieldValidatorMetaService_fields = new WeakMap(), _FieldValidatorMetaService_instances = new WeakSet(), _FieldValidatorMetaService_handleClassInit = function _FieldValidatorMetaService_handleClassInit(clazz) {
-    __classPrivateFieldSet(this, _FieldValidatorMetaService_fields, Classes.getClassFieldNames(clazz), "f");
+    __classPrivateFieldSet(this, _FieldValidatorMetaService_fields, _utilities_1.Classes.getClassFieldNames(clazz), "f");
     __classPrivateFieldGet(this, _FieldValidatorMetaService_fields, "f").forEach(name => this.getUntypedDescriptor(name));
 }, _FieldValidatorMetaService_handleContextInit = function _FieldValidatorMetaService_handleContextInit(_context) {
     __classPrivateFieldSet(this, _FieldValidatorMetaService_fields, [], "f");

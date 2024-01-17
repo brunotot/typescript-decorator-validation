@@ -1,1 +1,0 @@
-{"version":3,"file":"types.d.ts","sourceRoot":"","sources":["../../../../src/hooks/useMutations/types.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,QAAQ,EAAE,cAAc,EAAE,MAAM,OAAO,CAAC;AAEtD,kBAAU,gBAAgB,CAAC;IACzB,KAAY,kBAAkB,CAAC,KAAK,IAAI;QACtC,OAAO,EAAE,QAAQ,CAAC,cAAc,CAAC,KAAK,CAAC,CAAC,CAAC;KAC1C,CAAC;CACH;AAED,eAAe,gBAAgB,CAAC"}

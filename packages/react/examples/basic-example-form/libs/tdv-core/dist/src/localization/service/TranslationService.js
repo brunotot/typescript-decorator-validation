@@ -1,4 +1,7 @@
-import { getMessage } from "../service/MessageReaderService";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.translate = void 0;
+const MessageReaderService_1 = require("../service/MessageReaderService");
 /**
  * Formats a string by replacing placeholders with provided arguments.
  * @param str - The string containing placeholders in the form of `{0}`, `{1}`, etc.
@@ -42,8 +45,9 @@ function sprintf(str, ...args) {
  * const greeting = translate("en", "Hello", "John Doe");  // "Hello John Doe! How are you?"
  * ```
  */
-export function translate(locale, DecoratorKeys.key, ...args) {
-    const message = getMessage(key, locale);
+function translate(locale, key, ...args) {
+    const message = (0, MessageReaderService_1.readMessage)(key, locale);
     const translatedMessage = sprintf(message, ...args);
     return translatedMessage;
 }
+exports.translate = translate;

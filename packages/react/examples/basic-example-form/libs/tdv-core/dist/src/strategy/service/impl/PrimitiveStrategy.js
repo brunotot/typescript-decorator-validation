@@ -1,5 +1,8 @@
-import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
-export var PrimitiveStrategy;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PrimitiveStrategy = void 0;
+const AbstractValidationStrategyService_1 = require("../AbstractValidationStrategyService");
+var PrimitiveStrategy;
 (function (PrimitiveStrategy) {
     /**
      * Constant name identifier for this strategy.
@@ -12,7 +15,7 @@ export var PrimitiveStrategy;
      *
      * @extends AbstractValidationStrategyService<F,ValidationResult[],string[]>
      */
-    class StrategyResolver extends AbstractValidationStrategyService {
+    class StrategyResolver extends AbstractValidationStrategyService_1.AbstractValidationStrategyService {
         /**
          * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for primitive types by invoking the root rule's `validate` method and then building simplified error messages.
          *
@@ -28,4 +31,4 @@ export var PrimitiveStrategy;
         }
     }
     PrimitiveStrategy.StrategyResolver = StrategyResolver;
-})(PrimitiveStrategy || (PrimitiveStrategy = {}));
+})(PrimitiveStrategy || (exports.PrimitiveStrategy = PrimitiveStrategy = {}));

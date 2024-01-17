@@ -1,11 +1,15 @@
-import { translate } from "../../../../localization";
-import { Objects } from "../../../../utilities";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AssertTrue = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../utilities");
 /** Internal validation function for {@link AssertTrue} validator. */
 function isAssertTrueValid(value) {
-  Objects.assertType("boolean", value);
-  return !!value;
+    _utilities_1.Objects.assertType("boolean", value);
+    return !!value;
 }
 /**
  * Checks if a boolean value is `true`.
@@ -54,13 +58,11 @@ function isAssertTrueValid(value) {
  * }
  * ```
  */
-export function AssertTrue(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.ASSERT_TRUE),
-      valid: isAssertTrueValid(value),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ASSERT_TRUE)),
-    }),
-    buildGroupsProp(options)
-  );
+function AssertTrue(options) {
+    return (0, forField_1.createFieldValidator)((value, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.ASSERT_TRUE),
+        valid: isAssertTrueValid(value),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.ASSERT_TRUE)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.AssertTrue = AssertTrue;

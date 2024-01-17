@@ -1,11 +1,15 @@
-import { translate } from "../../../../localization";
-import { Objects } from "../../../../utilities";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Decimal = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../utilities");
 /** Internal validation function for {@link Decimal} validator. */
 function isDecimalValid(value) {
-  Objects.assertType("number", value);
-  return value !== undefined && value !== null && !Number.isInteger(value);
+    _utilities_1.Objects.assertType("number", value);
+    return value !== undefined && value !== null && !Number.isInteger(value);
 }
 /**
  * Checks if decorated number is a decimal number.
@@ -54,13 +58,11 @@ function isDecimalValid(value) {
  * }
  * ```
  */
-export function Decimal(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.DECIMAL),
-      valid: isDecimalValid(value),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.DECIMAL, value)),
-    }),
-    buildGroupsProp(options)
-  );
+function Decimal(options) {
+    return (0, forField_1.createFieldValidator)((value, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.DECIMAL),
+        valid: isDecimalValid(value),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.DECIMAL, value)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.Decimal = Decimal;

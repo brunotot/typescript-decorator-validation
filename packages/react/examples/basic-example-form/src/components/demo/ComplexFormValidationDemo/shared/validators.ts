@@ -3,7 +3,7 @@ import {
   Decorators,
   Form,
   Localization,
-  PrimitiveSet,
+  PrimitiveType,
   Reflection,
   UnwrapClass,
   Utilities,
@@ -29,7 +29,7 @@ createClassDecorator;
 createFieldDecorator;
 createClassValidator;
 // @ts-ignore
-type test1 = PrimitiveSet;
+type test1 = PrimitiveType;
 // @ts-ignore
 type test2 = ValidationResult;
 // @ts-ignore

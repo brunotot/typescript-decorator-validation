@@ -1,6 +1,9 @@
-import { Events } from "../../../validation/models/Events";
-import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
-export var FunctionStrategy;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FunctionStrategy = void 0;
+const Events_1 = require("../../../validation/models/Events");
+const AbstractValidationStrategyService_1 = require("../AbstractValidationStrategyService");
+var FunctionStrategy;
 (function (FunctionStrategy) {
     /**
      * Constant name identifier for this strategy.
@@ -13,7 +16,7 @@ export var FunctionStrategy;
      *
      * @extends AbstractValidationStrategyService<F, ValidationResult[], string[]>
      */
-    class StrategyResolver extends AbstractValidationStrategyService {
+    class StrategyResolver extends AbstractValidationStrategyService_1.AbstractValidationStrategyService {
         /**
          * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for primitive types by invoking the root rule's `validate` method and then building simplified error messages.
          *
@@ -26,7 +29,7 @@ export var FunctionStrategy;
             const result = value.bind(_context)();
             if (result instanceof Promise) {
                 result.then(validationResult => {
-                    this.eventEmitter.emit(Events.ASYNC_VALIDATION_COMPLETE, {
+                    this.eventEmitter.emit(Events_1.Events.ASYNC_VALIDATION_COMPLETE, {
                         key: this.fieldName,
                         value: validationResult,
                     });
@@ -40,4 +43,4 @@ export var FunctionStrategy;
     }
     StrategyResolver.EMPTY = [null, null];
     FunctionStrategy.StrategyResolver = StrategyResolver;
-})(FunctionStrategy || (FunctionStrategy = {}));
+})(FunctionStrategy || (exports.FunctionStrategy = FunctionStrategy = {}));

@@ -1,0 +1,1 @@
+{"version":3,"file":"MessagePropOverride.d.ts","sourceRoot":"","sources":["../../../../src/overrides/MessagePropOverride.ts"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;GAoCG;AACH,MAAM,WAAW,mBAAmB;CAAG;AAEvC;;;GAGG;AACH,MAAM,MAAM,WAAW,GAAG,mBAAmB,SAAS;IAAE,IAAI,EAAE,MAAM,CAAC,CAAA;CAAE,GAAG,CAAC,GAAG,MAAM,CAAC"}

@@ -1,11 +1,14 @@
-import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
-import { PrimitiveStrategy } from "./PrimitiveStrategy";
-export var PrimitiveArrayGetterStrategy;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PrimitiveArrayGetterStrategy = void 0;
+const AbstractValidationStrategyService_1 = require("../AbstractValidationStrategyService");
+const PrimitiveStrategy_1 = require("./PrimitiveStrategy");
+var PrimitiveArrayGetterStrategy;
 (function (PrimitiveArrayGetterStrategy) {
     /**
      * Constant name identifier for this strategy.
      */
-    PrimitiveArrayGetterStrategy.Name = `get (): ${PrimitiveStrategy.Name}[]`;
+    PrimitiveArrayGetterStrategy.Name = `get (): ${PrimitiveStrategy_1.PrimitiveStrategy.Name}[]`;
     /**
      * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating arrays of primitive types like numbers, strings, etc.
      *
@@ -13,7 +16,7 @@ export var PrimitiveArrayGetterStrategy;
      *
      * @extends AbstractValidationStrategyService<F, PrimitiveArrayGetterDetailedErrors, PrimitiveArrayGetterSimpleErrors>
      */
-    class StrategyResolver extends AbstractValidationStrategyService {
+    class StrategyResolver extends AbstractValidationStrategyService_1.AbstractValidationStrategyService {
         /**
          * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for arrays of primitive types.
          *
@@ -42,4 +45,4 @@ export var PrimitiveArrayGetterStrategy;
         }
     }
     PrimitiveArrayGetterStrategy.StrategyResolver = StrategyResolver;
-})(PrimitiveArrayGetterStrategy || (PrimitiveArrayGetterStrategy = {}));
+})(PrimitiveArrayGetterStrategy || (exports.PrimitiveArrayGetterStrategy = PrimitiveArrayGetterStrategy = {}));

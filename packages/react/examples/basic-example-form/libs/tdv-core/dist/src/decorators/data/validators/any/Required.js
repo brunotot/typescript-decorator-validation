@@ -1,20 +1,22 @@
-import { translate } from "../../../../localization/service/TranslationService";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Required = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
 /**
  * Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.
  *
  * @typeParam T - The type of the value.
  */
 function isRequiredValid(value) {
-  return !(
-    value === undefined ||
-    value === null ||
-    value === false ||
-    (Array.isArray(value) && value.length === 0) ||
-    (typeof value === "string" && value.trim().length === 0) ||
-    (value instanceof Date && value.toString() === "Invalid Date")
-  );
+    return !(value === undefined ||
+        value === null ||
+        value === false ||
+        (Array.isArray(value) && value.length === 0) ||
+        (typeof value === "string" && value.trim().length === 0) ||
+        (value instanceof Date && value.toString() === "Invalid Date"));
 }
 /**
  * Creates a validator decorator which requires that a value must be present.
@@ -54,13 +56,11 @@ function isRequiredValid(value) {
  * }
  * ```
  */
-export function Required(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.REQUIRED),
-      valid: isRequiredValid(value),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.REQUIRED)),
-    }),
-    buildGroupsProp(options)
-  );
+function Required(options) {
+    return (0, forField_1.createFieldValidator)((value, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.REQUIRED),
+        valid: isRequiredValid(value),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.REQUIRED)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.Required = Required;

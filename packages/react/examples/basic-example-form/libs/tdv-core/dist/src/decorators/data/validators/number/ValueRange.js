@@ -1,11 +1,15 @@
-import { translate } from "../../../../localization";
-import { Objects } from "../../../../utilities";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ValueRange = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../utilities");
 /** Internal validation function for {@link ValueRange} validator. */
 function isValueRangeValid(num, min, max) {
-  Objects.assertType("number", num);
-  return num == null ? true : num >= min && num <= max;
+    _utilities_1.Objects.assertType("number", num);
+    return num == null ? true : num >= min && num <= max;
 }
 /**
  * Checks if decorated number is within a given range of `min` and `max` parameters.
@@ -56,13 +60,11 @@ function isValueRangeValid(num, min, max) {
  * }
  * ```
  */
-export function ValueRange(min, max, options) {
-  return createFieldValidator(
-    (num, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.VALUE_RANGE),
-      valid: isValueRangeValid(num, min, max),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.VALUE_RANGE, min, max, num)),
-    }),
-    buildGroupsProp(options)
-  );
+function ValueRange(min, max, options) {
+    return (0, forField_1.createFieldValidator)((num, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.VALUE_RANGE),
+        valid: isValueRangeValid(num, min, max),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.VALUE_RANGE, min, max, num)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.ValueRange = ValueRange;

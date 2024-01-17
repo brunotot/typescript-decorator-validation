@@ -1,13 +1,17 @@
-import { translate } from "../../../../../../localization";
-import { Objects } from "../../../../../../utilities";
-import { testRegex } from "../../../../../data/validators/string/regex/Pattern";
-import { RegexConst } from "../../../../../data/validators/string/regex/shared/regex.constants";
-import { createFieldValidator } from "../../../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Alpha = void 0;
+const DecoratorKeys_1 = require("../../../../../data/validators/DecoratorKeys");
+const Pattern_1 = require("../../../../../data/validators/string/regex/Pattern");
+const regex_constants_1 = require("../../../../../data/validators/string/regex/shared/regex.constants");
+const forField_1 = require("../../../../../factory/forField");
+const helper_1 = require("../../../../../helper");
+const TranslationService_1 = require("../../../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../../../utilities");
 /** Internal validation function for {@link Alpha} validator. */
 function isAlphaValid(value) {
-  Objects.assertType("string", value);
-  return testRegex(RegexConst.ALPHA, value);
+    _utilities_1.Objects.assertType("string", value);
+    return (0, Pattern_1.testRegex)(regex_constants_1.RegexConst.ALPHA, value);
 }
 /**
  * Checks if decorated string contains only alphabetical characters.
@@ -56,13 +60,11 @@ function isAlphaValid(value) {
  * }
  * ```
  */
-export function Alpha(options) {
-  return createFieldValidator(
-    (value, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.ALPHA),
-      valid: isAlphaValid(value),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ALPHA)),
-    }),
-    buildGroupsProp(options)
-  );
+function Alpha(options) {
+    return (0, forField_1.createFieldValidator)((value, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.ALPHA),
+        valid: isAlphaValid(value),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.ALPHA)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.Alpha = Alpha;

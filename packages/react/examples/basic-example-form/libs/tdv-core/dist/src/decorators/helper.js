@@ -1,5 +1,19 @@
-import { parseMessage } from "../localization";
-import { Objects } from "../utilities";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.buildKeyProp = exports.buildGroupsProp = exports.buildMessageProp = void 0;
+const _localization_1 = require("../localization");
+const _utilities_1 = require("../utilities");
+function parseMessage(locale, message, args = {}) {
+    try {
+        return (0, _localization_1.getMessageParser)()(locale, message, args);
+    }
+    catch (error) {
+        const title = `An error occurred while resolving "${message}" for locale "${locale}".`;
+        const descr = `To fix, check your Localization.configureParser() implementation or review stack-trace.`;
+        const stacktrace = `\n\n${String(error)}`;
+        throw new Error(`${title} ${descr} ${stacktrace}`);
+    }
+}
 /**
  * Retrieves the localized message based on the provided options, locale, and default message.
  * If the options contain a custom message, it will be resolved using the provided locale.
@@ -10,27 +24,30 @@ import { Objects } from "../utilities";
  * @param defaultMessage - The default message to be returned if no custom message is provided.
  * @returns The localized message.
  */
-export function buildMessageProp(options, locale, defaultMessage) {
-    var _a;
-    const msg = (_a = options === null || options === void 0 ? void 0 : options.message) !== null && _a !== void 0 ? _a : "";
-    return msg.length > 0 ? parseMessage(locale, msg) : defaultMessage !== null && defaultMessage !== void 0 ? defaultMessage : "";
+function buildMessageProp(options, locale, defaultMessage = "", args = {}) {
+    if (!(options === null || options === void 0 ? void 0 : options.message))
+        return defaultMessage !== null && defaultMessage !== void 0 ? defaultMessage : "";
+    return parseMessage(locale, options.message, args);
 }
+exports.buildMessageProp = buildMessageProp;
 /**
  * Retrieves the unique groups from the provided options or returns the default groups.
  * @param options - The options object.
  * @param defaultGroups - The default groups.
  * @returns An array of unique groups.
  */
-export function buildGroupsProp(options, defaultGroups = []) {
-    return Array.isArray(options === null || options === void 0 ? void 0 : options.groups) ? Objects.unique(options.groups) : Objects.unique(defaultGroups);
+function buildGroupsProp(options, defaultGroups = []) {
+    return Array.isArray(options === null || options === void 0 ? void 0 : options.groups) ? _utilities_1.Objects.unique(options.groups) : _utilities_1.Objects.unique(defaultGroups);
 }
+exports.buildGroupsProp = buildGroupsProp;
 /**
  * Returns the key based on the provided options or the default key.
  * @param options - The options object.
  * @param defaultKey - The default key.
  * @returns The key.
  */
-export function buildKeyProp(options, DecoratorKeys.defaultKey) {
+function buildKeyProp(options, defaultKey) {
     var _a;
     return (_a = options === null || options === void 0 ? void 0 : options.key) !== null && _a !== void 0 ? _a : defaultKey;
 }
+exports.buildKeyProp = buildKeyProp;

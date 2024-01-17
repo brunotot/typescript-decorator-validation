@@ -1,10 +1,13 @@
-import { AbstractMetaService } from "../../service/AbstractMetaService";
-import { ValidationMetadata } from "../../../validation/models/ValidationMetadata";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ClassValidatorMetaService = void 0;
+const AbstractMetaService_1 = require("../../service/AbstractMetaService");
+const ValidationMetadata_1 = require("../../../validation/models/ValidationMetadata");
 /**
  * A configurer class which allows for easier manipulation of decorated class validators and corresponding metadata
  * @remarks This class is responsible for managing metadata related to validation (at class level). It provides methods to add validators and read them.
  */
-export class ClassValidatorMetaService extends AbstractMetaService {
+class ClassValidatorMetaService extends AbstractMetaService_1.AbstractMetaService {
     /**
      * Static method to create a new instance of ClassValidatorMetaService.
      * @param strategy - The strategy to inject.
@@ -14,7 +17,7 @@ export class ClassValidatorMetaService extends AbstractMetaService {
         return new ClassValidatorMetaService(strategy, eventEmitter);
     }
     constructor(strategy, eventEmitter) {
-        super(ClassValidatorMetaService.name, strategy, () => new ValidationMetadata());
+        super(ClassValidatorMetaService.name, strategy, () => new ValidationMetadata_1.ValidationMetadata());
         this.eventEmitter = eventEmitter;
     }
     /**
@@ -29,3 +32,4 @@ export class ClassValidatorMetaService extends AbstractMetaService {
         });
     }
 }
+exports.ClassValidatorMetaService = ClassValidatorMetaService;

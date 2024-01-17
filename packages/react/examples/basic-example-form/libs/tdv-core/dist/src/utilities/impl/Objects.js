@@ -1,4 +1,7 @@
-export var Objects;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Objects = void 0;
+var Objects;
 (function (Objects) {
     /**
      * Removes duplicate elements from an array while preserving order.
@@ -164,4 +167,4 @@ export var Objects;
     function throwTypeMismatchError(type, value) {
         throw new Error(`Type '${type}' is not assignable to type ${JSON.stringify(value)}`);
     }
-})(Objects || (Objects = {}));
+})(Objects || (exports.Objects = Objects = {}));

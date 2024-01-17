@@ -5,7 +5,7 @@ import { useForm } from "tdv-react";
 import { ModelForm } from "./model";
 
 /* Global locale configuration. */
-Localization.setLocale("en");
+Localization.setGlobalLocale("en");
 
 const LANGUAGE_FLAG: Record<string, string> = {
   en: "🇺🇸",
@@ -18,7 +18,7 @@ const LANGUAGE_FLAG: Record<string, string> = {
 };
 
 export default function Component() {
-  const globalLocale = Localization.getLocale();
+  const globalLocale = Localization.getGlobalLocale();
   const [locale, setLocale] = useState<Localization.Locale>(globalLocale);
   const [form, setForm, { errors }] = useForm(ModelForm, { locale });
   const handleLocaleChange = (event: any) => setLocale(event.target.value);

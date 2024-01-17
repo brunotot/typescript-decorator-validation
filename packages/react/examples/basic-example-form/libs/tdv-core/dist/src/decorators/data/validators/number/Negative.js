@@ -1,11 +1,15 @@
-import { translate } from "../../../../localization";
-import { Objects } from "../../../../utilities";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Negative = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../utilities");
 /** Internal validation function for {@link Negative} validator. */
 function isNegativeValid(num) {
-  Objects.assertType("number", num);
-  return num !== undefined && num !== null && num < 0;
+    _utilities_1.Objects.assertType("number", num);
+    return num !== undefined && num !== null && num < 0;
 }
 /**
  * Checks if decorated number is a negative number (number less than 0).
@@ -54,13 +58,11 @@ function isNegativeValid(num) {
  * }
  * ```
  */
-export function Negative(options) {
-  return createFieldValidator(
-    (num, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.NEGATIVE),
-      valid: isNegativeValid(num),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.NEGATIVE, num)),
-    }),
-    buildGroupsProp(options)
-  );
+function Negative(options) {
+    return (0, forField_1.createFieldValidator)((num, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.NEGATIVE),
+        valid: isNegativeValid(num),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.NEGATIVE, num)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.Negative = Negative;

@@ -1,4 +1,7 @@
-import { createClassDecorator } from "./createClassDecorator";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createClassValidator = void 0;
+const createClassDecorator_1 = require("./createClassDecorator");
 /**
  * Creates validation decorators for classes.
  * @typeParam T - The type of class being validated.
@@ -22,8 +25,9 @@ import { createClassDecorator } from "./createClassDecorator";
  * }
  * ```
  */
-export function createClassValidator(validate, groups = []) {
-    return createClassDecorator(meta => {
+function createClassValidator(validate, groups = []) {
+    return (0, createClassDecorator_1.createClassDecorator)(meta => {
         meta.addValidator(validate, groups);
     });
 }
+exports.createClassValidator = createClassValidator;

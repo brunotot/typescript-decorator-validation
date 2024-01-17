@@ -1,11 +1,15 @@
-import { translate } from "../../../../localization";
-import { Objects } from "../../../../utilities";
-import { createFieldValidator } from "../../../factory/forField";
-import { buildGroupsProp, buildKeyProp, buildMessageProp } from "../../../helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ArrayEmpty = void 0;
+const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
+const forField_1 = require("../../../factory/forField");
+const helper_1 = require("../../../helper");
+const TranslationService_1 = require("../../../../localization/service/TranslationService");
+const _utilities_1 = require("../../../../utilities");
 /** Internal validation function for {@link ArrayEmpty} validator. */
 function isArrayEmptyValid(array) {
-  Objects.assertType("array", array);
-  return (array !== null && array !== void 0 ? array : []).length === 0;
+    _utilities_1.Objects.assertType("array", array);
+    return (array !== null && array !== void 0 ? array : []).length === 0;
 }
 /**
  * Checks if the decorated array is empty.
@@ -55,13 +59,11 @@ function isArrayEmptyValid(array) {
  * }
  * ```
  */
-export function ArrayEmpty(options) {
-  return createFieldValidator(
-    (array, _context, locale) => ({
-      key: buildKeyProp(options, DecoratorKeys.ARRAY_EMPTY),
-      valid: isArrayEmptyValid(array),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ARRAY_EMPTY)),
-    }),
-    buildGroupsProp(options)
-  );
+function ArrayEmpty(options) {
+    return (0, forField_1.createFieldValidator)((array, _context, locale) => ({
+        key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.ARRAY_EMPTY),
+        valid: isArrayEmptyValid(array),
+        message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.ARRAY_EMPTY)),
+    }), (0, helper_1.buildGroupsProp)(options));
 }
+exports.ArrayEmpty = ArrayEmpty;

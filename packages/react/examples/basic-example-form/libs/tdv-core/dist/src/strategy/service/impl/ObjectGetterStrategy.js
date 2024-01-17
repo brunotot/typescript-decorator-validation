@@ -1,8 +1,11 @@
-import { AbstractValidationStrategyService } from "../AbstractValidationStrategyService";
-import { ObjectStrategy } from "./ObjectStrategy";
-export var ObjectGetterStrategy;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ObjectGetterStrategy = void 0;
+const AbstractValidationStrategyService_1 = require("../AbstractValidationStrategyService");
+const ObjectStrategy_1 = require("./ObjectStrategy");
+var ObjectGetterStrategy;
 (function (ObjectGetterStrategy) {
-    ObjectGetterStrategy.Name = `(): ${ObjectStrategy.Name}`;
+    ObjectGetterStrategy.Name = `(): ${ObjectStrategy_1.ObjectStrategy.Name}`;
     /**
      * Extends the abstract `ValidationStrategy` class to provide a concrete implementation for validating object types.
      *
@@ -10,7 +13,7 @@ export var ObjectGetterStrategy;
      *
      * @extends AbstractValidationStrategyService<F, ObjectDetailedErrors<F>, ObjectSimpleErrors<F>>
      */
-    class StrategyResolver extends AbstractValidationStrategyService {
+    class StrategyResolver extends AbstractValidationStrategyService_1.AbstractValidationStrategyService {
         /**
          * Implements the `test` method from the `ValidationStrategy` abstract class. It performs the actual validation logic for object types.
          *
@@ -39,4 +42,4 @@ export var ObjectGetterStrategy;
         }
     }
     ObjectGetterStrategy.StrategyResolver = StrategyResolver;
-})(ObjectGetterStrategy || (ObjectGetterStrategy = {}));
+})(ObjectGetterStrategy || (exports.ObjectGetterStrategy = ObjectGetterStrategy = {}));
