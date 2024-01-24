@@ -4,7 +4,7 @@ export class EventEmitter {
   #asyncDelay: number;
   public static EMPTY = new EventEmitter("EMPTY");
   private readonly events: Map<string, Array<(data?: any) => void>>;
-  private readonly handlersTimeout: Map<string, NodeJS.Timeout>;
+  private readonly handlersTimeout: Map<string, number>;
 
   get id() {
     return this.#id;
@@ -29,7 +29,7 @@ export class EventEmitter {
         const timeout = setTimeout(() => {
           handler(data);
         }, this.#asyncDelay);
-        this.handlersTimeout.set(handlerKey, timeout);
+        this.handlersTimeout.set(handlerKey, timeout as any);
       });
     }
   }
