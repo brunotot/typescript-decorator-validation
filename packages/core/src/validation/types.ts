@@ -1,3 +1,4 @@
+import { type DecoratorMeta } from "@decorators";
 import { type Locale } from "@localization";
 import type { DetailedErrorsResponse, SimpleErrorsResponse } from "@strategy";
 import { type Objects } from "@utilities";
@@ -19,8 +20,8 @@ export type ValidationEvaluator<T> = ((
  *
  * @typeParam T - The type of the value being evaluated.
  */
-export type ValidationMetadataEntry<T> = {
-  groups: string[];
+export type ValidationMetadataEntry<T, Class> = {
+  meta: DecoratorMeta<Class>;
   validate: ValidationEvaluator<T>;
 };
 

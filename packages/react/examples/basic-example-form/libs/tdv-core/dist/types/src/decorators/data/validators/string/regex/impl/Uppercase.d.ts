@@ -48,5 +48,5 @@ import { Objects } from "../../../../../../utilities";
  * }
  * ```
  */
-export declare function Uppercase<T extends Objects.Optional<string>>(options?: DecoratorOptions): FieldDecorator<T>;
+export declare function Uppercase<This, Value extends Objects.Optional<string>>(options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=Uppercase.d.ts.map

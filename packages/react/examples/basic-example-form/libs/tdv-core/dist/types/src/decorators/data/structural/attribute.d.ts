@@ -57,5 +57,5 @@ import { type Objects, type Types } from "../../../utilities";
  *   }
  * }
  */
-export declare function attribute<T extends Objects.Optional<object | object[]>>(clazz: Types.Class<any>): FieldDecorator<T>;
+export declare function attribute<Value extends Objects.Optional<object | object[]>, Class>(clazz: Types.Class<any>): FieldDecorator<Value, Class>;
 //# sourceMappingURL=attribute.d.ts.map

@@ -48,5 +48,5 @@ import { type DecoratorOptions } from "../../../helper";
  * }
  * ```
  */
-export declare function ArrayEmpty<K, T extends K[]>(options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ArrayEmpty<This, Item, Value extends Item[]>(options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=ArrayEmpty.d.ts.map

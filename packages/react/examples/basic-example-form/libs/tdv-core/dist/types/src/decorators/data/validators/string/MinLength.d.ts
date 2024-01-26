@@ -1,3 +1,4 @@
+import { type FieldDecorator } from "../../../factory/forField";
 import { type DecoratorOptions } from "../../../helper";
 import { Objects } from "../../../../utilities";
 /**
@@ -45,5 +46,5 @@ import { Objects } from "../../../../utilities";
  * }
  * ```
  */
-export declare function MinLength<T extends Objects.Optional<string>>(min: number, options?: DecoratorOptions): import("../../../factory/forField").FieldDecorator<T>;
+export declare function MinLength<This, Value extends Objects.Optional<string>>(min: number, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=MinLength.d.ts.map

@@ -17,11 +17,11 @@ export declare class ValidationMetadata<TFieldType> {
      *
      * @returns An array of `Validation.Metadata` for the field.
      */
-    get contents(): Array<ValidationMetadataEntry<TFieldType>>;
+    get contents(): Array<ValidationMetadataEntry<TFieldType, any>>;
     /**
      * Constructs a new `ReflectionRule` instance.
      */
-    constructor(contents?: Array<ValidationMetadataEntry<TFieldType>>);
+    constructor(contents?: Array<ValidationMetadataEntry<TFieldType, any>>);
     /**
      * Validates a field against a payload and a set of validation groups.
      *
@@ -36,15 +36,13 @@ export declare class ValidationMetadata<TFieldType> {
     validate<TBody>(value: TFieldType, payload: Objects.Payload<TBody>, groups: string[], locale: Locale, args?: Record<string, any>, emitter?: EventEmitter, field?: string): ValidationResult[];
     /**
      * Removes and returns the last validation rule from the collection.
-     *
      * @returns The last `Validation.Metadata` that was removed.
      */
-    pop(): ValidationMetadataEntry<TFieldType>;
+    pop(): ValidationMetadataEntry<TFieldType, any>;
     /**
      * Adds a new validation rule to the collection.
-     *
      * @param rule - The `Validation.Metadata` to add.
      */
-    add(rule: ValidationMetadataEntry<TFieldType>): void;
+    add(rule: ValidationMetadataEntry<TFieldType, any>): void;
 }
 //# sourceMappingURL=ValidationMetadata.d.ts.map

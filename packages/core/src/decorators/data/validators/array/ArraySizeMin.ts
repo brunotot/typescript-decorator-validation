@@ -1,6 +1,6 @@
 import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import { buildDecoratorMeta, buildKeyProp, buildMessageProp, type DecoratorOptions } from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
 
@@ -59,8 +59,11 @@ function isArraySizeMinValid(array: any[], min: number): boolean {
  * }
  * ```
  */
-export function ArraySizeMin<K, T extends K[]>(min: number, options?: DecoratorOptions): FieldDecorator<T> {
-  return createFieldValidator<T>(
+export function ArraySizeMin<This, Item, Value extends Item[]>(
+  min: number,
+  options?: DecoratorOptions<This>
+): FieldDecorator<This, Value> {
+  return createFieldValidator<This, Value>(
     (array, _context, locale) => ({
       key: buildKeyProp(options, DecoratorKeys.ARRAY_SIZE_MIN),
       valid: isArraySizeMinValid(array, min),
@@ -70,6 +73,6 @@ export function ArraySizeMin<K, T extends K[]>(min: number, options?: DecoratorO
         translate(locale, DecoratorKeys.ARRAY_SIZE_MIN, min, (array ?? []).length)
       ),
     }),
-    buildGroupsProp(options)
+    buildDecoratorMeta(options)
   );
 }

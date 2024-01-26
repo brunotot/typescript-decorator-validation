@@ -49,5 +49,5 @@ import { type DecoratorOptions } from "../../../helper";
  * }
  * ```
  */
-export declare function ArraySizeMax<K, T extends K[]>(max: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ArraySizeMax<This, Item, Value extends Item[]>(max: number, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=ArraySizeMax.d.ts.map

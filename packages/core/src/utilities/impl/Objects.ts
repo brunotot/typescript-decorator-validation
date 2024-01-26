@@ -1,3 +1,6 @@
+import { type Arrays } from "./Arrays";
+import { type Booleans } from "./Booleans";
+
 export namespace Objects {
   /**
    * A type that represents an optional value.
@@ -17,7 +20,7 @@ export namespace Objects {
    * Filters out getters, functions and read-only properties from a type
    */
   // prettier-ignore
-  export type Payload<T> = any/* Types.Prettify<Purify<{
+  export type Payload<T> = Purify<{
     [K in keyof T]: true extends Booleans.isAnyOf<true, [
       Booleans.isGetter<T, K>,
       Booleans.isFunction<T[K]>,
@@ -30,7 +33,7 @@ export namespace Objects {
         : true extends Booleans.isPrimitive<T[K]>
           ? T[K]
           : Payload<T[K]>
-  }>> */;
+  }>;
 
   /**
    * A conditional type that checks if types `X` and `Y` are equal. It returns type `A` if they are equal, and type `B` if they are not.
@@ -40,7 +43,9 @@ export namespace Objects {
    * @typeParam A - The type to return if `X` and `Y` are equal.
    * @typeParam B - The type to return if `X` and `Y` are not equal.
    */
-  export type IfEquals<X, Y, A = X, B = never> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2
+  export type IfEquals<X, Y, A = X, B = never> = (<T>() => T extends X ? 1 : 2) extends <
+    T
+  >() => T extends Y ? 1 : 2
     ? A
     : B;
 

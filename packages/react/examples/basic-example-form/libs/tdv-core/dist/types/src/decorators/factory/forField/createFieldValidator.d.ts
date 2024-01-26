@@ -1,3 +1,4 @@
+import { type DecoratorMeta } from "../../helper";
 import type { ValidationEvaluator } from "../../../validation/types";
 import { type FieldDecorator } from "./createFieldDecorator";
 /**
@@ -24,5 +25,5 @@ import { type FieldDecorator } from "./createFieldDecorator";
  * }
  * ```
  */
-export declare function createFieldValidator<T extends unknown>(validate: ValidationEvaluator<T>, groups?: string[]): FieldDecorator<T>;
+export declare function createFieldValidator<This, Value>(validate: ValidationEvaluator<Value>, decoratorMeta?: DecoratorMeta<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=createFieldValidator.d.ts.map

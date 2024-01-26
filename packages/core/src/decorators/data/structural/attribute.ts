@@ -1,4 +1,8 @@
-import { type FieldDecorator, createFieldDecorator } from "@decorators/factory/forField/createFieldDecorator";
+import {
+  createFieldDecorator,
+  type FieldDecorator,
+} from "@decorators/factory/forField/createFieldDecorator";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { PrimitiveTypeOverride } from "@overrides";
 import { type Objects, type Types } from "@utilities";
 
@@ -59,8 +63,10 @@ import { type Objects, type Types } from "@utilities";
  *   }
  * }
  */
-export function attribute<T extends Objects.Optional<object | object[]>>(clazz: Types.Class<any>): FieldDecorator<T> {
-  return createFieldDecorator<any>((meta, name) => {
+export function attribute<Value extends Objects.Optional<object | object[]>, Class>(
+  clazz: Types.Class<any>
+): FieldDecorator<Value, Class> {
+  return createFieldDecorator<Value, Class>((meta, name) => {
     meta.getUntypedDescriptor(name).thisClass = clazz;
   });
 }

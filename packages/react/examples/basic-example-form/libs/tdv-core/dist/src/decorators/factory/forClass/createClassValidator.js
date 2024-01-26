@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createClassValidator = void 0;
+const helper_1 = require("../../helper");
 const createClassDecorator_1 = require("./createClassDecorator");
 /**
  * Creates validation decorators for classes.
@@ -25,9 +26,9 @@ const createClassDecorator_1 = require("./createClassDecorator");
  * }
  * ```
  */
-function createClassValidator(validate, groups = []) {
+function createClassValidator(validate, decoratorMeta = helper_1.DEFAULT_DECORATOR_META) {
     return (0, createClassDecorator_1.createClassDecorator)(meta => {
-        meta.addValidator(validate, groups);
+        meta.addValidator(validate, decoratorMeta);
     });
 }
 exports.createClassValidator = createClassValidator;

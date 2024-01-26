@@ -48,5 +48,5 @@ import { Objects } from "../../../../utilities";
  * }
  * ```
  */
-export declare function Positive<T extends Objects.Optional<number>>(options?: DecoratorOptions): FieldDecorator<T>;
+export declare function Positive<This, Value extends Objects.Optional<number>>(options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=Positive.d.ts.map

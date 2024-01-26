@@ -12,7 +12,7 @@ const _utilities_1 = require("../../../utilities");
  */
 function createClassDecorator(supplier) {
     return function (baseClass, context) {
-        return supplier(_reflection_1.ClassValidatorMetaService.inject(baseClass !== null && baseClass !== void 0 ? baseClass : context, _utilities_1.EventEmitter.EMPTY), baseClass, context);
+        return supplier(_reflection_1.ClassValidatorMetaService.inject(context, _utilities_1.EventEmitter.EMPTY), baseClass, context);
     };
 }
 exports.createClassDecorator = createClassDecorator;

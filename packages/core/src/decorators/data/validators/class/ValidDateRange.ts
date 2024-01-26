@@ -1,6 +1,11 @@
 import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { type ClassDecorator, createClassValidator } from "@decorators/factory/forClass";
-import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { createClassValidator, type ClassDecorator } from "@decorators/factory/forClass";
+import {
+  buildDecoratorMeta,
+  buildKeyProp,
+  buildMessageProp,
+  type DecoratorOptions,
+} from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
 import { Objects, type Types } from "@utilities";
 
@@ -60,12 +65,12 @@ function isValidDateRangeValid(value: any, startDateField: string, endDateField:
  * }
  * ```
  */
-export function ValidDateRange<T extends Types.Class>(
+export function ValidDateRange<This extends Types.Class>(
   startDateField: string,
   endDateField: string,
-  options?: DecoratorOptions
-): ClassDecorator<T> {
-  return createClassValidator<T>(
+  options?: DecoratorOptions<This>
+): ClassDecorator<This> {
+  return createClassValidator<This>(
     (value, _context, locale) => ({
       key: buildKeyProp(options, DecoratorKeys.VALID_DATE_RANGE),
       valid: isValidDateRangeValid(value, startDateField, endDateField),
@@ -80,7 +85,7 @@ export function ValidDateRange<T extends Types.Class>(
         )
       ),
     }),
-    buildGroupsProp(options)
+    buildDecoratorMeta(options)
   );
 }
 
@@ -89,7 +94,9 @@ function convertCamelCaseToText(camelCase: string, capitalizeFirstLetter: boolea
     return camelCase;
   }
 
-  const result = camelCase.replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/ (\w)/g, str => str.toLowerCase());
+  const result = camelCase
+    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+    .replace(/ (\w)/g, str => str.toLowerCase());
 
   return capitalizeFirstLetter ? result.replace(/^./, str => str.toUpperCase()) : result;
 }

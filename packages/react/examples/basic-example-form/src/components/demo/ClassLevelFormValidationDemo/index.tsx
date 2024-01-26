@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { DemoCodeProps } from "../DemoList";
-import Component, { COMPONENT_CODE } from "./code/component";
+import { Component, COMPONENT_CODE } from "./code/component";
 import { MODEL_CODE } from "./code/model";
 import { VALIDATORS_CODE } from "./shared/validators";
 

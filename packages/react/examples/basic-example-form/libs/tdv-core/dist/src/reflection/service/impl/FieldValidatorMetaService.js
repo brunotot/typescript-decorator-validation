@@ -36,6 +36,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
 var _FieldValidatorMetaService_instances, _FieldValidatorMetaService_fields, _FieldValidatorMetaService_handleClassInit, _FieldValidatorMetaService_handleContextInit;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FieldValidatorMetaService = exports.ControlDescriptor = void 0;
+const _decorators_1 = require("../../../decorators");
 const AbstractMetaService_1 = require("../../service/AbstractMetaService");
 const StrategyMapper_1 = require("../../../strategy/models/StrategyMapper");
 const Strategies = __importStar(require("../../../strategy/service/impl"));
@@ -57,6 +58,7 @@ class ControlDescriptor {
         this.hostDefault = ((_a = props.hostDefault) !== null && _a !== void 0 ? _a : props.hostClass) ? new props.hostClass() : undefined;
         this.thisDefault = props.thisDefault;
         this.eventEmitter = props.eventEmitter;
+        this.validateIf = () => true;
         this.validations = (_b = props.validations) !== null && _b !== void 0 ? _b : {
             root: new ValidationMetadata_1.ValidationMetadata(),
             foreach: new ValidationMetadata_1.ValidationMetadata(),
@@ -148,20 +150,19 @@ class FieldValidatorMetaService extends AbstractMetaService_1.AbstractMetaServic
         _FieldValidatorMetaService_instances.add(this);
         _FieldValidatorMetaService_fields.set(this, void 0);
         this.eventEmitter = eventEmitter;
-        _utilities_1.Classes.isClass(strategy) ? __classPrivateFieldGet(this, _FieldValidatorMetaService_instances, "m", _FieldValidatorMetaService_handleClassInit).call(this, strategy) : __classPrivateFieldGet(this, _FieldValidatorMetaService_instances, "m", _FieldValidatorMetaService_handleContextInit).call(this, strategy);
+        _utilities_1.Classes.isClass(strategy)
+            ? __classPrivateFieldGet(this, _FieldValidatorMetaService_instances, "m", _FieldValidatorMetaService_handleClassInit).call(this, strategy)
+            : __classPrivateFieldGet(this, _FieldValidatorMetaService_instances, "m", _FieldValidatorMetaService_handleContextInit).call(this, strategy);
     }
     /**
      * Adds a validator to a field.
      *
      * @param field - The name of the field.
-     * @param isValid - The validation function.
+     * @param validate - The validation function.
      * @param groups - Optional validation groups.
      */
-    addValidator(field, isValid, groups) {
-        this.getUntypedDescriptor(field).validations.root.add({
-            validate: isValid,
-            groups,
-        });
+    addValidator(field, validate, meta = _decorators_1.DEFAULT_DECORATOR_META) {
+        this.getUntypedDescriptor(field).validations.root.add({ validate, meta });
     }
     /**
      * Gets the names of all fields present within given

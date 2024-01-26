@@ -1,6 +1,11 @@
 import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { createFieldValidator } from "@decorators/factory/forField";
-import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import {
+  buildDecoratorMeta,
+  buildKeyProp,
+  buildMessageProp,
+  type DecoratorOptions,
+} from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
 
@@ -55,13 +60,16 @@ function isMinLengthValid(value: Objects.Optional<string>, min: number): boolean
  * }
  * ```
  */
-export function MinLength<T extends Objects.Optional<string>>(min: number, options?: DecoratorOptions) {
-  return createFieldValidator<T>(
+export function MinLength<This, Value extends Objects.Optional<string>>(
+  min: number,
+  options?: DecoratorOptions<This>
+): FieldDecorator<This, Value> {
+  return createFieldValidator<This, Value>(
     (value, _context, locale) => ({
       key: buildKeyProp(options, DecoratorKeys.MIN_LENGTH),
       valid: isMinLengthValid(value, min),
       message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.MIN_LENGTH, min)),
     }),
-    buildGroupsProp(options)
+    buildDecoratorMeta(options)
   );
 }

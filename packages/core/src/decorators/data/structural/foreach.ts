@@ -1,4 +1,7 @@
-import { type FieldDecorator, createFieldDecorator } from "@decorators/factory/forField/createFieldDecorator";
+import {
+  createFieldDecorator,
+  type FieldDecorator,
+} from "@decorators/factory/forField/createFieldDecorator";
 import { type Arrays, type Types } from "@utilities";
 
 /**
@@ -15,10 +18,10 @@ import { type Arrays, type Types } from "@utilities";
  * }
  * ```
  */
-export function foreach<T extends NonNullable<Types.ArrayType | (() => Types.ArrayType)>>(
-  ...validators: Array<FieldDecorator<Arrays.getArrayType<T>>>
-): FieldDecorator<T> {
-  return createFieldDecorator<T>((meta, property, context) => {
+export function foreach<T extends NonNullable<Types.ArrayType | (() => Types.ArrayType)>, Class>(
+  ...validators: Array<FieldDecorator<Arrays.getArrayType<T>, Class>>
+): FieldDecorator<T, Class> {
+  return createFieldDecorator<T, Class>((meta, property, context) => {
     const validationProcessor = meta.getUntypedDescriptor(property);
     validationProcessor.thisDefault = [];
     validators.forEach(validator => {

@@ -48,6 +48,10 @@ export function createClassDecorator<TClass extends Types.Class>(
   supplier: ClassDecoratorSupplier<TClass>
 ): ClassDecorator<any> {
   return function (baseClass, context) {
-    return supplier(ClassValidatorMetaService.inject(baseClass ?? context, EventEmitter.EMPTY), baseClass, context);
+    return supplier(
+      ClassValidatorMetaService.inject(context, EventEmitter.EMPTY),
+      baseClass,
+      context
+    );
   };
 }

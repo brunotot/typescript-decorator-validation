@@ -56,7 +56,9 @@ class ValidationMetadata {
             return Boolean(value && typeof value.then === "function");
         }
         const groupedValidators = __classPrivateFieldGet(this, _ValidationMetadata_instances, "m", _ValidationMetadata_groupedValidators).call(this, __classPrivateFieldGet(this, _ValidationMetadata_contents, "f"), groups);
+        // eslint-disable-next-line @typescript-eslint/promise-function-async
         const results = groupedValidators.map(({ validate }) => validate(value, payload, locale, args !== null && args !== void 0 ? args : {}));
+        // eslint-disable-next-line @typescript-eslint/array-type
         const asyncResults = results.filter(v => isPromise(v));
         __classPrivateFieldGet(this, _ValidationMetadata_instances, "m", _ValidationMetadata_handleAsyncResults).call(this, asyncResults, emitter, field);
         const syncResults = results.filter(v => !isPromise(v));
@@ -64,7 +66,6 @@ class ValidationMetadata {
     }
     /**
      * Removes and returns the last validation rule from the collection.
-     *
      * @returns The last `Validation.Metadata` that was removed.
      */
     pop() {
@@ -72,7 +73,6 @@ class ValidationMetadata {
     }
     /**
      * Adds a new validation rule to the collection.
-     *
      * @param rule - The `Validation.Metadata` to add.
      */
     add(rule) {
@@ -83,6 +83,7 @@ exports.ValidationMetadata = ValidationMetadata;
 _ValidationMetadata_contents = new WeakMap(), _ValidationMetadata_instances = new WeakSet(), _ValidationMetadata_handleAsyncResults = function _ValidationMetadata_handleAsyncResults(asyncResults, emitter, field) {
     if (!emitter)
         return;
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     Promise.all(asyncResults).then(results => {
         results.forEach(value => {
             emitter.emit(Events_1.Events.ASYNC_VALIDATION_COMPLETE, {
@@ -92,5 +93,10 @@ _ValidationMetadata_contents = new WeakMap(), _ValidationMetadata_instances = ne
         });
     });
 }, _ValidationMetadata_groupedValidators = function _ValidationMetadata_groupedValidators(data, groups) {
-    return data.filter((meta) => groups.length > 0 ? meta.groups.some((o) => groups.includes(o)) : meta.groups.length === 0);
+    return data.filter((entry) => {
+        var _a, _b;
+        return groups.length > 0
+            ? (_a = entry.meta.groups) === null || _a === void 0 ? void 0 : _a.some((o) => groups.includes(o))
+            : ((_b = entry.meta.groups) === null || _b === void 0 ? void 0 : _b.length) === 0;
+    });
 };

@@ -1,3 +1,4 @@
+import { type FieldDecorator } from "../../../factory/forField";
 import { type DecoratorOptions } from "../../../helper";
 import { type Objects } from "../../../../utilities";
 /** Configurable options for `@Password` decorator. */
@@ -62,5 +63,5 @@ export type PasswordRules = {
  * }
  * ```
  */
-export declare function Password<T extends Objects.Optional<string>>(rules?: PasswordRules, options?: DecoratorOptions): import("../../../factory/forField").FieldDecorator<T>;
+export declare function Password<This, Value extends Objects.Optional<string>>(rules?: PasswordRules, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=Password.d.ts.map

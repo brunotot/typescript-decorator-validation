@@ -66,13 +66,15 @@ function ValidDateRange(startDateField, endDateField, options) {
         key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.VALID_DATE_RANGE),
         valid: isValidDateRangeValid(value, startDateField, endDateField),
         message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.VALID_DATE_RANGE, convertCamelCaseToText(endDateField, false), convertCamelCaseToText(startDateField))),
-    }), (0, helper_1.buildGroupsProp)(options));
+    }), (0, helper_1.buildDecoratorMeta)(options));
 }
 exports.ValidDateRange = ValidDateRange;
 function convertCamelCaseToText(camelCase, capitalizeFirstLetter = true) {
     if (camelCase === camelCase.toUpperCase()) {
         return camelCase;
     }
-    const result = camelCase.replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/ (\w)/g, str => str.toLowerCase());
+    const result = camelCase
+        .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+        .replace(/ (\w)/g, str => str.toLowerCase());
     return capitalizeFirstLetter ? result.replace(/^./, str => str.toUpperCase()) : result;
 }

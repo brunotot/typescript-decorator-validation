@@ -65,6 +65,6 @@ function ArraySizeMax(max, options) {
         key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.ARRAY_SIZE_MAX),
         valid: isArraySizeMaxValid(array, max),
         message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.ARRAY_SIZE_MAX, max, (array !== null && array !== void 0 ? array : []).length)),
-    }), (0, helper_1.buildGroupsProp)(options));
+    }), (0, helper_1.buildDecoratorMeta)(options));
 }
 exports.ArraySizeMax = ArraySizeMax;

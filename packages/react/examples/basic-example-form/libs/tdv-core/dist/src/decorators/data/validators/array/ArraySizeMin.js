@@ -65,6 +65,6 @@ function ArraySizeMin(min, options) {
         key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.ARRAY_SIZE_MIN),
         valid: isArraySizeMinValid(array, min),
         message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.ARRAY_SIZE_MIN, min, (array !== null && array !== void 0 ? array : []).length)),
-    }), (0, helper_1.buildGroupsProp)(options));
+    }), (0, helper_1.buildDecoratorMeta)(options));
 }
 exports.ArraySizeMin = ArraySizeMin;

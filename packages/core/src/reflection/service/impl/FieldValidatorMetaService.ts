@@ -1,3 +1,4 @@
+import { DEFAULT_DECORATOR_META, type DecoratorMeta } from "@decorators";
 import { AbstractMetaService, type MetaStrategy } from "@reflection/service/AbstractMetaService";
 import { type AbstractValidationStrategyService } from "@strategy";
 import { StrategyData } from "@strategy/models/StrategyMapper";
@@ -32,7 +33,11 @@ export type ControlDescriptorType<
  * @typeParam HostClass - The type of the host class.
  * @typeParam Name - The name of the descriptor within the host class.
  */
-export type ControlDescriptorProps<This, HostClass, Name extends keyof HostClass | undefined = undefined> = {
+export type ControlDescriptorProps<
+  This,
+  HostClass,
+  Name extends keyof HostClass | undefined = undefined
+> = {
   hostClass?: Types.Class<HostClass>;
   hostDefault?: HostClass;
   thisClass?: Types.Class<This>;
@@ -49,7 +54,11 @@ export type ControlDescriptorProps<This, HostClass, Name extends keyof HostClass
  * @typeParam Name - The name of the descriptor within the host class.
  * @remarks This class is used to store metadata about a specific field, including its validation rules and default values.
  */
-export class ControlDescriptor<This, HostClass, Name extends keyof HostClass | undefined = undefined> {
+export class ControlDescriptor<
+  This,
+  HostClass,
+  Name extends keyof HostClass | undefined = undefined
+> {
   hostClass?: Types.Class<HostClass>;
   hostDefault?: HostClass;
   thisClass?: Types.Class<This>;
@@ -57,6 +66,7 @@ export class ControlDescriptor<This, HostClass, Name extends keyof HostClass | u
   thisDefault?: ControlDescriptorType<HostClass, Name>;
   validations: ControlDescriptorValidationMetadata<ControlDescriptorType<HostClass, Name>>;
   eventEmitter: EventEmitter;
+  validateIf: (clazz: HostClass) => boolean;
 
   constructor(props: ControlDescriptorProps<This, HostClass, Name>) {
     this.hostClass = props.hostClass;
@@ -65,6 +75,7 @@ export class ControlDescriptor<This, HostClass, Name extends keyof HostClass | u
     this.hostDefault = props.hostDefault ?? props.hostClass ? new props.hostClass!() : undefined;
     this.thisDefault = props.thisDefault;
     this.eventEmitter = props.eventEmitter;
+    this.validateIf = () => true;
     this.validations = props.validations ?? {
       root: new ValidationMetadata(),
       foreach: new ValidationMetadata(),
@@ -164,13 +175,18 @@ type FieldDecoratorCtx<T = unknown> = Readonly<{
  * A configurer class which allows for easier manipulation of decorated fields and corresponding metadata
  * @remarks This class is responsible for managing metadata related to validation. It provides methods to add validators, get field names, and manage descriptors.
  */
-export class FieldValidatorMetaService extends AbstractMetaService<Map<string, ControlDescriptor<any, any, any>>> {
+export class FieldValidatorMetaService extends AbstractMetaService<
+  Map<string, ControlDescriptor<any, any, any>>
+> {
   /**
    * Static method to create a new instance of FieldValidatorMetaService.
    * @param strategy - The strategy to inject.
    * @returns A new instance of FieldValidatorMetaService.
    */
-  public static inject(strategy: MetaStrategy, eventEmitter: EventEmitter): FieldValidatorMetaService {
+  public static inject(
+    strategy: MetaStrategy,
+    eventEmitter: EventEmitter
+  ): FieldValidatorMetaService {
     return new FieldValidatorMetaService(strategy, eventEmitter);
   }
 
@@ -180,21 +196,24 @@ export class FieldValidatorMetaService extends AbstractMetaService<Map<string, C
   private constructor(strategy: MetaStrategy, eventEmitter: EventEmitter) {
     super(FieldValidatorMetaService.name, strategy, () => new Map());
     this.eventEmitter = eventEmitter;
-    Classes.isClass(strategy) ? this.#handleClassInit(strategy) : this.#handleContextInit(strategy as any);
+    Classes.isClass(strategy)
+      ? this.#handleClassInit(strategy)
+      : this.#handleContextInit(strategy as any);
   }
 
   /**
    * Adds a validator to a field.
    *
    * @param field - The name of the field.
-   * @param isValid - The validation function.
+   * @param validate - The validation function.
    * @param groups - Optional validation groups.
    */
-  addValidator(field: string, isValid: ValidationEvaluator<any>, groups: string[]): void {
-    this.getUntypedDescriptor(field).validations.root.add({
-      validate: isValid,
-      groups,
-    });
+  addValidator(
+    field: string,
+    validate: ValidationEvaluator<any>,
+    meta: DecoratorMeta<any> = DEFAULT_DECORATOR_META
+  ): void {
+    this.getUntypedDescriptor(field).validations.root.add({ validate, meta });
   }
 
   /**
@@ -223,8 +242,14 @@ export class FieldValidatorMetaService extends AbstractMetaService<Map<string, C
    * @param thisName - The name of the field.
    * @returns The typed descriptor.
    */
-  getTypedDescriptor<TClass, TName extends keyof TClass>(thisName: TName): ControlDescriptor<unknown, TClass, TName> {
-    return this.getUntypedDescriptor(thisName as string) as ControlDescriptor<unknown, TClass, TName>;
+  getTypedDescriptor<TClass, TName extends keyof TClass>(
+    thisName: TName
+  ): ControlDescriptor<unknown, TClass, TName> {
+    return this.getUntypedDescriptor(thisName as string) as ControlDescriptor<
+      unknown,
+      TClass,
+      TName
+    >;
   }
 
   /**
@@ -233,7 +258,10 @@ export class FieldValidatorMetaService extends AbstractMetaService<Map<string, C
    * @param fieldKey - The key of the field.
    * @returns The untyped descriptor.
    */
-  getUntypedDescriptor(fieldKey: any, eventEmitter?: EventEmitter): ControlDescriptor<any, any, any> {
+  getUntypedDescriptor(
+    fieldKey: any,
+    eventEmitter?: EventEmitter
+  ): ControlDescriptor<any, any, any> {
     this.eventEmitter = eventEmitter ?? this.eventEmitter;
     if (!this.hasDescriptor(fieldKey)) {
       const cfg = { thisName: fieldKey, eventEmitter: this.eventEmitter };

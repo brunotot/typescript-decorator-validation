@@ -49,5 +49,5 @@ import { type DecoratorOptions } from "../../../helper";
  * }
  * ```
  */
-export declare function ArrayContains<K, T extends K[]>(contains: K, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ArrayContains<This, Item, Value extends Item[]>(contains: Item, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=ArrayContains.d.ts.map

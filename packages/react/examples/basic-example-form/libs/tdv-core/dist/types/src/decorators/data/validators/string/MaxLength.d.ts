@@ -46,5 +46,5 @@ import { Objects } from "../../../../utilities";
  * }
  * ```
  */
-export declare function MaxLength<T extends Objects.Optional<string>>(max: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function MaxLength<This, Value extends Objects.Optional<string>>(max: number, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=MaxLength.d.ts.map

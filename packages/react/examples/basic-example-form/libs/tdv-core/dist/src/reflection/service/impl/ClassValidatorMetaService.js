@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClassValidatorMetaService = void 0;
+const _decorators_1 = require("../../../decorators");
 const AbstractMetaService_1 = require("../../service/AbstractMetaService");
 const ValidationMetadata_1 = require("../../../validation/models/ValidationMetadata");
 /**
@@ -19,17 +20,15 @@ class ClassValidatorMetaService extends AbstractMetaService_1.AbstractMetaServic
     constructor(strategy, eventEmitter) {
         super(ClassValidatorMetaService.name, strategy, () => new ValidationMetadata_1.ValidationMetadata());
         this.eventEmitter = eventEmitter;
+        this.validateIf = () => true;
     }
     /**
      * Adds a class-level validator to the provided class.
-     * @param isValid - The validation function.
+     * @param validate - The validation function.
      * @param groups - Optional validation groups.
      */
-    addValidator(isValid, groups) {
-        this.data.add({
-            validate: isValid,
-            groups,
-        });
+    addValidator(validate, meta = _decorators_1.DEFAULT_DECORATOR_META) {
+        this.data.add({ validate, meta });
     }
 }
 exports.ClassValidatorMetaService = ClassValidatorMetaService;

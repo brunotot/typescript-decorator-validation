@@ -1,3 +1,5 @@
+import { type Arrays } from "./Arrays";
+import { type Booleans } from "./Booleans";
 export declare namespace Objects {
     /**
      * A type that represents an optional value.
@@ -14,7 +16,12 @@ export declare namespace Objects {
     /**
      * Filters out getters, functions and read-only properties from a type
      */
-    type Payload<T> = any;
+    type Payload<T> = Purify<{
+        [K in keyof T]: true extends Booleans.isAnyOf<true, [
+            Booleans.isGetter<T, K>,
+            Booleans.isFunction<T[K]>
+        ]> ? never : true extends Booleans.isArray<T[K]> ? true extends Booleans.isPrimitive<Arrays.getArrayType<T[K]>> ? T[K] : Arrays.setArrayDepth<Payload<Arrays.getArrayType<T[K]>>, Arrays.getArrayDepth<T[K]>> : true extends Booleans.isPrimitive<T[K]> ? T[K] : Payload<T[K]>;
+    }>;
     /**
      * A conditional type that checks if types `X` and `Y` are equal. It returns type `A` if they are equal, and type `B` if they are not.
      *

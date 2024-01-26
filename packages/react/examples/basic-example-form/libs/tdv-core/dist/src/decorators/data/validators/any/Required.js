@@ -7,7 +7,6 @@ const helper_1 = require("../../../helper");
 const TranslationService_1 = require("../../../../localization/service/TranslationService");
 /**
  * Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.
- *
  * @typeParam T - The type of the value.
  */
 function isRequiredValid(value) {
@@ -61,6 +60,6 @@ function Required(options) {
         key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.REQUIRED),
         valid: isRequiredValid(value),
         message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.REQUIRED)),
-    }), (0, helper_1.buildGroupsProp)(options));
+    }), (0, helper_1.buildDecoratorMeta)(options));
 }
 exports.Required = Required;

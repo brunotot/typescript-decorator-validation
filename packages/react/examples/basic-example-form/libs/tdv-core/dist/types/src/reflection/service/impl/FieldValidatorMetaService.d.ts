@@ -1,3 +1,4 @@
+import { type DecoratorMeta } from "../../../decorators";
 import { AbstractMetaService, type MetaStrategy } from "../../service/AbstractMetaService";
 import { type AbstractValidationStrategyService } from "../../../strategy";
 import { type EventEmitter, type Types } from "../../../utilities";
@@ -48,6 +49,7 @@ export declare class ControlDescriptor<This, HostClass, Name extends keyof HostC
     thisDefault?: ControlDescriptorType<HostClass, Name>;
     validations: ControlDescriptorValidationMetadata<ControlDescriptorType<HostClass, Name>>;
     eventEmitter: EventEmitter;
+    validateIf: (clazz: HostClass) => boolean;
     constructor(props: ControlDescriptorProps<This, HostClass, Name>);
     /**
      * Gets the implementation of the reflection strategy.
@@ -83,10 +85,10 @@ export declare class FieldValidatorMetaService extends AbstractMetaService<Map<s
      * Adds a validator to a field.
      *
      * @param field - The name of the field.
-     * @param isValid - The validation function.
+     * @param validate - The validation function.
      * @param groups - Optional validation groups.
      */
-    addValidator(field: string, isValid: ValidationEvaluator<any>, groups: string[]): void;
+    addValidator(field: string, validate: ValidationEvaluator<any>, meta?: DecoratorMeta<any>): void;
     /**
      * Gets the names of all fields present within given
      * reflection strategy (`Types.Class<T>` or `Decorator.Context`).

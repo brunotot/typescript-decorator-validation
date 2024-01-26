@@ -1,6 +1,11 @@
 import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import {
+  buildDecoratorMeta,
+  buildKeyProp,
+  buildMessageProp,
+  type DecoratorOptions,
+} from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
 
@@ -57,13 +62,19 @@ function isNonNegativeValid(num: Objects.Optional<number>): boolean {
  * }
  * ```
  */
-export function NonNegative<T extends Objects.Optional<number>>(options?: DecoratorOptions): FieldDecorator<T> {
-  return createFieldValidator<T>(
+export function NonNegative<This, Value extends Objects.Optional<number>>(
+  options?: DecoratorOptions<This>
+): FieldDecorator<This, Value> {
+  return createFieldValidator<This, Value>(
     (num, _context, locale) => ({
       key: buildKeyProp(options, DecoratorKeys.NON_NEGATIVE),
       valid: isNonNegativeValid(num),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.NON_NEGATIVE, num)),
+      message: buildMessageProp(
+        options,
+        locale,
+        translate(locale, DecoratorKeys.NON_NEGATIVE, num)
+      ),
     }),
-    buildGroupsProp(options)
+    buildDecoratorMeta(options)
   );
 }

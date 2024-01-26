@@ -48,5 +48,5 @@ import { Objects } from "../../../../utilities";
  * }
  * ```
  */
-export declare function TodayDate<T extends Objects.Optional<Date>>(options?: DecoratorOptions): FieldDecorator<T>;
+export declare function TodayDate<This, Value extends Objects.Optional<Date>>(options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=TodayDate.d.ts.map

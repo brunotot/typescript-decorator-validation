@@ -50,5 +50,5 @@ import { type DecoratorOptions } from "../../../helper";
  * }
  * ```
  */
-export declare function ArraySizeRange<K, T extends K[]>(min: number, max: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ArraySizeRange<This, Item, Value extends Item[]>(min: number, max: number, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=ArraySizeRange.d.ts.map

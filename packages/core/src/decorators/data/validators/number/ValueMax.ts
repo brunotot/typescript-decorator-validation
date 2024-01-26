@@ -1,6 +1,11 @@
 import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import {
+  buildDecoratorMeta,
+  buildKeyProp,
+  buildMessageProp,
+  type DecoratorOptions,
+} from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
 
@@ -58,16 +63,20 @@ function isValueMaxValid(num: Objects.Optional<number>, max: number): boolean {
  * }
  * ```
  */
-export function ValueMax<T extends Objects.Optional<number>>(
+export function ValueMax<This, Value extends Objects.Optional<number>>(
   max: number,
-  options?: DecoratorOptions
-): FieldDecorator<T> {
-  return createFieldValidator<T>(
+  options?: DecoratorOptions<This>
+): FieldDecorator<This, Value> {
+  return createFieldValidator<This, Value>(
     (value, _context, locale) => ({
       key: buildKeyProp(options, DecoratorKeys.VALUE_MAX),
       valid: isValueMaxValid(value, max),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.VALUE_MAX, max, value)),
+      message: buildMessageProp(
+        options,
+        locale,
+        translate(locale, DecoratorKeys.VALUE_MAX, max, value)
+      ),
     }),
-    buildGroupsProp(options)
+    buildDecoratorMeta(options)
   );
 }

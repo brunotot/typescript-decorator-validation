@@ -48,5 +48,5 @@ import { Objects } from "../../../../../../utilities";
  * }
  * ```
  */
-export declare function Numeric<T extends Objects.Optional<string>>(options?: DecoratorOptions): FieldDecorator<T>;
+export declare function Numeric<This, Value extends Objects.Optional<string>>(options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=Numeric.d.ts.map

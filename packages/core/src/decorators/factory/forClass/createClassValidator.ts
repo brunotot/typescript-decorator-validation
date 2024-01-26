@@ -1,6 +1,7 @@
+import { DEFAULT_DECORATOR_META, type DecoratorMeta } from "@decorators/helper";
 import { type Types } from "@utilities";
 import type { ValidationEvaluator } from "@validation/types";
-import { type ClassDecorator, createClassDecorator } from "./createClassDecorator";
+import { createClassDecorator, type ClassDecorator } from "./createClassDecorator";
 
 /**
  * Creates validation decorators for classes.
@@ -27,9 +28,9 @@ import { type ClassDecorator, createClassDecorator } from "./createClassDecorato
  */
 export function createClassValidator<T extends Types.Class>(
   validate: ValidationEvaluator<Types.UnwrapClass<T>>,
-  groups: string[] = []
+  decoratorMeta: DecoratorMeta<T> = DEFAULT_DECORATOR_META
 ): ClassDecorator<T> {
   return createClassDecorator<T>(meta => {
-    meta.addValidator(validate, groups);
+    meta.addValidator(validate, decoratorMeta);
   });
 }

@@ -51,5 +51,5 @@ import { type Types } from "../../../../utilities";
  * }
  * ```
  */
-export declare function ValidDateRange<T extends Types.Class>(startDateField: string, endDateField: string, options?: DecoratorOptions): ClassDecorator<T>;
+export declare function ValidDateRange<This extends Types.Class>(startDateField: string, endDateField: string, options?: DecoratorOptions<This>): ClassDecorator<This>;
 //# sourceMappingURL=ValidDateRange.d.ts.map

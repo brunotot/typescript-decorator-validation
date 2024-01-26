@@ -1,6 +1,6 @@
 import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import { buildDecoratorMeta, buildKeyProp, buildMessageProp, type DecoratorOptions } from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
 
@@ -59,16 +59,16 @@ function isArraySomeValid<K, T extends K[]>(array: T, predicate: Objects.ArrayPr
  * }
  * ```
  **/
-export function ArraySome<K, T extends K[]>(
-  predicate: Objects.ArrayPredicate<K>,
-  options?: DecoratorOptions
-): FieldDecorator<T> {
-  return createFieldValidator<T>(
+export function ArraySome<This, Item, Value extends Item[]>(
+  predicate: Objects.ArrayPredicate<Item>,
+  options?: DecoratorOptions<This>
+): FieldDecorator<This, Value> {
+  return createFieldValidator<This, Value>(
     (array, _context, locale) => ({
       key: buildKeyProp(options, DecoratorKeys.ARRAY_SOME),
       valid: isArraySomeValid(array, predicate),
       message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ARRAY_SOME)),
     }),
-    buildGroupsProp(options)
+    buildDecoratorMeta(options)
   );
 }

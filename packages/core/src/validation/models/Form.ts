@@ -1,7 +1,11 @@
-import { type Locale, getGlobalLocale } from "@localization";
+import { getGlobalLocale, type Locale } from "@localization";
 import { ClassValidatorMetaService } from "@reflection/service/impl/ClassValidatorMetaService";
 import { FieldValidatorMetaService } from "@reflection/service/impl/FieldValidatorMetaService";
-import { type DetailedErrorsResponse, type SimpleErrorsResponse, type getStrategyResult } from "@strategy";
+import {
+  type DetailedErrorsResponse,
+  type getStrategyResult,
+  type SimpleErrorsResponse,
+} from "@strategy";
 import { EventEmitter, Objects, type Types } from "@utilities";
 import { Cache } from "@validation/models/Cache";
 import { Events } from "@validation/models/Events";
@@ -87,18 +91,20 @@ export class Form<TClass> {
   __id: string;
   locale: Locale;
   #eventListener?: AsyncEventHandler<TClass>;
-  #eventEmitter: EventEmitter;
-  #fieldValidatorMetaService: FieldValidatorMetaService;
-  // @ts-expect-error
-  #classValidatorMetaService: ClassValidatorMetaService<TClass>;
-  #groups: string[];
-  #defaultValue: Objects.Payload<TClass>;
-  #cache: Cache<FormValidateResponse<TClass>>;
-  #hostClass: Types.Class<TClass>;
-  #asyncDelay: number;
-  #debounceMap: {
+  readonly #eventEmitter: EventEmitter;
+  readonly #fieldValidatorMetaService: FieldValidatorMetaService;
+  // @ts-expect-error Error!
+  readonly #classValidatorMetaService: ClassValidatorMetaService<TClass>;
+  readonly #groups: string[];
+  readonly #defaultValue: Objects.Payload<TClass>;
+  readonly #cache: Cache<FormValidateResponse<TClass>>;
+  readonly #hostClass: Types.Class<TClass>;
+  readonly #asyncDelay: number;
+  readonly #debounceMap: {
     [key in keyof TClass]: ReturnType<typeof Objects.debounce>;
   } = {} as any;
+
+  // TODO!!! - DecoratorMeta!!!
 
   /**
    * Gets the default host value.
@@ -191,7 +197,10 @@ export class Form<TClass> {
    * console.log(result.valid);  // Output: true or false
    * ```
    */
-  public validate(payload?: Objects.Payload<TClass>, args: Record<string, any> = {}): FormValidateResponse<TClass> {
+  public validate(
+    payload?: Objects.Payload<TClass>,
+    args: Record<string, any> = {}
+  ): FormValidateResponse<TClass> {
     const state: Objects.Payload<TClass> = toClass(this.#hostClass, payload) as any;
 
     const errors: any = {};
@@ -209,6 +218,7 @@ export class Form<TClass> {
     );
 
     this.#fieldValidatorMetaService.getFields().forEach(field => {
+      // @ts-expect-error Error!
       const validation: any = this.#validateField(field as keyof TClass, state, args);
       detailedErrors[field] = validation[0];
       errors[field] = validation[1];
@@ -230,7 +240,7 @@ export class Form<TClass> {
    * @param event - The name of the event to listen for.
    * @param handler - The event handler function.
    */
-  public listen(event: string, handler: (this: Form<TClass>) => void) {
+  public listen(event: string, handler: (this: Form<TClass>) => void): void {
     this.#eventEmitter.on(event, handler);
   }
 
@@ -239,7 +249,7 @@ export class Form<TClass> {
    * @param event - The name of the event to emit.
    * @param data - Optional data to pass along with the event.
    */
-  public emit(event: string, data?: any) {
+  public emit(event: string, data?: any): void {
     this.#eventEmitter.emit(event, data);
   }
 
@@ -255,10 +265,14 @@ export class Form<TClass> {
    */
   #validateField<K extends keyof TClass>(
     fieldName: K,
+    // @ts-expect-error Error!
     payload: Objects.Payload<TClass>[K],
     args: Record<string, any> = {}
   ): getStrategyResult<TClass, K> {
-    const descriptor = this.#fieldValidatorMetaService.getUntypedDescriptor(fieldName, this.#eventEmitter);
+    const descriptor = this.#fieldValidatorMetaService.getUntypedDescriptor(
+      fieldName,
+      this.#eventEmitter
+    );
     const stratImpl = new descriptor.StrategyImpl(
       descriptor,
       this.#defaultValue,
@@ -274,6 +288,7 @@ export class Form<TClass> {
         }, this.#asyncDelay);
       }
 
+      // @ts-expect-error Error!
       this.#debounceMap[fieldName](payload[fieldName], payload, args);
 
       return [
@@ -282,7 +297,7 @@ export class Form<TClass> {
       ] as getStrategyResult<TClass, K>;
     }
 
-    // @ts-expect-error We expect error here due to the nature of arbitrary types depending on the different types of fields (primitive, object, primitive array, object array and so on...)
+    // @ts-expect-error Error!
     return stratImpl.test(payload[fieldName], payload, args);
   }
 

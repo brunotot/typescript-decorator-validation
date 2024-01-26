@@ -1,15 +1,14 @@
 import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import { buildDecoratorMeta, buildKeyProp, buildMessageProp, type DecoratorOptions } from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
 import { type Objects } from "@utilities";
 
 /**
  * Checks if a value is not `null`, `undefined`, `false`, an empty array, an empty string, or an invalid Date.
- *
  * @typeParam T - The type of the value.
  */
-function isRequiredValid<T>(value: T | undefined): value is NonNullable<typeof value> {
+function isRequiredValid<T>(value: T | undefined): boolean {
   return !(
     value === undefined ||
     value === null ||
@@ -58,13 +57,15 @@ function isRequiredValid<T>(value: T | undefined): value is NonNullable<typeof v
  * }
  * ```
  */
-export function Required<T extends Objects.Optional>(options?: DecoratorOptions): FieldDecorator<T> {
-  return createFieldValidator<T>(
+export function Required<This, Value extends Objects.Optional>(
+  options?: DecoratorOptions<This, Value>
+): FieldDecorator<This, Value> {
+  return createFieldValidator<This, Value>(
     (value, _context, locale) => ({
       key: buildKeyProp(options, DecoratorKeys.REQUIRED),
       valid: isRequiredValid(value),
       message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.REQUIRED)),
     }),
-    buildGroupsProp(options)
+    buildDecoratorMeta(options)
   );
 }

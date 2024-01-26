@@ -9,7 +9,7 @@ import { EventEmitter } from "@utilities";
  * The context object provides additional information about the field being decorated.
  * @typeParam T - The type of the field being decorated.
  */
-export type FieldDecorator<T extends unknown> = ((target: any, context: FieldDecoratorCtx<T>) => void) & {};
+export type FieldDecorator<This, Value> = ((target: any, context: FieldDecoratorCtx<This, Value>) => void) & {};
 
 /**
  * Type definition for the FieldDecoratorSupplier function.
@@ -20,22 +20,22 @@ export type FieldDecorator<T extends unknown> = ((target: any, context: FieldDec
  * @param context The context object for the field decorator.
  * @param args The decorator arguments.
  */
-export type FieldDecoratorSupplier<T extends unknown = unknown> = ((
+export type FieldDecoratorSupplier<This, Value> = ((
   meta: FieldValidatorMetaService,
   name: string,
-  context: FieldDecoratorCtx<T>,
+  context: FieldDecoratorCtx<This, Value>,
   args: DecoratorArgs
 ) => void) & {};
 
 /** Represents the context of a field decorator. */
-export type FieldDecoratorCtx<T extends unknown> = Readonly<{
+export type FieldDecoratorCtx<This, Value> = Readonly<{
   kind: "getter" | "method" | "field";
   static: boolean;
   private: boolean;
   name: string;
   metadata?: globalThis.DecoratorMetadataObject;
   access: {
-    get: (object: any) => T;
+    get: (object: This) => Value;
   };
 }>;
 
@@ -45,7 +45,9 @@ export type FieldDecoratorCtx<T extends unknown> = Readonly<{
  * @param supplier - A callback that defines the basic field decorator behavior.
  * @returns A basic field decorator factory.
  */
-export function createFieldDecorator<T extends unknown>(supplier: FieldDecoratorSupplier<T>): FieldDecorator<T> {
+export function createFieldDecorator<Value, Class>(
+  supplier: FieldDecoratorSupplier<Value, Class>
+): FieldDecorator<Value, Class> {
   return function (target, context) {
     const isStage2 = typeof context === "string";
     const nameEval = isStage2 ? context : context.name;

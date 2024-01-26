@@ -1,12 +1,17 @@
 import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import {
+  buildDecoratorMeta,
+  buildKeyProp,
+  buildMessageProp,
+  type DecoratorOptions,
+} from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
 import { type Objects } from "@utilities";
 
 /** Internal validation function for {@link Digits} validator. */
 function isDigitsValid(number: Objects.Optional<number>, ints: number, decs: number): boolean {
-  const assertValidInputs = () => {
+  const assertValidInputs = (): void => {
     const isMaxIntegersValid = ints !== Infinity && ints % 1 === 0 && ints >= 0;
     const isMaxDecimalsValid = decs !== Infinity && decs % 1 === 0 && decs >= 0;
     const isInputInvalid = !isMaxIntegersValid || !isMaxDecimalsValid;
@@ -70,17 +75,21 @@ function isDigitsValid(number: Objects.Optional<number>, ints: number, decs: num
  * }
  * ```
  */
-export function Digits<T extends Objects.Optional<number>>(
+export function Digits<This, Value extends Objects.Optional<number>>(
   intsLimit: number,
   decimalsLimit: number,
-  options?: DecoratorOptions
-): FieldDecorator<T> {
-  return createFieldValidator<T>(
+  options?: DecoratorOptions<This>
+): FieldDecorator<This, Value> {
+  return createFieldValidator<This, Value>(
     (value, _context, locale) => ({
       key: buildKeyProp(options, DecoratorKeys.DIGITS),
       valid: isDigitsValid(value, intsLimit, decimalsLimit),
-      message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.DIGITS, intsLimit, decimalsLimit)),
+      message: buildMessageProp(
+        options,
+        locale,
+        translate(locale, DecoratorKeys.DIGITS, intsLimit, decimalsLimit)
+      ),
     }),
-    buildGroupsProp(options)
+    buildDecoratorMeta(options)
   );
 }

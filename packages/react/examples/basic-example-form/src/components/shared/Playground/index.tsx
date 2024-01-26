@@ -14,7 +14,7 @@ import { ReactNode, useState } from "react";
 import { DemoCodeData } from "../../demo/DemoList";
 import { Code } from "../Code";
 import RelatedFAQ from "../RelatedFAQ";
-import "./index.css?inline";
+import "./index.css";
 
 export type PlaygroundProps = {
   title: string;
@@ -24,12 +24,21 @@ export type PlaygroundProps = {
   children: ReactNode;
 };
 
-export default function Playground({ title, description, codeData, children, relatedFAQ = [] }: PlaygroundProps) {
+export default function Playground({
+  title,
+  description,
+  codeData,
+  children,
+  relatedFAQ = [],
+}: PlaygroundProps) {
   const [currentCodeData, setCurrentCodeData] = useState(codeData[0]);
   const [expanded, setExpanded] = useState(true);
   return (
     <Accordion>
-      <AccordionSummary id={title.toLowerCase().replace(new RegExp(" ", "g"), "-")} expandIcon={<ExpandMore />}>
+      <AccordionSummary
+        id={title.toLowerCase().replace(new RegExp(" ", "g"), "-")}
+        expandIcon={<ExpandMore />}
+      >
         <Typography padding={0}>{title}</Typography>
       </AccordionSummary>
       <AccordionDetails sx={{ padding: 0 }}>
@@ -56,7 +65,9 @@ export default function Playground({ title, description, codeData, children, rel
                 </ToggleButton>
               ))}
             </ToggleButtonGroup>
-            <Button onClick={() => setExpanded(v => !v)}>{expanded ? "Hide code" : "Show code"}</Button>
+            <Button onClick={() => setExpanded(v => !v)}>
+              {expanded ? "Hide code" : "Show code"}
+            </Button>
           </Box>
           {expanded && <Code code={currentCodeData.code} language={currentCodeData.lang} />}
         </Box>

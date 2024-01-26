@@ -49,5 +49,5 @@ import { type DecoratorOptions } from "../../../helper";
  * }
  * ```
  */
-export declare function ArraySizeMin<K, T extends K[]>(min: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ArraySizeMin<This, Item, Value extends Item[]>(min: number, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=ArraySizeMin.d.ts.map

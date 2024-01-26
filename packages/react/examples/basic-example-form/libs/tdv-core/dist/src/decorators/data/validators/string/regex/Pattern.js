@@ -49,6 +49,6 @@ function Pattern(regex, options) {
         key: (0, helper_1.buildKeyProp)(options, "Pattern"),
         valid: testRegex(regex, value),
         message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, "Pattern", regex.toString())),
-    }), (0, helper_1.buildGroupsProp)(options));
+    }), (0, helper_1.buildDecoratorMeta)(options));
 }
 exports.Pattern = Pattern;

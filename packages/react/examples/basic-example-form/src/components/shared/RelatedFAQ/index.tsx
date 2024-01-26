@@ -1,5 +1,5 @@
 import { List, ListItem, Typography } from "@mui/material";
-import "./index.css?inline";
+import "./index.css";
 
 export type RelatedFAQProps = {
   data: string[];

@@ -49,5 +49,5 @@ import { type DecoratorOptions } from "../../../helper";
  * }
  * ```
  */
-export declare function ArraySizeExact<K, T extends K[]>(exact: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ArraySizeExact<This, Item, Value extends Item[]>(exact: number, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=ArraySizeExact.d.ts.map

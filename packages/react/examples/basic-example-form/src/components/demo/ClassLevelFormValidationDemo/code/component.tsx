@@ -4,13 +4,14 @@ import { useForm } from "tdv-react";
 import { Code } from "../../../shared/Code";
 import { ModelForm } from "./model";
 
-export default function Component() {
+export function Component() {
   const [form, setForm, { errors, globalErrors }] = useForm(ModelForm);
 
   const register = (field: keyof ModelForm, type: string) => ({
     label: field,
     placeholder: `Enter ${field}`,
     value: form[field],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onChange: (e: any) => setForm({ ...form, [field]: e.target.value }),
     helperText: errors[field][0],
     error: errors[field].length > 0,
@@ -39,7 +40,8 @@ export default function Component() {
       </MUI.Box>
       {globalErrors.map(({ key, message }) => (
         <MUI.Box key={key} gap={1} display="flex" alignItems="center" paddingTop={1.5}>
-          <Warning color="warning" /> <MUI.Typography color="warning.main">{message}</MUI.Typography>
+          <Warning color="warning" />{" "}
+          <MUI.Typography color="warning.main">{message}</MUI.Typography>
         </MUI.Box>
       ))}
     </>

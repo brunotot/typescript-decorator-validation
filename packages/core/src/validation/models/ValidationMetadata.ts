@@ -13,21 +13,21 @@ import type { ValidationMetadataEntry, ValidationResult } from "@validation/type
  * It allows you to validate the field against a payload and a set of validation groups.
  */
 export class ValidationMetadata<TFieldType> {
-  #contents: Array<ValidationMetadataEntry<TFieldType>>;
+  readonly #contents: Array<ValidationMetadataEntry<TFieldType, any>>;
 
   /**
    * Gets the contents of the reflection rule.
    *
    * @returns An array of `Validation.Metadata` for the field.
    */
-  get contents(): Array<ValidationMetadataEntry<TFieldType>> {
+  get contents(): Array<ValidationMetadataEntry<TFieldType, any>> {
     return this.#contents;
   }
 
   /**
    * Constructs a new `ReflectionRule` instance.
    */
-  constructor(contents: Array<ValidationMetadataEntry<TFieldType>> = []) {
+  constructor(contents: Array<ValidationMetadataEntry<TFieldType, any>> = []) {
     this.#contents = contents;
   }
 
@@ -56,15 +56,24 @@ export class ValidationMetadata<TFieldType> {
     }
 
     const groupedValidators = this.#groupedValidators(this.#contents, groups);
-    const results = groupedValidators.map(({ validate }) => validate(value, payload, locale, args ?? {}));
+    // eslint-disable-next-line @typescript-eslint/promise-function-async
+    const results = groupedValidators.map(({ validate }) =>
+      validate(value, payload, locale, args ?? {})
+    );
+    // eslint-disable-next-line @typescript-eslint/array-type
     const asyncResults = results.filter(v => isPromise(v)) as Promise<ValidationResult>[];
     this.#handleAsyncResults(asyncResults, emitter, field);
     const syncResults = results.filter(v => !isPromise(v)) as ValidationResult[];
     return syncResults.filter(({ valid }) => !valid);
   }
 
-  #handleAsyncResults(asyncResults: Array<Promise<ValidationResult>>, emitter?: EventEmitter, field?: string) {
+  #handleAsyncResults(
+    asyncResults: Array<Promise<ValidationResult>>,
+    emitter?: EventEmitter,
+    field?: string
+  ): void {
     if (!emitter) return;
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     Promise.all(asyncResults).then(results => {
       results.forEach(value => {
         emitter.emit(Events.ASYNC_VALIDATION_COMPLETE, {
@@ -77,19 +86,17 @@ export class ValidationMetadata<TFieldType> {
 
   /**
    * Removes and returns the last validation rule from the collection.
-   *
    * @returns The last `Validation.Metadata` that was removed.
    */
-  pop(): ValidationMetadataEntry<TFieldType> {
+  pop(): ValidationMetadataEntry<TFieldType, any> {
     return this.#contents.pop()!;
   }
 
   /**
    * Adds a new validation rule to the collection.
-   *
    * @param rule - The `Validation.Metadata` to add.
    */
-  add(rule: ValidationMetadataEntry<TFieldType>): void {
+  add(rule: ValidationMetadataEntry<TFieldType, any>): void {
     this.#contents.push(rule);
   }
 
@@ -101,11 +108,13 @@ export class ValidationMetadata<TFieldType> {
    * @returns An array of filtered validators.
    */
   #groupedValidators<TFieldType>(
-    data: Array<ValidationMetadataEntry<TFieldType>>,
+    data: Array<ValidationMetadataEntry<TFieldType, any>>,
     groups: string[]
-  ): Array<ValidationMetadataEntry<TFieldType>> {
-    return data.filter((meta: ValidationMetadataEntry<TFieldType>) =>
-      groups.length > 0 ? meta.groups.some((o: any) => groups.includes(o)) : meta.groups.length === 0
-    );
+  ): Array<ValidationMetadataEntry<TFieldType, any>> {
+    return data.filter((entry: ValidationMetadataEntry<TFieldType, any>) => {
+      return groups.length > 0
+        ? entry.meta.groups?.some((o: any) => groups.includes(o))
+        : entry.meta.groups?.length === 0;
+    });
   }
 }

@@ -1,3 +1,4 @@
+import { type FieldDecorator } from "../../../../factory/forField";
 import { type DecoratorOptions } from "../../../../helper";
 import { type Objects } from "../../../../../utilities";
 /**
@@ -37,5 +38,5 @@ export declare function testRegex<T extends Objects.Optional<string>>(regex: Reg
  * }
  * ```
  */
-export declare function Pattern<T extends Objects.Optional<string>>(regex: RegExp, options?: DecoratorOptions): import("../../../../factory/forField").FieldDecorator<T>;
+export declare function Pattern<This, Value extends Objects.Optional<string>>(regex: RegExp, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=Pattern.d.ts.map

@@ -3,7 +3,7 @@ import { IconButton } from "@mui/material";
 import { useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { vs2015 as theme } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import "./index.css?inline";
+import "./index.css";
 
 export type CodeProps = {
   code: string;

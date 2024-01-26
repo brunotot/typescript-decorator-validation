@@ -1,3 +1,4 @@
+import { type DecoratorMeta, type DecoratorValidateIf } from "../../../decorators";
 import { AbstractMetaService, type MetaStrategy } from "../../service/AbstractMetaService";
 import { type EventEmitter, type Types } from "../../../utilities";
 import { ValidationMetadata } from "../../../validation/models/ValidationMetadata";
@@ -12,19 +13,20 @@ export type UnwrapMetaStrategy<TStrategy extends MetaStrategy> = TStrategy exten
  * @remarks This class is responsible for managing metadata related to validation (at class level). It provides methods to add validators and read them.
  */
 export declare class ClassValidatorMetaService<TStrategy extends MetaStrategy> extends AbstractMetaService<ValidationMetadata<any>> {
+    eventEmitter: EventEmitter;
+    validateIf: DecoratorValidateIf<Types.UnwrapClass<Types.Class<any>>>;
     /**
      * Static method to create a new instance of ClassValidatorMetaService.
      * @param strategy - The strategy to inject.
      * @returns A new instance of ClassValidatorMetaService.
      */
     static inject<T extends MetaStrategy>(strategy: T, eventEmitter: EventEmitter): ClassValidatorMetaService<UnwrapMetaStrategy<T>>;
-    eventEmitter: EventEmitter;
     private constructor();
     /**
      * Adds a class-level validator to the provided class.
-     * @param isValid - The validation function.
+     * @param validate - The validation function.
      * @param groups - Optional validation groups.
      */
-    addValidator(isValid: ValidationEvaluator<Types.UnwrapClass<TStrategy>>, groups: string[]): void;
+    addValidator(validate: ValidationEvaluator<Types.UnwrapClass<TStrategy>>, meta?: DecoratorMeta<any>): void;
 }
 //# sourceMappingURL=ClassValidatorMetaService.d.ts.map

@@ -47,5 +47,5 @@ import { type DecoratorOptions } from "../../../helper";
  * }
  * ```
  */
-export declare function AssertTrue<T extends boolean>(options?: DecoratorOptions): FieldDecorator<T>;
+export declare function AssertTrue<This, Value extends boolean>(options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=AssertTrue.d.ts.map

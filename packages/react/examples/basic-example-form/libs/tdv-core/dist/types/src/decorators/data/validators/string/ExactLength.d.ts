@@ -46,5 +46,5 @@ import { Objects } from "../../../../utilities";
  * }
  * ```
  */
-export declare function ExactLength<T extends Objects.Optional<string>>(exact: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ExactLength<This, Value extends Objects.Optional<string>>(exact: number, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=ExactLength.d.ts.map

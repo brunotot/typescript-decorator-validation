@@ -1,6 +1,11 @@
 import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import {
+  buildDecoratorMeta,
+  buildKeyProp,
+  buildMessageProp,
+  type DecoratorOptions,
+} from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
 
@@ -57,13 +62,15 @@ function isDecimalValid<T extends Objects.Optional<number>>(value: T): boolean {
  * }
  * ```
  */
-export function Decimal<T extends Objects.Optional<number>>(options?: DecoratorOptions): FieldDecorator<T> {
-  return createFieldValidator<T>(
+export function Decimal<This, Value extends Objects.Optional<number>>(
+  options?: DecoratorOptions<This>
+): FieldDecorator<This, Value> {
+  return createFieldValidator<This, Value>(
     (value, _context, locale) => ({
       key: buildKeyProp(options, DecoratorKeys.DECIMAL),
       valid: isDecimalValid(value),
       message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.DECIMAL, value)),
     }),
-    buildGroupsProp(options)
+    buildDecoratorMeta(options)
   );
 }

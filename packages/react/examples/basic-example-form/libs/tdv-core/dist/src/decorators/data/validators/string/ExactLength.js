@@ -61,6 +61,6 @@ function ExactLength(exact, options) {
         key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.EXACT_LENGTH),
         valid: isExactLengthValid(value, exact),
         message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.EXACT_LENGTH, exact)),
-    }), (0, helper_1.buildGroupsProp)(options));
+    }), (0, helper_1.buildDecoratorMeta)(options));
 }
 exports.ExactLength = ExactLength;

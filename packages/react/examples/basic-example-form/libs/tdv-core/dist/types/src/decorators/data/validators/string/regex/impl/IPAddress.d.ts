@@ -48,5 +48,5 @@ import { Objects } from "../../../../../../utilities";
  * }
  * ```
  */
-export declare function IPAddress<T extends Objects.Optional<string>>(options?: DecoratorOptions): FieldDecorator<T>;
+export declare function IPAddress<This, Value extends Objects.Optional<string>>(options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=IPAddress.d.ts.map

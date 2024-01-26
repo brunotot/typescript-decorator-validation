@@ -63,6 +63,6 @@ function NonPositive(options) {
         key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.NON_POSITIVE),
         valid: isNonPositiveValid(num),
         message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.NON_POSITIVE, num)),
-    }), (0, helper_1.buildGroupsProp)(options));
+    }), (0, helper_1.buildDecoratorMeta)(options));
 }
 exports.NonPositive = NonPositive;

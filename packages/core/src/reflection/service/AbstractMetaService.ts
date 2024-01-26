@@ -20,8 +20,8 @@ export type MetaStrategy = FieldDecoratorCtx<any> | Types.Class<any> | Decorator
  */
 export abstract class AbstractMetaService<Entry> {
   #metadata: DecoratorMetadataObject;
-  #injectionKey: string;
-  #initial: () => Entry;
+  readonly #injectionKey: string;
+  readonly #initial: () => Entry;
   #class?: Types.Class<any>;
   protected context?: FieldDecoratorCtx<any>;
 

@@ -63,8 +63,8 @@ function isNumericValid(value) {
 function Numeric(options) {
     return (0, forField_1.createFieldValidator)((value, _context, locale) => ({
         key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.NUMERIC),
-        valid: (0, Pattern_1.testRegex)(regex_constants_1.RegexConst.NUMERIC, value),
+        valid: isNumericValid(value),
         message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.NUMERIC)),
-    }), (0, helper_1.buildGroupsProp)(options));
+    }), (0, helper_1.buildDecoratorMeta)(options));
 }
 exports.Numeric = Numeric;

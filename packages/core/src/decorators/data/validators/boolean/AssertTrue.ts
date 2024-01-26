@@ -1,6 +1,11 @@
 import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import {
+  buildDecoratorMeta,
+  buildKeyProp,
+  buildMessageProp,
+  type DecoratorOptions,
+} from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
 
@@ -57,13 +62,15 @@ function isAssertTrueValid(value: boolean): boolean {
  * }
  * ```
  */
-export function AssertTrue<T extends boolean>(options?: DecoratorOptions): FieldDecorator<T> {
-  return createFieldValidator<T>(
+export function AssertTrue<This, Value extends boolean>(
+  options?: DecoratorOptions<This>
+): FieldDecorator<This, Value> {
+  return createFieldValidator<This, Value>(
     (value, _context, locale) => ({
       key: buildKeyProp(options, DecoratorKeys.ASSERT_TRUE),
       valid: isAssertTrueValid(value),
       message: buildMessageProp(options, locale, translate(locale, DecoratorKeys.ASSERT_TRUE)),
     }),
-    buildGroupsProp(options)
+    buildDecoratorMeta(options)
   );
 }

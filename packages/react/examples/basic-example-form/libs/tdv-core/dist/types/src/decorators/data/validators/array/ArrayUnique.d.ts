@@ -48,5 +48,5 @@ import { type DecoratorOptions } from "../../../helper";
  * }
  * ```
  */
-export declare function ArrayUnique<K, T extends K[]>(options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ArrayUnique<This, Item, Value extends Item[]>(options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=ArrayUnique.d.ts.map

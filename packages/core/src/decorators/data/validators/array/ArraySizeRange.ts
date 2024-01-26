@@ -1,6 +1,6 @@
 import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import { buildDecoratorMeta, buildKeyProp, buildMessageProp, type DecoratorOptions } from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
 
@@ -60,12 +60,12 @@ function isArraySizeRangeValid(array: any[], min: number, max: number): boolean 
  * }
  * ```
  */
-export function ArraySizeRange<K, T extends K[]>(
+export function ArraySizeRange<This, Item, Value extends Item[]>(
   min: number,
   max: number,
-  options?: DecoratorOptions
-): FieldDecorator<T> {
-  return createFieldValidator<T>(
+  options?: DecoratorOptions<This>
+): FieldDecorator<This, Value> {
+  return createFieldValidator<This, Value>(
     (array, _context, locale) => ({
       key: buildKeyProp(options, DecoratorKeys.ARRAY_SIZE_RANGE),
       valid: isArraySizeRangeValid(array, min, max),
@@ -75,6 +75,6 @@ export function ArraySizeRange<K, T extends K[]>(
         translate(locale, DecoratorKeys.ARRAY_SIZE_RANGE, min, max, (array ?? []).length)
       ),
     }),
-    buildGroupsProp(options)
+    buildDecoratorMeta(options)
   );
 }

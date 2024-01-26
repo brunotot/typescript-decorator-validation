@@ -49,5 +49,5 @@ import { Objects } from "../../../../utilities";
  * }
  * ```
  */
-export declare function ValueMax<T extends Objects.Optional<number>>(max: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ValueMax<This, Value extends Objects.Optional<number>>(max: number, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=ValueMax.d.ts.map

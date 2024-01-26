@@ -50,5 +50,5 @@ import { type Objects } from "../../../../utilities";
  * }
  * ```
  */
-export declare function Digits<T extends Objects.Optional<number>>(intsLimit: number, decimalsLimit: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function Digits<This, Value extends Objects.Optional<number>>(intsLimit: number, decimalsLimit: number, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=Digits.d.ts.map

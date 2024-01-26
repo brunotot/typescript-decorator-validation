@@ -50,5 +50,5 @@ import { Objects } from "../../../../utilities";
  * }
  * ```
  **/
-export declare function ArrayEvery<K, T extends K[]>(predicate: Objects.ArrayPredicate<K>, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ArrayEvery<This, Item, Value extends Item[]>(predicate: Objects.ArrayPredicate<Item>, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=ArrayEvery.d.ts.map

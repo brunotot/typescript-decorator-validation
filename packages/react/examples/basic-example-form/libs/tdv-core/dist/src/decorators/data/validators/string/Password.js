@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Password = void 0;
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 const DecoratorKeys_1 = require("../../../data/validators/DecoratorKeys");
 const regex_constants_1 = require("../../../data/validators/string/regex/shared/regex.constants");
 const forField_1 = require("../../../factory/forField");
@@ -104,6 +105,6 @@ function isPasswordValid(input, rules, definedMessage, locale) {
  * ```
  */
 function Password(rules, options) {
-    return (0, forField_1.createFieldValidator)((value, _context, locale) => isPasswordValid(value, rules, (0, helper_1.buildMessageProp)(options, locale), locale), (0, helper_1.buildGroupsProp)(options));
+    return (0, forField_1.createFieldValidator)((value, _context, locale) => isPasswordValid(value, rules, (0, helper_1.buildMessageProp)(options, locale), locale), (0, helper_1.buildDecoratorMeta)(options));
 }
 exports.Password = Password;

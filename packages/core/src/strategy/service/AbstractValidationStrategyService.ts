@@ -1,7 +1,10 @@
 import { type DecoratorArgs } from "@decorators";
 import { type Locale } from "@localization";
 import { ClassValidatorMetaService } from "@reflection/service/impl/ClassValidatorMetaService";
-import { type ControlDescriptor, FieldValidatorMetaService } from "@reflection/service/impl/FieldValidatorMetaService";
+import {
+  FieldValidatorMetaService,
+  type ControlDescriptor,
+} from "@reflection/service/impl/FieldValidatorMetaService";
 import { type EventEmitter } from "@utilities";
 import { Form } from "@validation/models/Form";
 import { type ValidationMetadata } from "@validation/models/ValidationMetadata";
@@ -14,13 +17,17 @@ import type { FormConfig, ValidationResult } from "@validation/types";
  * @typeParam TDetailedResult The detailed result of the validation.
  * @typeParam TSimpleResult A simplified version of the validation result.
  */
-export abstract class AbstractValidationStrategyService<TClass = any, TDetailedResult = any, TSimpleResult = any> {
-  #locale: Locale;
-  #groups: string[];
-  #engineCfg: FormConfig<any>;
-  #classRules: ValidationMetadata<TClass>;
-  #descriptor: ControlDescriptor<any, any>;
-  #defaultParent: TClass;
+export abstract class AbstractValidationStrategyService<
+  TClass = any,
+  TDetailedResult = any,
+  TSimpleResult = any
+> {
+  readonly #locale: Locale;
+  readonly #groups: string[];
+  readonly #engineCfg: FormConfig<any>;
+  readonly #classRules: ValidationMetadata<TClass>;
+  readonly #descriptor: ControlDescriptor<any, any>;
+  readonly #defaultParent: TClass;
   #fieldDescriptor?: ControlDescriptor<TClass, any>;
   #eventEmitter: EventEmitter;
 
@@ -48,7 +55,10 @@ export abstract class AbstractValidationStrategyService<TClass = any, TDetailedR
       groups: this.groups,
       asyncDelay,
     };
-    this.#classRules = ClassValidatorMetaService.inject(this.#descriptor.hostClass!, this.eventEmitter).data;
+    this.#classRules = ClassValidatorMetaService.inject(
+      this.#descriptor.hostClass!,
+      this.eventEmitter
+    ).data;
   }
 
   public set eventEmitter(v: EventEmitter) {
@@ -122,7 +132,11 @@ export abstract class AbstractValidationStrategyService<TClass = any, TDetailedR
     return this.classRules.validate(fieldValue, parentValue, this.groups, this.locale);
   }
 
-  protected getRootErrors(fieldValue: any, parentValue: any, args: DecoratorArgs): ValidationResult[] {
+  protected getRootErrors(
+    fieldValue: any,
+    parentValue: any,
+    args: DecoratorArgs
+  ): ValidationResult[] {
     return this.fieldDescriptor.validations.root.validate(
       fieldValue,
       parentValue,
@@ -135,7 +149,12 @@ export abstract class AbstractValidationStrategyService<TClass = any, TDetailedR
   }
 
   protected getArrayItemErrors(arrayItem: any, parentValue: any): ValidationResult[] {
-    return this.fieldDescriptor.validations.foreach.validate(arrayItem, parentValue, this.groups, this.locale);
+    return this.fieldDescriptor.validations.foreach.validate(
+      arrayItem,
+      parentValue,
+      this.groups,
+      this.locale
+    );
   }
 
   /**

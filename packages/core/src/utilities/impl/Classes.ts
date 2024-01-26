@@ -7,9 +7,13 @@ export namespace Classes {
    * @param constructor - The class constructor.
    * @returns An array of field names.
    */
-  export function getClassFieldNames<TClass>(constructor: Types.Class<TClass>): Array<keyof TClass> {
+  export function getClassFieldNames<TClass>(
+    constructor: Types.Class<TClass>
+  ): Array<keyof TClass> {
     function getPropertyNames(classInstance: any): string[] {
-      return Object.getOwnPropertyNames(classInstance ?? {}).filter(property => property !== "constructor");
+      return Object.getOwnPropertyNames(classInstance ?? {}).filter(
+        property => property !== "constructor"
+      );
     }
     const instance: any = new constructor();
     const prototype = instance.__proto__;

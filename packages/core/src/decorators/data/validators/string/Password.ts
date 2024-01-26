@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
 import { RegexConst } from "@decorators/data/validators/string/regex/shared/regex.constants";
-import { createFieldValidator } from "@decorators/factory/forField";
-import { type DecoratorOptions, buildGroupsProp, buildMessageProp } from "@decorators/helper";
+import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import { buildDecoratorMeta, buildMessageProp, type DecoratorOptions } from "@decorators/helper";
 import { type Locale } from "@localization";
 import { translate } from "@localization/service/TranslationService";
 import { type Objects } from "@utilities";
@@ -47,15 +48,24 @@ function isPasswordValid(
   const length = rules?.length ?? 8;
   const str = input ?? "";
   if (str.length < length) {
-    return buildConstraintViolation(definedMessage ?? translate(locale, "PasswordLength", length), false);
+    return buildConstraintViolation(
+      definedMessage ?? translate(locale, "PasswordLength", length),
+      false
+    );
   }
 
   if (uppercase && isInvalid(str, "uppercase")) {
-    return buildConstraintViolation(definedMessage ?? translate(locale, "PasswordUppercase"), false);
+    return buildConstraintViolation(
+      definedMessage ?? translate(locale, "PasswordUppercase"),
+      false
+    );
   }
 
   if (lowercase && isInvalid(str, "lowercase")) {
-    return buildConstraintViolation(definedMessage ?? translate(locale, "PasswordLowercase"), false);
+    return buildConstraintViolation(
+      definedMessage ?? translate(locale, "PasswordLowercase"),
+      false
+    );
   }
 
   if (numbers && isInvalid(str, "numbers")) {
@@ -123,9 +133,13 @@ function isPasswordValid(
  * }
  * ```
  */
-export function Password<T extends Objects.Optional<string>>(rules?: PasswordRules, options?: DecoratorOptions) {
-  return createFieldValidator<T>(
-    (value, _context, locale) => isPasswordValid(value, rules, buildMessageProp(options, locale), locale),
-    buildGroupsProp(options)
+export function Password<This, Value extends Objects.Optional<string>>(
+  rules?: PasswordRules,
+  options?: DecoratorOptions<This>
+): FieldDecorator<This, Value> {
+  return createFieldValidator<This, Value>(
+    (value, _context, locale) =>
+      isPasswordValid(value, rules, buildMessageProp(options, locale), locale),
+    buildDecoratorMeta(options)
   );
 }

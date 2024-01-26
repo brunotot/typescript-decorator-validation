@@ -50,5 +50,5 @@ import { Objects } from "../../../../utilities";
  * }
  * ```
  */
-export declare function ValueRange<T extends Objects.Optional<number>>(min: number, max: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ValueRange<This, Value extends Objects.Optional<number>>(min: number, max: number, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=ValueRange.d.ts.map

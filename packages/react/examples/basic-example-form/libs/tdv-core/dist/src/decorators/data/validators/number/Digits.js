@@ -76,6 +76,6 @@ function Digits(intsLimit, decimalsLimit, options) {
         key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.DIGITS),
         valid: isDigitsValid(value, intsLimit, decimalsLimit),
         message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.DIGITS, intsLimit, decimalsLimit)),
-    }), (0, helper_1.buildGroupsProp)(options));
+    }), (0, helper_1.buildDecoratorMeta)(options));
 }
 exports.Digits = Digits;

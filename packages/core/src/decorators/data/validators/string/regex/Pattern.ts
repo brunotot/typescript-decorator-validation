@@ -1,5 +1,10 @@
-import { createFieldValidator } from "@decorators/factory/forField";
-import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import {
+  buildDecoratorMeta,
+  buildKeyProp,
+  buildMessageProp,
+  type DecoratorOptions,
+} from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
 import { type Objects } from "@utilities";
 
@@ -43,13 +48,16 @@ export function testRegex<T extends Objects.Optional<string>>(regex: RegExp, val
  * }
  * ```
  */
-export function Pattern<T extends Objects.Optional<string>>(regex: RegExp, options?: DecoratorOptions) {
-  return createFieldValidator<T>(
+export function Pattern<This, Value extends Objects.Optional<string>>(
+  regex: RegExp,
+  options?: DecoratorOptions<This>
+): FieldDecorator<This, Value> {
+  return createFieldValidator<This, Value>(
     (value, _context, locale) => ({
       key: buildKeyProp(options, "Pattern"),
       valid: testRegex(regex, value),
       message: buildMessageProp(options, locale, translate(locale, "Pattern", regex.toString())),
     }),
-    buildGroupsProp(options)
+    buildDecoratorMeta(options)
   );
 }

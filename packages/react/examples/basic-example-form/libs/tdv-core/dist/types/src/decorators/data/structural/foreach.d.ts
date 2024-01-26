@@ -14,5 +14,5 @@ import { type Arrays, type Types } from "../../../utilities";
  * }
  * ```
  */
-export declare function foreach<T extends NonNullable<Types.ArrayType | (() => Types.ArrayType)>>(...validators: Array<FieldDecorator<Arrays.getArrayType<T>>>): FieldDecorator<T>;
+export declare function foreach<T extends NonNullable<Types.ArrayType | (() => Types.ArrayType)>, Class>(...validators: Array<FieldDecorator<Arrays.getArrayType<T>, Class>>): FieldDecorator<T, Class>;
 //# sourceMappingURL=foreach.d.ts.map

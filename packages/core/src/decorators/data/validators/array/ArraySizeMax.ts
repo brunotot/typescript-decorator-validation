@@ -1,6 +1,6 @@
 import { DecoratorKeys } from "@decorators/data/validators/DecoratorKeys";
-import { type FieldDecorator, createFieldValidator } from "@decorators/factory/forField";
-import { type DecoratorOptions, buildGroupsProp, buildKeyProp, buildMessageProp } from "@decorators/helper";
+import { createFieldValidator, type FieldDecorator } from "@decorators/factory/forField";
+import { buildDecoratorMeta, buildKeyProp, buildMessageProp, type DecoratorOptions } from "@decorators/helper";
 import { translate } from "@localization/service/TranslationService";
 import { Objects } from "@utilities";
 
@@ -59,8 +59,11 @@ function isArraySizeMaxValid(array: any[], max: number): boolean {
  * }
  * ```
  */
-export function ArraySizeMax<K, T extends K[]>(max: number, options?: DecoratorOptions): FieldDecorator<T> {
-  return createFieldValidator<T>(
+export function ArraySizeMax<This, Item, Value extends Item[]>(
+  max: number,
+  options?: DecoratorOptions<This>
+): FieldDecorator<This, Value> {
+  return createFieldValidator<This, Value>(
     (array, _, locale) => ({
       key: buildKeyProp(options, DecoratorKeys.ARRAY_SIZE_MAX),
       valid: isArraySizeMaxValid(array, max),
@@ -70,6 +73,6 @@ export function ArraySizeMax<K, T extends K[]>(max: number, options?: DecoratorO
         translate(locale, DecoratorKeys.ARRAY_SIZE_MAX, max, (array ?? []).length)
       ),
     }),
-    buildGroupsProp(options)
+    buildDecoratorMeta(options)
   );
 }

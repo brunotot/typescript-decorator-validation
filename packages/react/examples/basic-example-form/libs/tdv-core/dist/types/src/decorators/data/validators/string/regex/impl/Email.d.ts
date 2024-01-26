@@ -48,5 +48,5 @@ import { Objects } from "../../../../../../utilities";
  * }
  * ```
  */
-export declare function Email<T extends Objects.Optional<string>>(options?: DecoratorOptions): FieldDecorator<T>;
+export declare function Email<This, Value extends Objects.Optional<string>>(options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=Email.d.ts.map

@@ -39,5 +39,5 @@ import { type Objects } from "../../../../utilities";
  * }
  * ```
  */
-export declare function Required<T extends Objects.Optional>(options?: DecoratorOptions): FieldDecorator<T>;
+export declare function Required<This, Value extends Objects.Optional>(options?: DecoratorOptions<This, Value>): FieldDecorator<This, Value>;
 //# sourceMappingURL=Required.d.ts.map

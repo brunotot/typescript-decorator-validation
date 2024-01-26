@@ -63,6 +63,6 @@ function AssertTrue(options) {
         key: (0, helper_1.buildKeyProp)(options, DecoratorKeys_1.DecoratorKeys.ASSERT_TRUE),
         valid: isAssertTrueValid(value),
         message: (0, helper_1.buildMessageProp)(options, locale, (0, TranslationService_1.translate)(locale, DecoratorKeys_1.DecoratorKeys.ASSERT_TRUE)),
-    }), (0, helper_1.buildGroupsProp)(options));
+    }), (0, helper_1.buildDecoratorMeta)(options));
 }
 exports.AssertTrue = AssertTrue;

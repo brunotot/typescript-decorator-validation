@@ -1,3 +1,4 @@
+import { type DecoratorMeta } from "../../helper";
 import { type Types } from "../../../utilities";
 import type { ValidationEvaluator } from "../../../validation/types";
 import { type ClassDecorator } from "./createClassDecorator";
@@ -24,5 +25,5 @@ import { type ClassDecorator } from "./createClassDecorator";
  * }
  * ```
  */
-export declare function createClassValidator<T extends Types.Class>(validate: ValidationEvaluator<Types.UnwrapClass<T>>, groups?: string[]): ClassDecorator<T>;
+export declare function createClassValidator<T extends Types.Class>(validate: ValidationEvaluator<Types.UnwrapClass<T>>, decoratorMeta?: DecoratorMeta<T>): ClassDecorator<T>;
 //# sourceMappingURL=createClassValidator.d.ts.map

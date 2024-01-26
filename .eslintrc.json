@@ -25,6 +25,8 @@
     "@typescript-eslint/no-non-null-assertion": "off",
     "no-proto": "off",
     "valid-typeof": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
     "import/no-cycle": [
       "error",
       {

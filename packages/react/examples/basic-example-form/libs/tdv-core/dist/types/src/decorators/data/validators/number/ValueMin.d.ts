@@ -49,5 +49,5 @@ import { Objects } from "../../../../utilities";
  * }
  * ```
  */
-export declare function ValueMin<T extends Objects.Optional<number>>(min: number, options?: DecoratorOptions): FieldDecorator<T>;
+export declare function ValueMin<This, Value extends Objects.Optional<number>>(min: number, options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=ValueMin.d.ts.map

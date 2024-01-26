@@ -1,18 +1,35 @@
-import { type Locale, getMessageParser } from "@localization";
+import { getMessageParser, type Locale } from "@localization";
 import { type MessageProp } from "@overrides";
 import { Objects } from "@utilities";
+
+export type DecoratorGroup = string;
+
+export type DecoratorValidateIf<Class> = (context: Class) => boolean;
+
+export type DecoratorMeta<Class> = {
+  groups?: DecoratorGroup[];
+  validateIf?: DecoratorValidateIf<Class>;
+};
+
+export const DEFAULT_DECORATOR_META: DecoratorMeta<any> = {
+  groups: [],
+  validateIf: () => true,
+};
 
 /** Represents decorator external dependency arguments. */
 export type DecoratorArgs = Record<string, any>;
 
 /** Generic validator decorator configurable options. */
-export type DecoratorOptions = {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export type DecoratorOptions<_This = any, Value = any> = {
   /** Identifier of the validator decorator. */
   key?: string;
   /** Error message to be evaluated through a preprocessor, which can have a custom or default implementation based on library setup. */
   message?: MessageProp;
   /** Unique list of groups for conditional validation. Validator triggers only if the form is applied on a listed group. */
-  groups?: string[];
+  groups?: DecoratorGroup[];
+  /** asdf */
+  validateIf?: DecoratorValidateIf<Value>;
 };
 
 function parseMessage(locale: Locale, message: string, args: Record<string, string> = {}): string {
@@ -52,8 +69,13 @@ export function buildMessageProp(
  * @param defaultGroups - The default groups.
  * @returns An array of unique groups.
  */
-export function buildGroupsProp(options?: DecoratorOptions, defaultGroups: string[] = []): string[] {
-  return Array.isArray(options?.groups) ? Objects.unique(options!.groups) : Objects.unique(defaultGroups);
+export function buildGroupsProp(
+  options?: DecoratorOptions,
+  defaultGroups: string[] = []
+): string[] {
+  return Array.isArray(options?.groups)
+    ? Objects.unique(options.groups)
+    : Objects.unique(defaultGroups);
 }
 
 /**
@@ -64,4 +86,17 @@ export function buildGroupsProp(options?: DecoratorOptions, defaultGroups: strin
  */
 export function buildKeyProp(options: DecoratorOptions | undefined, defaultKey: string): string {
   return options?.key ?? defaultKey;
+}
+
+export function buildValidateIfProp(
+  options: DecoratorOptions | undefined
+): (context: any) => boolean {
+  return options?.validateIf ?? (() => true);
+}
+
+export function buildDecoratorMeta(options: DecoratorOptions | undefined): DecoratorMeta<any> {
+  return {
+    groups: buildGroupsProp(options),
+    validateIf: buildValidateIfProp(options),
+  };
 }

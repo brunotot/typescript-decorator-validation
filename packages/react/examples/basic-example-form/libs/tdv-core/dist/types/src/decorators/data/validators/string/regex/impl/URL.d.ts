@@ -48,5 +48,5 @@ import { Objects } from "../../../../../../utilities";
  * }
  * ```
  */
-export declare function URL<T extends Objects.Optional<string>>(options?: DecoratorOptions): FieldDecorator<T>;
+export declare function URL<This, Value extends Objects.Optional<string>>(options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=URL.d.ts.map

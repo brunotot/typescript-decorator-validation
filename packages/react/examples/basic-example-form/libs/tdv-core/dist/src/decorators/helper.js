@@ -1,8 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.buildKeyProp = exports.buildGroupsProp = exports.buildMessageProp = void 0;
+exports.buildDecoratorMeta = exports.buildValidateIfProp = exports.buildKeyProp = exports.buildGroupsProp = exports.buildMessageProp = exports.DEFAULT_DECORATOR_META = void 0;
 const _localization_1 = require("../localization");
 const _utilities_1 = require("../utilities");
+exports.DEFAULT_DECORATOR_META = {
+    groups: [],
+    validateIf: () => true,
+};
 function parseMessage(locale, message, args = {}) {
     try {
         return (0, _localization_1.getMessageParser)()(locale, message, args);
@@ -37,7 +41,9 @@ exports.buildMessageProp = buildMessageProp;
  * @returns An array of unique groups.
  */
 function buildGroupsProp(options, defaultGroups = []) {
-    return Array.isArray(options === null || options === void 0 ? void 0 : options.groups) ? _utilities_1.Objects.unique(options.groups) : _utilities_1.Objects.unique(defaultGroups);
+    return Array.isArray(options === null || options === void 0 ? void 0 : options.groups)
+        ? _utilities_1.Objects.unique(options.groups)
+        : _utilities_1.Objects.unique(defaultGroups);
 }
 exports.buildGroupsProp = buildGroupsProp;
 /**
@@ -51,3 +57,15 @@ function buildKeyProp(options, defaultKey) {
     return (_a = options === null || options === void 0 ? void 0 : options.key) !== null && _a !== void 0 ? _a : defaultKey;
 }
 exports.buildKeyProp = buildKeyProp;
+function buildValidateIfProp(options) {
+    var _a;
+    return (_a = options === null || options === void 0 ? void 0 : options.validateIf) !== null && _a !== void 0 ? _a : (() => true);
+}
+exports.buildValidateIfProp = buildValidateIfProp;
+function buildDecoratorMeta(options) {
+    return {
+        groups: buildGroupsProp(options),
+        validateIf: buildValidateIfProp(options),
+    };
+}
+exports.buildDecoratorMeta = buildDecoratorMeta;

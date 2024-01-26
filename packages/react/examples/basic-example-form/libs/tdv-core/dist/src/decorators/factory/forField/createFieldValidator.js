@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createFieldValidator = void 0;
+const helper_1 = require("../../helper");
 const createFieldDecorator_1 = require("./createFieldDecorator");
 /**
  * Creates validation decorators for fields.
@@ -26,9 +27,9 @@ const createFieldDecorator_1 = require("./createFieldDecorator");
  * }
  * ```
  */
-function createFieldValidator(validate, groups) {
-    return (0, createFieldDecorator_1.createFieldDecorator)((meta, key) => {
-        meta.addValidator(key, validate, groups !== null && groups !== void 0 ? groups : []);
+function createFieldValidator(validate, decoratorMeta = helper_1.DEFAULT_DECORATOR_META) {
+    return (0, createFieldDecorator_1.createFieldDecorator)((meta, property) => {
+        meta.addValidator(property, validate, decoratorMeta);
     });
 }
 exports.createFieldValidator = createFieldValidator;

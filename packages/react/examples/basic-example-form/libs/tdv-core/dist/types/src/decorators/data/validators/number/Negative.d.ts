@@ -48,5 +48,5 @@ import { Objects } from "../../../../utilities";
  * }
  * ```
  */
-export declare function Negative<T extends Objects.Optional<number>>(options?: DecoratorOptions): FieldDecorator<T>;
+export declare function Negative<This, Value extends Objects.Optional<number>>(options?: DecoratorOptions<This>): FieldDecorator<This, Value>;
 //# sourceMappingURL=Negative.d.ts.map
